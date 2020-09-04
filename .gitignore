@@ -58,3 +58,6 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# Dust
+.idea/
+Assets/Dust-Sandbox*
