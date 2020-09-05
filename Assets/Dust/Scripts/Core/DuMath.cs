@@ -150,27 +150,6 @@ namespace DustEngine
             return RotatePoint(point.x, point.y, angle);
         }
 
-        /*
-        public static Vector2 RotatePointAroundPoint(Vector2 point, float angle, Vector2 center)
-        {
-            float sin = Mathf.Sin(Mathf.Deg2Rad * angle);
-            float cos = Mathf.Cos(Mathf.Deg2Rad * angle);
-
-            // translate point back to origin:
-            point.x -= center.x;
-            point.y -= center.y;
-
-            // rotate point + translate point back
-            float xNew = (point.x * cos - point.y * sin);
-            float yNew = (point.x * sin + point.y * cos);
-
-            // translate point back:
-            point.x = xNew + center.x;
-            point.y = yNew + center.y;
-            return point;
-        }
-        */
-
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         // @DUST.optimize: make it better!

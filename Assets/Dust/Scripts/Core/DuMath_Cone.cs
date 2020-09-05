@@ -8,12 +8,6 @@ namespace DustEngine
     {
         public static class Cone
         {
-            /*
-            public static Vector3 IntersectionPoint(float radius, float height, Vector3 endPoint)
-            {
-            }
-            */
-
             public static float DistanceToEdge(float radius, float height, Vector3 endPoint)
             {
                 if (IsZero(radius) || IsZero(height) || endPoint.Equals(Vector3.zero))
