@@ -236,6 +236,7 @@ namespace DustEngine
 
             switch (spawnPointMode)
             {
+                default:
                 case SpawnPointMode.Self:
                     useSpawnPoint = this.gameObject;
                     break;
@@ -246,6 +247,7 @@ namespace DustEngine
 
                     switch (spawnPointsIterate)
                     {
+                        default:
                         case IterateMode.Iterate:
                             useSpawnPoint = spawnPoints[(spawnPointsIteration++) % spawnPoints.Count];
                             break;
@@ -267,6 +269,7 @@ namespace DustEngine
             {
                 switch (spawnObjectsIterate)
                 {
+                    default:
                     case IterateMode.Iterate:
                         useSpawnObject = spawnObjects[(spawnObjectsIteration++) % spawnObjects.Count];
                         break;
@@ -288,6 +291,7 @@ namespace DustEngine
 
             switch (parentMode)
             {
+                default:
                 case SpawnParentMode.Spawner:
                     obj.transform.parent = transform;
                     break;
@@ -311,6 +315,7 @@ namespace DustEngine
 
             switch (intervalMode)
             {
+                default:
                 case IntervalMode.Fixed:
                     delay = interval;
                     break;

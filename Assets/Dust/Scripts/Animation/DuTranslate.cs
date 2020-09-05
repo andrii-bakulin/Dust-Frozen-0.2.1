@@ -172,6 +172,7 @@ namespace DustEngine
 
             switch (directionSpace)
             {
+                default:
                 case DirectionSpace.Self:
                 case DirectionSpace.Parent:
                     this.transform.localPosition += extDeltaPosition;

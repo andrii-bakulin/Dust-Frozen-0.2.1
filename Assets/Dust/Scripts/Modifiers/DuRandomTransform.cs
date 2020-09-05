@@ -170,6 +170,7 @@ namespace DustEngine
 
                 switch (space)
                 {
+                    default:
                     case WorkSpace.Local:
                         position = transform.localPosition;
                         break;
@@ -181,6 +182,7 @@ namespace DustEngine
 
                 switch (transformMode)
                 {
+                    default:
                     case TransformMode.Relative:
                         position += value;
                         break;
@@ -192,6 +194,7 @@ namespace DustEngine
 
                 switch (space)
                 {
+                    default:
                     case WorkSpace.Local:
                         transform.localPosition = position;
                         break;
@@ -209,6 +212,7 @@ namespace DustEngine
 
                 switch (space)
                 {
+                    default:
                     case WorkSpace.Local:
                         rotation = transform.localEulerAngles;
                         break;
@@ -220,6 +224,7 @@ namespace DustEngine
 
                 switch (transformMode)
                 {
+                    default:
                     case TransformMode.Relative:
                         rotation += value;
                         break;
@@ -231,6 +236,7 @@ namespace DustEngine
 
                 switch (space)
                 {
+                    default:
                     case WorkSpace.Local:
                         transform.localEulerAngles = rotation;
                         break;
@@ -248,6 +254,7 @@ namespace DustEngine
 
                 switch (space)
                 {
+                    default:
                     case WorkSpace.Local:
                         scale = transform.localScale;
                         break;
@@ -259,6 +266,7 @@ namespace DustEngine
 
                 switch (transformMode)
                 {
+                    default:
                     case TransformMode.Relative:
                         scale += value;
                         break;
@@ -270,6 +278,7 @@ namespace DustEngine
 
                 switch (space)
                 {
+                    default:
                     case WorkSpace.Local:
                         transform.localScale = scale;
                         break;

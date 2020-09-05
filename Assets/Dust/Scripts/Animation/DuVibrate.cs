@@ -229,6 +229,7 @@ namespace DustEngine
 
                 switch (transformMode)
                 {
+                    default:
                     case TransformMode.Relative:
                         transform.localPosition += deltaPosition - m_LastDeltaPosition;
                         break;
@@ -261,6 +262,7 @@ namespace DustEngine
 
                 switch (transformMode)
                 {
+                    default:
                     case TransformMode.Relative:
                         transform.localEulerAngles += deltaRotation - m_LastDeltaRotation;
                         break;
@@ -308,6 +310,7 @@ namespace DustEngine
 
                 switch (transformMode)
                 {
+                    default:
                     case TransformMode.Relative:
                     {
                         Vector3 scale = transform.localScale;

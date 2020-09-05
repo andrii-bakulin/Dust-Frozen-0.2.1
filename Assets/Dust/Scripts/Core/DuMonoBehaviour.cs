@@ -61,14 +61,12 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        protected Space WorkSpaceToSpace(WorkSpace space)
+        internal Space WorkSpaceToSpace(WorkSpace space)
         {
-            switch (space)
-            {
-                case WorkSpace.Local: return Space.Self;
-                case WorkSpace.World: return Space.World;
-            }
+            if (space == WorkSpace.World)
+                return Space.World;
 
+            // WorkSpace.Local [or] default
             return Space.Self;
         }
 

@@ -87,6 +87,7 @@ namespace DustEngine
         {
             switch (destroyMode)
             {
+                default:
                 case DestroyMode.Manual:
                 case DestroyMode.Time:
                     // Nothing need to do...
@@ -108,6 +109,7 @@ namespace DustEngine
         {
             switch (destroyMode)
             {
+                default:
                 case DestroyMode.Manual:
                     break;
 
@@ -153,6 +155,7 @@ namespace DustEngine
         {
             switch (destroyMode)
             {
+                default:
                 case DestroyMode.Manual:
                     break;
 
