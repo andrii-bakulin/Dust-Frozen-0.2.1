@@ -68,7 +68,10 @@ namespace DustEngine
         /**
          * return: each component value between range[0..1]
          */
-        public Vector3 PerlinNoiseVector3(float offset = 0f)
+        public Vector3 PerlinNoiseVector3()
+            => PerlinNoiseVector3(0f);
+
+        public Vector3 PerlinNoiseVector3(float offset)
         {
             float x = Mathf.Clamp01(Mathf.PerlinNoise(PerlinNoise_XX + offset, PerlinNoise_XY + offset));
             float y = Mathf.Clamp01(Mathf.PerlinNoise(PerlinNoise_YX + offset, PerlinNoise_YY + offset));
@@ -79,7 +82,10 @@ namespace DustEngine
         /**
          * return: each component value between range[0..1]
          */
-        public Vector3 PerlinNoiseVector3(Vector3 position, float offset = 0f)
+        public Vector3 PerlinNoiseVector3(Vector3 position)
+            => PerlinNoiseVector3(position, 0f);
+
+        public Vector3 PerlinNoiseVector3(Vector3 position, float offset)
         {
             float x = PerlinNoise(position.x + offset, position.y + offset, position.z + offset);
             float y = PerlinNoise(position.y + offset, position.z + offset, position.x + offset);

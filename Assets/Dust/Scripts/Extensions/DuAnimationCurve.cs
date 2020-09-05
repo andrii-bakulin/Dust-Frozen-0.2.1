@@ -42,7 +42,10 @@ namespace DustEngine
             return curve.Evaluate(tNormalized);
         }
 
-        public static void ClampTime(this AnimationCurve curve, float min, float max, bool forceStretch = false)
+        public static void ClampTime(this AnimationCurve curve, float min, float max)
+            => ClampTime(curve, min, max, false);
+
+        public static void ClampTime(this AnimationCurve curve, float min, float max, bool forceStretch)
         {
             if (curve.keys.Length == 0)
                 return;

@@ -25,14 +25,20 @@ namespace DustEngine
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        public static void Map01To(ref this Vector3 self, float min, float max, bool clamped = false)
+        public static void Map01To(ref this Vector3 self, float min, float max)
+            => Map01To(ref self, min, max, false);
+
+        public static void Map01To(ref this Vector3 self, float min, float max, bool clamped)
         {
             self.x = DuMath.Map01To(min, max, self.x, clamped);
             self.y = DuMath.Map01To(min, max, self.y, clamped);
             self.z = DuMath.Map01To(min, max, self.z, clamped);
         }
 
-        public static void Map01To(ref this Vector3 self, Vector3 min, Vector3 max, bool clamped = false)
+        public static void Map01To(ref this Vector3 self, Vector3 min, Vector3 max)
+            => Map01To(ref self, min, max, false);
+
+        public static void Map01To(ref this Vector3 self, Vector3 min, Vector3 max, bool clamped)
         {
             self.x = DuMath.Map01To(min.x, max.x, self.x, clamped);
             self.y = DuMath.Map01To(min.y, max.y, self.y, clamped);
@@ -41,7 +47,10 @@ namespace DustEngine
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        public static Color ToColor(this Vector3 self, float alpha = 1.0f)
+        public static Color ToColor(this Vector3 self)
+            => ToColor(self, 1.0f);
+
+        public static Color ToColor(this Vector3 self, float alpha)
         {
             return new Color(self.x, self.y, self.z, alpha);
         }
@@ -99,7 +108,10 @@ namespace DustEngine
             return value;
         }
 
-        public static Vector3 Round(Vector3 value, int digits = DuConstants.ROUND_DIGITS_COUNT)
+        public static Vector3 Round(Vector3 value)
+            => Round(value, DuConstants.ROUND_DIGITS_COUNT);
+
+        public static Vector3 Round(Vector3 value, int digits)
         {
             value.x = DuMath.Round(value.x, digits);
             value.y = DuMath.Round(value.y, digits);
@@ -107,7 +119,10 @@ namespace DustEngine
             return value;
         }
 
-        public static Vector3 Map(float inMin, float inMax, Vector3 outMin, Vector3 outMax, float inValue, bool clamped = false)
+        public static Vector3 Map(float inMin, float inMax, Vector3 outMin, Vector3 outMax, float inValue)
+            => Map(inMin, inMax, outMin, outMax, inValue, false);
+
+        public static Vector3 Map(float inMin, float inMax, Vector3 outMin, Vector3 outMax, float inValue, bool clamped)
         {
             Vector3 r;
             r.x = DuMath.Map(inMin, inMax, outMin.x, outMax.x, inValue, clamped);
@@ -116,7 +131,10 @@ namespace DustEngine
             return r;
         }
 
-        public static Vector3 Map01To(Vector3 outMin, Vector3 outMax, float inValue, bool clamped = false)
+        public static Vector3 Map01To(Vector3 outMin, Vector3 outMax, float inValue)
+            => Map01To(outMin, outMax, inValue, false);
+
+        public static Vector3 Map01To(Vector3 outMin, Vector3 outMax, float inValue, bool clamped)
         {
             Vector3 r;
             r.x = DuMath.Map01To(outMin.x, outMax.x, inValue, clamped);
@@ -127,7 +145,10 @@ namespace DustEngine
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        public static Vector3 SmoothDamp(Vector3 current, Vector3 target, ref Vector3 currentVelocity, float smoothTime, float maxSpeed = Mathf.Infinity)
+        public static Vector3 SmoothDamp(Vector3 current, Vector3 target, ref Vector3 currentVelocity, float smoothTime)
+            => SmoothDamp(current, target, ref currentVelocity, smoothTime, Mathf.Infinity);
+
+        public static Vector3 SmoothDamp(Vector3 current, Vector3 target, ref Vector3 currentVelocity, float smoothTime, float maxSpeed)
         {
             Vector3 r;
             r.x = Mathf.SmoothDamp(current.x, target.x, ref currentVelocity.x, smoothTime, maxSpeed);
@@ -145,7 +166,10 @@ namespace DustEngine
             return r;
         }
 
-        public static Vector3 SmoothDamp(Vector3 current, Vector3 target, ref Vector3 currentVelocity, Vector3 smoothTime, float maxSpeed = Mathf.Infinity)
+        public static Vector3 SmoothDamp(Vector3 current, Vector3 target, ref Vector3 currentVelocity, Vector3 smoothTime)
+            => SmoothDamp(current, target, ref currentVelocity, smoothTime, Mathf.Infinity);
+
+        public static Vector3 SmoothDamp(Vector3 current, Vector3 target, ref Vector3 currentVelocity, Vector3 smoothTime, float maxSpeed)
         {
             Vector3 r;
             r.x = Mathf.SmoothDamp(current.x, target.x, ref currentVelocity.x, smoothTime.x, maxSpeed);

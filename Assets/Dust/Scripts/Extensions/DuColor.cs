@@ -38,7 +38,10 @@ namespace DustEngine
             return self;
         }
 
-        public static Vector3 ToVector3(this Color self, int digits = 0)
+        public static Vector3 ToVector3(this Color self)
+            => ToVector3(self, 0);
+
+        public static Vector3 ToVector3(this Color self, int digits)
         {
             var v = new Vector3();
             v.x = DuMath.Round(self.r, digits);
@@ -94,7 +97,10 @@ namespace DustEngine
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        public static Color AddRGB(Color a, Color b, float alpha = 1f)
+        public static Color AddRGB(Color a, Color b)
+            => AddRGB(a, b, 1f);
+
+        public static Color AddRGB(Color a, Color b, float alpha)
         {
             a.r = a.r + b.r;
             a.g = a.g + b.g;
@@ -104,7 +110,10 @@ namespace DustEngine
             return a;
         }
 
-        public static Color SubtractRGB(Color a, Color b, float alpha = 1f)
+        public static Color SubtractRGB(Color a, Color b)
+            => SubtractRGB(a, b, 1f);
+
+        public static Color SubtractRGB(Color a, Color b, float alpha)
         {
             a.r = a.r - b.r;
             a.g = a.g - b.g;

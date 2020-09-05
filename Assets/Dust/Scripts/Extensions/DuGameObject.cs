@@ -21,7 +21,10 @@ namespace DustEngine
             }
         }
 
-        public static Data GetStats(GameObject gameObject, bool recursive = false)
+        public static Data GetStats(GameObject gameObject)
+            => GetStats(gameObject, false);
+
+        public static Data GetStats(GameObject gameObject, bool recursive)
         {
             Data result = new Data();
 

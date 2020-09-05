@@ -19,13 +19,20 @@ namespace DustEngine
             return a <= value && value <= b;
         }
 
-        public static float Round(float value, int digits = DuConstants.ROUND_DIGITS_COUNT)
+        //--------------------------------------------------------------------------------------------------------------
+
+        public static float Round(float value)
+            => Round(value, DuConstants.ROUND_DIGITS_COUNT);
+
+        public static float Round(float value, int digits)
         {
             if (digits == 0)
                 return value;
 
             return (float) System.Math.Round(value, digits);
         }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         public static float Length(float a, float b)
         {
@@ -97,7 +104,10 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public static float Map(float inMin, float inMax, float outMin, float outMax, float inValue, bool clamped = false)
+        public static float Map(float inMin, float inMax, float outMin, float outMax, float inValue)
+            => Map(inMin, inMax, outMin, outMax, inValue, false);
+
+        public static float Map(float inMin, float inMax, float outMin, float outMax, float inValue, bool clamped)
         {
             if (clamped)
             {
@@ -114,7 +124,10 @@ namespace DustEngine
             return outMin + (inValue - inMin) / inRange * outRange;
         }
 
-        public static float Map01To(float outMin, float outMax, float inValue, bool clamped = false)
+        public static float Map01To(float outMin, float outMax, float inValue)
+            => Map01To(outMin, outMax, inValue, false);
+
+        public static float Map01To(float outMin, float outMax, float inValue, bool clamped)
         {
             if (clamped)
             {
