@@ -56,16 +56,11 @@ namespace DustEngine
             if (Dust.IsNull(objectTags) || objectTags.Count == 0)
                 return true;
 
-            switch (tagProcessingMode)
-            {
-                case TagProcessingMode.Contains:
-                    return objectTags.Contains(otherGameObject.tag);
+            if (tagProcessingMode == TagProcessingMode.NotContains)
+                return !objectTags.Contains(otherGameObject.tag);
 
-                case TagProcessingMode.NotContains:
-                    return !objectTags.Contains(otherGameObject.tag);
-            }
-
-            return false;
+            // TagProcessingMode.Contains [or] default
+            return objectTags.Contains(otherGameObject.tag);
         }
     }
 }
