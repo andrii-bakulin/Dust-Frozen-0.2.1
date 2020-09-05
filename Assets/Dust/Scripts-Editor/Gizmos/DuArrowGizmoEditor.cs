@@ -5,7 +5,7 @@ using UnityEditor;
 namespace DustEngine.DustEditor
 {
     [CustomEditor(typeof(DuArrowGizmo)), CanEditMultipleObjects]
-    public class DuArrowGizmoGUI : DuGizmoEditor
+    public class DuArrowGizmoEditor : DuGizmoEditor
     {
         public static string[] s_DirectionOptions = new string[]
         {

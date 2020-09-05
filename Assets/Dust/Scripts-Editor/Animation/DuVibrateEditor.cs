@@ -5,7 +5,7 @@ using UnityEditor;
 namespace DustEngine.DustEditor
 {
     [CustomEditor(typeof(DuVibrate)), CanEditMultipleObjects]
-    public class DuVibrateGUI : DuEditor
+    public class DuVibrateEditor : DuEditor
     {
         private DuProperty m_Uniform;
         private DuProperty m_Seed;

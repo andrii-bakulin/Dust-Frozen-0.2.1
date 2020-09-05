@@ -5,7 +5,7 @@ using UnityEditor;
 namespace DustEngine.DustEditor
 {
     [CustomEditor(typeof(DuSpawner)), CanEditMultipleObjects]
-    public class DuSpawnerGUI : DuEditor
+    public class DuSpawnerEditor : DuEditor
     {
         private DuProperty m_SpawnPointMode;
         private DuProperty m_SpawnPoints;

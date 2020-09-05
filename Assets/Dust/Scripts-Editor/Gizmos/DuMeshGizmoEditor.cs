@@ -4,22 +4,22 @@ using UnityEditor;
 #if UNITY_EDITOR
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuCylinderGizmo)), CanEditMultipleObjects]
-    public class DuCylinderGizmoGUI : DuGizmoEditor
+    [CustomEditor(typeof(DuMeshGizmo)), CanEditMultipleObjects]
+    public class DuMeshGizmoEditor : DuGizmoEditor
     {
-        private DuProperty m_Radius;
-        private DuProperty m_Height;
-        private DuProperty m_Center;
-        private DuProperty m_Direction;
+        private DuProperty m_Mesh;
+        private DuProperty m_Position;
+        private DuProperty m_Rotation;
+        private DuProperty m_Scale;
 
         void OnEnable()
         {
             OnEnableGizmo();
 
-            m_Radius = FindProperty("m_Radius", "Radius");
-            m_Height = FindProperty("m_Height", "Height");
-            m_Center = FindProperty("m_Center", "Center");
-            m_Direction = FindProperty("m_Direction", "Direction");
+            m_Mesh = FindProperty("m_Mesh", "Mesh");
+            m_Position = FindProperty("m_Position", "Position");
+            m_Rotation = FindProperty("m_Rotation", "Rotation");
+            m_Scale = FindProperty("m_Scale", "Scale");
         }
 
         public override void OnInspectorGUI()
@@ -30,10 +30,10 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            PropertyExtendedSlider(m_Radius, 0f, 10f, 0.01f);
-            PropertyExtendedSlider(m_Height, 0f, 10f, 0.01f);
-            PropertyField(m_Center);
-            PropertyField(m_Direction);
+            PropertyField(m_Mesh);
+            PropertyField(m_Position);
+            PropertyField(m_Rotation);
+            PropertyField(m_Scale);
             Space();
             PropertyField(m_Color);
             PropertyField(m_GizmosVisibility);

@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
 using UnityEditor;
-using UnityEngine.UI;
 
 #if UNITY_EDITOR
 namespace DustEngine.DustEditor
 {
     [CustomEditor(typeof(DuTriggerGizmo)), CanEditMultipleObjects]
-    public class DuTriggerGizmoGUI : DuGizmoEditor
+    public class DuTriggerGizmoEditor : DuGizmoEditor
     {
         private DuProperty m_Size;
 

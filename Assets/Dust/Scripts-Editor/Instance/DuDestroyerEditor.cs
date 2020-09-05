@@ -5,7 +5,7 @@ using UnityEditor;
 namespace DustEngine.DustEditor
 {
     [CustomEditor(typeof(DuDestroyer)), CanEditMultipleObjects]
-    public class DuDestroyerGUI : DuEditor
+    public class DuDestroyerEditor : DuEditor
     {
         private DuProperty m_DestroyMode;
 

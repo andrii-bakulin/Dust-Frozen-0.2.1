@@ -5,7 +5,7 @@ using UnityEditor;
 namespace DustEngine.DustEditor
 {
     [CustomEditor(typeof(DuFollow)), CanEditMultipleObjects]
-    public class DuFollowGUI : DuEditor
+    public class DuFollowEditor : DuEditor
     {
         private DuProperty m_FollowObject;
         private DuProperty m_FollowDistance;

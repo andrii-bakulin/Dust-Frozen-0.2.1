@@ -5,7 +5,7 @@ using UnityEditor;
 namespace DustEngine.DustEditor
 {
     [CustomEditor(typeof(DuRandomTransform)), CanEditMultipleObjects]
-    public class DuRandomTransformGUI : DuEditor
+    public class DuRandomTransformEditor : DuEditor
     {
         private DuProperty m_ActivateMode;
         private DuProperty m_TransformMode;

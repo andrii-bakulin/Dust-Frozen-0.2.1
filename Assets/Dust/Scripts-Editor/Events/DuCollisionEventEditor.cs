@@ -5,7 +5,7 @@ using UnityEditor;
 namespace DustEngine.DustEditor
 {
     [CustomEditor(typeof(DuCollisionEvent)), CanEditMultipleObjects]
-    public class DuCollisionEventGUI : DuColliderEventGUI
+    public class DuCollisionEventEditor : DuColliderEventEditor
     {
     }
 }

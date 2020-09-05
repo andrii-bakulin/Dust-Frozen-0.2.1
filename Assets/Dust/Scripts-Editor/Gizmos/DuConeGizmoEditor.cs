@@ -5,7 +5,7 @@ using UnityEditor;
 namespace DustEngine.DustEditor
 {
     [CustomEditor(typeof(DuConeGizmo)), CanEditMultipleObjects]
-    public class DuConeGizmoGUI : DuGizmoEditor
+    public class DuConeGizmoEditor : DuGizmoEditor
     {
         private DuProperty m_Radius;
         private DuProperty m_Height;

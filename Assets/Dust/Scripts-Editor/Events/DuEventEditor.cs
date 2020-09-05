@@ -4,7 +4,7 @@ using UnityEditor;
 #if UNITY_EDITOR
 namespace DustEngine.DustEditor
 {
-    public abstract class DuEventGUI : DuEditor
+    public abstract class DuEventEditor : DuEditor
     {
         public override void OnInspectorGUI()
         {

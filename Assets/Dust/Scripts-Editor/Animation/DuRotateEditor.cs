@@ -5,7 +5,7 @@ using UnityEditor;
 namespace DustEngine.DustEditor
 {
     [CustomEditor(typeof(DuRotate)), CanEditMultipleObjects]
-    public class DuRotateGUI : DuEditor
+    public class DuRotateEditor : DuEditor
     {
         private DuProperty m_Axis;
         private DuProperty m_Speed;

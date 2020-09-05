@@ -5,7 +5,7 @@ using UnityEditor;
 namespace DustEngine.DustEditor
 {
     [CustomEditor(typeof(DuTarget)), CanEditMultipleObjects]
-    public class DuTargetGUI : DuEditor
+    public class DuTargetEditor : DuEditor
     {
         private DuProperty m_TargetObject;
         private DuProperty m_UpVectorObject;

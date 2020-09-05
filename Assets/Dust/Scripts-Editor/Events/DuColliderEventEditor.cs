@@ -4,7 +4,7 @@ using UnityEditor;
 #if UNITY_EDITOR
 namespace DustEngine.DustEditor
 {
-    public abstract class DuColliderEventGUI : DuEventGUI
+    public abstract class DuColliderEventEditor : DuEventEditor
     {
         protected DuProperty m_ObjectTags;
         protected DuProperty m_TagProcessingMode;
@@ -31,7 +31,7 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            if (DustGUI.FoldoutBegin("Tags", "DuColliderEventGUI.Tags"))
+            if (DustGUI.FoldoutBegin("Tags", "DuColliderEventEditor.Tags"))
             {
                 PropertyField(m_TagProcessingMode);
                 PropertyField(m_ObjectTags);
@@ -40,13 +40,13 @@ namespace DustEngine.DustEditor
 
             Space();
 
-            if (DustGUI.FoldoutBegin("Events", "DuColliderEventGUI.Events"))
+            if (DustGUI.FoldoutBegin("Events", "DuColliderEventEditor.Events"))
             {
                 var titleOnEnter = "On Enter" + (m_OnEnter.valUnityEvent.arraySize > 0 ? " (" + m_OnEnter.valUnityEvent.arraySize + ")" : "");
                 var titleOnStay  = "On Stay"  + (m_OnStay.valUnityEvent.arraySize  > 0 ? " (" + m_OnStay.valUnityEvent.arraySize  + ")" : "");
                 var titleOnExit  = "On Exit"  + (m_OnExit.valUnityEvent.arraySize  > 0 ? " (" + m_OnExit.valUnityEvent.arraySize  + ")" : "");
 
-                var tabIndex = DustGUI.Toolbar("DuColliderEventGUI.Events", new[] {titleOnEnter, titleOnStay, titleOnExit});
+                var tabIndex = DustGUI.Toolbar("DuColliderEventEditor.Events", new[] {titleOnEnter, titleOnStay, titleOnExit});
 
                 switch (tabIndex)
                 {
