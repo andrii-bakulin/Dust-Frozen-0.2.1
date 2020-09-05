@@ -2,7 +2,7 @@
 
 namespace DustEngine
 {
-    public static partial class DuMath
+    public static class DuMath
     {
         public static bool IsZero(float value)
         {
@@ -175,5 +175,89 @@ namespace DustEngine
             Matrix4x4 m4r = Matrix4x4.Rotate(q);
             return m4r.MultiplyPoint(pointToRotate);
         }
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Cone
+
+        // Math for this cone use fixed orientation along [X+]-axis
+        // Ray outgoing from center of cone to endPoint
+        public static class Cone
+        {
+            public static float DistanceToEdge(float radius, float height, Vector3 endPoint)
+            {
+                if (IsZero(radius) || IsZero(height) || endPoint.Equals(Vector3.zero))
+                    return 0f;
+
+                if (IsZero(endPoint.y) && IsZero(endPoint.z))
+                    return height / 2f;
+
+                // conePoint1 .. conePoint2 = edge
+                // conePoint2 .. conePoint3 = base
+
+                Vector2 conePoint1 = new Vector2(+height / 2f, 0f);
+                Vector2 conePoint2 = new Vector2(-height / 2f, radius);
+
+                Vector2 linePoint1 = Vector2.zero;
+
+                // Convert 3D point to 2D (x&z; y) -> (x; y)
+                Vector2 linePoint2 = new Vector2(endPoint.x, Length(endPoint.y, endPoint.z));
+                linePoint2.y = Mathf.Abs(linePoint2.y);
+
+                linePoint2 *= 1000f;
+                Vector2 intersectPoint;
+
+                if (DuVector2.IsIntersecting(conePoint1, conePoint2, linePoint1, linePoint2, out intersectPoint) == false)
+                {
+                    Vector2 conePoint3 = new Vector2(-height / 2f, 0f);
+
+                    if (DuVector2.IsIntersecting(conePoint2, conePoint3, linePoint1, linePoint2, out intersectPoint) == false)
+                        return 0f;
+                }
+
+                return intersectPoint.magnitude;
+            }
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Cylinder
+
+        // Math for this cylinder use fixed orientation along [X+]-axis
+        // Ray outgoing from center of cylinder to endPoint
+        public static class Cylinder
+        {
+            public static Vector3 IntersectionPoint(float radius, float height, Vector3 endPoint)
+            {
+                if (IsZero(radius) || IsZero(height) || endPoint.Equals(Vector3.zero))
+                    return Vector3.zero;
+
+                float h2 = height / 2f;
+
+                Vector3 point = Vector3.zero;
+
+                if (IsZero(endPoint.y) && IsZero(endPoint.z))
+                    return new Vector3(h2 * Mathf.Sign(endPoint.z), 0f, 0f);
+
+                float rP2 = radius * radius;
+                float yP2 = endPoint.y * endPoint.y;
+                float zP2 = endPoint.z * endPoint.z;
+
+                point.y = Mathf.Sqrt(rP2 * yP2 / (yP2 + zP2)) * Mathf.Sign(endPoint.y);
+                point.z = Mathf.Sqrt(rP2 * zP2 / (yP2 + zP2)) * Mathf.Sign(endPoint.z);
+
+                point.x = endPoint.x * (IsNotZero(endPoint.y) ? point.y / endPoint.y : point.z / endPoint.z);
+
+                if (Mathf.Abs(point.x) > h2)
+                    point *= h2 / Mathf.Abs(point.x);
+
+                return point;
+            }
+
+            public static float DistanceToEdge(float radius, float height, Vector3 endPoint)
+            {
+                return IntersectionPoint(radius, height, endPoint).magnitude;
+            }
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
     }
 }
