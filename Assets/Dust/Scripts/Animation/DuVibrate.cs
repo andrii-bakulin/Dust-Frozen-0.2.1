@@ -6,7 +6,7 @@ namespace DustEngine
     [AddComponentMenu("Dust/Animation/Vibrate")]
     public class DuVibrate : DuMonoBehaviour
     {
-        public const float k_MinScaleValue = 0.0001f;
+        internal const float k_MinScaleValue = 0.0001f;
 
         public enum TransformMode
         {
