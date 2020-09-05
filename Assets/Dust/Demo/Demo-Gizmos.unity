@@ -181,7 +181,6 @@ GameObject:
   - component: {fileID: 270315049}
   - component: {fileID: 270315048}
   - component: {fileID: 270315047}
-  - component: {fileID: 270315050}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -254,18 +253,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 23.241, y: -143.129, z: 0}
---- !u!114 &270315050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 270315046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2d94d71734249f9acec9b874e1fc2dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &278394069
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,6 +302,94 @@ MonoBehaviour:
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0}
   m_Scale: {x: 3, y: 3, z: 3}
+--- !u!1 &301108404
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 301108405}
+  - component: {fileID: 301108407}
+  - component: {fileID: 301108406}
+  m_Layer: 0
+  m_Name: Gizmo - Trigger (0)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &301108405
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301108404}
+  m_LocalRotation: {x: -0.0019335324, y: -0.0014593183, z: 0.0017185572, w: 0.9999956}
+  m_LocalPosition: {x: 3.74, y: -10.48, z: -2.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 881682113}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: -0.221, y: -0.168, z: 0.197}
+--- !u!114 &301108406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301108404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60d6029f47d2140b2adc01591a093873, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delay: 1
+  m_Repeat: 0
+  m_FireOnStart: 0
+  onEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 301108407}
+        m_TargetAssemblyTypeName: DustEngine.DuTriggerGizmo, Assembly-CSharp
+        m_MethodName: Trigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &301108407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301108404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6fae4c382d364205b566f7f7cf952d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Color: {r: 0.34451556, g: 1, b: 0.015686274, a: 1}
+  m_GizmosVisibility: 2
+  m_Size: 1
+  m_TriggeredColor: {r: 1, g: 0, b: 0, a: 1}
+  m_TriggeredSize: 1
+  m_ShowMessage: 0
+  m_HideMessageOnIdleState: 1
+  m_Message: Trigger Event
+  m_MessagePosition: 0
+  m_MessageOffset: 0.25
+  m_MessageSize: 1
+  m_MessageSizeInDepth: 0
+  m_FalloffDuration: 0.2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &329459315
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,6 +436,63 @@ MonoBehaviour:
   m_Color: {r: 1, g: 0, b: 0.67774296, a: 1}
   m_GizmosVisibility: 2
   m_Size: {x: 1, y: 2, z: 3}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &332430852
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 332430853}
+  - component: {fileID: 332430854}
+  m_Layer: 0
+  m_Name: Gizmo - Trigger (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &332430853
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332430852}
+  m_LocalRotation: {x: -0.0019335324, y: -0.0014593183, z: 0.0017185572, w: 0.9999956}
+  m_LocalPosition: {x: 4.97, y: -6.2468004, z: -2.83}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 881682113}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: -0.221, y: -0.168, z: 0.197}
+--- !u!114 &332430854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332430852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6fae4c382d364205b566f7f7cf952d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  m_GizmosVisibility: 2
+  m_Size: 1
+  m_TriggeredColor: {r: 1, g: 0, b: 0, a: 1}
+  m_TriggeredSize: 1
+  m_ShowMessage: 1
+  m_HideMessageOnIdleState: 0
+  m_Message: Custom Trigger
+  m_MessagePosition: 0
+  m_MessageOffset: 0.25
+  m_MessageSize: 1
+  m_MessageSizeInDepth: 0
+  m_FalloffDuration: 0.2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &455315027
 GameObject:
@@ -553,6 +685,94 @@ MonoBehaviour:
   m_Height: 5
   m_Center: {x: 0, y: 0, z: 0}
   m_Direction: 0
+--- !u!1 &777983908
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 777983909}
+  - component: {fileID: 777983910}
+  - component: {fileID: 777983911}
+  m_Layer: 0
+  m_Name: Gizmo - Trigger (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &777983909
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777983908}
+  m_LocalRotation: {x: -0.0019335324, y: -0.0014593183, z: 0.0017185572, w: 0.9999956}
+  m_LocalPosition: {x: 3.53, y: -6.26, z: -8.03}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 881682113}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: -0.221, y: -0.168, z: 0.197}
+--- !u!114 &777983910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777983908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6fae4c382d364205b566f7f7cf952d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Color: {r: 0.015686274, g: 0.89693403, b: 1, a: 1}
+  m_GizmosVisibility: 2
+  m_Size: 0.28
+  m_TriggeredColor: {r: 1, g: 0, b: 0, a: 1}
+  m_TriggeredSize: 1
+  m_ShowMessage: 1
+  m_HideMessageOnIdleState: 1
+  m_Message: Trigger (1)
+  m_MessagePosition: 1
+  m_MessageOffset: 0.25
+  m_MessageSize: 1
+  m_MessageSizeInDepth: 0
+  m_FalloffDuration: 0.2
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &777983911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777983908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60d6029f47d2140b2adc01591a093873, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delay: 0.5
+  m_Repeat: 0
+  m_FireOnStart: 0
+  onEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 777983910}
+        m_TargetAssemblyTypeName: DustEngine.DuTriggerGizmo, Assembly-CSharp
+        m_MethodName: Trigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: My Message Here...
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &797391164
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,7 +832,7 @@ GameObject:
   m_Component:
   - component: {fileID: 881682113}
   m_Layer: 0
-  m_Name: Games
+  m_Name: Gizmos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -638,6 +858,9 @@ Transform:
   - {fileID: 455315028}
   - {fileID: 1893932388}
   - {fileID: 1178043681}
+  - {fileID: 301108405}
+  - {fileID: 777983909}
+  - {fileID: 332430853}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
