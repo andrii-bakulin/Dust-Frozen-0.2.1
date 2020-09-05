@@ -1,0 +1,57 @@
+﻿using UnityEngine;
+using UnityEditor;
+
+namespace DustEngine
+{
+    [AddComponentMenu("Dust/Events/Collision Event 2D")]
+    public class DuCollision2DEvent : DuColliderEvent
+    {
+        [SerializeField]
+        private Collision2DEvent m_OnEnter = null;
+        public Collision2DEvent onEnter => m_OnEnter;
+
+        [SerializeField]
+        private Collision2DEvent m_OnStay = null;
+        public Collision2DEvent onStay => m_OnStay;
+
+        [SerializeField]
+        private Collision2DEvent m_OnExit = null;
+        public Collision2DEvent onExit => m_OnExit;
+
+        //--------------------------------------------------------------------------------------------------------------
+
+#if UNITY_EDITOR
+        [MenuItem("Dust/Events/Collision Event 2D")]
+        public static DuCollision2DEvent AddComponent()
+        {
+            return AddComponentByEventType(typeof(DuCollision2DEvent)) as DuCollision2DEvent;
+        }
+#endif
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            if (Dust.IsNull(onEnter) || onEnter.GetPersistentEventCount() == 0 || !IsRequireSendEvent(other.gameObject))
+                return;
+
+            onEnter.Invoke(other);
+        }
+
+        private void OnCollisionStay2D(Collision2D other)
+        {
+            if (Dust.IsNull(onStay) || onStay.GetPersistentEventCount() == 0 || !IsRequireSendEvent(other.gameObject))
+                return;
+
+            onStay.Invoke(other);
+        }
+
+        private void OnCollisionExit2D(Collision2D other)
+        {
+            if (Dust.IsNull(onExit) || onExit.GetPersistentEventCount() == 0 || !IsRequireSendEvent(other.gameObject))
+                return;
+
+            onExit.Invoke(other);
+        }
+    }
+}

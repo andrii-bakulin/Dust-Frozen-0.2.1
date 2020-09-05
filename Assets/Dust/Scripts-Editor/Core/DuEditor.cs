@@ -64,6 +64,8 @@ namespace DustEngine.DustEditor
                 set => property.colorValue = value;
             }
 
+            public SerializedProperty valUnityEvent => property.FindPropertyRelative("m_PersistentCalls.m_Calls");
+
             public GameObject GameObjectReference => property.objectReferenceValue as GameObject;
 
             public bool ObjectReferenceExists => Dust.IsNotNull(property.objectReferenceValue);
