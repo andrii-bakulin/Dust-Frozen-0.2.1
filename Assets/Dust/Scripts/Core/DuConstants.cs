@@ -9,8 +9,8 @@ namespace DustEngine
 
         public const int ROUND_DIGITS_COUNT = 6;
 
-        public const int RANDOM_SEED_DEFAULT = 123456;
+        public const int RANDOM_SEED_DEFAULT = 12345;
         public const int RANDOM_SEED_MIN = 1;
-        public const int RANDOM_SEED_MAX = 9999;
+        public const int RANDOM_SEED_MAX = 99999;
     }
 }
