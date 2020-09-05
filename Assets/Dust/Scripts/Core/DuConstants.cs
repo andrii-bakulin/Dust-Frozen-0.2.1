@@ -11,6 +11,6 @@ namespace DustEngine
 
         public const int RANDOM_SEED_DEFAULT = 123456;
         public const int RANDOM_SEED_MIN = 1;
-        public const int RANDOM_SEED_MAX = 999999;
+        public const int RANDOM_SEED_MAX = 9999;
     }
 }

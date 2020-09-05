@@ -224,7 +224,7 @@ namespace DustEngine.DustEditor
         public static bool PropertySeedFixed(DuProperty duProperty, int seedMin = DuConstants.RANDOM_SEED_MIN, int seedMax = DuConstants.RANDOM_SEED_MAX)
         {
             EditorGUI.BeginChangeCheck();
-            EditorGUILayout.IntSlider(duProperty.property, seedMin, seedMax, new GUIContent("Seed"));
+            DustGUI.IntSliderExt.Create(seedMin, seedMax, 1, 1, int.MaxValue).Draw("Seed", duProperty.property);
             duProperty.isChanged = EditorGUI.EndChangeCheck();
             return duProperty.isChanged;
         }
