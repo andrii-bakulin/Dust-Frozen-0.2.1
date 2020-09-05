@@ -28,7 +28,9 @@ namespace DustEngine.DustEditor
         void OnEnable()
         {
             m_ActivateMode = FindProperty("m_ActivateMode", "Activate On");
-            m_TransformMode = FindProperty("m_TransformMode", "Transform Mode");
+            m_TransformMode = FindProperty("m_TransformMode", "Transform Mode",
+                "Relative - add random values to current transform" + "\n" +
+                "Absolute - set random values as new transform");
             m_Space = FindProperty("m_Space", "Space");
 
             m_PositionEnabled = FindProperty("m_PositionEnabled", "Enable Position");
