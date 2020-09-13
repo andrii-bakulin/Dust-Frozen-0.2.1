@@ -5,7 +5,7 @@ using UnityEditor;
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Gizmos/Torus Gizmo")]
-    public class DuTorusGizmo : DuGizmo
+    public class DuTorusGizmo : DuGizmoObject
     {
         [SerializeField]
         private float m_Radius = 2f;
@@ -54,7 +54,7 @@ namespace DustEngine
             Gizmos.matrix = transform.localToWorldMatrix;
             Gizmos.color = color;
 
-            DrawWireTorus(radius, thickness, center, direction, 64, 32);
+            DuGizmos.DrawWireTorus(radius, thickness, center, direction, 64, 32);
         }
     }
 }

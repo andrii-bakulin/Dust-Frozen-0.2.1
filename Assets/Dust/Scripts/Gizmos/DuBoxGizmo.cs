@@ -5,7 +5,7 @@ using UnityEditor;
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Gizmos/Box Gizmo")]
-    public class DuBoxGizmo : DuGizmo
+    public class DuBoxGizmo : DuGizmoObject
     {
         [SerializeField]
         private Vector3 m_Size = Vector3.one;

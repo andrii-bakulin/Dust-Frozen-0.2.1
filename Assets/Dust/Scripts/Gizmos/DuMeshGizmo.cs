@@ -5,7 +5,7 @@ using UnityEditor;
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Gizmos/Mesh Gizmo")]
-    public class DuMeshGizmo : DuGizmo
+    public class DuMeshGizmo : DuGizmoObject
     {
         [SerializeField]
         private Mesh m_Mesh;

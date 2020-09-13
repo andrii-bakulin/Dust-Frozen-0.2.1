@@ -5,7 +5,7 @@ using UnityEditor;
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Gizmos/Cone Gizmo")]
-    public class DuConeGizmo : DuGizmo
+    public class DuConeGizmo : DuGizmoObject
     {
         [SerializeField]
         private float m_Radius = 1f;
@@ -54,7 +54,7 @@ namespace DustEngine
             Gizmos.matrix = transform.localToWorldMatrix;
             Gizmos.color = color;
 
-            DrawWireCone(radius, height, center, direction, 64, 4);
+            DuGizmos.DrawWireCone(radius, height, center, direction, 64, 4);
         }
     }
 }

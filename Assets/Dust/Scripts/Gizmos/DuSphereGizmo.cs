@@ -5,7 +5,7 @@ using UnityEditor;
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Gizmos/Sphere Gizmo")]
-    public class DuSphereGizmo : DuGizmo
+    public class DuSphereGizmo : DuGizmoObject
     {
         [SerializeField]
         private float m_Radius = 1f;

@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
 
 #if UNITY_EDITOR
@@ -7,7 +6,7 @@ namespace DustEngine
 {
     [AddComponentMenu("Dust/Gizmos/Trigger Gizmo")]
     [ExecuteInEditMode]
-    public class DuTriggerGizmo : DuGizmo
+    public class DuTriggerGizmo : DuGizmoObject
     {
         public enum MessagePosition
         {

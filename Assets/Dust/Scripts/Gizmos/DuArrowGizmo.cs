@@ -5,7 +5,7 @@ using UnityEditor;
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Gizmos/Arrow Gizmo")]
-    public class DuArrowGizmo : DuGizmo
+    public class DuArrowGizmo : DuGizmoObject
     {
         public enum ColorMode
         {
