@@ -70,12 +70,6 @@ namespace DustEngine
                 Vector3 p0 = GetCirclePointByOffset(offset0, direction) * radius;
 
                 Gizmos.DrawLine(center + pHeight, center + p0 - pHeight);
-
-                if (i < edgesCount / 2)
-                {
-                    // Lines in base, but only for "half of count"
-                    Gizmos.DrawLine(center + p0 - pHeight, center - p0 - pHeight);
-                }
             }
         }
 
