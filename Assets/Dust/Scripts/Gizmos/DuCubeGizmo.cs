@@ -4,8 +4,8 @@ using UnityEditor;
 #if UNITY_EDITOR
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Gizmos/Box Gizmo")]
-    public class DuBoxGizmo : DuGizmoObject
+    [AddComponentMenu("Dust/Gizmos/Cube Gizmo")]
+    public class DuCubeGizmo : DuGizmoObject
     {
         [SerializeField]
         private Vector3 m_Size = Vector3.one;
@@ -25,10 +25,10 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        [MenuItem("Dust/Gizmos/Box")]
+        [MenuItem("Dust/Gizmos/Cube")]
         public static void AddComponentToSelectedObjects()
         {
-            AddComponentToSelectedOrNewObject("Box Gizmo", typeof(DuBoxGizmo));
+            AddComponentToSelectedOrNewObject("Cube Gizmo", typeof(DuCubeGizmo));
         }
 
         //--------------------------------------------------------------------------------------------------------------

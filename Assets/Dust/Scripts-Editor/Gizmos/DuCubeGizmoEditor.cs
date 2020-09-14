@@ -4,8 +4,8 @@ using UnityEditor;
 #if UNITY_EDITOR
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuBoxGizmo)), CanEditMultipleObjects]
-    public class DuBoxGizmoEditor : DuGizmoEditor
+    [CustomEditor(typeof(DuCubeGizmo)), CanEditMultipleObjects]
+    public class DuCubeGizmoEditor : DuGizmoEditor
     {
         private DuProperty m_Size;
         private DuProperty m_Center;

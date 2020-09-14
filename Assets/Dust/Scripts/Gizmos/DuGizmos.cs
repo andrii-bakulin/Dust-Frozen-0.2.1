@@ -4,7 +4,7 @@ using UnityEditor;
 #if UNITY_EDITOR
 namespace DustEngine
 {
-    public abstract class DuGizmos : DuMonoBehaviour
+    public static class DuGizmos
     {
         //--------------------------------------------------------------------------------------------------------------
         // All Gizmos by default draw elements in [X+]-axis-direction
@@ -76,6 +76,34 @@ namespace DustEngine
                     // Lines in base, but only for "half of count"
                     Gizmos.DrawLine(center + p0 - pHeight, center - p0 - pHeight);
                 }
+            }
+        }
+
+        public static void DrawWirePyramid(float radius, float height, Vector3 center, Axis6xDirection direction, int sidesCount)
+        {
+            sidesCount = Mathf.Max(3, sidesCount);
+
+            Vector3 pHeight = new Vector3(height / 2f, 0f, 0f);
+            pHeight = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, pHeight);
+
+            for (int i = 0; i < sidesCount; i++)
+            {
+                float offset0 = (float) i / sidesCount;
+                float offset1 = (float) (i + 1) / sidesCount;
+
+                Vector3 p0 = GetCirclePointByOffset(offset0, direction);
+                Vector3 p1 = GetCirclePointByOffset(offset1, direction);
+
+                Gizmos.DrawLine(center + p0 * radius - pHeight, center + p1 * radius - pHeight);
+            }
+
+            for (int i = 0; i < sidesCount; i++)
+            {
+                float offset0 = (float) i / sidesCount;
+
+                Vector3 p0 = GetCirclePointByOffset(offset0, direction) * radius;
+
+                Gizmos.DrawLine(center + pHeight, center + p0 - pHeight);
             }
         }
 
