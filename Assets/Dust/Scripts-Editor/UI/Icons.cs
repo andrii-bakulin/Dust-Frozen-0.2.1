@@ -51,6 +51,7 @@ namespace DustEngine.DustEditor
             ["DustEngine.DuConeGizmo"] = new ClassParams { IconName = "DRAFT/Gizmos/DuConeGizmo" },
             ["DustEngine.DuCubeGizmo"] = new ClassParams { IconName = "DRAFT/Gizmos/DuCubeGizmo" },
             ["DustEngine.DuCylinderGizmo"] = new ClassParams { IconName = "DRAFT/Gizmos/DuCylinderGizmo" },
+            ["DustEngine.DuFieldsSpaceGizmo"] = new ClassParams { IconName = "DRAFT/Gizmos/DuFieldsSpaceGizmo" },
             ["DustEngine.DuMeshGizmo"] = new ClassParams { IconName = "DRAFT/Gizmos/DuMeshGizmo" },
             ["DustEngine.DuPyramidGizmo"] = new ClassParams { IconName = "DRAFT/Gizmos/DuPyramidGizmo" },
             ["DustEngine.DuSphereGizmo"] = new ClassParams { IconName = "DRAFT/Gizmos/DuSphereGizmo" },

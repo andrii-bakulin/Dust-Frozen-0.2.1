@@ -112,14 +112,26 @@ namespace DustEngine
             return fields.Count > 0;
         }
 
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        //--------------------------------------------------------------------------------------------------------------
 
-        public bool GetWeightAndColor(Vector3 worldPosition, float sequenceOffset, out float weight, out Color color)
+        public bool Calculate(Vector3 worldPosition, float sequenceOffset, out float weight)
         {
             m_CalcFieldPoint.inPosition = worldPosition;
             m_CalcFieldPoint.inOffset = sequenceOffset;
 
-            bool result = GetWeightAndColor(m_CalcFieldPoint);
+            bool result = Calculate(m_CalcFieldPoint);
+
+            weight = m_CalcFieldPoint.outValue;
+
+            return result;
+        }
+
+        public bool Calculate(Vector3 worldPosition, float sequenceOffset, out float weight, out Color color)
+        {
+            m_CalcFieldPoint.inPosition = worldPosition;
+            m_CalcFieldPoint.inOffset = sequenceOffset;
+
+            bool result = Calculate(m_CalcFieldPoint);
 
             weight = m_CalcFieldPoint.outValue;
             color = m_CalcFieldPoint.outColor;
@@ -129,21 +141,7 @@ namespace DustEngine
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        public bool GetWeight(Vector3 worldPosition, float sequenceOffset, out float weight)
-        {
-            m_CalcFieldPoint.inPosition = worldPosition;
-            m_CalcFieldPoint.inOffset = sequenceOffset;
-
-            bool result = GetWeightAndColor(m_CalcFieldPoint);
-
-            weight = m_CalcFieldPoint.outValue;
-
-            return result;
-        }
-
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-        protected bool GetWeightAndColor(DuField.Point fieldPoint)
+        public bool Calculate(DuField.Point fieldPoint)
         {
             // Start color is BLACK + alpha is ZERO
             // Because result will apply by alpha value

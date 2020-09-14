@@ -22,6 +22,26 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        // ..
+        public float GetWeight(Vector3 worldPosition)
+        {
+            float weight;
+            fieldsMap.Calculate(worldPosition, 0.0f, out weight);
+            return weight;
+        }
+
+        public Color GetColor(Vector3 worldPosition)
+        {
+            float weight;
+            Color color;
+            fieldsMap.Calculate(worldPosition, 0.0f, out weight, out color);
+            return color;
+        }
+
+        public float GetWeightAndColor(Vector3 worldPosition, out Color color)
+        {
+            float weight;
+            fieldsMap.Calculate(worldPosition, 0.0f, out weight, out color);
+            return weight;
+        }
     }
 }
