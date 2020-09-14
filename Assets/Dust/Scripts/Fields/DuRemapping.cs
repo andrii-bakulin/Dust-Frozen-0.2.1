@@ -21,11 +21,11 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
 
         [SerializeField]
-        private bool m_Enable = true;
-        public bool enable
+        private bool m_Enabled = true;
+        public bool enabled
         {
-            get => m_Enable;
-            set => m_Enable = value;
+            get => m_Enabled;
+            set => m_Enabled = value;
         }
 
         [SerializeField]
@@ -156,7 +156,7 @@ namespace DustEngine
 
         public float MapValue(float inWeight, float timeSinceStart = 0f)
         {
-            if (!enable)
+            if (!enabled)
                 return inWeight;
 
             //----------------------------------------------------------------------------------------------------------

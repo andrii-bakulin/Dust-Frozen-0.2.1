@@ -9,7 +9,7 @@ namespace DustEngine.DustEditor
         private DuRemapping m_Remapping;
         private Material m_DrawerMaterial;
 
-        protected DuEditor.DuProperty m_Enable;
+        protected DuEditor.DuProperty m_Enabled;
         protected DuEditor.DuProperty m_Strength;
         protected DuEditor.DuProperty m_InnerOffset;
         protected DuEditor.DuProperty m_Invert;
@@ -34,7 +34,7 @@ namespace DustEngine.DustEditor
             m_Remapping = duRemapping;
             m_DrawerMaterial = new Material(Shader.Find("Hidden/Internal-Colored"));
 
-            m_Enable = DuEditor.FindProperty(remappingProperty, "m_Enable", "Enable");
+            m_Enabled = DuEditor.FindProperty(remappingProperty, "m_Enabled", "Enabled");
             m_Strength = DuEditor.FindProperty(remappingProperty, "m_Strength", "Strength");
             m_InnerOffset = DuEditor.FindProperty(remappingProperty, "m_InnerOffset", "Inner Offset");
             m_Invert = DuEditor.FindProperty(remappingProperty, "m_Invert", "Invert");
@@ -60,9 +60,9 @@ namespace DustEngine.DustEditor
         {
             if (DustGUI.FoldoutBegin("Remapping", "DuRemapping.Remapping"))
             {
-                DuEditor.PropertyField(m_Enable);
+                DuEditor.PropertyField(m_Enabled);
 
-                if (!m_Enable.IsTrue)
+                if (!m_Enabled.IsTrue)
                     DustGUI.Lock();
 
                 PropertyMappingGraph(m_Remapping, m_Color.valColor, showGraphMirrored);
@@ -101,7 +101,7 @@ namespace DustEngine.DustEditor
                         break;
                 }
 
-                if (!m_Enable.IsTrue)
+                if (!m_Enabled.IsTrue)
                     DustGUI.Unlock();
             }
             DustGUI.FoldoutEnd();
