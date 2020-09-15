@@ -50,6 +50,7 @@ namespace DustEngine.DustEditor
                 PropertyField(m_GizmosVisibility);
                 PropertyExtendedSlider(m_GizmoWidth, 0f, 10f, 0.1f, 0f);
                 PropertyExtendedSlider(m_GizmoHeight, 0f, 10f, 0.1f, 0f);
+                Space();
             }
             DustGUI.FoldoutEnd();
 

@@ -35,6 +35,7 @@ namespace DustEngine.DustEditor
                 PropertyExtendedSlider(m_Delay, 0.0f, 5.0f, 0.01f, 0.0f);
                 PropertyExtendedIntSlider(m_Repeat, 0, 100, 1, 0);
                 PropertyField(m_FireOnStart);
+                Space();
             }
             DustGUI.FoldoutEnd();
 
@@ -42,6 +43,7 @@ namespace DustEngine.DustEditor
             if (DustGUI.FoldoutBegin("Events", "DuTimerEventEditor.Events", this))
             {
                 PropertyField(m_OnFire);
+                Space();
             }
             DustGUI.FoldoutEnd();
 

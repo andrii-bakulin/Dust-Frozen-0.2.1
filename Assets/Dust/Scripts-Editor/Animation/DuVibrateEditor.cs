@@ -68,6 +68,8 @@ namespace DustEngine.DustEditor
                     PropertyField(m_PositionAmplitude);
                     PropertyExtendedSlider(m_PositionFrequency, 0f, 10f, 0.01f);
                 }
+
+                Space();
             }
             DustGUI.FoldoutEnd();
 
@@ -81,6 +83,8 @@ namespace DustEngine.DustEditor
                     PropertyField(m_RotationAmplitude);
                     PropertyExtendedSlider(m_RotationFrequency, 0f, 10f, 0.01f);
                 }
+
+                Space();
             }
             DustGUI.FoldoutEnd();
 
@@ -95,6 +99,8 @@ namespace DustEngine.DustEditor
                     PropertyField(m_ScaleAmplitude);
                     PropertyExtendedSlider(m_ScaleFrequency, 0f, 10f, 0.01f);
                 }
+
+                Space();
             }
             DustGUI.FoldoutEnd();
 
@@ -122,6 +128,8 @@ namespace DustEngine.DustEditor
                 Space();
 
                 PropertyField(m_UpdateMode);
+
+                Space();
             }
             DustGUI.FoldoutEnd();
 

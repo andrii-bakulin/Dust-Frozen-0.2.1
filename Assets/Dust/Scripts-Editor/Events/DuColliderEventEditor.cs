@@ -35,6 +35,7 @@ namespace DustEngine.DustEditor
             {
                 PropertyField(m_TagProcessingMode);
                 PropertyField(m_ObjectTags);
+                Space();
             }
             DustGUI.FoldoutEnd();
 
@@ -62,6 +63,8 @@ namespace DustEngine.DustEditor
                         PropertyField(m_OnExit);
                         break;
                 }
+
+                Space();
             }
             DustGUI.FoldoutEnd();
 

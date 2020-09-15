@@ -52,25 +52,29 @@ namespace DustEngine.DustEditor
             {
                 PropertyField(m_GridCount);
                 PropertyField(m_GridStep);
+                Space();
             }
             DustGUI.FoldoutEnd();
+
 
             if (DustGUI.FoldoutBegin("Power", "DuFieldsSpaceGizmo.Power"))
             {
                 PropertyField(m_PowerVisible);
                 PropertyExtendedSlider(m_PowerSize, 0.1f, 2.0f, +0.1f, 0.1f);
+                Space();
             }
             DustGUI.FoldoutEnd();
+
 
             if (DustGUI.FoldoutBegin("Color", "DuFieldsSpaceGizmo.Color"))
             {
                 PropertyField(m_ColorVisible);
                 PropertyExtendedSlider(m_ColorSize, 0.1f, 5.0f, +0.1f, 0.1f);
                 PropertyField(m_ColorAllowTransparent);
+                Space();
             }
             DustGUI.FoldoutEnd();
 
-            Space();
 
             PropertyField(m_GizmosVisibility);
 

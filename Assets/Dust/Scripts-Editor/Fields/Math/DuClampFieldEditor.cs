@@ -51,6 +51,8 @@ namespace DustEngine.DustEditor
                 if (!isMaxEnabled) DustGUI.Lock();
                 PropertyExtendedSlider(m_PowerClampMax, 0f, 1f, 0.01f);
                 if (!isMaxEnabled) DustGUI.Unlock();
+
+                Space();
             }
             DustGUI.FoldoutEnd();
 
@@ -69,6 +71,8 @@ namespace DustEngine.DustEditor
                 if (!isMaxEnabled) DustGUI.Lock();
                 PropertyField(m_ColorClampMax);
                 if (!isMaxEnabled) DustGUI.Unlock();
+
+                Space();
             }
             DustGUI.FoldoutEnd();
 

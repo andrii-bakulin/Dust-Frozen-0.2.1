@@ -60,6 +60,7 @@ namespace DustEngine.DustEditor
                 PropertyExtendedSlider(m_Offset, 0f, 360f, 1f);
                 Space();
                 PropertyField(m_Direction);
+                Space();
             }
             DustGUI.FoldoutEnd();
 
@@ -73,6 +74,7 @@ namespace DustEngine.DustEditor
                 PropertyField(m_GizmosVisibility);
                 PropertyExtendedSlider(m_GizmoLength, 0f, 10f, 0.1f, 0f);
                 PropertyExtendedSlider(m_GizmoRadius, 0f, 5f, 0.1f, 0f);
+                Space();
             }
             DustGUI.FoldoutEnd();
 

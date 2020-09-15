@@ -103,6 +103,8 @@ namespace DustEngine.DustEditor
 
                 if (!m_Enabled.IsTrue)
                     DustGUI.Unlock();
+
+                DuEditor.Space();
             }
             DustGUI.FoldoutEnd();
 
@@ -121,6 +123,8 @@ namespace DustEngine.DustEditor
                         DuEditor.PropertyField(m_Color);
                         break;
                 }
+
+                DuEditor.Space();
             }
             DustGUI.FoldoutEnd();
 
