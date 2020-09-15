@@ -24,6 +24,14 @@ namespace DustEngine
             set => m_GizmosVisibility = value;
         }
 
+        [SerializeField]
+        private bool m_GizmoFieldColor = true;
+        public bool gizmoFieldColor
+        {
+            get => m_GizmoFieldColor;
+            set => m_GizmoFieldColor = value;
+        }
+
         //--------------------------------------------------------------------------------------------------------------
 
         public override bool IsAllowGetFieldColor()
@@ -62,12 +70,12 @@ namespace DustEngine
 
         protected Color GetGizmoColorRange0()
         {
-            return k_GizmosColorRangeZero;
+            return gizmoFieldColor ? remapping.color * 0.33f : k_GizmosColorRangeZero;
         }
 
         protected Color GetGizmoColorRange1()
         {
-            return k_GizmosColorRangeOne;
+            return gizmoFieldColor ? remapping.color : k_GizmosColorRangeOne;
         }
 #endif
 

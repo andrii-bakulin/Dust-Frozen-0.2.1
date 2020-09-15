@@ -9,6 +9,7 @@ namespace DustEngine.DustEditor
         protected DuRemappingEditor m_RemappingEditor;
 
         protected DuProperty m_GizmosVisibility;
+        protected DuProperty m_GizmoFieldColor;
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -19,6 +20,7 @@ namespace DustEngine.DustEditor
             m_RemappingEditor = new DuRemappingEditor((target as DuObjectField).remapping, serializedObject.FindProperty("m_Remapping"));
 
             m_GizmosVisibility = FindProperty("m_GizmosVisibility", "Visibility");
+            m_GizmoFieldColor = FindProperty("m_GizmoFieldColor", "Use Field Color");
         }
 
         protected void OnInspectorGUI_RemappingBlock()
@@ -31,6 +33,7 @@ namespace DustEngine.DustEditor
             if (DustGUI.FoldoutBegin("Gizmos", "DuField.Gizmos"))
             {
                 PropertyField(m_GizmosVisibility);
+                PropertyField(m_GizmoFieldColor);
                 Space();
             }
             DustGUI.FoldoutEnd();
