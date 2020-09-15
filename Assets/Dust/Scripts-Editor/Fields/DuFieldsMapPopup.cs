@@ -63,12 +63,12 @@ namespace DustEngine.DustEditor
                 // AddItem(colMathFields, "DustEngine.DuSolidField", "Solid");
                 // AddItem(colMathFields, "DustEngine.DuStepField", "Step");
                 // AddItem(colMathFields, "DustEngine.DuTimeField", "Time");
-                //
-                // AddItem(colMathFields, "DustEngine.DuClampField", "Clamp");
-                // AddItem(colMathFields, "DustEngine.DuCurveField", "Curve");
-                // AddItem(colMathFields, "DustEngine.DuInvertField", "Invert");
-                // AddItem(colMathFields, "DustEngine.DuRangeMapField", "RangeMap");
-                // AddItem(colMathFields, "DustEngine.DuRemapField", "Remap");
+
+                AddItem(colMathFields, "DustEngine.DuClampField", "Clamp");
+                AddItem(colMathFields, "DustEngine.DuCurveField", "Curve");
+                AddItem(colMathFields, "DustEngine.DuFitField", "Fit");
+                AddItem(colMathFields, "DustEngine.DuInvertField", "Invert");
+                AddItem(colMathFields, "DustEngine.DuRemapField", "Remap");
             }
             m_ColumnRecords.Add(colMathFields);
             m_ColsCount++;

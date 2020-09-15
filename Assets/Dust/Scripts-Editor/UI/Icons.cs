@@ -46,6 +46,13 @@ namespace DustEngine.DustEditor
             ["DustEngine.DuSphereField"] = new ClassParams { IconName = "DRAFT/Fields/Objects/DuSphereField" },
             ["DustEngine.DuTorusField"] = new ClassParams { IconName = "DRAFT/Fields/Objects/DuTorusField" },
 
+            // Fields:Math
+            ["DustEngine.DuClampField"] = new ClassParams { IconName = "DRAFT/Fields/Math/DuClampField" },
+            ["DustEngine.DuCurveField"] = new ClassParams { IconName = "DRAFT/Fields/Math/DuCurveField" },
+            ["DustEngine.DuFitField"] = new ClassParams { IconName = "DRAFT/Fields/Math/DuFitField" },
+            ["DustEngine.DuInvertField"] = new ClassParams { IconName = "DRAFT/Fields/Math/DuInvertField" },
+            ["DustEngine.DuRemapField"] = new ClassParams { IconName = "DRAFT/Fields/Math/DuRemapField" },
+
             // Gizmos
             ["DustEngine.DuArrowGizmo"] = new ClassParams { IconName = "DRAFT/Gizmos/DuArrowGizmo" },
             ["DustEngine.DuConeGizmo"] = new ClassParams { IconName = "DRAFT/Gizmos/DuConeGizmo" },
