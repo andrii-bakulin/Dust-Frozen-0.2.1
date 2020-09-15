@@ -20,12 +20,6 @@ namespace DustEngine.DustEditor
         {
             public string className;
             public string title;
-
-            public CellRecord(string className, string title)
-            {
-                this.className = className;
-                this.title = title;
-            }
         }
 
         private int m_ColsCount;
@@ -87,7 +81,7 @@ namespace DustEngine.DustEditor
             button.title = title;
             columnRecord.cells.Add(button);
 
-            m_RowsCount = Mathf.Max(m_ColsCount, columnRecord.cells.Count);
+            m_RowsCount = Mathf.Max(m_RowsCount, columnRecord.cells.Count);
         }
 
         //--------------------------------------------------------------------------------------------------------------

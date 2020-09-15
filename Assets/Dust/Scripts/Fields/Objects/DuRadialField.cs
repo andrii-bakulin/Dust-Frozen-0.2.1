@@ -102,7 +102,7 @@ namespace DustEngine
         // *-----*                          *------*
         // 0'    A       B              C   D      360'
         //
-        public override float GetWeightForFieldPoint(DuField.Point fieldPoint)
+        public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
         {
             Vector3 localPosition = transform.worldToLocalMatrix.MultiplyPoint(fieldPoint.inPosition);
 
@@ -115,7 +115,7 @@ namespace DustEngine
             angle = DuMath.NormalizeAngle360(angle - offset);        // step 1
             angle = DuMath.NormalizeAngle360(angle * iterations);    // step 2
 
-            float weight = 0f;
+            float power = 0f;
 
             if (DuMath.Between(angle, startAngle, endAngle))
             {
@@ -126,7 +126,7 @@ namespace DustEngine
 
                 if (DuMath.Between(angle, pointB, pointC))
                 {
-                    weight = 1f;
+                    power = 1f;
                 }
                 else // somewhere in transition(s). But may be in both transitions so get min value
                 {
@@ -135,22 +135,22 @@ namespace DustEngine
 
                     if (inTransitionAB && inTransitionCD)
                     {
-                        weight = Mathf.Min(Mathf.InverseLerp(pointA, pointB, angle), 1f - Mathf.InverseLerp(pointC, pointD, angle));
+                        power = Mathf.Min(Mathf.InverseLerp(pointA, pointB, angle), 1f - Mathf.InverseLerp(pointC, pointD, angle));
                     }
                     else if (inTransitionAB)
                     {
-                        weight = Mathf.InverseLerp(pointA, pointB, angle);
+                        power = Mathf.InverseLerp(pointA, pointB, angle);
                     }
                     else if (inTransitionCD)
                     {
-                        weight = 1f - Mathf.InverseLerp(pointC, pointD, angle);
+                        power = 1f - Mathf.InverseLerp(pointC, pointD, angle);
                     }
                 }
             }
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            return remapping.MapValue(weight, timeSinceStart);
+            return remapping.MapValue(power, timeSinceStart);
         }
 
         //--------------------------------------------------------------------------------------------------------------

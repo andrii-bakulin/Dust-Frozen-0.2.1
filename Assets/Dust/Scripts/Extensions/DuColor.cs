@@ -9,10 +9,12 @@ namespace DustEngine
 
         public static void Clamp(ref this Color self, float min, float max)
         {
-            self.r = Mathf.Clamp(self.r, min, max);
-            self.g = Mathf.Clamp(self.g, min, max);
-            self.b = Mathf.Clamp(self.b, min, max);
-            self.a = Mathf.Clamp(self.a, min, max);
+            self = Clamp(self, min, max);
+        }
+
+        public static void Clamp(ref this Color self, Color min, Color max)
+        {
+            self = Clamp(self, min, max);
         }
 
         public static void Clamp01(ref this Color self)
@@ -92,6 +94,26 @@ namespace DustEngine
         public static Color InvertRGB(Color color)
         {
             color.InvertRGB();
+            return color;
+        }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        public static Color Clamp(Color color, float min, float max)
+        {
+            color.r = Mathf.Clamp(color.r, min, max);
+            color.g = Mathf.Clamp(color.g, min, max);
+            color.b = Mathf.Clamp(color.b, min, max);
+            color.a = Mathf.Clamp(color.a, min, max);
+            return color;
+        }
+
+        public static Color Clamp(Color color, Color min, Color max)
+        {
+            color.r = Mathf.Clamp(color.r, min.r, max.r);
+            color.g = Mathf.Clamp(color.g, min.g, max.g);
+            color.b = Mathf.Clamp(color.b, min.b, max.b);
+            color.a = Mathf.Clamp(color.a, min.a, max.a);
             return color;
         }
 

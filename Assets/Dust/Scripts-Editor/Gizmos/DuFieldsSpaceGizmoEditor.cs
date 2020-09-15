@@ -12,8 +12,8 @@ namespace DustEngine.DustEditor
         private DuProperty m_GridCount;
         private DuProperty m_GridStep;
 
-        private DuProperty m_WeightVisible;
-        private DuProperty m_WeightSize;
+        private DuProperty m_PowerVisible;
+        private DuProperty m_PowerSize;
 
         private DuProperty m_ColorVisible;
         private DuProperty m_ColorSize;
@@ -28,8 +28,8 @@ namespace DustEngine.DustEditor
             m_GridCount = FindProperty("m_GridCount", "Grid Count");
             m_GridStep = FindProperty("m_GridStep", "Grid Step");
 
-            m_WeightVisible = FindProperty("m_WeightVisible", "Visible");
-            m_WeightSize = FindProperty("m_WeightSize", "Size");
+            m_PowerVisible = FindProperty("m_PowerVisible", "Visible");
+            m_PowerSize = FindProperty("m_PowerSize", "Size");
 
             m_ColorVisible = FindProperty("m_ColorVisible", "Visible");
             m_ColorSize = FindProperty("m_ColorSize", "Size");
@@ -48,21 +48,21 @@ namespace DustEngine.DustEditor
 
             Space();
 
-            if (DustGUI.FoldoutBegin("Grid"))
+            if (DustGUI.FoldoutBegin("Grid", "DuFieldsSpaceGizmo.Grid"))
             {
                 PropertyField(m_GridCount);
                 PropertyField(m_GridStep);
             }
             DustGUI.FoldoutEnd();
 
-            if (DustGUI.FoldoutBegin("Weight"))
+            if (DustGUI.FoldoutBegin("Power", "DuFieldsSpaceGizmo.Power"))
             {
-                PropertyField(m_WeightVisible);
-                PropertyExtendedSlider(m_WeightSize, 0.1f, 2.0f, +0.1f, 0.1f);
+                PropertyField(m_PowerVisible);
+                PropertyExtendedSlider(m_PowerSize, 0.1f, 2.0f, +0.1f, 0.1f);
             }
             DustGUI.FoldoutEnd();
 
-            if (DustGUI.FoldoutBegin("Color"))
+            if (DustGUI.FoldoutBegin("Color", "DuFieldsSpaceGizmo.Color"))
             {
                 PropertyField(m_ColorVisible);
                 PropertyExtendedSlider(m_ColorSize, 0.1f, 5.0f, +0.1f, 0.1f);

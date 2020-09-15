@@ -37,19 +37,19 @@ namespace DustEngine
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
-        private bool m_WeightVisible = false;
-        public bool weightVisible
+        private bool m_PowerVisible = false;
+        public bool powerVisible
         {
-            get => m_WeightVisible;
-            set => m_WeightVisible = value;
+            get => m_PowerVisible;
+            set => m_PowerVisible = value;
         }
 
         [SerializeField]
-        private float m_WeightSize = 1f;
-        public float weightSize
+        private float m_PowerSize = 1f;
+        public float powerSize
         {
-            get => m_WeightSize;
-            set => m_WeightSize = Normalizer.Size(value);
+            get => m_PowerSize;
+            set => m_PowerSize = Normalizer.Size(value);
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -93,11 +93,14 @@ namespace DustEngine
             if (Dust.IsNull(fieldsSpace))
                 return;
 
-            if (!weightVisible && !colorVisible)
+            bool showPower = powerVisible && fieldsSpace.fieldsMap.calculatePower;
+            bool showColor = colorVisible && fieldsSpace.fieldsMap.calculateColor;
+
+            if (!showPower && !showColor)
                 return;
 
             GUIStyle style = new GUIStyle("Label");
-            style.fontSize = Mathf.RoundToInt(style.fontSize * weightSize);
+            style.fontSize = Mathf.RoundToInt(style.fontSize * powerSize);
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -115,9 +118,9 @@ namespace DustEngine
                 Vector3 worldPosition = transform.TransformPoint(position);
 
                 Color fieldColor;
-                float fieldWeight = fieldsSpace.GetWeightAndColor(worldPosition, out fieldColor);
+                float fieldPower = fieldsSpace.GetPowerAndColor(worldPosition, out fieldColor);
 
-                if (colorVisible)
+                if (showColor)
                 {
                     if (!colorAllowTransparent)
                         fieldColor = DuColorBlend.AlphaBlend(Color.black, fieldColor);
@@ -126,9 +129,9 @@ namespace DustEngine
                     Handles.DotHandleCap(0, worldPosition, transform.rotation, 0.1f * colorSize, EventType.Repaint);
                 }
 
-                if (weightVisible)
+                if (showPower)
                 {
-                    Handles.Label(worldPosition, fieldWeight.ToString("F2"), style);
+                    Handles.Label(worldPosition, fieldPower.ToString("F2"), style);
                 }
             }
         }

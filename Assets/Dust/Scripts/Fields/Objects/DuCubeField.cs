@@ -49,7 +49,7 @@ namespace DustEngine
             return "Cube";
         }
 
-        public override float GetWeightForFieldPoint(DuField.Point fieldPoint)
+        public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
         {
             InitCalcData();
 

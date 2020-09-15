@@ -6,10 +6,33 @@ namespace DustEngine.DustEditor
 {
     public class DuFieldsMapEditor
     {
+        private const float CELL_WIDTH_ICON = 32f;
+        private const float CELL_WIDTH_STATE = 20f;
+        private const float CELL_WIDTH_BLENDING = 64f;
+        private const float CELL_WIDTH_CONTROL = 40f;
+
+        //--------------------------------------------------------------------------------------------------------------
+
         private DuFieldsMap m_FieldsMapInstance;
 
         private DuEditor m_Editor;
         private DuEditor.DuProperty m_Fields;
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        private GUIStyle m_StyleMiniButton;
+        private GUIStyle styleMiniButton => m_StyleMiniButton
+                                            ?? (m_StyleMiniButton = DustGUI.NewStyleButton().Padding(2, 0).Margin(0).Build());
+
+        private GUIStyle m_StyleIntensityField;
+        private GUIStyle styleIntensityField => m_StyleIntensityField
+                                                ?? (m_StyleIntensityField = DustGUI.NewStyleLabel().AlignMiddleRight().Build());
+
+        private GUIStyle m_StyleDropDownList;
+        private GUIStyle styleDropDownList => m_StyleDropDownList
+                                              ?? (m_StyleDropDownList = DustGUI.NewStylePopup().MarginTop(6).Build());
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         private Rect m_RectButtonFieldsPopup;
 
@@ -28,9 +51,8 @@ namespace DustEngine.DustEditor
             return (m_Editor.target as DuMonoBehaviour).gameObject;
         }
 
-        public bool calculateValues => m_FieldsMapInstance.calculateValues;
-
-        public bool calculateColors => m_FieldsMapInstance.calculateColors;
+        public bool calculatePower => m_FieldsMapInstance.calculatePower;
+        public bool calculateColor => m_FieldsMapInstance.calculateColor;
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -50,19 +72,21 @@ namespace DustEngine.DustEditor
                     DustGUI.BeginHorizontal();
                     {
                         float padding = 2;
-                        DustGUI.Header("", 52 - padding * 2); // First 2 buttons
-                        DustGUI.Header("Name", 70 - padding);
+                        DustGUI.Header("", CELL_WIDTH_ICON);
+                        DustGUI.Header("", CELL_WIDTH_STATE);
+                        DustGUI.Header("Name", 36);
+
                         DustGUI.SpaceExpand();
 
-                        if (calculateValues && calculateColors)
-                        {
-                            DustGUI.Header("", 32 - padding); // Calculation on/off button for weight
-                            DustGUI.Header("", 32 - padding); // Calculation on/off button for color
-                        }
+                        DustGUI.Header("Intensity", 54);
 
-                        DustGUI.Header("Blending", 70 - padding);
-                        DustGUI.Header("Intensity", 80 - padding);
-                        DustGUI.Header("", 40 - padding * 2); // Control buttons
+                        if (calculatePower)
+                            DustGUI.Header("Power", CELL_WIDTH_BLENDING - padding);
+
+                        if (calculateColor)
+                            DustGUI.Header("Color", CELL_WIDTH_BLENDING - padding);
+
+                        DustGUI.Header("", CELL_WIDTH_CONTROL);
                     }
                     DustGUI.EndHorizontal();
 
@@ -115,9 +139,8 @@ namespace DustEngine.DustEditor
             var record = new DuFieldsMap.FieldRecord();
             record.enabled = item.FindPropertyRelative("m_Enabled").boolValue;
             record.field = item.FindPropertyRelative("m_Field").objectReferenceValue as DuField;
-            record.blend = (DuFieldsMap.FieldRecord.BlendMode) item.FindPropertyRelative("m_BlendMode").enumValueIndex;
-            record.calculateValue = item.FindPropertyRelative("m_CalculateValue").boolValue;
-            record.calculateColor = item.FindPropertyRelative("m_CalculateColor").boolValue;
+            record.blendPowerMode = (DuFieldsMap.FieldRecord.BlendPowerMode) item.FindPropertyRelative("m_BlendPowerMode").enumValueIndex;
+            record.blendColorMode = (DuFieldsMap.FieldRecord.BlendColorMode) item.FindPropertyRelative("m_BlendColorMode").enumValueIndex;
             record.intensity = item.FindPropertyRelative("m_Intensity").floatValue;
             return record;
         }
@@ -134,80 +157,63 @@ namespace DustEngine.DustEditor
             bool clickOnMoveUp;
             bool clickOnMoveDw;
 
-            var miniButtonStyle = new GUIStyle(GUI.skin.button);
-            miniButtonStyle.padding = new RectOffset(2, 2, 0, 0);
-            miniButtonStyle.margin = new RectOffset(0, 0, 0, 0);
-
-            var dropDownListStyle = new GUIStyle(EditorStyles.popup);
-            dropDownListStyle.margin.top = 6;
-
-            var titleStyle = new GUIStyle(GUI.skin.label);
-
-            var intensityLabelStyle = new GUIStyle(GUI.skin.textField);
-            intensityLabelStyle.margin = new RectOffset(35,0,5,0);
-
             DustGUI.BeginHorizontal();
             {
-                if (DustGUI.IconButton(Icons.GetTextureByComponent(newRecord.field), newRecord.enabled ? DustGUI.ButtonState.Normal : DustGUI.ButtonState.Pressed))
+                if (DustGUI.IconButton(Icons.GetTextureByComponent(newRecord.field), CELL_WIDTH_ICON, CELL_WIDTH_ICON, styleMiniButton))
                     Selection.activeGameObject = newRecord.field.gameObject;
 
-                // @todo!
-                //if (DustGUI.IconButton(newRecord.enabled ? Icons.STATE_ENABLED : Icons.STATE_DISABLED, 20, 32, miniButtonStyle))
-                //    newRecord.enabled = !newRecord.enabled;
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+                var btnStateIcon = newRecord.enabled ? Icons.STATE_ENABLED : Icons.STATE_DISABLED;
+
+                if (DustGUI.IconButton(btnStateIcon, CELL_WIDTH_STATE, 32, styleMiniButton))
+                    newRecord.enabled = !newRecord.enabled;
+
+                //------------------------------------------------------------------------------------------------------
+
+                if (!newRecord.enabled)
+                    DustGUI.Lock();
+
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+                DustGUI.SimpleLabel(newRecord.field.FieldName(), 0, DustGUI.Config.ICON_BUTTON_HEIGHT);
+
+                DustGUI.SpaceExpand();
+
+                DustGUI.SimpleLabel(newRecord.intensity.ToString("F2"), 0, DustGUI.Config.ICON_BUTTON_HEIGHT, styleIntensityField);
+
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+                if (calculatePower)
+                {
+                    var enumValue = DustGUI.DropDownList(newRecord.blendPowerMode, CELL_WIDTH_BLENDING, 0, styleDropDownList);
+                    newRecord.blendPowerMode = (DuFieldsMap.FieldRecord.BlendPowerMode) enumValue;
+                }
+
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+                if (calculateColor)
+                {
+                    var enumValue = DustGUI.DropDownList(newRecord.blendColorMode, CELL_WIDTH_BLENDING, 0, styleDropDownList);
+                    newRecord.blendColorMode = (DuFieldsMap.FieldRecord.BlendColorMode) enumValue;
+                }
 
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
                 if (!newRecord.enabled)
-                    titleStyle.normal.textColor = Color.gray;
+                    DustGUI.Unlock();
 
-                DustGUI.SimpleLabel(newRecord.field.FieldName(), 0, DustGUI.Config.ICON_BUTTON_HEIGHT, titleStyle);
+                //------------------------------------------------------------------------------------------------------
 
-                DustGUI.SpaceExpand();
-
-                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-                /* @todo!
-                if (calculateValues && calculateColors)
-                {
-                    if (DustGUI.IconButton(newRecord.calculateValue ? Icons.FIELDS_MAP_WEIGHT_ENABLED : Icons.FIELDS_MAP_WEIGHT_DISABLED))
-                        newRecord.calculateValue = !newRecord.calculateValue;
-
-                    if (DustGUI.IconButton(newRecord.calculateColor ? Icons.FIELDS_MAP_COLOR_ENABLED : Icons.FIELDS_MAP_COLOR_DISABLED))
-                        newRecord.calculateColor = !newRecord.calculateColor;
-                }
-                */
-
-                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-                newRecord.blend = (DuFieldsMap.FieldRecord.BlendMode) DustGUI.DropDownList(newRecord.blend, 70, 0, dropDownListStyle);
-
-                DustGUI.BeginVertical(80);
-                {
-                    float newIntensity = DustGUI.SliderOnly01(newRecord.intensity);
-
-                    if (!newIntensity.Equals(newRecord.intensity))
-                        newRecord.intensity = DuMath.Round(newIntensity, 2);
-
-                    DustGUI.Space(9f);
-
-                    newRecord.intensity = DustGUI.Field("", newRecord.intensity, 40, 0, intensityLabelStyle);
-                    newRecord.intensity = Mathf.Clamp01(newRecord.intensity);
-                }
-                DustGUI.EndVertical();
-
-                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-                // @todo!
-                //clickOnDelete = DustGUI.IconButton(Icons.ACTION_DELETE, 20, 32, miniButtonStyle);
-                clickOnDelete = false;
+                clickOnDelete = DustGUI.IconButton(Icons.ACTION_DELETE, 20, 32, styleMiniButton);
 
                 DustGUI.BeginVertical(20);
                 {
                     DustGUI.ButtonState stateUp = itemIndex > 0 ? DustGUI.ButtonState.Normal : DustGUI.ButtonState.Locked;
                     DustGUI.ButtonState stateDw = itemIndex < itemsCount - 1 ? DustGUI.ButtonState.Normal : DustGUI.ButtonState.Locked;
 
-                    clickOnMoveUp = DustGUI.IconButton(DustGUI.Config.RESOURCE_ICON_ARROW_UP, 20, 16, miniButtonStyle, stateUp);
-                    clickOnMoveDw = DustGUI.IconButton(DustGUI.Config.RESOURCE_ICON_ARROW_DOWN, 20, 16, miniButtonStyle, stateDw);
+                    clickOnMoveUp = DustGUI.IconButton(DustGUI.Config.RESOURCE_ICON_ARROW_UP, 20, 16, styleMiniButton, stateUp);
+                    clickOnMoveDw = DustGUI.IconButton(DustGUI.Config.RESOURCE_ICON_ARROW_DOWN, 20, 16, styleMiniButton, stateDw);
                 }
                 DustGUI.EndVertical();
             }
@@ -221,18 +227,13 @@ namespace DustEngine.DustEditor
                 return true;
             }
 
-            if (curRecord.blend != newRecord.blend) {
-                item.FindPropertyRelative("m_BlendMode").enumValueIndex = (int) newRecord.blend;
+            if (curRecord.blendPowerMode != newRecord.blendPowerMode) {
+                item.FindPropertyRelative("m_BlendPowerMode").enumValueIndex = (int) newRecord.blendPowerMode;
                 return true;
             }
 
-            if (curRecord.calculateValue != newRecord.calculateValue) {
-                item.FindPropertyRelative("m_CalculateValue").boolValue = newRecord.calculateValue;
-                return true;
-            }
-
-            if (curRecord.calculateColor != newRecord.calculateColor) {
-                item.FindPropertyRelative("m_CalculateColor").boolValue = newRecord.calculateColor;
+            if (curRecord.blendColorMode != newRecord.blendColorMode) {
+                item.FindPropertyRelative("m_BlendColorMode").enumValueIndex = (int) newRecord.blendColorMode;
                 return true;
             }
 
@@ -261,19 +262,15 @@ namespace DustEngine.DustEditor
 
         private void DrawAddFieldButton()
         {
-            var miniButtonStyle = new GUIStyle(GUI.skin.button);
-            miniButtonStyle.padding = new RectOffset(2, 2, 0, 0);
-            miniButtonStyle.margin = new RectOffset(0, 0, 0, 0);
-
             DustGUI.BeginHorizontal();
             {
-                if (DustGUI.IconButton(Icons.ADD_FIELD))
+                if (DustGUI.IconButton(Icons.ACTION_ADD_FIELD, CELL_WIDTH_ICON, CELL_WIDTH_ICON, styleMiniButton))
                     PopupWindow.Show(m_RectButtonFieldsPopup, DuFieldsMapPopup.AllFields(this));
 
                 if (Event.current.type == EventType.Repaint)
                     m_RectButtonFieldsPopup = GUILayoutUtility.GetLastRect();
 
-                DustGUI.Label("To add field click on [+] or drag-and-drop it here", 0, DustGUI.Config.ICON_BUTTON_HEIGHT);
+                DustGUI.Label("Add field", 0, DustGUI.Config.ICON_BUTTON_HEIGHT);
             }
             DustGUI.EndHorizontal();
         }
@@ -330,9 +327,8 @@ namespace DustEngine.DustEditor
 
             newRecord.FindPropertyRelative("m_Enabled").boolValue = defaultRec.enabled;
             newRecord.FindPropertyRelative("m_Field").objectReferenceValue = field;
-            newRecord.FindPropertyRelative("m_BlendMode").enumValueIndex = (int) defaultRec.blend;
-            newRecord.FindPropertyRelative("m_CalculateValue").boolValue = defaultRec.calculateValue;
-            newRecord.FindPropertyRelative("m_CalculateColor").boolValue = defaultRec.calculateColor;
+            newRecord.FindPropertyRelative("m_BlendPowerMode").enumValueIndex = (int) defaultRec.blendPowerMode;
+            newRecord.FindPropertyRelative("m_BlendColorMode").enumValueIndex = (int) defaultRec.blendColorMode;
             newRecord.FindPropertyRelative("m_Intensity").floatValue = defaultRec.intensity;
 
             m_Editor.serializedObject.ApplyModifiedProperties();

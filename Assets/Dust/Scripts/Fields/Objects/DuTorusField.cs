@@ -47,7 +47,7 @@ namespace DustEngine
             return "Torus";
         }
 
-        public override float GetWeightForFieldPoint(DuField.Point fieldPoint)
+        public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
         {
             if (DuMath.IsZero(radius) || DuMath.IsZero(thickness))
                 return remapping.MapValue(0f, timeSinceStart);

@@ -7,8 +7,12 @@ namespace DustEngine
     public class DuFieldsSpace : DuMonoBehaviour
     {
         [SerializeField]
-        protected DuFieldsMap m_FieldsMap = DuFieldsMap.WeightsAndColorsFieldsMap();
+        private DuFieldsMap m_FieldsMap = DuFieldsMap.FieldsSpace();
         public DuFieldsMap fieldsMap => m_FieldsMap;
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        private DuField.Point m_CalcFieldPoint = new DuField.Point();
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -22,26 +26,35 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public float GetWeight(Vector3 worldPosition)
+        public float GetPower(Vector3 worldPosition)
         {
-            float weight;
-            fieldsMap.Calculate(worldPosition, 0.0f, out weight);
-            return weight;
+            m_CalcFieldPoint.inPosition = worldPosition;
+            m_CalcFieldPoint.inOffset = 0;
+
+            fieldsMap.Calculate(m_CalcFieldPoint);
+
+            return m_CalcFieldPoint.outPower;
         }
 
         public Color GetColor(Vector3 worldPosition)
         {
-            float weight;
-            Color color;
-            fieldsMap.Calculate(worldPosition, 0.0f, out weight, out color);
-            return color;
+            m_CalcFieldPoint.inPosition = worldPosition;
+            m_CalcFieldPoint.inOffset = 0;
+
+            fieldsMap.Calculate(m_CalcFieldPoint);
+
+            return m_CalcFieldPoint.outColor;
         }
 
-        public float GetWeightAndColor(Vector3 worldPosition, out Color color)
+        public float GetPowerAndColor(Vector3 worldPosition, out Color color)
         {
-            float weight;
-            fieldsMap.Calculate(worldPosition, 0.0f, out weight, out color);
-            return weight;
+            m_CalcFieldPoint.inPosition = worldPosition;
+            m_CalcFieldPoint.inOffset = 0;
+
+            fieldsMap.Calculate(m_CalcFieldPoint);
+
+            color = m_CalcFieldPoint.outColor;
+            return m_CalcFieldPoint.outPower;
         }
     }
 }

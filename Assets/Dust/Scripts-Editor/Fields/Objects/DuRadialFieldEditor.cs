@@ -5,7 +5,7 @@ using UnityEditor;
 namespace DustEngine.DustEditor
 {
     [CustomEditor(typeof(DuRadialField)), CanEditMultipleObjects]
-    public class DuRadialFieldGUI : DuObjectFieldEditor
+    public class DuRadialFieldEditor : DuObjectFieldEditor
     {
         private DuProperty m_StartAngle;
         private DuProperty m_EndAngle;

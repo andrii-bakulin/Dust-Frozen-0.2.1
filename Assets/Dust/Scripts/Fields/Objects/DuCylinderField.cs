@@ -47,7 +47,7 @@ namespace DustEngine
             return "Cylinder";
         }
 
-        public override float GetWeightForFieldPoint(DuField.Point fieldPoint)
+        public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
         {
             Vector3 localPosition = transform.worldToLocalMatrix.MultiplyPoint(fieldPoint.inPosition);
 

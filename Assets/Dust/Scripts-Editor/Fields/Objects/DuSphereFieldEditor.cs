@@ -5,7 +5,7 @@ using UnityEditor;
 namespace DustEngine.DustEditor
 {
     [CustomEditor(typeof(DuSphereField)), CanEditMultipleObjects]
-    public class DuSphereFieldGUI : DuObjectFieldEditor
+    public class DuSphereFieldEditor : DuObjectFieldEditor
     {
         private DuProperty m_Radius;
 
