@@ -98,7 +98,7 @@ namespace DustEngine
             Color colorRange0 = GetGizmoColorRange0();
             Color colorRange1 = GetGizmoColorRange1();
 
-            if (remapping.enabled)
+            if (remapping.remapForceEnabled)
             {
                 // End plane
                 Gizmos.color = !remapping.invert ? colorRange1 : colorRange0;
@@ -123,7 +123,7 @@ namespace DustEngine
             }
 
             // 3: Draw arrow
-            float arrowSign = remapping.enabled && remapping.invert ? -1f : +1f;
+            float arrowSign = remapping.remapForceEnabled && remapping.invert ? -1f : +1f;
             Gizmos.color = colorRange1;
             Gizmos.DrawRay(offsetPlane0 * arrowSign, (offsetPlane1 - offsetPlane0) * arrowSign);
             Gizmos.DrawRay(offsetPlane1 * arrowSign, DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, new Vector3(-0.2f, 0f, +0.06f) * halfLength) * arrowSign);

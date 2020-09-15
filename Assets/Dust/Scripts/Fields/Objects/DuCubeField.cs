@@ -113,7 +113,7 @@ namespace DustEngine
             Color colorRange0 = GetGizmoColorRange0();
             Color colorRange1 = GetGizmoColorRange1();
 
-            if (remapping.enabled)
+            if (remapping.remapForceEnabled)
             {
                 Gizmos.color = !remapping.invert ? colorRange1 : colorRange0;
                 Gizmos.DrawWireCube(Vector3.zero, size * remapping.innerOffset);

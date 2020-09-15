@@ -9,7 +9,7 @@ namespace DustEngine.DustEditor
         private DuRemapping m_Remapping;
         private Material m_DrawerMaterial;
 
-        protected DuEditor.DuProperty m_Enabled;
+        protected DuEditor.DuProperty m_RemapForceEnabled;
         protected DuEditor.DuProperty m_Strength;
         protected DuEditor.DuProperty m_InnerOffset;
         protected DuEditor.DuProperty m_Invert;
@@ -26,7 +26,8 @@ namespace DustEngine.DustEditor
         protected DuEditor.DuProperty m_ContourSplineAnimationSpeed;
         protected DuEditor.DuProperty m_ContourSplineOffset;
 
-        protected DuEditor.DuProperty m_ColorRemap;
+        protected DuEditor.DuProperty m_RemapColorEnabled;
+        protected DuEditor.DuProperty m_ColorMode;
         protected DuEditor.DuProperty m_Color;
 
         public DuRemappingEditor(DuRemapping duRemapping, SerializedProperty remappingProperty)
@@ -34,7 +35,7 @@ namespace DustEngine.DustEditor
             m_Remapping = duRemapping;
             m_DrawerMaterial = new Material(Shader.Find("Hidden/Internal-Colored"));
 
-            m_Enabled = DuEditor.FindProperty(remappingProperty, "m_Enabled", "Enabled");
+            m_RemapForceEnabled = DuEditor.FindProperty(remappingProperty, "m_RemapForceEnabled", "Enabled");
             m_Strength = DuEditor.FindProperty(remappingProperty, "m_Strength", "Strength");
             m_InnerOffset = DuEditor.FindProperty(remappingProperty, "m_InnerOffset", "Inner Offset");
             m_Invert = DuEditor.FindProperty(remappingProperty, "m_Invert", "Invert");
@@ -52,57 +53,55 @@ namespace DustEngine.DustEditor
             m_ContourSplineAnimationSpeed = DuEditor.FindProperty(remappingProperty, "m_ContourSplineAnimationSpeed", "Spline Animation Speed");
             m_ContourSplineOffset = DuEditor.FindProperty(remappingProperty, "m_ContourSplineOffset", "Spline Offset");
 
-            m_ColorRemap = DuEditor.FindProperty(remappingProperty, "m_ColorRemap", "Color Remap");
+            m_RemapColorEnabled = DuEditor.FindProperty(remappingProperty, "m_RemapColorEnabled", "Enabled");
+            m_ColorMode = DuEditor.FindProperty(remappingProperty, "m_ColorMode", "Mode");
             m_Color = DuEditor.FindProperty(remappingProperty, "m_Color", "Color");
         }
 
         public void OnInspectorGUI(bool showGraphMirrored)
         {
-            if (DustGUI.FoldoutBegin("Remapping", "DuRemapping.Remapping"))
+            if (DustGUI.FoldoutBegin("Force", "DuRemapping.Force"))
             {
-                DuEditor.PropertyField(m_Enabled);
-
-                if (!m_Enabled.IsTrue)
-                    DustGUI.Lock();
+                DuEditor.PropertyField(m_RemapForceEnabled);
 
                 PropertyMappingGraph(m_Remapping, m_Color.valColor, showGraphMirrored);
 
-                DuEditor.PropertyExtendedSlider(m_Strength, 0f, 1f, 0.01f);
-                DuEditor.PropertyExtendedSlider01(m_InnerOffset);
-                DuEditor.PropertyField(m_Invert);
-                DuEditor.Space();
-
-                DuEditor.PropertyExtendedSlider(m_Min, 0f, 1f, 0.01f);
-                DuEditor.PropertyExtendedSlider(m_Max, 0f, 1f, 0.01f);
-                DuEditor.Space();
-
-                DustGUI.Header("Clamping");
-                DuEditor.PropertyField(m_ClampMinEnabled);
-                DuEditor.PropertyField(m_ClampMaxEnabled);
-                DuEditor.Space();
-
-                DustGUI.Header("Contour");
-                DuEditor.PropertyExtendedSlider(m_ContourMultiplier, 0f, 1f, 0.01f);
-                DuEditor.PropertyField(m_ContourMode);
-
-                switch ((DuRemapping.ContourMode) m_ContourMode.enumValueIndex)
+                if (m_RemapForceEnabled.IsTrue)
                 {
-                    case DuRemapping.ContourMode.None:
-                        break;
+                    DuEditor.PropertyExtendedSlider(m_Strength, 0f, 1f, 0.01f);
+                    DuEditor.PropertyExtendedSlider01(m_InnerOffset);
+                    DuEditor.PropertyField(m_Invert);
+                    DuEditor.Space();
 
-                    case DuRemapping.ContourMode.Curve:
-                        DuEditor.PropertyFieldCurve(m_ContourSpline);
-                        DuEditor.PropertyExtendedSlider(m_ContourSplineAnimationSpeed, 0f, 1f, 0.01f);
-                        DuEditor.PropertyExtendedSlider(m_ContourSplineOffset, 0f, 1f, 0.01f);
-                        break;
+                    DuEditor.PropertyExtendedSlider(m_Min, 0f, 1f, 0.01f);
+                    DuEditor.PropertyExtendedSlider(m_Max, 0f, 1f, 0.01f);
+                    DuEditor.Space();
 
-                    case DuRemapping.ContourMode.Step:
-                        DuEditor.PropertyExtendedIntSlider(m_ContourSteps, 1, 25, 1, 1);
-                        break;
+                    DustGUI.Header("Clamping");
+                    DuEditor.PropertyField(m_ClampMinEnabled);
+                    DuEditor.PropertyField(m_ClampMaxEnabled);
+                    DuEditor.Space();
+
+                    DustGUI.Header("Contour");
+                    DuEditor.PropertyExtendedSlider(m_ContourMultiplier, 0f, 1f, 0.01f);
+                    DuEditor.PropertyField(m_ContourMode);
+
+                    switch ((DuRemapping.ContourMode) m_ContourMode.enumValueIndex)
+                    {
+                        case DuRemapping.ContourMode.None:
+                            break;
+
+                        case DuRemapping.ContourMode.Curve:
+                            DuEditor.PropertyFieldCurve(m_ContourSpline);
+                            DuEditor.PropertyExtendedSlider(m_ContourSplineAnimationSpeed, 0f, 1f, 0.01f);
+                            DuEditor.PropertyExtendedSlider(m_ContourSplineOffset, 0f, 1f, 0.01f);
+                            break;
+
+                        case DuRemapping.ContourMode.Step:
+                            DuEditor.PropertyExtendedIntSlider(m_ContourSteps, 1, 25, 1, 1);
+                            break;
+                    }
                 }
-
-                if (!m_Enabled.IsTrue)
-                    DustGUI.Unlock();
 
                 DuEditor.Space();
             }
@@ -110,18 +109,24 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            if (DustGUI.FoldoutBegin("Color Remap", "DuRemapping.ColorRemap"))
+            if (DustGUI.FoldoutBegin("Color", "DuRemapping.Color"))
             {
-                DuEditor.PropertyField(m_ColorRemap);
+                DuEditor.PropertyField(m_RemapColorEnabled);
 
-                switch ((DuRemapping.ColorRemap) m_ColorRemap.enumValueIndex)
+                if (m_RemapColorEnabled.IsTrue)
                 {
-                    case DuRemapping.ColorRemap.NoRemap:
-                        break;
+                    DuEditor.PropertyField(m_ColorMode);
 
-                    case DuRemapping.ColorRemap.Color:
-                        DuEditor.PropertyField(m_Color);
-                        break;
+                    switch ((DuRemapping.ColorMode) m_ColorMode.enumValueIndex)
+                    {
+                        case DuRemapping.ColorMode.Color:
+                            DuEditor.PropertyField(m_Color);
+                            break;
+
+                        case DuRemapping.ColorMode.Gradient:
+                            // @DUST.todo
+                            break;
+                    }
                 }
 
                 DuEditor.Space();

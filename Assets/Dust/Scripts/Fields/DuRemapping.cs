@@ -12,20 +12,20 @@ namespace DustEngine
             Step = 2,
         }
 
-        public enum ColorRemap
+        public enum ColorMode
         {
-            NoRemap = 0,
-            Color = 1,
+            Color = 0,
+            Gradient = 1,
         }
 
         //--------------------------------------------------------------------------------------------------------------
 
         [SerializeField]
-        private bool m_Enabled = true;
-        public bool enabled
+        private bool m_RemapForceEnabled = true;
+        public bool remapForceEnabled
         {
-            get => m_Enabled;
-            set => m_Enabled = value;
+            get => m_RemapForceEnabled;
+            set => m_RemapForceEnabled = value;
         }
 
         [SerializeField]
@@ -137,11 +137,19 @@ namespace DustEngine
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
-        private ColorRemap m_ColorRemap = ColorRemap.Color;
-        public ColorRemap colorRemap
+        private bool m_RemapColorEnabled = false;
+        public bool remapColorEnabled
         {
-            get => m_ColorRemap;
-            set => m_ColorRemap = value;
+            get => m_RemapColorEnabled;
+            set => m_RemapColorEnabled = value;
+        }
+
+        [SerializeField]
+        private ColorMode m_ColorMode = ColorMode.Color;
+        public ColorMode colorMode
+        {
+            get => m_ColorMode;
+            set => m_ColorMode = value;
         }
 
         [SerializeField]
@@ -156,7 +164,7 @@ namespace DustEngine
 
         public float MapValue(float inWeight, float timeSinceStart = 0f)
         {
-            if (!enabled)
+            if (!remapForceEnabled)
                 return inWeight;
 
             //----------------------------------------------------------------------------------------------------------

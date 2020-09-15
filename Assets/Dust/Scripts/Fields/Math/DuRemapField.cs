@@ -36,7 +36,7 @@ namespace DustEngine
 
         public override bool IsAllowGetFieldColor()
         {
-            return remapping.colorRemap != DuRemapping.ColorRemap.NoRemap;
+            return remapping.remapColorEnabled;
         }
 
         public override Color GetFieldColor(DuField.Point fieldPoint, float powerByField)
