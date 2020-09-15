@@ -36,7 +36,7 @@ namespace DustEngine.DustEditor
             PropertyField(m_Scale);
             Space();
             PropertyField(m_Color);
-            PropertyField(m_GizmosVisibility);
+            PropertyField(m_GizmoVisibility);
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

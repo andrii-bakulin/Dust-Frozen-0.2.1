@@ -71,7 +71,7 @@ namespace DustEngine.DustEditor
 
             if (DustGUI.FoldoutBegin("Gizmos", "DuField.Gizmos"))
             {
-                PropertyField(m_GizmosVisibility);
+                PropertyField(m_GizmoVisibility);
                 PropertyField(m_GizmoFieldColor);
                 PropertyExtendedSlider(m_GizmoLength, 0f, 10f, 0.1f, 0f);
                 PropertyExtendedSlider(m_GizmoRadius, 0f, 5f, 0.1f, 0f);

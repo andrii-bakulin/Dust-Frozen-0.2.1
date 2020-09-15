@@ -76,7 +76,7 @@ namespace DustEngine.DustEditor
             DustGUI.FoldoutEnd();
 
 
-            PropertyField(m_GizmosVisibility);
+            PropertyField(m_GizmoVisibility);
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

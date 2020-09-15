@@ -17,11 +17,11 @@ namespace DustEngine
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
-        private GizmosVisibility m_GizmosVisibility = GizmosVisibility.DrawOnSelect;
-        public GizmosVisibility gizmosVisibility
+        private GizmosVisibility m_GizmoVisibility = GizmosVisibility.DrawOnSelect;
+        public GizmosVisibility gizmoVisibility
         {
-            get => m_GizmosVisibility;
-            set => m_GizmosVisibility = value;
+            get => m_GizmoVisibility;
+            set => m_GizmoVisibility = value;
         }
 
         [SerializeField]
@@ -52,7 +52,7 @@ namespace DustEngine
             if (Selection.activeGameObject == this.gameObject)
                 return;
 
-            if (gizmosVisibility != GizmosVisibility.AlwaysDraw)
+            if (gizmoVisibility != GizmosVisibility.AlwaysDraw)
                 return;
 
             DrawFieldGizmos();
@@ -60,7 +60,7 @@ namespace DustEngine
 
         void OnDrawGizmosSelected()
         {
-            if (gizmosVisibility == GizmosVisibility.AlwaysHide)
+            if (gizmoVisibility == GizmosVisibility.AlwaysHide)
                 return;
 
             DrawFieldGizmos();
