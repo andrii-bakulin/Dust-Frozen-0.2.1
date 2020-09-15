@@ -160,11 +160,22 @@ namespace DustEngine
         {
             Gizmos.matrix = transform.localToWorldMatrix;
 
-            Gizmos.color = !remapping.invert ? k_GizmosColorRangeOne : k_GizmosColorRangeZero;
-            DrawRadialGizmo(startAngle + fadeInOffset, endAngle - fadeOutOffset, 0.95f);
+            Color colorRange0 = GetGizmoColorRange0();
+            Color colorRange1 = GetGizmoColorRange1();
 
-            Gizmos.color = !remapping.invert ? k_GizmosColorRangeZero : k_GizmosColorRangeOne;
-            DrawRadialGizmo(startAngle, endAngle, 1f);
+            if (remapping.enabled)
+            {
+                Gizmos.color = !remapping.invert ? colorRange1 : colorRange0;
+                DrawRadialGizmo(startAngle + fadeInOffset, endAngle - fadeOutOffset, 0.95f);
+
+                Gizmos.color = !remapping.invert ? colorRange0 : colorRange1;
+                DrawRadialGizmo(startAngle, endAngle, 1f);
+            }
+            else
+            {
+                Gizmos.color = colorRange0;
+                DrawRadialGizmo(startAngle, endAngle, 1f);
+            }
         }
 
         protected void DrawRadialGizmo(float angleStart, float angleEnd, float scale)

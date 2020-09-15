@@ -71,11 +71,22 @@ namespace DustEngine
 
             Gizmos.matrix = transform.localToWorldMatrix;
 
-            Gizmos.color = !remapping.invert ? k_GizmosColorRangeOne : k_GizmosColorRangeZero;
-            DuGizmos.DrawWireCone(radius * innerScale, height * innerScale, Vector3.zero, direction, 32, 4);
+            Color colorRange0 = GetGizmoColorRange0();
+            Color colorRange1 = GetGizmoColorRange1();
 
-            Gizmos.color = !remapping.invert ? k_GizmosColorRangeZero : k_GizmosColorRangeOne;
-            DuGizmos.DrawWireCone(radius, height, Vector3.zero, direction, 32, 4);
+            if (remapping.enabled)
+            {
+                Gizmos.color = !remapping.invert ? colorRange1 : colorRange0;
+                DuGizmos.DrawWireCone(radius * innerScale, height * innerScale, Vector3.zero, direction, 32, 4);
+
+                Gizmos.color = !remapping.invert ? colorRange0 : colorRange1;
+                DuGizmos.DrawWireCone(radius, height, Vector3.zero, direction, 32, 4);
+            }
+            else
+            {
+                Gizmos.color = colorRange0;
+                DuGizmos.DrawWireCone(radius, height, Vector3.zero, direction, 32, 4);
+            }
         }
 #endif
 

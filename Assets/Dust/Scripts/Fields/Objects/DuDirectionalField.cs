@@ -90,28 +90,46 @@ namespace DustEngine
             float halfLength = length / 2f;
 
             Vector3 plainSize = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, new Vector3(0.001f, gizmoHeight, gizmoWidth));
-            Vector3 offsetBgn = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, new Vector3(-halfLength, 0f, 0f));
-            Vector3 offsetEnd = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, new Vector3(+halfLength, 0f, 0f));
+            Vector3 offsetPlane0 = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, new Vector3(-halfLength, 0f, 0f));
+            Vector3 offsetPlane1 = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, new Vector3(+halfLength, 0f, 0f));
 
             Gizmos.matrix = transform.localToWorldMatrix;
 
-            // 1
-            Gizmos.color = !remapping.invert ? k_GizmosColorRangeOne : k_GizmosColorRangeZero;
-            Gizmos.DrawWireCube(offsetEnd, plainSize);
+            Color colorRange0 = GetGizmoColorRange0();
+            Color colorRange1 = GetGizmoColorRange1();
 
-            Gizmos.DrawWireCube(DuVector3.Map01To(offsetBgn, offsetEnd, 1f - remapping.innerOffset), plainSize);
+            if (remapping.enabled)
+            {
+                // End plane
+                Gizmos.color = !remapping.invert ? colorRange1 : colorRange0;
+                Gizmos.DrawWireCube(offsetPlane1, plainSize);
 
-            // 2
-            Gizmos.color = !remapping.invert ? k_GizmosColorRangeZero : k_GizmosColorRangeOne;
-            Gizmos.DrawWireCube(offsetBgn, plainSize);
+                // Middle plane
+                Gizmos.DrawWireCube(DuVector3.Map01To(offsetPlane0, offsetPlane1, 1f - remapping.innerOffset), plainSize);
+
+                // Begin plane
+                Gizmos.color = !remapping.invert ? colorRange0 : colorRange1;
+                Gizmos.DrawWireCube(offsetPlane0, plainSize);
+            }
+            else
+            {
+                // End plane
+                Gizmos.color = colorRange0;
+                Gizmos.DrawWireCube(offsetPlane0, plainSize);
+
+                // Begin plane
+                Gizmos.color = colorRange1;
+                Gizmos.DrawWireCube(offsetPlane1, plainSize);
+            }
 
             // 3: Draw arrow
-            Gizmos.color = k_GizmosColorRangeOne;
-            Gizmos.DrawRay(offsetBgn, offsetEnd - offsetBgn);
-            Gizmos.DrawRay(offsetEnd, DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, new Vector3(-0.2f, 0f, +0.06f) * halfLength));
-            Gizmos.DrawRay(offsetEnd, DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, new Vector3(-0.2f, 0f, -0.06f) * halfLength));
-            Gizmos.DrawRay(offsetEnd, DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, new Vector3(-0.2f, +0.06f, 0f) * halfLength));
-            Gizmos.DrawRay(offsetEnd, DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, new Vector3(-0.2f, -0.06f, 0f) * halfLength));
+            float arrowSign = remapping.enabled && remapping.invert ? -1f : +1f;
+            Gizmos.color = colorRange1;
+            Gizmos.DrawRay(offsetPlane0 * arrowSign, (offsetPlane1 - offsetPlane0) * arrowSign);
+            Gizmos.DrawRay(offsetPlane1 * arrowSign, DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, new Vector3(-0.2f, 0f, +0.06f) * halfLength) * arrowSign);
+            Gizmos.DrawRay(offsetPlane1 * arrowSign, DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, new Vector3(-0.2f, 0f, -0.06f) * halfLength) * arrowSign);
+            Gizmos.DrawRay(offsetPlane1 * arrowSign, DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, new Vector3(-0.2f, +0.06f, 0f) * halfLength) * arrowSign);
+            Gizmos.DrawRay(offsetPlane1 * arrowSign, DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, new Vector3(-0.2f, -0.06f, 0f) * halfLength) * arrowSign);
         }
 
         private void Reset()

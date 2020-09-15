@@ -59,6 +59,16 @@ namespace DustEngine
         }
 
         protected abstract void DrawFieldGizmos();
+
+        protected Color GetGizmoColorRange0()
+        {
+            return k_GizmosColorRangeZero;
+        }
+
+        protected Color GetGizmoColorRange1()
+        {
+            return k_GizmosColorRangeOne;
+        }
 #endif
 
         //--------------------------------------------------------------------------------------------------------------
