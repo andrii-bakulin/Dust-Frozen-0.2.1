@@ -41,7 +41,7 @@ namespace DustEngine
 
         public override Color GetFieldColor(DuField.Point fieldPoint, float powerByField)
         {
-            return GetFieldColorByPower(remapping.color, powerByField);
+            return GetFieldColorByRemapping(remapping, powerByField);
         }
 
         //--------------------------------------------------------------------------------------------------------------

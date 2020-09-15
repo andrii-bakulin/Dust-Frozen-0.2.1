@@ -104,6 +104,21 @@ namespace DustEngine
             return color;
         }
 
+        protected Color GetFieldColorByRemapping(DuRemapping remapping, float powerByField)
+        {
+            switch (remapping.colorMode)
+            {
+                case DuRemapping.ColorMode.Color:
+                    return GetFieldColorByPower(remapping.color, powerByField);
+
+                case DuRemapping.ColorMode.Gradient:
+                    return remapping.gradient.Evaluate(powerByField);
+
+                default:
+                    return Color.magenta;
+            }
+        }
+
         //--------------------------------------------------------------------------------------------------------------
 
         void Update()

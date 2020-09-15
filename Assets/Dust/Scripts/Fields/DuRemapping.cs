@@ -160,6 +160,14 @@ namespace DustEngine
             set => m_Color = value;
         }
 
+        [SerializeField]
+        protected Gradient m_Gradient;
+        public Gradient gradient
+        {
+            get => m_Gradient;
+            set => m_Gradient = value;
+        }
+
         //--------------------------------------------------------------------------------------------------------------
 
         public float MapValue(float inWeight, float timeSinceStart = 0f)

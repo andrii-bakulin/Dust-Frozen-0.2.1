@@ -29,6 +29,7 @@ namespace DustEngine.DustEditor
         protected DuEditor.DuProperty m_RemapColorEnabled;
         protected DuEditor.DuProperty m_ColorMode;
         protected DuEditor.DuProperty m_Color;
+        protected DuEditor.DuProperty m_Gradient;
 
         public DuRemappingEditor(DuRemapping duRemapping, SerializedProperty remappingProperty)
         {
@@ -56,6 +57,7 @@ namespace DustEngine.DustEditor
             m_RemapColorEnabled = DuEditor.FindProperty(remappingProperty, "m_RemapColorEnabled", "Enabled");
             m_ColorMode = DuEditor.FindProperty(remappingProperty, "m_ColorMode", "Mode");
             m_Color = DuEditor.FindProperty(remappingProperty, "m_Color", "Color");
+            m_Gradient = DuEditor.FindProperty(remappingProperty, "m_Gradient", "Gradient");
         }
 
         public void OnInspectorGUI(bool showGraphMirrored)
@@ -124,7 +126,7 @@ namespace DustEngine.DustEditor
                             break;
 
                         case DuRemapping.ColorMode.Gradient:
-                            // @DUST.todo
+                            DuEditor.PropertyField(m_Gradient);
                             break;
                     }
                 }
