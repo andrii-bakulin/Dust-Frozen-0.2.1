@@ -50,6 +50,7 @@ namespace DustEngine.DustEditor
             ["DustEngine.DuFitField"] = new ClassParams { IconName = "DRAFT/Fields/Math/DuFitField" },
             ["DustEngine.DuInvertField"] = new ClassParams { IconName = "DRAFT/Fields/Math/DuInvertField" },
             ["DustEngine.DuRemapField"] = new ClassParams { IconName = "DRAFT/Fields/Math/DuRemapField" },
+            ["DustEngine.DuRoundField"] = new ClassParams { IconName = "DRAFT/Fields/Math/DuRoundField" },
 
             // Fields:Objects
             ["DustEngine.DuConeField"] = new ClassParams { IconName = "DRAFT/Fields/Objects/DuConeField" },

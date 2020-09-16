@@ -72,6 +72,7 @@ namespace DustEngine.DustEditor
                 AddItem(colMathFields, "DustEngine.DuFitField", "Fit");
                 AddItem(colMathFields, "DustEngine.DuInvertField", "Invert");
                 AddItem(colMathFields, "DustEngine.DuRemapField", "Remap");
+                AddItem(colMathFields, "DustEngine.DuRoundField", "Round");
             }
             m_ColumnRecords.Add(colMathFields);
             m_ColsCount++;
