@@ -42,6 +42,7 @@ namespace DustEngine.DustEditor
 
             // Fields:Basic
             ["DustEngine.DuConstantField"] = new ClassParams { IconName = "DRAFT/Fields/Basic/DuConstantField" },
+            ["DustEngine.DuTimeField"] = new ClassParams { IconName = "DRAFT/Fields/Basic/DuTimeField" },
 
             // Fields:Math
             ["DustEngine.DuClampField"] = new ClassParams { IconName = "DRAFT/Fields/Math/DuClampField" },
