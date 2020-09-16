@@ -39,7 +39,13 @@ namespace DustEngine.DustEditor
             if (DustGUI.FoldoutBegin("Power", "DuFieldsSpace.Power"))
             {
                 PropertyField(m_CalculatePower);
-                PropertyFieldOrHide(m_DefaultPower, !m_CalculatePower.IsTrue);
+
+                if (!m_CalculatePower.IsTrue)
+                    DustGUI.Lock();
+
+                PropertyField(m_DefaultPower);
+
+                DustGUI.Unlock();
                 Space();
             }
             DustGUI.FoldoutEnd();
@@ -47,7 +53,13 @@ namespace DustEngine.DustEditor
             if (DustGUI.FoldoutBegin("Color", "DuFieldsSpace.Color"))
             {
                 PropertyField(m_CalculateColor);
-                PropertyFieldOrHide(m_DefaultColor, !m_CalculateColor.IsTrue);
+
+                if (!m_CalculateColor.IsTrue)
+                    DustGUI.Lock();
+
+                PropertyField(m_DefaultColor);
+
+                DustGUI.Unlock();
                 Space();
             }
             DustGUI.FoldoutEnd();

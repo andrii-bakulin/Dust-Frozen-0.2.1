@@ -8,7 +8,7 @@ namespace DustEngine.DustEditor
     {
         private const float CELL_WIDTH_ICON = 32f;
         private const float CELL_WIDTH_STATE = 20f;
-        private const float CELL_WIDTH_BLENDING = 64f;
+        private const float CELL_WIDTH_BLENDING = 50f;
         private const float CELL_WIDTH_CONTROL = 40f;
 
         //--------------------------------------------------------------------------------------------------------------
