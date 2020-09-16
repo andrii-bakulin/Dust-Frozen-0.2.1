@@ -44,6 +44,13 @@ namespace DustEngine.DustEditor
         {
             m_FieldsMap = fieldsMap;
 
+            var colBasicFields = new ColumnRecord() {title = "Basic Fields"};
+            {
+                AddItem(colBasicFields, "DustEngine.DuConstantField", "Constant");
+            }
+            m_ColumnRecords.Add(colBasicFields);
+            m_ColsCount++;
+
             var colObjectFields = new ColumnRecord() {title = "Object Fields"};
             {
                 AddItem(colObjectFields, "DustEngine.DuConeField", "Cone");
@@ -59,11 +66,6 @@ namespace DustEngine.DustEditor
 
             var colMathFields = new ColumnRecord() {title = "Math Fields"};
             {
-                // @todo!
-                // AddItem(colMathFields, "DustEngine.DuSolidField", "Solid");
-                // AddItem(colMathFields, "DustEngine.DuStepField", "Step");
-                // AddItem(colMathFields, "DustEngine.DuTimeField", "Time");
-
                 AddItem(colMathFields, "DustEngine.DuClampField", "Clamp");
                 AddItem(colMathFields, "DustEngine.DuCurveField", "Curve");
                 AddItem(colMathFields, "DustEngine.DuFitField", "Fit");
