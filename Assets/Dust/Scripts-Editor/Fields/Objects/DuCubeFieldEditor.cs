@@ -24,7 +24,7 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            if (DustGUI.FoldoutBegin("Field", "DuCubeField.Params"))
+            if (DustGUI.FoldoutBegin("Field Parameters", "DuCubeField.Params"))
             {
                 PropertyField(m_Size);
                 Space();

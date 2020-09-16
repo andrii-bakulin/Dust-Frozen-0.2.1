@@ -48,7 +48,7 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            if (DustGUI.FoldoutBegin("Field", "DuRadialField.Params"))
+            if (DustGUI.FoldoutBegin("Field Parameters", "DuRadialField.Params"))
             {
                 PropertyExtendedSlider(m_StartAngle, 0f, 360f, 1f);
                 PropertyExtendedSlider(m_EndAngle, 0f, 360f, 1f);

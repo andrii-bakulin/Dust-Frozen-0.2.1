@@ -28,7 +28,7 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            if (DustGUI.FoldoutBegin("Field", "DuTorusField.Params"))
+            if (DustGUI.FoldoutBegin("Field Parameters", "DuTorusField.Params"))
             {
                 PropertyExtendedSlider(m_Radius, 0f, 10f, 0.01f);
                 PropertyExtendedSlider(m_Thickness, 0f, 10f, 0.01f);

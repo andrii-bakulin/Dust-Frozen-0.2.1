@@ -32,7 +32,7 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            if (DustGUI.FoldoutBegin("Field", "DuDirectionalField.Params"))
+            if (DustGUI.FoldoutBegin("Field Parameters", "DuDirectionalField.Params"))
             {
                 PropertyExtendedSlider(m_Length, 0f, 10f, 0.01f);
                 PropertyField(m_Direction);

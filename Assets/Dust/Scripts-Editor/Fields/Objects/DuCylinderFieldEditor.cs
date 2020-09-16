@@ -28,7 +28,7 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            if (DustGUI.FoldoutBegin("Field", "DuCylinderField.Params"))
+            if (DustGUI.FoldoutBegin("Field Parameters", "DuCylinderField.Params"))
             {
                 PropertyExtendedSlider(m_Radius, 0f, 10f, 0.01f);
                 PropertyExtendedSlider(m_Height, 0f, 10f, 0.01f);
