@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-#if UNITY_EDITOR
 namespace DustEngine
 {
     public static partial class DustGUI
@@ -64,7 +63,7 @@ namespace DustEngine
         {
             ApplyButtonState(state);
 
-            bool res = GUILayout.Button(label, PackOptions(width, height));
+            bool res = GUILayout.Button(label, NewLayoutOptions(width, height).Build());
 
             RollbackButtonState();
 
@@ -156,4 +155,3 @@ namespace DustEngine
         }
     }
 }
-#endif

@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-#if UNITY_EDITOR
 namespace DustEngine
 {
     public static partial class DustGUI
@@ -36,7 +35,7 @@ namespace DustEngine
 
         public static Rect BeginHorizontal(GUIStyle style, float width, float height)
         {
-            return EditorGUILayout.BeginHorizontal(style, PackOptions(width, height));
+            return EditorGUILayout.BeginHorizontal(style, NewLayoutOptions(width, height).Build());
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -78,7 +77,7 @@ namespace DustEngine
 
         public static Rect BeginVertical(GUIStyle style, float width, float height)
         {
-            return EditorGUILayout.BeginVertical(style, PackOptions(width, height));
+            return EditorGUILayout.BeginVertical(style, NewLayoutOptions(width, height).Build());
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -162,7 +161,7 @@ namespace DustEngine
 
         public static Vector2 BeginScrollView(Vector2 scrollPosition, GUIStyle style, float width, float height)
         {
-            return EditorGUILayout.BeginScrollView(scrollPosition, style, PackOptions(width, height));
+            return EditorGUILayout.BeginScrollView(scrollPosition, style, NewLayoutOptions(width, height).Build());
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -187,7 +186,7 @@ namespace DustEngine
         public static bool BeginScrollView(ref Vector2 scrollPosition, GUIStyle style, float width, float height)
         {
             var lastPosition = scrollPosition;
-            scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition, style, PackOptions(width, height));
+            scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition, style, NewLayoutOptions(width, height).Build());
             return !lastPosition.Equals(scrollPosition);
         }
 
@@ -199,4 +198,3 @@ namespace DustEngine
         }
     }
 }
-#endif

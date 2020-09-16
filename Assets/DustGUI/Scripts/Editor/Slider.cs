@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-#if UNITY_EDITOR
 namespace DustEngine
 {
     public static partial class DustGUI
@@ -28,9 +27,9 @@ namespace DustEngine
         public static float Slider(GUIContent label, float value, float min, float max, float width, float height)
         {
             if( label == null)
-                return EditorGUILayout.Slider(value, min, max, PackOptions(width, height));
+                return EditorGUILayout.Slider(value, min, max, NewLayoutOptions(width, height).Build());
 
-            return EditorGUILayout.Slider(label, value, min, max, PackOptions(width, height));
+            return EditorGUILayout.Slider(label, value, min, max, NewLayoutOptions(width, height).Build());
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -57,9 +56,9 @@ namespace DustEngine
         public static void Slider(GUIContent label, SerializedProperty value, float min, float max, float width, float height)
         {
             if( label == null)
-                EditorGUILayout.Slider(value, min, max, PackOptions(width, height));
+                EditorGUILayout.Slider(value, min, max, NewLayoutOptions(width, height).Build());
 
-            EditorGUILayout.Slider(value, min, max, label, PackOptions(width, height));
+            EditorGUILayout.Slider(value, min, max, label, NewLayoutOptions(width, height).Build());
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -77,8 +76,7 @@ namespace DustEngine
 
         public static float SliderOnly(float value, float min, float max, float width, float height)
         {
-            return GUILayout.HorizontalSlider(value, min, max, PackOptions(width, height));
+            return GUILayout.HorizontalSlider(value, min, max, NewLayoutOptions(width, height).Build());
         }
     }
 }
-#endif
