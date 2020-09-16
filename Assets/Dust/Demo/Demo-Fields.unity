@@ -123,6 +123,93 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &39867062
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 39867063}
+  - component: {fileID: 39867064}
+  m_Layer: 0
+  m_Name: Cone Field
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &39867063
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39867062}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.84, y: 0, z: 2.97}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1514789996}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &39867064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39867062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c728418605894164bbb9d283bf20c1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Remapping:
+    m_Enabled: 1
+    m_Strength: 1
+    m_InnerOffset: 0.5
+    m_Invert: 0
+    m_Min: 0
+    m_Max: 1
+    m_ClampMinEnabled: 1
+    m_ClampMaxEnabled: 1
+    m_ContourMultiplier: 1
+    m_ContourMode: 0
+    m_ContourSteps: 1
+    m_ContourSpline:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ContourSplineAnimationSpeed: 0
+    m_ContourSplineOffset: 0
+    m_ColorRemap: 1
+    m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_GizmosVisibility: 1
+  m_Radius: 1
+  m_Height: 2
+  m_Direction: 2
 --- !u!1 &270315046
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,7 +293,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 23.241, y: -143.129, z: 0}
---- !u!1 &511345241
+--- !u!1 &341551641
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -214,39 +301,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 511345242}
-  - component: {fileID: 511345243}
+  - component: {fileID: 341551642}
+  - component: {fileID: 341551643}
   m_Layer: 0
-  m_Name: Cone Field
+  m_Name: Cube Field
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &511345242
+  m_IsActive: 0
+--- !u!4 &341551642
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 511345241}
-  m_LocalRotation: {x: -0, y: 0.069000855, z: -0, w: 0.99761665}
-  m_LocalPosition: {x: -3.41, y: 0.1, z: 0.16}
-  m_LocalScale: {x: 8.5463, y: 8.5463, z: 8.5463}
+  m_GameObject: {fileID: 341551641}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.03, y: 0, z: 2.97}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1514789996}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 7.913, z: 0}
---- !u!114 &511345243
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &341551643
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 511345241}
+  m_GameObject: {fileID: 341551641}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c728418605894164bbb9d283bf20c1b, type: 3}
+  m_Script: {fileID: 11500000, guid: e199d0cdde1ce4169a5c40ec34d376a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Remapping:
@@ -288,11 +375,9 @@ MonoBehaviour:
     m_ContourSplineAnimationSpeed: 0
     m_ContourSplineOffset: 0
     m_ColorRemap: 1
-    m_Color: {r: 0, g: 1, b: 0.3625865, a: 1}
+    m_Color: {r: 1, g: 1, b: 0, a: 1}
   m_GizmosVisibility: 1
-  m_Radius: 1
-  m_Height: 2
-  m_Direction: 2
+  m_Size: {x: 1, y: 1, z: 1}
 --- !u!1 &581391990
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,7 +486,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &633533975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -417,10 +502,10 @@ MonoBehaviour:
   m_Color: {r: 1, g: 0.66, b: 0.33, a: 1}
   m_GizmosVisibility: 2
   m_FieldsSpace: {fileID: 1514789995}
-  m_GridCount: {x: 9, y: 1, z: 9}
-  m_GridStep: {x: 1, y: 1, z: 1}
-  m_PowerVisible: 1
-  m_PowerSize: 1
+  m_GridCount: {x: 25, y: 1, z: 25}
+  m_GridStep: {x: 0.3, y: 1, z: 0.3}
+  m_PowerVisible: 0
+  m_PowerSize: 0.77
   m_ColorVisible: 1
   m_ColorSize: 1
   m_ColorAllowTransparent: 1
@@ -436,9 +521,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1514789994
+--- !u!1 &644782229
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -446,92 +531,45 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1514789996}
-  - component: {fileID: 1514789995}
+  - component: {fileID: 644782230}
+  - component: {fileID: 644782231}
   m_Layer: 0
-  m_Name: Fields Space
+  m_Name: Radial Field
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1514789995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1514789994}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66b79b9a268264a3387c6891dc69628c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FieldsMap:
-    m_CalculatePower: 0
-    m_DefaultPower: 0
-    m_CalculateColor: 1
-    m_DefaultColor: {r: 0, g: 0, b: 0, a: 1}
-    m_Fields:
-    - m_Enabled: 1
-      m_Field: {fileID: 511345243}
-      m_BlendPowerMode: 1
-      m_BlendColorMode: 2
-      m_Intensity: 1
-    - m_Enabled: 1
-      m_Field: {fileID: 1732334851}
-      m_BlendPowerMode: 7
-      m_BlendColorMode: 2
-      m_Intensity: 1
---- !u!4 &1514789996
+  m_IsActive: 0
+--- !u!4 &644782230
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1514789994}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 644782229}
+  m_LocalRotation: {x: -0, y: 0.869764, z: -0, w: 0.4934681}
+  m_LocalPosition: {x: -3.57, y: 0, z: 0.47}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 511345242}
-  - {fileID: 1732334852}
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1732334850
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1732334852}
-  - component: {fileID: 1732334851}
-  m_Layer: 0
-  m_Name: Directional Field
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1732334851
+  m_Children: []
+  m_Father: {fileID: 1514789996}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 120.862, z: 0}
+--- !u!114 &644782231
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1732334850}
+  m_GameObject: {fileID: 644782229}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 332484ea7bd5f43fd8411dad2d6fc27a, type: 3}
+  m_Script: {fileID: 11500000, guid: b261e1ac660434f0eb2facc18d289403, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Remapping:
     m_Enabled: 1
     m_Strength: 1
-    m_InnerOffset: 0
+    m_InnerOffset: 0.5
     m_Invert: 0
     m_Min: 0
     m_Max: 1
@@ -567,27 +605,18 @@ MonoBehaviour:
     m_ContourSplineAnimationSpeed: 0
     m_ContourSplineOffset: 0
     m_ColorRemap: 1
-    m_Color: {r: 0.73703957, g: 0, b: 1, a: 1}
+    m_Color: {r: 0, g: 0, b: 1, a: 1}
   m_GizmosVisibility: 1
-  m_Length: 1
-  m_Direction: 0
-  m_GizmoWidth: 4
-  m_GizmoHeight: 2
---- !u!4 &1732334852
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1732334850}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1514789996}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1772270079
+  m_StartAngle: 124.49
+  m_EndAngle: 302.8
+  m_FadeInOffset: 45
+  m_FadeOutOffset: 71.92
+  m_Iterations: 1
+  m_Offset: 0
+  m_Direction: 1
+  m_GizmoLength: 2
+  m_GizmoRadius: 1
+--- !u!1 &659562831
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -595,90 +624,433 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1772270083}
-  - component: {fileID: 1772270082}
-  - component: {fileID: 1772270081}
-  - component: {fileID: 1772270080}
+  - component: {fileID: 659562832}
+  - component: {fileID: 659562833}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Sphere Field
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!65 &1772270080
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1772270079}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &1772270081
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1772270079}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1772270082
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1772270079}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1772270083
+  m_IsActive: 0
+--- !u!4 &659562832
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1772270079}
+  m_GameObject: {fileID: 659562831}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalPosition: {x: -2.64, y: 0, z: -2.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1514789996}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &659562833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 659562831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd7b5aff2f6bd41988460940559044c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Remapping:
+    m_Enabled: 1
+    m_Strength: 1
+    m_InnerOffset: 0.5
+    m_Invert: 0
+    m_Min: 0
+    m_Max: 1
+    m_ClampMinEnabled: 1
+    m_ClampMaxEnabled: 1
+    m_ContourMultiplier: 1
+    m_ContourMode: 0
+    m_ContourSteps: 1
+    m_ContourSpline:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ContourSplineAnimationSpeed: 0
+    m_ContourSplineOffset: 0
+    m_ColorRemap: 1
+    m_Color: {r: 1, g: 0, b: 1, a: 1}
+  m_GizmosVisibility: 1
+  m_Radius: 1
+--- !u!1 &1210187933
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1210187934}
+  - component: {fileID: 1210187935}
+  m_Layer: 0
+  m_Name: Directional Field
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1210187934
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210187933}
+  m_LocalRotation: {x: -0, y: 0.554639, z: -0, w: 0.83209115}
+  m_LocalPosition: {x: 1.39, y: 0, z: -0.96}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1514789996}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 67.372, z: 0}
+--- !u!114 &1210187935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210187933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 332484ea7bd5f43fd8411dad2d6fc27a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Remapping:
+    m_Enabled: 1
+    m_Strength: 1
+    m_InnerOffset: 0.14
+    m_Invert: 1
+    m_Min: 0
+    m_Max: 1
+    m_ClampMinEnabled: 1
+    m_ClampMaxEnabled: 1
+    m_ContourMultiplier: 1
+    m_ContourMode: 0
+    m_ContourSteps: 1
+    m_ContourSpline:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ContourSplineAnimationSpeed: 0
+    m_ContourSplineOffset: 0
+    m_ColorRemap: 1
+    m_Color: {r: 0, g: 1, b: 1, a: 1}
+  m_GizmosVisibility: 1
+  m_Length: 4.42
+  m_Direction: 0
+  m_GizmoWidth: 4
+  m_GizmoHeight: 2
+--- !u!1 &1377293796
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1377293797}
+  - component: {fileID: 1377293798}
+  m_Layer: 0
+  m_Name: Cylinder Field
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1377293797
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377293796}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.4, y: 0, z: 3.14}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1514789996}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1377293798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1377293796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1c56ec36708641ab8e7f75987fb8432, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Remapping:
+    m_Enabled: 1
+    m_Strength: 1
+    m_InnerOffset: 0.5
+    m_Invert: 0
+    m_Min: 0
+    m_Max: 1
+    m_ClampMinEnabled: 1
+    m_ClampMaxEnabled: 1
+    m_ContourMultiplier: 1
+    m_ContourMode: 0
+    m_ContourSteps: 1
+    m_ContourSpline:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ContourSplineAnimationSpeed: 0
+    m_ContourSplineOffset: 0
+    m_ColorRemap: 1
+    m_Color: {r: 0, g: 1, b: 0, a: 1}
+  m_GizmosVisibility: 1
+  m_Radius: 1
+  m_Height: 2
+  m_Direction: 1
+--- !u!1 &1514789994
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1514789996}
+  - component: {fileID: 1514789995}
+  m_Layer: 0
+  m_Name: Fields Space
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1514789995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1514789994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66b79b9a268264a3387c6891dc69628c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FieldsMap:
+    m_CalculatePower: 1
+    m_DefaultPower: 0
+    m_CalculateColor: 1
+    m_DefaultColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Fields:
+    - m_Enabled: 1
+      m_Field: {fileID: 39867064}
+      m_BlendPowerMode: 1
+      m_BlendColorMode: 2
+      m_Intensity: 1
+    - m_Enabled: 1
+      m_Field: {fileID: 341551643}
+      m_BlendPowerMode: 7
+      m_BlendColorMode: 2
+      m_Intensity: 1
+    - m_Enabled: 1
+      m_Field: {fileID: 1377293798}
+      m_BlendPowerMode: 7
+      m_BlendColorMode: 2
+      m_Intensity: 1
+    - m_Enabled: 1
+      m_Field: {fileID: 1210187935}
+      m_BlendPowerMode: 7
+      m_BlendColorMode: 2
+      m_Intensity: 1
+    - m_Enabled: 1
+      m_Field: {fileID: 644782231}
+      m_BlendPowerMode: 7
+      m_BlendColorMode: 2
+      m_Intensity: 1
+    - m_Enabled: 1
+      m_Field: {fileID: 659562833}
+      m_BlendPowerMode: 7
+      m_BlendColorMode: 2
+      m_Intensity: 1
+    - m_Enabled: 1
+      m_Field: {fileID: 1792894462}
+      m_BlendPowerMode: 7
+      m_BlendColorMode: 2
+      m_Intensity: 1
+--- !u!4 &1514789996
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1514789994}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 39867063}
+  - {fileID: 341551642}
+  - {fileID: 1377293797}
+  - {fileID: 1210187934}
+  - {fileID: 644782230}
+  - {fileID: 659562832}
+  - {fileID: 1792894463}
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1792894461
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1792894463}
+  - component: {fileID: 1792894462}
+  m_Layer: 0
+  m_Name: Torus Field
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1792894462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792894461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa6d45ef43df44cc3ab3acab596294d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Remapping:
+    m_Enabled: 1
+    m_Strength: 1
+    m_InnerOffset: 0.5
+    m_Invert: 0
+    m_Min: 0
+    m_Max: 1
+    m_ClampMinEnabled: 1
+    m_ClampMaxEnabled: 1
+    m_ContourMultiplier: 1
+    m_ContourMode: 0
+    m_ContourSteps: 1
+    m_ContourSpline:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ContourSplineAnimationSpeed: 0
+    m_ContourSplineOffset: 0
+    m_ColorRemap: 1
+    m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_GizmosVisibility: 1
+  m_Radius: 2
+  m_Thickness: 0.5
+  m_Direction: 1
+--- !u!4 &1792894463
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792894461}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.03, y: 0, z: -0.14}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1514789996}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
