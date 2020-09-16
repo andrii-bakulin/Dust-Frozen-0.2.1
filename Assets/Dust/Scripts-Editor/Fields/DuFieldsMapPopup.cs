@@ -47,6 +47,7 @@ namespace DustEngine.DustEditor
             var colBasicFields = new ColumnRecord() {title = "Basic Fields"};
             {
                 AddItem(colBasicFields, "DustEngine.DuConstantField", "Constant");
+                AddItem(colBasicFields, "DustEngine.DuStepObjectsField", "Step Objects");
                 AddItem(colBasicFields, "DustEngine.DuTimeField", "Time");
             }
             m_ColumnRecords.Add(colBasicFields);
