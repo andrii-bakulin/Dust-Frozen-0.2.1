@@ -25,6 +25,9 @@ namespace DustEngine.DustEditor
         {
             // Animations
             ["DustEngine.DuFollow"] = new ClassParams { IconName = "DRAFT/Animation/DuFollow" },
+            ["DustEngine.DuParallax"] = new ClassParams { IconName = "DRAFT/Animation/DuParallax" },
+            ["DustEngine.DuParallaxController"] = new ClassParams { IconName = "DRAFT/Animation/DuParallaxController" },
+            ["DustEngine.DuParallaxInstance"] = new ClassParams { IconName = "DRAFT/Animation/DuParallaxInstance" },
             ["DustEngine.DuRotate"] = new ClassParams { IconName = "DRAFT/Animation/DuRotate" },
             ["DustEngine.DuTarget"] = new ClassParams { IconName = "DRAFT/Animation/DuTarget" },
             ["DustEngine.DuTranslate"] = new ClassParams { IconName = "DRAFT/Animation/DuTranslate" },
