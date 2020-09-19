@@ -39,6 +39,18 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
+#if UNITY_EDITOR
+        public class Stats
+        {
+            public int updatesCount { get; internal set; }
+            public float lastUpdateTime { get; internal set; }
+        }
+
+        public readonly Stats stats = new Stats();
+#endif
+
+        //--------------------------------------------------------------------------------------------------------------
+
         [SerializeField]
         private Mesh m_MeshOriginal;
         public Mesh meshOriginal => m_MeshOriginal;
@@ -140,7 +152,9 @@ namespace DustEngine
             {
                 if (!meshFilter.sharedMesh.isReadable)
                 {
+#if UNITY_EDITOR
                     Dust.Debug.Warning("GameObject [" + gameObject.name + "] has not readable Mesh");
+#endif
                     return;
                 }
 
@@ -236,6 +250,10 @@ namespace DustEngine
             if (Dust.IsNull(m_MeshPointsOriginal) || m_MeshPointsOriginal.Length == 0)
                 return;
 
+#if UNITY_EDITOR
+            var timer = Dust.Debug.StartTimer();
+#endif
+
             m_MeshPointsOriginal.CopyTo(m_MeshPointsDeformed, 0);
 
             if (Dust.IsNotNull(m_Deformers))
@@ -262,6 +280,11 @@ namespace DustEngine
 
             if (recalculateTangents)
                 meshFilter.sharedMesh.RecalculateTangents();
+
+#if UNITY_EDITOR
+            stats.updatesCount++;
+            stats.lastUpdateTime = timer.Stop();
+#endif
         }
 
         //--------------------------------------------------------------------------------------------------------------
