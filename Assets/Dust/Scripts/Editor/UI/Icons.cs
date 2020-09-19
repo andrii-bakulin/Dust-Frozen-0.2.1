@@ -30,6 +30,13 @@ namespace DustEngine.DustEditor
             ["DustEngine.DuTranslate"] = new ClassParams { IconName = "DRAFT/Animation/DuTranslate" },
             ["DustEngine.DuVibrate"] = new ClassParams { IconName = "DRAFT/Animation/DuVibrate" },
 
+            // Deformers:Core
+            ["DustEngine.DuDeformMesh"] = new ClassParams { IconName = "DRAFT/Deformers/DuDeformMesh" },
+
+            // Deformers
+            ["DustEngine.DuTwistDeformer"] = new ClassParams { IconName = "DRAFT/Deformers/DuTwistDeformer" },
+            ["DustEngine.DuWaveDeformer"] = new ClassParams { IconName = "DRAFT/Deformers/DuWaveDeformer" },
+
             // Events
             ["DustEngine.DuCollisionEvent"] = new ClassParams { IconName = "DRAFT/Events/DuColliderEvent" },
             ["DustEngine.DuCollision2DEvent"] = new ClassParams { IconName = "DRAFT/Events/DuColliderEvent2D" },

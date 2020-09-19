@@ -130,6 +130,11 @@ namespace DustEngine
             return new DuFieldsMap(true, true);
         }
 
+        public static DuFieldsMap Deformer()
+        {
+            return new DuFieldsMap(true, false);
+        }
+
         public DuFieldsMap(bool calcPower, bool calcColor)
         {
             calculatePower = calcPower;
