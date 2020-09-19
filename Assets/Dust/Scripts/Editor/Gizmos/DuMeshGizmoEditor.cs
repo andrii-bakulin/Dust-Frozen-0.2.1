@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-#if UNITY_EDITOR
 namespace DustEngine.DustEditor
 {
     [CustomEditor(typeof(DuMeshGizmo)), CanEditMultipleObjects]
@@ -44,4 +43,3 @@ namespace DustEngine.DustEditor
         }
     }
 }
-#endif

@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-#if UNITY_EDITOR
 namespace DustEngine.DustEditor
 {
     [CustomEditor(typeof(DuTrigger2DEvent)), CanEditMultipleObjects]
@@ -9,4 +8,3 @@ namespace DustEngine.DustEditor
     {
     }
 }
-#endif

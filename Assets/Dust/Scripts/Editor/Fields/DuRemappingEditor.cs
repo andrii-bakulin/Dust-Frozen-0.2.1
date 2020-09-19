@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEditor;
 
-#if UNITY_EDITOR
 namespace DustEngine.DustEditor
 {
     public class DuRemappingEditor
@@ -242,4 +241,3 @@ namespace DustEngine.DustEditor
         }
     }
 }
-#endif

@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-#if UNITY_EDITOR
 namespace DustEngine.DustEditor
 {
     public class DuEditor : Editor
@@ -324,4 +323,3 @@ namespace DustEngine.DustEditor
         }
     }
 }
-#endif

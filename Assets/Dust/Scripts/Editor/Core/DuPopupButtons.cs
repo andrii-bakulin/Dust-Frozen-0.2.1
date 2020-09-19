@@ -2,7 +2,6 @@
 using UnityEngine;
 using UnityEditor;
 
-#if UNITY_EDITOR
 namespace DustEngine.DustEditor
 {
     public class DuPopupButtons : PopupWindowContent
@@ -172,4 +171,3 @@ namespace DustEngine.DustEditor
         }
     }
 }
-#endif

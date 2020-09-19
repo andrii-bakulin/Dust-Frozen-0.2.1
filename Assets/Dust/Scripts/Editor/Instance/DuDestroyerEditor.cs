@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-#if UNITY_EDITOR
 namespace DustEngine.DustEditor
 {
     [CustomEditor(typeof(DuDestroyer)), CanEditMultipleObjects]
@@ -85,4 +84,3 @@ namespace DustEngine.DustEditor
         }
     }
 }
-#endif

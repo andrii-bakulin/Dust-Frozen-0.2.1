@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEditor;
 
-#if UNITY_EDITOR
 namespace DustEngine.DustEditor
 {
     public abstract class DuColliderEventEditor : DuEventEditor
@@ -74,4 +73,3 @@ namespace DustEngine.DustEditor
         }
     }
 }
-#endif

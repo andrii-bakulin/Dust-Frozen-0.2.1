@@ -3,7 +3,6 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
-#if UNITY_EDITOR
 namespace DustEngine.DustEditor
 {
     [CustomEditor(typeof(Transform))]
@@ -114,4 +113,3 @@ namespace DustEngine.DustEditor
         }
     }
 }
-#endif

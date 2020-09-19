@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEditor;
 
-#if UNITY_EDITOR
 namespace DustEngine.DustEditor
 {
     public abstract class DuObjectFieldEditor : DuFieldEditor
@@ -40,4 +39,3 @@ namespace DustEngine.DustEditor
         }
     }
 }
-#endif

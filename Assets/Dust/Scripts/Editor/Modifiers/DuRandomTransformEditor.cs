@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-#if UNITY_EDITOR
 namespace DustEngine.DustEditor
 {
     [CustomEditor(typeof(DuRandomTransform)), CanEditMultipleObjects]
@@ -96,4 +95,3 @@ namespace DustEngine.DustEditor
         }
     }
 }
-#endif

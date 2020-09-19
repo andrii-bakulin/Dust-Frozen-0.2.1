@@ -2,7 +2,6 @@ using System;
 using UnityEditor;
 using UnityEngine;
 
-#if UNITY_EDITOR
 namespace DustEngine.DustEditor
 {
     [InitializeOnLoad]
@@ -63,4 +62,3 @@ namespace DustEngine.DustEditor
         }
     }
 }
-#endif

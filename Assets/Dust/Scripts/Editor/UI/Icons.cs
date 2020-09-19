@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-#if UNITY_EDITOR
 namespace DustEngine.DustEditor
 {
     public static class Icons
@@ -128,4 +127,3 @@ namespace DustEngine.DustEditor
         }
     }
 }
-#endif

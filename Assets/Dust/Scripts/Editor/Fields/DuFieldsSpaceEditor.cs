@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-#if UNITY_EDITOR
 namespace DustEngine.DustEditor
 {
     [CustomEditor(typeof(DuFieldsSpace))]
@@ -72,4 +71,3 @@ namespace DustEngine.DustEditor
         }
     }
 }
-#endif

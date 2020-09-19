@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-#if UNITY_EDITOR
 namespace DustEngine.DustEditor
 {
     public static class DuSessionState
@@ -60,4 +59,3 @@ namespace DustEngine.DustEditor
         }
     }
 }
-#endif

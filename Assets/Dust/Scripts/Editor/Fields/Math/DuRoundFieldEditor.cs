@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-#if UNITY_EDITOR
 namespace DustEngine.DustEditor
 {
     [CustomEditor(typeof(DuRoundField)), CanEditMultipleObjects]
@@ -35,4 +34,3 @@ namespace DustEngine.DustEditor
         }
     }
 }
-#endif

@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-#if UNITY_EDITOR
 namespace DustEngine.DustEditor
 {
     public static class DuConstants
@@ -11,4 +10,3 @@ namespace DustEngine.DustEditor
         internal const int RANDOM_SEED_MAX = 99999;
     }
 }
-#endif

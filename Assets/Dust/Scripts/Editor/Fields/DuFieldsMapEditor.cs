@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-#if UNITY_EDITOR
 namespace DustEngine.DustEditor
 {
     public class DuFieldsMapEditor
@@ -400,4 +399,3 @@ namespace DustEngine.DustEditor
         }
     }
 }
-#endif
