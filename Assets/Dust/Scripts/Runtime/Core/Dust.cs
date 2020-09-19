@@ -109,7 +109,16 @@ namespace DustEngine
                     timer.Start();
                 }
 
-                public void Stop(string scope)
+                public float Stop()
+                {
+                    timer.Stop();
+
+                    double millisecond = timer.ElapsedMilliseconds;
+
+                    return (float) millisecond / 1000f;
+                }
+
+                public void StopAndLog(string scope)
                 {
                     timer.Stop();
 
