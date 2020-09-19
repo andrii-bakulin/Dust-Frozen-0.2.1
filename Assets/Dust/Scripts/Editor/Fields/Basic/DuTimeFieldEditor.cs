@@ -79,7 +79,7 @@ namespace DustEngine.DustEditor
 
                 if (previewDynamic)
                 {
-                    previewLength = DustGUI.SliderExt.Create(1f, 5f, 0.1f, 1f, 100f).Draw("Preview Length", previewLength);
+                    previewLength = DustGUI.ExtraSlider.Create(1f, 5f, 0.1f, 1f, 100f).Draw("Preview Length", previewLength);
                     DuSessionState.SetFloat("DuTimeField.Preview.Length", previewLength);
                 }
             }

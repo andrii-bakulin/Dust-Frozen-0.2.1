@@ -226,7 +226,7 @@ namespace DustEngine.DustEditor
         public static bool PropertySeedFixed(DuProperty duProperty, int seedMin = DuConstants.RANDOM_SEED_MIN, int seedMax = DuConstants.RANDOM_SEED_MAX)
         {
             EditorGUI.BeginChangeCheck();
-            DustGUI.IntSliderExt.Create(seedMin, seedMax, 1, 1, int.MaxValue).Draw("Seed", duProperty.property);
+            DustGUI.ExtraIntSlider.Create(seedMin, seedMax, 1, 1, int.MaxValue).Draw("Seed", duProperty.property);
             duProperty.isChanged = EditorGUI.EndChangeCheck();
             return duProperty.isChanged;
         }
@@ -249,7 +249,7 @@ namespace DustEngine.DustEditor
 
         public static bool PropertyExtendedIntSlider(DuProperty duProperty, int leftValue, int rightValue, int stepValue, int leftLimit = int.MinValue, int rightLimit = int.MaxValue)
         {
-            var slider = new DustGUI.IntSliderExt(leftValue, rightValue, stepValue, leftLimit, rightLimit);
+            var slider = new DustGUI.ExtraIntSlider(leftValue, rightValue, stepValue, leftLimit, rightLimit);
             slider.LinkEditor(duProperty.parentEditor);
             duProperty.isChanged = slider.Draw(new GUIContent(duProperty.title, duProperty.tooltip), duProperty.property);
             return duProperty.isChanged;
@@ -257,7 +257,7 @@ namespace DustEngine.DustEditor
 
         public static bool PropertyExtendedSlider(DuProperty duProperty, float leftValue, float rightValue, float stepValue, float leftLimit = float.MinValue, float rightLimit = float.MaxValue)
         {
-            var slider = new DustGUI.SliderExt(leftValue, rightValue, stepValue, leftLimit, rightLimit);
+            var slider = new DustGUI.ExtraSlider(leftValue, rightValue, stepValue, leftLimit, rightLimit);
             slider.LinkEditor(duProperty.parentEditor);
             duProperty.isChanged = slider.Draw(new GUIContent(duProperty.title, duProperty.tooltip), duProperty.property);
             return duProperty.isChanged;
