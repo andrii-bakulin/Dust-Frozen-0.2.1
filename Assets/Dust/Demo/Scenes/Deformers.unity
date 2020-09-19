@@ -440,7 +440,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 614727621}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 218255922}
@@ -555,8 +555,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1246048888}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.58, z: 0.01}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -0.010000467, z: 2.5100002}
   m_LocalScale: {x: 1.1418, y: 1.1418, z: 1.1418}
   m_Children: []
   m_Father: {fileID: 1850619819}
@@ -601,13 +601,14 @@ MonoBehaviour:
       m_Field: {fileID: 1246048889}
       m_BlendPowerMode: 1
       m_BlendColorMode: 1
-      m_Intensity: 1
+      m_Intensity: 0.85
   m_GizmosVisibility: 2
   m_Amplitude: 1
   m_Frequency: 1
-  m_LinearFalloff: 0
+  m_LinearFalloff: 1.11
   m_Offset: 0
   m_AnimationSpeed: 1
+  m_Direction: 2
   m_GizmosSize: 2
   m_GizmosQuality: 1
   m_GizmosAnimated: 1
@@ -618,14 +619,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1850619817}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -3}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1.93}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1246048890}
   m_Father: {fileID: 2003897257}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1872302823
 GameObject:
   m_ObjectHideFlags: 0
@@ -764,11 +765,11 @@ MonoBehaviour:
   m_MeshOriginal: {fileID: -5495902117074765545, guid: f2fe9bd8dcf114481918a89244bede05, type: 3}
   m_Deformers:
   - m_Deformer: {fileID: 1850619818}
-    m_Intensity: 0.23
+    m_Intensity: 1
     m_Enabled: 1
   - m_Deformer: {fileID: 1872302824}
-    m_Intensity: 0.88
-    m_Enabled: 1
+    m_Intensity: 1
+    m_Enabled: 0
   m_RecalculateBounds: 1
   m_RecalculateNormals: 1
   m_RecalculateTangents: 1

@@ -11,6 +11,7 @@ namespace DustEngine.DustEditor
         private DuProperty m_LinearFalloff;
         private DuProperty m_Offset;
         private DuProperty m_AnimationSpeed;
+        private DuProperty m_Direction;
 
         private DuProperty m_GizmosSize;
         private DuProperty m_GizmosQuality;
@@ -25,6 +26,7 @@ namespace DustEngine.DustEditor
             m_LinearFalloff = FindProperty("m_LinearFalloff", "Linear Falloff");
             m_Offset = FindProperty("m_Offset", "Offset");
             m_AnimationSpeed = FindProperty("m_AnimationSpeed", "Animation Speed");
+            m_Direction = FindProperty("m_Direction", "Direction");
 
             m_GizmosSize = FindProperty("m_GizmosSize", "Size");
             m_GizmosQuality = FindProperty("m_GizmosQuality", "Quality");
@@ -47,6 +49,7 @@ namespace DustEngine.DustEditor
                 Space();
                 PropertyExtendedSlider(m_Offset, 0f, 1f, 0.01f);
                 PropertyExtendedSlider(m_AnimationSpeed, -2f, +2f, 0.01f);
+                PropertyField(m_Direction);
             }
             DustGUI.FoldoutEnd();
 

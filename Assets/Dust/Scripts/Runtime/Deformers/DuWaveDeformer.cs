@@ -57,6 +57,14 @@ namespace DustEngine
             set => m_AnimationSpeed = value;
         }
 
+        [SerializeField]
+        private Axis3xDirection m_Direction = Axis3xDirection.Y;
+        public Axis3xDirection direction
+        {
+            get => m_Direction;
+            set => m_Direction = value;
+        }
+
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
@@ -150,7 +158,10 @@ namespace DustEngine
 
         public override bool DeformPoint(ref Vector3 localPosition, float strength = 1f)
         {
-            float distance = DuMath.Length(localPosition.x, localPosition.z);
+            // xp = x+
+            var xpAxisPosition = DuAxisDirection.ConvertFromDirectionToAxisXPlus(direction, localPosition);
+
+            float distance = DuMath.Length(xpAxisPosition.y, xpAxisPosition.z);
 
             if (DuMath.IsNotZero(linearFalloff) && distance >= linearFalloff)
                 return false;
@@ -167,7 +178,9 @@ namespace DustEngine
             if (DuMath.IsNotZero(linearFalloff))
                 offsetY *= Mathf.Clamp01((linearFalloff - distance) / linearFalloff);
 
-            localPosition.y += offsetY * strength;
+            xpAxisPosition.x += offsetY * strength;
+
+            localPosition = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, xpAxisPosition);
             return true;
         }
 
@@ -201,28 +214,36 @@ namespace DustEngine
                 case GizmosQuality.ExtraHigh: segments = 96; break;
             }
 
-            Vector3 zeroPoint = new Vector3(-gizmosSize / 2f, 0, -gizmosSize / 2f);
+            Vector3 zeroPoint = new Vector3(0, -gizmosSize / 2f, -gizmosSize / 2f);
 
             float delta = gizmosSize / segments;
 
             for (int s0 = 0; s0 <= segments; s0++)
             for (int s1 = 0; s1 < segments; s1++)
             {
-                Vector3 point0, point1;
+                Vector3 pointY0, pointY1;
+                Vector3 pointZ0, pointZ1;
 
-                point0 = zeroPoint + new Vector3(s1 * delta, 0, s0 * delta);
-                point1 = zeroPoint + new Vector3((s1 + 1) * delta, 0, s0 * delta);
+                pointY0 = zeroPoint + new Vector3(0, (s1 + 0) * delta, s0 * delta);
+                pointY1 = zeroPoint + new Vector3(0, (s1 + 1) * delta, s0 * delta);
+                pointZ0 = new Vector3(pointY0.x, pointY0.z, pointY0.y);
+                pointZ1 = new Vector3(pointY1.x, pointY1.z, pointY1.y);
 
-                DeformPoint(ref point0);
-                DeformPoint(ref point1);
+                pointY0 = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, pointY0);
+                pointY1 = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, pointY1);
+                pointZ0 = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, pointZ0);
+                pointZ1 = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, pointZ1);
 
-                Gizmos.DrawLine(point0, point1);
+                DeformPoint(ref pointY0);
+                DeformPoint(ref pointY1);
+                DeformPoint(ref pointZ0);
+                DeformPoint(ref pointZ1);
 
-                point0 = new Vector3(point0.z, point0.y, point0.x);
-                point1 = new Vector3(point1.z, point1.y, point1.x);
-
-                Gizmos.DrawLine(point0, point1);
+                Gizmos.DrawLine(pointY0, pointY1);
+                Gizmos.DrawLine(pointZ0, pointZ1);
             }
+
+            DuGizmos.DrawCircle(linearFalloff, Vector3.zero, direction, 32);
         }
 #endif
     }
