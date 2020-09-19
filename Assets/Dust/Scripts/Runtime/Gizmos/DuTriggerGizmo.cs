@@ -245,8 +245,7 @@ namespace DustEngine
                 Handles.Label(worldPosition + offset * (1f + messageOffset), message, style);
             }
 
-            // DustGUI.ForcedRedrawSceneView();
-            SceneView.lastActiveSceneView.Repaint();
+            DustGUIRuntime.ForcedRedrawSceneView();
         }
 
         void Reset()
