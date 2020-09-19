@@ -43,7 +43,7 @@ namespace DustEngine.DustEditor
         public static DuPopupButtons Fields(DuFieldsMapEditor fieldsMap)
         {
             var popup = new DuPopupButtons();
-            popup.m_PopupMode = PopupMode.Deformers;
+            popup.m_PopupMode = PopupMode.Fields;
             popup.m_FieldsMap = fieldsMap;
 
             ColumnRecord column;
