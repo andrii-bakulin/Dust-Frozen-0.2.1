@@ -86,7 +86,6 @@ namespace DustEngine
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         private float m_TimeSinceStart;
-        private float m_TimerForEditor;
 
         //------------------------------------------------------------------------------------------------------------------
 
@@ -101,6 +100,8 @@ namespace DustEngine
         //------------------------------------------------------------------------------------------------------------------
 
 #if UNITY_EDITOR
+        private float m_TimerForEditor;
+
         void OnEnable()
         {
             if (!Application.isPlaying)
@@ -154,7 +155,13 @@ namespace DustEngine
             if (DuMath.IsNotZero(linearFalloff) && distance >= linearFalloff)
                 return false;
 
-            float sinOffset = distance * frequency - offset - (m_TimeSinceStart + m_TimerForEditor) * animationSpeed;
+#if UNITY_EDITOR
+            float timeOffset = m_TimeSinceStart + m_TimerForEditor;
+#else
+            float timeOffset = m_TimeSinceStart;
+#endif
+
+            float sinOffset = distance * frequency - offset - timeOffset * animationSpeed;
             float offsetY = Mathf.Sin(DuConstants.PI2 * sinOffset) * amplitude / 2f;
 
             if (DuMath.IsNotZero(linearFalloff))
