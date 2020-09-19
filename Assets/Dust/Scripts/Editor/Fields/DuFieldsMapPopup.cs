@@ -18,8 +18,8 @@ namespace DustEngine.DustEditor
 
         private struct CellRecord
         {
-            public string className;
             public string title;
+            public System.Type type;
         }
 
         private int m_ColsCount;
@@ -46,44 +46,44 @@ namespace DustEngine.DustEditor
 
             var colBasicFields = new ColumnRecord() {title = "Basic Fields"};
             {
-                AddItem(colBasicFields, "DustEngine.DuConstantField", "Constant");
-                AddItem(colBasicFields, "DustEngine.DuStepObjectsField", "Step Objects");
-                AddItem(colBasicFields, "DustEngine.DuTimeField", "Time");
+                AddItem(colBasicFields, typeof(DuConstantField), "Constant");
+                AddItem(colBasicFields, typeof(DuStepObjectsField), "Step Objects");
+                AddItem(colBasicFields, typeof(DuTimeField), "Time");
             }
             m_ColumnRecords.Add(colBasicFields);
             m_ColsCount++;
 
             var colObjectFields = new ColumnRecord() {title = "Object Fields"};
             {
-                AddItem(colObjectFields, "DustEngine.DuConeField", "Cone");
-                AddItem(colObjectFields, "DustEngine.DuCubeField", "Cube");
-                AddItem(colObjectFields, "DustEngine.DuCylinderField", "Cylinder");
-                AddItem(colObjectFields, "DustEngine.DuDirectionalField", "Directional");
-                AddItem(colObjectFields, "DustEngine.DuRadialField", "Radial");
-                AddItem(colObjectFields, "DustEngine.DuSphereField", "Sphere");
-                AddItem(colObjectFields, "DustEngine.DuTorusField", "Torus");
+                AddItem(colObjectFields, typeof(DuConeField), "Cone");
+                AddItem(colObjectFields, typeof(DuCubeField), "Cube");
+                AddItem(colObjectFields, typeof(DuCylinderField), "Cylinder");
+                AddItem(colObjectFields, typeof(DuDirectionalField), "Directional");
+                AddItem(colObjectFields, typeof(DuRadialField), "Radial");
+                AddItem(colObjectFields, typeof(DuSphereField), "Sphere");
+                AddItem(colObjectFields, typeof(DuTorusField), "Torus");
             }
             m_ColumnRecords.Add(colObjectFields);
             m_ColsCount++;
 
             var colMathFields = new ColumnRecord() {title = "Math Fields"};
             {
-                AddItem(colMathFields, "DustEngine.DuClampField", "Clamp");
-                AddItem(colMathFields, "DustEngine.DuCurveField", "Curve");
-                AddItem(colMathFields, "DustEngine.DuFitField", "Fit");
-                AddItem(colMathFields, "DustEngine.DuInvertField", "Invert");
-                AddItem(colMathFields, "DustEngine.DuRemapField", "Remap");
-                AddItem(colMathFields, "DustEngine.DuRoundField", "Round");
+                AddItem(colMathFields, typeof(DuClampField), "Clamp");
+                AddItem(colMathFields, typeof(DuCurveField), "Curve");
+                AddItem(colMathFields, typeof(DuFitField), "Fit");
+                AddItem(colMathFields, typeof(DuInvertField), "Invert");
+                AddItem(colMathFields, typeof(DuRemapField), "Remap");
+                AddItem(colMathFields, typeof(DuRoundField), "Round");
             }
             m_ColumnRecords.Add(colMathFields);
             m_ColsCount++;
         }
 
-        private void AddItem(ColumnRecord columnRecord, string className, string title)
+        private void AddItem(ColumnRecord columnRecord, System.Type type, string title)
         {
             CellRecord button;
-            button.className = className;
             button.title = title;
+            button.type = type;
             columnRecord.cells.Add(button);
 
             m_RowsCount = Mathf.Max(m_RowsCount, columnRecord.cells.Count);
@@ -117,12 +117,12 @@ namespace DustEngine.DustEditor
                 foreach (var cellRecord in columnRecord.cells)
                 {
                     GUIContent cntFields = new GUIContent();
-                    cntFields.image = Icons.GetTextureByClassName(cellRecord.className);
+                    cntFields.image = Icons.GetTextureByClassName(cellRecord.type.ToString());
                     cntFields.text = cellRecord.title;
 
                     if (DustGUI.IconButton(cntFields, BUTTON_WIDTH, BUTTON_HEIGHT, btnStyle))
                     {
-                        DuField.AddFieldComponentByType(m_FieldsMap.GetParentGameObject(), System.Type.GetType(cellRecord.className));
+                        DuField.AddFieldComponentByType(m_FieldsMap.GetParentGameObject(), cellRecord.type);
                         editorWindow.Close();
                     }
                 }

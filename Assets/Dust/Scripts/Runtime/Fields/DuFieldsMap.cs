@@ -208,7 +208,7 @@ namespace DustEngine
                 //          Of course you can manually set this flag to FALSE, but better don't do this!
                 //          Also this object(s) will be forced ACTIVATED in UnityEditor mode.
                 //          If you want temporary disable object then required SetActive(false) for it's gameObject.
-                // PS: this logic same for Effectors and Fields
+                // PS: this logic same for Factory.Machines and Fields
 
                 if (!fieldRecord.field.gameObject.activeInHierarchy)
                     continue;
