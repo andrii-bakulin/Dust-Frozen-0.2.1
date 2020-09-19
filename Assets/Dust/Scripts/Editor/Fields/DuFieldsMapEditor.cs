@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
@@ -8,6 +9,7 @@ namespace DustEngine.DustEditor
     {
         private const float CELL_WIDTH_ICON = 32f;
         private const float CELL_WIDTH_STATE = 20f;
+        private const float CELL_WIDTH_INTENSITY = 54f;
         private const float CELL_WIDTH_BLENDING = 50f;
         private const float CELL_WIDTH_CONTROL = 40f;
 
@@ -20,21 +22,45 @@ namespace DustEngine.DustEditor
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        private GUIStyle m_StyleMiniButton;
-        private GUIStyle styleMiniButton => m_StyleMiniButton
-                                            ?? (m_StyleMiniButton = DustGUI.NewStyleButton().Padding(2, 0).Margin(0).Build());
+        private GUIStyle m_StyleMiniButton = GUIStyle.none;
+        private GUIStyle styleMiniButton
+        {
+            get
+            {
+                if (m_StyleMiniButton == GUIStyle.none)
+                    m_StyleMiniButton = DustGUI.NewStyleButton().Padding(2, 0).Margin(0).Build();
 
-        private GUIStyle m_StyleIntensityField;
-        private GUIStyle styleIntensityField => m_StyleIntensityField
-                                                ?? (m_StyleIntensityField = DustGUI.NewStyleLabel().AlignMiddleRight().Build());
+                return m_StyleMiniButton;
+            }
+        }
 
-        private GUIStyle m_StyleDropDownList;
-        private GUIStyle styleDropDownList => m_StyleDropDownList
-                                              ?? (m_StyleDropDownList = DustGUI.NewStylePopup().MarginTop(6).Build());
+        private GUIStyle m_StyleIntensityButton = GUIStyle.none;
+        private GUIStyle styleIntensityButton
+        {
+            get
+            {
+                if (m_StyleIntensityButton == GUIStyle.none)
+                    m_StyleIntensityButton = DustGUI.NewStyleButton().MarginTop(6).Build();
+
+                return m_StyleIntensityButton;
+            }
+        }
+
+        private GUIStyle m_StyleDropDownList = GUIStyle.none;
+        private GUIStyle styleDropDownList
+        {
+            get
+            {
+                if (m_StyleDropDownList == GUIStyle.none)
+                    m_StyleDropDownList = DustGUI.NewStylePopup().MarginTop(7).Build();
+
+                return m_StyleDropDownList;
+            }
+        }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        private Rect m_RectButtonFieldsPopup;
+        private readonly Dictionary<string, Rect> m_RectsUI = new Dictionary<string, Rect>();
 
         public DuFieldsMapEditor(DuEditor parentEditor, SerializedProperty fieldsMapProperty, DuFieldsMap fieldsMapInstance)
         {
@@ -72,13 +98,13 @@ namespace DustEngine.DustEditor
                     DustGUI.BeginHorizontal();
                     {
                         float padding = 2;
-                        DustGUI.Header("", CELL_WIDTH_ICON);
-                        DustGUI.Header("", CELL_WIDTH_STATE);
+                        DustGUI.Header("", CELL_WIDTH_ICON - padding);
+                        DustGUI.Header("", CELL_WIDTH_STATE - padding);
                         DustGUI.Header("Name", 36);
 
                         DustGUI.SpaceExpand();
 
-                        DustGUI.Header("Intensity", 54);
+                        DustGUI.Header("Intensity", CELL_WIDTH_INTENSITY);
 
                         if (calculatePower)
                             DustGUI.Header("Power", CELL_WIDTH_BLENDING - padding);
@@ -147,7 +173,7 @@ namespace DustEngine.DustEditor
 
         private bool DrawFieldItem(SerializedProperty item, int itemIndex, int itemsCount)
         {
-            var curRecord = UnpackFieldRecord(item); // just to save previos state
+            var curRecord = UnpackFieldRecord(item); // just to save previous state
             var newRecord = UnpackFieldRecord(item); // this record will fix changes
 
             if (Dust.IsNull(newRecord.field))
@@ -180,7 +206,20 @@ namespace DustEngine.DustEditor
 
                 DustGUI.SpaceExpand();
 
-                DustGUI.SimpleLabel(newRecord.intensity.ToString("F2"), 0, DustGUI.Config.ICON_BUTTON_HEIGHT, styleIntensityField);
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+                string intensityValue = newRecord.intensity.ToString("F2");
+
+                if (DustGUI.Button(intensityValue, CELL_WIDTH_INTENSITY, 20f, styleIntensityButton, DustGUI.ButtonState.Pressed))
+                {
+                    Rect buttonRect = m_RectsUI["item" + itemIndex.ToString()];
+                    buttonRect.y += 5f;
+
+                    PopupWindow.Show(buttonRect, DuPopupExtraSlider.Create(m_Editor.serializedObject, "Intensity", item.FindPropertyRelative("m_Intensity")));
+                }
+
+                if (Event.current.type == EventType.Repaint)
+                    m_RectsUI["item" + itemIndex.ToString()] = GUILayoutUtility.GetLastRect();
 
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -265,10 +304,10 @@ namespace DustEngine.DustEditor
             DustGUI.BeginHorizontal();
             {
                 if (DustGUI.IconButton(Icons.ACTION_ADD_FIELD, CELL_WIDTH_ICON, CELL_WIDTH_ICON, styleMiniButton))
-                    PopupWindow.Show(m_RectButtonFieldsPopup, DuFieldsMapPopup.AllFields(this));
+                    PopupWindow.Show(m_RectsUI["Add"], DuPopupButtons.Fields(this));
 
                 if (Event.current.type == EventType.Repaint)
-                    m_RectButtonFieldsPopup = GUILayoutUtility.GetLastRect();
+                    m_RectsUI["Add"] = GUILayoutUtility.GetLastRect();
 
                 DustGUI.Label("Add field", 0, DustGUI.Config.ICON_BUTTON_HEIGHT);
             }

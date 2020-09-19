@@ -21,11 +21,11 @@ namespace DustEngine
             }
 
             [SerializeField]
-            private float m_Strength = 1f;
-            public float strength
+            private float m_Intensity = 1f;
+            public float intensity
             {
-                get => m_Strength;
-                set => m_Strength = value;
+                get => m_Intensity;
+                set => m_Intensity = value;
             }
 
             [SerializeField]
@@ -220,7 +220,8 @@ namespace DustEngine
             var deformerRecord = new Record
             {
                 deformer = deformer,
-                enabled = true
+                enabled = true,
+                intensity = 1f,
             };
 
             deformers.Add(deformerRecord);
@@ -241,13 +242,13 @@ namespace DustEngine
             {
                 foreach (var deformerRecord in m_Deformers)
                 {
-                    if (Dust.IsNull(deformerRecord) || !deformerRecord.enabled)
+                    if (Dust.IsNull(deformerRecord) || !deformerRecord.enabled || DuMath.IsZero(deformerRecord.intensity))
                         continue;
 
                     if (Dust.IsNull(deformerRecord.deformer) || !deformerRecord.deformer.gameObject.activeInHierarchy)
                         continue;
 
-                    deformerRecord.deformer.UpdateMeshPointsCloud(ref m_MeshPointsDeformed, transform, deformerRecord.strength);
+                    deformerRecord.deformer.UpdateMeshPointsCloud(ref m_MeshPointsDeformed, transform, deformerRecord.intensity);
                 }
             }
 

@@ -213,7 +213,7 @@ MonoBehaviour:
   m_MeshOriginal: {fileID: -5495902117074765545, guid: f2fe9bd8dcf114481918a89244bede05, type: 3}
   m_Deformers:
   - m_Deformer: {fileID: 614727622}
-    m_Strength: 1
+    m_Intensity: 1
     m_Enabled: 1
   m_RecalculateBounds: 1
   m_RecalculateNormals: 1
@@ -705,7 +705,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f2fe9bd8dcf114481918a89244bede05, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.075
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f2fe9bd8dcf114481918a89244bede05, type: 3}
       propertyPath: m_LocalPosition.z
@@ -777,10 +777,10 @@ MonoBehaviour:
   m_MeshOriginal: {fileID: -5495902117074765545, guid: f2fe9bd8dcf114481918a89244bede05, type: 3}
   m_Deformers:
   - m_Deformer: {fileID: 1850619818}
-    m_Strength: 1
+    m_Intensity: 0.23
     m_Enabled: 1
   - m_Deformer: {fileID: 1872302824}
-    m_Strength: 1
+    m_Intensity: 0.88
     m_Enabled: 1
   m_RecalculateBounds: 1
   m_RecalculateNormals: 1

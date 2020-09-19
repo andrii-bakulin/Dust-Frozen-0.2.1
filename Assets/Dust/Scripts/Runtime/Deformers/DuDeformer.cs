@@ -26,24 +26,26 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
 
 #if UNITY_EDITOR
-        protected static void AddDeformerComponentByType(System.Type duDeformerType)
+        public static void AddDeformerComponentByType(System.Type type)
+        {
+            Selection.activeGameObject = AddDeformerComponentByType(Selection.activeGameObject, type);
+        }
+
+        public static GameObject AddDeformerComponentByType(GameObject activeGameObject, System.Type type)
         {
             DuDeformMesh selectedDeformMesh = null;
 
-            if (Dust.IsNotNull(Selection.activeGameObject))
+            if (Dust.IsNotNull(activeGameObject))
             {
-                selectedDeformMesh = Selection.activeGameObject.GetComponent<DuDeformMesh>();
+                selectedDeformMesh = activeGameObject.GetComponent<DuDeformMesh>();
 
-                if (Dust.IsNull(selectedDeformMesh))
-                {
-                    if (Selection.activeGameObject.GetComponent<MeshFilter>())
-                        selectedDeformMesh = Selection.activeGameObject.AddComponent<DuDeformMesh>();
-                }
+                if (Dust.IsNull(selectedDeformMesh) && Dust.IsNotNull(activeGameObject.transform.parent))
+                    selectedDeformMesh = activeGameObject.transform.parent.GetComponent<DuDeformMesh>();
             }
 
             var gameObject = new GameObject();
             {
-                DuDeformer deformer = gameObject.AddComponent(duDeformerType) as DuDeformer;
+                DuDeformer deformer = gameObject.AddComponent(type) as DuDeformer;
 
                 if (Dust.IsNotNull(selectedDeformMesh))
                 {
@@ -59,7 +61,7 @@ namespace DustEngine
 
             Undo.RegisterCreatedObjectUndo(gameObject, "Create " + gameObject.name);
 
-            Selection.activeGameObject = gameObject;
+            return gameObject;
         }
 #endif
 
