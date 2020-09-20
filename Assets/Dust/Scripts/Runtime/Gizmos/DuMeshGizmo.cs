@@ -44,10 +44,15 @@ namespace DustEngine
         [MenuItem("Dust/Gizmos/Mesh")]
         public static void AddComponentToSelectedObjects()
         {
-            AddComponentToSelectedOrNewObject("Mesh Gizmo", typeof(DuMeshGizmo));
+            AddGizmoToSelectedOrNewObject(typeof(DuMeshGizmo));
         }
 
         //--------------------------------------------------------------------------------------------------------------
+
+        public override string GizmoName()
+        {
+            return "Mesh";
+        }
 
         protected override void DrawGizmos()
         {

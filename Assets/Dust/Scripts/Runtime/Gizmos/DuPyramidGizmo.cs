@@ -52,10 +52,15 @@ namespace DustEngine
         [MenuItem("Dust/Gizmos/Pyramid")]
         public static void AddComponentToSelectedObjects()
         {
-            AddComponentToSelectedOrNewObject("Pyramid Gizmo", typeof(DuPyramidGizmo));
+            AddGizmoToSelectedOrNewObject(typeof(DuPyramidGizmo));
         }
 
         //--------------------------------------------------------------------------------------------------------------
+
+        public override string GizmoName()
+        {
+            return "Pyramid";
+        }
 
         protected override void DrawGizmos()
         {

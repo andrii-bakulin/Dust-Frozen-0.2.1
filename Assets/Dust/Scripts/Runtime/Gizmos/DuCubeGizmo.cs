@@ -28,10 +28,15 @@ namespace DustEngine
         [MenuItem("Dust/Gizmos/Cube")]
         public static void AddComponentToSelectedObjects()
         {
-            AddComponentToSelectedOrNewObject("Cube Gizmo", typeof(DuCubeGizmo));
+            AddGizmoToSelectedOrNewObject(typeof(DuCubeGizmo));
         }
 
         //--------------------------------------------------------------------------------------------------------------
+
+        public override string GizmoName()
+        {
+            return "Cube";
+        }
 
         protected override void DrawGizmos()
         {

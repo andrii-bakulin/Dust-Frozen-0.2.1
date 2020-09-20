@@ -83,10 +83,15 @@ namespace DustEngine
         [MenuItem("Dust/Gizmos/Fields Space")]
         public static void AddComponentToSelectedObjects()
         {
-            AddComponentToSelectedOrNewObject("Fields Space Gizmo", typeof(DuFieldsSpaceGizmo));
+            AddGizmoToSelectedOrNewObject(typeof(DuFieldsSpaceGizmo));
         }
 
         //--------------------------------------------------------------------------------------------------------------
+
+        public override string GizmoName()
+        {
+            return "Fields Space";
+        }
 
         protected override void DrawGizmos()
         {

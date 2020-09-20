@@ -130,7 +130,7 @@ namespace DustEngine
         [MenuItem("Dust/Gizmos/Trigger")]
         public static void AddComponentToSelectedObjects()
         {
-            AddComponentToSelectedOrNewObject("Trigger Gizmo", typeof(DuTriggerGizmo));
+            AddGizmoToSelectedOrNewObject(typeof(DuTriggerGizmo));
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -188,6 +188,13 @@ namespace DustEngine
         {
             m_TriggerState = 1.0f;
             m_Message = newMessage;
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        public override string GizmoName()
+        {
+            return "Trigger";
         }
 
         protected override void DrawGizmos()
