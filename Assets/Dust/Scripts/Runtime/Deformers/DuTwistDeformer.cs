@@ -92,16 +92,16 @@ namespace DustEngine
             Gizmos.color = k_GizmosColorMain;
 
             // Bottom
-            OnDrawGizmosLine(new Vector3(+halfSize.x, -halfSize.y, +halfSize.z), new Vector3(+halfSize.x, -halfSize.y, -halfSize.z));
-            OnDrawGizmosLine(new Vector3(+halfSize.x, -halfSize.y, -halfSize.z), new Vector3(-halfSize.x, -halfSize.y, -halfSize.z));
-            OnDrawGizmosLine(new Vector3(-halfSize.x, -halfSize.y, -halfSize.z), new Vector3(-halfSize.x, -halfSize.y, +halfSize.z));
-            OnDrawGizmosLine(new Vector3(-halfSize.x, -halfSize.y, +halfSize.z), new Vector3(+halfSize.x, -halfSize.y, +halfSize.z));
+            DrawGizmosLine(new Vector3(+halfSize.x, -halfSize.y, +halfSize.z), new Vector3(+halfSize.x, -halfSize.y, -halfSize.z));
+            DrawGizmosLine(new Vector3(+halfSize.x, -halfSize.y, -halfSize.z), new Vector3(-halfSize.x, -halfSize.y, -halfSize.z));
+            DrawGizmosLine(new Vector3(-halfSize.x, -halfSize.y, -halfSize.z), new Vector3(-halfSize.x, -halfSize.y, +halfSize.z));
+            DrawGizmosLine(new Vector3(-halfSize.x, -halfSize.y, +halfSize.z), new Vector3(+halfSize.x, -halfSize.y, +halfSize.z));
 
             // Top
-            OnDrawGizmosLine(new Vector3(+halfSize.x, +halfSize.y, +halfSize.z), new Vector3(+halfSize.x, +halfSize.y, -halfSize.z));
-            OnDrawGizmosLine(new Vector3(+halfSize.x, +halfSize.y, -halfSize.z), new Vector3(-halfSize.x, +halfSize.y, -halfSize.z));
-            OnDrawGizmosLine(new Vector3(-halfSize.x, +halfSize.y, -halfSize.z), new Vector3(-halfSize.x, +halfSize.y, +halfSize.z));
-            OnDrawGizmosLine(new Vector3(-halfSize.x, +halfSize.y, +halfSize.z), new Vector3(+halfSize.x, +halfSize.y, +halfSize.z));
+            DrawGizmosLine(new Vector3(+halfSize.x, +halfSize.y, +halfSize.z), new Vector3(+halfSize.x, +halfSize.y, -halfSize.z));
+            DrawGizmosLine(new Vector3(+halfSize.x, +halfSize.y, -halfSize.z), new Vector3(-halfSize.x, +halfSize.y, -halfSize.z));
+            DrawGizmosLine(new Vector3(-halfSize.x, +halfSize.y, -halfSize.z), new Vector3(-halfSize.x, +halfSize.y, +halfSize.z));
+            DrawGizmosLine(new Vector3(-halfSize.x, +halfSize.y, +halfSize.z), new Vector3(+halfSize.x, +halfSize.y, +halfSize.z));
 
             // Side lines
             int steps = Mathf.Abs(Mathf.FloorToInt(angle / 36)) + 10;
@@ -111,14 +111,14 @@ namespace DustEngine
                 float y0 = Mathf.Lerp(-halfSize.y, +halfSize.y, (float) (i + 0) / steps);
                 float y1 = Mathf.Lerp(-halfSize.y, +halfSize.y, (float) (i + 1) / steps);
 
-                OnDrawGizmosLine(new Vector3(+halfSize.x, y0, +halfSize.z), new Vector3(+halfSize.x, y1, +halfSize.z));
-                OnDrawGizmosLine(new Vector3(+halfSize.x, y0, -halfSize.z), new Vector3(+halfSize.x, y1, -halfSize.z));
-                OnDrawGizmosLine(new Vector3(-halfSize.x, y0, +halfSize.z), new Vector3(-halfSize.x, y1, +halfSize.z));
-                OnDrawGizmosLine(new Vector3(-halfSize.x, y0, -halfSize.z), new Vector3(-halfSize.x, y1, -halfSize.z));
+                DrawGizmosLine(new Vector3(+halfSize.x, y0, +halfSize.z), new Vector3(+halfSize.x, y1, +halfSize.z));
+                DrawGizmosLine(new Vector3(+halfSize.x, y0, -halfSize.z), new Vector3(+halfSize.x, y1, -halfSize.z));
+                DrawGizmosLine(new Vector3(-halfSize.x, y0, +halfSize.z), new Vector3(-halfSize.x, y1, +halfSize.z));
+                DrawGizmosLine(new Vector3(-halfSize.x, y0, -halfSize.z), new Vector3(-halfSize.x, y1, -halfSize.z));
             }
         }
 
-        private void OnDrawGizmosLine(Vector3 point0, Vector3 point1)
+        private void DrawGizmosLine(Vector3 point0, Vector3 point1)
         {
             DeformPoint(ref point0);
             DeformPoint(ref point1);
