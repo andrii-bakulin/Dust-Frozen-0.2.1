@@ -48,7 +48,7 @@ namespace DustEngine.DustEditor
             ["DustEngine.DuTrigger2DEvent"] = new ClassParams { IconName = "DRAFT/Events/DuColliderEvent2D" },
 
             // Fields
-            ["DustEngine.DuFieldsSpace"] = new ClassParams { IconName = "DRAFT/Fields/FieldsSpace" },
+            ["DustEngine.DuFieldsSpace"] = new ClassParams { IconName = "Fields/FieldsSpace" },
 
             // Fields:Basic
             ["DustEngine.DuConstantField"] = new ClassParams { IconName = "Fields/Basic/DuConstantField" },
