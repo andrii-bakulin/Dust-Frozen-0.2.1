@@ -7,7 +7,7 @@ namespace DustEngine.DustEditor
     {
         internal const string ACTION_DELETE = "DRAFT/UI/Action-Delete";
         internal const string ACTION_ADD_DEFORMER = "DRAFT/UI/Action-Add-Deformer";
-        internal const string ACTION_ADD_FIELD = "DRAFT/UI/Action-Add-Field";
+        internal const string ACTION_ADD_FIELD = "UI/Action-Add-Field";
 
         internal const string STATE_ENABLED = "DRAFT/UI/State-Enabled";
         internal const string STATE_DISABLED = "DRAFT/UI/State-Disabled";
@@ -51,27 +51,27 @@ namespace DustEngine.DustEditor
             ["DustEngine.DuFieldsSpace"] = new ClassParams { IconName = "DRAFT/Fields/FieldsSpace" },
 
             // Fields:Basic
-            ["DustEngine.DuConstantField"] = new ClassParams { IconName = "DRAFT/Fields/Basic/DuConstantField" },
+            ["DustEngine.DuConstantField"] = new ClassParams { IconName = "Fields/Basic/DuConstantField" },
+            ["DustEngine.DuRadialField"] = new ClassParams { IconName = "Fields/Basic/DuRadialField" },
             ["DustEngine.DuStepObjectsField"] = new ClassParams { IconName = "DRAFT/Fields/Basic/DuStepObjectsField" },
-            ["DustEngine.DuTimeField"] = new ClassParams { IconName = "DRAFT/Fields/Basic/DuTimeField" },
+            ["DustEngine.DuTimeField"] = new ClassParams { IconName = "Fields/Basic/DuTimeField" },
 
             // Fields:Math
-            ["DustEngine.DuClampField"] = new ClassParams { IconName = "DRAFT/Fields/Math/DuClampField" },
-            ["DustEngine.DuCurveField"] = new ClassParams { IconName = "DRAFT/Fields/Math/DuCurveField" },
-            ["DustEngine.DuFitField"] = new ClassParams { IconName = "DRAFT/Fields/Math/DuFitField" },
-            ["DustEngine.DuInvertField"] = new ClassParams { IconName = "DRAFT/Fields/Math/DuInvertField" },
-            ["DustEngine.DuRemapField"] = new ClassParams { IconName = "DRAFT/Fields/Math/DuRemapField" },
-            ["DustEngine.DuRoundField"] = new ClassParams { IconName = "DRAFT/Fields/Math/DuRoundField" },
+            ["DustEngine.DuClampField"] = new ClassParams { IconName = "Fields/Math/DuClampField" },
+            ["DustEngine.DuCurveField"] = new ClassParams { IconName = "Fields/Math/DuCurveField" },
+            ["DustEngine.DuFitField"] = new ClassParams { IconName = "Fields/Math/DuFitField" },
+            ["DustEngine.DuInvertField"] = new ClassParams { IconName = "Fields/Math/DuInvertField" },
+            ["DustEngine.DuRemapField"] = new ClassParams { IconName = "Fields/Math/DuRemapField" },
+            ["DustEngine.DuRoundField"] = new ClassParams { IconName = "Fields/Math/DuRoundField" },
 
             // Fields:Objects
-            ["DustEngine.DuConeField"] = new ClassParams { IconName = "DRAFT/Fields/Objects/DuConeField" },
-            ["DustEngine.DuCubeField"] = new ClassParams { IconName = "DRAFT/Fields/Objects/DuCubeField" },
-            ["DustEngine.DuCylinderField"] = new ClassParams { IconName = "DRAFT/Fields/Objects/DuCylinderField" },
-            ["DustEngine.DuDirectionalField"] = new ClassParams { IconName = "DRAFT/Fields/Objects/DuDirectionalField" },
-            ["DustEngine.DuRadialField"] = new ClassParams { IconName = "DRAFT/Fields/Objects/DuRadialField" },
-            ["DustEngine.DuSphereField"] = new ClassParams { IconName = "DRAFT/Fields/Objects/DuSphereField" },
-            ["DustEngine.DuTorusField"] = new ClassParams { IconName = "DRAFT/Fields/Objects/DuTorusField" },
-            ["DustEngine.DuWaveField"] = new ClassParams { IconName = "DRAFT/Fields/Objects/DuWaveField" },
+            ["DustEngine.DuConeField"] = new ClassParams { IconName = "Fields/Objects/DuConeField" },
+            ["DustEngine.DuCubeField"] = new ClassParams { IconName = "Fields/Objects/DuCubeField" },
+            ["DustEngine.DuCylinderField"] = new ClassParams { IconName = "Fields/Objects/DuCylinderField" },
+            ["DustEngine.DuDirectionalField"] = new ClassParams { IconName = "Fields/Objects/DuDirectionalField" },
+            ["DustEngine.DuSphereField"] = new ClassParams { IconName = "Fields/Objects/DuSphereField" },
+            ["DustEngine.DuTorusField"] = new ClassParams { IconName = "Fields/Objects/DuTorusField" },
+            ["DustEngine.DuWaveField"] = new ClassParams { IconName = "Fields/Objects/DuWaveField" },
 
             // Gizmos
             ["DustEngine.DuArrowGizmo"] = new ClassParams { IconName = "DRAFT/Gizmos/DuArrowGizmo" },
