@@ -51,6 +51,7 @@ namespace DustEngine.DustEditor
             column = new ColumnRecord() {title = "Basic Fields"};
             {
                 popup.AddItem(column, typeof(DuConstantField), "Constant");
+                popup.AddItem(column, typeof(DuRadialField), "Radial");
                 popup.AddItem(column, typeof(DuStepObjectsField), "Step Objects");
                 popup.AddItem(column, typeof(DuTimeField), "Time");
 
@@ -63,7 +64,6 @@ namespace DustEngine.DustEditor
                 popup.AddItem(column, typeof(DuCubeField), "Cube");
                 popup.AddItem(column, typeof(DuCylinderField), "Cylinder");
                 popup.AddItem(column, typeof(DuDirectionalField), "Directional");
-                popup.AddItem(column, typeof(DuRadialField), "Radial");
                 popup.AddItem(column, typeof(DuSphereField), "Sphere");
                 popup.AddItem(column, typeof(DuTorusField), "Torus");
                 popup.AddItem(column, typeof(DuWaveField), "Wave");
