@@ -51,6 +51,7 @@ namespace DustEngine.DustEditor
             column = new ColumnRecord() {title = "Basic Fields"};
             {
                 popup.AddItem(column, typeof(DuConstantField), "Constant");
+                popup.AddItem(column, typeof(DuCoordinatesField), "Coordinates");
                 popup.AddItem(column, typeof(DuRadialField), "Radial");
                 popup.AddItem(column, typeof(DuStepObjectsField), "Step Objects");
                 popup.AddItem(column, typeof(DuTimeField), "Time");
