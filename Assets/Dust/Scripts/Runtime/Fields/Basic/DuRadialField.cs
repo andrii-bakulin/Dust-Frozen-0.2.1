@@ -3,7 +3,7 @@ using UnityEditor;
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Fields/Object Fields/Radial Field")]
+    [AddComponentMenu("Dust/Fields/Basic Fields/Radial Field")]
     public class DuRadialField : DuObjectField
     {
         [SerializeField]
@@ -63,14 +63,6 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private float m_GizmoLength = 2.0f;
-        public float gizmoLength
-        {
-            get => m_GizmoLength;
-            set => m_GizmoLength = ShapeNormalizer.GizmoLength(value);
-        }
-
-        [SerializeField]
         private float m_GizmoRadius = 1.0f;
         public float gizmoRadius
         {
@@ -81,7 +73,7 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
 
 #if UNITY_EDITOR
-        [MenuItem("Dust/Fields/Object Fields/Radial")]
+        [MenuItem("Dust/Fields/Basic Fields/Radial")]
         public static void AddComponent()
         {
             AddFieldComponentByType(typeof(DuRadialField));
@@ -96,8 +88,8 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         //
         //               *--------------*                    A. Start Angle
-        //             /                 \                   B. Start Angle + Start Transition
-        //           /                    \                  C. End Angle - End Transition
+        //             /                 \                   B. Start Angle + FadeIn
+        //           /                    \                  C. End Angle - FadeOut
         //         /                       \                 D. End Angle
         // *-----*                          *------*
         // 0'    A       B              C   D      360'
@@ -128,20 +120,20 @@ namespace DustEngine
                 {
                     power = 1f;
                 }
-                else // somewhere in transition(s). But may be in both transitions so get min value
+                else // somewhere in fade-in-out. But if in both in+out then get min value
                 {
-                    bool inTransitionAB = DuMath.Between(angle, pointA, pointB);
-                    bool inTransitionCD = DuMath.Between(angle, pointC, pointD);
+                    bool inRangeAB = DuMath.Between(angle, pointA, pointB);
+                    bool inRangeCD = DuMath.Between(angle, pointC, pointD);
 
-                    if (inTransitionAB && inTransitionCD)
+                    if (inRangeAB && inRangeCD)
                     {
                         power = Mathf.Min(Mathf.InverseLerp(pointA, pointB, angle), 1f - Mathf.InverseLerp(pointC, pointD, angle));
                     }
-                    else if (inTransitionAB)
+                    else if (inRangeAB)
                     {
                         power = Mathf.InverseLerp(pointA, pointB, angle);
                     }
-                    else if (inTransitionCD)
+                    else if (inRangeCD)
                     {
                         power = 1f - Mathf.InverseLerp(pointC, pointD, angle);
                     }
@@ -166,7 +158,7 @@ namespace DustEngine
             if (remapping.remapForceEnabled)
             {
                 Gizmos.color = !remapping.invert ? colorRange1 : colorRange0;
-                DrawRadialGizmo(startAngle + fadeInOffset, endAngle - fadeOutOffset, 0.95f);
+                DrawRadialGizmo(startAngle + fadeInOffset, endAngle - fadeOutOffset, 0.98f);
 
                 Gizmos.color = !remapping.invert ? colorRange0 : colorRange1;
                 DrawRadialGizmo(startAngle, endAngle, 1f);
@@ -180,9 +172,6 @@ namespace DustEngine
 
         protected void DrawRadialGizmo(float angleStart, float angleEnd, float scale)
         {
-            Vector3 halfLengthOffset = new Vector3(gizmoLength / 2f, 0f, 0f);
-            halfLengthOffset = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, halfLengthOffset);
-
             int points = 64;
 
             float angleDelta = (angleEnd - angleStart) / points;
@@ -195,23 +184,15 @@ namespace DustEngine
                 Vector3 p0 = DuGizmos.GetCirclePointByAngle(180f - angle0, direction) * gizmoRadius * scale;
                 Vector3 p1 = DuGizmos.GetCirclePointByAngle(180f - angle1, direction) * gizmoRadius * scale;
 
-                Gizmos.DrawLine(p0 + halfLengthOffset, p1 + halfLengthOffset);
-                Gizmos.DrawLine(p0 - halfLengthOffset, p1 - halfLengthOffset);
+                Gizmos.DrawLine(p0, p1);
             }
 
             Vector3 pMid = Vector3.zero;
             Vector3 pBeg = DuGizmos.GetCirclePointByAngle(180f - angleStart, direction) * gizmoRadius * scale;
             Vector3 pEnd = DuGizmos.GetCirclePointByAngle(180f - angleEnd, direction) * gizmoRadius * scale;
 
-            Gizmos.DrawLine(pMid - halfLengthOffset, pMid + halfLengthOffset);
-            Gizmos.DrawLine(pBeg - halfLengthOffset, pBeg + halfLengthOffset);
-            Gizmos.DrawLine(pEnd - halfLengthOffset, pEnd + halfLengthOffset);
-
-            Gizmos.DrawLine(pMid - halfLengthOffset, pBeg - halfLengthOffset);
-            Gizmos.DrawLine(pMid - halfLengthOffset, pEnd - halfLengthOffset);
-
-            Gizmos.DrawLine(pMid + halfLengthOffset, pBeg + halfLengthOffset);
-            Gizmos.DrawLine(pMid + halfLengthOffset, pEnd + halfLengthOffset);
+            Gizmos.DrawLine(pMid, pBeg);
+            Gizmos.DrawLine(pMid, pEnd);
         }
 #endif
 
@@ -228,11 +209,6 @@ namespace DustEngine
             public static float Iterations(float value)
             {
                 return Mathf.Max(1f, value);
-            }
-
-            public static float GizmoLength(float value)
-            {
-                return Mathf.Abs(value);
             }
 
             public static float GizmoRadius(float value)

@@ -17,7 +17,6 @@ namespace DustEngine.DustEditor
 
         private DuProperty m_Direction;
 
-        private DuProperty m_GizmoLength;
         private DuProperty m_GizmoRadius;
 
         void OnEnable()
@@ -35,7 +34,6 @@ namespace DustEngine.DustEditor
 
             m_Direction = FindProperty("m_Direction", "Direction");
 
-            m_GizmoLength = FindProperty("m_GizmoLength", "Length");
             m_GizmoRadius = FindProperty("m_GizmoRadius", "Radius");
         }
 
@@ -72,7 +70,6 @@ namespace DustEngine.DustEditor
             {
                 PropertyField(m_GizmoVisibility);
                 PropertyField(m_GizmoFieldColor);
-                PropertyExtendedSlider(m_GizmoLength, 0f, 10f, 0.1f, 0f);
                 PropertyExtendedSlider(m_GizmoRadius, 0f, 5f, 0.1f, 0f);
                 Space();
             }
@@ -88,9 +85,6 @@ namespace DustEngine.DustEditor
 
             if (m_Iterations.isChanged)
                 m_Iterations.valFloat = DuRadialField.ShapeNormalizer.Iterations(m_Iterations.valFloat);
-
-            if (m_GizmoLength.isChanged)
-                m_GizmoLength.valFloat = DuRadialField.ShapeNormalizer.GizmoLength(m_GizmoLength.valFloat);
 
             if (m_GizmoRadius.isChanged)
                 m_GizmoRadius.valFloat = DuRadialField.ShapeNormalizer.GizmoRadius(m_GizmoRadius.valFloat);
