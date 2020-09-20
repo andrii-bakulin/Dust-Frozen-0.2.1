@@ -71,6 +71,7 @@ namespace DustEngine.DustEditor
             ["DustEngine.DuRadialField"] = new ClassParams { IconName = "DRAFT/Fields/Objects/DuRadialField" },
             ["DustEngine.DuSphereField"] = new ClassParams { IconName = "DRAFT/Fields/Objects/DuSphereField" },
             ["DustEngine.DuTorusField"] = new ClassParams { IconName = "DRAFT/Fields/Objects/DuTorusField" },
+            ["DustEngine.DuWaveField"] = new ClassParams { IconName = "DRAFT/Fields/Objects/DuWaveField" },
 
             // Gizmos
             ["DustEngine.DuArrowGizmo"] = new ClassParams { IconName = "DRAFT/Gizmos/DuArrowGizmo" },

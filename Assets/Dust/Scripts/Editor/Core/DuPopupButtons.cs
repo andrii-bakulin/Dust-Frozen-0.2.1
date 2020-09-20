@@ -66,6 +66,7 @@ namespace DustEngine.DustEditor
                 popup.AddItem(column, typeof(DuRadialField), "Radial");
                 popup.AddItem(column, typeof(DuSphereField), "Sphere");
                 popup.AddItem(column, typeof(DuTorusField), "Torus");
+                popup.AddItem(column, typeof(DuWaveField), "Wave");
 
                 popup.m_ColumnRecords.Add(column);
             }

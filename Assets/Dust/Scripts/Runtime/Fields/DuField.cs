@@ -123,6 +123,11 @@ namespace DustEngine
 
         void Update()
         {
+#if UNITY_EDITOR
+            if (!Application.isPlaying)
+                return;
+#endif
+
             m_TimeSinceStart += Time.deltaTime;
         }
     }
