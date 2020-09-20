@@ -5,7 +5,7 @@ namespace DustEngine.DustEditor
 {
     public abstract class DuDeformerEditor : DuEditor
     {
-        protected DuProperty m_GizmosVisibility;
+        protected DuProperty m_GizmoVisibility;
 
         protected DuFieldsMapEditor m_FieldsMapEditor;
 
@@ -13,7 +13,7 @@ namespace DustEngine.DustEditor
 
         protected virtual void OnEnableDeformer()
         {
-            m_GizmosVisibility = FindProperty("m_GizmosVisibility", "Visibility");
+            m_GizmoVisibility = FindProperty("m_GizmoVisibility", "Visibility");
 
             m_FieldsMapEditor = new DuFieldsMapEditor(this, serializedObject.FindProperty("m_FieldsMap"), (target as DuDeformer).fieldsMap);
         }
@@ -28,11 +28,11 @@ namespace DustEngine.DustEditor
             m_FieldsMapEditor.OnInspectorGUI();
         }
 
-        protected void OnInspectorGUI_GizmosBlock()
+        protected void OnInspectorGUI_GizmoBlock()
         {
-            if (DustGUI.FoldoutBegin("Gizmos", "DuDeformer.Gizmos"))
+            if (DustGUI.FoldoutBegin("Gizmo", "DuDeformer.Gizmo"))
             {
-                PropertyField(m_GizmosVisibility);
+                PropertyField(m_GizmoVisibility);
                 Space();
             }
             DustGUI.FoldoutEnd();

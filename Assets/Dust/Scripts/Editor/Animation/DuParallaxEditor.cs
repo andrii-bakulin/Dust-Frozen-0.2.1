@@ -19,7 +19,7 @@ namespace DustEngine.DustEditor
         private DuProperty m_TileOffset;
 
         private DuProperty m_UpdateMode;
-        private DuProperty m_GizmosVisibility;
+        private DuProperty m_GizmoVisibility;
 
         void OnEnable()
         {
@@ -36,7 +36,7 @@ namespace DustEngine.DustEditor
             m_TileOffset = FindProperty("m_TileOffset", "Tile Offset");
 
             m_UpdateMode = FindProperty("m_UpdateMode", "Update Mode");
-            m_GizmosVisibility = FindProperty("m_GizmosVisibility", "Gizmos Visibility");
+            m_GizmoVisibility = FindProperty("m_GizmoVisibility", "Gizmo Visibility");
         }
 
         public override void OnInspectorGUI()
@@ -94,7 +94,7 @@ namespace DustEngine.DustEditor
                 {
                     PropertyField(m_UpdateMode);
                 }
-                PropertyField(m_GizmosVisibility);
+                PropertyField(m_GizmoVisibility);
             }
             DustGUI.FoldoutEnd();
 

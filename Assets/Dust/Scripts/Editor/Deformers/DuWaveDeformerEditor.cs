@@ -13,9 +13,9 @@ namespace DustEngine.DustEditor
         private DuProperty m_AnimationSpeed;
         private DuProperty m_Direction;
 
-        private DuProperty m_GizmosSize;
-        private DuProperty m_GizmosQuality;
-        private DuProperty m_GizmosAnimated;
+        private DuProperty m_GizmoSize;
+        private DuProperty m_GizmoQuality;
+        private DuProperty m_GizmoAnimated;
 
         void OnEnable()
         {
@@ -28,9 +28,9 @@ namespace DustEngine.DustEditor
             m_AnimationSpeed = FindProperty("m_AnimationSpeed", "Animation Speed");
             m_Direction = FindProperty("m_Direction", "Direction");
 
-            m_GizmosSize = FindProperty("m_GizmosSize", "Size");
-            m_GizmosQuality = FindProperty("m_GizmosQuality", "Quality");
-            m_GizmosAnimated = FindProperty("m_GizmosAnimated", "Animate in Editor");
+            m_GizmoSize = FindProperty("m_GizmoSize", "Size");
+            m_GizmoQuality = FindProperty("m_GizmoQuality", "Quality");
+            m_GizmoAnimated = FindProperty("m_GizmoAnimated", "Animate in Editor");
         }
 
         public override void OnInspectorGUI()
@@ -58,14 +58,14 @@ namespace DustEngine.DustEditor
             OnInspectorGUI_FieldsMap();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            // @ignore: OnInspectorGUI_GizmosBlock();
+            // @ignore: OnInspectorGUI_GizmoBlock();
 
-            if (DustGUI.FoldoutBegin("Gizmos", "DuDeformer.Gizmos"))
+            if (DustGUI.FoldoutBegin("Gizmo", "DuDeformer.Gizmo"))
             {
-                PropertyExtendedSlider(m_GizmosSize, 0.1f, 10f, 0.1f);
-                PropertyField(m_GizmosQuality);
-                PropertyField(m_GizmosVisibility);
-                PropertyField(m_GizmosAnimated);
+                PropertyExtendedSlider(m_GizmoSize, 0.1f, 10f, 0.1f);
+                PropertyField(m_GizmoQuality);
+                PropertyField(m_GizmoVisibility);
+                PropertyFieldOrLock(m_GizmoAnimated, DuMath.IsZero(m_AnimationSpeed.valFloat));
                 Space();
             }
             DustGUI.FoldoutEnd();
@@ -74,7 +74,7 @@ namespace DustEngine.DustEditor
 
             serializedObject.ApplyModifiedProperties();
 
-            if (m_GizmosAnimated.isChanged)
+            if (m_GizmoAnimated.isChanged)
                 DustGUI.ForcedRedrawSceneView();
         }
     }

@@ -1,6 +1,6 @@
 namespace DustEngine
 {
-    public enum GizmosVisibility
+    public enum GizmoVisibility
     {
         AlwaysHide = 0,
         DrawOnSelect = 1,

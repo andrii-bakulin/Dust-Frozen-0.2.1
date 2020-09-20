@@ -27,9 +27,9 @@ namespace DustEngine.DustEditor
             m_RemappingEditor.OnInspectorGUI(false);
         }
 
-        protected void OnInspectorGUI_GizmosBlock()
+        protected void OnInspectorGUI_GizmoBlock()
         {
-            if (DustGUI.FoldoutBegin("Gizmos", "DuField.Gizmos"))
+            if (DustGUI.FoldoutBegin("Gizmo", "DuField.Gizmo"))
             {
                 PropertyField(m_GizmoVisibility);
                 PropertyField(m_GizmoFieldColor);

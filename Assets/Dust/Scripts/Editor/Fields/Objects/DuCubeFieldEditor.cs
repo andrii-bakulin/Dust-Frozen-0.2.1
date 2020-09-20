@@ -31,7 +31,7 @@ namespace DustEngine.DustEditor
             DustGUI.FoldoutEnd();
 
             OnInspectorGUI_RemappingBlock();
-            OnInspectorGUI_GizmosBlock();
+            OnInspectorGUI_GizmoBlock();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

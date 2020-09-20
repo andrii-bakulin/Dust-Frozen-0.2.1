@@ -7,7 +7,7 @@ namespace DustEngine
     [ExecuteInEditMode]
     public class DuWaveDeformer : DuDeformer
     {
-        public enum GizmosQuality
+        public enum GizmoQuality
         {
             Low = 0,
             Medium = 1,
@@ -68,27 +68,27 @@ namespace DustEngine
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
-        private float m_GizmosSize = 3f;
-        public float gizmosSize
+        private float m_GizmoSize = 3f;
+        public float gizmoSize
         {
-            get => m_GizmosSize;
-            set => m_GizmosSize = value;
+            get => m_GizmoSize;
+            set => m_GizmoSize = value;
         }
 
         [SerializeField]
-        private GizmosQuality m_GizmosQuality = GizmosQuality.Medium;
-        public GizmosQuality gizmosQuality
+        private GizmoQuality m_GizmoQuality = GizmoQuality.Medium;
+        public GizmoQuality gizmoQuality
         {
-            get => m_GizmosQuality;
-            set => m_GizmosQuality = value;
+            get => m_GizmoQuality;
+            set => m_GizmoQuality = value;
         }
 
         [SerializeField]
-        private bool m_GizmosAnimated = false;
-        public bool gizmosAnimated
+        private bool m_GizmoAnimated = false;
+        public bool gizmoAnimated
         {
-            get => m_GizmosAnimated;
-            set => m_GizmosAnimated = value;
+            get => m_GizmoAnimated;
+            set => m_GizmoAnimated = value;
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -136,7 +136,7 @@ namespace DustEngine
             if (!EditorUpdateTick(out deltaTime))
                 return;
 
-            if (gizmosAnimated)
+            if (gizmoAnimated)
             {
                 m_TimerForEditor += deltaTime;
 
@@ -173,12 +173,12 @@ namespace DustEngine
 #endif
 
             float sinOffset = distance * frequency - offset - timeOffset * animationSpeed;
-            float offsetY = Mathf.Sin(DuConstants.PI2 * sinOffset) * amplitude / 2f;
+            float waveOffset = Mathf.Sin(DuConstants.PI2 * sinOffset) * amplitude / 2f;
 
             if (DuMath.IsNotZero(linearFalloff))
-                offsetY *= Mathf.Clamp01((linearFalloff - distance) / linearFalloff);
+                waveOffset *= Mathf.Clamp01((linearFalloff - distance) / linearFalloff);
 
-            xpAxisPosition.x += offsetY * strength;
+            xpAxisPosition.x += waveOffset * strength;
 
             localPosition = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, xpAxisPosition);
             return true;
@@ -197,26 +197,23 @@ namespace DustEngine
 #if UNITY_EDITOR
         protected override void DrawDeformerGizmos()
         {
-            if (DuMath.IsZero(frequency))
-                return;
-
             Gizmos.matrix = transform.localToWorldMatrix;
             Gizmos.color = k_GizmosColorMain;
 
             int segments;
 
-            switch (gizmosQuality)
+            switch (gizmoQuality)
             {
                 default:
-                case GizmosQuality.Low:       segments = 12; break;
-                case GizmosQuality.Medium:    segments = 24; break;
-                case GizmosQuality.High:      segments = 48; break;
-                case GizmosQuality.ExtraHigh: segments = 96; break;
+                case GizmoQuality.Low:       segments = 12; break;
+                case GizmoQuality.Medium:    segments = 24; break;
+                case GizmoQuality.High:      segments = 48; break;
+                case GizmoQuality.ExtraHigh: segments = 96; break;
             }
 
-            Vector3 zeroPoint = new Vector3(0, -gizmosSize / 2f, -gizmosSize / 2f);
+            Vector3 zeroPoint = new Vector3(0, -gizmoSize / 2f, -gizmoSize / 2f);
 
-            float delta = gizmosSize / segments;
+            float delta = gizmoSize / segments;
 
             for (int s0 = 0; s0 <= segments; s0++)
             for (int s1 = 0; s1 < segments; s1++)
@@ -226,8 +223,8 @@ namespace DustEngine
 
                 pointY0 = zeroPoint + new Vector3(0, (s1 + 0) * delta, s0 * delta);
                 pointY1 = zeroPoint + new Vector3(0, (s1 + 1) * delta, s0 * delta);
-                pointZ0 = new Vector3(pointY0.x, pointY0.z, pointY0.y);
-                pointZ1 = new Vector3(pointY1.x, pointY1.z, pointY1.y);
+                pointZ0 = new Vector3(pointY0.x, pointY0.z, pointY0.y); // invert Y-Z
+                pointZ1 = new Vector3(pointY1.x, pointY1.z, pointY1.y); // invert Y-Z
 
                 pointY0 = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, pointY0);
                 pointY1 = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, pointY1);

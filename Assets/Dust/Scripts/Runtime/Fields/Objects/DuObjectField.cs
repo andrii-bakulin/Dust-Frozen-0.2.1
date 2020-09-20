@@ -17,8 +17,8 @@ namespace DustEngine
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
-        private GizmosVisibility m_GizmoVisibility = GizmosVisibility.DrawOnSelect;
-        public GizmosVisibility gizmoVisibility
+        private GizmoVisibility m_GizmoVisibility = GizmoVisibility.DrawOnSelect;
+        public GizmoVisibility gizmoVisibility
         {
             get => m_GizmoVisibility;
             set => m_GizmoVisibility = value;
@@ -52,7 +52,7 @@ namespace DustEngine
             if (Selection.activeGameObject == this.gameObject)
                 return;
 
-            if (gizmoVisibility != GizmosVisibility.AlwaysDraw)
+            if (gizmoVisibility != GizmoVisibility.AlwaysDraw)
                 return;
 
             DrawFieldGizmos();
@@ -60,7 +60,7 @@ namespace DustEngine
 
         void OnDrawGizmosSelected()
         {
-            if (gizmoVisibility == GizmosVisibility.AlwaysHide)
+            if (gizmoVisibility == GizmoVisibility.AlwaysHide)
                 return;
 
             DrawFieldGizmos();
@@ -70,7 +70,7 @@ namespace DustEngine
 
         protected Color GetGizmoColorRange0()
         {
-            return gizmoFieldColor ? remapping.color * 0.33f : k_GizmosColorRangeZero;
+            return gizmoFieldColor ? remapping.color * 0.5f : k_GizmosColorRangeZero;
         }
 
         protected Color GetGizmoColorRange1()
