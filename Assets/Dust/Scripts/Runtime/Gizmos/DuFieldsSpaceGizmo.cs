@@ -52,6 +52,22 @@ namespace DustEngine
             set => m_PowerSize = Normalizer.Size(value);
         }
 
+        [SerializeField]
+        private bool m_PowerDotsVisible = false;
+        public bool powerDotsVisible
+        {
+            get => m_PowerDotsVisible;
+            set => m_PowerDotsVisible = value;
+        }
+
+        [SerializeField]
+        private float m_PowerDotsSize = 0.4f;
+        public float powerDotsSize
+        {
+            get => m_PowerDotsSize;
+            set => m_PowerDotsSize = Normalizer.Size(value);
+        }
+
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
@@ -137,6 +153,12 @@ namespace DustEngine
                 if (showPower)
                 {
                     Handles.Label(worldPosition, fieldPower.ToString("F2"), style);
+
+                    if (powerDotsVisible)
+                    {
+                        Handles.color = Color.Lerp(Color.black, DuObjectField.k_GizmosColorRangeOne, fieldPower);
+                        Handles.DotHandleCap(0, worldPosition, transform.rotation, 0.1f * powerDotsSize, EventType.Repaint);
+                    }
                 }
             }
         }
