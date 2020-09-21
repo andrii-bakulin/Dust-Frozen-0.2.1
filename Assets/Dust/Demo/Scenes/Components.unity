@@ -1437,7 +1437,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2095927693}
   m_Layer: 0
-  m_Name: DuTarget
+  m_Name: DuLookAt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
