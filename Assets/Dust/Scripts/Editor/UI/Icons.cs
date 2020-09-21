@@ -28,9 +28,9 @@ namespace DustEngine.DustEditor
             ["DustEngine.DuParallax"] = new ClassParams { IconName = "DRAFT/Animation/DuParallax" },
             ["DustEngine.DuParallaxController"] = new ClassParams { IconName = "DRAFT/Animation/DuParallaxController" },
             ["DustEngine.DuParallaxInstance"] = new ClassParams { IconName = "DRAFT/Animation/DuParallaxInstance" },
-            ["DustEngine.DuRotate"] = new ClassParams { IconName = "DRAFT/Animation/DuRotate" },
+            ["DustEngine.DuRotate"] = new ClassParams { IconName = "Animation/DuRotate" },
             ["DustEngine.DuLookAt"] = new ClassParams { IconName = "DRAFT/Animation/DuLookAt" },
-            ["DustEngine.DuTranslate"] = new ClassParams { IconName = "DRAFT/Animation/DuTranslate" },
+            ["DustEngine.DuTranslate"] = new ClassParams { IconName = "Animation/DuTranslate" },
             ["DustEngine.DuVibrate"] = new ClassParams { IconName = "DRAFT/Animation/DuVibrate" },
 
             // Deformers:Core
