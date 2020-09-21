@@ -5,12 +5,12 @@ namespace DustEngine.DustEditor
 {
     public static class Icons
     {
-        internal const string ACTION_DELETE = "DRAFT/UI/Action-Delete";
+        internal const string ACTION_DELETE = "UI/Action-Delete";
         internal const string ACTION_ADD_DEFORMER = "DRAFT/UI/Action-Add-Deformer";
         internal const string ACTION_ADD_FIELD = "UI/Action-Add-Field";
 
-        internal const string STATE_ENABLED = "DRAFT/UI/State-Enabled";
-        internal const string STATE_DISABLED = "DRAFT/UI/State-Disabled";
+        internal const string STATE_ENABLED = "UI/State-Enabled";
+        internal const string STATE_DISABLED = "UI/State-Disabled";
 
         internal const string GAME_OBJECT_STATS = "UI/GameObject-Stats";
         internal const string TRANSFORM_RESET = "UI/Transform-Reset";
