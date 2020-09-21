@@ -41,11 +41,11 @@ namespace DustEngine.DustEditor
             ["DustEngine.DuWaveDeformer"] = new ClassParams { IconName = "DRAFT/Deformers/DuWaveDeformer" },
 
             // Events
-            ["DustEngine.DuCollisionEvent"] = new ClassParams { IconName = "DRAFT/Events/DuColliderEvent" },
-            ["DustEngine.DuCollision2DEvent"] = new ClassParams { IconName = "DRAFT/Events/DuColliderEvent2D" },
-            ["DustEngine.DuTimerEvent"] = new ClassParams { IconName = "DRAFT/Events/DuTimerEvent" },
-            ["DustEngine.DuTriggerEvent"] = new ClassParams { IconName = "DRAFT/Events/DuColliderEvent" },
-            ["DustEngine.DuTrigger2DEvent"] = new ClassParams { IconName = "DRAFT/Events/DuColliderEvent2D" },
+            ["DustEngine.DuCollisionEvent"] = new ClassParams { IconName = "Events/DuColliderEvent" },
+            ["DustEngine.DuCollision2DEvent"] = new ClassParams { IconName = "Events/DuColliderEvent2D" },
+            ["DustEngine.DuTimerEvent"] = new ClassParams { IconName = "Events/DuTimerEvent" },
+            ["DustEngine.DuTriggerEvent"] = new ClassParams { IconName = "Events/DuColliderEvent" },
+            ["DustEngine.DuTrigger2DEvent"] = new ClassParams { IconName = "Events/DuColliderEvent2D" },
 
             // Fields
             ["DustEngine.DuFieldsSpace"] = new ClassParams { IconName = "Fields/FieldsSpace" },
