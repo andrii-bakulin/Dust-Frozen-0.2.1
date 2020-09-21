@@ -25,13 +25,13 @@ namespace DustEngine.DustEditor
         {
             // Animations
             ["DustEngine.DuFollow"] = new ClassParams { IconName = "DRAFT/Animation/DuFollow" },
+            ["DustEngine.DuLookAt"] = new ClassParams { IconName = "DRAFT/Animation/DuLookAt" },
             ["DustEngine.DuParallax"] = new ClassParams { IconName = "DRAFT/Animation/DuParallax" },
             ["DustEngine.DuParallaxController"] = new ClassParams { IconName = "DRAFT/Animation/DuParallaxController" },
             ["DustEngine.DuParallaxInstance"] = new ClassParams { IconName = "DRAFT/Animation/DuParallaxInstance" },
             ["DustEngine.DuRotate"] = new ClassParams { IconName = "Animation/DuRotate" },
-            ["DustEngine.DuLookAt"] = new ClassParams { IconName = "DRAFT/Animation/DuLookAt" },
+            ["DustEngine.DuShake"] = new ClassParams { IconName = "Animation/DuShake" },
             ["DustEngine.DuTranslate"] = new ClassParams { IconName = "Animation/DuTranslate" },
-            ["DustEngine.DuVibrate"] = new ClassParams { IconName = "DRAFT/Animation/DuVibrate" },
 
             // Deformers:Core
             ["DustEngine.DuDeformMesh"] = new ClassParams { IconName = "DRAFT/Deformers/DuDeformMesh" },

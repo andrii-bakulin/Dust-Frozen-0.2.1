@@ -3,8 +3,8 @@ using UnityEditor;
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Animation/Vibrate")]
-    public class DuVibrate : DuMonoBehaviour
+    [AddComponentMenu("Dust/Animation/Shake")]
+    public class DuShake : DuMonoBehaviour
     {
         internal const float k_MinScaleValue = 0.0001f;
 
@@ -18,14 +18,6 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
 
         [SerializeField]
-        private bool m_Uniform = false;
-        public bool uniform
-        {
-            get => m_Uniform;
-            set => m_Uniform = value;
-        }
-
-        [SerializeField]
         private int m_Seed = 0;
         public int seed
         {
@@ -34,11 +26,11 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private float m_Force = 1f;
-        public float force
+        private float m_Power = 1f;
+        public float power
         {
-            get => m_Force;
-            set => m_Force = Normalizer.Force(value);
+            get => m_Power;
+            set => m_Power = Normalizer.Power(value);
         }
 
         [SerializeField]
@@ -68,11 +60,11 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private float m_PositionFrequency = 1f;
-        public float positionFrequency
+        private float m_PositionSpeed = 1f;
+        public float positionSpeed
         {
-            get => m_PositionFrequency;
-            set => m_PositionFrequency = value;
+            get => m_PositionSpeed;
+            set => m_PositionSpeed = value;
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -94,11 +86,11 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private float m_RotationFrequency = 1f;
-        public float rotationFrequency
+        private float m_RotationSpeed = 1f;
+        public float rotationSpeed
         {
-            get => m_RotationFrequency;
-            set => m_RotationFrequency = value;
+            get => m_RotationSpeed;
+            set => m_RotationSpeed = value;
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -112,14 +104,6 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private bool m_ScaleUniform = false;
-        public bool scaleUniform
-        {
-            get => m_ScaleUniform;
-            set => m_ScaleUniform = value;
-        }
-
-        [SerializeField]
         private Vector3 m_ScaleAmplitude = DuVector3.New(2f);
         public Vector3 scaleAmplitude
         {
@@ -128,11 +112,19 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private float m_ScaleFrequency = 1f;
-        public float scaleFrequency
+        private float m_ScaleSpeed = 1f;
+        public float scaleSpeed
         {
-            get => m_ScaleFrequency;
-            set => m_ScaleFrequency = value;
+            get => m_ScaleSpeed;
+            set => m_ScaleSpeed = value;
+        }
+
+        [SerializeField]
+        private bool m_ScaleUniform = false;
+        public bool scaleUniform
+        {
+            get => m_ScaleUniform;
+            set => m_ScaleUniform = value;
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -168,15 +160,17 @@ namespace DustEngine
         private DuNoise n_DuNoise;
         private DuNoise duNoise => n_DuNoise ?? (n_DuNoise = new DuNoise(seed));
 
-        private float m_TimeSinceStart;
+        private float m_PositionTimeOffset;
+        private float m_RotationTimeOffset;
+        private float m_ScaleTimeOffset;
 
         //--------------------------------------------------------------------------------------------------------------
 
 #if UNITY_EDITOR
-        [MenuItem("Dust/Animation/Vibrate")]
+        [MenuItem("Dust/Animation/Shake")]
         public static void AddComponentToSelectedObjects()
         {
-            AddComponentToSelectedOrNewObject("Vibrate", typeof(DuVibrate));
+            AddComponentToSelectedOrNewObject("Shake", typeof(DuShake));
         }
 #endif
 
@@ -208,23 +202,19 @@ namespace DustEngine
 
         void UpdateState(float deltaTime)
         {
-            if (!freeze)
-                m_TimeSinceStart += deltaTime;
-
-            force = Mathf.Clamp01(force);
+            power = Mathf.Clamp01(power);
 
             if (positionEnabled)
             {
                 Vector3 deltaPosition = Vector3.zero;
 
-                if (force > 0f)
-                {
-                    deltaPosition = positionAmplitude * force;
+                if (!freeze)
+                    m_PositionTimeOffset += positionSpeed * deltaTime;
 
-                    if (uniform)
-                        deltaPosition *= Mathf.Sin(DuConstants.PI2 * m_TimeSinceStart * positionFrequency);
-                    else
-                        deltaPosition.Scale(duNoise.PerlinNoiseWideVector3(m_TimeSinceStart * positionFrequency));
+                if (power > 0f)
+                {
+                    deltaPosition = positionAmplitude * power;
+                    deltaPosition.Scale(duNoise.PerlinNoiseWideVector3(m_PositionTimeOffset));
                 }
 
                 switch (transformMode)
@@ -250,14 +240,13 @@ namespace DustEngine
             {
                 Vector3 deltaRotation = Vector3.zero;
 
-                if (force > 0f)
-                {
-                    deltaRotation = rotationAmplitude * force;
+                if (!freeze)
+                    m_RotationTimeOffset += rotationSpeed * deltaTime;
 
-                    if (uniform)
-                        deltaRotation *= Mathf.Sin(DuConstants.PI2 * m_TimeSinceStart * rotationFrequency);
-                    else
-                        deltaRotation.Scale(duNoise.PerlinNoiseWideVector3(m_TimeSinceStart * rotationFrequency));
+                if (power > 0f)
+                {
+                    deltaRotation = rotationAmplitude * power;
+                    deltaRotation.Scale(duNoise.PerlinNoiseWideVector3(m_RotationTimeOffset));
                 }
 
                 switch (transformMode)
@@ -283,29 +272,28 @@ namespace DustEngine
             {
                 Vector3 multScale = Vector3.one;
 
-                if (force > 0f)
+                if (!freeze)
+                    m_ScaleTimeOffset += scaleSpeed * deltaTime;
+
+                if (power > 0f)
                 {
                     Vector3 noiseValue;
 
-                    if (uniform)
+                    if (scaleUniform)
                     {
-                        noiseValue.x = noiseValue.y = noiseValue.z = Mathf.Sin(DuConstants.PI2 * m_TimeSinceStart * scaleFrequency);
-                    }
-                    else if (scaleUniform)
-                    {
-                        noiseValue.x = noiseValue.y = noiseValue.z = duNoise.PerlinNoiseWide(m_TimeSinceStart * scaleFrequency);
+                        noiseValue.x = noiseValue.y = noiseValue.z = duNoise.PerlinNoiseWide(m_ScaleTimeOffset);
                     }
                     else
                     {
-                        noiseValue = duNoise.PerlinNoiseWideVector3(m_TimeSinceStart * scaleFrequency);
+                        noiseValue = duNoise.PerlinNoiseWideVector3(m_ScaleTimeOffset);
                     }
 
                     multScale.x = CalcScaleValue(scaleAmplitude.x, noiseValue.x);
                     multScale.y = CalcScaleValue(scaleAmplitude.y, noiseValue.y);
                     multScale.z = CalcScaleValue(scaleAmplitude.z, noiseValue.z);
 
-                    if (force < 1f)
-                        multScale = Vector3.Lerp(Vector3.one, multScale, force);
+                    if (power < 1f)
+                        multScale = Vector3.Lerp(Vector3.one, multScale, power);
                 }
 
                 switch (transformMode)
@@ -353,7 +341,7 @@ namespace DustEngine
 
         public static class Normalizer
         {
-            public static float Force(float value)
+            public static float Power(float value)
             {
                 return Mathf.Clamp01(value);
             }
