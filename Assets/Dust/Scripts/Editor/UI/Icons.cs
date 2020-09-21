@@ -75,16 +75,16 @@ namespace DustEngine.DustEditor
             ["DustEngine.DuWaveField"] = new ClassParams { IconName = "Fields/Objects/DuWaveField" },
 
             // Gizmos
-            ["DustEngine.DuArrowGizmo"] = new ClassParams { IconName = "DRAFT/Gizmos/DuArrowGizmo" },
-            ["DustEngine.DuConeGizmo"] = new ClassParams { IconName = "DRAFT/Gizmos/DuConeGizmo" },
-            ["DustEngine.DuCubeGizmo"] = new ClassParams { IconName = "DRAFT/Gizmos/DuCubeGizmo" },
-            ["DustEngine.DuCylinderGizmo"] = new ClassParams { IconName = "DRAFT/Gizmos/DuCylinderGizmo" },
-            ["DustEngine.DuFieldsSpaceGizmo"] = new ClassParams { IconName = "DRAFT/Gizmos/DuFieldsSpaceGizmo" },
-            ["DustEngine.DuMeshGizmo"] = new ClassParams { IconName = "DRAFT/Gizmos/DuMeshGizmo" },
-            ["DustEngine.DuPyramidGizmo"] = new ClassParams { IconName = "DRAFT/Gizmos/DuPyramidGizmo" },
-            ["DustEngine.DuSphereGizmo"] = new ClassParams { IconName = "DRAFT/Gizmos/DuSphereGizmo" },
-            ["DustEngine.DuTorusGizmo"] = new ClassParams { IconName = "DRAFT/Gizmos/DuTorusGizmo" },
-            ["DustEngine.DuTriggerGizmo"] = new ClassParams { IconName = "DRAFT/Gizmos/DuTriggerGizmo" },
+            ["DustEngine.DuArrowGizmo"] = new ClassParams { IconName = "Gizmos/DuArrowGizmo" },
+            ["DustEngine.DuConeGizmo"] = new ClassParams { IconName = "Gizmos/DuConeGizmo" },
+            ["DustEngine.DuCubeGizmo"] = new ClassParams { IconName = "Gizmos/DuCubeGizmo" },
+            ["DustEngine.DuCylinderGizmo"] = new ClassParams { IconName = "Gizmos/DuCylinderGizmo" },
+            ["DustEngine.DuFieldsSpaceGizmo"] = new ClassParams { IconName = "Gizmos/DuFieldsSpaceGizmo" },
+            ["DustEngine.DuMeshGizmo"] = new ClassParams { IconName = "Gizmos/DuMeshGizmo" },
+            ["DustEngine.DuPyramidGizmo"] = new ClassParams { IconName = "Gizmos/DuPyramidGizmo" },
+            ["DustEngine.DuSphereGizmo"] = new ClassParams { IconName = "Gizmos/DuSphereGizmo" },
+            ["DustEngine.DuTorusGizmo"] = new ClassParams { IconName = "Gizmos/DuTorusGizmo" },
+            ["DustEngine.DuTriggerGizmo"] = new ClassParams { IconName = "Gizmos/DuTriggerGizmo" },
 
             // Instances
             ["DustEngine.DuDestroyer"] = new ClassParams { IconName = "DRAFT/Instances/DuDestroyer" },
