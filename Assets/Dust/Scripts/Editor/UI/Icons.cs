@@ -29,7 +29,7 @@ namespace DustEngine.DustEditor
             ["DustEngine.DuParallaxController"] = new ClassParams { IconName = "DRAFT/Animation/DuParallaxController" },
             ["DustEngine.DuParallaxInstance"] = new ClassParams { IconName = "DRAFT/Animation/DuParallaxInstance" },
             ["DustEngine.DuRotate"] = new ClassParams { IconName = "DRAFT/Animation/DuRotate" },
-            ["DustEngine.DuTarget"] = new ClassParams { IconName = "DRAFT/Animation/DuTarget" },
+            ["DustEngine.DuLookAt"] = new ClassParams { IconName = "DRAFT/Animation/DuLookAt" },
             ["DustEngine.DuTranslate"] = new ClassParams { IconName = "DRAFT/Animation/DuTranslate" },
             ["DustEngine.DuVibrate"] = new ClassParams { IconName = "DRAFT/Animation/DuVibrate" },
 

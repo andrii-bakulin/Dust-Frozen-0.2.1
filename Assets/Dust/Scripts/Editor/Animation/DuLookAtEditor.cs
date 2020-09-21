@@ -3,8 +3,8 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuTarget)), CanEditMultipleObjects]
-    public class DuTargetEditor : DuEditor
+    [CustomEditor(typeof(DuLookAt)), CanEditMultipleObjects]
+    public class DuLookAtEditor : DuEditor
     {
         private DuProperty m_TargetObject;
         private DuProperty m_UpVectorObject;

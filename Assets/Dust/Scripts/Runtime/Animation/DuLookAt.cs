@@ -3,9 +3,9 @@ using UnityEditor;
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Animation/Target")]
+    [AddComponentMenu("Dust/Animation/LookAt")]
     [ExecuteInEditMode]
-    public class DuTarget : DuMonoBehaviour
+    public class DuLookAt : DuMonoBehaviour
     {
         [SerializeField]
         private GameObject m_TargetObject = null;
@@ -34,10 +34,10 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
 
 #if UNITY_EDITOR
-        [MenuItem("Dust/Animation/Target")]
+        [MenuItem("Dust/Animation/LookAt")]
         public static void AddComponentToSelectedObjects()
         {
-            AddComponentToSelectedOrNewObject("Target", typeof(DuTarget));
+            AddComponentToSelectedOrNewObject("LookAt", typeof(DuLookAt));
         }
 #endif
 
