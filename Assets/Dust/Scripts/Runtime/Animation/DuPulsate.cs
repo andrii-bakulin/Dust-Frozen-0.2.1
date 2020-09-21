@@ -1,12 +1,19 @@
-﻿using UnityEngine;
+﻿using System.Diagnostics;
+using UnityEngine;
 using UnityEditor;
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Animation/Shake")]
-    public class DuShake : DuMonoBehaviour
+    [AddComponentMenu("Dust/Animation/Pulsate")]
+    public class DuPulsate : DuMonoBehaviour
     {
         internal const float k_MinScaleValue = 0.0001f;
+
+        public enum EaseMode
+        {
+            Linear = 0,
+            EaseInOut = 1,
+        };
 
         public enum TransformMode
         {
@@ -16,14 +23,6 @@ namespace DustEngine
         };
 
         //--------------------------------------------------------------------------------------------------------------
-
-        [SerializeField]
-        private int m_Seed = 0;
-        public int seed
-        {
-            get => m_Seed;
-            set => m_Seed = value;
-        }
 
         [SerializeField]
         private float m_Power = 1f;
@@ -52,7 +51,7 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private Vector3 m_PositionAmplitude = Vector3.one;
+        private Vector3 m_PositionAmplitude = Vector3.up;
         public Vector3 positionAmplitude
         {
             get => m_PositionAmplitude;
@@ -119,15 +118,15 @@ namespace DustEngine
             set => m_ScaleSpeed = value;
         }
 
-        [SerializeField]
-        private bool m_ScaleUniform = false;
-        public bool scaleUniform
-        {
-            get => m_ScaleUniform;
-            set => m_ScaleUniform = value;
-        }
-
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        [SerializeField]
+        private EaseMode m_EaseMode = EaseMode.EaseInOut;
+        public EaseMode easeMode
+        {
+            get => m_EaseMode;
+            set => m_EaseMode = value;
+        }
 
         [SerializeField]
         private TransformMode m_TransformMode = TransformMode.Relative;
@@ -157,9 +156,6 @@ namespace DustEngine
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        private DuNoise n_DuNoise;
-        private DuNoise duNoise => n_DuNoise ?? (n_DuNoise = new DuNoise(seed));
-
         private float m_PositionTimeOffset;
         private float m_RotationTimeOffset;
         private float m_ScaleTimeOffset;
@@ -167,10 +163,10 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
 
 #if UNITY_EDITOR
-        [MenuItem("Dust/Animation/Shake")]
+        [MenuItem("Dust/Animation/Pulsate")]
         public static void AddComponentToSelectedObjects()
         {
-            AddComponentToSelectedOrNewObject("Shake", typeof(DuShake));
+            AddComponentToSelectedOrNewObject("Pulsate", typeof(DuPulsate));
         }
 #endif
 
@@ -212,7 +208,7 @@ namespace DustEngine
                 if (power > 0f)
                 {
                     deltaPosition = positionAmplitude * power;
-                    deltaPosition.Scale(duNoise.PerlinNoiseWideVector3(m_PositionTimeOffset));
+                    deltaPosition *= CalcOffsetByEaseMode(m_PositionTimeOffset);
                 }
 
                 switch (transformMode)
@@ -244,7 +240,7 @@ namespace DustEngine
                 if (power > 0f)
                 {
                     deltaRotation = rotationAmplitude * power;
-                    deltaRotation.Scale(duNoise.PerlinNoiseWideVector3(m_RotationTimeOffset));
+                    deltaRotation *= CalcOffsetByEaseMode(m_RotationTimeOffset);
                 }
 
                 switch (transformMode)
@@ -275,16 +271,9 @@ namespace DustEngine
 
                 if (power > 0f)
                 {
-                    Vector3 noiseValue;
+                    float noiseValue1 = CalcOffsetByEaseMode(m_ScaleTimeOffset);
 
-                    if (scaleUniform)
-                    {
-                        noiseValue.x = noiseValue.y = noiseValue.z = duNoise.PerlinNoiseWide(m_ScaleTimeOffset);
-                    }
-                    else
-                    {
-                        noiseValue = duNoise.PerlinNoiseWideVector3(m_ScaleTimeOffset);
-                    }
+                    Vector3 noiseValue = DuVector3.New(noiseValue1);
 
                     multScale.x = CalcScaleValue(scaleAmplitude.x, noiseValue.x);
                     multScale.y = CalcScaleValue(scaleAmplitude.y, noiseValue.y);
@@ -322,7 +311,18 @@ namespace DustEngine
             }
         }
 
-        float CalcScaleValue(float amplitude, float offset)
+        private float CalcOffsetByEaseMode(float timeOffset)
+        {
+            if (easeMode == EaseMode.EaseInOut)
+            {
+                return Mathf.Sin(DuConstants.PI2 * timeOffset);
+            }
+
+            // (easeMode == EaseMode.Linear)
+            return Mathf.PingPong(timeOffset * 4f, 2f) - 1f;
+        }
+
+        private float CalcScaleValue(float amplitude, float offset)
         {
             if (amplitude < k_MinScaleValue)
                 amplitude = k_MinScaleValue;

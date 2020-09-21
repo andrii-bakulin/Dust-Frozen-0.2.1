@@ -3,12 +3,11 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuShake)), CanEditMultipleObjects]
-    public class DuShakeEditor : DuEditor
+    [CustomEditor(typeof(DuPulsate)), CanEditMultipleObjects]
+    public class DuPulsateEditor : DuEditor
     {
         private DuProperty m_Power;
         private DuProperty m_Freeze;
-        private DuProperty m_Seed;
 
         private DuProperty m_PositionEnabled;
         private DuProperty m_PositionAmplitude;
@@ -21,8 +20,8 @@ namespace DustEngine.DustEditor
         private DuProperty m_ScaleEnabled;
         private DuProperty m_ScaleAmplitude;
         private DuProperty m_ScaleSpeed;
-        private DuProperty m_ScaleUniform;
 
+        private DuProperty m_EaseMode;
         private DuProperty m_TransformMode;
         private DuProperty m_UpdateMode;
 
@@ -30,7 +29,6 @@ namespace DustEngine.DustEditor
         {
             m_Power = FindProperty("m_Power", "Power");
             m_Freeze = FindProperty("m_Freeze", "Freeze");
-            m_Seed = FindProperty("m_Seed", "Seed");
 
             m_PositionEnabled = FindProperty("m_PositionEnabled", "Enable");
             m_PositionAmplitude = FindProperty("m_PositionAmplitude", "Amplitude");
@@ -43,8 +41,8 @@ namespace DustEngine.DustEditor
             m_ScaleEnabled = FindProperty("m_ScaleEnabled", "Enable");
             m_ScaleAmplitude = FindProperty("m_ScaleAmplitude", "Amplitude");
             m_ScaleSpeed = FindProperty("m_ScaleSpeed", "Speed");
-            m_ScaleUniform = FindProperty("m_ScaleUniform", "Uniform");
 
+            m_EaseMode = FindProperty("m_EaseMode", "Ease");
             m_TransformMode = FindProperty("m_TransformMode", "Transform Mode");
             m_UpdateMode = FindProperty("m_UpdateMode", "Update Mode");
         }
@@ -55,7 +53,7 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            if (DustGUI.FoldoutBegin("Position", "DuShake.Position"))
+            if (DustGUI.FoldoutBegin("Position", "DuPulsate.Position"))
             {
                 PropertyField(m_PositionEnabled);
 
@@ -71,7 +69,7 @@ namespace DustEngine.DustEditor
             DustGUI.FoldoutEnd();
 
 
-            if (DustGUI.FoldoutBegin("Rotation", "DuShake.Rotation"))
+            if (DustGUI.FoldoutBegin("Rotation", "DuPulsate.Rotation"))
             {
                 PropertyField(m_RotationEnabled);
 
@@ -87,7 +85,7 @@ namespace DustEngine.DustEditor
             DustGUI.FoldoutEnd();
 
 
-            if (DustGUI.FoldoutBegin("Scale", "DuShake.Scale"))
+            if (DustGUI.FoldoutBegin("Scale", "DuPulsate.Scale"))
             {
                 PropertyField(m_ScaleEnabled);
 
@@ -96,7 +94,6 @@ namespace DustEngine.DustEditor
 
                 PropertyField(m_ScaleAmplitude);
                 PropertyExtendedSlider(m_ScaleSpeed, 0f, 10f, 0.01f);
-                PropertyField(m_ScaleUniform);
 
                 DustGUI.Unlock();
                 Space();
@@ -104,21 +101,21 @@ namespace DustEngine.DustEditor
             DustGUI.FoldoutEnd();
 
 
-            if (DustGUI.FoldoutBegin("Shake Parameters", "DuShake.Parameters"))
+            if (DustGUI.FoldoutBegin("Pulsate Parameters", "DuPulsate.Parameters"))
             {
+                PropertyField(m_EaseMode);
                 PropertyExtendedSlider(m_Power, 0f, 1f, 0.01f, 0f, 1f);
                 PropertyField(m_Freeze);
-                PropertySeedRandomOrFixed(m_Seed);
 
                 Space();
 
                 PropertyField(m_TransformMode);
                 PropertyField(m_UpdateMode);
 
-                if ((DuShake.TransformMode) m_TransformMode.enumValueIndex == DuShake.TransformMode.AppendToAnimation)
+                if ((DuPulsate.TransformMode) m_TransformMode.enumValueIndex == DuPulsate.TransformMode.AppendToAnimation)
                 {
                     DustGUI.HelpBoxInfo("This mode need to use when object animated by keyframes or manually in Update method."
-                                        + " Then you may apply shake in LastUpdate calls");
+                                        + " Then you may apply pulsate in LastUpdate calls");
                 }
 
                 Space();
@@ -129,10 +126,10 @@ namespace DustEngine.DustEditor
             // Validate & Normalize Data
 
             if (m_Power.isChanged)
-                m_Power.valFloat = DuShake.Normalizer.Power(m_Power.valFloat);
+                m_Power.valFloat = DuPulsate.Normalizer.Power(m_Power.valFloat);
 
             if (m_ScaleAmplitude.isChanged)
-                m_ScaleAmplitude.valVector3 = DuShake.Normalizer.ScaleAmplitude(m_ScaleAmplitude.valVector3);
+                m_ScaleAmplitude.valVector3 = DuPulsate.Normalizer.ScaleAmplitude(m_ScaleAmplitude.valVector3);
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
