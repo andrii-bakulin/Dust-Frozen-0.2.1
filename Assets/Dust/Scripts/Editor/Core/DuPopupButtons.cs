@@ -134,7 +134,7 @@ namespace DustEngine.DustEditor
 
         public override void OnGUI(Rect rect)
         {
-            GUIStyle btnStyle = DustGUI.GetIconButtonStyle();
+            GUIStyle btnStyle = DustGUI.iconButtonStyle;
             btnStyle.alignment = TextAnchor.MiddleLeft;
 
             DustGUI.BeginHorizontal();
