@@ -26,9 +26,6 @@ namespace DustEngine.DustEditor
             // Animations
             ["DustEngine.DuFollow"] = new ClassParams { IconName = "Animation/DuFollow" },
             ["DustEngine.DuLookAt"] = new ClassParams { IconName = "Animation/DuLookAt" },
-            ["DustEngine.DuParallax"] = new ClassParams { IconName = "DRAFT/Animation/DuParallax" },
-            ["DustEngine.DuParallaxController"] = new ClassParams { IconName = "DRAFT/Animation/DuParallaxController" },
-            ["DustEngine.DuParallaxInstance"] = new ClassParams { IconName = "DRAFT/Animation/DuParallaxInstance" },
             ["DustEngine.DuPulsate"] = new ClassParams { IconName = "Animation/DuPulsate" },
             ["DustEngine.DuRotate"] = new ClassParams { IconName = "Animation/DuRotate" },
             ["DustEngine.DuShake"] = new ClassParams { IconName = "Animation/DuShake" },
@@ -88,8 +85,11 @@ namespace DustEngine.DustEditor
             ["DustEngine.DuTriggerGizmo"] = new ClassParams { IconName = "Gizmos/DuTriggerGizmo" },
 
             // Instances
-            ["DustEngine.DuDestroyer"] = new ClassParams { IconName = "DRAFT/Instances/DuDestroyer" },
-            ["DustEngine.DuSpawner"] = new ClassParams { IconName = "DRAFT/Instances/DuSpawner" },
+            ["DustEngine.DuDestroyer"] = new ClassParams { IconName = "Instance/DuDestroyer" },
+            ["DustEngine.DuParallax"] = new ClassParams { IconName = "Instance/DuParallax" },
+            ["DustEngine.DuParallaxController"] = new ClassParams { IconName = "Instance/DuParallaxController" },
+            ["DustEngine.DuParallaxInstance"] = new ClassParams { IconName = "Instance/DuParallaxInstance" },
+            ["DustEngine.DuSpawner"] = new ClassParams { IconName = "Instance/DuSpawner" },
 
             // Modifiers
             ["DustEngine.DuRandomTransform"] = new ClassParams { IconName = "DRAFT/Modifiers/DuRandomTransform" },
