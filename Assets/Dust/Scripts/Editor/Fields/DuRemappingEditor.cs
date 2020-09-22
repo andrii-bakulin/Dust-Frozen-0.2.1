@@ -19,7 +19,7 @@ namespace DustEngine.DustEditor
         protected DuEditor.DuProperty m_ClampMaxEnabled;
 
         protected DuEditor.DuProperty m_PostPower;
-        protected DuEditor.DuProperty m_ContourMode;
+        protected DuEditor.DuProperty m_PostReshapeMode;
         protected DuEditor.DuProperty m_ContourSteps;
         protected DuEditor.DuProperty m_ContourSpline;
 
@@ -44,7 +44,7 @@ namespace DustEngine.DustEditor
             m_ClampMaxEnabled = DuEditor.FindProperty(remappingProperty, "m_ClampMaxEnabled", "Clamp Max");
 
             m_PostPower = DuEditor.FindProperty(remappingProperty, "m_PostPower", "Post Power");
-            m_ContourMode = DuEditor.FindProperty(remappingProperty, "m_ContourMode", "Contour Mode");
+            m_PostReshapeMode = DuEditor.FindProperty(remappingProperty, "m_PostReshapeMode", "Post Reshape");
             m_ContourSteps = DuEditor.FindProperty(remappingProperty, "m_ContourSteps", "Steps");
 
             m_ContourSpline = DuEditor.FindProperty(remappingProperty, "m_ContourSpline", "Spline");
@@ -81,18 +81,18 @@ namespace DustEngine.DustEditor
 
                     DustGUI.Header("Contour");
                     DuEditor.PropertyExtendedSlider(m_PostPower, 0f, 1f, 0.01f);
-                    DuEditor.PropertyField(m_ContourMode);
+                    DuEditor.PropertyField(m_PostReshapeMode);
 
-                    switch ((DuRemapping.ContourMode) m_ContourMode.enumValueIndex)
+                    switch ((DuRemapping.PostReshapeMode) m_PostReshapeMode.enumValueIndex)
                     {
-                        case DuRemapping.ContourMode.None:
+                        case DuRemapping.PostReshapeMode.None:
                             break;
 
-                        case DuRemapping.ContourMode.Curve:
+                        case DuRemapping.PostReshapeMode.Curve:
                             DuEditor.PropertyFieldCurve(m_ContourSpline);
                             break;
 
-                        case DuRemapping.ContourMode.Step:
+                        case DuRemapping.PostReshapeMode.Step:
                             DuEditor.PropertyExtendedIntSlider(m_ContourSteps, 1, 25, 1, 1);
                             break;
                     }

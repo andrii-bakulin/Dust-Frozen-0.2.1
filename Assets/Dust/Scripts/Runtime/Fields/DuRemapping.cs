@@ -5,7 +5,7 @@ namespace DustEngine
     [System.Serializable]
     public class DuRemapping
     {
-        public enum ContourMode
+        public enum PostReshapeMode
         {
             None = 0,
             Curve = 1,
@@ -95,11 +95,11 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private ContourMode m_ContourMode = ContourMode.None;
-        public ContourMode contourMode
+        private PostReshapeMode m_PostReshapeMode = PostReshapeMode.None;
+        public PostReshapeMode postReshapeMode
         {
-            get => m_ContourMode;
-            set => m_ContourMode = value;
+            get => m_PostReshapeMode;
+            set => m_PostReshapeMode = value;
         }
 
         [SerializeField]
@@ -198,17 +198,17 @@ namespace DustEngine
             //----------------------------------------------------------------------------------------------------------
             // Contour
 
-            switch (contourMode)
+            switch (postReshapeMode)
             {
-                case ContourMode.None:
+                case PostReshapeMode.None:
                     // Nothing need to do
                     break;
 
-                case ContourMode.Step:
+                case PostReshapeMode.Step:
                     outWeight = DuMath.Step(outWeight, contourSteps, outMin, outMax);
                     break;
 
-                case ContourMode.Curve:
+                case PostReshapeMode.Curve:
                 {
                     float weightNormalized = DuMath.Map(outMin, outMax, 0f, 1f, outWeight);
 
