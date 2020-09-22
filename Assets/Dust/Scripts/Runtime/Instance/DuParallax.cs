@@ -4,7 +4,7 @@ using UnityEditor;
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Animation/Parallax")]
+    [AddComponentMenu("Dust/Instance/Parallax")]
     [ExecuteInEditMode]
     public class DuParallax : DuMonoBehaviour
     {
@@ -123,7 +123,7 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
 
 #if UNITY_EDITOR
-        [MenuItem("Dust/Animation/Parallax")]
+        [MenuItem("Dust/Instance/Parallax")]
         public static void AddComponentToSelected()
         {
             AddComponentToSelectedOrNewObject("Parallax", typeof(DuParallax));
