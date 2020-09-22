@@ -428,7 +428,7 @@ MonoBehaviour:
     m_CalculateColor: 0
     m_DefaultColor: {r: 0, g: 0, b: 0, a: 1}
     m_Fields: []
-  m_GizmosVisibility: 2
+  m_GizmoVisibility: 1
   m_ImpactMode: 0
   m_Size: {x: 2, y: 2, z: 2}
   m_Angle: 90
@@ -602,16 +602,16 @@ MonoBehaviour:
       m_BlendPowerMode: 1
       m_BlendColorMode: 1
       m_Intensity: 0.85
-  m_GizmosVisibility: 2
+  m_GizmoVisibility: 1
   m_Amplitude: 1
   m_Frequency: 1
   m_LinearFalloff: 1.11
   m_Offset: 0
   m_AnimationSpeed: 1
   m_Direction: 2
-  m_GizmosSize: 2
-  m_GizmosQuality: 1
-  m_GizmosAnimated: 1
+  m_GizmoSize: 3
+  m_GizmoQuality: 1
+  m_GizmoAnimated: 0
 --- !u!4 &1850619819
 Transform:
   m_ObjectHideFlags: 0
@@ -662,7 +662,7 @@ MonoBehaviour:
     m_CalculateColor: 0
     m_DefaultColor: {r: 0, g: 0, b: 0, a: 1}
     m_Fields: []
-  m_GizmosVisibility: 1
+  m_GizmoVisibility: 1
   m_ImpactMode: 0
   m_Size: {x: 2, y: 2, z: 2}
   m_Angle: -65.06
@@ -730,6 +730,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: f2fe9bd8dcf114481918a89244bede05, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: f2fe9bd8dcf114481918a89244bede05, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -5754084199372789682, guid: f2fe9bd8dcf114481918a89244bede05, type: 3}
       propertyPath: m_Mesh

@@ -6,7 +6,7 @@ namespace DustEngine.DustEditor
     public static class Icons
     {
         internal const string ACTION_DELETE = "UI/Action-Delete";
-        internal const string ACTION_ADD_DEFORMER = "DRAFT/UI/Action-Add-Deformer";
+        internal const string ACTION_ADD_DEFORMER = "UI/Action-Add-Deformer";
         internal const string ACTION_ADD_FIELD = "UI/Action-Add-Field";
 
         internal const string STATE_ENABLED = "UI/State-Enabled";
@@ -32,11 +32,11 @@ namespace DustEngine.DustEditor
             ["DustEngine.DuTranslate"] = new ClassParams { IconName = "Animation/DuTranslate" },
 
             // Deformers:Core
-            ["DustEngine.DuDeformMesh"] = new ClassParams { IconName = "DRAFT/Deformers/DuDeformMesh" },
+            ["DustEngine.DuDeformMesh"] = new ClassParams { IconName = "Deformers/Core/DuDeformMesh" },
 
             // Deformers
-            ["DustEngine.DuTwistDeformer"] = new ClassParams { IconName = "DRAFT/Deformers/DuTwistDeformer" },
-            ["DustEngine.DuWaveDeformer"] = new ClassParams { IconName = "DRAFT/Deformers/DuWaveDeformer" },
+            ["DustEngine.DuTwistDeformer"] = new ClassParams { IconName = "Deformers/DuTwistDeformer" },
+            ["DustEngine.DuWaveDeformer"] = new ClassParams { IconName = "Deformers/DuWaveDeformer" },
 
             // Events
             ["DustEngine.DuCollisionEvent"] = new ClassParams { IconName = "Events/DuColliderEvent" },
