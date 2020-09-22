@@ -45,9 +45,8 @@ namespace DustEngine.DustEditor
 
             m_PostPower = DuEditor.FindProperty(remappingProperty, "m_PostPower", "Post Power");
             m_PostReshapeMode = DuEditor.FindProperty(remappingProperty, "m_PostReshapeMode", "Post Reshape");
-            m_PostStepsCount = DuEditor.FindProperty(remappingProperty, "m_PostStepsCount", "Steps");
-
-            m_PostCurve = DuEditor.FindProperty(remappingProperty, "m_PostCurve", "Curve");
+            m_PostStepsCount = DuEditor.FindProperty(remappingProperty, "m_PostStepsCount", "Steps Count");
+            m_PostCurve = DuEditor.FindProperty(remappingProperty, "m_PostCurve", "Curve Shape");
 
             m_RemapColorEnabled = DuEditor.FindProperty(remappingProperty, "m_RemapColorEnabled", "Enabled");
             m_ColorMode = DuEditor.FindProperty(remappingProperty, "m_ColorMode", "Mode");
@@ -79,7 +78,7 @@ namespace DustEngine.DustEditor
                     DuEditor.PropertyField(m_ClampMaxEnabled);
                     DuEditor.Space();
 
-                    DustGUI.Header("Contour");
+                    DustGUI.Header("Post Update");
                     DuEditor.PropertyExtendedSlider(m_PostPower, 0f, 1f, 0.01f);
                     DuEditor.PropertyField(m_PostReshapeMode);
 

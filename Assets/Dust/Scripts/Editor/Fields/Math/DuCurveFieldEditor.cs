@@ -45,7 +45,7 @@ namespace DustEngine.DustEditor
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             if (m_Shape.isChanged)
-                m_Shape.valAnimationCurve = DuCurveField.Normalizer.ContourSpline(m_Shape.valAnimationCurve);
+                m_Shape.valAnimationCurve = DuCurveField.Normalizer.Shape(m_Shape.valAnimationCurve);
 
             serializedObject.ApplyModifiedProperties();
         }

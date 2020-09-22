@@ -20,7 +20,7 @@ namespace DustEngine
         public AnimationCurve shape
         {
             get => m_Shape;
-            set => m_Shape = Normalizer.ContourSpline(value);
+            set => m_Shape = Normalizer.Shape(value);
         }
 
         [SerializeField]
@@ -157,7 +157,7 @@ namespace DustEngine
 
         public static class Normalizer
         {
-            public static AnimationCurve ContourSpline(AnimationCurve curve)
+            public static AnimationCurve Shape(AnimationCurve curve)
             {
                 curve.ClampTime(0f, 1f, true);
                 curve.ClampValues(0f, 1f);

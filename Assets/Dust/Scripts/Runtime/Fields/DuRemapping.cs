@@ -196,7 +196,7 @@ namespace DustEngine
                 outWeight = Mathf.Min(outWeight, Mathf.Max(min, max)); // 2nd argument: find totally max value
 
             //----------------------------------------------------------------------------------------------------------
-            // Contour
+            // Post Reshape
 
             switch (postReshapeMode)
             {
