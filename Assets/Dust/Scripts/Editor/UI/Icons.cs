@@ -24,8 +24,8 @@ namespace DustEngine.DustEditor
         private static readonly Dictionary<string, ClassParams> duClassParams = new Dictionary<string, ClassParams>()
         {
             // Animations
-            ["DustEngine.DuFollow"] = new ClassParams { IconName = "DRAFT/Animation/DuFollow" },
-            ["DustEngine.DuLookAt"] = new ClassParams { IconName = "DRAFT/Animation/DuLookAt" },
+            ["DustEngine.DuFollow"] = new ClassParams { IconName = "Animation/DuFollow" },
+            ["DustEngine.DuLookAt"] = new ClassParams { IconName = "Animation/DuLookAt" },
             ["DustEngine.DuParallax"] = new ClassParams { IconName = "DRAFT/Animation/DuParallax" },
             ["DustEngine.DuParallaxController"] = new ClassParams { IconName = "DRAFT/Animation/DuParallaxController" },
             ["DustEngine.DuParallaxInstance"] = new ClassParams { IconName = "DRAFT/Animation/DuParallaxInstance" },
