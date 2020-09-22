@@ -20,7 +20,7 @@ namespace DustEngine.DustEditor
 
         protected DuEditor.DuProperty m_PostPower;
         protected DuEditor.DuProperty m_PostReshapeMode;
-        protected DuEditor.DuProperty m_ContourSteps;
+        protected DuEditor.DuProperty m_PostStepsCount;
         protected DuEditor.DuProperty m_ContourSpline;
 
         protected DuEditor.DuProperty m_RemapColorEnabled;
@@ -45,7 +45,7 @@ namespace DustEngine.DustEditor
 
             m_PostPower = DuEditor.FindProperty(remappingProperty, "m_PostPower", "Post Power");
             m_PostReshapeMode = DuEditor.FindProperty(remappingProperty, "m_PostReshapeMode", "Post Reshape");
-            m_ContourSteps = DuEditor.FindProperty(remappingProperty, "m_ContourSteps", "Steps");
+            m_PostStepsCount = DuEditor.FindProperty(remappingProperty, "m_PostStepsCount", "Steps");
 
             m_ContourSpline = DuEditor.FindProperty(remappingProperty, "m_ContourSpline", "Spline");
 
@@ -93,7 +93,7 @@ namespace DustEngine.DustEditor
                             break;
 
                         case DuRemapping.PostReshapeMode.Step:
-                            DuEditor.PropertyExtendedIntSlider(m_ContourSteps, 1, 25, 1, 1);
+                            DuEditor.PropertyExtendedIntSlider(m_PostStepsCount, 1, 25, 1, 1);
                             break;
                     }
                 }
@@ -133,8 +133,8 @@ namespace DustEngine.DustEditor
             if (m_InnerOffset.isChanged)
                 m_InnerOffset.valFloat = DuRemapping.ObjectNormalizer.InnerOffset(m_InnerOffset.valFloat);
 
-            if (m_ContourSteps.isChanged)
-                m_ContourSteps.valInt = DuRemapping.ObjectNormalizer.ContourSteps(m_ContourSteps.valInt);
+            if (m_PostStepsCount.isChanged)
+                m_PostStepsCount.valInt = DuRemapping.ObjectNormalizer.PostStepsCount(m_PostStepsCount.valInt);
 
             if (m_ContourSpline.isChanged)
                 m_ContourSpline.valAnimationCurve = DuRemapping.ObjectNormalizer.ContourSpline(m_ContourSpline.valAnimationCurve);

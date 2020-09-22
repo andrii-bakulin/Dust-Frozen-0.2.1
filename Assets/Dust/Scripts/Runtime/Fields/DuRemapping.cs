@@ -103,11 +103,11 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private int m_ContourSteps = 1;
-        public int contourSteps
+        private int m_PostStepsCount = 1;
+        public int postStepsCount
         {
-            get => m_ContourSteps;
-            set => m_ContourSteps = ObjectNormalizer.ContourSteps(value);
+            get => m_PostStepsCount;
+            set => m_PostStepsCount = ObjectNormalizer.PostStepsCount(value);
         }
 
         [SerializeField]
@@ -205,7 +205,7 @@ namespace DustEngine
                     break;
 
                 case PostReshapeMode.Step:
-                    outWeight = DuMath.Step(outWeight, contourSteps, outMin, outMax);
+                    outWeight = DuMath.Step(outWeight, postStepsCount, outMin, outMax);
                     break;
 
                 case PostReshapeMode.Curve:
@@ -235,7 +235,7 @@ namespace DustEngine
                 return Mathf.Clamp01(value);
             }
 
-            public static int ContourSteps(int value)
+            public static int PostStepsCount(int value)
             {
                 return Mathf.Max(1, value);
             }
