@@ -27,6 +27,7 @@ namespace DustEngine
         public static GameObject AddFieldComponentByType(GameObject activeGameObject, System.Type duFieldType)
         {
             DuFieldsSpace selectedFieldsSpace = null;
+            DuDeformer selectedDeformer = null;
 
             if (Dust.IsNotNull(activeGameObject))
             {
@@ -34,6 +35,13 @@ namespace DustEngine
 
                 if (Dust.IsNull(selectedFieldsSpace) && Dust.IsNotNull(activeGameObject.transform.parent))
                     selectedFieldsSpace = activeGameObject.transform.parent.GetComponent<DuFieldsSpace>();
+
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+                selectedDeformer = activeGameObject.GetComponent<DuDeformer>();
+
+                if (Dust.IsNull(selectedDeformer) && Dust.IsNotNull(activeGameObject.transform.parent))
+                    selectedDeformer = activeGameObject.transform.parent.GetComponent<DuDeformer>();
             }
 
             var gameObject = new GameObject();
@@ -44,6 +52,11 @@ namespace DustEngine
                 {
                     field.transform.parent = selectedFieldsSpace.transform;
                     selectedFieldsSpace.fieldsMap.AddField(field);
+                }
+                else if (Dust.IsNotNull(selectedDeformer))
+                {
+                    field.transform.parent = selectedDeformer.transform;
+                    selectedDeformer.fieldsMap.AddField(field);
                 }
 
                 gameObject.name = field.FieldName() + " Field";
