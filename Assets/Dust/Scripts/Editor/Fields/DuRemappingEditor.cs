@@ -21,7 +21,7 @@ namespace DustEngine.DustEditor
         protected DuEditor.DuProperty m_PostPower;
         protected DuEditor.DuProperty m_PostReshapeMode;
         protected DuEditor.DuProperty m_PostStepsCount;
-        protected DuEditor.DuProperty m_ContourSpline;
+        protected DuEditor.DuProperty m_PostCurve;
 
         protected DuEditor.DuProperty m_RemapColorEnabled;
         protected DuEditor.DuProperty m_ColorMode;
@@ -47,7 +47,7 @@ namespace DustEngine.DustEditor
             m_PostReshapeMode = DuEditor.FindProperty(remappingProperty, "m_PostReshapeMode", "Post Reshape");
             m_PostStepsCount = DuEditor.FindProperty(remappingProperty, "m_PostStepsCount", "Steps");
 
-            m_ContourSpline = DuEditor.FindProperty(remappingProperty, "m_ContourSpline", "Spline");
+            m_PostCurve = DuEditor.FindProperty(remappingProperty, "m_PostCurve", "Curve");
 
             m_RemapColorEnabled = DuEditor.FindProperty(remappingProperty, "m_RemapColorEnabled", "Enabled");
             m_ColorMode = DuEditor.FindProperty(remappingProperty, "m_ColorMode", "Mode");
@@ -89,7 +89,7 @@ namespace DustEngine.DustEditor
                             break;
 
                         case DuRemapping.PostReshapeMode.Curve:
-                            DuEditor.PropertyFieldCurve(m_ContourSpline);
+                            DuEditor.PropertyFieldCurve(m_PostCurve);
                             break;
 
                         case DuRemapping.PostReshapeMode.Step:
@@ -136,8 +136,8 @@ namespace DustEngine.DustEditor
             if (m_PostStepsCount.isChanged)
                 m_PostStepsCount.valInt = DuRemapping.ObjectNormalizer.PostStepsCount(m_PostStepsCount.valInt);
 
-            if (m_ContourSpline.isChanged)
-                m_ContourSpline.valAnimationCurve = DuRemapping.ObjectNormalizer.ContourSpline(m_ContourSpline.valAnimationCurve);
+            if (m_PostCurve.isChanged)
+                m_PostCurve.valAnimationCurve = DuRemapping.ObjectNormalizer.PostCurve(m_PostCurve.valAnimationCurve);
         }
 
         //--------------------------------------------------------------------------------------------------------------

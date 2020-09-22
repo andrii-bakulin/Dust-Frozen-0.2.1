@@ -8,8 +8,8 @@ namespace DustEngine
         public enum PostReshapeMode
         {
             None = 0,
-            Curve = 1,
-            Step = 2,
+            Step = 1,
+            Curve = 2,
         }
 
         public enum ColorMode
@@ -111,11 +111,11 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private AnimationCurve m_ContourSpline = DuAnimationCurve.StraightLine01();
-        public AnimationCurve contourSpline
+        private AnimationCurve m_PostCurve = DuAnimationCurve.StraightLine01();
+        public AnimationCurve postCurve
         {
-            get => m_ContourSpline;
-            set => m_ContourSpline = ObjectNormalizer.ContourSpline(value);
+            get => m_PostCurve;
+            set => m_PostCurve = ObjectNormalizer.PostCurve(value);
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -212,7 +212,7 @@ namespace DustEngine
                 {
                     float weightNormalized = DuMath.Map(outMin, outMax, 0f, 1f, outWeight);
 
-                    weightNormalized = contourSpline.Evaluate(weightNormalized);
+                    weightNormalized = postCurve.Evaluate(weightNormalized);
                     outWeight = DuMath.Map01To(outMin, outMax, weightNormalized);
                     break;
                 }
@@ -240,7 +240,7 @@ namespace DustEngine
                 return Mathf.Max(1, value);
             }
 
-            public static AnimationCurve ContourSpline(AnimationCurve curve)
+            public static AnimationCurve PostCurve(AnimationCurve curve)
             {
                 curve.ClampTime(0f, 1f, true);
                 curve.ClampValues(0f, 1f);
