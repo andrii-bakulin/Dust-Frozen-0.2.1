@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace DustEngine
 {
-    public abstract class DuDeformer : DuMonoBehaviour
+    public abstract class DuDeformer : DuMonoBehaviour, DuDynamicStateInterface
     {
         protected static readonly Color k_GizmosColorMain = new Color(1.00f, 0.60f, 0.60f);
 
@@ -110,6 +110,19 @@ namespace DustEngine
         public abstract string DeformerName();
 
         public abstract bool DeformPoint(ref Vector3 localPosition, float strength = 1f);
+
+        //--------------------------------------------------------------------------------------------------------------
+        // DuDynamicStateInterface
+
+        public virtual int GetDynamicStateHashCode()
+        {
+            int seq = 0, dynamicState = 0;
+
+            DuDynamicState.Append(ref dynamicState, ++seq, transform);
+            DuDynamicState.Append(ref dynamicState, ++seq, fieldsMap);
+
+            return DuDynamicState.Normalize(dynamicState);
+        }
 
         //--------------------------------------------------------------------------------------------------------------
         // Helpers

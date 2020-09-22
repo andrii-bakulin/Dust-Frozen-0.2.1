@@ -74,8 +74,10 @@ namespace DustEngine.DustEditor
 
             serializedObject.ApplyModifiedProperties();
 
-            if (m_GizmoAnimated.isChanged)
-                DustGUI.ForcedRedrawSceneView();
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            // Require forced redraw scene view
+
+            DustGUI.ForcedRedrawSceneView();
         }
     }
 }

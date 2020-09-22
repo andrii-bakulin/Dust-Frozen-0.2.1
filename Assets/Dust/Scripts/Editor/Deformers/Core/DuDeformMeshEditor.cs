@@ -163,6 +163,11 @@ namespace DustEngine.DustEditor
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             serializedObject.ApplyModifiedProperties();
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            // Require forced redraw scene view
+
+            DustGUI.ForcedRedrawSceneView();
         }
 
         private DuDeformMesh.Record UnpackDeformerRecord(SerializedProperty item)

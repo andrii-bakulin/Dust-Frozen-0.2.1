@@ -7,7 +7,7 @@ namespace DustEngine
     [AddComponentMenu("Dust/Deformers/Core/Deform Mesh")]
     [RequireComponent(typeof(MeshFilter))]
     [ExecuteInEditMode]
-    public class DuDeformMesh : DuMonoBehaviour
+    public class DuDeformMesh : DuMonoBehaviour, DuDynamicStateInterface
     {
         [System.Serializable]
         public class Record
@@ -82,6 +82,10 @@ namespace DustEngine
             get => m_RecalculateTangents;
             set => m_RecalculateTangents = value;
         }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        private int m_LastDynamicStateHash = 0;
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -244,11 +248,50 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
+        // DuDynamicStateInterface
+
+        public int GetDynamicStateHashCode()
+        {
+            int seq = 0, dynamicState = 0;
+
+            DuDynamicState.Append(ref dynamicState, ++seq, transform);
+            DuDynamicState.Append(ref dynamicState, ++seq, meshOriginal);
+            DuDynamicState.Append(ref dynamicState, ++seq, recalculateBounds);
+            DuDynamicState.Append(ref dynamicState, ++seq, recalculateNormals);
+            DuDynamicState.Append(ref dynamicState, ++seq, recalculateTangents);
+
+            // @WARNING!!! require sync code in: GetDynamicStateHashCode() + UpdateMeshPoints()
+            if (Dust.IsNotNull(m_Deformers))
+            {
+                foreach (var deformerRecord in m_Deformers)
+                {
+                    if (Dust.IsNull(deformerRecord) || !deformerRecord.enabled || DuMath.IsZero(deformerRecord.intensity))
+                        continue;
+
+                    if (Dust.IsNull(deformerRecord.deformer) || !deformerRecord.deformer.gameObject.activeInHierarchy)
+                        continue;
+
+                    DuDynamicState.Append(ref dynamicState, ++seq, deformerRecord.intensity);
+                    DuDynamicState.Append(ref dynamicState, ++seq, deformerRecord.deformer);
+                }
+            }
+
+            return DuDynamicState.Normalize(dynamicState);
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         private void UpdateMeshPoints(float deltaTime)
         {
             if (Dust.IsNull(m_MeshPointsOriginal) || m_MeshPointsOriginal.Length == 0)
                 return;
+
+            int newDynamicStateHash = GetDynamicStateHashCode();
+
+            if (m_LastDynamicStateHash == newDynamicStateHash)
+                return;
+
+            m_LastDynamicStateHash = newDynamicStateHash;
 
 #if UNITY_EDITOR
             var timer = Dust.Debug.StartTimer();
@@ -256,6 +299,7 @@ namespace DustEngine
 
             m_MeshPointsOriginal.CopyTo(m_MeshPointsDeformed, 0);
 
+            // @WARNING!!! require sync code in: GetDynamicStateHashCode() + UpdateMeshPoints()
             if (Dust.IsNotNull(m_Deformers))
             {
                 foreach (var deformerRecord in m_Deformers)

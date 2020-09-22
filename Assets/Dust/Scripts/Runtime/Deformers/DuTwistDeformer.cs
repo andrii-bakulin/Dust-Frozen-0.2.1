@@ -6,7 +6,7 @@ namespace DustEngine
     [AddComponentMenu("Dust/Deformers/Twist Deformer")]
     public class DuTwistDeformer : DuDeformer
     {
-        public enum ImpactMode
+        public enum DeformMode
         {
             Limited = 0,
             Unlimited = 1,
@@ -16,11 +16,11 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
 
         [SerializeField]
-        private ImpactMode m_ImpactMode = ImpactMode.Limited;
-        public ImpactMode impactMode
+        private DeformMode m_DeformMode = DeformMode.Limited;
+        public DeformMode deformMode
         {
-            get => m_ImpactMode;
-            set => m_ImpactMode = value;
+            get => m_DeformMode;
+            set => m_DeformMode = value;
         }
 
         [SerializeField]
@@ -61,24 +61,39 @@ namespace DustEngine
             float halfSizeY = size.y / 2f;
             float weight;
 
-            if (impactMode == ImpactMode.WithinBox && !IsPointInsideDeformBox(localPosition, size))
+            if (deformMode == DeformMode.WithinBox && !IsPointInsideDeformBox(localPosition, size))
                 return false;
 
-            switch (impactMode)
+            switch (deformMode)
             {
                 default:
-                case ImpactMode.Limited:
-                case ImpactMode.WithinBox:
+                case DeformMode.Limited:
+                case DeformMode.WithinBox:
                     weight = DuMath.Map(-halfSizeY, +halfSizeY, 0f, 1f, localPosition.y, true);
                     break;
 
-                case ImpactMode.Unlimited:
+                case DeformMode.Unlimited:
                     weight = DuMath.Map(-halfSizeY, +halfSizeY, 0f, 1f, localPosition.y);
                     break;
             }
 
             DuMath.RotatePoint(ref localPosition.x, ref localPosition.z, weight * angle * strength);
             return true;
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+        // DuDynamicStateInterface
+
+        public override int GetDynamicStateHashCode()
+        {
+            var dynamicState = base.GetDynamicStateHashCode();
+            var seq = 0;
+
+            DuDynamicState.Append(ref dynamicState, ++seq, (int) deformMode);
+            DuDynamicState.Append(ref dynamicState, ++seq, size);
+            DuDynamicState.Append(ref dynamicState, ++seq, angle);
+
+            return DuDynamicState.Normalize(dynamicState);
         }
 
         //--------------------------------------------------------------------------------------------------------------
