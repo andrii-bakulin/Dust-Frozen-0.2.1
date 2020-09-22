@@ -87,11 +87,11 @@ namespace DustEngine
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
-        private float m_ContourMultiplier = 1.0f;
-        public float contourMultiplier
+        private float m_PostPower = 1.0f;
+        public float postPower
         {
-            get => m_ContourMultiplier;
-            set => m_ContourMultiplier = value;
+            get => m_PostPower;
+            set => m_PostPower = value;
         }
 
         [SerializeField]
@@ -218,7 +218,7 @@ namespace DustEngine
                 }
             }
 
-            outWeight *= contourMultiplier;
+            outWeight *= postPower;
 
             //----------------------------------------------------------------------------------------------------------
 

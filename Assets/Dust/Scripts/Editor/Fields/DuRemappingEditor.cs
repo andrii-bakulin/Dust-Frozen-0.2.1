@@ -18,7 +18,7 @@ namespace DustEngine.DustEditor
         protected DuEditor.DuProperty m_ClampMinEnabled;
         protected DuEditor.DuProperty m_ClampMaxEnabled;
 
-        protected DuEditor.DuProperty m_ContourMultiplier;
+        protected DuEditor.DuProperty m_PostPower;
         protected DuEditor.DuProperty m_ContourMode;
         protected DuEditor.DuProperty m_ContourSteps;
         protected DuEditor.DuProperty m_ContourSpline;
@@ -43,7 +43,7 @@ namespace DustEngine.DustEditor
             m_ClampMinEnabled = DuEditor.FindProperty(remappingProperty, "m_ClampMinEnabled", "Clamp Min");
             m_ClampMaxEnabled = DuEditor.FindProperty(remappingProperty, "m_ClampMaxEnabled", "Clamp Max");
 
-            m_ContourMultiplier = DuEditor.FindProperty(remappingProperty, "m_ContourMultiplier", "Contour Multiplier");
+            m_PostPower = DuEditor.FindProperty(remappingProperty, "m_PostPower", "Post Power");
             m_ContourMode = DuEditor.FindProperty(remappingProperty, "m_ContourMode", "Contour Mode");
             m_ContourSteps = DuEditor.FindProperty(remappingProperty, "m_ContourSteps", "Steps");
 
@@ -80,7 +80,7 @@ namespace DustEngine.DustEditor
                     DuEditor.Space();
 
                     DustGUI.Header("Contour");
-                    DuEditor.PropertyExtendedSlider(m_ContourMultiplier, 0f, 1f, 0.01f);
+                    DuEditor.PropertyExtendedSlider(m_PostPower, 0f, 1f, 0.01f);
                     DuEditor.PropertyField(m_ContourMode);
 
                     switch ((DuRemapping.ContourMode) m_ContourMode.enumValueIndex)
