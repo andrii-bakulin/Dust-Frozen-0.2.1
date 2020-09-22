@@ -54,7 +54,7 @@ namespace DustEngine
             InitCalcData();
 
             if (DuMath.IsZero(size.x) || DuMath.IsZero(size.y) || DuMath.IsZero(size.z))
-                return remapping.MapValue(0f, timeSinceStart);
+                return remapping.MapValue(0f);
 
             Vector3 localPosition = transform.worldToLocalMatrix.MultiplyPoint(fieldPoint.inPosition);
 
@@ -75,10 +75,10 @@ namespace DustEngine
                 distanceToEdge = Mathf.Min(distanceToEdge, distanceToPlane);
 
             if (DuMath.IsZero(distanceToEdge))
-                return remapping.MapValue(0f, timeSinceStart); // but this never should execute!
+                return remapping.MapValue(0f); // but this never should execute!
 
             float offset = 1f - distanceToPoint / distanceToEdge;
-            return remapping.MapValue(offset, timeSinceStart);
+            return remapping.MapValue(offset);
         }
 
         //--------------------------------------------------------------------------------------------------------------

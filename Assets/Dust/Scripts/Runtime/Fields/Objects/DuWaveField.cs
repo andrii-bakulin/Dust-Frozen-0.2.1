@@ -65,7 +65,7 @@ namespace DustEngine
             set => m_Direction = value;
         }
 
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
         private float m_GizmoSize = 3f;
@@ -90,6 +90,10 @@ namespace DustEngine
             get => m_GizmoAnimated;
             set => m_GizmoAnimated = value;
         }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        private float m_TimeSinceStart;
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -145,6 +149,17 @@ namespace DustEngine
         }
 #endif
 
+        void Update()
+        {
+#if UNITY_EDITOR
+            if (!Application.isPlaying)
+                return;
+#endif
+
+            if (DuMath.IsNotZero(animationSpeed))
+                m_TimeSinceStart += Time.deltaTime;
+        }
+
         //--------------------------------------------------------------------------------------------------------------
 
         public override string FieldName()
@@ -165,14 +180,14 @@ namespace DustEngine
         internal float GetPowerForLocalPositionInAxisXPlus(Vector3 xpLocalPosition)
         {
             if (DuMath.IsZero(size))
-                return remapping.MapValue(0.5f, timeSinceStart);
+                return remapping.MapValue(0.5f);
 
             float distance = DuMath.Length(xpLocalPosition.y, xpLocalPosition.z);
 
             if (DuMath.IsNotZero(linearFalloff) && distance >= linearFalloff)
-                return remapping.MapValue(0.5f, timeSinceStart);
+                return remapping.MapValue(0.5f);
 
-            float timeOffset = timeSinceStart;
+            float timeOffset = m_TimeSinceStart;
 
 #if UNITY_EDITOR
             if (gizmoAnimated)
@@ -190,7 +205,7 @@ namespace DustEngine
             // Convert waveOffset [-1..+1] to [0..1]))
             waveOffset = DuMath.Map(-1f, +1f, 0f, 1f, waveOffset);
 
-            return remapping.MapValue(waveOffset, timeSinceStart);
+            return remapping.MapValue(waveOffset);
         }
 
         //--------------------------------------------------------------------------------------------------------------

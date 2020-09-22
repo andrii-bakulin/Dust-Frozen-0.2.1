@@ -18,11 +18,6 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        private float m_TimeSinceStart;
-        public float timeSinceStart => m_TimeSinceStart;
-
-        //--------------------------------------------------------------------------------------------------------------
-
 #if UNITY_EDITOR
         public static void AddFieldComponentByType(System.Type duFieldType)
         {
@@ -117,18 +112,6 @@ namespace DustEngine
                 default:
                     return Color.magenta;
             }
-        }
-
-        //--------------------------------------------------------------------------------------------------------------
-
-        void Update()
-        {
-#if UNITY_EDITOR
-            if (!Application.isPlaying)
-                return;
-#endif
-
-            m_TimeSinceStart += Time.deltaTime;
         }
     }
 }

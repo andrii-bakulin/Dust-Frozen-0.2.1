@@ -55,6 +55,10 @@ namespace DustEngine
             set => m_AfterCurve = value;
         }
 
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        private float m_TimeSinceStart;
+
         //--------------------------------------------------------------------------------------------------------------
 
 #if UNITY_EDITOR
@@ -98,7 +102,7 @@ namespace DustEngine
 
         protected float RecalculateValue(float value)
         {
-            value = value + (timeSinceStart + offset) * animationSpeed;
+            value = value + (m_TimeSinceStart + offset) * animationSpeed;
 
             if (value < 0.0f)
             {
@@ -138,6 +142,14 @@ namespace DustEngine
             }
 
             return value;
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        void Update()
+        {
+            if (DuMath.IsNotZero(animationSpeed))
+                m_TimeSinceStart += Time.deltaTime;
         }
 
         //--------------------------------------------------------------------------------------------------------------

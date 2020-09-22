@@ -22,8 +22,6 @@ namespace DustEngine.DustEditor
         protected DuEditor.DuProperty m_ContourMode;
         protected DuEditor.DuProperty m_ContourSteps;
         protected DuEditor.DuProperty m_ContourSpline;
-        protected DuEditor.DuProperty m_ContourSplineAnimationSpeed;
-        protected DuEditor.DuProperty m_ContourSplineOffset;
 
         protected DuEditor.DuProperty m_RemapColorEnabled;
         protected DuEditor.DuProperty m_ColorMode;
@@ -50,8 +48,6 @@ namespace DustEngine.DustEditor
             m_ContourSteps = DuEditor.FindProperty(remappingProperty, "m_ContourSteps", "Steps");
 
             m_ContourSpline = DuEditor.FindProperty(remappingProperty, "m_ContourSpline", "Spline");
-            m_ContourSplineAnimationSpeed = DuEditor.FindProperty(remappingProperty, "m_ContourSplineAnimationSpeed", "Spline Animation Speed");
-            m_ContourSplineOffset = DuEditor.FindProperty(remappingProperty, "m_ContourSplineOffset", "Spline Offset");
 
             m_RemapColorEnabled = DuEditor.FindProperty(remappingProperty, "m_RemapColorEnabled", "Enabled");
             m_ColorMode = DuEditor.FindProperty(remappingProperty, "m_ColorMode", "Mode");
@@ -94,8 +90,6 @@ namespace DustEngine.DustEditor
 
                         case DuRemapping.ContourMode.Curve:
                             DuEditor.PropertyFieldCurve(m_ContourSpline);
-                            DuEditor.PropertyExtendedSlider(m_ContourSplineAnimationSpeed, 0f, 1f, 0.01f);
-                            DuEditor.PropertyExtendedSlider(m_ContourSplineOffset, 0f, 1f, 0.01f);
                             break;
 
                         case DuRemapping.ContourMode.Step:

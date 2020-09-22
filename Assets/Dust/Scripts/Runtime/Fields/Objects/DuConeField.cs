@@ -59,7 +59,7 @@ namespace DustEngine
 
             float offset = distanceToEdge > 0f ? 1f - distanceToPoint / distanceToEdge : 0f;
 
-            return remapping.MapValue(offset, timeSinceStart);
+            return remapping.MapValue(offset);
         }
 
         //--------------------------------------------------------------------------------------------------------------

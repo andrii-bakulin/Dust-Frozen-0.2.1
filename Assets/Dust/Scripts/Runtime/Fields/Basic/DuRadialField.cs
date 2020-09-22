@@ -142,7 +142,7 @@ namespace DustEngine
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            return remapping.MapValue(power, timeSinceStart);
+            return remapping.MapValue(power);
         }
 
         //--------------------------------------------------------------------------------------------------------------

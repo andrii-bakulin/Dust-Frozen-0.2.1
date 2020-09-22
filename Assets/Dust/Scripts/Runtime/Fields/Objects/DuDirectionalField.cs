@@ -58,7 +58,7 @@ namespace DustEngine
         public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
         {
             if (DuMath.IsZero(length))
-                return remapping.MapValue(0f, timeSinceStart);
+                return remapping.MapValue(0f);
 
             Vector3 localPosition = transform.worldToLocalMatrix.MultiplyPoint(fieldPoint.inPosition);
 
@@ -79,7 +79,7 @@ namespace DustEngine
 
             float offset = 1f - DuMath.Map(-halfLength, +halfLength, 0f, 1f, distanceToPoint);
 
-            return remapping.MapValue(offset, timeSinceStart);
+            return remapping.MapValue(offset);
         }
 
         //--------------------------------------------------------------------------------------------------------------

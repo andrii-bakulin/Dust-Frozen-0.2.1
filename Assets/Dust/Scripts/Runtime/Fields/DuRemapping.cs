@@ -118,22 +118,6 @@ namespace DustEngine
             set => m_ContourSpline = ObjectNormalizer.ContourSpline(value);
         }
 
-        [SerializeField]
-        private float m_ContourSplineAnimationSpeed = 0f;
-        public float contourSplineAnimationSpeed
-        {
-            get => m_ContourSplineAnimationSpeed;
-            set => m_ContourSplineAnimationSpeed = value;
-        }
-
-        [SerializeField]
-        private float m_ContourSplineOffset = 0.0f;
-        public float contourSplineOffset
-        {
-            get => m_ContourSplineOffset;
-            set => m_ContourSplineOffset = value;
-        }
-
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
@@ -170,7 +154,7 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public float MapValue(float inWeight, float timeSinceStart = 0f)
+        public float MapValue(float inWeight)
         {
             if (!remapForceEnabled)
                 return inWeight;
@@ -227,16 +211,6 @@ namespace DustEngine
                 case ContourMode.Curve:
                 {
                     float weightNormalized = DuMath.Map(outMin, outMax, 0f, 1f, outWeight);
-
-                    if (DuMath.IsNotZero(contourSplineAnimationSpeed) || DuMath.IsNotZero(contourSplineOffset))
-                    {
-                        weightNormalized += timeSinceStart * contourSplineAnimationSpeed + contourSplineOffset;
-
-                        // Why need this?
-                        // Because Repeat(1f, 1f) will be 0f, but should be 1f
-                        // If 1f translate to 0f -> then "top level objects" will move to the floor
-                        weightNormalized = DuMath.Repeat(weightNormalized, 1f);
-                    }
 
                     weightNormalized = contourSpline.Evaluate(weightNormalized);
                     outWeight = DuMath.Map01To(outMin, outMax, weightNormalized);
