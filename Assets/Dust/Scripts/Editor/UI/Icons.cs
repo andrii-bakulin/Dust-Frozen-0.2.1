@@ -92,7 +92,7 @@ namespace DustEngine.DustEditor
             ["DustEngine.DuSpawner"] = new ClassParams { IconName = "Instance/DuSpawner" },
 
             // Modifiers
-            ["DustEngine.DuRandomTransform"] = new ClassParams { IconName = "DRAFT/Modifiers/DuRandomTransform" },
+            ["DustEngine.DuRandomTransform"] = new ClassParams { IconName = "Modifiers/DuRandomTransform" },
 
         };
 

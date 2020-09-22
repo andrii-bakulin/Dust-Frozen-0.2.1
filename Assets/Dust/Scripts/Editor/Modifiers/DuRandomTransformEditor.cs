@@ -32,15 +32,15 @@ namespace DustEngine.DustEditor
                 "Absolute - set random values as new transform");
             m_Space = FindProperty("m_Space", "Space");
 
-            m_PositionEnabled = FindProperty("m_PositionEnabled", "Enable Position");
+            m_PositionEnabled = FindProperty("m_PositionEnabled", "Enabled");
             m_PositionRangeMin = FindProperty("m_PositionRangeMin", "Range Min");
             m_PositionRangeMax = FindProperty("m_PositionRangeMax", "Range Max");
 
-            m_RotationEnabled = FindProperty("m_RotationEnabled", "Enable Rotation");
+            m_RotationEnabled = FindProperty("m_RotationEnabled", "Enabled");
             m_RotationRangeMin = FindProperty("m_RotationRangeMin", "Range Min");
             m_RotationRangeMax = FindProperty("m_RotationRangeMax", "Range Max");
 
-            m_ScaleEnabled = FindProperty("m_ScaleEnabled", "Enable Scale");
+            m_ScaleEnabled = FindProperty("m_ScaleEnabled", "Enabled");
             m_ScaleRangeMin = FindProperty("m_ScaleRangeMin", "Range Min");
             m_ScaleRangeMax = FindProperty("m_ScaleRangeMax", "Range Max");
 
@@ -59,31 +59,43 @@ namespace DustEngine.DustEditor
 
             Space();
 
-            PropertyField(m_PositionEnabled);
-
-            if (m_PositionEnabled.IsTrue)
+            if (DustGUI.FoldoutBegin("Position", "DuRandomTransform.Position"))
             {
-                PropertyField(m_PositionRangeMin);
-                PropertyField(m_PositionRangeMax);
-                Space();
+                PropertyField(m_PositionEnabled);
+
+                if (m_PositionEnabled.IsTrue)
+                {
+                    PropertyField(m_PositionRangeMin);
+                    PropertyField(m_PositionRangeMax);
+                }
             }
+            DustGUI.FoldoutEnd();
 
-            PropertyField(m_RotationEnabled);
 
-            if (m_RotationEnabled.IsTrue)
+            if (DustGUI.FoldoutBegin("Rotation", "DuRandomTransform.Rotation"))
             {
-                PropertyField(m_RotationRangeMin);
-                PropertyField(m_RotationRangeMax);
-                Space();
+                PropertyField(m_RotationEnabled);
+
+                if (m_RotationEnabled.IsTrue)
+                {
+                    PropertyField(m_RotationRangeMin);
+                    PropertyField(m_RotationRangeMax);
+                }
             }
+            DustGUI.FoldoutEnd();
 
-            PropertyField(m_ScaleEnabled);
 
-            if (m_ScaleEnabled.IsTrue)
+            if (DustGUI.FoldoutBegin("Scale", "DuRandomTransform.Scale"))
             {
-                PropertyField(m_ScaleRangeMin);
-                PropertyField(m_ScaleRangeMax);
+                PropertyField(m_ScaleEnabled);
+
+                if (m_ScaleEnabled.IsTrue)
+                {
+                    PropertyField(m_ScaleRangeMin);
+                    PropertyField(m_ScaleRangeMax);
+                }
             }
+            DustGUI.FoldoutEnd();
 
             Space();
 
