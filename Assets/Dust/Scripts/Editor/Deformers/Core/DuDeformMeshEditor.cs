@@ -33,20 +33,20 @@ namespace DustEngine.DustEditor
             }
         }
 
-        private GUIStyle m_StyleDescriptionLabel = GUIStyle.none;
-        private GUIStyle styleDescriptionLabel
+        private GUIStyle m_StyleHintLabel = GUIStyle.none;
+        private GUIStyle styleHintLabel
         {
             get
             {
-                if (m_StyleDescriptionLabel == GUIStyle.none)
-                    m_StyleDescriptionLabel = DustGUI.NewStyleLabel()
+                if (m_StyleHintLabel == GUIStyle.none)
+                    m_StyleHintLabel = DustGUI.NewStyleLabel()
                         .PaddingTop(0).PaddingBottom(0)
                         .MarginTop(0).MarginBottom(0)
                         .FontSizeScaled(0.8f)
                         .NormalTextColor(Color.gray)
                         .Build();
 
-                return m_StyleDescriptionLabel;
+                return m_StyleHintLabel;
             }
         }
 
@@ -239,8 +239,8 @@ namespace DustEngine.DustEditor
                 {
                     DustGUI.BeginVertical();
                     {
-                        DustGUI.SimpleLabel(deformerName);
-                        DustGUI.SimpleLabel(deformerHint, 0, 10, styleDescriptionLabel);
+                        DustGUI.SimpleLabel(deformerName, 0, 14);
+                        DustGUI.SimpleLabel(deformerHint, 0, 10, styleHintLabel);
                     }
                     DustGUI.EndVertical();
                 }
