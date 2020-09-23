@@ -128,6 +128,7 @@ namespace DustEngine
             }
 #endif
             EnableMeshForDeformer();
+            UpdateMeshPoints(0f);
         }
 
         void OnDisable()
@@ -198,6 +199,8 @@ namespace DustEngine
 
                 m_MeshFilter = null;
             }
+
+            m_LastDynamicStateHash = 0;
         }
 
         public void ReEnableMeshForDeformer()
