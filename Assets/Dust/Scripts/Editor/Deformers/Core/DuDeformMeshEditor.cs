@@ -33,6 +33,23 @@ namespace DustEngine.DustEditor
             }
         }
 
+        private GUIStyle m_StyleDescriptionLabel = GUIStyle.none;
+        private GUIStyle styleDescriptionLabel
+        {
+            get
+            {
+                if (m_StyleDescriptionLabel == GUIStyle.none)
+                    m_StyleDescriptionLabel = DustGUI.NewStyleLabel()
+                        .PaddingTop(0).PaddingBottom(0)
+                        .MarginTop(0).MarginBottom(0)
+                        .FontSizeScaled(0.8f)
+                        .NormalTextColor(Color.gray)
+                        .Build();
+
+                return m_StyleDescriptionLabel;
+            }
+        }
+
         private GUIStyle m_StyleIntensityButton = GUIStyle.none;
         private GUIStyle styleIntensityButton
         {
@@ -213,7 +230,22 @@ namespace DustEngine.DustEditor
 
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-                DustGUI.SimpleLabel(newRecord.deformer.DeformerName(), 0, DustGUI.Config.ICON_BUTTON_HEIGHT);
+                var deformerName = new GUIContent(newRecord.deformer.DeformerName(), newRecord.deformer.gameObject.name);
+                var deformerHint = newRecord.deformer.DeformerEditorDynamicHint();
+
+                if (deformerHint != "")
+                {
+                    DustGUI.BeginVertical();
+                    {
+                        DustGUI.SimpleLabel(deformerName);
+                        DustGUI.SimpleLabel(deformerHint, 0, 10, styleDescriptionLabel);
+                    }
+                    DustGUI.EndVertical();
+                }
+                else
+                {
+                    DustGUI.SimpleLabel(deformerName, 0, DustGUI.Config.ICON_BUTTON_HEIGHT);
+                }
 
                 DustGUI.SpaceExpand();
 

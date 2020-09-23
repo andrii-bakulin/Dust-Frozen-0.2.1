@@ -64,6 +64,15 @@ namespace DustEngine
             return "Twist";
         }
 
+#if UNITY_EDITOR
+        public override string DeformerEditorDynamicHint()
+        {
+            return angle.ToString("F2") + "° in " + DuAxisDirection.ToString(direction);
+        }
+#endif
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
         public override bool DeformPoint(ref Vector3 localPosition, float strength = 1f)
         {
             if (deformMode == DeformMode.WithinBox && !IsPointInsideDeformBox(localPosition, size))

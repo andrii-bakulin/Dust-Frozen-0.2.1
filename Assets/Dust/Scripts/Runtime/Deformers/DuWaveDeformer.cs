@@ -159,6 +159,15 @@ namespace DustEngine
             return "Wave";
         }
 
+#if UNITY_EDITOR
+        public override string DeformerEditorDynamicHint()
+        {
+            return "";
+        }
+#endif
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
         public override bool DeformPoint(ref Vector3 localPosition, float strength = 1f)
         {
             // xp = x+

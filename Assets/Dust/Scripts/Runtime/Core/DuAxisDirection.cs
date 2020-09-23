@@ -4,6 +4,35 @@ namespace DustEngine
 {
     public class DuAxisDirection
     {
+        public static string ToString(Axis3xDirection direction)
+        {
+            switch (direction)
+            {
+                default:
+                case Axis3xDirection.X: return "X";
+                case Axis3xDirection.Y: return "Y";
+                case Axis3xDirection.Z: return "Z";
+            }
+        }
+
+        public static string ToString(Axis6xDirection direction)
+        {
+            switch (direction)
+            {
+                default:
+                case Axis6xDirection.XPlus:  return "X+";
+                case Axis6xDirection.XMinus: return "X-";
+
+                case Axis6xDirection.YPlus:  return "Y+";
+                case Axis6xDirection.YMinus: return "Y-";
+
+                case Axis6xDirection.ZPlus:  return "Z+";
+                case Axis6xDirection.ZMinus: return "Z-";
+            }
+        }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
         public static Axis6xDirection ConvertToAxis6(Axis3xDirection direction)
         {
             switch (direction)
