@@ -8,6 +8,7 @@ namespace DustEngine.DustEditor
         internal const float WIDTH = 200f;
         internal const float HEIGHT = 23f;
 
+        private GameObject m_ActiveGameObject;
         private SerializedObject m_SerializedObject;
         private SerializedProperty m_Property;
         private string m_Title;
@@ -17,6 +18,7 @@ namespace DustEngine.DustEditor
         public static DuPopupExtraSlider Create(SerializedObject serializedObject, SerializedProperty property)
         {
             var popup = new DuPopupExtraSlider();
+            popup.m_ActiveGameObject = Selection.activeGameObject;
             popup.m_SerializedObject = serializedObject;
             popup.m_Property = property;
             popup.m_Title = "";
@@ -26,6 +28,7 @@ namespace DustEngine.DustEditor
         public static DuPopupExtraSlider Create(SerializedObject serializedObject, string title, SerializedProperty property)
         {
             var popup = new DuPopupExtraSlider();
+            popup.m_ActiveGameObject = Selection.activeGameObject;
             popup.m_SerializedObject = serializedObject;
             popup.m_Property = property;
             popup.m_Title = title;
@@ -44,6 +47,9 @@ namespace DustEngine.DustEditor
 
         public override void OnGUI(Rect rect)
         {
+            if (m_ActiveGameObject != Selection.activeGameObject)
+                return;
+
             if (m_Title != "")
                 DustGUI.SimpleLabel(m_Title, DustGUI.NewStyleLabel().PaddingBottom(3).Build());
 
