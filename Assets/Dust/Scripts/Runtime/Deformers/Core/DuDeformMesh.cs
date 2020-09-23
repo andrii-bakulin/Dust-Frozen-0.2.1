@@ -267,7 +267,10 @@ namespace DustEngine
                     if (Dust.IsNull(deformerRecord) || !deformerRecord.enabled || DuMath.IsZero(deformerRecord.intensity))
                         continue;
 
-                    if (Dust.IsNull(deformerRecord.deformer) || !deformerRecord.deformer.gameObject.activeInHierarchy)
+                    if (Dust.IsNull(deformerRecord.deformer))
+                        continue;
+
+                    if (!deformerRecord.deformer.enabled || !deformerRecord.deformer.gameObject.activeInHierarchy)
                         continue;
 
                     DuDynamicState.Append(ref dynamicState, ++seq, deformerRecord.intensity);
@@ -306,7 +309,10 @@ namespace DustEngine
                     if (Dust.IsNull(deformerRecord) || !deformerRecord.enabled || DuMath.IsZero(deformerRecord.intensity))
                         continue;
 
-                    if (Dust.IsNull(deformerRecord.deformer) || !deformerRecord.deformer.gameObject.activeInHierarchy)
+                    if (Dust.IsNull(deformerRecord.deformer))
+                        continue;
+
+                    if (!deformerRecord.deformer.enabled || !deformerRecord.deformer.gameObject.activeInHierarchy)
                         continue;
 
                     deformerRecord.deformer.UpdateMeshPointsCloud(ref m_MeshPointsDeformed, transform, deformerRecord.intensity);

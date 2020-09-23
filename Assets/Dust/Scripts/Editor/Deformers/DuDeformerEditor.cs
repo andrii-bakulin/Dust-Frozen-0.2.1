@@ -20,7 +20,8 @@ namespace DustEngine.DustEditor
 
         public override void OnInspectorGUI()
         {
-            (target as DuMonoBehaviour).enabled = true; // Forced activate all deformers-scripts
+            // Hide default OnInspectorGUI() call
+            // Extend all-deformers-view if need in future...
         }
 
         protected void OnInspectorGUI_FieldsMap()
