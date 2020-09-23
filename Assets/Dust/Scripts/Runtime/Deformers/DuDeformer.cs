@@ -66,6 +66,11 @@ namespace DustEngine
         }
 #endif
 
+        private void Start()
+        {
+            // Require to show enabled-checkbox in editor for all deformers
+        }
+
         //--------------------------------------------------------------------------------------------------------------
 
         public virtual void UpdateMeshPointsCloud(ref Vector3[] pointsCloud, Transform meshTransform, float strength)
