@@ -93,6 +93,13 @@ namespace DustEngine
             return "Curve";
         }
 
+#if UNITY_EDITOR
+        public override string FieldEditorDynamicHint()
+        {
+            return "";
+        }
+#endif
+
         public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
         {
             return shape.Evaluate(RecalculateValue(fieldPoint.outPower));

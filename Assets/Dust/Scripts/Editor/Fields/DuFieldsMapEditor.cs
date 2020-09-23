@@ -33,6 +33,23 @@ namespace DustEngine.DustEditor
             }
         }
 
+        private GUIStyle m_StyleHintLabel = GUIStyle.none;
+        private GUIStyle styleHintLabel
+        {
+            get
+            {
+                if (m_StyleHintLabel == GUIStyle.none)
+                    m_StyleHintLabel = DustGUI.NewStyleLabel()
+                        .PaddingTop(0).PaddingBottom(0)
+                        .MarginTop(0).MarginBottom(0)
+                        .FontSizeScaled(0.8f)
+                        .NormalTextColor(Color.gray)
+                        .Build();
+
+                return m_StyleHintLabel;
+            }
+        }
+
         private GUIStyle m_StyleIntensityButton = GUIStyle.none;
         private GUIStyle styleIntensityButton
         {
@@ -194,14 +211,29 @@ namespace DustEngine.DustEditor
                 if (DustGUI.IconButton(btnStateIcon, CELL_WIDTH_STATE, 32, styleMiniButton))
                     newRecord.enabled = !newRecord.enabled;
 
-                //------------------------------------------------------------------------------------------------------
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
                 if (!newRecord.enabled)
                     DustGUI.Lock();
 
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-                DustGUI.SimpleLabel(newRecord.field.FieldName(), 0, DustGUI.Config.ICON_BUTTON_HEIGHT);
+                var fieldName = new GUIContent(newRecord.field.FieldName(), newRecord.field.gameObject.name);
+                var fieldHint = newRecord.field.FieldEditorDynamicHint();
+
+                if (fieldHint != "")
+                {
+                    DustGUI.BeginVertical();
+                    {
+                        DustGUI.SimpleLabel(fieldName, 0, 14);
+                        DustGUI.SimpleLabel(fieldHint, 0, 10, styleHintLabel);
+                    }
+                    DustGUI.EndVertical();
+                }
+                else
+                {
+                    DustGUI.SimpleLabel(fieldName, 0, DustGUI.Config.ICON_BUTTON_HEIGHT);
+                }
 
                 DustGUI.SpaceExpand();
 
@@ -241,7 +273,7 @@ namespace DustEngine.DustEditor
                 if (!newRecord.enabled)
                     DustGUI.Unlock();
 
-                //------------------------------------------------------------------------------------------------------
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
                 clickOnDelete = DustGUI.IconButton(Icons.ACTION_DELETE, 20, 32, styleMiniButton);
 

@@ -87,6 +87,16 @@ namespace DustEngine
             return "Time";
         }
 
+#if UNITY_EDITOR
+        public override string FieldEditorDynamicHint()
+        {
+            if (Mathf.Approximately(timeScale, 1f))
+                return "";
+
+            return "Scale " + timeScale.ToString("F2");
+        }
+#endif
+
         public float GetPowerByTimeMode(TimeMode mode, float timeOffset)
         {
             switch (mode)

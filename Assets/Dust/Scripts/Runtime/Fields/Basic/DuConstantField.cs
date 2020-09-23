@@ -52,6 +52,13 @@ namespace DustEngine
             return "Constant";
         }
 
+#if UNITY_EDITOR
+        public override string FieldEditorDynamicHint()
+        {
+            return "Power " + power.ToString("F2");
+        }
+#endif
+
         public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
         {
             return power;

@@ -70,6 +70,15 @@ namespace DustEngine
             return "Fit";
         }
 
+#if UNITY_EDITOR
+        public override string FieldEditorDynamicHint()
+        {
+            return "[" + minInput.ToString("F2") + " .. " + maxInput.ToString("F2") + "]"
+                + " > "
+                + "[" + minOutput.ToString("F2") + " .. " + maxOutput.ToString("F2") + "]";
+        }
+#endif
+
         public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
         {
             return DuMath.Map(minInput, maxInput, minOutput, maxOutput, fieldPoint.outPower);

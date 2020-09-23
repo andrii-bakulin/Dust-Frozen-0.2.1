@@ -73,7 +73,18 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
+        private void Start()
+        {
+            // Require to show enabled-checkbox in editor for all fields
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
         public abstract string FieldName();
+
+#if UNITY_EDITOR
+        public abstract string FieldEditorDynamicHint();
+#endif
 
         public abstract float GetPowerForFieldPoint(DuField.Point fieldPoint);
 

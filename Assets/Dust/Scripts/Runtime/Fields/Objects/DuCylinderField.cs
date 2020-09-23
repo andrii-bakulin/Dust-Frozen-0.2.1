@@ -62,6 +62,13 @@ namespace DustEngine
             return "Cylinder";
         }
 
+#if UNITY_EDITOR
+        public override string FieldEditorDynamicHint()
+        {
+            return "";
+        }
+#endif
+
         public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
         {
             Vector3 localPosition = transform.worldToLocalMatrix.MultiplyPoint(fieldPoint.inPosition);

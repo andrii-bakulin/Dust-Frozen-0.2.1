@@ -108,6 +108,13 @@ namespace DustEngine
             return "Radial";
         }
 
+#if UNITY_EDITOR
+        public override string FieldEditorDynamicHint()
+        {
+            return "";
+        }
+#endif
+
         //--------------------------------------------------------------------------------------------------------------
         //
         //               *--------------*                    A. Start Angle

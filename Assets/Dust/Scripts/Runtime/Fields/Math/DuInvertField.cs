@@ -33,6 +33,13 @@ namespace DustEngine
             return "Invert";
         }
 
+#if UNITY_EDITOR
+        public override string FieldEditorDynamicHint()
+        {
+            return "";
+        }
+#endif
+
         public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
         {
             return 1f - fieldPoint.outPower;

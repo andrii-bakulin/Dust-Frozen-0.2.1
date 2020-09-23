@@ -39,6 +39,13 @@ namespace DustEngine
             return "Remap";
         }
 
+#if UNITY_EDITOR
+        public override string FieldEditorDynamicHint()
+        {
+            return "";
+        }
+#endif
+
         public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
         {
             return remapping.MapValue(fieldPoint.outPower);

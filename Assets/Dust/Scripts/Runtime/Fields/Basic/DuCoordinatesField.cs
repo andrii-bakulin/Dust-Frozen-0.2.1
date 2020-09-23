@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEditor;
 
 namespace DustEngine
@@ -19,7 +20,6 @@ namespace DustEngine
             Min = 1,
             Max = 2,
             Sum = 3,
-            Sub = 4,
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -172,6 +172,41 @@ namespace DustEngine
             return "Coordinates";
         }
 
+#if UNITY_EDITOR
+        public override string FieldEditorDynamicHint()
+        {
+            if (!powerEnabled)
+                return "";
+
+            var hint = "";
+            var items = new List<string>();
+
+            if (powerUseAxisX) items.Add("X");
+            if (powerUseAxisY) items.Add("Y");
+            if (powerUseAxisZ) items.Add("Z");
+
+            if (items.Count > 1)
+            {
+                switch (powerAggregate)
+                {
+                    case AggregateMode.Avg: hint = "AVG( " + string.Join(", ", items) + " )"; break;
+                    case AggregateMode.Min: hint = "MIN( " + string.Join(", ", items) + " )"; break;
+                    case AggregateMode.Max: hint = "MAX( " + string.Join(", ", items) + " )"; break;
+                    case AggregateMode.Sum: hint = "SUM( " + string.Join(", ", items) + " )"; break;
+                }
+            }
+            else if (items.Count == 1)
+            {
+                hint = items[0];
+            }
+
+            if (hint != "")
+                hint += " -> Power";
+
+            return hint;
+        }
+#endif
+
         public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
         {
             if (!powerEnabled)
@@ -191,8 +226,7 @@ namespace DustEngine
                     case AggregateMode.Avg: value = (point.x + point.y + point.z) / 3f; break;
                     case AggregateMode.Min: value = Mathf.Min(Mathf.Min(point.x, point.y), point.z); break;
                     case AggregateMode.Max: value = Mathf.Max(Mathf.Max(point.x, point.y), point.z); break;
-                    case AggregateMode.Sum: value = +(point.x + point.y + point.z); break;
-                    case AggregateMode.Sub: value = -(point.x + point.y + point.z); break;
+                    case AggregateMode.Sum: value = point.x + point.y + point.z; break;
                 }
             }
             else if (powerUseAxisX && powerUseAxisY)
@@ -203,8 +237,7 @@ namespace DustEngine
                     case AggregateMode.Avg: value = (point.x + point.y) / 2f; break;
                     case AggregateMode.Min: value = Mathf.Min(point.x, point.y); break;
                     case AggregateMode.Max: value = Mathf.Max(point.x, point.y); break;
-                    case AggregateMode.Sum: value = +(point.x + point.y); break;
-                    case AggregateMode.Sub: value = -(point.x + point.y); break;
+                    case AggregateMode.Sum: value = point.x + point.y; break;
                 }
             }
             else if (powerUseAxisY && powerUseAxisZ)
@@ -215,8 +248,7 @@ namespace DustEngine
                     case AggregateMode.Avg: value = (point.y + point.z) / 2f; break;
                     case AggregateMode.Min: value = Mathf.Min(point.y, point.z); break;
                     case AggregateMode.Max: value = Mathf.Max(point.y, point.z); break;
-                    case AggregateMode.Sum: value = +(point.y + point.z); break;
-                    case AggregateMode.Sub: value = -(point.y + point.z); break;
+                    case AggregateMode.Sum: value = point.y + point.z; break;
                 }
             }
             else if (powerUseAxisX && powerUseAxisZ)
@@ -227,8 +259,7 @@ namespace DustEngine
                     case AggregateMode.Avg: value = (point.x + point.z) / 2f; break;
                     case AggregateMode.Min: value = Mathf.Min(point.x, point.z); break;
                     case AggregateMode.Max: value = Mathf.Max(point.x, point.z); break;
-                    case AggregateMode.Sum: value = +(point.x + point.z); break;
-                    case AggregateMode.Sub: value = -(point.x + point.z); break;
+                    case AggregateMode.Sum: value = point.x + point.z; break;
                 }
             }
             else if (powerUseAxisX)

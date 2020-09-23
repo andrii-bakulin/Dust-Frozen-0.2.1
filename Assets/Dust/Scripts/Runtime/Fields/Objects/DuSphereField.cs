@@ -44,6 +44,13 @@ namespace DustEngine
             return "Sphere";
         }
 
+#if UNITY_EDITOR
+        public override string FieldEditorDynamicHint()
+        {
+            return "";
+        }
+#endif
+
         public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
         {
             if (DuMath.IsZero(radius))

@@ -82,6 +82,22 @@ namespace DustEngine
             return "Round";
         }
 
+#if UNITY_EDITOR
+        public override string FieldEditorDynamicHint()
+        {
+            string hint = "";
+
+            switch (roundMode)
+            {
+                case RoundMode.Round: hint = "Round"; break;
+                case RoundMode.Floor: hint = "Floor"; break;
+                case RoundMode.Ceil:  hint = "Ceil"; break;
+            }
+
+            return hint + ", " + distance.ToString("F2");
+        }
+#endif
+
         public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
         {
             return RoundValue(fieldPoint.outPower);

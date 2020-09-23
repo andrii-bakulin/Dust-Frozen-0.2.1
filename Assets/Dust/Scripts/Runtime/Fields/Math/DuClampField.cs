@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 using UnityEditor;
 
 namespace DustEngine
@@ -100,6 +102,37 @@ namespace DustEngine
         {
             return "Clamp";
         }
+
+#if UNITY_EDITOR
+        public override string FieldEditorDynamicHint()
+        {
+            var parts = new List<string>();
+
+            switch (powerClampMode)
+            {
+                case ClampMode.MinAndMax:
+                    parts.Add("[" + powerClampMin.ToString("F2") + " .. " + powerClampMax.ToString("F2") + "]");
+                    break;
+
+                case ClampMode.MinOnly:
+                    parts.Add("[" + powerClampMin.ToString("F2") + " .. ∞)");
+                    break;
+
+                case ClampMode.MaxOnly:
+                    parts.Add("(∞ .. " + powerClampMax.ToString("F2") + "]");
+                    break;
+
+                case ClampMode.NoClamp:
+                    parts.Add("(∞ .. ∞)");
+                    break;
+            }
+
+            if (colorClampMode != ClampMode.NoClamp)
+                parts.Add("Color");
+
+            return string.Join(" + ", parts);
+        }
+#endif
 
         public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
         {
