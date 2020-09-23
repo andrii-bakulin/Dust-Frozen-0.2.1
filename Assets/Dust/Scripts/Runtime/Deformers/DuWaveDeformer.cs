@@ -112,7 +112,7 @@ namespace DustEngine
 
         void OnEnable()
         {
-            if (!Application.isPlaying)
+            if (isEditorUpdatesEnabled)
             {
                 EditorUpdateReset();
 
@@ -123,7 +123,7 @@ namespace DustEngine
 
         void OnDisable()
         {
-            if (!Application.isPlaying)
+            if (isEditorUpdatesEnabled)
             {
                 EditorApplication.update -= EditorUpdate;
             }
@@ -149,7 +149,17 @@ namespace DustEngine
         }
 #endif
 
-        //------------------------------------------------------------------------------------------------------------------
+        void Update()
+        {
+#if UNITY_EDITOR
+            if (isEditorUpdatesEnabled) return;
+#endif
+
+            if (DuMath.IsNotZero(animationSpeed))
+                m_TimeSinceStart += Time.deltaTime;
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         public override string DeformerName()
         {
@@ -182,14 +192,6 @@ namespace DustEngine
 
             localPosition = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, xpAxisPosition);
             return true;
-        }
-
-        private void Update()
-        {
-            if (!Application.isPlaying)
-                return;
-
-            m_TimeSinceStart += Time.deltaTime;
         }
 
         //--------------------------------------------------------------------------------------------------------------

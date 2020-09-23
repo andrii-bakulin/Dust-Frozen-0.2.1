@@ -137,7 +137,7 @@ namespace DustEngine
 
         void OnEnable()
         {
-            if (!Application.isPlaying)
+            if (isEditorUpdatesEnabled)
             {
                 EditorUpdateReset();
 
@@ -148,7 +148,7 @@ namespace DustEngine
 
         void OnDisable()
         {
-            if (!Application.isPlaying)
+            if (isEditorUpdatesEnabled)
             {
                 EditorApplication.update -= EditorUpdate;
             }
@@ -166,8 +166,7 @@ namespace DustEngine
 
         void Update()
         {
-            if (!Application.isPlaying)
-                return;
+            if (isEditorUpdatesEnabled) return;
 
             UpdateState(Time.deltaTime);
         }

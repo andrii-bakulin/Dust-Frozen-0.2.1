@@ -66,7 +66,7 @@ namespace DustEngine
         void OnEnable()
         {
 #if UNITY_EDITOR
-            if (!Application.isPlaying)
+            if (isEditorUpdatesEnabled)
             {
                 EditorUpdateReset();
 
@@ -79,7 +79,7 @@ namespace DustEngine
         void OnDisable()
         {
 #if UNITY_EDITOR
-            if (!Application.isPlaying)
+            if (isEditorUpdatesEnabled)
             {
                 EditorApplication.update -= EditorUpdate;
             }
@@ -89,9 +89,9 @@ namespace DustEngine
         void Update()
         {
 #if UNITY_EDITOR
-            if (!Application.isPlaying)
-                return;
+            if (isEditorUpdatesEnabled) return;
 #endif
+
             if (updateMode != UpdateMode.Update)
                 return;
 
