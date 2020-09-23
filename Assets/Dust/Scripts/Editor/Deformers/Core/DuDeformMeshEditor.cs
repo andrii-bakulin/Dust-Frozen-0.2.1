@@ -193,7 +193,10 @@ namespace DustEngine.DustEditor
 
             DustGUI.BeginHorizontal();
             {
-                if (DustGUI.IconButton(Icons.GetTextureByComponent(newRecord.deformer), CELL_WIDTH_ICON, CELL_WIDTH_ICON, styleMiniButton))
+                var deformerEnabledInScene = newRecord.deformer.enabled && newRecord.deformer.gameObject.activeInHierarchy;
+                var deformerIcon = Icons.GetTextureByComponent(newRecord.deformer, !deformerEnabledInScene ? "Disabled" : "");
+
+                if (DustGUI.IconButton(deformerIcon, CELL_WIDTH_ICON, CELL_WIDTH_ICON, styleMiniButton))
                     Selection.activeGameObject = newRecord.deformer.gameObject;
 
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -203,7 +206,7 @@ namespace DustEngine.DustEditor
                 if (DustGUI.IconButton(btnStateIcon, CELL_WIDTH_STATE, 32f, styleMiniButton))
                     newRecord.enabled = !newRecord.enabled;
 
-                //------------------------------------------------------------------------------------------------------
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
                 if (!newRecord.enabled)
                     DustGUI.Lock();
@@ -234,7 +237,7 @@ namespace DustEngine.DustEditor
                 if (!newRecord.enabled)
                     DustGUI.Unlock();
 
-                //------------------------------------------------------------------------------------------------------
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
                 clickOnDelete = DustGUI.IconButton(Icons.ACTION_DELETE, 20, 32, styleMiniButton);
 

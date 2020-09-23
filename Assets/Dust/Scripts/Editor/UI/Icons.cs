@@ -103,11 +103,18 @@ namespace DustEngine.DustEditor
         }
 
         public static Texture GetTextureByClassName(string className)
+            => GetTextureByClassName(className, "");
+
+        public static Texture GetTextureByClassName(string className, string suffix)
         {
             if (!duClassParams.ContainsKey(className))
                 return null;
 
             ClassParams classParams = duClassParams[className];
+
+            // texture with suffix load directly from Resources, without caching
+            if (suffix != "")
+                return Resources.Load(classParams.IconName + "-" + suffix) as Texture;
 
             if (Dust.IsNull(classParams.IconTexture))
                 classParams.IconTexture = Resources.Load(classParams.IconName) as Texture;
@@ -116,6 +123,9 @@ namespace DustEngine.DustEditor
         }
 
         public static Texture GetTextureByComponent(Component component)
+            => GetTextureByComponent(component, "");
+
+        public static Texture GetTextureByComponent(Component component, string suffix)
         {
             if (Dust.IsNull(component))
                 return null;
@@ -125,7 +135,7 @@ namespace DustEngine.DustEditor
             if (!IsClassSupported(className))
                 return null;
 
-            return GetTextureByClassName(className);
+            return GetTextureByClassName(className, suffix);
         }
     }
 }
