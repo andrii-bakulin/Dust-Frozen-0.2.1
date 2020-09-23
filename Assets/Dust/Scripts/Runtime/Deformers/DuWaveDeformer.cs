@@ -164,6 +164,9 @@ namespace DustEngine
             // xp = x+
             var xpAxisPosition = DuAxisDirection.ConvertFromDirectionToAxisXPlus(direction, localPosition);
 
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            // Deform logic (in X+ direction)
+
             float distance = DuMath.Length(xpAxisPosition.y, xpAxisPosition.z);
 
             if (DuMath.IsNotZero(linearFalloff) && distance >= linearFalloff)
@@ -176,6 +179,8 @@ namespace DustEngine
                 waveOffset *= Mathf.Clamp01((linearFalloff - distance) / linearFalloff);
 
             xpAxisPosition.x += waveOffset * strength;
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             localPosition = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, xpAxisPosition);
             return true;
