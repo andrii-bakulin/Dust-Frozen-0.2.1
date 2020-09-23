@@ -39,6 +39,14 @@ namespace DustEngine
             set => m_Angle = value;
         }
 
+        [SerializeField]
+        private Axis6xDirection m_Direction = Axis6xDirection.YPlus;
+        public Axis6xDirection direction
+        {
+            get => m_Direction;
+            set => m_Direction = value;
+        }
+
         //--------------------------------------------------------------------------------------------------------------
 
 #if UNITY_EDITOR
@@ -58,26 +66,35 @@ namespace DustEngine
 
         public override bool DeformPoint(ref Vector3 localPosition, float strength = 1f)
         {
-            float halfSizeY = size.y / 2f;
-            float weight;
-
             if (deformMode == DeformMode.WithinBox && !IsPointInsideDeformBox(localPosition, size))
                 return false;
+
+            var xpAxisPosition = DuAxisDirection.ConvertFromDirectionToAxisXPlus(direction, localPosition);
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            // Deform logic (in X+ direction)
+
+            float twistHalfSize = size.x / 2f;
+            float weight;
 
             switch (deformMode)
             {
                 default:
                 case DeformMode.Limited:
                 case DeformMode.WithinBox:
-                    weight = DuMath.Map(-halfSizeY, +halfSizeY, 0f, 1f, localPosition.y, true);
+                    weight = DuMath.Map(-twistHalfSize, +twistHalfSize, 0f, 1f, xpAxisPosition.x, true);
                     break;
 
                 case DeformMode.Unlimited:
-                    weight = DuMath.Map(-halfSizeY, +halfSizeY, 0f, 1f, localPosition.y);
+                    weight = DuMath.Map(-twistHalfSize, +twistHalfSize, 0f, 1f, xpAxisPosition.x);
                     break;
             }
 
-            DuMath.RotatePoint(ref localPosition.x, ref localPosition.z, weight * angle * strength);
+            DuMath.RotatePoint(ref xpAxisPosition.y, ref xpAxisPosition.z, weight * angle * strength);
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            localPosition = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, xpAxisPosition);
             return true;
         }
 
@@ -92,6 +109,7 @@ namespace DustEngine
             DuDynamicState.Append(ref dynamicState, ++seq, (int) deformMode);
             DuDynamicState.Append(ref dynamicState, ++seq, size);
             DuDynamicState.Append(ref dynamicState, ++seq, angle);
+            DuDynamicState.Append(ref dynamicState, ++seq, (int) direction);
 
             return DuDynamicState.Normalize(dynamicState);
         }

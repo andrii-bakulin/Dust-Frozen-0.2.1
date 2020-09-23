@@ -9,6 +9,7 @@ namespace DustEngine.DustEditor
         private DuProperty m_DeformMode;
         private DuProperty m_Size;
         private DuProperty m_Angle;
+        private DuProperty m_Direction;
 
         void OnEnable()
         {
@@ -17,6 +18,7 @@ namespace DustEngine.DustEditor
             m_DeformMode = FindProperty("m_DeformMode", "Deform Mode");
             m_Size = FindProperty("m_Size", "Size");
             m_Angle = FindProperty("m_Angle", "Angle");
+            m_Direction = FindProperty("m_Direction", "Direction");
         }
 
         public override void OnInspectorGUI()
@@ -32,6 +34,7 @@ namespace DustEngine.DustEditor
                 PropertyField(m_Size);
                 PropertyExtendedSlider(m_Angle, -360f, 360f, 1f);
                 PropertyField(m_DeformMode);
+                PropertyField(m_Direction);
             }
             DustGUI.FoldoutEnd();
 
