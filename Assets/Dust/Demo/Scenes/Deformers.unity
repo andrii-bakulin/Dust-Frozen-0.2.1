@@ -213,7 +213,7 @@ MonoBehaviour:
   m_MeshOriginal: {fileID: -5495902117074765545, guid: f2fe9bd8dcf114481918a89244bede05, type: 3}
   m_Deformers:
   - m_Deformer: {fileID: 614727622}
-    m_Intensity: 1
+    m_Intensity: 0.75
     m_Enabled: 1
   m_RecalculateBounds: 1
   m_RecalculateNormals: 1
@@ -301,6 +301,55 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 23.241, y: -143.129, z: 0}
+--- !u!1 &495596855
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 495596857}
+  - component: {fileID: 495596856}
+  m_Layer: 0
+  m_Name: Clamp Field
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &495596856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 495596855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5245e4bdcc2044baa0a9c2f00230deb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PowerClampMode: 0
+  m_PowerClampMin: 0
+  m_PowerClampMax: 5
+  m_ColorClampMode: 0
+  m_ColorClampMin: {r: 0, g: 0, b: 0, a: 0}
+  m_ColorClampMax: {r: 1, g: 1, b: 1, a: 1}
+--- !u!4 &495596857
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 495596855}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1850619819}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &581391990
 GameObject:
   m_ObjectHideFlags: 0
@@ -429,9 +478,10 @@ MonoBehaviour:
     m_DefaultColor: {r: 0, g: 0, b: 0, a: 1}
     m_Fields: []
   m_GizmoVisibility: 1
-  m_ImpactMode: 0
-  m_Size: {x: 2, y: 2, z: 2}
-  m_Angle: 90
+  m_DeformMode: 0
+  m_Size: {x: 2.19, y: 1.51, z: 2}
+  m_Angle: 267.59
+  m_Direction: 2
 --- !u!4 &614727623
 Transform:
   m_ObjectHideFlags: 0
@@ -445,6 +495,60 @@ Transform:
   m_Children: []
   m_Father: {fileID: 218255922}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1131375655
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1131375657}
+  - component: {fileID: 1131375656}
+  m_Layer: 0
+  m_Name: Twist Deformer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1131375656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131375655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 601ef8675d6c649a6b1485e9227f64d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FieldsMap:
+    m_CalculatePower: 1
+    m_DefaultPower: 0
+    m_CalculateColor: 0
+    m_DefaultColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Fields: []
+  m_GizmoVisibility: 1
+  m_DeformMode: 0
+  m_Size: {x: 0.66, y: 1.42, z: 2}
+  m_Angle: 36.74
+  m_Direction: 1
+--- !u!4 &1131375657
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131375655}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2003897257}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1246048888
 GameObject:
@@ -477,17 +581,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Remapping:
     m_RemapForceEnabled: 1
-    m_Strength: 1
-    m_InnerOffset: 0.76
+    m_Strength: 0.74
+    m_InnerOffset: 1
     m_Invert: 0
     m_Min: 0
     m_Max: 1
-    m_ClampMinEnabled: 1
-    m_ClampMaxEnabled: 1
-    m_ContourMultiplier: 1
-    m_ContourMode: 0
-    m_ContourSteps: 1
-    m_ContourSpline:
+    m_ClampMinEnabled: 0
+    m_ClampMaxEnabled: 0
+    m_PostPower: 1
+    m_PostReshapeMode: 0
+    m_PostStepsCount: 1
+    m_PostCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -511,11 +615,9 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    m_ContourSplineAnimationSpeed: 0
-    m_ContourSplineOffset: 0
     m_RemapColorEnabled: 0
     m_ColorMode: 0
-    m_Color: {r: 1, g: 0, b: 0.7251849, a: 1}
+    m_Color: {r: 0, g: 1, b: 0.6646948, a: 1}
     m_Gradient:
       serializedVersion: 2
       key0: {r: 1, g: 1, b: 1, a: 1}
@@ -547,7 +649,7 @@ MonoBehaviour:
       m_NumAlphaKeys: 2
   m_GizmoVisibility: 1
   m_GizmoFieldColor: 1
-  m_Size: {x: 1.06, y: 1, z: 2}
+  m_Size: {x: 2.29, y: 1.89, z: 2.5}
 --- !u!4 &1246048890
 Transform:
   m_ObjectHideFlags: 0
@@ -578,7 +680,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1850619818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -601,17 +703,22 @@ MonoBehaviour:
       m_Field: {fileID: 1246048889}
       m_BlendPowerMode: 1
       m_BlendColorMode: 1
-      m_Intensity: 0.85
+      m_Intensity: 1
+    - m_Enabled: 1
+      m_Field: {fileID: 495596856}
+      m_BlendPowerMode: 7
+      m_BlendColorMode: 2
+      m_Intensity: 1
   m_GizmoVisibility: 1
   m_Amplitude: 1
   m_Frequency: 1
-  m_LinearFalloff: 1.11
+  m_LinearFalloff: 2
   m_Offset: 0
   m_AnimationSpeed: 1
   m_Direction: 2
-  m_GizmoSize: 3
+  m_GizmoSize: 5
   m_GizmoQuality: 1
-  m_GizmoAnimated: 0
+  m_GizmoAnimated: 1
 --- !u!4 &1850619819
 Transform:
   m_ObjectHideFlags: 0
@@ -620,10 +727,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1850619817}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1.93}
+  m_LocalPosition: {x: 0.06, y: 0, z: -1.93}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1246048890}
+  - {fileID: 495596857}
   m_Father: {fileID: 2003897257}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -651,7 +759,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1872302823}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 601ef8675d6c649a6b1485e9227f64d0, type: 3}
   m_Name: 
@@ -663,9 +771,10 @@ MonoBehaviour:
     m_DefaultColor: {r: 0, g: 0, b: 0, a: 1}
     m_Fields: []
   m_GizmoVisibility: 1
-  m_ImpactMode: 0
-  m_Size: {x: 2, y: 2, z: 2}
-  m_Angle: -65.06
+  m_DeformMode: 0
+  m_Size: {x: 2.28, y: 1.79, z: 1.86}
+  m_Angle: -36.58
+  m_Direction: 2
 --- !u!4 &1872302825
 Transform:
   m_ObjectHideFlags: 0
@@ -693,11 +802,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f2fe9bd8dcf114481918a89244bede05, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.075
+      value: 0.799
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f2fe9bd8dcf114481918a89244bede05, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.43
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f2fe9bd8dcf114481918a89244bede05, type: 3}
       propertyPath: m_LocalRotation.x
@@ -773,7 +882,10 @@ MonoBehaviour:
     m_Enabled: 1
   - m_Deformer: {fileID: 1872302824}
     m_Intensity: 1
-    m_Enabled: 0
+    m_Enabled: 1
+  - m_Deformer: {fileID: 1131375656}
+    m_Intensity: 1
+    m_Enabled: 1
   m_RecalculateBounds: 1
   m_RecalculateNormals: 1
   m_RecalculateTangents: 1

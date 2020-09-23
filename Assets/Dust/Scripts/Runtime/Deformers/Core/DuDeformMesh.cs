@@ -85,7 +85,8 @@ namespace DustEngine
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        private int m_LastDynamicStateHash = 0;
+        private int m_LastDynamicStateHashCode = 0;
+        public int lastDynamicStateHashCode => m_LastDynamicStateHashCode;
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -200,7 +201,7 @@ namespace DustEngine
                 m_MeshFilter = null;
             }
 
-            m_LastDynamicStateHash = 0;
+            m_LastDynamicStateHashCode = 0;
         }
 
         public void ReEnableMeshForDeformer()
@@ -293,10 +294,8 @@ namespace DustEngine
 
             int newDynamicStateHash = GetDynamicStateHashCode();
 
-            if (m_LastDynamicStateHash == newDynamicStateHash)
+            if (m_LastDynamicStateHashCode == newDynamicStateHash)
                 return;
-
-            m_LastDynamicStateHash = newDynamicStateHash;
 
 #if UNITY_EDITOR
             var timer = Dust.Debug.StartTimer();
@@ -337,6 +336,8 @@ namespace DustEngine
             stats.updatesCount++;
             stats.lastUpdateTime = timer.Stop();
 #endif
+
+            m_LastDynamicStateHashCode = newDynamicStateHash;
         }
 
         //--------------------------------------------------------------------------------------------------------------
