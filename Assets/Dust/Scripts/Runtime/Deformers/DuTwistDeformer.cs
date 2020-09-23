@@ -104,7 +104,7 @@ namespace DustEngine
             Vector3 halfSize = size / 2f;
 
             Gizmos.matrix = transform.localToWorldMatrix;
-            Gizmos.color = k_GizmosColorMain;
+            Gizmos.color = enabled ? k_GizmosColorActive : k_GizmosColorDisabled;
 
             // Bottom
             DrawGizmosLine(new Vector3(+halfSize.x, -halfSize.y, +halfSize.z), new Vector3(+halfSize.x, -halfSize.y, -halfSize.z));

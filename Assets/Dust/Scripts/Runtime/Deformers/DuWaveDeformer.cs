@@ -207,7 +207,7 @@ namespace DustEngine
         protected override void DrawDeformerGizmos()
         {
             Gizmos.matrix = transform.localToWorldMatrix;
-            Gizmos.color = k_GizmosColorMain;
+            Gizmos.color = enabled ? k_GizmosColorActive : k_GizmosColorDisabled;
 
             int segments;
 

@@ -5,7 +5,8 @@ namespace DustEngine
 {
     public abstract class DuDeformer : DuMonoBehaviour, DuDynamicStateInterface
     {
-        protected static readonly Color k_GizmosColorMain = new Color(1.00f, 0.60f, 0.60f);
+        protected static readonly Color k_GizmosColorActive = new Color(1.00f, 0.60f, 0.60f);
+        protected static readonly Color k_GizmosColorDisabled = new Color(0.60f, 0.60f, 0.60f);
 
         //--------------------------------------------------------------------------------------------------------------
 
