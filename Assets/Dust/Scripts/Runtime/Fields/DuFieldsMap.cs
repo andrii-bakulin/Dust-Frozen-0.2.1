@@ -153,12 +153,16 @@ namespace DustEngine
             DuDynamicState.Append(ref dynamicState, ++seq, calculateColor);
             DuDynamicState.Append(ref dynamicState, ++seq, defaultColor);
 
+            DuDynamicState.Append(ref dynamicState, ++seq, fields.Count);
+
             foreach (FieldRecord fieldRecord in fields)
             {
                 // @WARNING!!! require sync code in: GetDynamicStateHashCode() + Calculate()
-                // @BEGIN:
 
                 if (Dust.IsNull(fieldRecord) || !fieldRecord.enabled || Dust.IsNull(fieldRecord.field))
+                    continue;
+
+                if (!fieldRecord.field.enabled || !fieldRecord.field.gameObject.activeInHierarchy)
                     continue;
 
                 // @END
@@ -227,39 +231,21 @@ namespace DustEngine
             if (fields.Count == 0)
                 return false;
 
-            int fieldsApplied = 0;
-
             foreach (FieldRecord fieldRecord in fields)
             {
                 // @WARNING!!! require sync code in: GetDynamicStateHashCode() + Calculate()
-                // @BEGIN:
 
                 if (Dust.IsNull(fieldRecord) || !fieldRecord.enabled || Dust.IsNull(fieldRecord.field))
+                    continue;
+
+                if (!fieldRecord.field.enabled || !fieldRecord.field.gameObject.activeInHierarchy)
                     continue;
 
                 // @END
 
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-                // For example:
-                // if no one fields enabled in FieldsMap list
-                //     -> then it think like list is empty and default (start) power is 1.0f
-                // if one+ of field(s) enabled in list, but object disabled in hierarchy
-                //     -> then it count as 1+ field applied and default (start) power is 0.0f
-                fieldsApplied++;
-
-                // I don't check (!fieldRecord.field<Du..Field>.enabled) because I think as script always enabled!
-                //          Of course you can manually set this flag to FALSE, but better don't do this!
-                //          Also this object(s) will be forced ACTIVATED in UnityEditor mode.
-                //          If you want temporary disable object then required SetActive(false) for it's gameObject.
-                // PS: this logic same for Factory.Machines and Fields
-
-                if (!fieldRecord.field.gameObject.activeInHierarchy)
-                    continue;
-
                 float fieldPower = fieldRecord.field.GetPowerForFieldPoint(fieldPoint);
-
-                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
                 if (calculatePower && fieldRecord.blendPowerMode != FieldRecord.BlendPowerMode.Ignore)
                 {
@@ -346,7 +332,7 @@ namespace DustEngine
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             }
 
-            return fieldsApplied > 0;
+            return true;
         }
 
         public FieldRecord AddField(DuField field)

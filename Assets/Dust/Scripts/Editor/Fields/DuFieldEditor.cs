@@ -11,7 +11,8 @@ namespace DustEngine.DustEditor
 
         public override void OnInspectorGUI()
         {
-            (target as DuMonoBehaviour).enabled = true; // Forced activate all field-scripts
+            // Hide default OnInspectorGUI() call
+            // Extend all-fields-view if need in future...
         }
     }
 }

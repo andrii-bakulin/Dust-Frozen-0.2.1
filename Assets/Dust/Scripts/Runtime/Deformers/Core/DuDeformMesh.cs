@@ -268,7 +268,6 @@ namespace DustEngine
                 foreach (var deformerRecord in m_Deformers)
                 {
                     // @WARNING!!! require sync code in: GetDynamicStateHashCode() + UpdateMeshPoints()
-                    // @BEGIN:
 
                     if (Dust.IsNull(deformerRecord) || !deformerRecord.enabled || DuMath.IsZero(deformerRecord.intensity))
                         continue;
@@ -312,7 +311,6 @@ namespace DustEngine
                 foreach (var deformerRecord in m_Deformers)
                 {
                     // @WARNING!!! require sync code in: GetDynamicStateHashCode() + UpdateMeshPoints()
-                    // @BEGIN:
 
                     if (Dust.IsNull(deformerRecord) || !deformerRecord.enabled || DuMath.IsZero(deformerRecord.intensity))
                         continue;

@@ -210,7 +210,9 @@ namespace DustEngine.DustEditor
 
             DustGUI.BeginHorizontal();
             {
-                var deformerEnabledInScene = newRecord.deformer.enabled && newRecord.deformer.gameObject.activeInHierarchy;
+                var deformerEnabledInScene = newRecord.deformer.enabled &&
+                                             newRecord.deformer.gameObject.activeInHierarchy;
+
                 var deformerIcon = Icons.GetTextureByComponent(newRecord.deformer, !deformerEnabledInScene ? "Disabled" : "");
 
                 if (DustGUI.IconButton(deformerIcon, CELL_WIDTH_ICON, CELL_WIDTH_ICON, styleMiniButton))
