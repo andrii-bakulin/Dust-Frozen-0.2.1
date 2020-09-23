@@ -4,7 +4,6 @@ using UnityEditor;
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Instance/Parallax Controller")]
-    [ExecuteInEditMode]
     public class DuParallaxController : DuMonoBehaviour
     {
         public enum ParallaxControl
@@ -99,7 +98,7 @@ namespace DustEngine
 
         internal void UpdateState(float deltaTime)
         {
-            if (freeze || !Application.isPlaying)
+            if (freeze)
                 return;
 
             switch (parallaxControl)

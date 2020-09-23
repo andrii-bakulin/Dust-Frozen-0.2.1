@@ -5,7 +5,6 @@ using UnityEditor;
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Instance/Parallax")]
-    [ExecuteInEditMode]
     public class DuParallax : DuMonoBehaviour
     {
         public enum ParallaxControl
@@ -194,9 +193,6 @@ namespace DustEngine
                     break;
 
                 case ParallaxControl.Time:
-                    if (!Application.isPlaying)
-                        return;
-
                     m_OffsetDynamic += deltaTime * timeScale * speed;
                     break;
 
