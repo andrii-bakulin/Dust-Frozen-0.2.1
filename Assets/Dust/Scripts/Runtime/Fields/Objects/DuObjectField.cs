@@ -45,6 +45,19 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
+        // DuDynamicStateInterface
+
+        public override int GetDynamicStateHashCode()
+        {
+            int seq = 0, dynamicState = 0;
+
+            DuDynamicState.Append(ref dynamicState, ++seq, transform);
+            DuDynamicState.Append(ref dynamicState, ++seq, remapping.GetDynamicStateHashCode());
+
+            return DuDynamicState.Normalize(dynamicState);
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
 #if UNITY_EDITOR
         void OnDrawGizmos()

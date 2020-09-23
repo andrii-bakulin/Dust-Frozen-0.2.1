@@ -22,6 +22,8 @@ namespace DustEngine
             set => m_Direction = value;
         }
 
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
         [SerializeField]
         private float m_GizmoWidth = 4.0f;
         public float gizmoWidth
@@ -47,6 +49,20 @@ namespace DustEngine
             AddFieldComponentByType(typeof(DuDirectionalField));
         }
 #endif
+
+        //--------------------------------------------------------------------------------------------------------------
+        // DuDynamicStateInterface
+
+        public override int GetDynamicStateHashCode()
+        {
+            var seq = 0;
+            var dynamicState = base.GetDynamicStateHashCode();
+
+            DuDynamicState.Append(ref dynamicState, ++seq, length);
+            DuDynamicState.Append(ref dynamicState, ++seq, direction);
+
+            return DuDynamicState.Normalize(dynamicState);
+        }
 
         //--------------------------------------------------------------------------------------------------------------
 

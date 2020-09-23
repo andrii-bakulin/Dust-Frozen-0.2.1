@@ -14,6 +14,8 @@ namespace DustEngine
             NoClamp = 3,
         }
 
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
         [SerializeField]
         private ClampMode m_PowerClampMode = ClampMode.MinAndMax;
         public ClampMode powerClampMode
@@ -21,8 +23,6 @@ namespace DustEngine
             get => m_PowerClampMode;
             set => m_PowerClampMode = value;
         }
-
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
         private float m_PowerClampMin = 0f;
@@ -75,6 +75,24 @@ namespace DustEngine
             AddFieldComponentByType(typeof(DuClampField));
         }
 #endif
+
+        //--------------------------------------------------------------------------------------------------------------
+        // DuDynamicStateInterface
+
+        public override int GetDynamicStateHashCode()
+        {
+            int seq = 0, dynamicState = 0;
+
+            DuDynamicState.Append(ref dynamicState, ++seq, powerClampMode);
+            DuDynamicState.Append(ref dynamicState, ++seq, powerClampMin);
+            DuDynamicState.Append(ref dynamicState, ++seq, powerClampMax);
+
+            DuDynamicState.Append(ref dynamicState, ++seq, colorClampMode);
+            DuDynamicState.Append(ref dynamicState, ++seq, colorClampMin);
+            DuDynamicState.Append(ref dynamicState, ++seq, colorClampMax);
+
+            return DuDynamicState.Normalize(dynamicState);
+        }
 
         //--------------------------------------------------------------------------------------------------------------
 

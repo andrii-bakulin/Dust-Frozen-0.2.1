@@ -64,6 +64,28 @@ namespace DustEngine
 #endif
 
         //--------------------------------------------------------------------------------------------------------------
+        // DuDynamicStateInterface
+
+        public override int GetDynamicStateHashCode()
+        {
+            int seq = 0, dynamicState = 0;
+
+            DuDynamicState.Append(ref dynamicState, ++seq, timeMode);
+            DuDynamicState.Append(ref dynamicState, ++seq, timeScale);
+            DuDynamicState.Append(ref dynamicState, ++seq, offset);
+
+            DuDynamicState.Append(ref dynamicState, ++seq, remapping.GetDynamicStateHashCode());
+            DuDynamicState.Append(ref dynamicState, ++seq, m_OffsetDynamic);
+
+            return DuDynamicState.Normalize(dynamicState);
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        public override string FieldName()
+        {
+            return "Time";
+        }
 
         public float GetPowerByTimeMode(TimeMode mode, float timeOffset)
         {
@@ -103,11 +125,6 @@ namespace DustEngine
                 case TimeMode.Square:
                     return Mathf.Repeat(timeOffset, 1f) < 0.5f ? 0f : 1f;
             }
-        }
-
-        public override string FieldName()
-        {
-            return "Time";
         }
 
         public override float GetPowerForFieldPoint(DuField.Point fieldPoint)

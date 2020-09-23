@@ -70,6 +70,23 @@ namespace DustEngine
 #endif
 
         //--------------------------------------------------------------------------------------------------------------
+        // DuDynamicStateInterface
+
+        public override int GetDynamicStateHashCode()
+        {
+            int seq = 0, dynamicState = 0;
+
+            DuDynamicState.Append(ref dynamicState, ++seq, shape);
+            DuDynamicState.Append(ref dynamicState, ++seq, offset);
+            DuDynamicState.Append(ref dynamicState, ++seq, animationSpeed);
+            DuDynamicState.Append(ref dynamicState, ++seq, beforeCurve);
+            DuDynamicState.Append(ref dynamicState, ++seq, afterCurve);
+            DuDynamicState.Append(ref dynamicState, ++seq, m_OffsetDynamic);
+
+            return DuDynamicState.Normalize(dynamicState);
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         public override string FieldName()
         {

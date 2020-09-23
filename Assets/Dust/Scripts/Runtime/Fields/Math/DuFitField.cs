@@ -49,6 +49,21 @@ namespace DustEngine
 #endif
 
         //--------------------------------------------------------------------------------------------------------------
+        // DuDynamicStateInterface
+
+        public override int GetDynamicStateHashCode()
+        {
+            int seq = 0, dynamicState = 0;
+
+            DuDynamicState.Append(ref dynamicState, ++seq, minInput);
+            DuDynamicState.Append(ref dynamicState, ++seq, maxInput);
+            DuDynamicState.Append(ref dynamicState, ++seq, minOutput);
+            DuDynamicState.Append(ref dynamicState, ++seq, maxOutput);
+
+            return DuDynamicState.Normalize(dynamicState);
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         public override string FieldName()
         {

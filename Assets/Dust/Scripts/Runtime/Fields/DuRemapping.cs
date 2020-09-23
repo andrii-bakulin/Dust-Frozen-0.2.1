@@ -3,7 +3,7 @@
 namespace DustEngine
 {
     [System.Serializable]
-    public class DuRemapping
+    public class DuRemapping : DuDynamicStateInterface
     {
         public enum PostReshapeMode
         {
@@ -150,6 +150,35 @@ namespace DustEngine
         {
             get => m_Gradient;
             set => m_Gradient = value;
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+        // DuDynamicStateInterface
+
+        public int GetDynamicStateHashCode()
+        {
+            int seq = 0, dynamicState = 0;
+
+            DuDynamicState.Append(ref dynamicState, ++seq, remapForceEnabled);
+            DuDynamicState.Append(ref dynamicState, ++seq, strength);
+            DuDynamicState.Append(ref dynamicState, ++seq, innerOffset);
+            DuDynamicState.Append(ref dynamicState, ++seq, invert);
+            DuDynamicState.Append(ref dynamicState, ++seq, min);
+            DuDynamicState.Append(ref dynamicState, ++seq, max);
+            DuDynamicState.Append(ref dynamicState, ++seq, clampMinEnabled);
+            DuDynamicState.Append(ref dynamicState, ++seq, clampMaxEnabled);
+
+            DuDynamicState.Append(ref dynamicState, ++seq, postPower);
+            DuDynamicState.Append(ref dynamicState, ++seq, postReshapeMode);
+            DuDynamicState.Append(ref dynamicState, ++seq, postStepsCount);
+            DuDynamicState.Append(ref dynamicState, ++seq, postCurve);
+
+            DuDynamicState.Append(ref dynamicState, ++seq, remapColorEnabled);
+            DuDynamicState.Append(ref dynamicState, ++seq, colorMode);
+            DuDynamicState.Append(ref dynamicState, ++seq, color);
+            DuDynamicState.Append(ref dynamicState, ++seq, gradient);
+
+            return DuDynamicState.Normalize(dynamicState);
         }
 
         //--------------------------------------------------------------------------------------------------------------

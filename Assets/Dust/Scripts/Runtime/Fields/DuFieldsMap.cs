@@ -5,7 +5,7 @@ using UnityEngine;
 namespace DustEngine
 {
     [Serializable]
-    public class DuFieldsMap
+    public class DuFieldsMap : DuDynamicStateInterface
     {
         [Serializable]
         public class FieldRecord
@@ -142,6 +142,38 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
+        // DuDynamicStateInterface
+
+        public int GetDynamicStateHashCode()
+        {
+            int seq = 0, dynamicState = 0;
+
+            DuDynamicState.Append(ref dynamicState, ++seq, calculatePower);
+            DuDynamicState.Append(ref dynamicState, ++seq, defaultPower);
+            DuDynamicState.Append(ref dynamicState, ++seq, calculateColor);
+            DuDynamicState.Append(ref dynamicState, ++seq, defaultColor);
+
+            foreach (FieldRecord fieldRecord in fields)
+            {
+                // @WARNING!!! require sync code in: GetDynamicStateHashCode() + Calculate()
+                // @BEGIN:
+
+                if (Dust.IsNull(fieldRecord) || !fieldRecord.enabled || Dust.IsNull(fieldRecord.field))
+                    continue;
+
+                // @END
+
+                DuDynamicState.Append(ref dynamicState, ++seq, fieldRecord.enabled);
+                DuDynamicState.Append(ref dynamicState, ++seq, fieldRecord.field);
+                DuDynamicState.Append(ref dynamicState, ++seq, fieldRecord.blendPowerMode);
+                DuDynamicState.Append(ref dynamicState, ++seq, fieldRecord.blendColorMode);
+                DuDynamicState.Append(ref dynamicState, ++seq, fieldRecord.intensity);
+            }
+
+            return DuDynamicState.Normalize(dynamicState);
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         public bool HasFields()
         {
@@ -199,8 +231,15 @@ namespace DustEngine
 
             foreach (FieldRecord fieldRecord in fields)
             {
+                // @WARNING!!! require sync code in: GetDynamicStateHashCode() + Calculate()
+                // @BEGIN:
+
                 if (Dust.IsNull(fieldRecord) || !fieldRecord.enabled || Dust.IsNull(fieldRecord.field))
                     continue;
+
+                // @END
+
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
                 // For example:
                 // if no one fields enabled in FieldsMap list

@@ -263,11 +263,13 @@ namespace DustEngine
             DuDynamicState.Append(ref dynamicState, ++seq, recalculateNormals);
             DuDynamicState.Append(ref dynamicState, ++seq, recalculateTangents);
 
-            // @WARNING!!! require sync code in: GetDynamicStateHashCode() + UpdateMeshPoints()
             if (Dust.IsNotNull(m_Deformers))
             {
                 foreach (var deformerRecord in m_Deformers)
                 {
+                    // @WARNING!!! require sync code in: GetDynamicStateHashCode() + UpdateMeshPoints()
+                    // @BEGIN:
+
                     if (Dust.IsNull(deformerRecord) || !deformerRecord.enabled || DuMath.IsZero(deformerRecord.intensity))
                         continue;
 
@@ -276,6 +278,8 @@ namespace DustEngine
 
                     if (!deformerRecord.deformer.enabled || !deformerRecord.deformer.gameObject.activeInHierarchy)
                         continue;
+
+                    // @END
 
                     DuDynamicState.Append(ref dynamicState, ++seq, deformerRecord.intensity);
                     DuDynamicState.Append(ref dynamicState, ++seq, deformerRecord.deformer);
@@ -303,11 +307,13 @@ namespace DustEngine
 
             m_MeshPointsOriginal.CopyTo(m_MeshPointsDeformed, 0);
 
-            // @WARNING!!! require sync code in: GetDynamicStateHashCode() + UpdateMeshPoints()
             if (Dust.IsNotNull(m_Deformers))
             {
                 foreach (var deformerRecord in m_Deformers)
                 {
+                    // @WARNING!!! require sync code in: GetDynamicStateHashCode() + UpdateMeshPoints()
+                    // @BEGIN:
+
                     if (Dust.IsNull(deformerRecord) || !deformerRecord.enabled || DuMath.IsZero(deformerRecord.intensity))
                         continue;
 
@@ -316,6 +322,8 @@ namespace DustEngine
 
                     if (!deformerRecord.deformer.enabled || !deformerRecord.deformer.gameObject.activeInHierarchy)
                         continue;
+
+                    // @END
 
                     deformerRecord.deformer.UpdateMeshPointsCloud(ref m_MeshPointsDeformed, transform, deformerRecord.intensity);
                 }

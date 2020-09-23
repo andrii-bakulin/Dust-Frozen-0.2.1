@@ -115,10 +115,10 @@ namespace DustEngine
             var seq = 0;
             var dynamicState = base.GetDynamicStateHashCode();
 
-            DuDynamicState.Append(ref dynamicState, ++seq, (int) deformMode);
+            DuDynamicState.Append(ref dynamicState, ++seq, deformMode);
             DuDynamicState.Append(ref dynamicState, ++seq, size);
             DuDynamicState.Append(ref dynamicState, ++seq, angle);
-            DuDynamicState.Append(ref dynamicState, ++seq, (int) direction);
+            DuDynamicState.Append(ref dynamicState, ++seq, direction);
 
             return DuDynamicState.Normalize(dynamicState);
         }

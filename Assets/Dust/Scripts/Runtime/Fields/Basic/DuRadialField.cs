@@ -62,6 +62,8 @@ namespace DustEngine
             set => m_Direction = value;
         }
 
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
         [SerializeField]
         private float m_GizmoRadius = 1.0f;
         public float gizmoRadius
@@ -79,6 +81,27 @@ namespace DustEngine
             AddFieldComponentByType(typeof(DuRadialField));
         }
 #endif
+
+        //--------------------------------------------------------------------------------------------------------------
+        // DuDynamicStateInterface
+
+        public override int GetDynamicStateHashCode()
+        {
+            int seq = 0, dynamicState = 0;
+
+            DuDynamicState.Append(ref dynamicState, ++seq, transform);
+            DuDynamicState.Append(ref dynamicState, ++seq, startAngle);
+            DuDynamicState.Append(ref dynamicState, ++seq, endAngle);
+            DuDynamicState.Append(ref dynamicState, ++seq, fadeInOffset);
+            DuDynamicState.Append(ref dynamicState, ++seq, fadeOutOffset);
+            DuDynamicState.Append(ref dynamicState, ++seq, iterations);
+            DuDynamicState.Append(ref dynamicState, ++seq, offset);
+            DuDynamicState.Append(ref dynamicState, ++seq, direction);
+
+            return DuDynamicState.Normalize(dynamicState);
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         public override string FieldName()
         {

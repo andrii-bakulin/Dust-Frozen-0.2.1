@@ -208,7 +208,7 @@ namespace DustEngine
             DuDynamicState.Append(ref dynamicState, ++seq, linearFalloff);
             DuDynamicState.Append(ref dynamicState, ++seq, offset);
             DuDynamicState.Append(ref dynamicState, ++seq, animationSpeed);
-            DuDynamicState.Append(ref dynamicState, ++seq, (int) direction);
+            DuDynamicState.Append(ref dynamicState, ++seq, direction);
 
             DuDynamicState.Append(ref dynamicState, ++seq, m_OffsetDynamic);
 

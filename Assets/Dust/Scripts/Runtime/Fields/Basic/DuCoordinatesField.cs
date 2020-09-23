@@ -133,6 +133,39 @@ namespace DustEngine
 #endif
 
         //--------------------------------------------------------------------------------------------------------------
+        // DuDynamicStateInterface
+
+        public override int GetDynamicStateHashCode()
+        {
+            int seq = 0, dynamicState = 0;
+
+            DuDynamicState.Append(ref dynamicState, ++seq, transform);
+            DuDynamicState.Append(ref dynamicState, ++seq, powerEnabled);
+
+            if (powerEnabled)
+            {
+                DuDynamicState.Append(ref dynamicState, ++seq, powerUseAxisX);
+                DuDynamicState.Append(ref dynamicState, ++seq, powerUseAxisY);
+                DuDynamicState.Append(ref dynamicState, ++seq, powerUseAxisZ);
+                DuDynamicState.Append(ref dynamicState, ++seq, powerScale);
+                DuDynamicState.Append(ref dynamicState, ++seq, powerAggregate);
+                DuDynamicState.Append(ref dynamicState, ++seq, powerMin);
+                DuDynamicState.Append(ref dynamicState, ++seq, powerMax);
+                DuDynamicState.Append(ref dynamicState, ++seq, powerShape);
+            }
+
+            DuDynamicState.Append(ref dynamicState, ++seq, colorEnabled);
+
+            if (colorEnabled)
+            {
+                DuDynamicState.Append(ref dynamicState, ++seq, colorScale);
+                DuDynamicState.Append(ref dynamicState, ++seq, colorShape);
+            }
+
+            return DuDynamicState.Normalize(dynamicState);
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         public override string FieldName()
         {

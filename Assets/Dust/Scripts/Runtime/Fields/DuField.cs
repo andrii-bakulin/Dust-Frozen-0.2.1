@@ -3,7 +3,7 @@ using UnityEditor;
 
 namespace DustEngine
 {
-    public abstract class DuField : DuMonoBehaviour
+    public abstract class DuField : DuMonoBehaviour, DuDynamicStateInterface
     {
         public class Point
         {
@@ -83,6 +83,11 @@ namespace DustEngine
 
         /// <returns>Color.alpha used as power of color</returns>
         public abstract Color GetFieldColor(DuField.Point fieldPoint, float powerByField);
+
+        //--------------------------------------------------------------------------------------------------------------
+        // DuDynamicStateInterface
+
+        public abstract int GetDynamicStateHashCode();
 
         //--------------------------------------------------------------------------------------------------------------
 

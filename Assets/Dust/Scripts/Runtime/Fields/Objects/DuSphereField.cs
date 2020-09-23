@@ -25,6 +25,19 @@ namespace DustEngine
 #endif
 
         //--------------------------------------------------------------------------------------------------------------
+        // DuDynamicStateInterface
+
+        public override int GetDynamicStateHashCode()
+        {
+            var seq = 0;
+            var dynamicState = base.GetDynamicStateHashCode();
+
+            DuDynamicState.Append(ref dynamicState, ++seq, radius);
+
+            return DuDynamicState.Normalize(dynamicState);
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         public override string FieldName()
         {
