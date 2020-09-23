@@ -201,7 +201,12 @@ namespace DustEngine.DustEditor
 
             DustGUI.BeginHorizontal();
             {
-                if (DustGUI.IconButton(Icons.GetTextureByComponent(newRecord.field), CELL_WIDTH_ICON, CELL_WIDTH_ICON, styleMiniButton))
+                var fieldEnabledInScene = newRecord.field.enabled &&
+                                          newRecord.field.gameObject.activeInHierarchy;
+
+                var fieldIcon = Icons.GetTextureByComponent(newRecord.field, !fieldEnabledInScene ? "Disabled" : "");
+
+                if (DustGUI.IconButton(fieldIcon, CELL_WIDTH_ICON, CELL_WIDTH_ICON, styleMiniButton))
                     Selection.activeGameObject = newRecord.field.gameObject;
 
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
