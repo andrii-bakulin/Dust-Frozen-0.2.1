@@ -93,7 +93,7 @@ namespace DustEngine
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        private float m_TimeSinceStart;
+        private float m_OffsetDynamic;
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -105,11 +105,9 @@ namespace DustEngine
         }
 #endif
 
-        //------------------------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------------------
 
 #if UNITY_EDITOR
-        private float m_TimerForEditor;
-
         void OnEnable()
         {
             if (isEditorUpdatesEnabled)
@@ -136,15 +134,11 @@ namespace DustEngine
             if (!EditorUpdateTick(out deltaTime))
                 return;
 
-            if (gizmoAnimated)
+            if (gizmoAnimated && DuMath.IsNotZero(animationSpeed))
             {
-                m_TimerForEditor += deltaTime;
+                m_OffsetDynamic += deltaTime * animationSpeed;
 
                 DustGUIRuntime.ForcedRedrawSceneView();
-            }
-            else
-            {
-                m_TimerForEditor = 0f;
             }
         }
 #endif
@@ -155,8 +149,7 @@ namespace DustEngine
             if (isEditorUpdatesEnabled) return;
 #endif
 
-            if (DuMath.IsNotZero(animationSpeed))
-                m_TimeSinceStart += Time.deltaTime;
+            m_OffsetDynamic += Time.deltaTime * animationSpeed;
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -186,16 +179,7 @@ namespace DustEngine
             if (DuMath.IsNotZero(linearFalloff) && distance >= linearFalloff)
                 return remapping.MapValue(0.5f);
 
-            float timeOffset = m_TimeSinceStart;
-
-#if UNITY_EDITOR
-            if (gizmoAnimated)
-            {
-                timeOffset += m_TimerForEditor;
-            }
-#endif
-
-            float sinOffset = distance / size - (offset + 0.75f) - timeOffset * animationSpeed;
+            float sinOffset = distance / size - (offset + 0.75f) - m_OffsetDynamic;
             float waveOffset = Mathf.Sin(DuConstants.PI2 * sinOffset) * amplitude;
 
             if (DuMath.IsNotZero(linearFalloff))

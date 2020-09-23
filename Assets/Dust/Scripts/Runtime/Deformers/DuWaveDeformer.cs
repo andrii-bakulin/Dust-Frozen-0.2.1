@@ -65,7 +65,7 @@ namespace DustEngine
             set => m_Direction = value;
         }
 
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
         private float m_GizmoSize = 3f;
@@ -91,11 +91,11 @@ namespace DustEngine
             set => m_GizmoAnimated = value;
         }
 
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        private float m_TimeSinceStart;
+        private float m_OffsetDynamic;
 
-        //------------------------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------------------
 
 #if UNITY_EDITOR
         [MenuItem("Dust/Deformers/Wave")]
@@ -105,11 +105,9 @@ namespace DustEngine
         }
 #endif
 
-        //------------------------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------------------
 
 #if UNITY_EDITOR
-        private float m_TimerForEditor;
-
         void OnEnable()
         {
             if (isEditorUpdatesEnabled)
@@ -136,15 +134,11 @@ namespace DustEngine
             if (!EditorUpdateTick(out deltaTime))
                 return;
 
-            if (gizmoAnimated)
+            if (gizmoAnimated && DuMath.IsNotZero(animationSpeed))
             {
-                m_TimerForEditor += deltaTime;
+                m_OffsetDynamic += deltaTime * animationSpeed;
 
                 DustGUIRuntime.ForcedRedrawSceneView();
-            }
-            else
-            {
-                m_TimerForEditor = 0f;
             }
         }
 #endif
@@ -155,8 +149,7 @@ namespace DustEngine
             if (isEditorUpdatesEnabled) return;
 #endif
 
-            if (DuMath.IsNotZero(animationSpeed))
-                m_TimeSinceStart += Time.deltaTime;
+            m_OffsetDynamic += Time.deltaTime * animationSpeed;
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -176,13 +169,7 @@ namespace DustEngine
             if (DuMath.IsNotZero(linearFalloff) && distance >= linearFalloff)
                 return false;
 
-#if UNITY_EDITOR
-            float timeOffset = m_TimeSinceStart + m_TimerForEditor;
-#else
-            float timeOffset = m_TimeSinceStart;
-#endif
-
-            float sinOffset = distance * frequency - offset - timeOffset * animationSpeed;
+            float sinOffset = distance * frequency - (offset + 0.75f) - m_OffsetDynamic;
             float waveOffset = Mathf.Sin(DuConstants.PI2 * sinOffset) * amplitude / 2f;
 
             if (DuMath.IsNotZero(linearFalloff))
@@ -199,8 +186,8 @@ namespace DustEngine
 
         public override int GetDynamicStateHashCode()
         {
-            var dynamicState = base.GetDynamicStateHashCode();
             var seq = 0;
+            var dynamicState = base.GetDynamicStateHashCode();
 
             DuDynamicState.Append(ref dynamicState, ++seq, amplitude);
             DuDynamicState.Append(ref dynamicState, ++seq, frequency);
@@ -209,10 +196,7 @@ namespace DustEngine
             DuDynamicState.Append(ref dynamicState, ++seq, animationSpeed);
             DuDynamicState.Append(ref dynamicState, ++seq, (int) direction);
 
-            DuDynamicState.Append(ref dynamicState, ++seq, m_TimeSinceStart);
-#if UNITY_EDITOR
-            DuDynamicState.Append(ref dynamicState, ++seq, m_TimerForEditor);
-#endif
+            DuDynamicState.Append(ref dynamicState, ++seq, m_OffsetDynamic);
 
             return DuDynamicState.Normalize(dynamicState);
         }
