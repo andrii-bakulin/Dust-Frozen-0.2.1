@@ -51,7 +51,7 @@ namespace DustEngine
         private DuRemapping m_Remapping = new DuRemapping();
         public DuRemapping remapping => m_Remapping;
 
-        private float m_TimeSinceStart;
+        private float m_OffsetDynamic;
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -112,7 +112,7 @@ namespace DustEngine
 
         public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
         {
-            float globalOffset = (m_TimeSinceStart + offset) * timeScale;
+            float globalOffset = m_OffsetDynamic + offset * timeScale;
 
             float power = GetPowerByTimeMode(timeMode, globalOffset);
 
@@ -135,7 +135,7 @@ namespace DustEngine
 
         void Update()
         {
-            m_TimeSinceStart += Time.deltaTime;
+            m_OffsetDynamic += Time.deltaTime * timeScale;
         }
 
         private void Reset()

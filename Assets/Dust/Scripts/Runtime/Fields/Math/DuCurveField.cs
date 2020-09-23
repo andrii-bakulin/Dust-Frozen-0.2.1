@@ -57,7 +57,7 @@ namespace DustEngine
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        private float m_TimeSinceStart;
+        private float m_OffsetDynamic;
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -102,7 +102,7 @@ namespace DustEngine
 
         protected float RecalculateValue(float value)
         {
-            value = value + (m_TimeSinceStart + offset) * animationSpeed;
+            value = value + m_OffsetDynamic + offset * animationSpeed;
 
             if (value < 0.0f)
             {
@@ -148,8 +148,7 @@ namespace DustEngine
 
         void Update()
         {
-            if (DuMath.IsNotZero(animationSpeed))
-                m_TimeSinceStart += Time.deltaTime;
+            m_OffsetDynamic += Time.deltaTime * animationSpeed;
         }
 
         //--------------------------------------------------------------------------------------------------------------
