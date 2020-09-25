@@ -127,7 +127,7 @@ namespace DustEngine
         // - color
         public virtual DuFactoryInstance.State GetDefaultInstanceState(DuFactoryInstance duFactoryInstance)
         {
-            return m_InstancesStates[duFactoryInstance.instanceIndex].Clone();
+            return m_InstancesStates[duFactoryInstance.index].Clone();
         }
     }
 }

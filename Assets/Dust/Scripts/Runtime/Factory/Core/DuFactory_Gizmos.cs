@@ -60,7 +60,7 @@ namespace DustEngine
                     case InspectorDisplay.Index:
                         Handles.Label(
                             GetPositionInWorldSpace(instance.stateDynamic.position),
-                            instance.instanceIndex.ToString(),
+                            instance.index.ToString(),
                             style);
                         break;
 

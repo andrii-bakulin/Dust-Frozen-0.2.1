@@ -129,16 +129,16 @@ namespace DustEngine
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
-        private int m_InstanceIndex;
-        public int instanceIndex => m_InstanceIndex;
+        private int m_Index;
+        public int index => m_Index;
 
         // Instance offset in total instances sequence.
         // Value in range [0..1]
         // First instance is 0.0
         // Last instance is 1.0
         [SerializeField]
-        private float m_InstanceOffset;
-        public float instanceOffset => m_InstanceOffset;
+        private float m_Offset;
+        public float offset => m_Offset;
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -205,11 +205,11 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public void Initialize(DuFactory duFactory, int index, float offset)
+        public void Initialize(DuFactory duFactory, int initIndex, float initOffset)
         {
             m_ParentFactory = duFactory;
-            m_InstanceIndex = index;
-            m_InstanceOffset = offset;
+            m_Index = initIndex;
+            m_Offset = initOffset;
         }
 
         internal void SetPrevNextInstances(DuFactoryInstance prevFactoryInstance, DuFactoryInstance nextFactoryInstance)

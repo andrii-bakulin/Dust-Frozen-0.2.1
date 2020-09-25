@@ -7,14 +7,14 @@ namespace DustEngine.DustEditor
     // [CanEditMultipleObjects] -> Cannot!
     public class DuFactoryInstanceEditor : DuEditor
     {
-        private DuProperty m_InstanceIndex;
-        private DuProperty m_InstanceOffset;
+        private DuProperty m_Index;
+        private DuProperty m_Offset;
         private DuProperty m_MaterialReferences;
 
         void OnEnable()
         {
-            m_InstanceIndex = FindProperty("m_InstanceIndex", "Instance Index");
-            m_InstanceOffset = FindProperty("m_InstanceOffset", "Instance Offset");
+            m_Index = FindProperty("m_Index", "Index");
+            m_Offset = FindProperty("m_Offset", "Offset");
             m_MaterialReferences = FindProperty("m_MaterialReferences");
         }
 
@@ -30,8 +30,8 @@ namespace DustEngine.DustEditor
 
             if (!IsFreeInstance)
             {
-                PropertyFieldOrLock(m_InstanceIndex, true);
-                PropertyFieldOrLock(m_InstanceOffset, true);
+                PropertyFieldOrLock(m_Index, true);
+                PropertyFieldOrLock(m_Offset, true);
                 Space();
             }
 

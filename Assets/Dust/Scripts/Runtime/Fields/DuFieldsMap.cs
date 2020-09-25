@@ -237,7 +237,7 @@ namespace DustEngine
             }
 
             m_CalcFieldPoint.inPosition = factory.GetInstancePositionInWorldSpace(factoryInstance);
-            m_CalcFieldPoint.inOffset = factoryInstance.instanceOffset;
+            m_CalcFieldPoint.inOffset = factoryInstance.offset;
 
             bool result = Calculate(m_CalcFieldPoint);
 
@@ -256,7 +256,7 @@ namespace DustEngine
             }
 
             m_CalcFieldPoint.inPosition = factory.GetInstancePositionInWorldSpace(factoryInstance);
-            m_CalcFieldPoint.inOffset = factoryInstance.instanceOffset;
+            m_CalcFieldPoint.inOffset = factoryInstance.offset;
 
             bool result = Calculate(m_CalcFieldPoint);
 
