@@ -233,7 +233,8 @@ namespace DustEngine.DustEditor
 
                                 if (lastElement.width > 0 && lastElement.height > 0)
                                 {
-                                    DustGUI.Gradient(lastElement, previewGradient);
+                                    var opacity = newRecord.blendColorMode != DuFieldsMap.FieldRecord.BlendColorMode.Ignore ? 1f : 0.25f;
+                                    DustGUI.Gradient(lastElement, previewGradient, opacity);
                                 }
                             }
                         }
