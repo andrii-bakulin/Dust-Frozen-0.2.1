@@ -103,7 +103,7 @@ namespace DustEngine.DustEditor
 
         protected void OnInspectorGUI_Objects()
         {
-            if (DustGUI.FoldoutBegin("Source Objects", "DuCloner.Objects"))
+            if (DustGUI.FoldoutBegin("Source Objects", "DuFactory.Objects"))
             {
                 PropertyField(m_Objects);
                 Space();
@@ -127,7 +127,7 @@ namespace DustEngine.DustEditor
 
         protected void OnInspectorGUI_FactoryMachines()
         {
-            if (DustGUI.FoldoutBegin("Factory Machines", "DuCloner.FactoryMachines"))
+            if (DustGUI.FoldoutBegin("Factory Machines", "DuFactory.FactoryMachines"))
             {
                 PropertyExtendedSlider(m_Power, 0f, 1f, 0.01f);
                 PropertyField(m_Color);
@@ -146,7 +146,7 @@ namespace DustEngine.DustEditor
 
         protected void OnInspectorGUI_Transform()
         {
-            if (DustGUI.FoldoutBegin("Transform", "DuCloner.Transform"))
+            if (DustGUI.FoldoutBegin("Transform", "DuFactory.Transform"))
             {
                 PropertyField(m_TransformPosition);
                 PropertyField(m_TransformRotation);
@@ -169,7 +169,7 @@ namespace DustEngine.DustEditor
 
         protected void OnInspectorGUI_Display()
         {
-            if (DustGUI.FoldoutBegin("Display", "DuCloner.Display"))
+            if (DustGUI.FoldoutBegin("Display", "DuFactory.Display"))
             {
                 PropertyField(m_InspectorDisplay);
                 PropertyExtendedSlider(m_InspectorScale, 0.5f, 3f, 0.01f, 0.01f);
@@ -180,7 +180,7 @@ namespace DustEngine.DustEditor
 
         protected void OnInspectorGUI_Tools()
         {
-            if (DustGUI.FoldoutBegin("Tools", "DuCloner.Tools", false))
+            if (DustGUI.FoldoutBegin("Tools", "DuFactory.Tools", false))
             {
                 if (DustGUI.Button("Forced Rebuild Clones"))
                     m_IsRequireRebuildClones |= true;
@@ -204,7 +204,7 @@ namespace DustEngine.DustEditor
 
             OptimizeFactoryMachinesArray();
 
-            Vector2 scrollPosition = DuSessionState.GetVector3("DuCloner.FactoryMachine.ScrollPosition", target, Vector2.zero);
+            Vector2 scrollPosition = DuSessionState.GetVector3("DuFactory.FactoryMachine.ScrollPosition", target, Vector2.zero);
             float totalHeight = 32 * Mathf.Clamp(m_FactoryMachines.property.arraySize + 1, 3, 8);
 
             int indentLevel = DustGUI.IndentLevelReset(); // Because it'll try to add left-spacing when draw fields
@@ -244,7 +244,7 @@ namespace DustEngine.DustEditor
 
             Space();
 
-            DuSessionState.SetVector3("DuCloner.FactoryMachine.ScrollPosition", target, scrollPosition);
+            DuSessionState.SetVector3("DuFactory.FactoryMachine.ScrollPosition", target, scrollPosition);
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

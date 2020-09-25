@@ -136,7 +136,7 @@ namespace DustEngine
             //----------------------------------------------------------------------------------------------------------
             // [2] Apply Target logic
 
-            Vector3 lookDirection; // local is for cloner
+            Vector3 lookDirection;
 
             switch (targetMode)
             {
