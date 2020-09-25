@@ -21,61 +21,6 @@ namespace DustEngine.DustEditor
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        private GUIStyle m_StyleMiniButton = GUIStyle.none;
-        private GUIStyle styleMiniButton
-        {
-            get
-            {
-                if (m_StyleMiniButton == GUIStyle.none)
-                    m_StyleMiniButton = DustGUI.NewStyleButton().Padding(2, 0).Margin(0).Build();
-
-                return m_StyleMiniButton;
-            }
-        }
-
-        private GUIStyle m_StyleHintLabel = GUIStyle.none;
-        private GUIStyle styleHintLabel
-        {
-            get
-            {
-                if (m_StyleHintLabel == GUIStyle.none)
-                    m_StyleHintLabel = DustGUI.NewStyleLabel()
-                        .PaddingTop(0).PaddingBottom(0)
-                        .MarginTop(0).MarginBottom(0)
-                        .FontSizeScaled(0.8f)
-                        .NormalTextColor(Color.gray)
-                        .Build();
-
-                return m_StyleHintLabel;
-            }
-        }
-
-        private GUIStyle m_StyleIntensityButton = GUIStyle.none;
-        private GUIStyle styleIntensityButton
-        {
-            get
-            {
-                if (m_StyleIntensityButton == GUIStyle.none)
-                    m_StyleIntensityButton = DustGUI.NewStyleButton().MarginTop(6).Build();
-
-                return m_StyleIntensityButton;
-            }
-        }
-
-        private GUIStyle m_StyleDropDownList = GUIStyle.none;
-        private GUIStyle styleDropDownList
-        {
-            get
-            {
-                if (m_StyleDropDownList == GUIStyle.none)
-                    m_StyleDropDownList = DustGUI.NewStylePopup().MarginTop(7).Build();
-
-                return m_StyleDropDownList;
-            }
-        }
-
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
         private readonly Dictionary<string, Rect> m_RectsUI = new Dictionary<string, Rect>();
 
         public DuFieldsMapEditor(DuEditor parentEditor, SerializedProperty fieldsMapProperty, DuFieldsMap fieldsMapInstance)
@@ -204,16 +149,16 @@ namespace DustEngine.DustEditor
                 var fieldEnabledInScene = newRecord.field.enabled &&
                                           newRecord.field.gameObject.activeInHierarchy;
 
-                var fieldIcon = Icons.GetTextureByComponent(newRecord.field, !fieldEnabledInScene ? "Disabled" : "");
+                var fieldIcon = UI.Icons.GetTextureByComponent(newRecord.field, !fieldEnabledInScene ? "Disabled" : "");
 
-                if (DustGUI.IconButton(fieldIcon, CELL_WIDTH_ICON, CELL_WIDTH_ICON, styleMiniButton))
+                if (DustGUI.IconButton(fieldIcon, CELL_WIDTH_ICON, CELL_WIDTH_ICON, UI.ExtraList.styleMiniButton))
                     Selection.activeGameObject = newRecord.field.gameObject;
 
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-                var btnStateIcon = newRecord.enabled ? Icons.STATE_ENABLED : Icons.STATE_DISABLED;
+                var btnStateIcon = newRecord.enabled ? UI.Icons.STATE_ENABLED : UI.Icons.STATE_DISABLED;
 
-                if (DustGUI.IconButton(btnStateIcon, CELL_WIDTH_STATE, 32, styleMiniButton))
+                if (DustGUI.IconButton(btnStateIcon, CELL_WIDTH_STATE, 32, UI.ExtraList.styleMiniButton))
                     newRecord.enabled = !newRecord.enabled;
 
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -231,7 +176,7 @@ namespace DustEngine.DustEditor
                     DustGUI.BeginVertical();
                     {
                         DustGUI.SimpleLabel(fieldName, 0, 14);
-                        DustGUI.SimpleLabel(fieldHint, 0, 10, styleHintLabel);
+                        DustGUI.SimpleLabel(fieldHint, 0, 10, UI.ExtraList.styleHintLabel);
                     }
                     DustGUI.EndVertical();
                 }
@@ -246,7 +191,7 @@ namespace DustEngine.DustEditor
 
                 string intensityValue = newRecord.intensity.ToString("F2");
 
-                if (DustGUI.Button(intensityValue, CELL_WIDTH_INTENSITY, 20f, styleIntensityButton, DustGUI.ButtonState.Pressed))
+                if (DustGUI.Button(intensityValue, CELL_WIDTH_INTENSITY, 20f, UI.ExtraList.styleIntensityButton, DustGUI.ButtonState.Pressed))
                 {
                     Rect buttonRect = m_RectsUI["item" + itemIndex.ToString()];
                     buttonRect.y += 5f;
@@ -261,7 +206,7 @@ namespace DustEngine.DustEditor
 
                 if (calculatePower)
                 {
-                    var enumValue = DustGUI.DropDownList(newRecord.blendPowerMode, CELL_WIDTH_BLENDING, 0, styleDropDownList);
+                    var enumValue = DustGUI.DropDownList(newRecord.blendPowerMode, CELL_WIDTH_BLENDING, 0, UI.ExtraList.styleDropDownList);
                     newRecord.blendPowerMode = (DuFieldsMap.FieldRecord.BlendPowerMode) enumValue;
                 }
 
@@ -269,7 +214,7 @@ namespace DustEngine.DustEditor
 
                 if (calculateColor)
                 {
-                    var enumValue = DustGUI.DropDownList(newRecord.blendColorMode, CELL_WIDTH_BLENDING, 0, styleDropDownList);
+                    var enumValue = DustGUI.DropDownList(newRecord.blendColorMode, CELL_WIDTH_BLENDING, 0, UI.ExtraList.styleDropDownList);
                     newRecord.blendColorMode = (DuFieldsMap.FieldRecord.BlendColorMode) enumValue;
                 }
 
@@ -280,15 +225,15 @@ namespace DustEngine.DustEditor
 
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-                clickOnDelete = DustGUI.IconButton(Icons.ACTION_DELETE, 20, 32, styleMiniButton);
+                clickOnDelete = DustGUI.IconButton(UI.Icons.ACTION_DELETE, 20, 32, UI.ExtraList.styleMiniButton);
 
                 DustGUI.BeginVertical(20);
                 {
                     DustGUI.ButtonState stateUp = itemIndex > 0 ? DustGUI.ButtonState.Normal : DustGUI.ButtonState.Locked;
                     DustGUI.ButtonState stateDw = itemIndex < itemsCount - 1 ? DustGUI.ButtonState.Normal : DustGUI.ButtonState.Locked;
 
-                    clickOnMoveUp = DustGUI.IconButton(DustGUI.Config.RESOURCE_ICON_ARROW_UP, 20, 16, styleMiniButton, stateUp);
-                    clickOnMoveDw = DustGUI.IconButton(DustGUI.Config.RESOURCE_ICON_ARROW_DOWN, 20, 16, styleMiniButton, stateDw);
+                    clickOnMoveUp = DustGUI.IconButton(DustGUI.Config.RESOURCE_ICON_ARROW_UP, 20, 16, UI.ExtraList.styleMiniButton, stateUp);
+                    clickOnMoveDw = DustGUI.IconButton(DustGUI.Config.RESOURCE_ICON_ARROW_DOWN, 20, 16, UI.ExtraList.styleMiniButton, stateDw);
                 }
                 DustGUI.EndVertical();
             }
@@ -339,7 +284,7 @@ namespace DustEngine.DustEditor
         {
             DustGUI.BeginHorizontal();
             {
-                if (DustGUI.IconButton(Icons.ACTION_ADD_FIELD, CELL_WIDTH_ICON, CELL_WIDTH_ICON, styleMiniButton))
+                if (DustGUI.IconButton(UI.Icons.ACTION_ADD_FIELD, CELL_WIDTH_ICON, CELL_WIDTH_ICON, UI.ExtraList.styleMiniButton))
                     PopupWindow.Show(m_RectsUI["Add"], DuPopupButtons.Fields(this));
 
                 if (Event.current.type == EventType.Repaint)

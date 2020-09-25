@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace DustEngine.DustEditor
+namespace DustEngine.DustEditor.UI
 {
     public static class Icons
     {
@@ -50,6 +50,7 @@ namespace DustEngine.DustEditor
             ["DustEngine.DuFactoryInstance"] = new ClassParams { IconName = "Factory/DuFactoryInstance" },
 
             ["DustEngine.DuGridFactory"] = new ClassParams { IconName = "Factory/DuGridFactory" },
+            ["DustEngine.DuHoneycombFactory"] = new ClassParams { IconName = "Factory/DuHoneycombFactory" },
             ["DustEngine.DuLinearFactory"] = new ClassParams { IconName = "Factory/DuLinearFactory" },
             ["DustEngine.DuRadialFactory"] = new ClassParams { IconName = "Factory/DuRadialFactory" },
 

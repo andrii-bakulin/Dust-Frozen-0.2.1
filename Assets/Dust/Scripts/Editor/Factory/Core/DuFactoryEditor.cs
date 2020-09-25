@@ -7,6 +7,8 @@ namespace DustEngine.DustEditor
     public abstract class DuFactoryEditor : DuEditor
     {
         private const float CELL_WIDTH_ICON = 32f;
+        private const float CELL_WIDTH_STATE = 20f;
+        private const float CELL_WIDTH_INTENSITY = 54f;
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -28,20 +30,6 @@ namespace DustEngine.DustEditor
 
         private DuProperty m_InspectorDisplay;
         private DuProperty m_InspectorScale;
-
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-        private GUIStyle m_StyleMiniButton = GUIStyle.none;
-        private GUIStyle styleMiniButton
-        {
-            get
-            {
-                if (m_StyleMiniButton == GUIStyle.none)
-                    m_StyleMiniButton = DustGUI.NewStyleButton().Padding(2, 0).Margin(0).Build();
-
-                return m_StyleMiniButton;
-            }
-        }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -134,8 +122,7 @@ namespace DustEngine.DustEditor
                 Space();
 
                 DrawFactoryMachinesBlock();
-                PropertyField(m_FactoryMachines); // @todo! hide
-                Space();
+                // Space();
             }
             DustGUI.FoldoutEnd();
 
@@ -205,7 +192,7 @@ namespace DustEngine.DustEditor
             OptimizeFactoryMachinesArray();
 
             Vector2 scrollPosition = DuSessionState.GetVector3("DuFactory.FactoryMachine.ScrollPosition", target, Vector2.zero);
-            float totalHeight = 32 * Mathf.Clamp(m_FactoryMachines.property.arraySize + 1, 3, 8);
+            float totalHeight = 36 * Mathf.Clamp(m_FactoryMachines.property.arraySize + 1, 4, 8) + 16;
 
             int indentLevel = DustGUI.IndentLevelReset(); // Because it'll try to add left-spacing when draw fields
             Rect rect = DustGUI.BeginVerticalBox();
@@ -229,23 +216,9 @@ namespace DustEngine.DustEditor
             DustGUI.EndVertical();
             DustGUI.IndentLevelReset(indentLevel);
 
-            for (int i = 0; i < m_FactoryMachines.property.arraySize; i++)
-            {
-                SerializedProperty item = m_FactoryMachines.property.GetArrayElementAtIndex(i);
-                var record = UnpackFactoryMachineRecord(item);
-
-                if (Dust.IsNull(record.factoryMachine))
-                    continue; // Notice: but it should never be this way!
-
-                var property = FindProperty(this, item, "m_Intensity", record.factoryMachine.FactoryMachineName());
-
-                PropertyExtendedSlider(property, 0f, 1f, 0.01f);
-            }
-
             Space();
 
-            DuSessionState.SetVector3("DuFactory.FactoryMachine.ScrollPosition", target, scrollPosition);
-
+            // PropertyField(m_FactoryMachines);
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             if (rect.Contains(Event.current.mousePosition))
@@ -261,6 +234,10 @@ namespace DustEngine.DustEditor
                     Event.current.Use();
                 }
             }
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            DuSessionState.SetVector3("DuFactory.FactoryMachine.ScrollPosition", target, scrollPosition);
         }
 
         private DuFactoryMachine.Record UnpackFactoryMachineRecord(SerializedProperty item)
@@ -274,39 +251,89 @@ namespace DustEngine.DustEditor
 
         private bool DrawFactoryMachineItem(SerializedProperty item, int itemIndex, int itemsCount)
         {
-            var record = UnpackFactoryMachineRecord(item);
+            var curRecord = UnpackFactoryMachineRecord(item); // just to save previous state
+            var newRecord = UnpackFactoryMachineRecord(item); // this record will fix changes
 
-            if (Dust.IsNull(record.factoryMachine))
+            if (Dust.IsNull(newRecord.factoryMachine))
                 return false; // Notice: but it should never be this way!
 
-            bool clickOnIcon;
-            bool clickOnEnable;
             bool clickOnDelete;
             bool clickOnMoveUp;
             bool clickOnMoveDw;
 
-            var miniButtonStyle = new GUIStyle(GUI.skin.button);
-            miniButtonStyle.padding = new RectOffset(2, 2, 0, 0);
-            miniButtonStyle.margin = new RectOffset(0, 0, 0, 0);
-
             DustGUI.BeginHorizontal();
             {
-                clickOnIcon = DustGUI.IconButton(Icons.GetTextureByComponent(record.factoryMachine),
-                    record.enabled ? DustGUI.ButtonState.Normal : DustGUI.ButtonState.Pressed);
+                var machineEnabledInScene = newRecord.factoryMachine.enabled &&
+                                            newRecord.factoryMachine.gameObject.activeInHierarchy;
+                var machineIcon = UI.Icons.GetTextureByComponent(newRecord.factoryMachine, !machineEnabledInScene ? "Disabled" : "");
 
-                DustGUI.Label(record.factoryMachine.FactoryMachineName(), 0, DustGUI.Config.ICON_BUTTON_HEIGHT,
-                    record.enabled ? DustGUI.labelNormalColor : Color.gray);
+                if (DustGUI.IconButton(machineIcon, CELL_WIDTH_ICON, CELL_WIDTH_ICON, UI.ExtraList.styleMiniButton))
+                    Selection.activeGameObject = newRecord.factoryMachine.gameObject;
 
-                clickOnEnable = DustGUI.IconButton(record.enabled ? Icons.STATE_ENABLED : Icons.STATE_DISABLED);
-                clickOnDelete = DustGUI.IconButton(Icons.ACTION_DELETE, 20, 32, miniButtonStyle);
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+                var btnStateIcon = newRecord.enabled ? UI.Icons.STATE_ENABLED : UI.Icons.STATE_DISABLED;
+
+                if (DustGUI.IconButton(btnStateIcon, CELL_WIDTH_STATE, 32f, UI.ExtraList.styleMiniButton))
+                    newRecord.enabled = !newRecord.enabled;
+
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+                if (!newRecord.enabled)
+                    DustGUI.Lock();
+
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+                var machineName = new GUIContent(newRecord.factoryMachine.FactoryMachineName(), newRecord.factoryMachine.gameObject.name);
+                var machineHint = newRecord.factoryMachine.FactoryMachineEditorDynamicHint();
+
+                if (machineHint != "")
+                {
+                    DustGUI.BeginVertical();
+                    {
+                        DustGUI.SimpleLabel(machineName, 0, 14);
+                        DustGUI.SimpleLabel(machineHint, 0, 10, UI.ExtraList.styleHintLabel);
+                    }
+                    DustGUI.EndVertical();
+                }
+                else
+                {
+                    DustGUI.SimpleLabel(machineName, 0, DustGUI.Config.ICON_BUTTON_HEIGHT);
+                }
+
+                DustGUI.SpaceExpand();
+
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+                string intensityValue = newRecord.intensity.ToString("F2");
+
+                if (DustGUI.Button(intensityValue, CELL_WIDTH_INTENSITY, 20f, UI.ExtraList.styleIntensityButton, DustGUI.ButtonState.Pressed))
+                {
+                    Rect buttonRect = m_RectsUI["item" + itemIndex.ToString()];
+                    buttonRect.y += 5f;
+
+                    PopupWindow.Show(buttonRect, DuPopupExtraSlider.Create(serializedObject, "Intensity", item.FindPropertyRelative("m_Intensity")));
+                }
+
+                if (Event.current.type == EventType.Repaint)
+                    m_RectsUI["item" + itemIndex.ToString()] = GUILayoutUtility.GetLastRect();
+
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+                if (!newRecord.enabled)
+                    DustGUI.Unlock();
+
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+                clickOnDelete = DustGUI.IconButton(UI.Icons.ACTION_DELETE, 20, 32, UI.ExtraList.styleMiniButton);
 
                 DustGUI.BeginVertical(20);
                 {
                     DustGUI.ButtonState stateUp = itemIndex > 0 ? DustGUI.ButtonState.Normal : DustGUI.ButtonState.Locked;
                     DustGUI.ButtonState stateDw = itemIndex < itemsCount - 1 ? DustGUI.ButtonState.Normal : DustGUI.ButtonState.Locked;
 
-                    clickOnMoveUp = DustGUI.IconButton(DustGUI.Config.RESOURCE_ICON_ARROW_UP, 20, 16, miniButtonStyle, stateUp);
-                    clickOnMoveDw = DustGUI.IconButton(DustGUI.Config.RESOURCE_ICON_ARROW_DOWN, 20, 16, miniButtonStyle, stateDw);
+                    clickOnMoveUp = DustGUI.IconButton(DustGUI.Config.RESOURCE_ICON_ARROW_UP, 20, 16, UI.ExtraList.styleMiniButton, stateUp);
+                    clickOnMoveDw = DustGUI.IconButton(DustGUI.Config.RESOURCE_ICON_ARROW_DOWN, 20, 16, UI.ExtraList.styleMiniButton, stateDw);
                 }
                 DustGUI.EndVertical();
             }
@@ -315,32 +342,27 @@ namespace DustEngine.DustEditor
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // Actions
 
-            if (clickOnIcon)
-            {
-                Selection.activeGameObject = record.factoryMachine.gameObject;
-                return false;
-            }
-
-            if (clickOnEnable)
-            {
-                item.FindPropertyRelative("m_Enabled").boolValue = !item.FindPropertyRelative("m_Enabled").boolValue;
+            if (curRecord.enabled != newRecord.enabled) {
+                item.FindPropertyRelative("m_Enabled").boolValue = newRecord.enabled;
                 return true;
             }
 
-            if (clickOnDelete)
-            {
+            if (!curRecord.intensity.Equals(newRecord.intensity)) {
+                item.FindPropertyRelative("m_Intensity").floatValue = newRecord.intensity;
+                return true;
+            }
+
+            if (clickOnDelete) {
                 m_FactoryMachines.property.DeleteArrayElementAtIndex(itemIndex);
                 return true;
             }
 
-            if (clickOnMoveUp)
-            {
+            if (clickOnMoveUp) {
                 m_FactoryMachines.property.MoveArrayElement(itemIndex, itemIndex - 1);
                 return true;
             }
 
-            if (clickOnMoveDw)
-            {
+            if (clickOnMoveDw) {
                 m_FactoryMachines.property.MoveArrayElement(itemIndex, itemIndex + 1);
                 return true;
             }
@@ -352,7 +374,7 @@ namespace DustEngine.DustEditor
         {
             DustGUI.BeginHorizontal();
             {
-                if (DustGUI.IconButton(Icons.ACTION_ADD_FACTORY_MACHINE, CELL_WIDTH_ICON, CELL_WIDTH_ICON, styleMiniButton))
+                if (DustGUI.IconButton(UI.Icons.ACTION_ADD_FACTORY_MACHINE, CELL_WIDTH_ICON, CELL_WIDTH_ICON, UI.ExtraList.styleMiniButton))
                     PopupWindow.Show(m_RectsUI["Add"], DuPopupButtons.FactoryMachines(this));
 
                 if (Event.current.type == EventType.Repaint)

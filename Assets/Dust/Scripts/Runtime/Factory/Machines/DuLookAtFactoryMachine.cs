@@ -103,6 +103,24 @@ namespace DustEngine
             return "LookAt";
         }
 
+#if UNITY_EDITOR
+        public override string FactoryMachineEditorDynamicHint()
+        {
+            switch (targetMode)
+            {
+                default:
+                case TargetMode.ObjectTarget:
+                    return Dust.IsNotNull(targetObject) ? targetObject.gameObject.name : "";
+
+                case TargetMode.NextInstance:
+                    return "Next Instance";
+
+                case TargetMode.PreviousInstance:
+                    return "Previous Instance";
+            }
+        }
+#endif
+
         public override void PrepareForUpdateInstancesStates(DuFactory factory)
         {
         }

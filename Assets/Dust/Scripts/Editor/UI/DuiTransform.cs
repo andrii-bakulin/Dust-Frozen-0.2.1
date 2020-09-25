@@ -51,13 +51,13 @@ namespace DustEngine.DustEditor
 
             DustGUI.BeginHorizontal();
             {
-                if (DustGUI.IconButton(Icons.GAME_OBJECT_STATS, isRequireShowMeshInfo ? DustGUI.ButtonState.Pressed : DustGUI.ButtonState.Normal))
+                if (DustGUI.IconButton(UI.Icons.GAME_OBJECT_STATS, isRequireShowMeshInfo ? DustGUI.ButtonState.Pressed : DustGUI.ButtonState.Normal))
                 {
                     isRequireShowMeshInfo = !isRequireShowMeshInfo;
                     DuSessionState.SetBool("DuiTransform.ShowMeshInfo", isRequireShowMeshInfo);
                 }
 
-                if (DustGUI.IconButton(Icons.TRANSFORM_RESET))
+                if (DustGUI.IconButton(UI.Icons.TRANSFORM_RESET))
                 {
                     foreach (var subTarget in targets)
                     {

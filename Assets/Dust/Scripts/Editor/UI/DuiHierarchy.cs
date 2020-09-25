@@ -45,7 +45,7 @@ namespace DustEngine.DustEditor
 
                 for (int i = list.Length - 1; i >= 0; i--)
                 {
-                    Texture iconTexture = Icons.GetTextureByComponent(list[i]);
+                    Texture iconTexture = UI.Icons.GetTextureByComponent(list[i]);
 
                     if (Dust.IsNull(iconTexture))
                         continue;

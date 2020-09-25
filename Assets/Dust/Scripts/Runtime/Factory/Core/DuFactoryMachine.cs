@@ -92,6 +92,10 @@ namespace DustEngine
 
         public abstract string FactoryMachineName();
 
+#if UNITY_EDITOR
+        public abstract string FactoryMachineEditorDynamicHint();
+#endif
+
         public abstract void PrepareForUpdateInstancesStates(DuFactory factory);
         public abstract void FinalizeUpdateInstancesStates(DuFactory factory);
 

@@ -168,7 +168,7 @@ namespace DustEngine.DustEditor
                 foreach (var cellRecord in columnRecord.cells)
                 {
                     GUIContent btnContent = new GUIContent();
-                    btnContent.image = Icons.GetTextureByClassName(cellRecord.type.ToString());
+                    btnContent.image = UI.Icons.GetTextureByClassName(cellRecord.type.ToString());
                     btnContent.text = cellRecord.title;
 
                     if (DustGUI.IconButton(btnContent, BUTTON_WIDTH, BUTTON_HEIGHT, btnStyle))
