@@ -191,7 +191,7 @@ namespace DustEngine.DustEditor
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
                 var deformerName = new GUIContent(newRecord.deformer.DeformerName(), newRecord.deformer.gameObject.name);
-                var deformerHint = newRecord.deformer.DeformerEditorDynamicHint();
+                var deformerHint = newRecord.deformer.DeformerDynamicHint();
 
                 if (deformerHint != "")
                 {

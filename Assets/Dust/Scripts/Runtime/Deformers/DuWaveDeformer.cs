@@ -160,7 +160,7 @@ namespace DustEngine
         }
 
 #if UNITY_EDITOR
-        public override string DeformerEditorDynamicHint()
+        public override string DeformerDynamicHint()
         {
             return "";
         }

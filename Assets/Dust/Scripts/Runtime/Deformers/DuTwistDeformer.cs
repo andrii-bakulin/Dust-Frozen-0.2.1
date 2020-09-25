@@ -65,7 +65,7 @@ namespace DustEngine
         }
 
 #if UNITY_EDITOR
-        public override string DeformerEditorDynamicHint()
+        public override string DeformerDynamicHint()
         {
             return angle.ToString("F2") + "° in " + DuAxisDirection.ToString(direction);
         }

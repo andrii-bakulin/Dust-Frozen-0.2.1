@@ -118,7 +118,7 @@ namespace DustEngine
         public abstract string DeformerName();
 
 #if UNITY_EDITOR
-        public abstract string DeformerEditorDynamicHint();
+        public abstract string DeformerDynamicHint();
 #endif
 
         public abstract bool DeformPoint(ref Vector3 localPosition, float strength = 1f);
