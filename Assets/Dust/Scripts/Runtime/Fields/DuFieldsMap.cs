@@ -125,14 +125,19 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public static DuFieldsMap FieldsSpace()
+        public static DuFieldsMap Deformer()
+        {
+            return new DuFieldsMap(true, false);
+        }
+
+        public static DuFieldsMap Factory()
         {
             return new DuFieldsMap(true, true);
         }
 
-        public static DuFieldsMap Deformer()
+        public static DuFieldsMap FieldsSpace()
         {
-            return new DuFieldsMap(true, false);
+            return new DuFieldsMap(true, true);
         }
 
         public DuFieldsMap(bool calcPower, bool calcColor)
@@ -212,6 +217,46 @@ namespace DustEngine
         {
             m_CalcFieldPoint.inPosition = worldPosition;
             m_CalcFieldPoint.inOffset = sequenceOffset;
+
+            bool result = Calculate(m_CalcFieldPoint);
+
+            power = m_CalcFieldPoint.outPower;
+            color = m_CalcFieldPoint.outColor;
+
+            return result;
+        }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        public bool Calculate(DuFactory factory, DuFactoryInstance factoryInstance, out float power)
+        {
+            if (fields.Count == 0)
+            {
+                power = 1f; // This is tricks just for factory-machine logics
+                return false;
+            }
+
+            m_CalcFieldPoint.inPosition = factory.GetInstancePositionInWorldSpace(factoryInstance);
+            m_CalcFieldPoint.inOffset = factoryInstance.instanceOffset;
+
+            bool result = Calculate(m_CalcFieldPoint);
+
+            power = m_CalcFieldPoint.outPower;
+
+            return result;
+        }
+
+        public bool Calculate(DuFactory factory, DuFactoryInstance factoryInstance, out float power, out Color color)
+        {
+            if (fields.Count == 0)
+            {
+                power = 1f; // This is tricks just for factory-machine logics
+                color = Color.black;
+                return false;
+            }
+
+            m_CalcFieldPoint.inPosition = factory.GetInstancePositionInWorldSpace(factoryInstance);
+            m_CalcFieldPoint.inOffset = factoryInstance.instanceOffset;
 
             bool result = Calculate(m_CalcFieldPoint);
 

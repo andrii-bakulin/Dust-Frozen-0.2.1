@@ -7,6 +7,7 @@ namespace DustEngine.DustEditor
     {
         internal const string ACTION_DELETE = "UI/Action-Delete";
         internal const string ACTION_ADD_DEFORMER = "Deformers/Add";
+        internal const string ACTION_ADD_FACTORY_MACHINE = "Factory/Add-Machine";
         internal const string ACTION_ADD_FIELD = "Fields/Add";
 
         internal const string STATE_ENABLED = "UI/State-Enabled";
@@ -44,6 +45,13 @@ namespace DustEngine.DustEditor
             ["DustEngine.DuTimerEvent"] = new ClassParams { IconName = "Events/DuTimerEvent" },
             ["DustEngine.DuTriggerEvent"] = new ClassParams { IconName = "Events/DuColliderEvent" },
             ["DustEngine.DuTrigger2DEvent"] = new ClassParams { IconName = "Events/DuColliderEvent2D" },
+
+            // Factory @todo!
+            ["DustEngine.DuFactoryInstance"] = new ClassParams { IconName = "Factory/DuFactoryInstance" },
+
+            ["DustEngine.DuGridFactory"] = new ClassParams { IconName = "Factory/DuGridFactory" },
+            ["DustEngine.DuLinearFactory"] = new ClassParams { IconName = "Factory/DuLinearFactory" },
+            ["DustEngine.DuRadialFactory"] = new ClassParams { IconName = "Factory/DuRadialFactory" },
 
             // Fields
             ["DustEngine.DuFieldsSpace"] = new ClassParams { IconName = "Fields/FieldsSpace" },

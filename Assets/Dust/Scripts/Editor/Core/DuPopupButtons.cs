@@ -11,8 +11,9 @@ namespace DustEngine.DustEditor
 
         private enum PopupMode
         {
-            Fields = 0,
             Deformers = 1,
+            FactoryMachines = 2,
+            Fields = 3,
         }
 
         private class ColumnRecord
@@ -31,14 +32,52 @@ namespace DustEngine.DustEditor
 
         private PopupMode m_PopupMode;
 
-        private DuFieldsMapEditor m_FieldsMap;
         private DuDeformMeshEditor m_DeformMesh;
+        private DuFactoryEditor m_Factory;
+        private DuFieldsMapEditor m_FieldsMap;
 
         private List<ColumnRecord> m_ColumnRecords = new List<ColumnRecord>();
         private int m_ColsCount;
         private int m_RowsCount;
 
         //--------------------------------------------------------------------------------------------------------------
+
+        public static DuPopupButtons Deformers(DuDeformMeshEditor deformMesh)
+        {
+            var popup = new DuPopupButtons();
+            popup.m_PopupMode = PopupMode.Deformers;
+            popup.m_DeformMesh = deformMesh;
+
+            ColumnRecord column;
+
+            column = new ColumnRecord() {title = "Deformers"};
+            {
+                popup.AddItem(column, typeof(DuTwistDeformer), "Twist");
+                popup.AddItem(column, typeof(DuWaveDeformer), "Wave");
+
+                popup.m_ColumnRecords.Add(column);
+            }
+
+            popup.m_ColsCount = popup.m_ColumnRecords.Count;
+            return popup;
+        }
+
+        public static DuPopupButtons FactoryMachines(DuFactoryEditor factory)
+        {
+            var popup = new DuPopupButtons();
+            popup.m_PopupMode = PopupMode.FactoryMachines;
+            popup.m_Factory = factory;
+
+            ColumnRecord column;
+
+            column = new ColumnRecord() {title = "Machines"};
+            {
+                popup.m_ColumnRecords.Add(column);
+            }
+
+            popup.m_ColsCount = popup.m_ColumnRecords.Count;
+            return popup;
+        }
 
         public static DuPopupButtons Fields(DuFieldsMapEditor fieldsMap)
         {
@@ -79,26 +118,6 @@ namespace DustEngine.DustEditor
                 popup.AddItem(column, typeof(DuInvertField), "Invert");
                 popup.AddItem(column, typeof(DuRemapField), "Remap");
                 popup.AddItem(column, typeof(DuRoundField), "Round");
-
-                popup.m_ColumnRecords.Add(column);
-            }
-
-            popup.m_ColsCount = popup.m_ColumnRecords.Count;
-            return popup;
-        }
-
-        public static DuPopupButtons Deformers(DuDeformMeshEditor deformMesh)
-        {
-            var popup = new DuPopupButtons();
-            popup.m_PopupMode = PopupMode.Deformers;
-            popup.m_DeformMesh = deformMesh;
-
-            ColumnRecord column;
-
-            column = new ColumnRecord() {title = "Deformers"};
-            {
-                popup.AddItem(column, typeof(DuTwistDeformer), "Twist");
-                popup.AddItem(column, typeof(DuWaveDeformer), "Wave");
 
                 popup.m_ColumnRecords.Add(column);
             }
@@ -152,13 +171,17 @@ namespace DustEngine.DustEditor
 
                     if (DustGUI.IconButton(btnContent, BUTTON_WIDTH, BUTTON_HEIGHT, btnStyle))
                     {
-                        if (m_PopupMode == PopupMode.Fields)
-                        {
-                            DuField.AddFieldComponentByType(m_FieldsMap.GetParentGameObject(), cellRecord.type);
-                        }
-                        else if (m_PopupMode == PopupMode.Deformers)
+                        if (m_PopupMode == PopupMode.Deformers)
                         {
                             DuDeformer.AddDeformerComponentByType((m_DeformMesh.target as DuMonoBehaviour).gameObject, cellRecord.type);
+                        }
+                        else if (m_PopupMode == PopupMode.FactoryMachines)
+                        {
+                            DuFactoryMachine.AddFactoryMachineComponentByType((m_Factory.target as DuMonoBehaviour).gameObject, cellRecord.type);
+                        }
+                        else if (m_PopupMode == PopupMode.Fields)
+                        {
+                            DuField.AddFieldComponentByType(m_FieldsMap.GetParentGameObject(), cellRecord.type);
                         }
 
                         editorWindow.Close();

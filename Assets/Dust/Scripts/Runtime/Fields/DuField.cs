@@ -26,11 +26,19 @@ namespace DustEngine
 
         public static GameObject AddFieldComponentByType(GameObject activeGameObject, System.Type duFieldType)
         {
-            DuFieldsSpace selectedFieldsSpace = null;
             DuDeformer selectedDeformer = null;
+            DuFieldsSpace selectedFieldsSpace = null;
+            DuFactoryMachine selectedFactoryMachine = null;
 
             if (Dust.IsNotNull(activeGameObject))
             {
+                selectedDeformer = activeGameObject.GetComponent<DuDeformer>();
+
+                if (Dust.IsNull(selectedDeformer) && Dust.IsNotNull(activeGameObject.transform.parent))
+                    selectedDeformer = activeGameObject.transform.parent.GetComponent<DuDeformer>();
+
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
                 selectedFieldsSpace = activeGameObject.GetComponent<DuFieldsSpace>();
 
                 if (Dust.IsNull(selectedFieldsSpace) && Dust.IsNotNull(activeGameObject.transform.parent))
@@ -38,25 +46,30 @@ namespace DustEngine
 
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-                selectedDeformer = activeGameObject.GetComponent<DuDeformer>();
+                selectedFactoryMachine = activeGameObject.GetComponent<DuFactoryMachine>();
 
-                if (Dust.IsNull(selectedDeformer) && Dust.IsNotNull(activeGameObject.transform.parent))
-                    selectedDeformer = activeGameObject.transform.parent.GetComponent<DuDeformer>();
+                if (Dust.IsNull(selectedFactoryMachine) && Dust.IsNotNull(activeGameObject.transform.parent))
+                    selectedFactoryMachine = activeGameObject.transform.parent.GetComponent<DuFactoryMachine>();
             }
 
             var gameObject = new GameObject();
             {
                 DuField field = gameObject.AddComponent(duFieldType) as DuField;
 
-                if (Dust.IsNotNull(selectedFieldsSpace))
+                if (Dust.IsNotNull(selectedDeformer))
+                {
+                    field.transform.parent = selectedDeformer.transform;
+                    selectedDeformer.fieldsMap.AddField(field);
+                }
+                else if (Dust.IsNotNull(selectedFieldsSpace))
                 {
                     field.transform.parent = selectedFieldsSpace.transform;
                     selectedFieldsSpace.fieldsMap.AddField(field);
                 }
-                else if (Dust.IsNotNull(selectedDeformer))
+                else if (Dust.IsNotNull(selectedFactoryMachine))
                 {
-                    field.transform.parent = selectedDeformer.transform;
-                    selectedDeformer.fieldsMap.AddField(field);
+                    field.transform.parent = selectedFactoryMachine.transform;
+                    selectedFactoryMachine.fieldsMap.AddField(field);
                 }
 
                 gameObject.name = field.FieldName() + " Field";
