@@ -4,7 +4,7 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuDeformMesh)), CanEditMultipleObjects]
+    [CustomEditor(typeof(DuDeformMesh))]
     public class DuDeformMeshEditor : DuEditor
     {
         private const float CELL_WIDTH_ICON = 32f;
@@ -364,14 +364,14 @@ namespace DustEngine.DustEditor
 
             for (int i = 0; i < count; i++)
             {
-                SerializedProperty fldRecord = m_Deformers.property.GetArrayElementAtIndex(i);
+                SerializedProperty record = m_Deformers.property.GetArrayElementAtIndex(i);
 
-                if (Dust.IsNull(fldRecord))
+                if (Dust.IsNull(record))
                     continue;
 
-                SerializedProperty deformerObject = fldRecord.FindPropertyRelative("m_Deformer");
+                SerializedProperty refObject = record.FindPropertyRelative("m_Deformer");
 
-                if (Dust.IsNull(deformerObject) || !deformerObject.objectReferenceValue.Equals(deformer))
+                if (Dust.IsNull(refObject) || !refObject.objectReferenceValue.Equals(deformer))
                     continue;
 
                 return; // No need to insert 2nd time
@@ -392,28 +392,7 @@ namespace DustEngine.DustEditor
 
         private void OptimizeDeformersArray()
         {
-            bool changed = false;
-
-            for (int i = m_Deformers.property.arraySize - 1; i >= 0; i--)
-            {
-                SerializedProperty fldRecord = m_Deformers.property.GetArrayElementAtIndex(i);
-
-                if (Dust.IsNull(fldRecord))
-                    continue;
-
-                SerializedProperty deformerObject = fldRecord.FindPropertyRelative("m_Deformer");
-
-                if (Dust.IsNotNull(deformerObject) && Dust.IsNull(deformerObject.objectReferenceValue))
-                {
-                    m_Deformers.property.DeleteArrayElementAtIndex(i);
-                    changed = true;
-                }
-            }
-
-            if (!changed)
-                return;
-
-            serializedObject.ApplyModifiedProperties();
+            DuEditorHelper.OptimizeObjectReferencesArray(ref m_Deformers, "m_Deformer");
         }
     }
 }

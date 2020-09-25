@@ -86,7 +86,18 @@ namespace DustEngine.DustEditor
             return duProperty;
         }
 
-        public static DuProperty FindProperty(SerializedProperty parentProperty, string propertyPath, string title = "", string tooltip = "")
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        public static DuProperty FindProperty(SerializedProperty parentProperty, string propertyPath)
+            => FindProperty(null, parentProperty, propertyPath, "", "");
+
+        public static DuProperty FindProperty(SerializedProperty parentProperty, string propertyPath, string title)
+            => FindProperty(null, parentProperty, propertyPath, title, "");
+
+        public static DuProperty FindProperty(DuEditor parentEditor, SerializedProperty parentProperty, string propertyPath, string title)
+            => FindProperty(parentEditor, parentProperty, propertyPath, title, "");
+
+        public static DuProperty FindProperty(DuEditor parentEditor, SerializedProperty parentProperty, string propertyPath, string title, string tooltip)
         {
             var duProperty = new DuProperty
             {
@@ -95,7 +106,7 @@ namespace DustEngine.DustEditor
                 tooltip = tooltip,
                 property = parentProperty.FindPropertyRelative(propertyPath),
                 isChanged = false,
-                parentEditor = null
+                parentEditor = parentEditor,
             };
             return duProperty;
         }
@@ -197,7 +208,10 @@ namespace DustEngine.DustEditor
             return duProperty.isChanged;
         }
 
-        public static bool PropertySeedRandomOrFixed(DuProperty duProperty, int defValue = DuConstants.RANDOM_SEED_DEFAULT)
+        public static bool PropertySeedRandomOrFixed(DuProperty duProperty)
+            => PropertySeedRandomOrFixed(duProperty, DuConstants.RANDOM_SEED_DEFAULT);
+
+        public static bool PropertySeedRandomOrFixed(DuProperty duProperty, int defValue)
         {
             bool isChanged = false;
 
@@ -222,7 +236,10 @@ namespace DustEngine.DustEditor
             return isChanged;
         }
 
-        public static bool PropertySeedFixed(DuProperty duProperty, int seedMin = DuConstants.RANDOM_SEED_MIN, int seedMax = DuConstants.RANDOM_SEED_MAX)
+        public static bool PropertySeedFixed(DuProperty duProperty)
+            => PropertySeedFixed(duProperty, DuConstants.RANDOM_SEED_MIN, DuConstants.RANDOM_SEED_MAX);
+
+        public static bool PropertySeedFixed(DuProperty duProperty, int seedMin, int seedMax)
         {
             EditorGUI.BeginChangeCheck();
             DustGUI.ExtraIntSlider.Create(seedMin, seedMax, 1, 1, int.MaxValue).Draw("Seed", duProperty.property);

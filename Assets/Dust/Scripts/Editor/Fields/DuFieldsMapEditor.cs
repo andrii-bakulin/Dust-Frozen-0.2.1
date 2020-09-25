@@ -83,7 +83,7 @@ namespace DustEngine.DustEditor
             m_FieldsMapInstance = fieldsMapInstance;
 
             m_Editor = parentEditor;
-            m_Fields = DuEditor.FindProperty(fieldsMapProperty, "m_Fields", "Fields");
+            m_Fields = DuEditor.FindProperty(parentEditor, fieldsMapProperty, "m_Fields", "Fields");
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -381,14 +381,14 @@ namespace DustEngine.DustEditor
 
             for (int i = 0; i < count; i++)
             {
-                SerializedProperty fldRecord = m_Fields.property.GetArrayElementAtIndex(i);
+                SerializedProperty record = m_Fields.property.GetArrayElementAtIndex(i);
 
-                if (Dust.IsNull(fldRecord))
+                if (Dust.IsNull(record))
                     continue;
 
-                SerializedProperty fieldObject = fldRecord.FindPropertyRelative("m_Field");
+                SerializedProperty refObject = record.FindPropertyRelative("m_Field");
 
-                if (Dust.IsNull(fieldObject) || !fieldObject.objectReferenceValue.Equals(field))
+                if (Dust.IsNull(refObject) || !refObject.objectReferenceValue.Equals(field))
                     continue;
 
                 return; // No need to insert 2nd time
@@ -411,28 +411,7 @@ namespace DustEngine.DustEditor
 
         private void OptimizeFieldsArray()
         {
-            bool changed = false;
-
-            for (int i = m_Fields.property.arraySize - 1; i >= 0; i--)
-            {
-                SerializedProperty fldRecord = m_Fields.property.GetArrayElementAtIndex(i);
-
-                if (Dust.IsNull(fldRecord))
-                    continue;
-
-                SerializedProperty fieldObject = fldRecord.FindPropertyRelative("m_Field");
-
-                if (Dust.IsNotNull(fieldObject) && Dust.IsNull(fieldObject.objectReferenceValue))
-                {
-                    m_Fields.property.DeleteArrayElementAtIndex(i);
-                    changed = true;
-                }
-            }
-
-            if (!changed)
-                return;
-
-            m_Editor.serializedObject.ApplyModifiedProperties();
+            DuEditorHelper.OptimizeObjectReferencesArray(ref m_Fields, "m_Field");
         }
     }
 }
