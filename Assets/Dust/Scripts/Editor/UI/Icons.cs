@@ -6,8 +6,8 @@ namespace DustEngine.DustEditor
     public static class Icons
     {
         internal const string ACTION_DELETE = "UI/Action-Delete";
-        internal const string ACTION_ADD_DEFORMER = "UI/Action-Add-Deformer";
-        internal const string ACTION_ADD_FIELD = "UI/Action-Add-Field";
+        internal const string ACTION_ADD_DEFORMER = "Deformers/Add";
+        internal const string ACTION_ADD_FIELD = "Fields/Add";
 
         internal const string STATE_ENABLED = "UI/State-Enabled";
         internal const string STATE_DISABLED = "UI/State-Disabled";
