@@ -104,7 +104,7 @@ namespace DustEngine
         }
 
 #if UNITY_EDITOR
-        public override string FactoryMachineEditorDynamicHint()
+        public override string FactoryMachineDynamicHint()
         {
             switch (targetMode)
             {

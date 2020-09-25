@@ -285,7 +285,7 @@ namespace DustEngine.DustEditor
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
                 var machineName = new GUIContent(newRecord.factoryMachine.FactoryMachineName(), newRecord.factoryMachine.gameObject.name);
-                var machineHint = newRecord.factoryMachine.FactoryMachineEditorDynamicHint();
+                var machineHint = newRecord.factoryMachine.FactoryMachineDynamicHint();
 
                 if (machineHint != "")
                 {
