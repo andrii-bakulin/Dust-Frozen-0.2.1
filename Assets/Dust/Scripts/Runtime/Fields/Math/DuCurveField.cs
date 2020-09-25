@@ -87,6 +87,7 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
+        // Basic
 
         public override string FieldName()
         {
@@ -94,20 +95,24 @@ namespace DustEngine
         }
 
 #if UNITY_EDITOR
-        public override string FieldEditorDynamicHint()
+        public override string FieldDynamicHint()
         {
             return "";
         }
 #endif
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Power
 
         public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
         {
             return shape.Evaluate(RecalculateValue(fieldPoint.outPower));
         }
 
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        //--------------------------------------------------------------------------------------------------------------
+        // Color
 
-        public override bool IsAllowGetFieldColor()
+        public override bool IsAllowCalculateFieldColor()
         {
             return true;
         }
@@ -122,7 +127,19 @@ namespace DustEngine
             return color;
         }
 
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#if UNITY_EDITOR
+        public override bool IsHasFieldColorPreview()
+        {
+            return false;
+        }
+
+        public override Gradient GetFieldColorPreview()
+        {
+            return null;
+        }
+#endif
+
+        //--------------------------------------------------------------------------------------------------------------
 
         protected float RecalculateValue(float value)
         {

@@ -61,6 +61,17 @@ namespace DustEngine
             return v;
         }
 
+        public static Gradient ToGradient(this Color self)
+        {
+            var gradient = new Gradient();
+
+            gradient.SetKeys(
+                new[] {new GradientColorKey(self, 0f)},
+                new[] {new GradientAlphaKey(1f, 0f)});
+
+            return gradient;
+        }
+
         //--------------------------------------------------------------------------------------------------------------
         // Creators
 

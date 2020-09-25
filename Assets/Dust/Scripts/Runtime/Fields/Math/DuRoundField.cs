@@ -77,13 +77,16 @@ namespace DustEngine
             return value;
         }
 
+        //--------------------------------------------------------------------------------------------------------------
+        // Basic
+
         public override string FieldName()
         {
             return "Round";
         }
 
 #if UNITY_EDITOR
-        public override string FieldEditorDynamicHint()
+        public override string FieldDynamicHint()
         {
             string hint = "";
 
@@ -98,14 +101,18 @@ namespace DustEngine
         }
 #endif
 
+        //--------------------------------------------------------------------------------------------------------------
+        // Power
+
         public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
         {
             return RoundValue(fieldPoint.outPower);
         }
 
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        //--------------------------------------------------------------------------------------------------------------
+        // Color
 
-        public override bool IsAllowGetFieldColor()
+        public override bool IsAllowCalculateFieldColor()
         {
             return true;
         }
@@ -119,5 +126,17 @@ namespace DustEngine
             color.a = RoundValue(color.a);
             return color;
         }
+
+#if UNITY_EDITOR
+        public override bool IsHasFieldColorPreview()
+        {
+            return false;
+        }
+
+        public override Gradient GetFieldColorPreview()
+        {
+            return null;
+        }
+#endif
     }
 }

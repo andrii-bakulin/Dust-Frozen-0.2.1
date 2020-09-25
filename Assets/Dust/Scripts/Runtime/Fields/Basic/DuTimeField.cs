@@ -81,6 +81,7 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
+        // Basic
 
         public override string FieldName()
         {
@@ -88,7 +89,7 @@ namespace DustEngine
         }
 
 #if UNITY_EDITOR
-        public override string FieldEditorDynamicHint()
+        public override string FieldDynamicHint()
         {
             if (Mathf.Approximately(timeScale, 1f))
                 return "";
@@ -96,6 +97,18 @@ namespace DustEngine
             return "Scale " + timeScale.ToString("F2");
         }
 #endif
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Power
+
+        public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
+        {
+            float globalOffset = m_OffsetDynamic + offset * timeScale;
+
+            float power = GetPowerByTimeMode(timeMode, globalOffset);
+
+            return remapping.MapValue(power);
+        }
 
         public float GetPowerByTimeMode(TimeMode mode, float timeOffset)
         {
@@ -137,18 +150,10 @@ namespace DustEngine
             }
         }
 
-        public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
-        {
-            float globalOffset = m_OffsetDynamic + offset * timeScale;
+        //--------------------------------------------------------------------------------------------------------------
+        // Color
 
-            float power = GetPowerByTimeMode(timeMode, globalOffset);
-
-            return remapping.MapValue(power);
-        }
-
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-        public override bool IsAllowGetFieldColor()
+        public override bool IsAllowCalculateFieldColor()
         {
             return remapping.remapColorEnabled;
         }
@@ -157,6 +162,18 @@ namespace DustEngine
         {
             return GetFieldColorFromRemapping(remapping, powerByField);
         }
+
+#if UNITY_EDITOR
+        public override bool IsHasFieldColorPreview()
+        {
+            return remapping.remapColorEnabled;
+        }
+
+        public override Gradient GetFieldColorPreview()
+        {
+            return GetFieldColorPreview(remapping);
+        }
+#endif
 
         //--------------------------------------------------------------------------------------------------------------
 

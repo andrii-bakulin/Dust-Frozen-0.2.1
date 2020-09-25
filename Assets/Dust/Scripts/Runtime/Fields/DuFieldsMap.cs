@@ -334,7 +334,7 @@ namespace DustEngine
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                 // Calculate new color
 
-                if (calculateColor && fieldRecord.blendColorMode != FieldRecord.BlendColorMode.Ignore && fieldRecord.field.IsAllowGetFieldColor())
+                if (calculateColor && fieldRecord.blendColorMode != FieldRecord.BlendColorMode.Ignore && fieldRecord.field.IsAllowCalculateFieldColor())
                 {
                     Color fieldColor = fieldRecord.field.GetFieldColor(fieldPoint, fieldPower);
                     Color blendedColor;

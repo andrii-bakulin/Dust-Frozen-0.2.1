@@ -169,7 +169,7 @@ namespace DustEngine.DustEditor
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
                 var fieldName = new GUIContent(newRecord.field.FieldName(), newRecord.field.gameObject.name);
-                var fieldHint = newRecord.field.FieldEditorDynamicHint();
+                var fieldHint = newRecord.field.FieldDynamicHint();
 
                 if (fieldHint != "")
                 {
@@ -214,8 +214,36 @@ namespace DustEngine.DustEditor
 
                 if (calculateColor)
                 {
-                    var enumValue = DustGUI.DropDownList(newRecord.blendColorMode, CELL_WIDTH_BLENDING, 0, UI.ExtraList.styleDropDownList);
-                    newRecord.blendColorMode = (DuFieldsMap.FieldRecord.BlendColorMode) enumValue;
+                    if (newRecord.field.IsAllowCalculateFieldColor())
+                    {
+                        var enumValue = DustGUI.DropDownList(newRecord.blendColorMode, CELL_WIDTH_BLENDING, 0, UI.ExtraList.styleDropDownList);
+                        newRecord.blendColorMode = (DuFieldsMap.FieldRecord.BlendColorMode) enumValue;
+
+                        if (newRecord.field.IsHasFieldColorPreview())
+                        {
+                            Gradient previewGradient = newRecord.field.GetFieldColorPreview();
+
+                            if (Dust.IsNotNull(previewGradient))
+                            {
+                                Rect lastElement = GUILayoutUtility.GetLastRect();
+                                lastElement.x += 2f;
+                                lastElement.width -= 4f;
+                                lastElement.y += lastElement.height + 1f;
+                                lastElement.height = 4f;
+
+                                if (lastElement.width > 0 && lastElement.height > 0)
+                                {
+                                    DustGUI.Gradient(lastElement, previewGradient);
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        DustGUI.Lock();
+                        DustGUI.DropDownList(DuFieldsMap.FieldRecord.BlendColorMode.Ignore, CELL_WIDTH_BLENDING, 0, UI.ExtraList.styleDropDownList);
+                        DustGUI.Unlock();
+                    }
                 }
 
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

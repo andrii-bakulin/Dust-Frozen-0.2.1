@@ -38,6 +38,7 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
+        // Basic
 
         public override string FieldName()
         {
@@ -45,11 +46,14 @@ namespace DustEngine
         }
 
 #if UNITY_EDITOR
-        public override string FieldEditorDynamicHint()
+        public override string FieldDynamicHint()
         {
             return "";
         }
 #endif
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Power
 
         public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
         {

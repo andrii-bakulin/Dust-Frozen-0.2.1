@@ -33,8 +33,9 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
+        // Color
 
-        public override bool IsAllowGetFieldColor()
+        public override bool IsAllowCalculateFieldColor()
         {
             return remapping.remapColorEnabled;
         }
@@ -43,6 +44,18 @@ namespace DustEngine
         {
             return GetFieldColorFromRemapping(remapping, powerByField);
         }
+
+#if UNITY_EDITOR
+        public override bool IsHasFieldColorPreview()
+        {
+            return remapping.remapColorEnabled;
+        }
+
+        public override Gradient GetFieldColorPreview()
+        {
+            return GetFieldColorPreview(remapping);
+        }
+#endif
 
         //--------------------------------------------------------------------------------------------------------------
         // DuDynamicStateInterface

@@ -97,6 +97,7 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
+        // Basic
 
         public override string FieldName()
         {
@@ -104,7 +105,7 @@ namespace DustEngine
         }
 
 #if UNITY_EDITOR
-        public override string FieldEditorDynamicHint()
+        public override string FieldDynamicHint()
         {
             var parts = new List<string>();
 
@@ -134,6 +135,9 @@ namespace DustEngine
         }
 #endif
 
+        //--------------------------------------------------------------------------------------------------------------
+        // Power
+
         public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
         {
             float value = fieldPoint.outPower;
@@ -147,9 +151,10 @@ namespace DustEngine
             return value;
         }
 
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        //--------------------------------------------------------------------------------------------------------------
+        // Color
 
-        public override bool IsAllowGetFieldColor()
+        public override bool IsAllowCalculateFieldColor()
         {
             return true;
         }
@@ -166,5 +171,17 @@ namespace DustEngine
 
             return color;
         }
+
+#if UNITY_EDITOR
+        public override bool IsHasFieldColorPreview()
+        {
+            return false;
+        }
+
+        public override Gradient GetFieldColorPreview()
+        {
+            return null;
+        }
+#endif
     }
 }

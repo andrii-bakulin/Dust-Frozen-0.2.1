@@ -92,21 +92,31 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
+        // Basic
 
         public abstract string FieldName();
 
 #if UNITY_EDITOR
-        public abstract string FieldEditorDynamicHint();
+        public abstract string FieldDynamicHint();
 #endif
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Power
 
         public abstract float GetPowerForFieldPoint(DuField.Point fieldPoint);
 
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        //--------------------------------------------------------------------------------------------------------------
+        // Color
 
-        public abstract bool IsAllowGetFieldColor();
+        public abstract bool IsAllowCalculateFieldColor();
 
         /// <returns>Color.alpha used as power of color</returns>
         public abstract Color GetFieldColor(DuField.Point fieldPoint, float powerByField);
+
+#if UNITY_EDITOR
+        public abstract bool IsHasFieldColorPreview();
+        public abstract Gradient GetFieldColorPreview();
+#endif
 
         //--------------------------------------------------------------------------------------------------------------
         // DuDynamicStateInterface
@@ -153,6 +163,21 @@ namespace DustEngine
 
                 default:
                     return Color.magenta;
+            }
+        }
+
+        protected Gradient GetFieldColorPreview(DuRemapping remapping)
+        {
+            switch (remapping.colorMode)
+            {
+                case DuRemapping.ColorMode.Color:
+                    return remapping.color.ToGradient();
+
+                case DuRemapping.ColorMode.Gradient:
+                    return remapping.gradient;
+
+                default:
+                    return Color.magenta.ToGradient();
             }
         }
     }

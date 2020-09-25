@@ -102,6 +102,7 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
+        // Basic
 
         public override string FieldName()
         {
@@ -109,14 +110,14 @@ namespace DustEngine
         }
 
 #if UNITY_EDITOR
-        public override string FieldEditorDynamicHint()
+        public override string FieldDynamicHint()
         {
             return "";
         }
 #endif
 
         //--------------------------------------------------------------------------------------------------------------
-        //
+        // Power
         //               *--------------*                    A. Start Angle
         //             /                 \                   B. Start Angle + FadeIn
         //           /                    \                  C. End Angle - FadeOut
