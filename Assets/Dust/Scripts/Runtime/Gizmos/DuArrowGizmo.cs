@@ -7,7 +7,7 @@ namespace DustEngine
     [AddComponentMenu("Dust/Gizmos/Arrow Gizmo")]
     public class DuArrowGizmo : DuGizmoObject
     {
-        public enum ColorMode
+        public enum AxisColorMode
         {
             AutoSetByDirection = 0,
             AxisX = 1,
@@ -41,11 +41,11 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private ColorMode m_ColorMode = ColorMode.AutoSetByDirection;
-        public ColorMode colorMode
+        private AxisColorMode m_AxisColorMode = AxisColorMode.AutoSetByDirection;
+        public AxisColorMode axisColorMode
         {
-            get => m_ColorMode;
-            set => m_ColorMode = value;
+            get => m_AxisColorMode;
+            set => m_AxisColorMode = value;
         }
 
         [SerializeField]
@@ -83,25 +83,25 @@ namespace DustEngine
             if (direction.Equals(Vector3.zero))
                 return;
 
-            switch (colorMode)
+            switch (axisColorMode)
             {
-                case ColorMode.AutoSetByDirection:
+                case AxisColorMode.AutoSetByDirection:
                     Handles.color = direction.normalized.abs().ToColor();
                     break;
 
-                case ColorMode.AxisX:
+                case AxisColorMode.AxisX:
                     Handles.color = Handles.xAxisColor;
                     break;
 
-                case ColorMode.AxisY:
+                case AxisColorMode.AxisY:
                     Handles.color = Handles.yAxisColor;
                     break;
 
-                case ColorMode.AxisZ:
+                case AxisColorMode.AxisZ:
                     Handles.color = Handles.zAxisColor;
                     break;
 
-                case ColorMode.Custom:
+                case AxisColorMode.Custom:
                     Handles.color = color;
                     break;
             }
