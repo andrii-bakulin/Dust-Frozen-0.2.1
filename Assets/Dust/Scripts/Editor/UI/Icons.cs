@@ -53,6 +53,9 @@ namespace DustEngine.DustEditor
             ["DustEngine.DuLinearFactory"] = new ClassParams { IconName = "Factory/DuLinearFactory" },
             ["DustEngine.DuRadialFactory"] = new ClassParams { IconName = "Factory/DuRadialFactory" },
 
+            // Factory-Machines
+            ["DustEngine.DuLookAtFactoryMachine"] = new ClassParams { IconName = "Factory/Machines/DuLookAtFactoryMachine" },
+
             // Fields
             ["DustEngine.DuFieldsSpace"] = new ClassParams { IconName = "Fields/FieldsSpace" },
 
