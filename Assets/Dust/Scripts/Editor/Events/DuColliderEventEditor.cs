@@ -30,7 +30,7 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            if (DustGUI.FoldoutBegin("Tags", "DuColliderEventEditor.Tags"))
+            if (DustGUI.FoldoutBegin("Tags", "DuColliderEvent.Tags"))
             {
                 PropertyField(m_TagProcessingMode);
                 PropertyField(m_ObjectTags);
@@ -40,13 +40,13 @@ namespace DustEngine.DustEditor
 
             Space();
 
-            if (DustGUI.FoldoutBegin("Events", "DuColliderEventEditor.Events"))
+            if (DustGUI.FoldoutBegin("Events", "DuColliderEvent.Events"))
             {
                 var titleOnEnter = "On Enter" + (m_OnEnter.valUnityEvent.arraySize > 0 ? " (" + m_OnEnter.valUnityEvent.arraySize + ")" : "");
                 var titleOnStay  = "On Stay"  + (m_OnStay.valUnityEvent.arraySize  > 0 ? " (" + m_OnStay.valUnityEvent.arraySize  + ")" : "");
                 var titleOnExit  = "On Exit"  + (m_OnExit.valUnityEvent.arraySize  > 0 ? " (" + m_OnExit.valUnityEvent.arraySize  + ")" : "");
 
-                var tabIndex = DustGUI.Toolbar("DuColliderEventEditor.Events", new[] {titleOnEnter, titleOnStay, titleOnExit});
+                var tabIndex = DustGUI.Toolbar("DuColliderEvent.Events", new[] {titleOnEnter, titleOnStay, titleOnExit});
 
                 switch (tabIndex)
                 {

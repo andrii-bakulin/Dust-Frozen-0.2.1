@@ -49,7 +49,7 @@ namespace DustEngine.DustEditor
             {
                 OptimizeFieldsArray();
 
-                Vector2 scrollPosition = DuSessionState.GetVector3("DuFieldsMapEditor.Fields.ScrollPosition", m_Editor.target, Vector2.zero);
+                Vector2 scrollPosition = DuSessionState.GetVector3("DuFieldsMap.Fields.ScrollPosition", m_Editor.target, Vector2.zero);
                 float totalHeight = 24 + 36 * Mathf.Clamp(m_Fields.property.arraySize + 1, 4, 8) + 16;
 
                 int indentLevel = DustGUI.IndentLevelReset(); // Because it'll try to add left-spacing when draw fields
@@ -116,7 +116,7 @@ namespace DustEngine.DustEditor
 
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-                DuSessionState.SetVector3("DuFieldsMapEditor.Fields.ScrollPosition", m_Editor.target, scrollPosition);
+                DuSessionState.SetVector3("DuFieldsMap.Fields.ScrollPosition", m_Editor.target, scrollPosition);
             }
             DustGUI.FoldoutEnd();
         }
