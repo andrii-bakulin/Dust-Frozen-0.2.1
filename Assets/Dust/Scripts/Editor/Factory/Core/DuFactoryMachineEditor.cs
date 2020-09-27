@@ -18,8 +18,8 @@ namespace DustEngine.DustEditor
 
         public override void OnInspectorGUI()
         {
-            // @todo! drop this?!
-            (target as DuMonoBehaviour).enabled = true; // Forced activate all effector-scripts
+            // Hide default OnInspectorGUI() call
+            // Extend all-factoryMachines-view if need in future...
         }
 
         protected void OnInspectorGUI_Falloff()

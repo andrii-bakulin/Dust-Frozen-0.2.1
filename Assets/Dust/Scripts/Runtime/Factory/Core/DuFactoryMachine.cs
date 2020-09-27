@@ -90,6 +90,13 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
+        private void Start()
+        {
+            // Require to show enabled-checkbox in editor for all factory-machine
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
         public abstract string FactoryMachineName();
 
 #if UNITY_EDITOR

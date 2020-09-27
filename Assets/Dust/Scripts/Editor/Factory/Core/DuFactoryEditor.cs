@@ -265,6 +265,7 @@ namespace DustEngine.DustEditor
             {
                 var machineEnabledInScene = newRecord.factoryMachine.enabled &&
                                             newRecord.factoryMachine.gameObject.activeInHierarchy;
+
                 var machineIcon = UI.Icons.GetTextureByComponent(newRecord.factoryMachine, !machineEnabledInScene ? "Disabled" : "");
 
                 if (DustGUI.IconButton(machineIcon, CELL_WIDTH_ICON, CELL_WIDTH_ICON, UI.ExtraList.styleMiniButton))

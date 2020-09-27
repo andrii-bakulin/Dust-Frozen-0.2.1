@@ -36,11 +36,16 @@ namespace DustEngine
 
             foreach (DuFactoryMachine.Record record in factoryMachines)
             {
+                // @WARNING!!! require sync code in: GetDynamicStateHashCode() + UpdateInstancesDynamicStates()
+                // @DUST.todo!
+
                 if (Dust.IsNull(record) || !record.enabled || Dust.IsNull(record.factoryMachine))
                     continue;
 
-                if (!record.factoryMachine.gameObject.activeInHierarchy)
+                if (!record.factoryMachine.enabled || !record.factoryMachine.gameObject.activeInHierarchy)
                     continue;
+
+                // @END
 
                 // Notice: cannot do this
                 // For example in MaterialFactoryMachine if with intensity=0.0f logic will skip UpdateInstanceState()
