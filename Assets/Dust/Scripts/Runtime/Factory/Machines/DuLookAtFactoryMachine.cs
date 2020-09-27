@@ -121,8 +121,9 @@ namespace DustEngine
         }
 #endif
 
-        public override void PrepareForUpdateInstancesStates(DuFactory factory)
+        public override bool PrepareForUpdateInstancesStates(DuFactory factory, float intensityByFactory)
         {
+            return DuMath.IsNotZero(intensityByFactory);
         }
 
         public override void FinalizeUpdateInstancesStates(DuFactory factory)

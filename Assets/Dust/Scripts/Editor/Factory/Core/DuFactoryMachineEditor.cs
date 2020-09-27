@@ -9,7 +9,7 @@ namespace DustEngine.DustEditor
 
         protected DuFieldsMapEditor m_FieldsMapEditor;
 
-        protected void OnEnableFactoryMachine()
+        protected virtual void OnEnableFactoryMachine()
         {
             m_Strength = FindProperty("m_Strength", "Strength");
 

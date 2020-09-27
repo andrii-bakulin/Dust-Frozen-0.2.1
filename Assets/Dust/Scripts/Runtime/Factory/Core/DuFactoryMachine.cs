@@ -96,7 +96,8 @@ namespace DustEngine
         public abstract string FactoryMachineDynamicHint();
 #endif
 
-        public abstract void PrepareForUpdateInstancesStates(DuFactory factory);
+        public abstract bool PrepareForUpdateInstancesStates(DuFactory factory, float intensityByFactory);
+
         public abstract void FinalizeUpdateInstancesStates(DuFactory factory);
 
         public abstract void UpdateInstanceState(DuFactory factory, DuFactoryInstance factoryInstance, float intensityByFactory);

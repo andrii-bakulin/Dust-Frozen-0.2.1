@@ -39,13 +39,20 @@ namespace DustEngine
                 if (Dust.IsNull(record) || !record.enabled || Dust.IsNull(record.factoryMachine))
                     continue;
 
-                if (DuMath.IsZero(record.intensity))
-                    continue;
-
                 if (!record.factoryMachine.gameObject.activeInHierarchy)
                     continue;
 
-                record.factoryMachine.PrepareForUpdateInstancesStates(this);
+                // Notice: cannot do this
+                // For example in MaterialFactoryMachine if with intensity=0.0f logic will skip UpdateInstanceState()
+                // then it'll ignore material changes and it'll return to default state.
+                // But should apply material is zero-state.
+                // So, factoryMachine.***UpdateInstanceState() logic should decide what to do with intensity=0.0f
+                //
+                // if (DuMath.IsZero(record.intensity))
+                //     continue;
+
+                if (record.factoryMachine.PrepareForUpdateInstancesStates(this, record.intensity) == false)
+                    continue;
 
                 foreach (var instance in instances)
                 {
