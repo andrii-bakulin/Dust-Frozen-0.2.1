@@ -18,8 +18,6 @@ namespace DustEngine.DustEditor
         protected DuProperty m_ColorBlendMode;
         protected DuProperty m_ColorFixed;
 
-        protected DuProperty m_DebugColorView;
-
         protected DuFieldsMapEditor m_FieldsMapEditor;
 
         //--------------------------------------------------------------------------------------------------------------
@@ -40,8 +38,6 @@ namespace DustEngine.DustEditor
             m_ColorImpactIntensity = FindProperty("m_ColorImpactIntensity", "Intensity");
             m_ColorBlendMode = FindProperty("m_ColorBlendMode", "Blend Mode");
             m_ColorFixed = FindProperty("m_ColorFixed", "Fixed Color");
-
-            m_DebugColorView = FindProperty("m_DebugColorView", "Color View");
 
             m_FieldsMapEditor = new DuFieldsMapEditor(this, serializedObject.FindProperty("m_FieldsMap"), (target as DuFactoryExtendedMachine).fieldsMap);
         }
@@ -105,16 +101,6 @@ namespace DustEngine.DustEditor
         protected void OnInspectorGUI_Falloff()
         {
             m_FieldsMapEditor.OnInspectorGUI();
-        }
-
-        protected void OnInspectorGUI_Debug()
-        {
-            if (DustGUI.FoldoutBegin("Debug", "DuFactoryMachineEditor.Debug", false))
-            {
-                PropertyField(m_DebugColorView);
-                Space();
-            }
-            DustGUI.FoldoutEnd();
         }
     }
 }

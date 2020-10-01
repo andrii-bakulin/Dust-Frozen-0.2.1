@@ -65,8 +65,6 @@ namespace DustEngine.DustEditor
             OnInspectorGUI_ImpactOnColorBlock();
             OnInspectorGUI_Falloff();
 
-            OnInspectorGUI_Debug();
-
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             serializedObject.ApplyModifiedProperties();

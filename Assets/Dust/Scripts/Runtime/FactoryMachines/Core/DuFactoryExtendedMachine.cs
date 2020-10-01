@@ -45,15 +45,6 @@ namespace DustEngine
             Divide = 4,
         }
 
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-        public enum DebugColorView
-        {
-            Normal = 0,
-            FalloffColor = 1,
-            FalloffAlpha = 2,
-        }
-
         //--------------------------------------------------------------------------------------------------------------
 
         [SerializeField]
@@ -151,17 +142,6 @@ namespace DustEngine
         [SerializeField]
         protected DuFieldsMap m_FieldsMap = DuFieldsMap.Factory();
         public DuFieldsMap fieldsMap => m_FieldsMap;
-
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-        // @todo! @todo@ >> drop?
-        [SerializeField]
-        protected DebugColorView m_DebugColorView = DebugColorView.Normal;
-        public DebugColorView debugColorView
-        {
-            get => m_DebugColorView;
-            set => m_DebugColorView = value;
-        }
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -357,28 +337,9 @@ namespace DustEngine
                 newColor.a = 1f;
             }
 
-#if UNITY_EDITOR
-            switch (debugColorView)
-            {
-                default:
-                case DebugColorView.Normal:
-                    // use down code...
-                    break;
-
-                case DebugColorView.FalloffColor:
-                    instanceState.color = newColor * colorPower;
-                    instanceState.color.Clamp01();
-                    return;
-
-                case DebugColorView.FalloffAlpha:
-                    instanceState.color = new Color(colorPower, colorPower, colorPower);
-                    instanceState.color.Clamp01();
-                    return;
-            }
-#endif
-
             instanceState.color = Color.LerpUnclamped(instanceState.color, newColor,
                 Mathf.Abs(factoryInstanceState.intensityByFactory) * colorPower * colorImpactIntensity);
+
             instanceState.color.Clamp01();
         }
 
