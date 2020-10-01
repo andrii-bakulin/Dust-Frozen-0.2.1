@@ -40,7 +40,7 @@ namespace DustEngine
 
         public override void UpdateInstanceState(DuFactory factory, DuFactoryInstance factoryInstance, float intensityByFactory)
         {
-            factoryInstance.ApplyMaterialUpdatesToObject(intensityByFactory * strength);
+            factoryInstance.ApplyMaterialUpdatesToObject(intensityByFactory * intensity);
         }
     }
 }

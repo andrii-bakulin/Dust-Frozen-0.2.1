@@ -36,11 +36,11 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
 
         [SerializeField]
-        protected float m_Strength = 1.0f;
-        public float strength
+        protected float m_Intensity = 1.0f;
+        public float intensity
         {
-            get => m_Strength;
-            set => m_Strength = value;
+            get => m_Intensity;
+            set => m_Intensity = value;
         }
 
         [SerializeField]

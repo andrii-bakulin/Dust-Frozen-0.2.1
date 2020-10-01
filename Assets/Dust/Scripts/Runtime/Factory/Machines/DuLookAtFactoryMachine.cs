@@ -138,18 +138,18 @@ namespace DustEngine
             if (upVectorMode == UpVectorMode.Object && Dust.IsNull(upVectorObject))
                 return;
 
-            // [1] Calculate endWeight
+            // [1] Calculate end-intensity
 
-            float endWeight = strength * intensityByFactory;
+            float endIntensity = intensity * intensityByFactory;
 
-            if (DuMath.IsZero(endWeight))
+            if (DuMath.IsZero(endIntensity))
                 return;
 
-            fieldsMap.Calculate(factory, factoryInstance, out float fieldWeight);
+            fieldsMap.Calculate(factory, factoryInstance, out float fieldIntensity);
 
-            endWeight *= fieldWeight;
+            endIntensity *= fieldIntensity;
 
-            if (DuMath.IsZero(endWeight))
+            if (DuMath.IsZero(endIntensity))
                 return;
 
             //----------------------------------------------------------------------------------------------------------
@@ -225,7 +225,7 @@ namespace DustEngine
             Quaternion rotationCur = Quaternion.Euler(factoryInstance.stateDynamic.rotation);
             Quaternion rotationNew = Quaternion.LookRotation(lookDirection, upVector);
 
-            var endRotation = Quaternion.LerpUnclamped(rotationCur, rotationNew, endWeight).eulerAngles;
+            var endRotation = Quaternion.LerpUnclamped(rotationCur, rotationNew, endIntensity).eulerAngles;
 
             if (lockAxisX) endRotation.x = factoryInstance.stateDynamic.rotation.x;
             if (lockAxisY) endRotation.y = factoryInstance.stateDynamic.rotation.y;
