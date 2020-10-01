@@ -40,8 +40,8 @@ namespace DustEngine
 
                 switch (inspectorDisplay)
                 {
-                    case InspectorDisplay.Power:
-                        string value = DuMath.IsNotZero(instance.stateDynamic.power) ? instance.stateDynamic.power.ToString("F2") : "0";
+                    case InspectorDisplay.Value:
+                        string value = DuMath.IsNotZero(instance.stateDynamic.value) ? instance.stateDynamic.value.ToString("F2") : "0";
                         Handles.Label(
                             GetPositionInWorldSpace(instance.stateDynamic.position),
                             value,

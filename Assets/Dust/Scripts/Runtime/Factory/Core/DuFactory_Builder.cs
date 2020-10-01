@@ -141,7 +141,7 @@ namespace DustEngine
                         break;
                 }
 
-                SetInstanceZeroStates_Power(instanceState);
+                SetInstanceZeroStates_Value(instanceState);
                 SetInstanceZeroStates_Color(instanceState);
 
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -182,14 +182,14 @@ namespace DustEngine
             instanceState.scale.Scale(transformScale);
         }
 
-        private void SetInstanceZeroStates_Color(DuFactoryInstance.State instanceState)
+        private void SetInstanceZeroStates_Value(DuFactoryInstance.State instanceState)
         {
-            instanceState.color = color;
+            instanceState.value = defaultValue;
         }
 
-        private void SetInstanceZeroStates_Power(DuFactoryInstance.State instanceState)
+        private void SetInstanceZeroStates_Color(DuFactoryInstance.State instanceState)
         {
-            instanceState.power = power;
+            instanceState.color = defaultColor;
         }
     }
 }

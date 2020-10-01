@@ -74,6 +74,7 @@ namespace DustEngine.DustEditor
             {
                 popup.AddItem(column, typeof(DuLookAtFactoryMachine), "LookAt");
                 popup.AddItem(column, typeof(DuMaterialFactoryMachine), "Material");
+                popup.AddItem(column, typeof(DuTransformFactoryMachine), "Transform");
 
                 popup.m_ColumnRecords.Add(column);
             }

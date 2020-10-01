@@ -41,7 +41,7 @@ namespace DustEngine
         public enum InspectorDisplay
         {
             None = 0,
-            Power = 1,
+            Value = 1,
             Color = 2,
             Index = 3,
             UV = 4,
@@ -126,19 +126,19 @@ namespace DustEngine
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
-        private float m_Power = 1f;
-        public float power
+        private float m_DefaultValue = 0f;
+        public float defaultValue
         {
-            get => m_Power;
-            set => m_Power = value;
+            get => m_DefaultValue;
+            set => m_DefaultValue = value;
         }
 
         [SerializeField]
-        private Color m_Color = Color.white;
-        public Color color
+        private Color m_DefaultColor = Color.white;
+        public Color defaultColor
         {
-            get => m_Color;
-            set => m_Color = value;
+            get => m_DefaultColor;
+            set => m_DefaultColor = value;
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

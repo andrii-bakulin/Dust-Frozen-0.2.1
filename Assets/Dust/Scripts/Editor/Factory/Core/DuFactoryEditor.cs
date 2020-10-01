@@ -18,8 +18,8 @@ namespace DustEngine.DustEditor
         private DuProperty m_ForcedSetActive;
         private DuProperty m_Seed;
 
-        private DuProperty m_Power;
-        private DuProperty m_Color;
+        private DuProperty m_DefaultValue;
+        private DuProperty m_DefaultColor;
         private DuProperty m_FactoryMachines;
 
         private DuProperty m_TransformSpace;
@@ -48,8 +48,8 @@ namespace DustEngine.DustEditor
             m_ForcedSetActive = FindProperty("m_ForcedSetActive", "Forced Set Active");
             m_Seed = FindProperty("m_Seed", "Forced Set Active");
 
-            m_Power = FindProperty("m_Power", "Init Power");
-            m_Color = FindProperty("m_Color", "Init Color");
+            m_DefaultValue = FindProperty("m_DefaultValue", "Default Value");
+            m_DefaultColor = FindProperty("m_DefaultColor", "Default Color");
             m_FactoryMachines = FindProperty("m_FactoryMachines", "Factory Machines");
 
             m_TransformSpace = FindProperty("m_TransformSpace", "Transform Space");
@@ -117,8 +117,8 @@ namespace DustEngine.DustEditor
         {
             if (DustGUI.FoldoutBegin("Factory Machines", "DuFactory.FactoryMachines"))
             {
-                PropertyExtendedSlider(m_Power, 0f, 1f, 0.01f);
-                PropertyField(m_Color);
+                PropertyExtendedSlider(m_DefaultValue, 0f, 1f, 0.01f);
+                PropertyField(m_DefaultColor);
                 Space();
 
                 DrawFactoryMachinesBlock();
@@ -126,8 +126,8 @@ namespace DustEngine.DustEditor
             }
             DustGUI.FoldoutEnd();
 
-            m_IsRequireResetupClones |= m_Power.isChanged;
-            m_IsRequireResetupClones |= m_Color.isChanged;
+            m_IsRequireResetupClones |= m_DefaultValue.isChanged;
+            m_IsRequireResetupClones |= m_DefaultColor.isChanged;
             m_IsRequireResetupClones |= m_FactoryMachines.isChanged;
         }
 

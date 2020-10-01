@@ -15,7 +15,7 @@ namespace DustEngine
             public Vector3 rotation = Vector3.zero;
             public Vector3 scale = Vector3.one;
 
-            public float power = 0f;
+            public float value = 0f;
             public Color color = Color.magenta;
             public Vector3 uvw = Vector3.zero;
 
@@ -34,7 +34,7 @@ namespace DustEngine
                     rotation = this.rotation,
                     scale    = this.scale,
 
-                    power    = this.power,
+                    value    = this.value,
                     color    = this.color,
                     uvw      = this.uvw,
                 };
@@ -47,7 +47,7 @@ namespace DustEngine
                 this.rotation = t.rotation;
                 this.scale    = t.scale;
 
-                this.power    = t.power;
+                this.value    = t.value;
                 this.color    = t.color;
                 this.uvw      = t.uvw;
             }
@@ -69,19 +69,19 @@ namespace DustEngine
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             [SerializeField]
+            private string m_ValuePropertyName = "";
+            public string valuePropertyName
+            {
+                get => m_ValuePropertyName;
+                set => m_ValuePropertyName = value;
+            }
+
+            [SerializeField]
             private string m_ColorPropertyName = "_Color";
             public string colorPropertyName
             {
                 get => m_ColorPropertyName;
                 set => m_ColorPropertyName = value;
-            }
-
-            [SerializeField]
-            private string m_PowerPropertyName = "";
-            public string powerPropertyName
-            {
-                get => m_PowerPropertyName;
-                set => m_PowerPropertyName = value;
             }
 
             [SerializeField]
@@ -282,11 +282,11 @@ namespace DustEngine
                 material = matRef.meshRenderer.sharedMaterial;
             }
 
+            if (!Dust.IsNullOrEmpty(matRef.valuePropertyName))
+                material.SetFloat(matRef.valuePropertyName, stateDynamic.value * intensity);
+
             if (!Dust.IsNullOrEmpty(matRef.colorPropertyName))
                 material.SetColor(matRef.colorPropertyName, stateDynamic.color * intensity);
-
-            if (!Dust.IsNullOrEmpty(matRef.powerPropertyName))
-                material.SetFloat(matRef.powerPropertyName, stateDynamic.power * intensity);
 
             if (!Dust.IsNullOrEmpty(matRef.uvwPropertyName))
                 material.SetVector(matRef.uvwPropertyName, stateDynamic.uvw * intensity);

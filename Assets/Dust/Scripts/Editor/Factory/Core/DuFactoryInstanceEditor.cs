@@ -55,13 +55,13 @@ namespace DustEngine.DustEditor
                     var item = m_MaterialReferences.property.GetArrayElementAtIndex(0);
 
                     DuProperty m_MeshRenderer      = FindProperty(item, "m_MeshRenderer");
+                    DuProperty m_ValuePropertyName = FindProperty(item, "m_ValuePropertyName");
                     DuProperty m_ColorPropertyName = FindProperty(item, "m_ColorPropertyName");
-                    DuProperty m_PowerPropertyName = FindProperty(item, "m_PowerPropertyName");
                     DuProperty m_UvwPropertyName   = FindProperty(item, "m_UvwPropertyName");
 
                     m_MeshRenderer.property.objectReferenceValue = matRef.meshRenderer;
+                    m_ValuePropertyName.property.stringValue = matRef.valuePropertyName;
                     m_ColorPropertyName.property.stringValue = matRef.colorPropertyName;
-                    m_PowerPropertyName.property.stringValue = matRef.powerPropertyName;
                     m_UvwPropertyName.property.stringValue = matRef.uvwPropertyName;
                 }
             }
@@ -79,15 +79,15 @@ namespace DustEngine.DustEditor
                 var item = m_MaterialReferences.property.GetArrayElementAtIndex(i);
 
                 DuProperty m_MeshRenderer      = FindProperty(item, "m_MeshRenderer", "Mesh Renderer");
+                DuProperty m_ValuePropertyName = FindProperty(item, "m_ValuePropertyName", "Value");
                 DuProperty m_ColorPropertyName = FindProperty(item, "m_ColorPropertyName", "Color");
-                DuProperty m_PowerPropertyName = FindProperty(item, "m_PowerPropertyName", "Power");
                 DuProperty m_UvwPropertyName   = FindProperty(item, "m_UvwPropertyName", "UVW");
                 DuProperty m_OriginalMaterial  = FindProperty(item, "m_OriginalMaterial", "Original Material");
 
                 DustGUI.Header("Reference #" + (i + 1));
                 PropertyFieldOrLock(m_MeshRenderer, !IsFreeInstance);
                 PropertyFieldOrLock(m_ColorPropertyName, !IsFreeInstance);
-                PropertyFieldOrLock(m_PowerPropertyName, !IsFreeInstance);
+                PropertyFieldOrLock(m_ValuePropertyName, !IsFreeInstance);
                 PropertyFieldOrLock(m_UvwPropertyName, !IsFreeInstance);
 
                 if (!IsFreeInstance)
@@ -110,7 +110,7 @@ namespace DustEngine.DustEditor
                     DustGUI.Field("Rotation", mainScript.stateZero.rotation.ToRound(3));
                     DustGUI.Field("Scale", mainScript.stateZero.scale.ToRound(3));
                     Space();
-                    DustGUI.Field("Power", mainScript.stateZero.power);
+                    DustGUI.Field("Value", mainScript.stateZero.value);
                     DustGUI.Field("Color", mainScript.stateZero.color);
                     DustGUI.Field("Color Values", mainScript.stateZero.color.ToVector3(2));
                     DustGUI.Field("Color RGB", (mainScript.stateZero.color * 255).ToVector3Int());
@@ -129,7 +129,7 @@ namespace DustEngine.DustEditor
                     DustGUI.Field("Rotation", mainScript.stateDynamic.rotation.ToRound(3));
                     DustGUI.Field("Scale", mainScript.stateDynamic.scale.ToRound(3));
                     Space();
-                    DustGUI.Field("Power", mainScript.stateDynamic.power);
+                    DustGUI.Field("Value", mainScript.stateDynamic.value);
                     DustGUI.Field("Color", mainScript.stateDynamic.color);
                     DustGUI.Field("Color Values", mainScript.stateDynamic.color.ToVector3(2));
                     DustGUI.Field("Color RGB", (mainScript.stateDynamic.color * 255).ToVector3Int());

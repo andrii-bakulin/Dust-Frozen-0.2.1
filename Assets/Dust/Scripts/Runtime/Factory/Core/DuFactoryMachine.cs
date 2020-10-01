@@ -43,10 +43,6 @@ namespace DustEngine
             set => m_Intensity = value;
         }
 
-        [SerializeField]
-        protected DuFieldsMap m_FieldsMap = DuFieldsMap.Factory();
-        public DuFieldsMap fieldsMap => m_FieldsMap;
-
         //--------------------------------------------------------------------------------------------------------------
 
 #if UNITY_EDITOR
