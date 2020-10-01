@@ -5,7 +5,7 @@ namespace DustEngine.DustEditor
 {
     [CustomEditor(typeof(DuLookAtFactoryMachine))]
     [CanEditMultipleObjects]
-    public class DuLookAtFactoryMachineEditor : DuFactoryMachineEditor
+    public class DuLookAtFactoryMachineEditor : DuFactoryExtendedMachineEditor
     {
         private DuProperty m_TargetMode;
         private DuProperty m_TargetObject;
@@ -40,11 +40,10 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            if (DustGUI.FoldoutBegin("Parameters", "DuLookAtFactoryMachine.Parameters"))
-            {
-                PropertyExtendedSlider(m_Intensity, 0f, 1f, 0.01f);
-                Space();
+            OnInspectorGUI_BaseParameters();
 
+            if (DustGUI.FoldoutBegin("LookAt", "DuLookAtFactoryMachine.LookAt"))
+            {
                 PropertyField(m_TargetMode);
                 PropertyFieldOrHide(m_TargetObject, (DuLookAtFactoryMachine.TargetMode) m_TargetMode.enumValueIndex
                                                     != DuLookAtFactoryMachine.TargetMode.ObjectTarget);
@@ -62,7 +61,11 @@ namespace DustEngine.DustEditor
             }
             DustGUI.FoldoutEnd();
 
+            OnInspectorGUI_ImpactOnValueBlock();
+            OnInspectorGUI_ImpactOnColorBlock();
             OnInspectorGUI_Falloff();
+
+            OnInspectorGUI_Debug();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

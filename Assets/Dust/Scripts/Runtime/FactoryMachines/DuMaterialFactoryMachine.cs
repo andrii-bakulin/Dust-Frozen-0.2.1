@@ -28,19 +28,21 @@ namespace DustEngine
         }
 #endif
 
-        public override bool PrepareForUpdateInstancesStates(DuFactory factory, float intensityByFactory)
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        public override bool PrepareForUpdateInstancesStates(FactoryInstanceState factoryInstanceState)
         {
             // Should execute logic even if intensityByFactory is ZERO
             return true;
         }
 
-        public override void FinalizeUpdateInstancesStates(DuFactory factory)
+        public override void UpdateInstanceState(FactoryInstanceState factoryInstanceState)
         {
+            factoryInstanceState.instance.ApplyMaterialUpdatesToObject(factoryInstanceState.intensityByFactory * intensity);
         }
 
-        public override void UpdateInstanceState(DuFactory factory, DuFactoryInstance factoryInstance, float intensityByFactory)
+        public override void FinalizeUpdateInstancesStates(FactoryInstanceState factoryInstanceState)
         {
-            factoryInstance.ApplyMaterialUpdatesToObject(intensityByFactory * intensity);
         }
     }
 }

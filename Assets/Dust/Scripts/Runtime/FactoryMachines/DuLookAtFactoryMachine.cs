@@ -4,7 +4,7 @@ using UnityEditor;
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Factory/Machines/LookAt Machine")]
-    public class DuLookAtFactoryMachine : DuFactoryMachine
+    public class DuLookAtFactoryMachine : DuFactoryExtendedMachine
     {
         public enum TargetMode
         {
@@ -121,41 +121,34 @@ namespace DustEngine
         }
 #endif
 
-        public override bool PrepareForUpdateInstancesStates(DuFactory factory, float intensityByFactory)
-        {
-            return DuMath.IsNotZero(intensityByFactory);
-        }
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        public override void FinalizeUpdateInstancesStates(DuFactory factory)
+        public override void UpdateInstanceState(FactoryInstanceState factoryInstanceState)
         {
-        }
+            //----------------------------------------------------------------------------------------------------------
+            // [1] Base logic
 
-        public override void UpdateInstanceState(DuFactory factory, DuFactoryInstance factoryInstance, float intensityByFactory)
-        {
+            float intensityByMachine = intensity;
+
+            UpdateInstanceDynamicState(factoryInstanceState, intensityByMachine);
+
+            //----------------------------------------------------------------------------------------------------------
+            // [2] Apply LookAt logic
+
+            if (DuMath.IsZero(intensityByMachine))
+                return; // no need to continue execute next logic
+
             if (targetMode == TargetMode.ObjectTarget && Dust.IsNull(targetObject))
                 return;
 
             if (upVectorMode == UpVectorMode.Object && Dust.IsNull(upVectorObject))
                 return;
 
-            // [1] Calculate end-intensity
-
-            float endIntensity = intensity * intensityByFactory;
-
-            if (DuMath.IsZero(endIntensity))
-                return;
-
-            fieldsMap.Calculate(factory, factoryInstance, out float fieldIntensity);
-
-            endIntensity *= fieldIntensity;
-
-            if (DuMath.IsZero(endIntensity))
-                return;
-
-            //----------------------------------------------------------------------------------------------------------
-            // [2] Apply Target logic
-
             Vector3 lookDirection;
+
+            // @short links
+            var factory = factoryInstanceState.factory;
+            var factoryInstance = factoryInstanceState.instance;
 
             switch (targetMode)
             {
@@ -225,7 +218,7 @@ namespace DustEngine
             Quaternion rotationCur = Quaternion.Euler(factoryInstance.stateDynamic.rotation);
             Quaternion rotationNew = Quaternion.LookRotation(lookDirection, upVector);
 
-            var endRotation = Quaternion.LerpUnclamped(rotationCur, rotationNew, endIntensity).eulerAngles;
+            var endRotation = Quaternion.LerpUnclamped(rotationCur, rotationNew, intensityByMachine).eulerAngles;
 
             if (lockAxisX) endRotation.x = factoryInstance.stateDynamic.rotation.x;
             if (lockAxisY) endRotation.y = factoryInstance.stateDynamic.rotation.y;

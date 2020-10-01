@@ -4,59 +4,6 @@ namespace DustEngine
 {
     public abstract class DuFactoryExtendedMachine : DuFactoryMachine
     {
-        protected class MachineParams
-        {
-            // In
-            public DuFactory factory;
-            public DuFactoryInstance factoryInstance;
-            public float intensityByFactory;
-            public float intensityByMachine;
-
-            // Out
-            public float fieldPower;
-            public Color fieldColor;
-
-            // Supported params:                            // Use by FactoryMachine: Random
-            public bool extraIntensityEnabled;
-            public Vector3 extraIntensityPosition;
-            public Vector3 extraIntensityRotation;
-            public Vector3 extraIntensityScale;
-
-            /* @todo!
-            public Vector3 offset;                          // Use by FactoryMachine: Random
-            public Color color;                             // Use by FactoryMachine: Random, Shader
-            */
-        }
-
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-        /**
-         * Calculation steps:
-         *     1. calculate new value
-         *     2. RESULT multiply for Intensity(s)
-         * for Relative:
-         *     3. RESULT multiply for fieldPower
-         *     4. RESULT added to current value
-         * for Absolute:
-         *     3. Calculate END-RESULT value as Lerp(current, RESULT, fieldPower)
-         */
-        public enum TransformMode
-        {
-            Relative = 0,
-            Absolute = 1,
-        }
-
-        /**
-         * Currently this value works only with position
-         */
-        public enum TransformSpace
-        {
-            Factory = 0,
-            Instance = 1,
-        }
-
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
         public enum ValueImpactSource
         {
             Skip = 0,
@@ -108,96 +55,6 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
-
-        [SerializeField]
-        protected float m_Min = 0.0f;
-        public float min
-        {
-            get => m_Min;
-            set => m_Min = value;
-        }
-
-        [SerializeField]
-        protected float m_Max = 1.0f;
-        public float max
-        {
-            get => m_Max;
-            set => m_Max = value;
-        }
-
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-        [SerializeField]
-        protected TransformMode m_TransformMode = TransformMode.Relative;
-        public TransformMode transformMode
-        {
-            get => m_TransformMode;
-            set => m_TransformMode = value;
-        }
-
-        [SerializeField]
-        protected TransformSpace m_TransformSpace = TransformSpace.Factory;
-        public TransformSpace transformSpace
-        {
-            get => m_TransformSpace;
-            set => m_TransformSpace = value;
-        }
-
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-        [SerializeField]
-        protected bool m_PositionEnabled = true;
-        public bool positionEnabled
-        {
-            get => m_PositionEnabled;
-            set => m_PositionEnabled = value;
-        }
-
-        [SerializeField]
-        protected Vector3 m_Position = Vector3.up;
-        public Vector3 position
-        {
-            get => m_Position;
-            set => m_Position = value;
-        }
-
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-        [SerializeField]
-        protected bool m_RotationEnabled = false;
-        public bool rotationEnabled
-        {
-            get => m_RotationEnabled;
-            set => m_RotationEnabled = value;
-        }
-
-        [SerializeField]
-        protected Vector3 m_Rotation = new Vector3(0f, 90f, 0f);
-        public Vector3 rotation
-        {
-            get => m_Rotation;
-            set => m_Rotation = value;
-        }
-
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-        [SerializeField]
-        protected bool m_ScaleEnabled = false;
-        public bool scaleEnabled
-        {
-            get => m_ScaleEnabled;
-            set => m_ScaleEnabled = value;
-        }
-
-        [SerializeField]
-        protected Vector3 m_Scale = Vector3.one;
-        public Vector3 scale
-        {
-            get => m_Scale;
-            set => m_Scale = value;
-        }
-
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
         protected ValueImpactSource m_ValueImpactSource = ValueImpactSource.Skip;
@@ -297,6 +154,7 @@ namespace DustEngine
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+        // @todo! @todo@ >> drop?
         [SerializeField]
         protected DebugColorView m_DebugColorView = DebugColorView.Normal;
         public DebugColorView debugColorView
@@ -307,121 +165,44 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        protected abstract float GetFactoryMachinePower(MachineParams machineParams);
-        protected abstract Color GetFactoryMachineColor(MachineParams machineParams);
+        public override bool PrepareForUpdateInstancesStates(FactoryInstanceState factoryInstanceState)
+        {
+            return DuMath.IsNotZero(factoryInstanceState.intensityByFactory);
+        }
+
+        public override void UpdateInstanceState(FactoryInstanceState factoryInstanceState)
+        {
+            float intensityByMachine = intensity;
+
+            UpdateInstanceDynamicState(factoryInstanceState, intensityByMachine);
+        }
+
+        public override void FinalizeUpdateInstancesStates(FactoryInstanceState factoryInstanceState)
+        {
+        }
 
         //--------------------------------------------------------------------------------------------------------------
 
-        protected virtual void UpdateInstanceDynamicState(DuFactoryInstance.State instanceState, MachineParams machineParams)
+        protected virtual void UpdateInstanceDynamicState(FactoryInstanceState factoryInstanceState, float intensityByMachine)
         {
-            fieldsMap.Calculate(machineParams.factory, machineParams.factoryInstance, out machineParams.fieldPower, out machineParams.fieldColor);
+            factoryInstanceState.intensityByMachine = intensityByMachine;
 
-            UpdateInstanceDynamicState_Position(instanceState, machineParams);
-            UpdateInstanceDynamicState_Rotation(instanceState, machineParams);
-            UpdateInstanceDynamicState_Scale(instanceState, machineParams);
+            fieldsMap.Calculate(factoryInstanceState.factory, factoryInstanceState.instance,
+                out factoryInstanceState.fieldPower,
+                out factoryInstanceState.fieldColor);
 
-            UpdateInstanceDynamicState_Value(instanceState, machineParams);
-            UpdateInstanceDynamicState_Color(instanceState, machineParams);
+            UpdateInstanceDynamicState_Value(factoryInstanceState);
+            UpdateInstanceDynamicState_Color(factoryInstanceState);
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        protected virtual void UpdateInstanceDynamicState_Position(DuFactoryInstance.State instanceState, MachineParams machineParams)
-        {
-            if (!positionEnabled)
-                return;
-
-            Vector3 updateForValue = position;
-            updateForValue *= machineParams.intensityByFactory * machineParams.intensityByMachine;
-
-            if (machineParams.extraIntensityEnabled)
-                updateForValue.Scale(machineParams.extraIntensityPosition);
-
-            switch (transformSpace)
-            {
-                case TransformSpace.Factory:
-                {
-                    // Work same for both TransformModes
-
-                    updateForValue = DuMath.RotatePoint(updateForValue, instanceState.rotation);
-
-                    instanceState.position += updateForValue * machineParams.fieldPower;
-                    break;
-                }
-
-                case TransformSpace.Instance:
-                {
-                    switch (transformMode)
-                    {
-                        case TransformMode.Relative:
-                            instanceState.position += updateForValue * machineParams.fieldPower;
-                            break;
-
-                        case TransformMode.Absolute:
-                            instanceState.position = Vector3.LerpUnclamped(instanceState.position, updateForValue, machineParams.fieldPower);
-                            break;
-                    }
-
-                    break;
-                }
-            }
-        }
-
-        protected virtual void UpdateInstanceDynamicState_Rotation(DuFactoryInstance.State instanceState, MachineParams machineParams)
-        {
-            if (!rotationEnabled)
-                return;
-
-            Vector3 updateForValue = rotation;
-            updateForValue *= machineParams.intensityByFactory * machineParams.intensityByMachine;
-
-            if (machineParams.extraIntensityEnabled)
-                updateForValue.Scale(machineParams.extraIntensityRotation);
-
-            switch (transformMode)
-            {
-                case TransformMode.Relative:
-                    instanceState.rotation += updateForValue * machineParams.fieldPower;
-                    break;
-
-                case TransformMode.Absolute:
-                    instanceState.rotation = Vector3.LerpUnclamped(instanceState.rotation, updateForValue, machineParams.fieldPower);
-                    break;
-            }
-        }
-
-        protected virtual void UpdateInstanceDynamicState_Scale(DuFactoryInstance.State instanceState, MachineParams machineParams)
-        {
-            if (!scaleEnabled)
-                return;
-
-            Vector3 endScale = scale * (machineParams.intensityByFactory * machineParams.intensityByMachine);
-
-            if (machineParams.extraIntensityEnabled)
-                endScale.Scale(machineParams.extraIntensityScale);
-
-            // Notice: if instanceState.scale is 2.0f and I need scale relative +1.0f
-            // then result should be 4.0f (not 3.0f)
-            // So here require recalculate updateForValue bases on current object scale
-            // And later apply field-power
-            Vector3 newRelativeValue = Vector3.Scale(instanceState.scale, endScale);
-
-            switch (transformMode)
-            {
-                case TransformMode.Relative:
-                    instanceState.scale += newRelativeValue * machineParams.fieldPower;
-                    break;
-
-                case TransformMode.Absolute:
-                    instanceState.scale = Vector3.LerpUnclamped(instanceState.scale, newRelativeValue, machineParams.fieldPower);
-                    break;
-            }
-        }
-
-        protected virtual void UpdateInstanceDynamicState_Value(DuFactoryInstance.State instanceState, MachineParams machineParams)
+        protected void UpdateInstanceDynamicState_Value(FactoryInstanceState factoryInstanceState)
         {
             if (DuMath.IsZero(valueImpactIntensity))
                 return;
+
+            var instanceState = factoryInstanceState.instance.stateDynamic;
 
             float newValue;
 
@@ -439,11 +220,11 @@ namespace DustEngine
                     break;
 
                 case ValueImpactSource.FactoryMachinePower:
-                    newValue = GetFactoryMachinePower(machineParams);
+                    newValue = GetFactoryMachinePower(factoryInstanceState);
                     break;
 
                 case ValueImpactSource.FieldsMapPower:
-                    newValue = machineParams.fieldPower;
+                    newValue = factoryInstanceState.fieldPower;
                     break;
             }
 
@@ -499,16 +280,18 @@ namespace DustEngine
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // Merge
 
-            instanceState.value = Mathf.LerpUnclamped(instanceState.value, newValue, machineParams.intensityByFactory * valueImpactIntensity);
+            instanceState.value = Mathf.LerpUnclamped(instanceState.value, newValue, factoryInstanceState.intensityByFactory * valueImpactIntensity);
 
             if (valueClampEnabled)
                 instanceState.value = Mathf.Clamp(instanceState.value, valueClampMin, valueClampMax);
         }
 
-        protected virtual void UpdateInstanceDynamicState_Color(DuFactoryInstance.State instanceState, MachineParams machineParams)
+        protected void UpdateInstanceDynamicState_Color(FactoryInstanceState factoryInstanceState)
         {
             if (DuMath.IsZero(colorImpactIntensity))
                 return;
+
+            var instanceState = factoryInstanceState.instance.stateDynamic;
 
             Color newColor;
 
@@ -526,11 +309,11 @@ namespace DustEngine
                     break;
 
                 case ColorImpactSource.FactoryMachineColor:
-                    newColor = GetFactoryMachineColor(machineParams);
+                    newColor = GetFactoryMachineColor(factoryInstanceState);
                     break;
 
                 case ColorImpactSource.FieldsMapColor:
-                    newColor = machineParams.fieldColor;
+                    newColor = factoryInstanceState.fieldColor;
                     break;
             }
 
@@ -566,7 +349,7 @@ namespace DustEngine
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // Merge
 
-            float colorPower = machineParams.fieldPower;
+            float colorPower = factoryInstanceState.fieldPower;
 
             if (colorImpactSource == ColorImpactSource.FieldsMapColor)
             {
@@ -594,8 +377,21 @@ namespace DustEngine
             }
 #endif
 
-            instanceState.color = Color.LerpUnclamped(instanceState.color, newColor, Mathf.Abs(machineParams.intensityByFactory) * colorPower * colorImpactIntensity);
+            instanceState.color = Color.LerpUnclamped(instanceState.color, newColor,
+                Mathf.Abs(factoryInstanceState.intensityByFactory) * colorPower * colorImpactIntensity);
             instanceState.color.Clamp01();
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        protected virtual float GetFactoryMachinePower(FactoryInstanceState factoryInstanceState)
+        {
+            return factoryInstanceState.intensityByMachine;
+        }
+
+        protected virtual Color GetFactoryMachineColor(FactoryInstanceState factoryInstanceState)
+        {
+            return Color.white;
         }
     }
 }

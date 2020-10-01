@@ -56,7 +56,13 @@ namespace DustEngine
                 // if (DuMath.IsZero(record.intensity))
                 //     continue;
 
-                if (record.factoryMachine.PrepareForUpdateInstancesStates(this, record.intensity) == false)
+                var factoryInstanceState = new DuFactoryMachine.FactoryInstanceState()
+                {
+                    factory = this,
+                    intensityByFactory = record.intensity,
+                };
+
+                if (record.factoryMachine.PrepareForUpdateInstancesStates(factoryInstanceState) == false)
                     continue;
 
                 foreach (var instance in instances)
@@ -64,10 +70,12 @@ namespace DustEngine
                     if (Dust.IsNull(instance))
                         continue;
 
-                    record.factoryMachine.UpdateInstanceState(this, instance, record.intensity);
+                    factoryInstanceState.instance = instance;
+
+                    record.factoryMachine.UpdateInstanceState(factoryInstanceState);
                 }
 
-                record.factoryMachine.FinalizeUpdateInstancesStates(this);
+                record.factoryMachine.FinalizeUpdateInstancesStates(factoryInstanceState);
             }
 
             //----------------------------------------------------------------------------------------------------------

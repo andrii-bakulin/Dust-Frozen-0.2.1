@@ -17,5 +17,15 @@ namespace DustEngine.DustEditor
             // Hide default OnInspectorGUI() call
             // Extend all-factoryMachines-view if need in future...
         }
+
+        protected virtual void OnInspectorGUI_BaseParameters()
+        {
+            if (DustGUI.FoldoutBegin("Parameters", "DuFactoryMachine.Parameters"))
+            {
+                PropertyExtendedSlider(m_Intensity, 0f, 1f, 0.01f);
+                Space();
+            }
+            DustGUI.FoldoutEnd();
+        }
     }
 }
