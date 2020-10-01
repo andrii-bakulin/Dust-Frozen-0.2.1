@@ -90,7 +90,7 @@ namespace DustEngine
 
             for (int i = 0; i < pointsCount; i++)
             {
-                float weight = 1f;
+                float deformPower = 1f;
 
                 // 1. Transform vertex position: local-in-mesh > world
                 // 2. Transform vertex position: world > local-in-deformer
@@ -99,13 +99,13 @@ namespace DustEngine
 
                 if (fieldsMap.HasFields())
                 {
-                    bool result = fieldsMap.Calculate(vWorldPosition, (float) i / pointsCount, out weight);
+                    bool result = fieldsMap.Calculate(vWorldPosition, (float) i / pointsCount, out deformPower);
 
-                    if (result && DuMath.IsZero(weight))
+                    if (result && DuMath.IsZero(deformPower))
                         continue;
                 }
 
-                if (DeformPoint(ref vLocalPosition, weight * strength) == false)
+                if (DeformPoint(ref vLocalPosition, deformPower * strength) == false)
                     continue;
 
                 // 1. Back-Transform vertex position: local-in-deformer > world

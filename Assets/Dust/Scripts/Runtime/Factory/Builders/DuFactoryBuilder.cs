@@ -120,10 +120,10 @@ namespace DustEngine
         }
 
         // This method should calculate:
-        // - PSR (position, rotation, scale)
+        // - position, rotation, scale
         // - UVW
         // Values for (next) params will be defined by instance:
-        // - weight
+        // - value
         // - color
         public virtual DuFactoryInstance.State GetDefaultInstanceState(DuFactoryInstance duFactoryInstance)
         {

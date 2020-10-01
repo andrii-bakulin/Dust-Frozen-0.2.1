@@ -65,9 +65,9 @@ namespace DustEngine.DustEditor
                 {
                     float innerOffset = i / 200f;
                     float globalOffset = (innerOffset + offset) * timeScale * previewLength;
-                    float weight = (target as DuTimeField).GetPowerByTimeMode(timeMode, globalOffset);
+                    float value = (target as DuTimeField).GetPowerByTimeMode(timeMode, globalOffset);
 
-                    curve.AddKey(new Keyframe(innerOffset, weight) {weightedMode = WeightedMode.Both});
+                    curve.AddKey(new Keyframe(innerOffset, value) {weightedMode = WeightedMode.Both});
                 }
 
                 Space();

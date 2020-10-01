@@ -183,10 +183,10 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public float MapValue(float inWeight)
+        public float MapValue(float inValue)
         {
             if (!remapForceEnabled)
-                return inWeight;
+                return inValue;
 
             //----------------------------------------------------------------------------------------------------------
 
@@ -210,19 +210,19 @@ namespace DustEngine
                 outMax = Mathf.LerpUnclamped(1f - min, 1f - max, strength);
             }
 
-            if (innerOffset > 0f && inWeight > inMax)
-                inWeight = inMax;
+            if (innerOffset > 0f && inValue > inMax)
+                inValue = inMax;
 
-            float outWeight = DuMath.Map(inMin, inMax, outMin, outMax, inWeight);
+            float outValue = DuMath.Map(inMin, inMax, outMin, outMax, inValue);
 
             //----------------------------------------------------------------------------------------------------------
             // Clamp values if need
 
             if (clampMinEnabled)
-                outWeight = Mathf.Max(outWeight, Mathf.Min(min, max)); // 2nd argument: find totally min value
+                outValue = Mathf.Max(outValue, Mathf.Min(min, max)); // 2nd argument: find totally min value
 
             if (clampMaxEnabled)
-                outWeight = Mathf.Min(outWeight, Mathf.Max(min, max)); // 2nd argument: find totally max value
+                outValue = Mathf.Min(outValue, Mathf.Max(min, max)); // 2nd argument: find totally max value
 
             //----------------------------------------------------------------------------------------------------------
             // Post Reshape
@@ -234,24 +234,24 @@ namespace DustEngine
                     break;
 
                 case PostReshapeMode.Step:
-                    outWeight = DuMath.Step(outWeight, postStepsCount, outMin, outMax);
+                    outValue = DuMath.Step(outValue, postStepsCount, outMin, outMax);
                     break;
 
                 case PostReshapeMode.Curve:
                 {
-                    float weightNormalized = DuMath.Map(outMin, outMax, 0f, 1f, outWeight);
+                    float valueNormalized = DuMath.Map(outMin, outMax, 0f, 1f, outValue);
 
-                    weightNormalized = postCurve.Evaluate(weightNormalized);
-                    outWeight = DuMath.Map01To(outMin, outMax, weightNormalized);
+                    valueNormalized = postCurve.Evaluate(valueNormalized);
+                    outValue = DuMath.Map01To(outMin, outMax, valueNormalized);
                     break;
                 }
             }
 
-            outWeight *= postPower;
+            outValue *= postPower;
 
             //----------------------------------------------------------------------------------------------------------
 
-            return outWeight;
+            return outValue;
         }
 
         //--------------------------------------------------------------------------------------------------------------

@@ -255,7 +255,7 @@ namespace DustEngine
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        internal void ApplyMaterialUpdatesToObject(float strength)
+        internal void ApplyMaterialUpdatesToObject(float intensity)
         {
             var matRef = materialReference;
 
@@ -283,13 +283,13 @@ namespace DustEngine
             }
 
             if (!Dust.IsNullOrEmpty(matRef.colorPropertyName))
-                material.SetColor(matRef.colorPropertyName, stateDynamic.color * strength);
+                material.SetColor(matRef.colorPropertyName, stateDynamic.color * intensity);
 
             if (!Dust.IsNullOrEmpty(matRef.powerPropertyName))
-                material.SetFloat(matRef.powerPropertyName, stateDynamic.power * strength);
+                material.SetFloat(matRef.powerPropertyName, stateDynamic.power * intensity);
 
             if (!Dust.IsNullOrEmpty(matRef.uvwPropertyName))
-                material.SetVector(matRef.uvwPropertyName, stateDynamic.uvw * strength);
+                material.SetVector(matRef.uvwPropertyName, stateDynamic.uvw * intensity);
 
             m_DidApplyMaterialUpdatesBefore = true;
             m_DidApplyMaterialUpdatesLastIteration = true;

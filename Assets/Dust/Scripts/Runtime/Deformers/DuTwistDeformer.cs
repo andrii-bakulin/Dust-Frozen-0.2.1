@@ -84,22 +84,22 @@ namespace DustEngine
             // Deform logic (in X+ direction)
 
             float twistHalfSize = size.x / 2f;
-            float weight;
+            float deformPower;
 
             switch (deformMode)
             {
                 default:
                 case DeformMode.Limited:
                 case DeformMode.WithinBox:
-                    weight = DuMath.Map(-twistHalfSize, +twistHalfSize, 0f, 1f, xpAxisPosition.x, true);
+                    deformPower = DuMath.Map(-twistHalfSize, +twistHalfSize, 0f, 1f, xpAxisPosition.x, true);
                     break;
 
                 case DeformMode.Unlimited:
-                    weight = DuMath.Map(-twistHalfSize, +twistHalfSize, 0f, 1f, xpAxisPosition.x);
+                    deformPower = DuMath.Map(-twistHalfSize, +twistHalfSize, 0f, 1f, xpAxisPosition.x);
                     break;
             }
 
-            DuMath.RotatePoint(ref xpAxisPosition.y, ref xpAxisPosition.z, weight * angle * strength);
+            DuMath.RotatePoint(ref xpAxisPosition.y, ref xpAxisPosition.z, deformPower * angle * strength);
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
