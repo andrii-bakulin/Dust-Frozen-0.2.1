@@ -352,6 +352,19 @@ namespace DustEngine.DustEditor
                 DustGUI.Label("Add field", 0, DustGUI.Config.ICON_BUTTON_HEIGHT);
             }
             DustGUI.EndHorizontal();
+
+            if (m_Fields.property.arraySize == 0)
+            {
+                var message = "Until no one field added the defaults values is:" + "\n"
+                              + "- Power = 1.0f" + "\n"
+                              + "- Color = Black";
+
+                DustGUI.BeginHorizontal();
+                {
+                    DustGUI.Label(message, 0, DustGUI.Config.ICON_BUTTON_HEIGHT * 2f, Color.gray);
+                }
+                DustGUI.EndHorizontal();
+            }
         }
 
         //--------------------------------------------------------------------------------------------------------------
