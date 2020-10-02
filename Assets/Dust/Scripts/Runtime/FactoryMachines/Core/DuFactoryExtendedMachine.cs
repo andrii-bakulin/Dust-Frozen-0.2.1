@@ -313,7 +313,6 @@ namespace DustEngine
             {
                 case ColorBlendMode.Blend:
                 default:
-                    // @todo!!! тут должно быть не "factoryInstanceState.fieldPower" конечный, а fieldPower текущий!
                     finalIntensity *= factoryInstanceState.fieldPower * newColor.a;
                     newColor.a = 1f;
                     break;
