@@ -14,6 +14,15 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
+        public enum ColumnVisibility
+        {
+            Auto = 0,
+            ForcedShow = 1,
+            ForcedHide = 2,
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
         private DuFieldsMap m_FieldsMapInstance;
 
         private DuEditor m_Editor;
@@ -38,13 +47,34 @@ namespace DustEngine.DustEditor
             return (m_Editor.target as DuMonoBehaviour).gameObject;
         }
 
-        public bool calculatePower => m_FieldsMapInstance.calculatePower;
-        public bool calculateColor => m_FieldsMapInstance.calculateColor;
+        private bool showColumnPower;
+        private bool showColumnColor;
 
         //--------------------------------------------------------------------------------------------------------------
 
         public void OnInspectorGUI()
+            => OnInspectorGUI(ColumnVisibility.Auto, ColumnVisibility.Auto);
+
+        public void OnInspectorGUI(ColumnVisibility visColumnPower, ColumnVisibility visColumnColor)
         {
+            switch (visColumnPower)
+            {
+                default:
+                case ColumnVisibility.Auto:       showColumnPower = m_FieldsMapInstance.calculatePower; break;
+                case ColumnVisibility.ForcedShow: showColumnPower = true; break;
+                case ColumnVisibility.ForcedHide: showColumnPower = false; break;
+            }
+
+            switch (visColumnColor)
+            {
+                default:
+                case ColumnVisibility.Auto:       showColumnColor = m_FieldsMapInstance.calculateColor; break;
+                case ColumnVisibility.ForcedShow: showColumnColor = true; break;
+                case ColumnVisibility.ForcedHide: showColumnColor = false; break;
+            }
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
             if (DustGUI.FoldoutBegin("Fields Map", "DuFieldsMap.Main"))
             {
                 OptimizeFieldsArray();
@@ -67,10 +97,10 @@ namespace DustEngine.DustEditor
 
                         DustGUI.Header("Intensity", CELL_WIDTH_INTENSITY);
 
-                        if (calculatePower)
+                        if (showColumnPower)
                             DustGUI.Header("Power", CELL_WIDTH_BLENDING - padding);
 
-                        if (calculateColor)
+                        if (showColumnColor)
                             DustGUI.Header("Color", CELL_WIDTH_BLENDING - padding);
 
                         DustGUI.Header("", CELL_WIDTH_CONTROL);
@@ -204,7 +234,7 @@ namespace DustEngine.DustEditor
 
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-                if (calculatePower)
+                if (showColumnPower)
                 {
                     var enumValue = DustGUI.DropDownList(newRecord.blendPowerMode, CELL_WIDTH_BLENDING, 0, UI.ExtraList.styleDropDownList);
                     newRecord.blendPowerMode = (DuFieldsMap.FieldRecord.BlendPowerMode) enumValue;
@@ -212,7 +242,7 @@ namespace DustEngine.DustEditor
 
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-                if (calculateColor)
+                if (showColumnColor)
                 {
                     if (newRecord.field.IsAllowCalculateFieldColor())
                     {

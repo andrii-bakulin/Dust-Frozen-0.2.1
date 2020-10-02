@@ -43,14 +43,21 @@ namespace DustEngine.DustEditor
         }
 
         //--------------------------------------------------------------------------------------------------------------
+        // Helper
+
+        private DuFactoryExtendedMachine.ValueImpactSource valueImpactSource
+            => (DuFactoryExtendedMachine.ValueImpactSource) m_ValueImpactSource.enumValueIndex;
+
+        private DuFactoryExtendedMachine.ColorImpactSource colorImpactSource
+            => (DuFactoryExtendedMachine.ColorImpactSource) m_ColorImpactSource.enumValueIndex;
+
+        //--------------------------------------------------------------------------------------------------------------
 
         protected void OnInspectorGUI_ImpactOnValueBlock()
         {
             if (DustGUI.FoldoutBegin("Impact On Instances Value", "DuFactoryMachine.ImpactOnValue"))
             {
                 PropertyField(m_ValueImpactSource);
-
-                var valueImpactSource = (DuFactoryExtendedMachine.ValueImpactSource) m_ValueImpactSource.enumValueIndex;
 
                 if (valueImpactSource != DuFactoryExtendedMachine.ValueImpactSource.Skip)
                 {
@@ -83,8 +90,6 @@ namespace DustEngine.DustEditor
             {
                 PropertyField(m_ColorImpactSource);
 
-                var colorImpactSource = (DuFactoryExtendedMachine.ColorImpactSource) m_ColorImpactSource.enumValueIndex;
-
                 if (colorImpactSource != DuFactoryExtendedMachine.ColorImpactSource.Skip)
                 {
                     if (colorImpactSource == DuFactoryExtendedMachine.ColorImpactSource.FixedColor)
@@ -100,7 +105,13 @@ namespace DustEngine.DustEditor
 
         protected void OnInspectorGUI_Falloff()
         {
-            m_FieldsMapEditor.OnInspectorGUI();
+            var showColumnPower = DuFieldsMapEditor.ColumnVisibility.Auto;
+            var showColumnColor = DuFieldsMapEditor.ColumnVisibility.Auto;
+
+            if (colorImpactSource != DuFactoryExtendedMachine.ColorImpactSource.FieldsMapColor)
+                showColumnColor = DuFieldsMapEditor.ColumnVisibility.ForcedHide;
+
+            m_FieldsMapEditor.OnInspectorGUI(showColumnPower, showColumnColor);
         }
     }
 }
