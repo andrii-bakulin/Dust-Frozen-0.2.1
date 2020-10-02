@@ -38,11 +38,12 @@ namespace DustEngine
 
         public enum ColorBlendMode
         {
-            Set = 0,
-            Add = 1,
-            Subtract = 2,
-            Multiply = 3,
-            Divide = 4,
+            Blend = 0,
+            Set = 1,
+            Add = 2,
+            Subtract = 3,
+            Multiply = 4,
+            Divide = 5,
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -122,7 +123,7 @@ namespace DustEngine
         }
 
         [SerializeField]
-        protected ColorBlendMode m_ColorBlendMode = ColorBlendMode.Set;
+        protected ColorBlendMode m_ColorBlendMode = ColorBlendMode.Blend;
         public ColorBlendMode colorBlendMode
         {
             get => m_ColorBlendMode;
@@ -304,11 +305,21 @@ namespace DustEngine
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // Blending
 
+            float finalIntensity = Mathf.Abs(factoryInstanceState.intensityByFactory)
+                                   * factoryInstanceState.intensityByMachine
+                                   * colorImpactIntensity;
+
             switch (colorBlendMode)
             {
-                case ColorBlendMode.Set:
+                case ColorBlendMode.Blend:
                 default:
-                    // Nothing need to do
+                    // @todo!!! тут должно быть не "factoryInstanceState.fieldPower" конечный, а fieldPower текущий!
+                    finalIntensity *= factoryInstanceState.fieldPower * newColor.a;
+                    newColor.a = 1f;
+                    break;
+
+                case ColorBlendMode.Set:
+                    newColor = newColor.ToRGBWithoutAlpha();
                     break;
 
                 case ColorBlendMode.Add:
@@ -320,31 +331,15 @@ namespace DustEngine
                     break;
 
                 case ColorBlendMode.Multiply:
-                    newColor = instanceState.color * newColor;
+                    newColor = instanceState.color * newColor.ToRGBWithoutAlpha();
                     newColor.Clamp01();
                     break;
 
                 case ColorBlendMode.Divide:
-                    newColor = DuColor.DivideSafely(instanceState.color, newColor);
+                    newColor = DuColor.DivideSafely(instanceState.color, newColor.ToRGBWithoutAlpha());
                     newColor.Clamp01();
                     break;
             }
-
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            // Merge
-
-            float colorPower = factoryInstanceState.fieldPower;
-
-            if (colorImpactSource == ColorImpactSource.FieldsMapColor)
-            {
-                colorPower = newColor.a;
-                newColor.a = 1f;
-            }
-
-            float finalIntensity = Mathf.Abs(factoryInstanceState.intensityByFactory)
-                                   * factoryInstanceState.intensityByMachine
-                                   * colorPower
-                                   * colorImpactIntensity;
 
             instanceState.color = Color.LerpUnclamped(instanceState.color, newColor, finalIntensity);
             instanceState.color.Clamp01();

@@ -293,6 +293,9 @@ namespace DustEngine
 
                 float fieldPower = fieldRecord.field.GetPowerForFieldPoint(fieldPoint);
 
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                // Calculate Power
+
                 if (calculatePower && fieldRecord.blendPowerMode != FieldRecord.BlendPowerMode.Ignore)
                 {
                     float afterBlendPower;
@@ -375,6 +378,8 @@ namespace DustEngine
                             blendedColor = DuColorBlend.Max(fieldPoint.outColor, DuColorBlend.AlphaBlend(fieldPoint.outColor, fieldColor));
                             break;
                     }
+
+                    blendedColor = blendedColor.ToRGBWithoutAlpha();
 
                     fieldPoint.outColor = Color.Lerp(fieldPoint.outColor, blendedColor, fieldRecord.intensity);
                 }
