@@ -179,7 +179,7 @@ namespace DustEngine
 
         protected void UpdateInstanceDynamicState_Value(FactoryInstanceState factoryInstanceState)
         {
-            if (DuMath.IsZero(valueImpactIntensity))
+            if (DuMath.IsZero(valueImpactIntensity) || DuMath.IsZero(factoryInstanceState.intensityByMachine))
                 return;
 
             var instanceState = factoryInstanceState.instance.stateDynamic;
@@ -260,7 +260,11 @@ namespace DustEngine
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // Merge
 
-            instanceState.value = Mathf.LerpUnclamped(instanceState.value, newValue, factoryInstanceState.intensityByFactory * valueImpactIntensity);
+            float finalIntensity = factoryInstanceState.intensityByFactory
+                                   * factoryInstanceState.intensityByMachine
+                                   * valueImpactIntensity;
+
+            instanceState.value = Mathf.LerpUnclamped(instanceState.value, newValue, finalIntensity);
 
             if (valueClampEnabled)
                 instanceState.value = Mathf.Clamp(instanceState.value, valueClampMin, valueClampMax);
@@ -268,7 +272,7 @@ namespace DustEngine
 
         protected void UpdateInstanceDynamicState_Color(FactoryInstanceState factoryInstanceState)
         {
-            if (DuMath.IsZero(colorImpactIntensity))
+            if (DuMath.IsZero(colorImpactIntensity) || DuMath.IsZero(factoryInstanceState.intensityByMachine))
                 return;
 
             var instanceState = factoryInstanceState.instance.stateDynamic;
@@ -337,9 +341,12 @@ namespace DustEngine
                 newColor.a = 1f;
             }
 
-            instanceState.color = Color.LerpUnclamped(instanceState.color, newColor,
-                Mathf.Abs(factoryInstanceState.intensityByFactory) * colorPower * colorImpactIntensity);
+            float finalIntensity = Mathf.Abs(factoryInstanceState.intensityByFactory)
+                                   * factoryInstanceState.intensityByMachine
+                                   * colorPower
+                                   * colorImpactIntensity;
 
+            instanceState.color = Color.LerpUnclamped(instanceState.color, newColor, finalIntensity);
             instanceState.color.Clamp01();
         }
 
