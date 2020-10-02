@@ -18,8 +18,9 @@ namespace DustEngine
                 Subtract = 3,
                 Multiply = 4,
                 Divide = 5,
-                Min = 6,
-                Max = 7,
+                Avg = 6,
+                Min = 7,
+                Max = 8,
             }
 
             public enum BlendColorMode
@@ -317,6 +318,10 @@ namespace DustEngine
 
                         case FieldRecord.BlendPowerMode.Divide:
                             afterBlendPower = DuMath.IsNotZero(fieldPower) ? fieldPoint.outPower / fieldPower : 0f;
+                            break;
+
+                        case FieldRecord.BlendPowerMode.Avg:
+                            afterBlendPower = (fieldPoint.outPower + fieldPower) / 2f;
                             break;
 
                         case FieldRecord.BlendPowerMode.Min:
