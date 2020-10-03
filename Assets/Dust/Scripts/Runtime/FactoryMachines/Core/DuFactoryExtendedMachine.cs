@@ -43,6 +43,8 @@ namespace DustEngine
             Add = 2,
             Subtract = 3,
             Multiply = 4,
+            Min = 5,
+            Max = 6,
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -290,6 +292,7 @@ namespace DustEngine
 
                 case ColorImpactSource.FixedColor:
                     newColor = colorFixed;
+                    newColor.a = factoryInstanceState.fieldPower;
                     break;
 
                 case ColorImpactSource.FactoryMachineColor:
@@ -332,8 +335,13 @@ namespace DustEngine
                     newColor = DuColorBlend.Multiply(instanceState.color, newColor);
                     break;
 
-                // @todo@: add Min
-                // @todo@: add Max
+                case ColorBlendMode.Min:
+                    newColor = DuColorBlend.MinAfterBlend(instanceState.color, newColor);
+                    break;
+
+                case ColorBlendMode.Max:
+                    newColor = DuColorBlend.MaxAfterBlend(instanceState.color,newColor);
+                    break;
             }
 
             instanceState.color = Color.LerpUnclamped(instanceState.color, newColor, finalIntensity);
