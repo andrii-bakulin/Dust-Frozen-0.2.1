@@ -300,6 +300,7 @@ namespace DustEngine
             color.r = RepackValueByShape(colorShape, color.r / colorScale, 0f, 1f);
             color.g = RepackValueByShape(colorShape, color.g / colorScale, 0f, 1f);
             color.b = RepackValueByShape(colorShape, color.b / colorScale, 0f, 1f);
+            color.a = 1f;
 
             return color;
         }
