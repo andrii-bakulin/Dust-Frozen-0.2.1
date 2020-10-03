@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEditor;
 
@@ -134,6 +133,18 @@ namespace DustEngine
             return string.Join(" + ", parts);
         }
 #endif
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        public override DuFieldsMap.FieldRecord.BlendPowerMode GetBlendPowerMode()
+        {
+            return DuFieldsMap.FieldRecord.BlendPowerMode.Set;
+        }
+
+        public override DuFieldsMap.FieldRecord.BlendColorMode GetBlendColorMode()
+        {
+            return DuFieldsMap.FieldRecord.BlendColorMode.Set;
+        }
 
         //--------------------------------------------------------------------------------------------------------------
         // Power

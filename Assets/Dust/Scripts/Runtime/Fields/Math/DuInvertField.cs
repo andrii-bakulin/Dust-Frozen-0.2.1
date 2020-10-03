@@ -42,6 +42,18 @@ namespace DustEngine
 #endif
 
         //--------------------------------------------------------------------------------------------------------------
+
+        public override DuFieldsMap.FieldRecord.BlendPowerMode GetBlendPowerMode()
+        {
+            return DuFieldsMap.FieldRecord.BlendPowerMode.Set;
+        }
+
+        public override DuFieldsMap.FieldRecord.BlendColorMode GetBlendColorMode()
+        {
+            return DuFieldsMap.FieldRecord.BlendColorMode.Set;
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
         // Power
 
         public override float GetPowerForFieldPoint(DuField.Point fieldPoint)

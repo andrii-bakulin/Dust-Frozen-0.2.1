@@ -414,13 +414,23 @@ namespace DustEngine
             return fields.Count > 0;
         }
 
-        public FieldRecord.BlendPowerMode GetDefaultBlendPower()
+        public FieldRecord.BlendPowerMode GetDefaultBlendPower(DuField field)
         {
+            var blendMode = field.GetBlendPowerMode();
+
+            if (blendMode != FieldRecord.BlendPowerMode.Ignore)
+                return blendMode;
+
             return fields.Count == 0 ? FieldRecord.BlendPowerMode.Set : FieldRecord.BlendPowerMode.Max;
         }
 
-        public FieldRecord.BlendColorMode GetDefaultBlendColor()
+        public FieldRecord.BlendColorMode GetDefaultBlendColor(DuField field)
         {
+            var blendMode = field.GetBlendColorMode();
+
+            if (blendMode != FieldRecord.BlendColorMode.Ignore)
+                return blendMode;
+
             return FieldRecord.BlendColorMode.Blend;
         }
 
@@ -433,8 +443,8 @@ namespace DustEngine
                 field = field,
                 enabled = true,
                 intensity = 1f,
-                blendPowerMode = GetDefaultBlendPower(),
-                blendColorMode = GetDefaultBlendColor(),
+                blendPowerMode = GetDefaultBlendPower(field),
+                blendColorMode = GetDefaultBlendColor(field),
             };
 
             fields.Add(fieldRecord);

@@ -425,8 +425,8 @@ namespace DustEngine.DustEditor
 
             newRecord.FindPropertyRelative("m_Enabled").boolValue = defaultRec.enabled;
             newRecord.FindPropertyRelative("m_Field").objectReferenceValue = field;
-            newRecord.FindPropertyRelative("m_BlendPowerMode").enumValueIndex = (int) m_FieldsMapInstance.GetDefaultBlendPower();
-            newRecord.FindPropertyRelative("m_BlendColorMode").enumValueIndex = (int) m_FieldsMapInstance.GetDefaultBlendColor();
+            newRecord.FindPropertyRelative("m_BlendPowerMode").enumValueIndex = (int) m_FieldsMapInstance.GetDefaultBlendPower(field);
+            newRecord.FindPropertyRelative("m_BlendColorMode").enumValueIndex = (int) m_FieldsMapInstance.GetDefaultBlendColor(field);
             newRecord.FindPropertyRelative("m_Intensity").floatValue = defaultRec.intensity;
 
             m_Editor.serializedObject.ApplyModifiedProperties();

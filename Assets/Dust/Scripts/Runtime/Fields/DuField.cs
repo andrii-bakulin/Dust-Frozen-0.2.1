@@ -124,6 +124,18 @@ namespace DustEngine
 #endif
 
         //--------------------------------------------------------------------------------------------------------------
+
+        public virtual DuFieldsMap.FieldRecord.BlendPowerMode GetBlendPowerMode()
+        {
+            return DuFieldsMap.FieldRecord.BlendPowerMode.Ignore;
+        }
+
+        public virtual DuFieldsMap.FieldRecord.BlendColorMode GetBlendColorMode()
+        {
+            return DuFieldsMap.FieldRecord.BlendColorMode.Ignore;
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
         // DuDynamicStateInterface
 
         public abstract int GetDynamicStateHashCode();
