@@ -112,7 +112,7 @@ namespace DustEngine.DustEditor
             DustGUI.FoldoutEnd();
         }
 
-        protected void OnInspectorGUI_Falloff()
+        protected void OnInspectorGUI_FieldsMap()
         {
             var showColumnPower = DuFieldsMapEditor.ColumnVisibility.Auto;
             var showColumnColor = DuFieldsMapEditor.ColumnVisibility.Auto;

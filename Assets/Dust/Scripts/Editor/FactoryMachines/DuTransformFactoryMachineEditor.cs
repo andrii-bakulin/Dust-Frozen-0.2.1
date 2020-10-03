@@ -56,7 +56,7 @@ namespace DustEngine.DustEditor
 
             OnInspectorGUI_ImpactOnValueBlock();
             OnInspectorGUI_ImpactOnColorBlock();
-            OnInspectorGUI_Falloff();
+            OnInspectorGUI_FieldsMap();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
