@@ -390,13 +390,11 @@ namespace DustEngine
                             break;
 
                         case FieldRecord.BlendColorMode.Min:
-                            // @todo@: should I make AlphaBlend?
-                            blendedColor = DuColorBlend.Min(fieldPoint.outColor, DuColorBlend.AlphaBlend(fieldPoint.outColor, fieldColor));
+                            blendedColor = DuColorBlend.MinAfterBlend(fieldPoint.outColor, fieldColor);
                             break;
 
                         case FieldRecord.BlendColorMode.Max:
-                            // @todo@: should I make AlphaBlend?
-                            blendedColor = DuColorBlend.Max(fieldPoint.outColor, DuColorBlend.AlphaBlend(fieldPoint.outColor, fieldColor));
+                            blendedColor = DuColorBlend.MaxAfterBlend(fieldPoint.outColor,fieldColor);
                             break;
                     }
 
@@ -416,12 +414,12 @@ namespace DustEngine
             return fields.Count > 0;
         }
 
-        internal FieldRecord.BlendPowerMode GetDefaultBlendPower()
+        public FieldRecord.BlendPowerMode GetDefaultBlendPower()
         {
             return fields.Count == 0 ? FieldRecord.BlendPowerMode.Set : FieldRecord.BlendPowerMode.Max;
         }
 
-        internal FieldRecord.BlendColorMode GetDefaultBlendColor()
+        public FieldRecord.BlendColorMode GetDefaultBlendColor()
         {
             return FieldRecord.BlendColorMode.Blend;
         }

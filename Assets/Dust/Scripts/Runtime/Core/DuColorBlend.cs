@@ -108,5 +108,15 @@ namespace DustEngine
 
             return res;
         }
+
+        public static Color MinAfterBlend(Color colorBase, Color colorOver)
+        {
+            return Min(colorBase, AlphaBlend(colorBase, colorOver));
+        }
+
+        public static Color MaxAfterBlend(Color colorBase, Color colorOver)
+        {
+            return Max(colorBase, AlphaBlend(colorBase, colorOver));
+        }
     }
 }
