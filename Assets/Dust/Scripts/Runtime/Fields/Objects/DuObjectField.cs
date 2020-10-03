@@ -5,11 +5,6 @@ namespace DustEngine
 {
     public abstract class DuObjectField : DuField
     {
-        public static readonly Color k_GizmosColorRangeZero = new Color(0.00f, 0.50f, 0.66f);
-        public static readonly Color k_GizmosColorRangeOne = new Color(0.00f, 0.75f, 1.00f);
-
-        //--------------------------------------------------------------------------------------------------------------
-
         [SerializeField]
         private DuRemapping m_Remapping = new DuRemapping();
         public DuRemapping remapping => m_Remapping;
