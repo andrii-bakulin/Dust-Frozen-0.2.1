@@ -310,8 +310,9 @@ namespace DustEngine
             return false;
         }
 
-        public override Gradient GetFieldColorPreview()
+        public override Gradient GetFieldColorPreview(out float intensity)
         {
+            intensity = 0f;
             return null;
         }
 #endif

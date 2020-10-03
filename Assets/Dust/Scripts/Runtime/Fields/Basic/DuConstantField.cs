@@ -88,8 +88,9 @@ namespace DustEngine
             return true;
         }
 
-        public override Gradient GetFieldColorPreview()
+        public override Gradient GetFieldColorPreview(out float intensity)
         {
+            intensity = color.a;
             return color.ToGradient();
         }
 #endif

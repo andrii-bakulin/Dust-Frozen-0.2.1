@@ -115,7 +115,7 @@ namespace DustEngine
 
 #if UNITY_EDITOR
         public abstract bool IsHasFieldColorPreview();
-        public abstract Gradient GetFieldColorPreview();
+        public abstract Gradient GetFieldColorPreview(out float intensity);
 #endif
 
         //--------------------------------------------------------------------------------------------------------------
@@ -166,17 +166,20 @@ namespace DustEngine
             }
         }
 
-        protected Gradient GetFieldColorPreview(DuRemapping remapping)
+        protected Gradient GetFieldColorPreview(DuRemapping remapping, out float intensity)
         {
             switch (remapping.colorMode)
             {
                 case DuRemapping.ColorMode.Color:
+                    intensity = remapping.color.a;
                     return remapping.color.ToGradient();
 
                 case DuRemapping.ColorMode.Gradient:
+                    intensity = 1f;
                     return remapping.gradient;
 
                 default:
+                    intensity = 1f;
                     return Color.magenta.ToGradient();
             }
         }

@@ -51,9 +51,9 @@ namespace DustEngine
             return remapping.remapColorEnabled;
         }
 
-        public override Gradient GetFieldColorPreview()
+        public override Gradient GetFieldColorPreview(out float intensity)
         {
-            return GetFieldColorPreview(remapping);
+            return GetFieldColorPreview(remapping, out intensity);
         }
 #endif
 
