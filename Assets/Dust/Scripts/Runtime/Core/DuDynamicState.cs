@@ -44,45 +44,54 @@ namespace DustEngine
 
         public static void Append(ref int dynamicState, int sequenceIndex, Gradient value)
         {
-            dynamicState ^= sequenceIndex * 238715 + value.GetHashCode();
+            dynamicState ^= sequenceIndex * 238715 + (Dust.IsNotNull(value) ? value.GetHashCode() : 123456);
         }
 
         public static void Append(ref int dynamicState, int sequenceIndex, AnimationCurve value)
         {
-            dynamicState ^= sequenceIndex * 772937 + value.GetHashCode();
+            dynamicState ^= sequenceIndex * 772937 + (Dust.IsNotNull(value) ? value.GetHashCode() : 123456);
         }
 
         //--------------------------------------------------------------------------------------------------------------
 
         public static void Append(ref int dynamicState, int sequenceIndex, Transform transform)
         {
-            dynamicState ^= sequenceIndex * 784449 + transform.position.GetHashCode();
-            dynamicState ^= sequenceIndex * 807525 + transform.rotation.GetHashCode();
-            dynamicState ^= sequenceIndex * 371238 + transform.lossyScale.GetHashCode();
+            if (Dust.IsNotNull(transform))
+            {
+                dynamicState ^= sequenceIndex * 784449 + transform.position.GetHashCode();
+                dynamicState ^= sequenceIndex * 807525 + transform.rotation.GetHashCode();
+                dynamicState ^= sequenceIndex * 371238 + transform.lossyScale.GetHashCode();
+            }
+            else
+            {
+                dynamicState ^= sequenceIndex * 784449 + 123456;
+                dynamicState ^= sequenceIndex * 807525 + 123456;
+                dynamicState ^= sequenceIndex * 371238 + 123456;
+            }
         }
 
         //--------------------------------------------------------------------------------------------------------------
 
         public static void Append(ref int dynamicState, int sequenceIndex, DuDeformer deformer)
         {
-            dynamicState ^= sequenceIndex * 291422 + deformer.GetDynamicStateHashCode();
+            dynamicState ^= sequenceIndex * 291422 + (Dust.IsNotNull(deformer) ? deformer.GetDynamicStateHashCode() : 123456);
         }
 
         public static void Append(ref int dynamicState, int sequenceIndex, DuFieldsMap fieldsMap)
         {
-            dynamicState ^= sequenceIndex * 955735 + fieldsMap.GetDynamicStateHashCode();
+            dynamicState ^= sequenceIndex * 955735 + (Dust.IsNotNull(fieldsMap) ? fieldsMap.GetDynamicStateHashCode() : 123456);
         }
 
         public static void Append(ref int dynamicState, int sequenceIndex, DuField field)
         {
-            dynamicState ^= sequenceIndex * 512661 + field.GetDynamicStateHashCode();
+            dynamicState ^= sequenceIndex * 512661 + (Dust.IsNotNull(field) ? field.GetDynamicStateHashCode() : 123456);
         }
 
         //--------------------------------------------------------------------------------------------------------------
 
         public static void Append(ref int dynamicState, int sequenceIndex, Mesh mesh)
         {
-            dynamicState ^= sequenceIndex * 848409 + mesh.GetHashCode();
+            dynamicState ^= sequenceIndex * 848409 + (Dust.IsNotNull(mesh) ? mesh.GetHashCode() : 123456);
         }
     }
 }
