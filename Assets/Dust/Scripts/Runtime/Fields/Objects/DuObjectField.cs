@@ -109,7 +109,7 @@ namespace DustEngine
 
         protected void ResetDefaults()
         {
-            remapping.color = DuColor.RandomColor();
+            // Use this method to reset values for default to remapping object
         }
     }
 }

@@ -84,7 +84,6 @@ namespace DustEngine
 
         private void Reset()
         {
-            remapping.color = DuColor.RandomColor();
             remapping.innerOffset = 0f;
         }
     }

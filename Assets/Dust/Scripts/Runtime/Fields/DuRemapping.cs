@@ -137,7 +137,7 @@ namespace DustEngine
         }
 
         [SerializeField]
-        protected Color m_Color = Color.white;
+        protected Color m_Color = new Color(0.00f, 0.75f, 1.00f);
         public Color color
         {
             get => m_Color;
