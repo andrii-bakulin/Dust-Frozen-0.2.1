@@ -15,6 +15,7 @@ namespace DustEngine.DustEditor
         private DuProperty m_PowerSize;
         private DuProperty m_PowerDotsVisible;
         private DuProperty m_PowerDotsSize;
+        private DuProperty m_PowerDotsColor;
 
         private DuProperty m_ColorVisible;
         private DuProperty m_ColorSize;
@@ -33,6 +34,7 @@ namespace DustEngine.DustEditor
             m_PowerSize = FindProperty("m_PowerSize", "Size");
             m_PowerDotsVisible = FindProperty("m_PowerDotsVisible", "Dots Visible");
             m_PowerDotsSize = FindProperty("m_PowerDotsSize", "Dots Size");
+            m_PowerDotsColor = FindProperty("m_PowerDotsColor", "Dots Color");
 
             m_ColorVisible = FindProperty("m_ColorVisible", "Visible");
             m_ColorSize = FindProperty("m_ColorSize", "Size");
@@ -67,6 +69,7 @@ namespace DustEngine.DustEditor
                 Space();
                 PropertyField(m_PowerDotsVisible);
                 PropertyExtendedSlider(m_PowerDotsSize, 0.1f, 2.0f, +0.1f, 0.1f);
+                PropertyField(m_PowerDotsColor);
                 Space();
             }
             DustGUI.FoldoutEnd();

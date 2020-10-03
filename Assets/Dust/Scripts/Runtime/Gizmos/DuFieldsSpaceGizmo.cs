@@ -68,6 +68,14 @@ namespace DustEngine
             set => m_PowerDotsSize = Normalizer.Size(value);
         }
 
+        [SerializeField]
+        private Gradient m_PowerDotsColor = new Gradient();
+        public Gradient powerDotsColor
+        {
+            get => m_PowerDotsColor;
+            set => m_PowerDotsColor = value;
+        }
+
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
@@ -156,11 +164,26 @@ namespace DustEngine
 
                     if (powerDotsVisible)
                     {
-                        Handles.color = Color.Lerp(Color.black, DuObjectField.k_GizmosColorRangeOne, fieldPower);
+                        if (Dust.IsNotNull(powerDotsColor))
+                            Handles.color = powerDotsColor.Evaluate(fieldPower);
+                        else
+                            Handles.color = Color.Lerp(Color.black, Color.white, fieldPower);
+
                         Handles.DotHandleCap(0, worldPosition, transform.rotation, 0.1f * powerDotsSize, EventType.Repaint);
                     }
                 }
             }
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        void Reset()
+        {
+            powerDotsColor = new Gradient();
+            powerDotsColor.SetKeys(
+                new[] {new GradientColorKey(Color.black, 0f), new GradientColorKey(Color.red, 1f)},
+                new[] {new GradientAlphaKey(1f, 0f), new GradientAlphaKey(1f, 1f)}
+                );
         }
 
         //--------------------------------------------------------------------------------------------------------------
