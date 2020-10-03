@@ -213,7 +213,7 @@ namespace DustEngine
             if (innerOffset > 0f && inValue > inMax)
                 inValue = inMax;
 
-            float outValue = DuMath.Map(inMin, inMax, outMin, outMax, inValue);
+            float outValue = DuMath.Fit(inMin, inMax, outMin, outMax, inValue);
 
             //----------------------------------------------------------------------------------------------------------
             // Clamp values if need
@@ -239,10 +239,10 @@ namespace DustEngine
 
                 case PostReshapeMode.Curve:
                 {
-                    float valueNormalized = DuMath.Map(outMin, outMax, 0f, 1f, outValue);
+                    float valueNormalized = DuMath.Fit(outMin, outMax, 0f, 1f, outValue);
 
                     valueNormalized = postCurve.Evaluate(valueNormalized);
-                    outValue = DuMath.Map01To(outMin, outMax, valueNormalized);
+                    outValue = DuMath.Fit01To(outMin, outMax, valueNormalized);
                     break;
                 }
             }

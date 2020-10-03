@@ -217,7 +217,7 @@ namespace DustEngine
                 waveOffset *= Mathf.Clamp01((linearFalloff - distance) / linearFalloff);
 
             // Convert waveOffset [-1..+1] to [0..1]))
-            waveOffset = DuMath.Map(-1f, +1f, 0f, 1f, waveOffset);
+            waveOffset = DuMath.Fit(-1f, +1f, 0f, 1f, waveOffset);
 
             return remapping.MapValue(waveOffset);
         }

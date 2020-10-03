@@ -25,24 +25,24 @@ namespace DustEngine
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        public static void Map01To(ref this Vector3 self, float min, float max)
-            => Map01To(ref self, min, max, false);
+        public static void Fit01To(ref this Vector3 self, float min, float max)
+            => Fit01To(ref self, min, max, false);
 
-        public static void Map01To(ref this Vector3 self, float min, float max, bool clamped)
+        public static void Fit01To(ref this Vector3 self, float min, float max, bool clamped)
         {
-            self.x = DuMath.Map01To(min, max, self.x, clamped);
-            self.y = DuMath.Map01To(min, max, self.y, clamped);
-            self.z = DuMath.Map01To(min, max, self.z, clamped);
+            self.x = DuMath.Fit01To(min, max, self.x, clamped);
+            self.y = DuMath.Fit01To(min, max, self.y, clamped);
+            self.z = DuMath.Fit01To(min, max, self.z, clamped);
         }
 
-        public static void Map01To(ref this Vector3 self, Vector3 min, Vector3 max)
-            => Map01To(ref self, min, max, false);
+        public static void Fit01To(ref this Vector3 self, Vector3 min, Vector3 max)
+            => Fit01To(ref self, min, max, false);
 
-        public static void Map01To(ref this Vector3 self, Vector3 min, Vector3 max, bool clamped)
+        public static void Fit01To(ref this Vector3 self, Vector3 min, Vector3 max, bool clamped)
         {
-            self.x = DuMath.Map01To(min.x, max.x, self.x, clamped);
-            self.y = DuMath.Map01To(min.y, max.y, self.y, clamped);
-            self.z = DuMath.Map01To(min.z, max.z, self.z, clamped);
+            self.x = DuMath.Fit01To(min.x, max.x, self.x, clamped);
+            self.y = DuMath.Fit01To(min.y, max.y, self.y, clamped);
+            self.z = DuMath.Fit01To(min.z, max.z, self.z, clamped);
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -119,27 +119,27 @@ namespace DustEngine
             return value;
         }
 
-        public static Vector3 Map(float inMin, float inMax, Vector3 outMin, Vector3 outMax, float inValue)
-            => Map(inMin, inMax, outMin, outMax, inValue, false);
+        public static Vector3 Fit(float inMin, float inMax, Vector3 outMin, Vector3 outMax, float inValue)
+            => Fit(inMin, inMax, outMin, outMax, inValue, false);
 
-        public static Vector3 Map(float inMin, float inMax, Vector3 outMin, Vector3 outMax, float inValue, bool clamped)
+        public static Vector3 Fit(float inMin, float inMax, Vector3 outMin, Vector3 outMax, float inValue, bool clamped)
         {
             Vector3 r;
-            r.x = DuMath.Map(inMin, inMax, outMin.x, outMax.x, inValue, clamped);
-            r.y = DuMath.Map(inMin, inMax, outMin.y, outMax.y, inValue, clamped);
-            r.z = DuMath.Map(inMin, inMax, outMin.z, outMax.z, inValue, clamped);
+            r.x = DuMath.Fit(inMin, inMax, outMin.x, outMax.x, inValue, clamped);
+            r.y = DuMath.Fit(inMin, inMax, outMin.y, outMax.y, inValue, clamped);
+            r.z = DuMath.Fit(inMin, inMax, outMin.z, outMax.z, inValue, clamped);
             return r;
         }
 
-        public static Vector3 Map01To(Vector3 outMin, Vector3 outMax, float inValue)
-            => Map01To(outMin, outMax, inValue, false);
+        public static Vector3 Fit01To(Vector3 outMin, Vector3 outMax, float inValue)
+            => Fit01To(outMin, outMax, inValue, false);
 
-        public static Vector3 Map01To(Vector3 outMin, Vector3 outMax, float inValue, bool clamped)
+        public static Vector3 Fit01To(Vector3 outMin, Vector3 outMax, float inValue, bool clamped)
         {
             Vector3 r;
-            r.x = DuMath.Map01To(outMin.x, outMax.x, inValue, clamped);
-            r.y = DuMath.Map01To(outMin.y, outMax.y, inValue, clamped);
-            r.z = DuMath.Map01To(outMin.z, outMax.z, inValue, clamped);
+            r.x = DuMath.Fit01To(outMin.x, outMax.x, inValue, clamped);
+            r.y = DuMath.Fit01To(outMin.y, outMax.y, inValue, clamped);
+            r.z = DuMath.Fit01To(outMin.z, outMax.z, inValue, clamped);
             return r;
         }
 

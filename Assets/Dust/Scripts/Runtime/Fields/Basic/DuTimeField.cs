@@ -121,10 +121,10 @@ namespace DustEngine
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
                 case TimeMode.Sin:
-                    return DuMath.Map(-1f, +1f, 0f, 1f, Mathf.Sin(DuConstants.PI2 * timeOffset));
+                    return DuMath.Fit(-1f, +1f, 0f, 1f, Mathf.Sin(DuConstants.PI2 * timeOffset));
 
                 case TimeMode.Cos:
-                    return DuMath.Map(-1f, +1f, 0f, 1f, Mathf.Cos(DuConstants.PI2 * timeOffset));
+                    return DuMath.Fit(-1f, +1f, 0f, 1f, Mathf.Cos(DuConstants.PI2 * timeOffset));
 
                 case TimeMode.WaveUp:
                     return Mathf.Abs(Mathf.Sin(DuConstants.PI * timeOffset));

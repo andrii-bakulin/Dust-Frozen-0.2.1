@@ -95,19 +95,19 @@ namespace DustEngine
             if (stepsCount < 1)
                 return 0.0f;
 
-            float valueNormalized = Map(min, max, 0f, 1f, value);
+            float valueNormalized = Fit(min, max, 0f, 1f, value);
 
             valueNormalized = Step01(valueNormalized, stepsCount);
 
-            return Map01To(min, max, valueNormalized);
+            return Fit01To(min, max, valueNormalized);
         }
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public static float Map(float inMin, float inMax, float outMin, float outMax, float inValue)
-            => Map(inMin, inMax, outMin, outMax, inValue, false);
+        public static float Fit(float inMin, float inMax, float outMin, float outMax, float inValue)
+            => Fit(inMin, inMax, outMin, outMax, inValue, false);
 
-        public static float Map(float inMin, float inMax, float outMin, float outMax, float inValue, bool clamped)
+        public static float Fit(float inMin, float inMax, float outMin, float outMax, float inValue, bool clamped)
         {
             if (clamped)
             {
@@ -124,10 +124,10 @@ namespace DustEngine
             return outMin + (inValue - inMin) / inRange * outRange;
         }
 
-        public static float Map01To(float outMin, float outMax, float inValue)
-            => Map01To(outMin, outMax, inValue, false);
+        public static float Fit01To(float outMin, float outMax, float inValue)
+            => Fit01To(outMin, outMax, inValue, false);
 
-        public static float Map01To(float outMin, float outMax, float inValue, bool clamped)
+        public static float Fit01To(float outMin, float outMax, float inValue, bool clamped)
         {
             if (clamped)
             {

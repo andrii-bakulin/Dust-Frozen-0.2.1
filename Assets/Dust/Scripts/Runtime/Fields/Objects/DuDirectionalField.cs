@@ -104,7 +104,7 @@ namespace DustEngine
 
             float halfLength = length / 2f;
 
-            float offset = 1f - DuMath.Map(-halfLength, +halfLength, 0f, 1f, distanceToPoint);
+            float offset = 1f - DuMath.Fit(-halfLength, +halfLength, 0f, 1f, distanceToPoint);
 
             return remapping.MapValue(offset);
         }
@@ -132,7 +132,7 @@ namespace DustEngine
                 Gizmos.DrawWireCube(offsetPlane1, plainSize);
 
                 // Middle plane
-                Gizmos.DrawWireCube(DuVector3.Map01To(offsetPlane0, offsetPlane1, 1f - remapping.innerOffset), plainSize);
+                Gizmos.DrawWireCube(DuVector3.Fit01To(offsetPlane0, offsetPlane1, 1f - remapping.innerOffset), plainSize);
 
                 // Begin plane
                 Gizmos.color = !remapping.invert ? colorRange0 : colorRange1;

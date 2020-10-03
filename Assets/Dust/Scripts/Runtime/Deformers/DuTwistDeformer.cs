@@ -91,11 +91,11 @@ namespace DustEngine
                 default:
                 case DeformMode.Limited:
                 case DeformMode.WithinBox:
-                    deformPower = DuMath.Map(-twistHalfSize, +twistHalfSize, 0f, 1f, xpAxisPosition.x, true);
+                    deformPower = DuMath.Fit(-twistHalfSize, +twistHalfSize, 0f, 1f, xpAxisPosition.x, true);
                     break;
 
                 case DeformMode.Unlimited:
-                    deformPower = DuMath.Map(-twistHalfSize, +twistHalfSize, 0f, 1f, xpAxisPosition.x);
+                    deformPower = DuMath.Fit(-twistHalfSize, +twistHalfSize, 0f, 1f, xpAxisPosition.x);
                     break;
             }
 
