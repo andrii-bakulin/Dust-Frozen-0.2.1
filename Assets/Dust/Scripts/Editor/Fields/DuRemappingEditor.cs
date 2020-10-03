@@ -23,7 +23,6 @@ namespace DustEngine.DustEditor
         protected DuEditor.DuProperty m_PostStepsCount;
         protected DuEditor.DuProperty m_PostCurve;
 
-        protected DuEditor.DuProperty m_RemapColorEnabled;
         protected DuEditor.DuProperty m_ColorMode;
         protected DuEditor.DuProperty m_Color;
         protected DuEditor.DuProperty m_Gradient;
@@ -48,7 +47,6 @@ namespace DustEngine.DustEditor
             m_PostStepsCount = DuEditor.FindProperty(remappingProperty, "m_PostStepsCount", "Steps Count");
             m_PostCurve = DuEditor.FindProperty(remappingProperty, "m_PostCurve", "Curve Shape");
 
-            m_RemapColorEnabled = DuEditor.FindProperty(remappingProperty, "m_RemapColorEnabled", "Enabled");
             m_ColorMode = DuEditor.FindProperty(remappingProperty, "m_ColorMode", "Mode");
             m_Color = DuEditor.FindProperty(remappingProperty, "m_Color", "Color");
             m_Gradient = DuEditor.FindProperty(remappingProperty, "m_Gradient", "Gradient");
@@ -105,22 +103,17 @@ namespace DustEngine.DustEditor
 
             if (DustGUI.FoldoutBegin("Color", "DuRemapping.Color"))
             {
-                DuEditor.PropertyField(m_RemapColorEnabled);
+                DuEditor.PropertyField(m_ColorMode);
 
-                if (m_RemapColorEnabled.IsTrue)
+                switch ((DuRemapping.ColorMode) m_ColorMode.enumValueIndex)
                 {
-                    DuEditor.PropertyField(m_ColorMode);
+                    case DuRemapping.ColorMode.Color:
+                        DuEditor.PropertyField(m_Color);
+                        break;
 
-                    switch ((DuRemapping.ColorMode) m_ColorMode.enumValueIndex)
-                    {
-                        case DuRemapping.ColorMode.Color:
-                            DuEditor.PropertyField(m_Color);
-                            break;
-
-                        case DuRemapping.ColorMode.Gradient:
-                            DuEditor.PropertyField(m_Gradient);
-                            break;
-                    }
+                    case DuRemapping.ColorMode.Gradient:
+                        DuEditor.PropertyField(m_Gradient);
+                        break;
                 }
 
                 DuEditor.Space();

@@ -121,14 +121,6 @@ namespace DustEngine
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
-        private bool m_RemapColorEnabled = false;
-        public bool remapColorEnabled
-        {
-            get => m_RemapColorEnabled;
-            set => m_RemapColorEnabled = value;
-        }
-
-        [SerializeField]
         private ColorMode m_ColorMode = ColorMode.Color;
         public ColorMode colorMode
         {
@@ -173,7 +165,6 @@ namespace DustEngine
             DuDynamicState.Append(ref dynamicState, ++seq, postStepsCount);
             DuDynamicState.Append(ref dynamicState, ++seq, postCurve);
 
-            DuDynamicState.Append(ref dynamicState, ++seq, remapColorEnabled);
             DuDynamicState.Append(ref dynamicState, ++seq, colorMode);
             DuDynamicState.Append(ref dynamicState, ++seq, color);
             DuDynamicState.Append(ref dynamicState, ++seq, gradient);

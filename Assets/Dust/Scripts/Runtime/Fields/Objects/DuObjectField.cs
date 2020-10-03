@@ -32,7 +32,7 @@ namespace DustEngine
 
         public override bool IsAllowCalculateFieldColor()
         {
-            return remapping.remapColorEnabled;
+            return true;
         }
 
         public override Color GetFieldColor(DuField.Point fieldPoint, float powerByField)
@@ -43,7 +43,7 @@ namespace DustEngine
 #if UNITY_EDITOR
         public override bool IsHasFieldColorPreview()
         {
-            return remapping.remapColorEnabled;
+            return true;
         }
 
         public override Gradient GetFieldColorPreview(out float intensity)
