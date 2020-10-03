@@ -49,14 +49,14 @@ namespace DustEngine.DustEditor
             }
             DustGUI.FoldoutEnd();
 
-            m_IsRequireRebuildClones |= m_Count.isChanged;
+            m_IsRequireRebuildInstances |= m_Count.isChanged;
 
-            m_IsRequireResetupClones |= m_Offset.isChanged;
-            m_IsRequireResetupClones |= m_Amount.isChanged;
-            m_IsRequireResetupClones |= m_Position.isChanged;
-            m_IsRequireResetupClones |= m_Rotation.isChanged;
-            m_IsRequireResetupClones |= m_Scale.isChanged;
-            m_IsRequireResetupClones |= m_StepRotation.isChanged;
+            m_IsRequireResetupInstances |= m_Offset.isChanged;
+            m_IsRequireResetupInstances |= m_Amount.isChanged;
+            m_IsRequireResetupInstances |= m_Position.isChanged;
+            m_IsRequireResetupInstances |= m_Rotation.isChanged;
+            m_IsRequireResetupInstances |= m_Scale.isChanged;
+            m_IsRequireResetupInstances |= m_StepRotation.isChanged;
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

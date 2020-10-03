@@ -32,9 +32,9 @@ namespace DustEngine.DustEditor
             }
             DustGUI.FoldoutEnd();
 
-            m_IsRequireRebuildClones |= m_Count.isChanged;
+            m_IsRequireRebuildInstances |= m_Count.isChanged;
 
-            m_IsRequireResetupClones |= m_Size.isChanged;
+            m_IsRequireResetupInstances |= m_Size.isChanged;
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

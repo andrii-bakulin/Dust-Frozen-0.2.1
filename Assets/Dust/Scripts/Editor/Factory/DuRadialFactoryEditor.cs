@@ -55,16 +55,16 @@ namespace DustEngine.DustEditor
             }
             DustGUI.FoldoutEnd();
 
-            m_IsRequireRebuildClones |= m_Count.isChanged;
+            m_IsRequireRebuildInstances |= m_Count.isChanged;
 
-            m_IsRequireResetupClones |= m_Radius.isChanged;
-            m_IsRequireResetupClones |= m_Orientation.isChanged;
-            m_IsRequireResetupClones |= m_Align.isChanged;
-            m_IsRequireResetupClones |= m_StartAngle.isChanged;
-            m_IsRequireResetupClones |= m_EndAngle.isChanged;
-            m_IsRequireResetupClones |= m_Offset.isChanged;
-            m_IsRequireResetupClones |= m_OffsetVariation.isChanged;
-            m_IsRequireResetupClones |= m_OffsetSeed.isChanged;
+            m_IsRequireResetupInstances |= m_Radius.isChanged;
+            m_IsRequireResetupInstances |= m_Orientation.isChanged;
+            m_IsRequireResetupInstances |= m_Align.isChanged;
+            m_IsRequireResetupInstances |= m_StartAngle.isChanged;
+            m_IsRequireResetupInstances |= m_EndAngle.isChanged;
+            m_IsRequireResetupInstances |= m_Offset.isChanged;
+            m_IsRequireResetupInstances |= m_OffsetVariation.isChanged;
+            m_IsRequireResetupInstances |= m_OffsetSeed.isChanged;
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

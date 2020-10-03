@@ -35,8 +35,8 @@ namespace DustEngine.DustEditor
 
         private readonly Dictionary<string, Rect> m_RectsUI = new Dictionary<string, Rect>();
 
-        protected bool m_IsRequireRebuildClones;
-        protected bool m_IsRequireResetupClones;
+        protected bool m_IsRequireRebuildInstances;
+        protected bool m_IsRequireResetupInstances;
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -66,7 +66,7 @@ namespace DustEngine.DustEditor
 
         protected void BeginData()
         {
-            m_IsRequireRebuildClones = m_IsRequireResetupClones = DustGUI.IsUndoRedoPerformed();
+            m_IsRequireRebuildInstances = m_IsRequireResetupInstances = DustGUI.IsUndoRedoPerformed();
 
             serializedObject.Update();
         }
@@ -79,10 +79,10 @@ namespace DustEngine.DustEditor
             {
                 var origin = subTarget as DuFactory;
 
-                if (m_IsRequireRebuildClones)
+                if (m_IsRequireRebuildInstances)
                     origin.RebuildInstances();
 
-                if (m_IsRequireResetupClones)
+                if (m_IsRequireResetupInstances)
                     origin.UpdateInstancesZeroStates();
             }
         }
@@ -106,11 +106,11 @@ namespace DustEngine.DustEditor
             }
             DustGUI.FoldoutEnd();
 
-            m_IsRequireRebuildClones |= m_Objects.isChanged;
-            m_IsRequireRebuildClones |= m_IterateMode.isChanged;
-            m_IsRequireRebuildClones |= m_InstanceMode.isChanged;
-            m_IsRequireRebuildClones |= m_Seed.isChanged;
-            m_IsRequireRebuildClones |= m_ForcedSetActive.isChanged;
+            m_IsRequireRebuildInstances |= m_Objects.isChanged;
+            m_IsRequireRebuildInstances |= m_IterateMode.isChanged;
+            m_IsRequireRebuildInstances |= m_InstanceMode.isChanged;
+            m_IsRequireRebuildInstances |= m_Seed.isChanged;
+            m_IsRequireRebuildInstances |= m_ForcedSetActive.isChanged;
         }
 
         protected void OnInspectorGUI_FactoryMachines()
@@ -126,9 +126,9 @@ namespace DustEngine.DustEditor
             }
             DustGUI.FoldoutEnd();
 
-            m_IsRequireResetupClones |= m_DefaultValue.isChanged;
-            m_IsRequireResetupClones |= m_DefaultColor.isChanged;
-            m_IsRequireResetupClones |= m_FactoryMachines.isChanged;
+            m_IsRequireResetupInstances |= m_DefaultValue.isChanged;
+            m_IsRequireResetupInstances |= m_DefaultColor.isChanged;
+            m_IsRequireResetupInstances |= m_FactoryMachines.isChanged;
         }
 
         protected void OnInspectorGUI_Transform()
@@ -147,11 +147,11 @@ namespace DustEngine.DustEditor
             }
             DustGUI.FoldoutEnd();
 
-            m_IsRequireResetupClones |= m_TransformPosition.isChanged;
-            m_IsRequireResetupClones |= m_TransformRotation.isChanged;
-            m_IsRequireResetupClones |= m_TransformScale.isChanged;
-            m_IsRequireResetupClones |= m_TransformSpace.isChanged;
-            m_IsRequireResetupClones |= m_TransformSequence.isChanged;
+            m_IsRequireResetupInstances |= m_TransformPosition.isChanged;
+            m_IsRequireResetupInstances |= m_TransformRotation.isChanged;
+            m_IsRequireResetupInstances |= m_TransformScale.isChanged;
+            m_IsRequireResetupInstances |= m_TransformSpace.isChanged;
+            m_IsRequireResetupInstances |= m_TransformSequence.isChanged;
         }
 
         protected void OnInspectorGUI_Display()
@@ -169,8 +169,8 @@ namespace DustEngine.DustEditor
         {
             if (DustGUI.FoldoutBegin("Tools", "DuFactory.Tools", false))
             {
-                if (DustGUI.Button("Forced Rebuild Clones"))
-                    m_IsRequireRebuildClones |= true;
+                if (DustGUI.Button("Forced Rebuild Instances"))
+                    m_IsRequireRebuildInstances |= true;
             }
             DustGUI.FoldoutEnd();
         }
