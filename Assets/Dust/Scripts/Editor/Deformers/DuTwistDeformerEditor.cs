@@ -35,6 +35,7 @@ namespace DustEngine.DustEditor
                 PropertyExtendedSlider(m_Angle, -360f, 360f, 1f);
                 PropertyField(m_DeformMode);
                 PropertyField(m_Direction);
+                Space();
             }
             DustGUI.FoldoutEnd();
 

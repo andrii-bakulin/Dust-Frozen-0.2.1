@@ -47,9 +47,11 @@ namespace DustEngine.DustEditor
                 PropertyExtendedSlider(m_Frequency, 0f, 10f, 0.01f);
                 PropertyExtendedSlider(m_LinearFalloff, 0f, 10f, 0.01f);
                 Space();
+
                 PropertyExtendedSlider(m_Offset, 0f, 1f, 0.01f);
                 PropertyExtendedSlider(m_AnimationSpeed, -2f, +2f, 0.01f);
                 PropertyField(m_Direction);
+                Space();
             }
             DustGUI.FoldoutEnd();
 
