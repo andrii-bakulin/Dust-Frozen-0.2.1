@@ -6,10 +6,9 @@ namespace DustEngine
     {
         public enum ValueImpactSource
         {
-            Skip = 0,
-            FixedValue = 1,
-            FactoryMachinePower = 2,
-            FieldsMapPower = 3,
+            FieldsMapPower = 0,
+            FactoryMachinePower = 1,
+            FixedValue = 2,
         }
 
         public enum ValueBlendMode
@@ -30,10 +29,9 @@ namespace DustEngine
 
         public enum ColorImpactSource
         {
-            Skip = 0,
-            FixedColor = 1,
-            FactoryMachineColor = 2,
-            FieldsMapColor = 3,
+            FieldsMapColor = 0,
+            FactoryMachineColor = 1,
+            FixedColor = 2,
         }
 
         public enum ColorBlendMode
@@ -50,7 +48,15 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
 
         [SerializeField]
-        protected ValueImpactSource m_ValueImpactSource = ValueImpactSource.Skip;
+        protected bool m_ValueImpactEnabled = true;
+        public bool valueImpactEnabled
+        {
+            get => m_ValueImpactEnabled;
+            set => m_ValueImpactEnabled = value;
+        }
+
+        [SerializeField]
+        protected ValueImpactSource m_ValueImpactSource = ValueImpactSource.FieldsMapPower;
         public ValueImpactSource valueImpactSource
         {
             get => m_ValueImpactSource;
@@ -108,7 +114,15 @@ namespace DustEngine
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
-        protected ColorImpactSource m_ColorImpactSource = ColorImpactSource.Skip;
+        protected bool m_ColorImpactEnabled = true;
+        public bool colorImpactEnabled
+        {
+            get => m_ColorImpactEnabled;
+            set => m_ColorImpactEnabled = value;
+        }
+
+        [SerializeField]
+        protected ColorImpactSource m_ColorImpactSource = ColorImpactSource.FieldsMapColor;
         public ColorImpactSource colorImpactSource
         {
             get => m_ColorImpactSource;
@@ -181,6 +195,9 @@ namespace DustEngine
 
         protected void UpdateInstanceDynamicState_Value(FactoryInstanceState factoryInstanceState)
         {
+            if (!valueImpactEnabled)
+                return;
+
             if (DuMath.IsZero(valueImpactIntensity) || DuMath.IsZero(factoryInstanceState.intensityByMachine))
                 return;
 
@@ -194,9 +211,6 @@ namespace DustEngine
             switch (valueImpactSource)
             {
                 default:
-                case ValueImpactSource.Skip:
-                    return;
-
                 case ValueImpactSource.FixedValue:
                     newValue = valueFixed;
                     break;
@@ -274,6 +288,9 @@ namespace DustEngine
 
         protected void UpdateInstanceDynamicState_Color(FactoryInstanceState factoryInstanceState)
         {
+            if (!colorImpactEnabled)
+                return;
+
             if (DuMath.IsZero(colorImpactIntensity) || DuMath.IsZero(factoryInstanceState.intensityByMachine))
                 return;
 
@@ -286,10 +303,7 @@ namespace DustEngine
 
             switch (colorImpactSource)
             {
-                case ColorImpactSource.Skip:
                 default:
-                    return;
-
                 case ColorImpactSource.FixedColor:
                     newColor = colorFixed;
                     newColor.a = factoryInstanceState.fieldPower;

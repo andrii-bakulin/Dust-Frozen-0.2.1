@@ -5,6 +5,7 @@ namespace DustEngine.DustEditor
 {
     public abstract class DuFactoryExtendedMachineEditor : DuFactoryMachineEditor
     {
+        protected DuProperty m_ValueImpactEnabled;
         protected DuProperty m_ValueImpactSource;
         protected DuProperty m_ValueImpactIntensity;
         protected DuProperty m_ValueBlendMode;
@@ -13,6 +14,7 @@ namespace DustEngine.DustEditor
         protected DuProperty m_ValueClampMin;
         protected DuProperty m_ValueClampMax;
 
+        protected DuProperty m_ColorImpactEnabled;
         protected DuProperty m_ColorImpactSource;
         protected DuProperty m_ColorImpactIntensity;
         protected DuProperty m_ColorBlendMode;
@@ -26,6 +28,7 @@ namespace DustEngine.DustEditor
         {
             base.OnEnableFactoryMachine();
 
+            m_ValueImpactEnabled = FindProperty("m_ValueImpactEnabled", "Enabled");
             m_ValueImpactSource = FindProperty("m_ValueImpactSource", "Source");
             m_ValueImpactIntensity = FindProperty("m_ValueImpactIntensity", "Intensity");
             m_ValueBlendMode = FindProperty("m_ValueBlendMode", "Blend Mode");
@@ -34,6 +37,7 @@ namespace DustEngine.DustEditor
             m_ValueClampMin = FindProperty("m_ValueClampMin", "Min");
             m_ValueClampMax = FindProperty("m_ValueClampMax", "Max");
 
+            m_ColorImpactEnabled = FindProperty("m_ColorImpactEnabled", "Enabled");
             m_ColorImpactSource = FindProperty("m_ColorImpactSource", "Source");
             m_ColorImpactIntensity = FindProperty("m_ColorImpactIntensity", "Intensity");
             m_ColorBlendMode = FindProperty("m_ColorBlendMode", "Blend Mode");
@@ -57,10 +61,12 @@ namespace DustEngine.DustEditor
         {
             if (DustGUI.FoldoutBegin("Impact On Instances Value", "DuFactoryMachine.ImpactOnValue"))
             {
-                PropertyField(m_ValueImpactSource);
+                PropertyField(m_ValueImpactEnabled);
 
-                if (valueImpactSource != DuFactoryExtendedMachine.ValueImpactSource.Skip)
+                if (m_ValueImpactEnabled.IsTrue)
                 {
+                    PropertyField(m_ValueImpactSource);
+
                     if (valueImpactSource == DuFactoryExtendedMachine.ValueImpactSource.FixedValue)
                         PropertyField(m_ValueFixed);
 
@@ -79,6 +85,7 @@ namespace DustEngine.DustEditor
                         DustGUI.IndentLevelDec();
                     }
                 }
+
                 Space();
             }
             DustGUI.FoldoutEnd();
@@ -88,10 +95,12 @@ namespace DustEngine.DustEditor
         {
             if (DustGUI.FoldoutBegin("Impact On Instances Color", "DuFactoryMachine.ImpactOnColor"))
             {
-                PropertyField(m_ColorImpactSource);
+                PropertyField(m_ColorImpactEnabled);
 
-                if (colorImpactSource != DuFactoryExtendedMachine.ColorImpactSource.Skip)
+                if (m_ColorImpactEnabled.IsTrue)
                 {
+                    PropertyField(m_ColorImpactSource);
+
                     if (colorImpactSource == DuFactoryExtendedMachine.ColorImpactSource.FixedColor)
                         PropertyField(m_ColorFixed);
 
