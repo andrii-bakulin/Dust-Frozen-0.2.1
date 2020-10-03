@@ -43,7 +43,6 @@ namespace DustEngine
             Add = 2,
             Subtract = 3,
             Multiply = 4,
-            Divide = 5,
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -141,7 +140,7 @@ namespace DustEngine
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
-        protected DuFieldsMap m_FieldsMap = DuFieldsMap.Factory();
+        protected DuFieldsMap m_FieldsMap = DuFieldsMap.FactoryMachine();
         public DuFieldsMap fieldsMap => m_FieldsMap;
 
         //--------------------------------------------------------------------------------------------------------------
@@ -313,31 +312,28 @@ namespace DustEngine
             {
                 case ColorBlendMode.Blend:
                 default:
-                    finalIntensity *= factoryInstanceState.fieldPower * newColor.a;
-                    newColor.a = 1f;
+                    newColor = DuColorBlend.AlphaBlend(instanceState.color, newColor);
                     break;
 
                 case ColorBlendMode.Set:
-                    newColor = newColor.ToRGBWithoutAlpha();
+                    // nothing need to do
+                    // newColor = newColor;
                     break;
 
                 case ColorBlendMode.Add:
-                    newColor = DuColor.AddRGB(instanceState.color, newColor.ToRGBWithoutAlpha());
+                    newColor = DuColorBlend.Add(instanceState.color, newColor);
                     break;
 
                 case ColorBlendMode.Subtract:
-                    newColor = DuColor.SubtractRGB(instanceState.color, newColor.ToRGBWithoutAlpha());
+                    newColor = DuColorBlend.Subtract(instanceState.color, newColor);
                     break;
 
                 case ColorBlendMode.Multiply:
-                    newColor = instanceState.color * newColor.ToRGBWithoutAlpha();
-                    newColor.Clamp01();
+                    newColor = DuColorBlend.Multiply(instanceState.color, newColor);
                     break;
 
-                case ColorBlendMode.Divide:
-                    newColor = DuColor.DivideSafely(instanceState.color, newColor.ToRGBWithoutAlpha());
-                    newColor.Clamp01();
-                    break;
+                // @todo@: add Min
+                // @todo@: add Max
             }
 
             instanceState.color = Color.LerpUnclamped(instanceState.color, newColor, finalIntensity);

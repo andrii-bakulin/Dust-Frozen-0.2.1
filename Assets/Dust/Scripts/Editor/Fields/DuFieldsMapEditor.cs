@@ -26,6 +26,9 @@ namespace DustEngine.DustEditor
         private DuFieldsMap m_FieldsMapInstance;
 
         private DuEditor m_Editor;
+
+        private DuEditor.DuProperty m_DefaultPower;
+        private DuEditor.DuProperty m_DefaultColor;
         private DuEditor.DuProperty m_Fields;
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -35,8 +38,11 @@ namespace DustEngine.DustEditor
         public DuFieldsMapEditor(DuEditor parentEditor, SerializedProperty fieldsMapProperty, DuFieldsMap fieldsMapInstance)
         {
             m_FieldsMapInstance = fieldsMapInstance;
-
             m_Editor = parentEditor;
+
+            m_DefaultPower = DuEditor.FindProperty(parentEditor, fieldsMapProperty, "m_DefaultPower", "Default Power");
+            m_DefaultColor = DuEditor.FindProperty(parentEditor, fieldsMapProperty, "m_DefaultColor", "Default Color");
+
             m_Fields = DuEditor.FindProperty(parentEditor, fieldsMapProperty, "m_Fields", "Fields");
         }
 
@@ -47,8 +53,8 @@ namespace DustEngine.DustEditor
             return (m_Editor.target as DuMonoBehaviour).gameObject;
         }
 
-        private bool showColumnPower;
-        private bool showColumnColor;
+        private bool showPowerEditor;
+        private bool showColorEditor;
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -60,23 +66,33 @@ namespace DustEngine.DustEditor
             switch (visColumnPower)
             {
                 default:
-                case ColumnVisibility.Auto:       showColumnPower = m_FieldsMapInstance.calculatePower; break;
-                case ColumnVisibility.ForcedShow: showColumnPower = true; break;
-                case ColumnVisibility.ForcedHide: showColumnPower = false; break;
+                case ColumnVisibility.Auto:       showPowerEditor = m_FieldsMapInstance.calculatePower; break;
+                case ColumnVisibility.ForcedShow: showPowerEditor = true; break;
+                case ColumnVisibility.ForcedHide: showPowerEditor = false; break;
             }
 
             switch (visColumnColor)
             {
                 default:
-                case ColumnVisibility.Auto:       showColumnColor = m_FieldsMapInstance.calculateColor; break;
-                case ColumnVisibility.ForcedShow: showColumnColor = true; break;
-                case ColumnVisibility.ForcedHide: showColumnColor = false; break;
+                case ColumnVisibility.Auto:       showColorEditor = m_FieldsMapInstance.calculateColor; break;
+                case ColumnVisibility.ForcedShow: showColorEditor = true; break;
+                case ColumnVisibility.ForcedHide: showColorEditor = false; break;
             }
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             if (DustGUI.FoldoutBegin("Fields Map", "DuFieldsMap.Main"))
             {
+                if (showPowerEditor)
+                    DuEditor.PropertyExtendedSlider(m_DefaultPower, 0f, 1f, 0.01f);
+
+                if (showColorEditor)
+                    DuEditor.PropertyField(m_DefaultColor);
+
+                DuEditor.Space();
+
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
                 OptimizeFieldsArray();
 
                 Vector2 scrollPosition = DuSessionState.GetVector3("DuFieldsMap.Fields.ScrollPosition", m_Editor.target, Vector2.zero);
@@ -97,10 +113,10 @@ namespace DustEngine.DustEditor
 
                         DustGUI.Header("Intensity", CELL_WIDTH_INTENSITY);
 
-                        if (showColumnPower)
+                        if (showPowerEditor)
                             DustGUI.Header("Power", CELL_WIDTH_BLENDING - padding);
 
-                        if (showColumnColor)
+                        if (showColorEditor)
                             DustGUI.Header("Color", CELL_WIDTH_BLENDING - padding);
 
                         DustGUI.Header("", CELL_WIDTH_CONTROL);
@@ -234,7 +250,7 @@ namespace DustEngine.DustEditor
 
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-                if (showColumnPower)
+                if (showPowerEditor)
                 {
                     var enumValue = DustGUI.DropDownList(newRecord.blendPowerMode, CELL_WIDTH_BLENDING, 0, UI.ExtraList.styleDropDownList);
                     newRecord.blendPowerMode = (DuFieldsMap.FieldRecord.BlendPowerMode) enumValue;
@@ -242,7 +258,7 @@ namespace DustEngine.DustEditor
 
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-                if (showColumnColor)
+                if (showColorEditor)
                 {
                     if (newRecord.field.IsAllowCalculateFieldColor())
                     {
@@ -355,19 +371,6 @@ namespace DustEngine.DustEditor
                 DustGUI.Label("Add field", 0, DustGUI.Config.ICON_BUTTON_HEIGHT);
             }
             DustGUI.EndHorizontal();
-
-            if (m_Fields.property.arraySize == 0)
-            {
-                var message = "Until no one field added the defaults values is:" + "\n"
-                              + "- Power = 1.0f" + "\n"
-                              + "- Color = Black";
-
-                DustGUI.BeginHorizontal();
-                {
-                    DustGUI.Label(message, 0, DustGUI.Config.ICON_BUTTON_HEIGHT * 2f, Color.gray);
-                }
-                DustGUI.EndHorizontal();
-            }
         }
 
         //--------------------------------------------------------------------------------------------------------------

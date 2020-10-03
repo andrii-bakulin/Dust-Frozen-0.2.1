@@ -97,13 +97,10 @@ namespace DustEngine
                 vWorldPosition = matrixMeshLocalToMeshWorld.MultiplyPoint(pointsCloud[i]);
                 vLocalPosition = matrixMeshWorldToDefmLocal.MultiplyPoint(vWorldPosition);
 
-                if (fieldsMap.HasFields())
-                {
-                    bool result = fieldsMap.Calculate(vWorldPosition, (float) i / pointsCount, out deformPower);
+                fieldsMap.Calculate(vWorldPosition, (float) i / pointsCount, out deformPower);
 
-                    if (result && DuMath.IsZero(deformPower))
-                        continue;
-                }
+                if (DuMath.IsZero(deformPower))
+                    continue;
 
                 if (DeformPoint(ref vLocalPosition, deformPower * strength) == false)
                     continue;

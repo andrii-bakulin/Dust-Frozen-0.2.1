@@ -4,6 +4,15 @@ using UnityEngine;
 
 namespace DustEngine
 {
+    /// <summary>
+    ///
+    /// Main idea for color usage:
+    /// - R+G+B define color
+    /// - A     define intensity of color in this point
+    ///
+    /// 1) If need change intensity of some color only require multiple A for required value
+    ///
+    /// </summary>
     [Serializable]
     public class DuFieldsMap : DuDynamicStateInterface
     {
@@ -26,8 +35,8 @@ namespace DustEngine
             public enum BlendColorMode
             {
                 Ignore = 0,
-                Set = 1,
-                Blend = 2,
+                Blend = 1,
+                Set = 2,
                 Add = 3,
                 Subtract = 4,
                 Multiply = 5,
@@ -35,7 +44,7 @@ namespace DustEngine
                 Max = 7,
             }
 
-            //--------------------------------------------------------------------------------------------------------------
+            //----------------------------------------------------------------------------------------------------------
 
             [SerializeField]
             private bool m_Enabled = true;
@@ -107,7 +116,7 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private Color m_DefaultColor = Color.black;
+        private Color m_DefaultColor = Color.clear;
         public Color defaultColor
         {
             get => m_DefaultColor;
@@ -128,23 +137,37 @@ namespace DustEngine
 
         public static DuFieldsMap Deformer()
         {
-            return new DuFieldsMap(true, false);
+            return new DuFieldsMap()
+            {
+                calculatePower = true,
+                calculateColor = false,
+
+                defaultPower = 1f,
+            };
         }
 
-        public static DuFieldsMap Factory()
+        public static DuFieldsMap FactoryMachine()
         {
-            return new DuFieldsMap(true, true);
+            return new DuFieldsMap()
+            {
+                calculatePower = true,
+                calculateColor = true,
+
+                defaultPower = 1f,
+                defaultColor = Color.clear,
+            };
         }
 
         public static DuFieldsMap FieldsSpace()
         {
-            return new DuFieldsMap(true, true);
-        }
+            return new DuFieldsMap()
+            {
+                calculatePower = true,
+                calculateColor = true,
 
-        public DuFieldsMap(bool calcPower, bool calcColor)
-        {
-            calculatePower = calcPower;
-            calculateColor = calcColor;
+                defaultPower = 0f,
+                defaultColor = Color.black,
+            };
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -185,25 +208,14 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public bool HasFields()
-        {
-            return fields.Count > 0;
-        }
-
-        public FieldRecord.BlendPowerMode GetDefaultBlendPower()
-        {
-            return fields.Count == 0 ? FieldRecord.BlendPowerMode.Set : FieldRecord.BlendPowerMode.Max;
-        }
-
-        public FieldRecord.BlendColorMode GetDefaultBlendColor()
-        {
-            return FieldRecord.BlendColorMode.Blend;
-        }
-
-        //--------------------------------------------------------------------------------------------------------------
-
         public bool Calculate(Vector3 worldPosition, float sequenceOffset, out float power)
         {
+            if (!HasFields())
+            {
+                power = defaultPower;
+                return false;
+            }
+
             m_CalcFieldPoint.inPosition = worldPosition;
             m_CalcFieldPoint.inOffset = sequenceOffset;
 
@@ -216,6 +228,13 @@ namespace DustEngine
 
         public bool Calculate(Vector3 worldPosition, float sequenceOffset, out float power, out Color color)
         {
+            if (!HasFields())
+            {
+                power = defaultPower;
+                color = defaultColor;
+                return false;
+            }
+
             m_CalcFieldPoint.inPosition = worldPosition;
             m_CalcFieldPoint.inOffset = sequenceOffset;
 
@@ -231,9 +250,9 @@ namespace DustEngine
 
         public bool Calculate(DuFactory factory, DuFactoryInstance factoryInstance, out float power)
         {
-            if (fields.Count == 0)
+            if (!HasFields())
             {
-                power = 1f; // This is tricks just for factory-machine logics
+                power = defaultPower;
                 return false;
             }
 
@@ -249,10 +268,10 @@ namespace DustEngine
 
         public bool Calculate(DuFactory factory, DuFactoryInstance factoryInstance, out float power, out Color color)
         {
-            if (fields.Count == 0)
+            if (!HasFields())
             {
-                power = 1f; // This is tricks just for factory-machine logics
-                color = Color.black;
+                power = defaultPower;
+                color = defaultColor;
                 return false;
             }
 
@@ -271,8 +290,8 @@ namespace DustEngine
 
         public bool Calculate(DuField.Point fieldPoint)
         {
-            fieldPoint.outPower = calculatePower ? defaultPower : 0f;
-            fieldPoint.outColor = calculateColor ? defaultColor : Color.black;
+            fieldPoint.outPower = defaultPower;
+            fieldPoint.outColor = defaultColor;
 
             if (fields.Count == 0)
                 return false;
@@ -371,15 +390,15 @@ namespace DustEngine
                             break;
 
                         case FieldRecord.BlendColorMode.Min:
+                            // @todo@: should I make AlphaBlend?
                             blendedColor = DuColorBlend.Min(fieldPoint.outColor, DuColorBlend.AlphaBlend(fieldPoint.outColor, fieldColor));
                             break;
 
                         case FieldRecord.BlendColorMode.Max:
+                            // @todo@: should I make AlphaBlend?
                             blendedColor = DuColorBlend.Max(fieldPoint.outColor, DuColorBlend.AlphaBlend(fieldPoint.outColor, fieldColor));
                             break;
                     }
-
-                    blendedColor = blendedColor.ToRGBWithoutAlpha();
 
                     fieldPoint.outColor = Color.Lerp(fieldPoint.outColor, blendedColor, fieldRecord.intensity);
                 }
@@ -389,6 +408,25 @@ namespace DustEngine
 
             return true;
         }
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        public bool HasFields()
+        {
+            return fields.Count > 0;
+        }
+
+        internal FieldRecord.BlendPowerMode GetDefaultBlendPower()
+        {
+            return fields.Count == 0 ? FieldRecord.BlendPowerMode.Set : FieldRecord.BlendPowerMode.Max;
+        }
+
+        internal FieldRecord.BlendColorMode GetDefaultBlendColor()
+        {
+            return FieldRecord.BlendColorMode.Blend;
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         public FieldRecord AddField(DuField field)
         {

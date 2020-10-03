@@ -127,42 +127,5 @@ namespace DustEngine
             color.a = Mathf.Clamp(color.a, min.a, max.a);
             return color;
         }
-
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-        public static Color AddRGB(Color a, Color b)
-            => AddRGB(a, b, 1f);
-
-        public static Color AddRGB(Color a, Color b, float alpha)
-        {
-            a.r = a.r + b.r;
-            a.g = a.g + b.g;
-            a.b = a.b + b.b;
-            a.a = alpha;
-            a.Clamp01();
-            return a;
-        }
-
-        public static Color SubtractRGB(Color a, Color b)
-            => SubtractRGB(a, b, 1f);
-
-        public static Color SubtractRGB(Color a, Color b, float alpha)
-        {
-            a.r = a.r - b.r;
-            a.g = a.g - b.g;
-            a.b = a.b - b.b;
-            a.a = alpha;
-            a.Clamp01();
-            return a;
-        }
-
-        public static Color DivideSafely(Color a, Color b)
-        {
-            if (b.r > 0f) a.r /= b.r;
-            if (b.g > 0f) a.g /= b.g;
-            if (b.b > 0f) a.b /= b.b;
-            if (b.a > 0f) a.a /= b.a;
-            return a;
-        }
     }
 }
