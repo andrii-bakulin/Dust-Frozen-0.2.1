@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Remapping:
-    m_Enabled: 1
+    m_RemapForceEnabled: 1
     m_Strength: 1
     m_InnerOffset: 0.5
     m_Invert: 0
@@ -175,10 +175,10 @@ MonoBehaviour:
     m_Max: 1
     m_ClampMinEnabled: 1
     m_ClampMaxEnabled: 1
-    m_ContourMultiplier: 1
-    m_ContourMode: 0
-    m_ContourSteps: 1
-    m_ContourSpline:
+    m_PostPower: 1
+    m_PostReshapeMode: 0
+    m_PostStepsCount: 1
+    m_PostCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -202,11 +202,40 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    m_ContourSplineAnimationSpeed: 0
-    m_ContourSplineOffset: 0
-    m_ColorRemap: 1
+    m_RemapColorEnabled: 0
+    m_ColorMode: 0
     m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_GizmosVisibility: 1
+    m_Gradient:
+      serializedVersion: 2
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+  m_GizmoVisibility: 1
+  m_GizmoFieldColor: 1
   m_Radius: 1
   m_Height: 2
   m_Direction: 2
@@ -309,7 +338,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &341551642
 Transform:
   m_ObjectHideFlags: 0
@@ -318,8 +347,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 341551641}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.03, y: 0, z: 2.97}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.29, y: 0, z: 1.16}
+  m_LocalScale: {x: 1.6489887, y: 1, z: 1.7637}
   m_Children: []
   m_Father: {fileID: 1514789996}
   m_RootOrder: 1
@@ -337,7 +366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Remapping:
-    m_Enabled: 1
+    m_RemapForceEnabled: 1
     m_Strength: 1
     m_InnerOffset: 0.5
     m_Invert: 0
@@ -345,10 +374,10 @@ MonoBehaviour:
     m_Max: 1
     m_ClampMinEnabled: 1
     m_ClampMaxEnabled: 1
-    m_ContourMultiplier: 1
-    m_ContourMode: 0
-    m_ContourSteps: 1
-    m_ContourSpline:
+    m_PostPower: 1
+    m_PostReshapeMode: 0
+    m_PostStepsCount: 1
+    m_PostCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -372,12 +401,125 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    m_ContourSplineAnimationSpeed: 0
-    m_ContourSplineOffset: 0
-    m_ColorRemap: 1
+    m_RemapColorEnabled: 1
+    m_ColorMode: 0
     m_Color: {r: 1, g: 1, b: 0, a: 1}
-  m_GizmosVisibility: 1
-  m_Size: {x: 1, y: 1, z: 1}
+    m_Gradient:
+      serializedVersion: 2
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+  m_GizmoVisibility: 1
+  m_GizmoFieldColor: 1
+  m_Size: {x: 2, y: 2, z: 2}
+--- !u!1 &386541355
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 386541357}
+  - component: {fileID: 386541356}
+  m_Layer: 0
+  m_Name: Fields Space Gizmo (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &386541356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 386541355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 255d0003c77764b2088142459e7b1d60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Color: {r: 1, g: 0.66, b: 0.33, a: 1}
+  m_GizmoVisibility: 2
+  m_FieldsSpace: {fileID: 1988627285}
+  m_GridCount: {x: 25, y: 1, z: 25}
+  m_GridStep: {x: 0.3, y: 1, z: 0.3}
+  m_PowerVisible: 0
+  m_PowerSize: 1.12
+  m_PowerDotsVisible: 1
+  m_PowerDotsSize: 0.65
+  m_PowerDotsColor:
+    serializedVersion: 2
+    key0: {r: 0, g: 0, b: 0, a: 1}
+    key1: {r: 1, g: 0, b: 0, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  m_ColorVisible: 1
+  m_ColorSize: 1
+  m_ColorAllowTransparent: 1
+--- !u!4 &386541357
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 386541355}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 5.3, z: 0.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &581391990
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,12 +642,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 1, g: 0.66, b: 0.33, a: 1}
-  m_GizmosVisibility: 2
+  m_GizmoVisibility: 2
   m_FieldsSpace: {fileID: 1514789995}
   m_GridCount: {x: 25, y: 1, z: 25}
   m_GridStep: {x: 0.3, y: 1, z: 0.3}
-  m_PowerVisible: 0
-  m_PowerSize: 0.77
+  m_PowerVisible: 1
+  m_PowerSize: 1.12
+  m_PowerDotsVisible: 1
+  m_PowerDotsSize: 0.65
+  m_PowerDotsColor:
+    serializedVersion: 2
+    key0: {r: 0, g: 0, b: 0, a: 1}
+    key1: {r: 1, g: 0, b: 0, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
   m_ColorVisible: 1
   m_ColorSize: 1
   m_ColorAllowTransparent: 1
@@ -517,7 +690,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 633533974}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -567,7 +740,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Remapping:
-    m_Enabled: 1
+    m_RemapForceEnabled: 1
     m_Strength: 1
     m_InnerOffset: 0.5
     m_Invert: 0
@@ -575,10 +748,10 @@ MonoBehaviour:
     m_Max: 1
     m_ClampMinEnabled: 1
     m_ClampMaxEnabled: 1
-    m_ContourMultiplier: 1
-    m_ContourMode: 0
-    m_ContourSteps: 1
-    m_ContourSpline:
+    m_PostPower: 1
+    m_PostReshapeMode: 0
+    m_PostStepsCount: 1
+    m_PostCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -602,11 +775,40 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    m_ContourSplineAnimationSpeed: 0
-    m_ContourSplineOffset: 0
-    m_ColorRemap: 1
+    m_RemapColorEnabled: 0
+    m_ColorMode: 0
     m_Color: {r: 0, g: 0, b: 1, a: 1}
-  m_GizmosVisibility: 1
+    m_Gradient:
+      serializedVersion: 2
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+  m_GizmoVisibility: 1
+  m_GizmoFieldColor: 1
   m_StartAngle: 124.49
   m_EndAngle: 302.8
   m_FadeInOffset: 45
@@ -614,7 +816,6 @@ MonoBehaviour:
   m_Iterations: 1
   m_Offset: 0
   m_Direction: 1
-  m_GizmoLength: 2
   m_GizmoRadius: 1
 --- !u!1 &659562831
 GameObject:
@@ -660,7 +861,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Remapping:
-    m_Enabled: 1
+    m_RemapForceEnabled: 1
     m_Strength: 1
     m_InnerOffset: 0.5
     m_Invert: 0
@@ -668,10 +869,10 @@ MonoBehaviour:
     m_Max: 1
     m_ClampMinEnabled: 1
     m_ClampMaxEnabled: 1
-    m_ContourMultiplier: 1
-    m_ContourMode: 0
-    m_ContourSteps: 1
-    m_ContourSpline:
+    m_PostPower: 1
+    m_PostReshapeMode: 0
+    m_PostStepsCount: 1
+    m_PostCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -695,12 +896,269 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    m_ContourSplineAnimationSpeed: 0
-    m_ContourSplineOffset: 0
-    m_ColorRemap: 1
+    m_RemapColorEnabled: 0
+    m_ColorMode: 0
     m_Color: {r: 1, g: 0, b: 1, a: 1}
-  m_GizmosVisibility: 1
+    m_Gradient:
+      serializedVersion: 2
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+  m_GizmoVisibility: 1
+  m_GizmoFieldColor: 1
   m_Radius: 1
+--- !u!1 &998509763
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 998509764}
+  - component: {fileID: 998509765}
+  m_Layer: 0
+  m_Name: Cube Field
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &998509764
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998509763}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.63, y: 0, z: -0.71}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1988627286}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &998509765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998509763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e199d0cdde1ce4169a5c40ec34d376a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Remapping:
+    m_RemapForceEnabled: 1
+    m_Strength: 1
+    m_InnerOffset: 0.5
+    m_Invert: 0
+    m_Min: 0
+    m_Max: 1
+    m_ClampMinEnabled: 1
+    m_ClampMaxEnabled: 1
+    m_PostPower: 1
+    m_PostReshapeMode: 0
+    m_PostStepsCount: 1
+    m_PostCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_RemapColorEnabled: 1
+    m_ColorMode: 0
+    m_Color: {r: 0, g: 0.5019608, b: 1, a: 1}
+    m_Gradient:
+      serializedVersion: 2
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+  m_GizmoVisibility: 1
+  m_GizmoFieldColor: 1
+  m_Size: {x: 4, y: 4, z: 4}
+--- !u!1 &999568468
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 999568470}
+  - component: {fileID: 999568469}
+  m_Layer: 0
+  m_Name: Cube Field (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &999568469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999568468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e199d0cdde1ce4169a5c40ec34d376a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Remapping:
+    m_RemapForceEnabled: 1
+    m_Strength: 1
+    m_InnerOffset: 0.5
+    m_Invert: 0
+    m_Min: 0
+    m_Max: 1
+    m_ClampMinEnabled: 1
+    m_ClampMaxEnabled: 1
+    m_PostPower: 1
+    m_PostReshapeMode: 0
+    m_PostStepsCount: 1
+    m_PostCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 3
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_RemapColorEnabled: 1
+    m_ColorMode: 0
+    m_Color: {r: 0.39215687, g: 0.78431374, b: 0.5019608, a: 1}
+    m_Gradient:
+      serializedVersion: 2
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+  m_GizmoVisibility: 1
+  m_GizmoFieldColor: 1
+  m_Size: {x: 4, y: 4, z: 4}
+--- !u!4 &999568470
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999568468}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.9, y: 0, z: -1.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1988627286}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1210187933
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,7 +1184,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1210187933}
   m_LocalRotation: {x: -0, y: 0.554639, z: -0, w: 0.83209115}
-  m_LocalPosition: {x: 1.39, y: 0, z: -0.96}
+  m_LocalPosition: {x: 0.07, y: 0, z: 0.61}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1514789996}
@@ -745,18 +1203,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Remapping:
-    m_Enabled: 1
+    m_RemapForceEnabled: 1
     m_Strength: 1
-    m_InnerOffset: 0.14
-    m_Invert: 1
+    m_InnerOffset: 0
+    m_Invert: 0
     m_Min: 0
     m_Max: 1
     m_ClampMinEnabled: 1
     m_ClampMaxEnabled: 1
-    m_ContourMultiplier: 1
-    m_ContourMode: 0
-    m_ContourSteps: 1
-    m_ContourSpline:
+    m_PostPower: 1
+    m_PostReshapeMode: 0
+    m_PostStepsCount: 1
+    m_PostCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -780,12 +1238,41 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    m_ContourSplineAnimationSpeed: 0
-    m_ContourSplineOffset: 0
-    m_ColorRemap: 1
-    m_Color: {r: 0, g: 1, b: 1, a: 1}
-  m_GizmosVisibility: 1
-  m_Length: 4.42
+    m_RemapColorEnabled: 1
+    m_ColorMode: 0
+    m_Color: {r: 0, g: 0.75, b: 1, a: 1}
+    m_Gradient:
+      serializedVersion: 2
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+  m_GizmoVisibility: 1
+  m_GizmoFieldColor: 1
+  m_Length: 1
   m_Direction: 0
   m_GizmoWidth: 4
   m_GizmoHeight: 2
@@ -833,7 +1320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Remapping:
-    m_Enabled: 1
+    m_RemapForceEnabled: 1
     m_Strength: 1
     m_InnerOffset: 0.5
     m_Invert: 0
@@ -841,10 +1328,10 @@ MonoBehaviour:
     m_Max: 1
     m_ClampMinEnabled: 1
     m_ClampMaxEnabled: 1
-    m_ContourMultiplier: 1
-    m_ContourMode: 0
-    m_ContourSteps: 1
-    m_ContourSpline:
+    m_PostPower: 1
+    m_PostReshapeMode: 0
+    m_PostStepsCount: 1
+    m_PostCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -868,11 +1355,40 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    m_ContourSplineAnimationSpeed: 0
-    m_ContourSplineOffset: 0
-    m_ColorRemap: 1
+    m_RemapColorEnabled: 0
+    m_ColorMode: 0
     m_Color: {r: 0, g: 1, b: 0, a: 1}
-  m_GizmosVisibility: 1
+    m_Gradient:
+      serializedVersion: 2
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+  m_GizmoVisibility: 1
+  m_GizmoFieldColor: 1
   m_Radius: 1
   m_Height: 2
   m_Direction: 1
@@ -892,7 +1408,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1514789995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -907,7 +1423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_FieldsMap:
     m_CalculatePower: 1
-    m_DefaultPower: 0
+    m_DefaultPower: 0.75
     m_CalculateColor: 1
     m_DefaultColor: {r: 0, g: 0, b: 0, a: 1}
     m_Fields:
@@ -918,33 +1434,33 @@ MonoBehaviour:
       m_Intensity: 1
     - m_Enabled: 1
       m_Field: {fileID: 341551643}
-      m_BlendPowerMode: 7
-      m_BlendColorMode: 2
-      m_Intensity: 1
-    - m_Enabled: 1
-      m_Field: {fileID: 1377293798}
-      m_BlendPowerMode: 7
-      m_BlendColorMode: 2
+      m_BlendPowerMode: 2
+      m_BlendColorMode: 1
       m_Intensity: 1
     - m_Enabled: 1
       m_Field: {fileID: 1210187935}
-      m_BlendPowerMode: 7
+      m_BlendPowerMode: 3
+      m_BlendColorMode: 7
+      m_Intensity: 1
+    - m_Enabled: 1
+      m_Field: {fileID: 1377293798}
+      m_BlendPowerMode: 8
       m_BlendColorMode: 2
       m_Intensity: 1
     - m_Enabled: 1
       m_Field: {fileID: 644782231}
-      m_BlendPowerMode: 7
+      m_BlendPowerMode: 8
       m_BlendColorMode: 2
       m_Intensity: 1
     - m_Enabled: 1
       m_Field: {fileID: 659562833}
-      m_BlendPowerMode: 7
+      m_BlendPowerMode: 8
       m_BlendColorMode: 2
       m_Intensity: 1
     - m_Enabled: 1
       m_Field: {fileID: 1792894462}
       m_BlendPowerMode: 7
-      m_BlendColorMode: 2
+      m_BlendColorMode: 1
       m_Intensity: 1
 --- !u!4 &1514789996
 Transform:
@@ -954,7 +1470,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1514789994}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 1.05, y: -0.17, z: 0.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 39867063}
@@ -983,7 +1499,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1792894462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -997,7 +1513,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Remapping:
-    m_Enabled: 1
+    m_RemapForceEnabled: 1
     m_Strength: 1
     m_InnerOffset: 0.5
     m_Invert: 0
@@ -1005,10 +1521,10 @@ MonoBehaviour:
     m_Max: 1
     m_ClampMinEnabled: 1
     m_ClampMaxEnabled: 1
-    m_ContourMultiplier: 1
-    m_ContourMode: 0
-    m_ContourSteps: 1
-    m_ContourSpline:
+    m_PostPower: 1
+    m_PostReshapeMode: 0
+    m_PostStepsCount: 1
+    m_PostCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -1032,13 +1548,42 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    m_ContourSplineAnimationSpeed: 0
-    m_ContourSplineOffset: 0
-    m_ColorRemap: 1
-    m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_GizmosVisibility: 1
-  m_Radius: 2
-  m_Thickness: 0.5
+    m_RemapColorEnabled: 1
+    m_ColorMode: 0
+    m_Color: {r: 1, g: 0, b: 0.8753972, a: 1}
+    m_Gradient:
+      serializedVersion: 2
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+  m_GizmoVisibility: 1
+  m_GizmoFieldColor: 1
+  m_Radius: 2.68
+  m_Thickness: 1.08
   m_Direction: 1
 --- !u!4 &1792894463
 Transform:
@@ -1048,9 +1593,70 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1792894461}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.03, y: 0, z: -0.14}
+  m_LocalPosition: {x: 0, y: 0.62, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1514789996}
   m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1988627284
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1988627286}
+  - component: {fileID: 1988627285}
+  m_Layer: 0
+  m_Name: Fields Space (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1988627285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988627284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66b79b9a268264a3387c6891dc69628c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FieldsMap:
+    m_CalculatePower: 1
+    m_DefaultPower: 0.75
+    m_CalculateColor: 1
+    m_DefaultColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Fields:
+    - m_Enabled: 1
+      m_Field: {fileID: 998509765}
+      m_BlendPowerMode: 1
+      m_BlendColorMode: 1
+      m_Intensity: 1
+    - m_Enabled: 1
+      m_Field: {fileID: 999568469}
+      m_BlendPowerMode: 8
+      m_BlendColorMode: 6
+      m_Intensity: 1
+--- !u!4 &1988627286
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988627284}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.41, y: 5.13, z: 1.63}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 999568470}
+  - {fileID: 998509764}
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -473,7 +473,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_FieldsMap:
     m_CalculatePower: 1
-    m_DefaultPower: 0
+    m_DefaultPower: 1
     m_CalculateColor: 0
     m_DefaultColor: {r: 0, g: 0, b: 0, a: 1}
     m_Fields: []
@@ -527,7 +527,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_FieldsMap:
     m_CalculatePower: 1
-    m_DefaultPower: 0
+    m_DefaultPower: 1
     m_CalculateColor: 0
     m_DefaultColor: {r: 0, g: 0, b: 0, a: 1}
     m_Fields: []
@@ -615,7 +615,6 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    m_RemapColorEnabled: 0
     m_ColorMode: 0
     m_Color: {r: 0, g: 1, b: 0.6646948, a: 1}
     m_Gradient:
@@ -695,7 +694,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_FieldsMap:
     m_CalculatePower: 1
-    m_DefaultPower: 0
+    m_DefaultPower: 1
     m_CalculateColor: 0
     m_DefaultColor: {r: 0, g: 0, b: 0, a: 1}
     m_Fields:
@@ -766,7 +765,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_FieldsMap:
     m_CalculatePower: 1
-    m_DefaultPower: 0
+    m_DefaultPower: 1
     m_CalculateColor: 0
     m_DefaultColor: {r: 0, g: 0, b: 0, a: 1}
     m_Fields: []
