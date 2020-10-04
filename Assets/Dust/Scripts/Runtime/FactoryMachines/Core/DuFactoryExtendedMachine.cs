@@ -48,7 +48,7 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
 
         [SerializeField]
-        protected bool m_ValueImpactEnabled = true;
+        protected bool m_ValueImpactEnabled = false;
         public bool valueImpactEnabled
         {
             get => m_ValueImpactEnabled;
@@ -114,7 +114,7 @@ namespace DustEngine
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
-        protected bool m_ColorImpactEnabled = true;
+        protected bool m_ColorImpactEnabled = false;
         public bool colorImpactEnabled
         {
             get => m_ColorImpactEnabled;
