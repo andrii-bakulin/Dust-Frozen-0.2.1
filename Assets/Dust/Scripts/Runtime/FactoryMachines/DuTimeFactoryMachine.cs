@@ -4,7 +4,7 @@ using UnityEditor;
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Factory/Machines/Time Transform Machine")]
-    public class DuTimeFactoryMachine : DuTransformFactoryMachine
+    public class DuTimeFactoryMachine : DuFactoryPRSMachine
     {
         private float m_TimeSinceStart;
         public float timeSinceStart => m_TimeSinceStart;
@@ -13,7 +13,7 @@ namespace DustEngine
 
 #if UNITY_EDITOR
         [MenuItem("Dust/Factory/Machines/Time Transform")]
-        public new static void AddComponent()
+        public static void AddComponent()
         {
             AddFactoryMachineComponentByType(typeof(DuTimeFactoryMachine));
         }
