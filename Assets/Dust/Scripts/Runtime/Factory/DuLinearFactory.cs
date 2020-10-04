@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
 namespace DustEngine
 {
@@ -62,16 +61,6 @@ namespace DustEngine
             get => m_StepRotation;
             set => m_StepRotation = value;
         }
-
-        //--------------------------------------------------------------------------------------------------------------
-
-#if UNITY_EDITOR
-        [MenuItem("Dust/Factory/Linear Factory")]
-        public static void AddComponent()
-        {
-            CreateFactoryByType(typeof(DuLinearFactory));
-        }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
 

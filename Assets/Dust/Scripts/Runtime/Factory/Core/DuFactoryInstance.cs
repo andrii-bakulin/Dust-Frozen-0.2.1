@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 namespace DustEngine
 {
@@ -192,16 +191,6 @@ namespace DustEngine
                 return m_MaterialReferences;
             }
         }
-
-        //--------------------------------------------------------------------------------------------------------------
-
-#if UNITY_EDITOR
-        [MenuItem("Dust/Factory/Support/Factory Instance")]
-        public static void AddComponentToSelectedObjects()
-        {
-            AddComponent(typeof(DuFactoryInstance));
-        }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
 

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 namespace DustEngine
 {
@@ -37,7 +36,6 @@ namespace DustEngine
             RotationPositionScale = 1,
         }
 
-#if UNITY_EDITOR
         public enum InspectorDisplay
         {
             None = 0,
@@ -46,7 +44,6 @@ namespace DustEngine
             Index = 3,
             UV = 4,
         }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -143,7 +140,6 @@ namespace DustEngine
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-#if UNITY_EDITOR
         [SerializeField]
         private InspectorDisplay m_InspectorDisplay = InspectorDisplay.None;
         public InspectorDisplay inspectorDisplay => m_InspectorDisplay;
@@ -151,7 +147,6 @@ namespace DustEngine
         [SerializeField]
         private float m_InspectorScale = 1f;
         public float inspectorScale => m_InspectorScale;
-#endif
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -169,26 +164,6 @@ namespace DustEngine
         [SerializeField]
         private DuFactoryInstance[] m_Instances = new DuFactoryInstance[0]; // shouldn't be null
         public DuFactoryInstance[] instances => m_Instances;
-
-        //--------------------------------------------------------------------------------------------------------------
-
-#if UNITY_EDITOR
-        public static void CreateFactoryByType(System.Type factoryType)
-        {
-            var gameObject = new GameObject();
-
-            var factory = gameObject.AddComponent(factoryType) as DuFactory;
-
-            gameObject.name = factory.FactoryName() + " Factory";
-            gameObject.transform.localPosition = Vector3.zero;
-            gameObject.transform.localRotation = Quaternion.identity;
-            gameObject.transform.localScale = Vector3.one;
-
-            Undo.RegisterCreatedObjectUndo(gameObject, "Create " + gameObject.name);
-
-            Selection.activeGameObject = gameObject;
-        }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
 

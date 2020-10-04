@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
 namespace DustEngine
 {
@@ -22,16 +21,6 @@ namespace DustEngine
             get => m_Size;
             set => m_Size = value;
         }
-
-        //--------------------------------------------------------------------------------------------------------------
-
-#if UNITY_EDITOR
-        [MenuItem("Dust/Factory/Grid Factory")]
-        public static void AddComponent()
-        {
-            CreateFactoryByType(typeof(DuGridFactory));
-        }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
 

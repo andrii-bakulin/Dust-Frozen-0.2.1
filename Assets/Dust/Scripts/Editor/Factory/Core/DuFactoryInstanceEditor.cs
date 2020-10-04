@@ -11,6 +11,16 @@ namespace DustEngine.DustEditor
         private DuProperty m_Offset;
         private DuProperty m_MaterialReferences;
 
+        //--------------------------------------------------------------------------------------------------------------
+
+        [MenuItem("Dust/Factory/Support/Factory Instance")]
+        public static void AddComponentToSelectedObjects()
+        {
+            AddComponent(typeof(DuFactoryInstance));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
         void OnEnable()
         {
             m_Index = FindProperty("m_Index", "Index");

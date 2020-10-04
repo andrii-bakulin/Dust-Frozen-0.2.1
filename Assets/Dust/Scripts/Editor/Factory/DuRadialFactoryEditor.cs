@@ -17,6 +17,16 @@ namespace DustEngine.DustEditor
         private DuProperty m_OffsetVariation;
         private DuProperty m_OffsetSeed;
 
+        //--------------------------------------------------------------------------------------------------------------
+
+        [MenuItem("Dust/Factory/Radial Factory")]
+        public static void AddComponent()
+        {
+            CreateFactoryByType(typeof(DuRadialFactory));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
         void OnEnable()
         {
             OnEnableFactory();

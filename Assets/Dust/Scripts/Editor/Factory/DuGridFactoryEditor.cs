@@ -10,6 +10,16 @@ namespace DustEngine.DustEditor
         private DuProperty m_Count;
         private DuProperty m_Size;
 
+        //--------------------------------------------------------------------------------------------------------------
+
+        [MenuItem("Dust/Factory/Grid Factory")]
+        public static void AddComponent()
+        {
+            CreateFactoryByType(typeof(DuGridFactory));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
         void OnEnable()
         {
             OnEnableFactory();

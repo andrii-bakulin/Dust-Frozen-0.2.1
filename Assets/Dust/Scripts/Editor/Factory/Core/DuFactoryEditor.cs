@@ -40,6 +40,24 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
+        public static void CreateFactoryByType(System.Type factoryType)
+        {
+            var gameObject = new GameObject();
+
+            var factory = gameObject.AddComponent(factoryType) as DuFactory;
+
+            gameObject.name = factory.FactoryName() + " Factory";
+            gameObject.transform.localPosition = Vector3.zero;
+            gameObject.transform.localRotation = Quaternion.identity;
+            gameObject.transform.localScale = Vector3.one;
+
+            Undo.RegisterCreatedObjectUndo(gameObject, "Create " + gameObject.name);
+
+            Selection.activeGameObject = gameObject;
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
         protected void OnEnableFactory()
         {
             m_Objects = FindProperty("m_Objects", "Objects");

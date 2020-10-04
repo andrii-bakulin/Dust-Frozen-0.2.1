@@ -15,6 +15,16 @@ namespace DustEngine.DustEditor
         private DuProperty m_Scale;
         private DuProperty m_StepRotation;
 
+        //--------------------------------------------------------------------------------------------------------------
+
+        [MenuItem("Dust/Factory/Linear Factory")]
+        public static void AddComponent()
+        {
+            CreateFactoryByType(typeof(DuLinearFactory));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
         void OnEnable()
         {
             OnEnableFactory();

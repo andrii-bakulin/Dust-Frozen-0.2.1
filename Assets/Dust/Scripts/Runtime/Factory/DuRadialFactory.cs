@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
 namespace DustEngine
 {
@@ -82,16 +81,6 @@ namespace DustEngine
             get => m_OffsetSeed;
             set => m_OffsetSeed = Normalizer.OffsetSeed(value);
         }
-
-        //--------------------------------------------------------------------------------------------------------------
-
-#if UNITY_EDITOR
-        [MenuItem("Dust/Factory/Radial Factory")]
-        public static void AddComponent()
-        {
-            CreateFactoryByType(typeof(DuRadialFactory));
-        }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
 
