@@ -3,10 +3,17 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuRemapField)), CanEditMultipleObjects]
+    [CustomEditor(typeof(DuRemapField))]
+    [CanEditMultipleObjects]
+    [InitializeOnLoad]
     public class DuRemapFieldEditor : DuFieldEditor
     {
         protected DuRemappingEditor m_RemappingEditor;
+
+        static DuRemapFieldEditor()
+        {
+            DuPopupButtons.AddMathField(typeof(DuRemapField), "Remap");
+        }
 
         void OnEnable()
         {

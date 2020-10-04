@@ -5,8 +5,14 @@ namespace DustEngine.DustEditor
 {
     [CustomEditor(typeof(DuTransformFactoryMachine))]
     [CanEditMultipleObjects]
+    [InitializeOnLoad]
     public class DuTransformFactoryMachineEditor : DuPRSFactoryMachineEditor
     {
+        static DuTransformFactoryMachineEditor()
+        {
+            DuPopupButtons.AddFactoryMachine(typeof(DuTransformFactoryMachine), "Transform");
+        }
+
         void OnEnable()
         {
             OnEnableFactoryMachine();

@@ -5,8 +5,14 @@ namespace DustEngine.DustEditor
 {
     [CustomEditor(typeof(DuTimeFactoryMachine))]
     [CanEditMultipleObjects]
+    [InitializeOnLoad]
     public class DuTimeFactoryMachineEditor : DuPRSFactoryMachineEditor
     {
+        static DuTimeFactoryMachineEditor()
+        {
+            DuPopupButtons.AddFactoryMachine(typeof(DuTimeFactoryMachine), "Time");
+        }
+
         void OnEnable()
         {
             OnEnableFactoryMachine();

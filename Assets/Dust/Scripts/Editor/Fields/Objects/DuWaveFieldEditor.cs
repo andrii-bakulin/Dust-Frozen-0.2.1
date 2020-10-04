@@ -3,7 +3,9 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuWaveField)), CanEditMultipleObjects]
+    [CustomEditor(typeof(DuWaveField))]
+    [CanEditMultipleObjects]
+    [InitializeOnLoad]
     public class DuWaveFieldEditor : DuObjectFieldEditor
     {
         private DuProperty m_Amplitude;
@@ -16,6 +18,11 @@ namespace DustEngine.DustEditor
         private DuProperty m_GizmoSize;
         private DuProperty m_GizmoQuality;
         private DuProperty m_GizmoAnimated;
+
+        static DuWaveFieldEditor()
+        {
+            DuPopupButtons.AddObjectField(typeof(DuWaveField), "Wave");
+        }
 
         void OnEnable()
         {

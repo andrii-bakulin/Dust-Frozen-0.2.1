@@ -3,11 +3,18 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuConstantField)), CanEditMultipleObjects]
+    [CustomEditor(typeof(DuConstantField))]
+    [CanEditMultipleObjects]
+    [InitializeOnLoad]
     public class DuConstantFieldEditor : DuFieldEditor
     {
         private DuProperty m_Power;
         private DuProperty m_Color;
+
+        static DuConstantFieldEditor()
+        {
+            DuPopupButtons.AddBasicField(typeof(DuConstantField), "Constant");
+        }
 
         void OnEnable()
         {

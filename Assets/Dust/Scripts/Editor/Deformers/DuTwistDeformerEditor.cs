@@ -3,13 +3,20 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuTwistDeformer)), CanEditMultipleObjects]
+    [CustomEditor(typeof(DuTwistDeformer))]
+    [CanEditMultipleObjects]
+    [InitializeOnLoad]
     public class DuTwistDeformerEditor : DuDeformerEditor
     {
         private DuProperty m_DeformMode;
         private DuProperty m_Size;
         private DuProperty m_Angle;
         private DuProperty m_Direction;
+
+        static DuTwistDeformerEditor()
+        {
+            DuPopupButtons.AddDeformer(typeof(DuTwistDeformer), "Twist");
+        }
 
         void OnEnable()
         {

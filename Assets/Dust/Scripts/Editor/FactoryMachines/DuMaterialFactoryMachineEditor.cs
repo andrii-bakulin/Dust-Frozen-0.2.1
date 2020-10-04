@@ -1,13 +1,18 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-#if UNITY_EDITOR
 namespace DustEngine.DustEditor
 {
     [CustomEditor(typeof(DuMaterialFactoryMachine))]
     [CanEditMultipleObjects]
-    public class DuMaterialFactoryMachineGUI : DuFactoryMachineEditor
+    [InitializeOnLoad]
+    public class DuMaterialFactoryMachineEditor : DuFactoryMachineEditor
     {
+        static DuMaterialFactoryMachineEditor()
+        {
+            DuPopupButtons.AddFactoryMachine(typeof(DuMaterialFactoryMachine), "Material");
+        }
+
         void OnEnable()
         {
             OnEnableFactoryMachine();
@@ -34,4 +39,3 @@ namespace DustEngine.DustEditor
         }
     }
 }
-#endif

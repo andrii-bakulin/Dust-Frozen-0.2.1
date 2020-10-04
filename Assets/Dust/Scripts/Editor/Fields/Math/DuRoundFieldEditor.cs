@@ -3,11 +3,18 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuRoundField)), CanEditMultipleObjects]
+    [CustomEditor(typeof(DuRoundField))]
+    [CanEditMultipleObjects]
+    [InitializeOnLoad]
     public class DuRoundFieldEditor : DuFieldEditor
     {
         protected DuProperty m_RoundMode;
         protected DuProperty m_Distance;
+
+        static DuRoundFieldEditor()
+        {
+            DuPopupButtons.AddMathField(typeof(DuRoundField), "Round");
+        }
 
         void OnEnable()
         {

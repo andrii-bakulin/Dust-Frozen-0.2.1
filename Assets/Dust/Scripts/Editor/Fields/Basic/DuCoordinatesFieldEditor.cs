@@ -3,7 +3,9 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuCoordinatesField)), CanEditMultipleObjects]
+    [CustomEditor(typeof(DuCoordinatesField))]
+    [CanEditMultipleObjects]
+    [InitializeOnLoad]
     public class DuCoordinatesFieldEditor : DuFieldEditor
     {
         private DuProperty m_PowerEnabled;
@@ -19,6 +21,11 @@ namespace DustEngine.DustEditor
         private DuProperty m_ColorEnabled;
         private DuProperty m_ColorScale;
         private DuProperty m_ColorShape;
+
+        static DuCoordinatesFieldEditor()
+        {
+            DuPopupButtons.AddBasicField(typeof(DuCoordinatesField), "Coordinates");
+        }
 
         void OnEnable()
         {

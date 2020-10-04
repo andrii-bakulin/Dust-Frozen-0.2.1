@@ -3,10 +3,17 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuCubeField)), CanEditMultipleObjects]
+    [CustomEditor(typeof(DuCubeField))]
+    [CanEditMultipleObjects]
+    [InitializeOnLoad]
     public class DuCubeFieldEditor : DuObjectFieldEditor
     {
         private DuProperty m_Size;
+
+        static DuCubeFieldEditor()
+        {
+            DuPopupButtons.AddObjectField(typeof(DuCubeField), "Cube");
+        }
 
         void OnEnable()
         {

@@ -3,12 +3,19 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuTorusField)), CanEditMultipleObjects]
+    [CustomEditor(typeof(DuTorusField))]
+    [CanEditMultipleObjects]
+    [InitializeOnLoad]
     public class DuTorusFieldEditor : DuObjectFieldEditor
     {
         private DuProperty m_Radius;
         private DuProperty m_Thickness;
         private DuProperty m_Direction;
+
+        static DuTorusFieldEditor()
+        {
+            DuPopupButtons.AddObjectField(typeof(DuTorusField), "Torus");
+        }
 
         void OnEnable()
         {

@@ -3,7 +3,9 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuTimeField)), CanEditMultipleObjects]
+    [CustomEditor(typeof(DuTimeField))]
+    [CanEditMultipleObjects]
+    [InitializeOnLoad]
     public class DuTimeFieldEditor : DuFieldEditor
     {
         protected DuProperty m_TimeMode;
@@ -11,6 +13,11 @@ namespace DustEngine.DustEditor
         protected DuProperty m_Offset;
 
         protected DuRemappingEditor m_RemappingEditor;
+
+        static DuTimeFieldEditor()
+        {
+            DuPopupButtons.AddBasicField(typeof(DuTimeField), "Time");
+        }
 
         void OnEnable()
         {

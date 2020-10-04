@@ -3,7 +3,9 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuClampField)), CanEditMultipleObjects]
+    [CustomEditor(typeof(DuClampField))]
+    [CanEditMultipleObjects]
+    [InitializeOnLoad]
     public class DuClampFieldEditor : DuFieldEditor
     {
         protected DuProperty m_PowerClampMode;
@@ -13,6 +15,11 @@ namespace DustEngine.DustEditor
         protected DuProperty m_ColorClampMode;
         protected DuProperty m_ColorClampMin;
         protected DuProperty m_ColorClampMax;
+
+        static DuClampFieldEditor()
+        {
+            DuPopupButtons.AddMathField(typeof(DuClampField), "Clamp");
+        }
 
         void OnEnable()
         {

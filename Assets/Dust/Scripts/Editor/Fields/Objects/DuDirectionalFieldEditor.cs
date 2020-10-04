@@ -3,7 +3,9 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuDirectionalField)), CanEditMultipleObjects]
+    [CustomEditor(typeof(DuDirectionalField))]
+    [CanEditMultipleObjects]
+    [InitializeOnLoad]
     public class DuDirectionalFieldEditor : DuObjectFieldEditor
     {
         private DuProperty m_Length;
@@ -11,6 +13,11 @@ namespace DustEngine.DustEditor
 
         private DuProperty m_GizmoWidth;
         private DuProperty m_GizmoHeight;
+
+        static DuDirectionalFieldEditor()
+        {
+            DuPopupButtons.AddObjectField(typeof(DuDirectionalField), "Directional");
+        }
 
         void OnEnable()
         {

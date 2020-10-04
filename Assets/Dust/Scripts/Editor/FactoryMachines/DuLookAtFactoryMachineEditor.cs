@@ -5,6 +5,7 @@ namespace DustEngine.DustEditor
 {
     [CustomEditor(typeof(DuLookAtFactoryMachine))]
     [CanEditMultipleObjects]
+    [InitializeOnLoad]
     public class DuLookAtFactoryMachineEditor : DuExtendedFactoryMachineEditor
     {
         private DuProperty m_TargetMode;
@@ -16,6 +17,11 @@ namespace DustEngine.DustEditor
         private DuProperty m_LockAxisX;
         private DuProperty m_LockAxisY;
         private DuProperty m_LockAxisZ;
+
+        static DuLookAtFactoryMachineEditor()
+        {
+            DuPopupButtons.AddFactoryMachine(typeof(DuLookAtFactoryMachine), "LookAt");
+        }
 
         void OnEnable()
         {

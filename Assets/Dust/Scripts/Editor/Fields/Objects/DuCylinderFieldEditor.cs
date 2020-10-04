@@ -3,12 +3,19 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuCylinderField)), CanEditMultipleObjects]
+    [CustomEditor(typeof(DuCylinderField))]
+    [CanEditMultipleObjects]
+    [InitializeOnLoad]
     public class DuCylinderFieldEditor : DuObjectFieldEditor
     {
         private DuProperty m_Height;
         private DuProperty m_Radius;
         private DuProperty m_Direction;
+
+        static DuCylinderFieldEditor()
+        {
+            DuPopupButtons.AddObjectField(typeof(DuCylinderField), "Cylinder");
+        }
 
         void OnEnable()
         {

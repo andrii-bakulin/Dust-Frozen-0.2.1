@@ -3,7 +3,9 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuFitField)), CanEditMultipleObjects]
+    [CustomEditor(typeof(DuFitField))]
+    [CanEditMultipleObjects]
+    [InitializeOnLoad]
     public class DuFitFieldEditor : DuFieldEditor
     {
         protected DuProperty m_MinInput;
@@ -11,6 +13,11 @@ namespace DustEngine.DustEditor
 
         protected DuProperty m_MinOutput;
         protected DuProperty m_MaxOutput;
+
+        static DuFitFieldEditor()
+        {
+            DuPopupButtons.AddMathField(typeof(DuFitField), "Fit");
+        }
 
         void OnEnable()
         {

@@ -16,6 +16,19 @@ namespace DustEngine.DustEditor
             Fields = 3,
         }
 
+        private enum EntityType
+        {
+            Deformer = 11,
+
+            FactoryMachine = 21,
+
+            BasicField = 31,
+            ObjectField = 32,
+            MathField = 33,
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
         private class ColumnRecord
         {
             public string title;
@@ -27,6 +40,10 @@ namespace DustEngine.DustEditor
             public string title;
             public System.Type type;
         }
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        private static Dictionary<EntityType, Dictionary<System.Type, string>> m_Entities;
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -48,17 +65,8 @@ namespace DustEngine.DustEditor
             popup.m_PopupMode = PopupMode.Deformers;
             popup.m_DeformMesh = deformMesh;
 
-            ColumnRecord column;
+            GenerateColumn(popup, EntityType.Deformer, "Deformers");
 
-            column = new ColumnRecord() {title = "Deformers"};
-            {
-                popup.AddItem(column, typeof(DuTwistDeformer), "Twist");
-                popup.AddItem(column, typeof(DuWaveDeformer), "Wave");
-
-                popup.m_ColumnRecords.Add(column);
-            }
-
-            popup.m_ColsCount = popup.m_ColumnRecords.Count;
             return popup;
         }
 
@@ -68,19 +76,8 @@ namespace DustEngine.DustEditor
             popup.m_PopupMode = PopupMode.FactoryMachines;
             popup.m_Factory = factory;
 
-            ColumnRecord column;
+            GenerateColumn(popup, EntityType.FactoryMachine, "Machines");
 
-            column = new ColumnRecord() {title = "Machines"};
-            {
-                popup.AddItem(column, typeof(DuLookAtFactoryMachine), "LookAt");
-                popup.AddItem(column, typeof(DuMaterialFactoryMachine), "Material");
-                popup.AddItem(column, typeof(DuTimeFactoryMachine), "Time");
-                popup.AddItem(column, typeof(DuTransformFactoryMachine), "Transform");
-
-                popup.m_ColumnRecords.Add(column);
-            }
-
-            popup.m_ColsCount = popup.m_ColumnRecords.Count;
             return popup;
         }
 
@@ -90,57 +87,80 @@ namespace DustEngine.DustEditor
             popup.m_PopupMode = PopupMode.Fields;
             popup.m_FieldsMap = fieldsMap;
 
-            ColumnRecord column;
+            GenerateColumn(popup, EntityType.BasicField, "Basic Fields");
+            GenerateColumn(popup, EntityType.ObjectField, "Object Fields");
+            GenerateColumn(popup, EntityType.MathField, "Math Fields");
 
-            column = new ColumnRecord() {title = "Basic Fields"};
-            {
-                popup.AddItem(column, typeof(DuConstantField), "Constant");
-                popup.AddItem(column, typeof(DuCoordinatesField), "Coordinates");
-                popup.AddItem(column, typeof(DuRadialField), "Radial");
-                popup.AddItem(column, typeof(DuTimeField), "Time");
-
-                popup.m_ColumnRecords.Add(column);
-            }
-
-            column = new ColumnRecord() {title = "Object Fields"};
-            {
-                popup.AddItem(column, typeof(DuConeField), "Cone");
-                popup.AddItem(column, typeof(DuCubeField), "Cube");
-                popup.AddItem(column, typeof(DuCylinderField), "Cylinder");
-                popup.AddItem(column, typeof(DuDirectionalField), "Directional");
-                popup.AddItem(column, typeof(DuSphereField), "Sphere");
-                popup.AddItem(column, typeof(DuTorusField), "Torus");
-                popup.AddItem(column, typeof(DuWaveField), "Wave");
-
-                popup.m_ColumnRecords.Add(column);
-            }
-
-            column = new ColumnRecord() {title = "Math Fields"};
-            {
-                popup.AddItem(column, typeof(DuClampField), "Clamp");
-                popup.AddItem(column, typeof(DuCurveField), "Curve");
-                popup.AddItem(column, typeof(DuFitField), "Fit");
-                popup.AddItem(column, typeof(DuInvertField), "Invert");
-                popup.AddItem(column, typeof(DuRemapField), "Remap");
-                popup.AddItem(column, typeof(DuRoundField), "Round");
-
-                popup.m_ColumnRecords.Add(column);
-            }
-
-            popup.m_ColsCount = popup.m_ColumnRecords.Count;
             return popup;
         }
 
         //--------------------------------------------------------------------------------------------------------------
 
-        private void AddItem(ColumnRecord columnRecord, System.Type type, string title)
+        public static void AddDeformer(System.Type type, string title)
         {
-            CellRecord button;
-            button.title = title;
-            button.type = type;
-            columnRecord.cells.Add(button);
+            AddEntity(EntityType.Deformer, type, title);
+        }
 
-            m_RowsCount = Mathf.Max(m_RowsCount, columnRecord.cells.Count);
+        public static void AddFactoryMachine(System.Type type, string title)
+        {
+            AddEntity(EntityType.FactoryMachine, type, title);
+        }
+
+        public static void AddBasicField(System.Type type, string title)
+        {
+            AddEntity(EntityType.BasicField, type, title);
+        }
+
+        public static void AddObjectField(System.Type type, string title)
+        {
+            AddEntity(EntityType.ObjectField, type, title);
+        }
+
+        public static void AddMathField(System.Type type, string title)
+        {
+            AddEntity(EntityType.MathField, type, title);
+        }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        private static void AddEntity(EntityType entityType, System.Type type, string title)
+        {
+            if (Dust.IsNull(m_Entities))
+                m_Entities = new Dictionary<EntityType, Dictionary<System.Type, string>>();
+
+            if (!m_Entities.ContainsKey(entityType))
+                m_Entities[entityType] = new Dictionary<System.Type, string>();
+
+            m_Entities[entityType][type] = title;
+        }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        private static void GenerateColumn(DuPopupButtons popup, EntityType entityType, string title)
+        {
+            if (Dust.IsNull(m_Entities))
+                return;
+
+            var column = new ColumnRecord()
+            {
+                title = title
+            };
+
+            if (m_Entities.ContainsKey(entityType))
+            {
+                foreach (var pair in m_Entities[entityType])
+                {
+                    CellRecord button;
+                    button.title = pair.Value;
+                    button.type = pair.Key;
+                    column.cells.Add(button);
+
+                    popup.m_RowsCount = Mathf.Max(popup.m_RowsCount, column.cells.Count);
+                }
+            }
+
+            popup.m_ColumnRecords.Add(column);
+            popup.m_ColsCount = popup.m_ColumnRecords.Count;
         }
 
         //--------------------------------------------------------------------------------------------------------------

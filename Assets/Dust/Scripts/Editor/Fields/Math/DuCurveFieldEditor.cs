@@ -3,7 +3,9 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuCurveField)), CanEditMultipleObjects]
+    [CustomEditor(typeof(DuCurveField))]
+    [CanEditMultipleObjects]
+    [InitializeOnLoad]
     public class DuCurveFieldEditor : DuFieldEditor
     {
         protected DuProperty m_Shape;
@@ -12,6 +14,11 @@ namespace DustEngine.DustEditor
 
         protected DuProperty m_BeforeCurve;
         protected DuProperty m_AfterCurve;
+
+        static DuCurveFieldEditor()
+        {
+            DuPopupButtons.AddMathField(typeof(DuCurveField), "Curve");
+        }
 
         void OnEnable()
         {

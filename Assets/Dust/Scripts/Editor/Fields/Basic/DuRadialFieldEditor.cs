@@ -3,7 +3,9 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuRadialField)), CanEditMultipleObjects]
+    [CustomEditor(typeof(DuRadialField))]
+    [CanEditMultipleObjects]
+    [InitializeOnLoad]
     public class DuRadialFieldEditor : DuObjectFieldEditor
     {
         private DuProperty m_StartAngle;
@@ -18,6 +20,11 @@ namespace DustEngine.DustEditor
         private DuProperty m_Direction;
 
         private DuProperty m_GizmoRadius;
+
+        static DuRadialFieldEditor()
+        {
+            DuPopupButtons.AddBasicField(typeof(DuRadialField), "Radial");
+        }
 
         void OnEnable()
         {

@@ -3,10 +3,17 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuSphereField)), CanEditMultipleObjects]
+    [CustomEditor(typeof(DuSphereField))]
+    [CanEditMultipleObjects]
+    [InitializeOnLoad]
     public class DuSphereFieldEditor : DuObjectFieldEditor
     {
         private DuProperty m_Radius;
+
+        static DuSphereFieldEditor()
+        {
+            DuPopupButtons.AddObjectField(typeof(DuSphereField), "Sphere");
+        }
 
         void OnEnable()
         {

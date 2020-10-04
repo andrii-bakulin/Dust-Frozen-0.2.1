@@ -3,9 +3,16 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuInvertField)), CanEditMultipleObjects]
+    [CustomEditor(typeof(DuInvertField))]
+    [CanEditMultipleObjects]
+    [InitializeOnLoad]
     public class DuInvertFieldEditor : DuFieldEditor
     {
+        static DuInvertFieldEditor()
+        {
+            DuPopupButtons.AddMathField(typeof(DuInvertField), "Invert");
+        }
+
         void OnEnable()
         {
             OnEnableField();
