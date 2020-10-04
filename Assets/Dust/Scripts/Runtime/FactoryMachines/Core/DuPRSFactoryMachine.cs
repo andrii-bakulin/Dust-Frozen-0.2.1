@@ -3,7 +3,7 @@ using UnityEditor;
 
 namespace DustEngine
 {
-    public abstract class DuFactoryPRSMachine : DuFactoryExtendedMachine
+    public abstract class DuPRSFactoryMachine : DuExtendedFactoryMachine
     {
         /**
          * Calculation steps:

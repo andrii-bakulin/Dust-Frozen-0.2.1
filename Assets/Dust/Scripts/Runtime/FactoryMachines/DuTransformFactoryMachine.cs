@@ -4,7 +4,7 @@ using UnityEditor;
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Factory/Machines/Transform Machine")]
-    public class DuTransformFactoryMachine : DuFactoryPRSMachine
+    public class DuTransformFactoryMachine : DuPRSFactoryMachine
     {
 #if UNITY_EDITOR
         [MenuItem("Dust/Factory/Machines/Transform")]

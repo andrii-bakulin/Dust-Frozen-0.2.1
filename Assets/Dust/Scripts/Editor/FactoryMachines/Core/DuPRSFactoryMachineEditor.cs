@@ -3,7 +3,7 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    public abstract class DuFactoryPRSMachineEditor : DuFactoryExtendedMachineEditor
+    public abstract class DuPRSFactoryMachineEditor : DuExtendedFactoryMachineEditor
     {
         protected DuProperty m_Min;
         protected DuProperty m_Max;

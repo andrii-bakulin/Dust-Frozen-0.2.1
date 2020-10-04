@@ -3,7 +3,7 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    public abstract class DuFactoryExtendedMachineEditor : DuFactoryMachineEditor
+    public abstract class DuExtendedFactoryMachineEditor : DuFactoryMachineEditor
     {
         protected DuProperty m_ValueImpactEnabled;
         protected DuProperty m_ValueImpactSource;
@@ -43,17 +43,17 @@ namespace DustEngine.DustEditor
             m_ColorBlendMode = FindProperty("m_ColorBlendMode", "Blend Mode");
             m_ColorFixed = FindProperty("m_ColorFixed", "Fixed Color");
 
-            m_FieldsMapEditor = new DuFieldsMapEditor(this, serializedObject.FindProperty("m_FieldsMap"), (target as DuFactoryExtendedMachine).fieldsMap);
+            m_FieldsMapEditor = new DuFieldsMapEditor(this, serializedObject.FindProperty("m_FieldsMap"), (target as DuExtendedFactoryMachine).fieldsMap);
         }
 
         //--------------------------------------------------------------------------------------------------------------
         // Helper
 
-        private DuFactoryExtendedMachine.ValueImpactSource valueImpactSource
-            => (DuFactoryExtendedMachine.ValueImpactSource) m_ValueImpactSource.enumValueIndex;
+        private DuExtendedFactoryMachine.ValueImpactSource valueImpactSource
+            => (DuExtendedFactoryMachine.ValueImpactSource) m_ValueImpactSource.enumValueIndex;
 
-        private DuFactoryExtendedMachine.ColorImpactSource colorImpactSource
-            => (DuFactoryExtendedMachine.ColorImpactSource) m_ColorImpactSource.enumValueIndex;
+        private DuExtendedFactoryMachine.ColorImpactSource colorImpactSource
+            => (DuExtendedFactoryMachine.ColorImpactSource) m_ColorImpactSource.enumValueIndex;
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -67,7 +67,7 @@ namespace DustEngine.DustEditor
                 {
                     PropertyField(m_ValueImpactSource);
 
-                    if (valueImpactSource == DuFactoryExtendedMachine.ValueImpactSource.FixedValue)
+                    if (valueImpactSource == DuExtendedFactoryMachine.ValueImpactSource.FixedValue)
                         PropertyField(m_ValueFixed);
 
                     PropertyField(m_ValueBlendMode);
@@ -101,7 +101,7 @@ namespace DustEngine.DustEditor
                 {
                     PropertyField(m_ColorImpactSource);
 
-                    if (colorImpactSource == DuFactoryExtendedMachine.ColorImpactSource.FixedColor)
+                    if (colorImpactSource == DuExtendedFactoryMachine.ColorImpactSource.FixedColor)
                         PropertyField(m_ColorFixed);
 
                     PropertyField(m_ColorBlendMode);
@@ -117,7 +117,7 @@ namespace DustEngine.DustEditor
             var showColumnPower = DuFieldsMapEditor.ColumnVisibility.Auto;
             var showColumnColor = DuFieldsMapEditor.ColumnVisibility.Auto;
 
-            if (colorImpactSource != DuFactoryExtendedMachine.ColorImpactSource.FieldsMapColor)
+            if (colorImpactSource != DuExtendedFactoryMachine.ColorImpactSource.FieldsMapColor)
                 showColumnColor = DuFieldsMapEditor.ColumnVisibility.ForcedHide;
 
             m_FieldsMapEditor.OnInspectorGUI(showColumnPower, showColumnColor);

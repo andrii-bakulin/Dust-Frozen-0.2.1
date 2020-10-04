@@ -4,7 +4,7 @@ using UnityEditor;
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Factory/Machines/LookAt Machine")]
-    public class DuLookAtFactoryMachine : DuFactoryExtendedMachine
+    public class DuLookAtFactoryMachine : DuExtendedFactoryMachine
     {
         public enum TargetMode
         {

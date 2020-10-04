@@ -5,7 +5,7 @@ namespace DustEngine.DustEditor
 {
     [CustomEditor(typeof(DuTimeFactoryMachine))]
     [CanEditMultipleObjects]
-    public class DuTimeFactoryMachineEditor : DuFactoryPRSMachineEditor
+    public class DuTimeFactoryMachineEditor : DuPRSFactoryMachineEditor
     {
         void OnEnable()
         {

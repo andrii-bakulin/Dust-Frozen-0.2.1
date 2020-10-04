@@ -2,7 +2,7 @@
 
 namespace DustEngine
 {
-    public abstract class DuFactoryExtendedMachine : DuFactoryMachine
+    public abstract class DuExtendedFactoryMachine : DuFactoryMachine
     {
         public enum ValueImpactSource
         {

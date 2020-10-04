@@ -33,7 +33,7 @@ namespace DustEngine
         {
             DuDeformer selectedDeformer = null;
             DuFieldsSpace selectedFieldsSpace = null;
-            DuFactoryExtendedMachine selectedFactoryMachine = null;
+            DuExtendedFactoryMachine selectedFactoryMachine = null;
 
             if (Dust.IsNotNull(activeGameObject))
             {
@@ -51,10 +51,10 @@ namespace DustEngine
 
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-                selectedFactoryMachine = activeGameObject.GetComponent<DuFactoryExtendedMachine>();
+                selectedFactoryMachine = activeGameObject.GetComponent<DuExtendedFactoryMachine>();
 
                 if (Dust.IsNull(selectedFactoryMachine) && Dust.IsNotNull(activeGameObject.transform.parent))
-                    selectedFactoryMachine = activeGameObject.transform.parent.GetComponent<DuFactoryExtendedMachine>();
+                    selectedFactoryMachine = activeGameObject.transform.parent.GetComponent<DuExtendedFactoryMachine>();
             }
 
             var gameObject = new GameObject();

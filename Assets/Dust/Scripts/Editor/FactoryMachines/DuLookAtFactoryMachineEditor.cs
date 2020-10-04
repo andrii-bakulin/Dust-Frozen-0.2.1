@@ -5,7 +5,7 @@ namespace DustEngine.DustEditor
 {
     [CustomEditor(typeof(DuLookAtFactoryMachine))]
     [CanEditMultipleObjects]
-    public class DuLookAtFactoryMachineEditor : DuFactoryExtendedMachineEditor
+    public class DuLookAtFactoryMachineEditor : DuExtendedFactoryMachineEditor
     {
         private DuProperty m_TargetMode;
         private DuProperty m_TargetObject;
