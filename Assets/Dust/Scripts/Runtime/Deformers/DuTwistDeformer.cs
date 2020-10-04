@@ -53,12 +53,10 @@ namespace DustEngine
             return "Twist";
         }
 
-#if UNITY_EDITOR
         public override string DeformerDynamicHint()
         {
             return angle.ToString("F2") + "° in " + DuAxisDirection.ToString(direction);
         }
-#endif
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

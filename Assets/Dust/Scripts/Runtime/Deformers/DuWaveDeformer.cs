@@ -149,12 +149,10 @@ namespace DustEngine
             return "Wave";
         }
 
-#if UNITY_EDITOR
         public override string DeformerDynamicHint()
         {
             return "";
         }
-#endif
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
