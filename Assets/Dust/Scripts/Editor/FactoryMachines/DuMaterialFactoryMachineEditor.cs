@@ -8,10 +8,20 @@ namespace DustEngine.DustEditor
     [InitializeOnLoad]
     public class DuMaterialFactoryMachineEditor : DuFactoryMachineEditor
     {
+        //--------------------------------------------------------------------------------------------------------------
+
         static DuMaterialFactoryMachineEditor()
         {
             DuPopupButtons.AddFactoryMachine(typeof(DuMaterialFactoryMachine), "Material");
         }
+
+        [MenuItem("Dust/Factory/Machines/Material")]
+        public static void AddComponent()
+        {
+            AddFactoryMachineComponentByType(typeof(DuMaterialFactoryMachine));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         void OnEnable()
         {

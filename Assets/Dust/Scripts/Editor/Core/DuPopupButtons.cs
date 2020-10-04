@@ -202,7 +202,7 @@ namespace DustEngine.DustEditor
                         }
                         else if (m_PopupMode == PopupMode.FactoryMachines)
                         {
-                            DuFactoryMachine.AddFactoryMachineComponentByType((m_Factory.target as DuMonoBehaviour).gameObject, cellRecord.type);
+                            DuFactoryMachineEditor.AddFactoryMachineComponentByType((m_Factory.target as DuMonoBehaviour).gameObject, cellRecord.type);
                         }
                         else if (m_PopupMode == PopupMode.Fields)
                         {

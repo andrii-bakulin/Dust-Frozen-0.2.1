@@ -1,24 +1,18 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Factory/Machines/Material Machine")]
     public class DuMaterialFactoryMachine : DuFactoryMachine
     {
-#if UNITY_EDITOR
-        [MenuItem("Dust/Factory/Machines/Material")]
-        public static void AddComponent()
-        {
-            AddFactoryMachineComponentByType(typeof(DuMaterialFactoryMachine));
-        }
-#endif
-
-        //--------------------------------------------------------------------------------------------------------------
-
         public override string FactoryMachineName()
         {
             return "Material";
+        }
+
+        public override string FactoryMachineDynamicHint()
+        {
+            return "";
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

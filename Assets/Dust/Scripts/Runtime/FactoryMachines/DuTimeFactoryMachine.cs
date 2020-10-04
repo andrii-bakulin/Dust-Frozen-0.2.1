@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
 namespace DustEngine
 {
@@ -11,19 +10,14 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-#if UNITY_EDITOR
-        [MenuItem("Dust/Factory/Machines/Time Transform")]
-        public static void AddComponent()
-        {
-            AddFactoryMachineComponentByType(typeof(DuTimeFactoryMachine));
-        }
-#endif
-
-        //--------------------------------------------------------------------------------------------------------------
-
         public override string FactoryMachineName()
         {
             return "Time";
+        }
+
+        public override string FactoryMachineDynamicHint()
+        {
+            return "";
         }
 
         //--------------------------------------------------------------------------------------------------------------

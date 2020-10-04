@@ -7,6 +7,47 @@ namespace DustEngine.DustEditor
     {
         protected DuProperty m_Intensity;
 
+        //--------------------------------------------------------------------------------------------------------------
+
+        public static void AddFactoryMachineComponentByType(System.Type factoryType)
+        {
+            Selection.activeGameObject = AddFactoryMachineComponentByType(Selection.activeGameObject, factoryType);
+        }
+
+        public static GameObject AddFactoryMachineComponentByType(GameObject activeGameObject, System.Type factoryMachineType)
+        {
+            DuFactory selectedFactory = null;
+
+            if (Dust.IsNotNull(activeGameObject))
+            {
+                selectedFactory = activeGameObject.GetComponent<DuFactory>();
+
+                if (Dust.IsNull(selectedFactory) && Dust.IsNotNull(activeGameObject.transform.parent))
+                    selectedFactory = activeGameObject.transform.parent.GetComponent<DuFactory>();
+            }
+
+            var gameObject = new GameObject();
+            {
+                var factoryMachine = gameObject.AddComponent(factoryMachineType) as DuFactoryMachine;
+
+                if (Dust.IsNotNull(selectedFactory))
+                {
+                    selectedFactory.AddFactoryMachine(factoryMachine);
+                }
+
+                gameObject.name = factoryMachine.FactoryMachineName() + " Machine";
+                gameObject.transform.localPosition = Vector3.zero;
+                gameObject.transform.localRotation = Quaternion.identity;
+                gameObject.transform.localScale = Vector3.one;
+            }
+
+            Undo.RegisterCreatedObjectUndo(gameObject, "Create " + gameObject.name);
+
+            return gameObject;
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
         protected virtual void OnEnableFactoryMachine()
         {
             m_Intensity = FindProperty("m_Intensity", "Intensity");

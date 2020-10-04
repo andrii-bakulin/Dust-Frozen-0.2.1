@@ -8,10 +8,20 @@ namespace DustEngine.DustEditor
     [InitializeOnLoad]
     public class DuTimeFactoryMachineEditor : DuPRSFactoryMachineEditor
     {
+        //--------------------------------------------------------------------------------------------------------------
+
         static DuTimeFactoryMachineEditor()
         {
             DuPopupButtons.AddFactoryMachine(typeof(DuTimeFactoryMachine), "Time");
         }
+
+        [MenuItem("Dust/Factory/Machines/Time Transform")]
+        public static void AddComponent()
+        {
+            AddFactoryMachineComponentByType(typeof(DuTimeFactoryMachine));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         void OnEnable()
         {

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
 namespace DustEngine
 {
@@ -88,22 +87,11 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-#if UNITY_EDITOR
-        [MenuItem("Dust/Factory/Machines/LookAt")]
-        public static void AddComponent()
-        {
-            AddFactoryMachineComponentByType(typeof(DuLookAtFactoryMachine));
-        }
-#endif
-
-        //--------------------------------------------------------------------------------------------------------------
-
         public override string FactoryMachineName()
         {
             return "LookAt";
         }
 
-#if UNITY_EDITOR
         public override string FactoryMachineDynamicHint()
         {
             switch (targetMode)
@@ -119,7 +107,6 @@ namespace DustEngine
                     return "Previous Instance";
             }
         }
-#endif
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

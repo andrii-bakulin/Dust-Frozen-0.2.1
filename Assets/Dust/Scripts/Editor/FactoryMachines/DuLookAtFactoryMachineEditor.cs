@@ -18,10 +18,20 @@ namespace DustEngine.DustEditor
         private DuProperty m_LockAxisY;
         private DuProperty m_LockAxisZ;
 
+        //--------------------------------------------------------------------------------------------------------------
+
         static DuLookAtFactoryMachineEditor()
         {
             DuPopupButtons.AddFactoryMachine(typeof(DuLookAtFactoryMachine), "LookAt");
         }
+
+        [MenuItem("Dust/Factory/Machines/LookAt")]
+        public static void AddComponent()
+        {
+            AddFactoryMachineComponentByType(typeof(DuLookAtFactoryMachine));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         void OnEnable()
         {

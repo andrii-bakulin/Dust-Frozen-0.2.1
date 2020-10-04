@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
 namespace DustEngine
 {
@@ -69,47 +68,6 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-#if UNITY_EDITOR
-        public static void AddFactoryMachineComponentByType(System.Type factoryType)
-        {
-            Selection.activeGameObject = AddFactoryMachineComponentByType(Selection.activeGameObject, factoryType);
-        }
-
-        public static GameObject AddFactoryMachineComponentByType(GameObject activeGameObject, System.Type factoryMachineType)
-        {
-            DuFactory selectedFactory = null;
-
-            if (Dust.IsNotNull(activeGameObject))
-            {
-                selectedFactory = activeGameObject.GetComponent<DuFactory>();
-
-                if (Dust.IsNull(selectedFactory) && Dust.IsNotNull(activeGameObject.transform.parent))
-                    selectedFactory = activeGameObject.transform.parent.GetComponent<DuFactory>();
-            }
-
-            var gameObject = new GameObject();
-            {
-                var factoryMachine = gameObject.AddComponent(factoryMachineType) as DuFactoryMachine;
-
-                if (Dust.IsNotNull(selectedFactory))
-                {
-                    selectedFactory.AddFactoryMachine(factoryMachine);
-                }
-
-                gameObject.name = factoryMachine.FactoryMachineName() + " Machine";
-                gameObject.transform.localPosition = Vector3.zero;
-                gameObject.transform.localRotation = Quaternion.identity;
-                gameObject.transform.localScale = Vector3.one;
-            }
-
-            Undo.RegisterCreatedObjectUndo(gameObject, "Create " + gameObject.name);
-
-            return gameObject;
-        }
-#endif
-
-        //--------------------------------------------------------------------------------------------------------------
-
         private void Start()
         {
             // Require to show enabled-checkbox in editor for all factory-machine
@@ -119,12 +77,7 @@ namespace DustEngine
 
         public abstract string FactoryMachineName();
 
-#if UNITY_EDITOR
-        public virtual string FactoryMachineDynamicHint()
-        {
-            return "";
-        }
-#endif
+        public abstract string FactoryMachineDynamicHint();
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
