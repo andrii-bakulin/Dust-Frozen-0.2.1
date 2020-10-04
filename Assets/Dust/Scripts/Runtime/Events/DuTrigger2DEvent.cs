@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
 namespace DustEngine
 {
@@ -17,16 +16,6 @@ namespace DustEngine
         [SerializeField]
         private Trigger2DEvent m_OnExit = null;
         public Trigger2DEvent onExit => m_OnExit;
-
-        //--------------------------------------------------------------------------------------------------------------
-
-#if UNITY_EDITOR
-        [MenuItem("Dust/Events/Trigger Event 2D")]
-        public static DuTrigger2DEvent AddComponent()
-        {
-            return AddComponentByEventType(typeof(DuTrigger2DEvent)) as DuTrigger2DEvent;
-        }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
 

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
 namespace DustEngine
 {
@@ -17,16 +16,6 @@ namespace DustEngine
         [SerializeField]
         private TriggerEvent m_OnExit = null;
         public TriggerEvent onExit => m_OnExit;
-
-        //--------------------------------------------------------------------------------------------------------------
-
-#if UNITY_EDITOR
-        [MenuItem("Dust/Events/Trigger Event")]
-        public static DuTriggerEvent AddComponent()
-        {
-            return AddComponentByEventType(typeof(DuTriggerEvent)) as DuTriggerEvent;
-        }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
 

@@ -1,7 +1,6 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEditor;
 
 namespace DustEngine
 {
@@ -58,19 +57,6 @@ namespace DustEngine
             get => m_Timer;
             set => m_Timer = value;
         }
-
-        //--------------------------------------------------------------------------------------------------------------
-
-#if UNITY_EDITOR
-        [MenuItem("Dust/Events/Timer Event")]
-        public static DuTimerEvent AddComponent()
-        {
-            if (Dust.IsNull(Selection.activeGameObject))
-                return null;
-
-            return Selection.activeGameObject.AddComponent<DuTimerEvent>();
-        }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
 

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
 namespace DustEngine
 {
@@ -17,16 +16,6 @@ namespace DustEngine
         [SerializeField]
         private Collision2DEvent m_OnExit = null;
         public Collision2DEvent onExit => m_OnExit;
-
-        //--------------------------------------------------------------------------------------------------------------
-
-#if UNITY_EDITOR
-        [MenuItem("Dust/Events/Collision Event 2D")]
-        public static DuCollision2DEvent AddComponent()
-        {
-            return AddComponentByEventType(typeof(DuCollision2DEvent)) as DuCollision2DEvent;
-        }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
 

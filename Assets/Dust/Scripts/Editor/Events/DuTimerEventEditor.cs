@@ -12,6 +12,19 @@ namespace DustEngine.DustEditor
 
         protected DuProperty m_OnFire;
 
+        //--------------------------------------------------------------------------------------------------------------
+
+        [MenuItem("Dust/Events/Timer Event")]
+        public static DuTimerEvent AddComponent()
+        {
+            if (Dust.IsNull(Selection.activeGameObject))
+                return null;
+
+            return Selection.activeGameObject.AddComponent<DuTimerEvent>();
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
         void OnEnable()
         {
             m_Delay = FindProperty("m_Delay", "Delay");
