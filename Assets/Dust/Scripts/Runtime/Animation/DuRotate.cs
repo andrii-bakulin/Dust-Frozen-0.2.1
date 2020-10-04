@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
 namespace DustEngine
 {
@@ -45,16 +44,6 @@ namespace DustEngine
             get => m_UpdateMode;
             set => m_UpdateMode = value;
         }
-
-        //--------------------------------------------------------------------------------------------------------------
-
-#if UNITY_EDITOR
-        [MenuItem("Dust/Animation/Rotate")]
-        public static void AddComponentToSelectedObjects()
-        {
-            AddComponentToSelectedOrNewObject("Rotate", typeof(DuRotate));
-        }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
 

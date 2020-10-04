@@ -11,6 +11,16 @@ namespace DustEngine.DustEditor
 
         private DuProperty m_UpdateMode;
 
+        //--------------------------------------------------------------------------------------------------------------
+
+        [MenuItem("Dust/Animation/LookAt")]
+        public static void AddComponentToSelectedObjects()
+        {
+            AddComponentToSelectedOrNewObject("LookAt", typeof(DuLookAt));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
         void OnEnable()
         {
             m_TargetObject = FindProperty("m_TargetObject", "Target Object");

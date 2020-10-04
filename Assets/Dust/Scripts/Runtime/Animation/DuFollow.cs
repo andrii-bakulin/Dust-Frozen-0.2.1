@@ -53,16 +53,6 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-#if UNITY_EDITOR
-        [MenuItem("Dust/Animation/Follow")]
-        public static void AddComponentToSelectedObjects()
-        {
-            AddComponentToSelectedOrNewObject("Follow", typeof(DuFollow));
-        }
-#endif
-
-        //--------------------------------------------------------------------------------------------------------------
-
         void OnEnable()
         {
 #if UNITY_EDITOR

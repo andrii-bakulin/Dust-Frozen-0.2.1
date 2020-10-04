@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
 namespace DustEngine
 {
@@ -163,16 +162,6 @@ namespace DustEngine
         private float m_PositionTimeOffset;
         private float m_RotationTimeOffset;
         private float m_ScaleTimeOffset;
-
-        //--------------------------------------------------------------------------------------------------------------
-
-#if UNITY_EDITOR
-        [MenuItem("Dust/Animation/Shake")]
-        public static void AddComponentToSelectedObjects()
-        {
-            AddComponentToSelectedOrNewObject("Shake", typeof(DuShake));
-        }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
 

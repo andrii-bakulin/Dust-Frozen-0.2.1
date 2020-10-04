@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-using UnityEngine;
-using UnityEditor;
+﻿using UnityEngine;
 
 namespace DustEngine
 {
@@ -159,16 +157,6 @@ namespace DustEngine
         private float m_PositionTimeOffset;
         private float m_RotationTimeOffset;
         private float m_ScaleTimeOffset;
-
-        //--------------------------------------------------------------------------------------------------------------
-
-#if UNITY_EDITOR
-        [MenuItem("Dust/Animation/Pulsate")]
-        public static void AddComponentToSelectedObjects()
-        {
-            AddComponentToSelectedOrNewObject("Pulsate", typeof(DuPulsate));
-        }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
 

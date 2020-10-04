@@ -25,6 +25,16 @@ namespace DustEngine.DustEditor
         private DuProperty m_TransformMode;
         private DuProperty m_UpdateMode;
 
+        //--------------------------------------------------------------------------------------------------------------
+
+        [MenuItem("Dust/Animation/Pulsate")]
+        public static void AddComponentToSelectedObjects()
+        {
+            AddComponentToSelectedOrNewObject("Pulsate", typeof(DuPulsate));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
         void OnEnable()
         {
             m_Power = FindProperty("m_Power", "Power");

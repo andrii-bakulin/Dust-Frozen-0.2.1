@@ -19,6 +19,16 @@ namespace DustEngine.DustEditor
 
         private DuProperty m_UpdateMode;
 
+        //--------------------------------------------------------------------------------------------------------------
+
+        [MenuItem("Dust/Animation/Translate")]
+        public static void AddComponentToSelectedObjects()
+        {
+            AddComponentToSelectedOrNewObject("Translate", typeof(DuTranslate));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
         void OnEnable()
         {
             m_TranslateType = FindProperty("m_TranslateType", "Translate Kind");

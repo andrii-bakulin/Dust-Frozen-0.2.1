@@ -14,6 +14,16 @@ namespace DustEngine.DustEditor
 
         private DuProperty m_UpdateMode;
 
+        //--------------------------------------------------------------------------------------------------------------
+
+        [MenuItem("Dust/Animation/Rotate")]
+        public static void AddComponentToSelectedObjects()
+        {
+            AddComponentToSelectedOrNewObject("Rotate", typeof(DuRotate));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
         void OnEnable()
         {
             m_Axis = FindProperty("m_Axis", "Axis");

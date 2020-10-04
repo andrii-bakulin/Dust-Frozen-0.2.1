@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
 namespace DustEngine
 {
@@ -97,16 +96,6 @@ namespace DustEngine
         public Vector3 lastDeltaPosition => m_LastDeltaPosition;
 
         private float m_TimeSinceStart;
-
-        //--------------------------------------------------------------------------------------------------------------
-
-#if UNITY_EDITOR
-        [MenuItem("Dust/Animation/Translate")]
-        public static void AddComponentToSelectedObjects()
-        {
-            AddComponentToSelectedOrNewObject("Translate", typeof(DuTranslate));
-        }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
 

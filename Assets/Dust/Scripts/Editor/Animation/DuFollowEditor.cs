@@ -14,6 +14,16 @@ namespace DustEngine.DustEditor
 
         private DuProperty m_UpdateMode;
 
+        //--------------------------------------------------------------------------------------------------------------
+
+        [MenuItem("Dust/Animation/Follow")]
+        public static void AddComponentToSelectedObjects()
+        {
+            AddComponentToSelectedOrNewObject("Follow", typeof(DuFollow));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
         void OnEnable()
         {
             m_FollowObject = FindProperty("m_FollowObject", "Follow Object");

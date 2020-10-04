@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
 namespace DustEngine
 {
@@ -30,16 +29,6 @@ namespace DustEngine
             get => m_UpdateMode;
             set => m_UpdateMode = value;
         }
-
-        //--------------------------------------------------------------------------------------------------------------
-
-#if UNITY_EDITOR
-        [MenuItem("Dust/Animation/LookAt")]
-        public static void AddComponentToSelectedObjects()
-        {
-            AddComponentToSelectedOrNewObject("LookAt", typeof(DuLookAt));
-        }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
 
