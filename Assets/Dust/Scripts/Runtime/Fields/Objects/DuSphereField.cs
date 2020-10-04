@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
 namespace DustEngine
 {
@@ -13,16 +12,6 @@ namespace DustEngine
             get => m_Radius;
             set => m_Radius = ShapeNormalizer.Radius(value);
         }
-
-        //--------------------------------------------------------------------------------------------------------------
-
-#if UNITY_EDITOR
-        [MenuItem("Dust/Fields/Object Fields/Sphere")]
-        public static void AddComponent()
-        {
-            AddFieldComponentByType(typeof(DuSphereField));
-        }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
         // DuDynamicStateInterface
@@ -45,12 +34,10 @@ namespace DustEngine
             return "Sphere";
         }
 
-#if UNITY_EDITOR
         public override string FieldDynamicHint()
         {
             return "";
         }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
         // Power

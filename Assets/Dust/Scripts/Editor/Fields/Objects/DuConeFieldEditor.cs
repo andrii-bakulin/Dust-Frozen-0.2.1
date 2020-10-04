@@ -12,10 +12,20 @@ namespace DustEngine.DustEditor
         private DuProperty m_Radius;
         private DuProperty m_Direction;
 
+        //--------------------------------------------------------------------------------------------------------------
+
         static DuConeFieldEditor()
         {
             DuPopupButtons.AddObjectField(typeof(DuConeField), "Cone");
         }
+
+        [MenuItem("Dust/Fields/Object Fields/Cone")]
+        public static void AddComponent()
+        {
+            AddFieldComponentByType(typeof(DuConeField));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         void OnEnable()
         {

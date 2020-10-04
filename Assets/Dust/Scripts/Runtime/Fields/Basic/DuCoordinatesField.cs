@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 namespace DustEngine
 {
@@ -123,16 +122,6 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
-
-#if UNITY_EDITOR
-        [MenuItem("Dust/Fields/Basic Fields/Coordinates")]
-        public static void AddComponent()
-        {
-            AddFieldComponentByType(typeof(DuCoordinatesField));
-        }
-#endif
-
-        //--------------------------------------------------------------------------------------------------------------
         // DuDynamicStateInterface
 
         public override int GetDynamicStateHashCode()
@@ -173,7 +162,6 @@ namespace DustEngine
             return "Coordinates";
         }
 
-#if UNITY_EDITOR
         public override string FieldDynamicHint()
         {
             if (!powerEnabled)
@@ -206,7 +194,6 @@ namespace DustEngine
 
             return hint;
         }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
         // Power

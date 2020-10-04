@@ -14,10 +14,20 @@ namespace DustEngine.DustEditor
         protected DuProperty m_MinOutput;
         protected DuProperty m_MaxOutput;
 
+        //--------------------------------------------------------------------------------------------------------------
+
         static DuFitFieldEditor()
         {
             DuPopupButtons.AddMathField(typeof(DuFitField), "Fit");
         }
+
+        [MenuItem("Dust/Fields/Math Fields/Fit")]
+        public static void AddComponent()
+        {
+            AddFieldComponentByType(typeof(DuFitField));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         void OnEnable()
         {

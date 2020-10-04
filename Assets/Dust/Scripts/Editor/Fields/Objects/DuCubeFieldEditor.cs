@@ -10,10 +10,20 @@ namespace DustEngine.DustEditor
     {
         private DuProperty m_Size;
 
+        //--------------------------------------------------------------------------------------------------------------
+
         static DuCubeFieldEditor()
         {
             DuPopupButtons.AddObjectField(typeof(DuCubeField), "Cube");
         }
+
+        [MenuItem("Dust/Fields/Object Fields/Cube")]
+        public static void AddComponent()
+        {
+            AddFieldComponentByType(typeof(DuCubeField));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         void OnEnable()
         {

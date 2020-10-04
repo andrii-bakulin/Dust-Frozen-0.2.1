@@ -1,19 +1,10 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Fields/Math Fields/Invert Field")]
     public class DuInvertField : DuField
     {
-#if UNITY_EDITOR
-        [MenuItem("Dust/Fields/Math Fields/Invert")]
-        public static void AddComponent()
-        {
-            AddFieldComponentByType(typeof(DuInvertField));
-        }
-#endif
-
         //--------------------------------------------------------------------------------------------------------------
         // DuDynamicStateInterface
 
@@ -34,12 +25,10 @@ namespace DustEngine
             return "Invert";
         }
 
-#if UNITY_EDITOR
         public override string FieldDynamicHint()
         {
             return "";
         }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
 

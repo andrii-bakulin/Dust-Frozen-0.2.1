@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
 namespace DustEngine
 {
@@ -23,16 +22,6 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
-
-#if UNITY_EDITOR
-        [MenuItem("Dust/Fields/Basic Fields/Constant")]
-        public static void AddComponent()
-        {
-            AddFieldComponentByType(typeof(DuConstantField));
-        }
-#endif
-
-        //--------------------------------------------------------------------------------------------------------------
         // DuDynamicStateInterface
 
         public override int GetDynamicStateHashCode()
@@ -53,12 +42,10 @@ namespace DustEngine
             return "Constant";
         }
 
-#if UNITY_EDITOR
         public override string FieldDynamicHint()
         {
             return "Power " + power.ToString("F2");
         }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
         // Power

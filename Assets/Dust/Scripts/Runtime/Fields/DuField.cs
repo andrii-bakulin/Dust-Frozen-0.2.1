@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
 namespace DustEngine
 {
@@ -23,74 +22,6 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-#if UNITY_EDITOR
-        public static void AddFieldComponentByType(System.Type duFieldType)
-        {
-            Selection.activeGameObject = AddFieldComponentByType(Selection.activeGameObject, duFieldType);
-        }
-
-        public static GameObject AddFieldComponentByType(GameObject activeGameObject, System.Type duFieldType)
-        {
-            DuDeformer selectedDeformer = null;
-            DuFieldsSpace selectedFieldsSpace = null;
-            DuExtendedFactoryMachine selectedFactoryMachine = null;
-
-            if (Dust.IsNotNull(activeGameObject))
-            {
-                selectedDeformer = activeGameObject.GetComponent<DuDeformer>();
-
-                if (Dust.IsNull(selectedDeformer) && Dust.IsNotNull(activeGameObject.transform.parent))
-                    selectedDeformer = activeGameObject.transform.parent.GetComponent<DuDeformer>();
-
-                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-                selectedFieldsSpace = activeGameObject.GetComponent<DuFieldsSpace>();
-
-                if (Dust.IsNull(selectedFieldsSpace) && Dust.IsNotNull(activeGameObject.transform.parent))
-                    selectedFieldsSpace = activeGameObject.transform.parent.GetComponent<DuFieldsSpace>();
-
-                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-                selectedFactoryMachine = activeGameObject.GetComponent<DuExtendedFactoryMachine>();
-
-                if (Dust.IsNull(selectedFactoryMachine) && Dust.IsNotNull(activeGameObject.transform.parent))
-                    selectedFactoryMachine = activeGameObject.transform.parent.GetComponent<DuExtendedFactoryMachine>();
-            }
-
-            var gameObject = new GameObject();
-            {
-                DuField field = gameObject.AddComponent(duFieldType) as DuField;
-
-                if (Dust.IsNotNull(selectedDeformer))
-                {
-                    field.transform.parent = selectedDeformer.transform;
-                    selectedDeformer.fieldsMap.AddField(field);
-                }
-                else if (Dust.IsNotNull(selectedFieldsSpace))
-                {
-                    field.transform.parent = selectedFieldsSpace.transform;
-                    selectedFieldsSpace.fieldsMap.AddField(field);
-                }
-                else if (Dust.IsNotNull(selectedFactoryMachine))
-                {
-                    field.transform.parent = selectedFactoryMachine.transform;
-                    selectedFactoryMachine.fieldsMap.AddField(field);
-                }
-
-                gameObject.name = field.FieldName() + " Field";
-                gameObject.transform.localPosition = Vector3.zero;
-                gameObject.transform.localRotation = Quaternion.identity;
-                gameObject.transform.localScale = Vector3.one;
-            }
-
-            Undo.RegisterCreatedObjectUndo(gameObject, "Create " + gameObject.name);
-
-            return gameObject;
-        }
-#endif
-
-        //--------------------------------------------------------------------------------------------------------------
-
         private void Start()
         {
             // Require to show enabled-checkbox in editor for all fields
@@ -101,9 +32,7 @@ namespace DustEngine
 
         public abstract string FieldName();
 
-#if UNITY_EDITOR
         public abstract string FieldDynamicHint();
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
         // Power

@@ -11,10 +11,20 @@ namespace DustEngine.DustEditor
         protected DuProperty m_RoundMode;
         protected DuProperty m_Distance;
 
+        //--------------------------------------------------------------------------------------------------------------
+
         static DuRoundFieldEditor()
         {
             DuPopupButtons.AddMathField(typeof(DuRoundField), "Round");
         }
+
+        [MenuItem("Dust/Fields/Math Fields/Round")]
+        public static void AddComponent()
+        {
+            AddFieldComponentByType(typeof(DuRoundField));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         void OnEnable()
         {

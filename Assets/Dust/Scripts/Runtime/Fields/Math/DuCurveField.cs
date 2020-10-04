@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
 namespace DustEngine
 {
@@ -60,16 +59,6 @@ namespace DustEngine
         private float m_OffsetDynamic;
 
         //--------------------------------------------------------------------------------------------------------------
-
-#if UNITY_EDITOR
-        [MenuItem("Dust/Fields/Math Fields/Curve")]
-        public static void AddComponent()
-        {
-            AddFieldComponentByType(typeof(DuCurveField));
-        }
-#endif
-
-        //--------------------------------------------------------------------------------------------------------------
         // DuDynamicStateInterface
 
         public override int GetDynamicStateHashCode()
@@ -94,12 +83,10 @@ namespace DustEngine
             return "Curve";
         }
 
-#if UNITY_EDITOR
         public override string FieldDynamicHint()
         {
             return "";
         }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
 

@@ -98,16 +98,6 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
 
 #if UNITY_EDITOR
-        [MenuItem("Dust/Fields/Object Fields/Wave")]
-        public static void AddComponent()
-        {
-            AddFieldComponentByType(typeof(DuWaveField));
-        }
-#endif
-
-        //--------------------------------------------------------------------------------------------------------------
-
-#if UNITY_EDITOR
         void OnEnable()
         {
             if (isEditorUpdatesEnabled)
@@ -180,12 +170,10 @@ namespace DustEngine
             return "Wave";
         }
 
-#if UNITY_EDITOR
         public override string FieldDynamicHint()
         {
             return "";
         }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
         // Power

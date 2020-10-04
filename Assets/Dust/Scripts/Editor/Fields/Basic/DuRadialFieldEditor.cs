@@ -21,10 +21,20 @@ namespace DustEngine.DustEditor
 
         private DuProperty m_GizmoRadius;
 
+        //--------------------------------------------------------------------------------------------------------------
+
         static DuRadialFieldEditor()
         {
             DuPopupButtons.AddBasicField(typeof(DuRadialField), "Radial");
         }
+
+        [MenuItem("Dust/Fields/Basic Fields/Radial")]
+        public static void AddComponent()
+        {
+            AddFieldComponentByType(typeof(DuRadialField));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         void OnEnable()
         {

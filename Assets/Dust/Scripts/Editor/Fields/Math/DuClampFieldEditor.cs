@@ -16,10 +16,20 @@ namespace DustEngine.DustEditor
         protected DuProperty m_ColorClampMin;
         protected DuProperty m_ColorClampMax;
 
+        //--------------------------------------------------------------------------------------------------------------
+
         static DuClampFieldEditor()
         {
             DuPopupButtons.AddMathField(typeof(DuClampField), "Clamp");
         }
+
+        [MenuItem("Dust/Fields/Math Fields/Clamp")]
+        public static void AddComponent()
+        {
+            AddFieldComponentByType(typeof(DuClampField));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         void OnEnable()
         {

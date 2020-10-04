@@ -22,10 +22,20 @@ namespace DustEngine.DustEditor
         private DuProperty m_ColorScale;
         private DuProperty m_ColorShape;
 
+        //--------------------------------------------------------------------------------------------------------------
+
         static DuCoordinatesFieldEditor()
         {
             DuPopupButtons.AddBasicField(typeof(DuCoordinatesField), "Coordinates");
         }
+
+        [MenuItem("Dust/Fields/Basic Fields/Coordinates")]
+        public static void AddComponent()
+        {
+            AddFieldComponentByType(typeof(DuCoordinatesField));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         void OnEnable()
         {

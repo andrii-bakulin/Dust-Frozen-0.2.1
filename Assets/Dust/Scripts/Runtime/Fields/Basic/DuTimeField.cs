@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
 namespace DustEngine
 {
@@ -54,16 +53,6 @@ namespace DustEngine
         private float m_OffsetDynamic;
 
         //--------------------------------------------------------------------------------------------------------------
-
-#if UNITY_EDITOR
-        [MenuItem("Dust/Fields/Basic Fields/Time")]
-        public static void AddComponent()
-        {
-            AddFieldComponentByType(typeof(DuTimeField));
-        }
-#endif
-
-        //--------------------------------------------------------------------------------------------------------------
         // DuDynamicStateInterface
 
         public override int GetDynamicStateHashCode()
@@ -88,7 +77,6 @@ namespace DustEngine
             return "Time";
         }
 
-#if UNITY_EDITOR
         public override string FieldDynamicHint()
         {
             if (Mathf.Approximately(timeScale, 1f))
@@ -96,7 +84,6 @@ namespace DustEngine
 
             return "Scale " + timeScale.ToString("F2");
         }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
         // Power

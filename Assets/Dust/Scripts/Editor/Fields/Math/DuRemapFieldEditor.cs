@@ -15,12 +15,22 @@ namespace DustEngine.DustEditor
             DuPopupButtons.AddMathField(typeof(DuRemapField), "Remap");
         }
 
+        //--------------------------------------------------------------------------------------------------------------
+
         void OnEnable()
         {
             OnEnableField();
 
             m_RemappingEditor = new DuRemappingEditor((target as DuRemapField).remapping, serializedObject.FindProperty("m_Remapping"));
         }
+
+        [MenuItem("Dust/Fields/Math Fields/Remap")]
+        public static void AddComponent()
+        {
+            AddFieldComponentByType(typeof(DuRemapField));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         public override void OnInspectorGUI()
         {

@@ -14,10 +14,20 @@ namespace DustEngine.DustEditor
 
         protected DuRemappingEditor m_RemappingEditor;
 
+        //--------------------------------------------------------------------------------------------------------------
+
         static DuTimeFieldEditor()
         {
             DuPopupButtons.AddBasicField(typeof(DuTimeField), "Time");
         }
+
+        [MenuItem("Dust/Fields/Basic Fields/Time")]
+        public static void AddComponent()
+        {
+            AddFieldComponentByType(typeof(DuTimeField));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         void OnEnable()
         {

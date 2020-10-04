@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
 namespace DustEngine
 {
@@ -73,16 +72,6 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
-
-#if UNITY_EDITOR
-        [MenuItem("Dust/Fields/Basic Fields/Radial")]
-        public static void AddComponent()
-        {
-            AddFieldComponentByType(typeof(DuRadialField));
-        }
-#endif
-
-        //--------------------------------------------------------------------------------------------------------------
         // DuDynamicStateInterface
 
         public override int GetDynamicStateHashCode()
@@ -109,12 +98,10 @@ namespace DustEngine
             return "Radial";
         }
 
-#if UNITY_EDITOR
         public override string FieldDynamicHint()
         {
             return "";
         }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
         // Power

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 namespace DustEngine
 {
@@ -68,16 +67,6 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
-
-#if UNITY_EDITOR
-        [MenuItem("Dust/Fields/Math Fields/Clamp")]
-        public static void AddComponent()
-        {
-            AddFieldComponentByType(typeof(DuClampField));
-        }
-#endif
-
-        //--------------------------------------------------------------------------------------------------------------
         // DuDynamicStateInterface
 
         public override int GetDynamicStateHashCode()
@@ -103,7 +92,6 @@ namespace DustEngine
             return "Clamp";
         }
 
-#if UNITY_EDITOR
         public override string FieldDynamicHint()
         {
             var parts = new List<string>();
@@ -132,7 +120,6 @@ namespace DustEngine
 
             return string.Join(" + ", parts);
         }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
 

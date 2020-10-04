@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEditor;
 
 namespace DustEngine
 {
@@ -33,16 +32,6 @@ namespace DustEngine
         private Calc m_Calc = null;
 
         //--------------------------------------------------------------------------------------------------------------
-
-#if UNITY_EDITOR
-        [MenuItem("Dust/Fields/Object Fields/Cube")]
-        public static void AddComponent()
-        {
-            AddFieldComponentByType(typeof(DuCubeField));
-        }
-#endif
-
-        //--------------------------------------------------------------------------------------------------------------
         // DuDynamicStateInterface
 
         public override int GetDynamicStateHashCode()
@@ -63,12 +52,10 @@ namespace DustEngine
             return "Cube";
         }
 
-#if UNITY_EDITOR
         public override string FieldDynamicHint()
         {
             return "";
         }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
         // Power

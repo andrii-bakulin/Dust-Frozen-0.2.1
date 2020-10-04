@@ -10,10 +10,20 @@ namespace DustEngine.DustEditor
     {
         private DuProperty m_Radius;
 
+        //--------------------------------------------------------------------------------------------------------------
+
         static DuSphereFieldEditor()
         {
             DuPopupButtons.AddObjectField(typeof(DuSphereField), "Sphere");
         }
+
+        [MenuItem("Dust/Fields/Object Fields/Sphere")]
+        public static void AddComponent()
+        {
+            AddFieldComponentByType(typeof(DuSphereField));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         void OnEnable()
         {

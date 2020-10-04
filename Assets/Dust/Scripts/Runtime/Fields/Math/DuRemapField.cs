@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
 namespace DustEngine
 {
@@ -9,16 +8,6 @@ namespace DustEngine
         [SerializeField]
         private DuRemapping m_Remapping = new DuRemapping();
         public DuRemapping remapping => m_Remapping;
-
-        //--------------------------------------------------------------------------------------------------------------
-
-#if UNITY_EDITOR
-        [MenuItem("Dust/Fields/Math Fields/Remap")]
-        public static void AddComponent()
-        {
-            AddFieldComponentByType(typeof(DuRemapField));
-        }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
         // DuDynamicStateInterface
@@ -40,12 +29,10 @@ namespace DustEngine
             return "Remap";
         }
 
-#if UNITY_EDITOR
         public override string FieldDynamicHint()
         {
             return "";
         }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
 

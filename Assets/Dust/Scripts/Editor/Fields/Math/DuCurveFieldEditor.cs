@@ -15,10 +15,20 @@ namespace DustEngine.DustEditor
         protected DuProperty m_BeforeCurve;
         protected DuProperty m_AfterCurve;
 
+        //--------------------------------------------------------------------------------------------------------------
+
         static DuCurveFieldEditor()
         {
             DuPopupButtons.AddMathField(typeof(DuCurveField), "Curve");
         }
+
+        [MenuItem("Dust/Fields/Math Fields/Curve")]
+        public static void AddComponent()
+        {
+            AddFieldComponentByType(typeof(DuCurveField));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         void OnEnable()
         {

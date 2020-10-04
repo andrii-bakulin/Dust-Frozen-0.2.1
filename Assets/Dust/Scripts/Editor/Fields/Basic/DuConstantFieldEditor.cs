@@ -11,10 +11,20 @@ namespace DustEngine.DustEditor
         private DuProperty m_Power;
         private DuProperty m_Color;
 
+        //--------------------------------------------------------------------------------------------------------------
+
         static DuConstantFieldEditor()
         {
             DuPopupButtons.AddBasicField(typeof(DuConstantField), "Constant");
         }
+
+        [MenuItem("Dust/Fields/Basic Fields/Constant")]
+        public static void AddComponent()
+        {
+            AddFieldComponentByType(typeof(DuConstantField));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         void OnEnable()
         {

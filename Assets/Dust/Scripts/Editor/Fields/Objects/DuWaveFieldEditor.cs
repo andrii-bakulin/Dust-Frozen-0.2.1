@@ -19,10 +19,20 @@ namespace DustEngine.DustEditor
         private DuProperty m_GizmoQuality;
         private DuProperty m_GizmoAnimated;
 
+        //--------------------------------------------------------------------------------------------------------------
+
         static DuWaveFieldEditor()
         {
             DuPopupButtons.AddObjectField(typeof(DuWaveField), "Wave");
         }
+
+        [MenuItem("Dust/Fields/Object Fields/Wave")]
+        public static void AddComponent()
+        {
+            AddFieldComponentByType(typeof(DuWaveField));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         void OnEnable()
         {

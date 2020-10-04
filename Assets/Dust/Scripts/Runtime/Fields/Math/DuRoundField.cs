@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
 namespace DustEngine
 {
@@ -28,16 +27,6 @@ namespace DustEngine
             get => m_Distance;
             set => m_Distance = value;
         }
-
-        //--------------------------------------------------------------------------------------------------------------
-
-#if UNITY_EDITOR
-        [MenuItem("Dust/Fields/Math Fields/Round")]
-        public static void AddComponent()
-        {
-            AddFieldComponentByType(typeof(DuRoundField));
-        }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
         // DuDynamicStateInterface
@@ -85,7 +74,6 @@ namespace DustEngine
             return "Round";
         }
 
-#if UNITY_EDITOR
         public override string FieldDynamicHint()
         {
             string hint = "";
@@ -99,7 +87,6 @@ namespace DustEngine
 
             return hint + ", " + distance.ToString("F2");
         }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
 

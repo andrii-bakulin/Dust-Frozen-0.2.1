@@ -1,5 +1,4 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace DustEngine
 {
@@ -13,16 +12,6 @@ namespace DustEngine
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         private DuField.Point m_CalcFieldPoint = new DuField.Point();
-
-        //--------------------------------------------------------------------------------------------------------------
-
-#if UNITY_EDITOR
-        [MenuItem("Dust/Fields/Fields Space")]
-        protected static void AddComponentToSelectedObjects()
-        {
-            AddComponentToSelectedOrNewObject("Fields Space", typeof(DuFieldsSpace));
-        }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
 

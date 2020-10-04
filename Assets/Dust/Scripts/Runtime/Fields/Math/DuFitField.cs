@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
 namespace DustEngine
 {
@@ -39,16 +38,6 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
-
-#if UNITY_EDITOR
-        [MenuItem("Dust/Fields/Math Fields/Fit")]
-        public static void AddComponent()
-        {
-            AddFieldComponentByType(typeof(DuFitField));
-        }
-#endif
-
-        //--------------------------------------------------------------------------------------------------------------
         // DuDynamicStateInterface
 
         public override int GetDynamicStateHashCode()
@@ -71,14 +60,12 @@ namespace DustEngine
             return "Fit";
         }
 
-#if UNITY_EDITOR
         public override string FieldDynamicHint()
         {
             return "[" + minInput.ToString("F2") + " .. " + maxInput.ToString("F2") + "]"
                 + " > "
                 + "[" + minOutput.ToString("F2") + " .. " + maxOutput.ToString("F2") + "]";
         }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
 

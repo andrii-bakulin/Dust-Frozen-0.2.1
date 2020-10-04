@@ -13,6 +13,14 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
+        [MenuItem("Dust/Fields/Fields Space")]
+        protected static void AddComponentToSelectedObjects()
+        {
+            AddComponentToSelectedOrNewObject("Fields Space", typeof(DuFieldsSpace));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
         protected void OnEnable()
         {
             SerializedProperty propertyFieldsMap = serializedObject.FindProperty("m_FieldsMap");

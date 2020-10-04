@@ -206,7 +206,7 @@ namespace DustEngine.DustEditor
                         }
                         else if (m_PopupMode == PopupMode.Fields)
                         {
-                            DuField.AddFieldComponentByType(m_FieldsMap.GetParentGameObject(), cellRecord.type);
+                            DuFieldEditor.AddFieldComponentByType(m_FieldsMap.GetParentGameObject(), cellRecord.type);
                         }
 
                         editorWindow.Close();

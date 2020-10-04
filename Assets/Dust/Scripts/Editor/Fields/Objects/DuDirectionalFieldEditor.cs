@@ -14,10 +14,20 @@ namespace DustEngine.DustEditor
         private DuProperty m_GizmoWidth;
         private DuProperty m_GizmoHeight;
 
+        //--------------------------------------------------------------------------------------------------------------
+
         static DuDirectionalFieldEditor()
         {
             DuPopupButtons.AddObjectField(typeof(DuDirectionalField), "Directional");
         }
+
+        [MenuItem("Dust/Fields/Object Fields/Directional")]
+        public static void AddComponent()
+        {
+            AddFieldComponentByType(typeof(DuDirectionalField));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         void OnEnable()
         {

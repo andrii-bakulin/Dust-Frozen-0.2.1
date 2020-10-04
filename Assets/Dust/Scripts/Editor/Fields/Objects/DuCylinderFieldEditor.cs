@@ -12,10 +12,20 @@ namespace DustEngine.DustEditor
         private DuProperty m_Radius;
         private DuProperty m_Direction;
 
+        //--------------------------------------------------------------------------------------------------------------
+
         static DuCylinderFieldEditor()
         {
             DuPopupButtons.AddObjectField(typeof(DuCylinderField), "Cylinder");
         }
+
+        [MenuItem("Dust/Fields/Object Fields/Cylinder")]
+        public static void AddComponent()
+        {
+            AddFieldComponentByType(typeof(DuCylinderField));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         void OnEnable()
         {

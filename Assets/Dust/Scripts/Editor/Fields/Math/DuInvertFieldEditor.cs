@@ -13,10 +13,20 @@ namespace DustEngine.DustEditor
             DuPopupButtons.AddMathField(typeof(DuInvertField), "Invert");
         }
 
+        //--------------------------------------------------------------------------------------------------------------
+
         void OnEnable()
         {
             OnEnableField();
         }
+
+        [MenuItem("Dust/Fields/Math Fields/Invert")]
+        public static void AddComponent()
+        {
+            AddFieldComponentByType(typeof(DuInvertField));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         public override void OnInspectorGUI()
         {

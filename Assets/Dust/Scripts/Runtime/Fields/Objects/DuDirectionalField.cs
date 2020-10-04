@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEditor;
 
 namespace DustEngine
 {
@@ -41,16 +40,6 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
-
-#if UNITY_EDITOR
-        [MenuItem("Dust/Fields/Object Fields/Directional")]
-        public static void AddComponent()
-        {
-            AddFieldComponentByType(typeof(DuDirectionalField));
-        }
-#endif
-
-        //--------------------------------------------------------------------------------------------------------------
         // DuDynamicStateInterface
 
         public override int GetDynamicStateHashCode()
@@ -72,12 +61,10 @@ namespace DustEngine
             return "Directional";
         }
 
-#if UNITY_EDITOR
         public override string FieldDynamicHint()
         {
             return "";
         }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
         // Power

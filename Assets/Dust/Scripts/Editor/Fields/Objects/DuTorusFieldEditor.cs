@@ -12,10 +12,20 @@ namespace DustEngine.DustEditor
         private DuProperty m_Thickness;
         private DuProperty m_Direction;
 
+        //--------------------------------------------------------------------------------------------------------------
+
         static DuTorusFieldEditor()
         {
             DuPopupButtons.AddObjectField(typeof(DuTorusField), "Torus");
         }
+
+        [MenuItem("Dust/Fields/Object Fields/Torus")]
+        public static void AddComponent()
+        {
+            AddFieldComponentByType(typeof(DuTorusField));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         void OnEnable()
         {
