@@ -25,6 +25,14 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
+        [MenuItem("Dust/Deformers/Core/Deform Mesh")]
+        public static void AddComponent()
+        {
+            AddComponentToSelectedOrNewObject("Deform Mesh", typeof(DuDeformMesh));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
         void OnEnable()
         {
             m_Deformers = FindProperty("m_Deformers", "Deformers");

@@ -146,6 +146,60 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
+        public static void AddComponent(System.Type duComponentType)
+        {
+            if (Selection.gameObjects.Length == 0)
+                return;
+
+            foreach (var gameObject in Selection.gameObjects)
+            {
+                Undo.AddComponent(gameObject, duComponentType);
+            }
+        }
+
+        public static void AddComponentToSelectedOrNewObject(string gameObjectName, System.Type duComponentType)
+        {
+            if (Selection.gameObjects.Length > 0)
+            {
+                foreach (var gameObject in Selection.gameObjects)
+                {
+                    Undo.AddComponent(gameObject, duComponentType);
+                }
+            }
+            else
+            {
+                AddComponentToNewObject(gameObjectName, duComponentType);
+            }
+        }
+
+        public static Component AddComponentToNewObject(string gameObjectName, System.Type duComponentType, bool fixUndoState = true)
+        {
+            var gameObject = new GameObject();
+            gameObject.name = gameObjectName;
+
+            if (Dust.IsNotNull(Selection.activeGameObject))
+                gameObject.transform.parent = Selection.activeGameObject.transform;
+
+            gameObject.transform.localPosition = Vector3.zero;
+            gameObject.transform.localRotation = Quaternion.identity;
+            gameObject.transform.localScale = Vector3.one;
+
+            var component = gameObject.AddComponent(duComponentType);
+
+            if (fixUndoState)
+                Undo.RegisterCreatedObjectUndo(gameObject, "Create " + gameObject.name);
+
+            Selection.activeGameObject = gameObject;
+            return component;
+        }
+
+        protected static bool IsAllowExecMenuCommandOnce(MenuCommand menuCommand)
+        {
+            return Selection.objects.Length == 0 || menuCommand.context == Selection.objects[0];
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
         public static bool PropertyField(DuProperty duProperty, string label, string tooltip = "")
         {
             if (Dust.IsNull(duProperty.property))

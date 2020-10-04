@@ -26,48 +26,6 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-#if UNITY_EDITOR
-        public static void AddDeformerComponentByType(System.Type type)
-        {
-            Selection.activeGameObject = AddDeformerComponentByType(Selection.activeGameObject, type);
-        }
-
-        public static GameObject AddDeformerComponentByType(GameObject activeGameObject, System.Type type)
-        {
-            DuDeformMesh selectedDeformMesh = null;
-
-            if (Dust.IsNotNull(activeGameObject))
-            {
-                selectedDeformMesh = activeGameObject.GetComponent<DuDeformMesh>();
-
-                if (Dust.IsNull(selectedDeformMesh) && Dust.IsNotNull(activeGameObject.transform.parent))
-                    selectedDeformMesh = activeGameObject.transform.parent.GetComponent<DuDeformMesh>();
-            }
-
-            var gameObject = new GameObject();
-            {
-                DuDeformer deformer = gameObject.AddComponent(type) as DuDeformer;
-
-                if (Dust.IsNotNull(selectedDeformMesh))
-                {
-                    deformer.transform.parent = selectedDeformMesh.transform;
-                    selectedDeformMesh.AddDeformer(deformer);
-                }
-
-                gameObject.name = deformer.DeformerName() + " Deformer";
-                gameObject.transform.localPosition = Vector3.zero;
-                gameObject.transform.localRotation = Quaternion.identity;
-                gameObject.transform.localScale = Vector3.one;
-            }
-
-            Undo.RegisterCreatedObjectUndo(gameObject, "Create " + gameObject.name);
-
-            return gameObject;
-        }
-#endif
-
-        //--------------------------------------------------------------------------------------------------------------
-
         private void Start()
         {
             // Require to show enabled-checkbox in editor for all deformers

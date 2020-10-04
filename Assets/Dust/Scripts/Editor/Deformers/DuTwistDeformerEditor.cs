@@ -13,10 +13,20 @@ namespace DustEngine.DustEditor
         private DuProperty m_Angle;
         private DuProperty m_Direction;
 
+        //--------------------------------------------------------------------------------------------------------------
+
         static DuTwistDeformerEditor()
         {
             DuPopupButtons.AddDeformer(typeof(DuTwistDeformer), "Twist");
         }
+
+        [MenuItem("Dust/Deformers/Twist")]
+        public static void AddComponent()
+        {
+            AddDeformerComponentByType(typeof(DuTwistDeformer));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         void OnEnable()
         {

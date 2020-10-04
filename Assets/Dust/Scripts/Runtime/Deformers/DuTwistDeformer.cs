@@ -49,16 +49,6 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-#if UNITY_EDITOR
-        [MenuItem("Dust/Deformers/Twist")]
-        public static void AddComponent()
-        {
-            AddDeformerComponentByType(typeof(DuTwistDeformer));
-        }
-#endif
-
-        //--------------------------------------------------------------------------------------------------------------
-
         public override string DeformerName()
         {
             return "Twist";

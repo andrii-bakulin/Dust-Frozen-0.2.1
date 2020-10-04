@@ -98,16 +98,6 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
 
 #if UNITY_EDITOR
-        [MenuItem("Dust/Deformers/Wave")]
-        public static void AddComponent()
-        {
-            AddDeformerComponentByType(typeof(DuWaveDeformer));
-        }
-#endif
-
-        //--------------------------------------------------------------------------------------------------------------
-
-#if UNITY_EDITOR
         void OnEnable()
         {
             if (isEditorUpdatesEnabled)

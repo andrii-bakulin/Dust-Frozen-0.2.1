@@ -107,16 +107,6 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-#if UNITY_EDITOR
-        [MenuItem("Dust/Deformers/Core/Deform Mesh")]
-        public static void AddComponent()
-        {
-            AddComponentToSelectedOrNewObject("Deform Mesh", typeof(DuDeformMesh));
-        }
-#endif
-
-        //--------------------------------------------------------------------------------------------------------------
-
         void OnEnable()
         {
 #if UNITY_EDITOR

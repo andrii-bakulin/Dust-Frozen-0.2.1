@@ -19,10 +19,20 @@ namespace DustEngine.DustEditor
         private DuProperty m_GizmoQuality;
         private DuProperty m_GizmoAnimated;
 
+        //--------------------------------------------------------------------------------------------------------------
+
         static DuWaveDeformerEditor()
         {
             DuPopupButtons.AddDeformer(typeof(DuWaveDeformer), "Wave");
         }
+
+        [MenuItem("Dust/Deformers/Wave")]
+        public static void AddComponent()
+        {
+            AddDeformerComponentByType(typeof(DuWaveDeformer));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         void OnEnable()
         {
