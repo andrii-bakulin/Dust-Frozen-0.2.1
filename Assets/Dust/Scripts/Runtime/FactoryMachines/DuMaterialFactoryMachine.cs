@@ -21,13 +21,6 @@ namespace DustEngine
             return "Material";
         }
 
-#if UNITY_EDITOR
-        public override string FactoryMachineDynamicHint()
-        {
-            return "";
-        }
-#endif
-
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         public override bool PrepareForUpdateInstancesStates(FactoryInstanceState factoryInstanceState)

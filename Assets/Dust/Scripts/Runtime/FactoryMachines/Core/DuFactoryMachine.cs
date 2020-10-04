@@ -120,7 +120,10 @@ namespace DustEngine
         public abstract string FactoryMachineName();
 
 #if UNITY_EDITOR
-        public abstract string FactoryMachineDynamicHint();
+        public virtual string FactoryMachineDynamicHint()
+        {
+            return "";
+        }
 #endif
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
