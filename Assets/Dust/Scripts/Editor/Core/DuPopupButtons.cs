@@ -198,7 +198,7 @@ namespace DustEngine.DustEditor
                     {
                         if (m_PopupMode == PopupMode.Deformers)
                         {
-                            DuDeformer.AddDeformerComponentByType((m_DeformMesh.target as DuMonoBehaviour).gameObject, cellRecord.type);
+                            DuDeformerEditor.AddDeformerComponentByType((m_DeformMesh.target as DuMonoBehaviour).gameObject, cellRecord.type);
                         }
                         else if (m_PopupMode == PopupMode.FactoryMachines)
                         {
