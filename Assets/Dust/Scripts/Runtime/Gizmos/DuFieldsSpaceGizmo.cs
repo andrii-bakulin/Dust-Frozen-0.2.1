@@ -170,7 +170,7 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        void Reset()
+        private void Reset()
         {
             powerDotsColor = new Gradient();
             powerDotsColor.SetKeys(

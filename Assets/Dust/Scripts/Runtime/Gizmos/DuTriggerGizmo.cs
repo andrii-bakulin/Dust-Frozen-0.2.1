@@ -120,13 +120,15 @@ namespace DustEngine
             set => m_Center = value;
         }
 
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        //--------------------------------------------------------------------------------------------------------------
+
+#if UNITY_EDITOR
 
         private float m_TriggerState;
 
         //--------------------------------------------------------------------------------------------------------------
 
-        void OnEnable()
+        private void OnEnable()
         {
             if (isEditorUpdatesEnabled)
             {
@@ -137,7 +139,7 @@ namespace DustEngine
             }
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             if (isEditorUpdatesEnabled)
             {
@@ -145,7 +147,7 @@ namespace DustEngine
             }
         }
 
-        void EditorUpdate()
+        private void EditorUpdate()
         {
             float deltaTime;
 
@@ -155,29 +157,34 @@ namespace DustEngine
             UpdateState(deltaTime);
         }
 
-        void Update()
+        private void Update()
         {
             if (isEditorUpdatesEnabled) return;
 
             UpdateState(Time.deltaTime);
         }
 
-        void UpdateState(float deltaTime)
+        private void UpdateState(float deltaTime)
         {
             m_TriggerState = Mathf.Clamp01(m_TriggerState - deltaTime / falloffDuration);
         }
+#endif
 
         //--------------------------------------------------------------------------------------------------------------
 
         public void Trigger()
         {
+#if UNITY_EDITOR
             m_TriggerState = 1.0f;
+#endif
         }
 
         public void Trigger(string newMessage)
         {
+#if UNITY_EDITOR
             m_TriggerState = 1.0f;
             m_Message = newMessage;
+#endif
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -247,7 +254,7 @@ namespace DustEngine
         }
 #endif
 
-        void Reset()
+        private void Reset()
         {
             color = Color.yellow;
         }
