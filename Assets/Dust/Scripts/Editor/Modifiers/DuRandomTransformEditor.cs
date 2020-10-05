@@ -25,6 +25,18 @@ namespace DustEngine.DustEditor
 
         private DuProperty m_Seed;
 
+        //--------------------------------------------------------------------------------------------------------------
+
+#if UNITY_EDITOR
+        [MenuItem("Dust/Modifiers/Random Transform")]
+        public static void AddComponentToSelectedObjects()
+        {
+            AddComponentToSelectedOrNewObject("Random Transform", typeof(DuRandomTransform));
+        }
+#endif
+
+        //--------------------------------------------------------------------------------------------------------------
+
         void OnEnable()
         {
             m_ActivateMode = FindProperty("m_ActivateMode", "Activate On");

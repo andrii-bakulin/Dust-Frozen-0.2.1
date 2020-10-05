@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
 namespace DustEngine
 {
@@ -136,16 +135,6 @@ namespace DustEngine
 
         private DuRandom m_DuRandom;
         private DuRandom duRandom => m_DuRandom ?? (m_DuRandom = new DuRandom(seed));
-
-        //--------------------------------------------------------------------------------------------------------------
-
-#if UNITY_EDITOR
-        [MenuItem("Dust/Modifiers/Random Transform")]
-        public static void AddComponentToSelectedObjects()
-        {
-            AddComponentToSelectedOrNewObject("Random Transform", typeof(DuRandomTransform));
-        }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
 
