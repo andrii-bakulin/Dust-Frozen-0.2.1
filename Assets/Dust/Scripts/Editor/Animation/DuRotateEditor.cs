@@ -3,7 +3,8 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuRotate)), CanEditMultipleObjects]
+    [CustomEditor(typeof(DuRotate))]
+    [CanEditMultipleObjects]
     public class DuRotateEditor : DuEditor
     {
         private DuProperty m_Axis;

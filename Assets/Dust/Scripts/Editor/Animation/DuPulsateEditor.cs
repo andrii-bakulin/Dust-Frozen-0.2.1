@@ -3,7 +3,8 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuPulsate)), CanEditMultipleObjects]
+    [CustomEditor(typeof(DuPulsate))]
+    [CanEditMultipleObjects]
     public class DuPulsateEditor : DuEditor
     {
         private DuProperty m_Power;

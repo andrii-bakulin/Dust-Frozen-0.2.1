@@ -3,7 +3,8 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuCollisionEvent)), CanEditMultipleObjects]
+    [CustomEditor(typeof(DuCollisionEvent))]
+    [CanEditMultipleObjects]
     public class DuCollisionEventEditor : DuColliderEventEditor
     {
         [MenuItem("Dust/Events/Collision Event")]

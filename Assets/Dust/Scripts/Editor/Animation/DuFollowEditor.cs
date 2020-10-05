@@ -3,7 +3,8 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuFollow)), CanEditMultipleObjects]
+    [CustomEditor(typeof(DuFollow))]
+    [CanEditMultipleObjects]
     public class DuFollowEditor : DuEditor
     {
         private DuProperty m_FollowObject;

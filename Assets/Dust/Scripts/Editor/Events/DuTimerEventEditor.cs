@@ -3,7 +3,8 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuTimerEvent)), CanEditMultipleObjects]
+    [CustomEditor(typeof(DuTimerEvent))]
+    [CanEditMultipleObjects]
     public class DuTimerEventEditor : DuEventEditor
     {
         protected DuProperty m_Delay;

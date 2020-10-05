@@ -3,7 +3,8 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuTranslate)), CanEditMultipleObjects]
+    [CustomEditor(typeof(DuTranslate))]
+    [CanEditMultipleObjects]
     public class DuTranslateEditor : DuEditor
     {
         private DuProperty m_TranslateType;

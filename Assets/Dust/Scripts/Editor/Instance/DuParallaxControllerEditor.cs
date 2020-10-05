@@ -3,7 +3,8 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuParallaxController)), CanEditMultipleObjects]
+    [CustomEditor(typeof(DuParallaxController))]
+    [CanEditMultipleObjects]
     public class DuParallaxControllerEditor : DuEditor
     {
         private DuProperty m_ParallaxControl;

@@ -3,7 +3,8 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuTrigger2DEvent)), CanEditMultipleObjects]
+    [CustomEditor(typeof(DuTrigger2DEvent))]
+    [CanEditMultipleObjects]
     public class DuTrigger2DEventEditor : DuColliderEventEditor
     {
         [MenuItem("Dust/Events/Trigger Event 2D")]
