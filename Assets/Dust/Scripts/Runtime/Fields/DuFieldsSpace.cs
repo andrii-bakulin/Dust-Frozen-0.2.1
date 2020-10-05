@@ -22,7 +22,7 @@ namespace DustEngine
 
             fieldsMap.Calculate(m_CalcFieldPoint);
 
-            return m_CalcFieldPoint.outPower;
+            return m_CalcFieldPoint.endPower;
         }
 
         public Color GetColor(Vector3 worldPosition)
@@ -32,7 +32,7 @@ namespace DustEngine
 
             fieldsMap.Calculate(m_CalcFieldPoint);
 
-            return m_CalcFieldPoint.outColor;
+            return m_CalcFieldPoint.endColor;
         }
 
         public float GetPowerAndColor(Vector3 worldPosition, out Color color)
@@ -42,8 +42,8 @@ namespace DustEngine
 
             fieldsMap.Calculate(m_CalcFieldPoint);
 
-            color = m_CalcFieldPoint.outColor;
-            return m_CalcFieldPoint.outPower;
+            color = m_CalcFieldPoint.endColor;
+            return m_CalcFieldPoint.endPower;
         }
     }
 }

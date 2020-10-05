@@ -15,9 +15,9 @@ namespace DustEngine
             public Vector3 inPosition; // point in world position
             public float inOffset; // offset for point in sequence of points [0..1]
 
-            // Out
-            public float outPower; // power calculated by fieldsMap
-            public Color outColor; // color calculated by fieldsMap
+            // Out/End/Resulted values
+            public float endPower; // power calculated by fieldsMap
+            public Color endColor; // color calculated by fieldsMap
         }
 
         //--------------------------------------------------------------------------------------------------------------

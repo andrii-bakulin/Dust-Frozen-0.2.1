@@ -105,7 +105,7 @@ namespace DustEngine
 
         public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
         {
-            return RoundValue(fieldPoint.outPower);
+            return RoundValue(fieldPoint.endPower);
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -118,7 +118,7 @@ namespace DustEngine
 
         public override Color GetFieldColor(DuField.Point fieldPoint, float powerByField)
         {
-            Color color = fieldPoint.outColor;
+            Color color = fieldPoint.endColor;
             color.r = RoundValue(color.r);
             color.g = RoundValue(color.g);
             color.b = RoundValue(color.b);

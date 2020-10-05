@@ -51,7 +51,7 @@ namespace DustEngine
 
         public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
         {
-            return remapping.MapValue(fieldPoint.outPower);
+            return remapping.MapValue(fieldPoint.endPower);
         }
 
         //--------------------------------------------------------------------------------------------------------------

@@ -47,7 +47,7 @@ namespace DustEngine
 
         public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
         {
-            return 1f - fieldPoint.outPower;
+            return 1f - fieldPoint.endPower;
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -60,7 +60,7 @@ namespace DustEngine
 
         public override Color GetFieldColor(DuField.Point fieldPoint, float powerByField)
         {
-            return DuColor.InvertRGB(fieldPoint.outColor);
+            return DuColor.InvertRGB(fieldPoint.endColor);
         }
 
 #if UNITY_EDITOR

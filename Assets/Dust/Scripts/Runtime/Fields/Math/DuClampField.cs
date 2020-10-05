@@ -138,7 +138,7 @@ namespace DustEngine
 
         public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
         {
-            float value = fieldPoint.outPower;
+            float value = fieldPoint.endPower;
 
             if (powerClampMode == ClampMode.MinAndMax || powerClampMode == ClampMode.MinOnly)
                 value = Mathf.Max(value, powerClampMin);
@@ -159,7 +159,7 @@ namespace DustEngine
 
         public override Color GetFieldColor(DuField.Point fieldPoint, float powerByField)
         {
-            Color color = fieldPoint.outColor;
+            Color color = fieldPoint.endColor;
 
             if (colorClampMode == ClampMode.MinAndMax || colorClampMode == ClampMode.MinOnly)
                 color = DuColor.Max(color, colorClampMin);

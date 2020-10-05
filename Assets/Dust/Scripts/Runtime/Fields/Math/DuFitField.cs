@@ -84,7 +84,7 @@ namespace DustEngine
 
         public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
         {
-            return DuMath.Fit(minInput, maxInput, minOutput, maxOutput, fieldPoint.outPower);
+            return DuMath.Fit(minInput, maxInput, minOutput, maxOutput, fieldPoint.endPower);
         }
 
         //--------------------------------------------------------------------------------------------------------------
