@@ -248,25 +248,7 @@ namespace DustEngine
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        public bool Calculate(DuFactory factory, DuFactoryInstance factoryInstance, out float power)
-        {
-            if (!HasFields())
-            {
-                power = defaultPower;
-                return false;
-            }
-
-            m_CalcFieldPoint.inPosition = factory.GetInstancePositionInWorldSpace(factoryInstance);
-            m_CalcFieldPoint.inOffset = factoryInstance.offset;
-
-            bool result = Calculate(m_CalcFieldPoint);
-
-            power = m_CalcFieldPoint.outPower;
-
-            return result;
-        }
-
-        public bool Calculate(DuFactory factory, DuFactoryInstance factoryInstance, out float power, out Color color)
+        public bool Calculate(DuFactoryMachine.FactoryInstanceState factoryInstanceState, out float power, out Color color)
         {
             if (!HasFields())
             {
@@ -275,8 +257,8 @@ namespace DustEngine
                 return false;
             }
 
-            m_CalcFieldPoint.inPosition = factory.GetInstancePositionInWorldSpace(factoryInstance);
-            m_CalcFieldPoint.inOffset = factoryInstance.offset;
+            m_CalcFieldPoint.inPosition = factoryInstanceState.factory.GetInstancePositionInWorldSpace(factoryInstanceState.instance);
+            m_CalcFieldPoint.inOffset = factoryInstanceState.instance.offset;
 
             bool result = Calculate(m_CalcFieldPoint);
 

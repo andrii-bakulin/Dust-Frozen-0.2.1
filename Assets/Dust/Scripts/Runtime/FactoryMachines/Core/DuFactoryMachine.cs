@@ -21,11 +21,6 @@ namespace DustEngine
             public Vector3 extraIntensityPosition;
             public Vector3 extraIntensityRotation;
             public Vector3 extraIntensityScale;
-
-            /* @todo!
-            public Vector3 offset;                          // Use by FactoryMachine: Random
-            public Color color;                             // Use by FactoryMachine: Random, Shader
-            */
         }
 
         [System.Serializable]
