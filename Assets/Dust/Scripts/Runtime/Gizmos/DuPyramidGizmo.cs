@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
-#if UNITY_EDITOR
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Gizmos/Pyramid Gizmo")]
@@ -49,19 +47,12 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        [MenuItem("Dust/Gizmos/Pyramid")]
-        public static void AddComponentToSelectedObjects()
-        {
-            AddGizmoToSelectedOrNewObject(typeof(DuPyramidGizmo));
-        }
-
-        //--------------------------------------------------------------------------------------------------------------
-
         public override string GizmoName()
         {
             return "Pyramid";
         }
 
+#if UNITY_EDITOR
         protected override void DrawGizmos()
         {
             Gizmos.matrix = transform.localToWorldMatrix;
@@ -69,6 +60,7 @@ namespace DustEngine
 
             DuGizmos.DrawWirePyramid(radius, height, center, direction, faces);
         }
+#endif
 
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
@@ -82,4 +74,3 @@ namespace DustEngine
         }
     }
 }
-#endif

@@ -3,8 +3,9 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuTriggerGizmo)), CanEditMultipleObjects]
-    public class DuTriggerGizmoEditor : DuGizmoEditor
+    [CustomEditor(typeof(DuTriggerGizmo))]
+    [CanEditMultipleObjects]
+    public class DuTriggerGizmoEditor : DuGizmoObjectEditor
     {
         private DuProperty m_Size;
 
@@ -21,6 +22,16 @@ namespace DustEngine.DustEditor
 
         private DuProperty m_FalloffDuration;
         private DuProperty m_Center;
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        [MenuItem("Dust/Gizmos/Trigger")]
+        public static void AddComponentToSelectedObjects()
+        {
+            AddGizmoToSelectedOrNewObject(typeof(DuTriggerGizmo));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         void OnEnable()
         {

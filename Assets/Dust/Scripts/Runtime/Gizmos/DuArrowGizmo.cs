@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-#if UNITY_EDITOR
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Gizmos/Arrow Gizmo")]
@@ -58,19 +57,12 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        [MenuItem("Dust/Gizmos/Arrow")]
-        public static void AddComponentToSelectedObjects()
-        {
-            AddGizmoToSelectedOrNewObject(typeof(DuArrowGizmo));
-        }
-
-        //--------------------------------------------------------------------------------------------------------------
-
         public override string GizmoName()
         {
             return "Arrow";
         }
 
+#if UNITY_EDITOR
         protected override void DrawGizmos()
         {
             if (showStartPoint)
@@ -112,6 +104,6 @@ namespace DustEngine
                 size,
                 EventType.Repaint);
         }
+#endif
     }
 }
-#endif

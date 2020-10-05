@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
-#if UNITY_EDITOR
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Gizmos/Sphere Gizmo")]
@@ -25,25 +23,18 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        [MenuItem("Dust/Gizmos/Sphere")]
-        public static void AddComponentToSelectedObjects()
-        {
-            AddGizmoToSelectedOrNewObject(typeof(DuSphereGizmo));
-        }
-
-        //--------------------------------------------------------------------------------------------------------------
-
         public override string GizmoName()
         {
             return "Sphere";
         }
 
+#if UNITY_EDITOR
         protected override void DrawGizmos()
         {
             Gizmos.matrix = transform.localToWorldMatrix;
             Gizmos.color = color;
             Gizmos.DrawWireSphere(center, radius);
         }
+#endif
     }
 }
-#endif

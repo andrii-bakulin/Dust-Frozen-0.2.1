@@ -3,11 +3,22 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuSphereGizmo)), CanEditMultipleObjects]
-    public class DuSphereGizmoEditor : DuGizmoEditor
+    [CustomEditor(typeof(DuSphereGizmo))]
+    [CanEditMultipleObjects]
+    public class DuSphereGizmoEditor : DuGizmoObjectEditor
     {
         private DuProperty m_Radius;
         private DuProperty m_Center;
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        [MenuItem("Dust/Gizmos/Sphere")]
+        public static void AddComponentToSelectedObjects()
+        {
+            AddGizmoToSelectedOrNewObject(typeof(DuSphereGizmo));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         void OnEnable()
         {

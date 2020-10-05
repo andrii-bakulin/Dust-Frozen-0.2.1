@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-#if UNITY_EDITOR
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Gizmos/Fields Space Gizmo")]
@@ -104,19 +103,12 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        [MenuItem("Dust/Gizmos/Fields Space")]
-        public static void AddComponentToSelectedObjects()
-        {
-            AddGizmoToSelectedOrNewObject(typeof(DuFieldsSpaceGizmo));
-        }
-
-        //--------------------------------------------------------------------------------------------------------------
-
         public override string GizmoName()
         {
             return "Fields Space";
         }
 
+#if UNITY_EDITOR
         protected override void DrawGizmos()
         {
             if (Dust.IsNull(fieldsSpace))
@@ -174,6 +166,7 @@ namespace DustEngine
                 }
             }
         }
+#endif
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -203,4 +196,3 @@ namespace DustEngine
         }
     }
 }
-#endif

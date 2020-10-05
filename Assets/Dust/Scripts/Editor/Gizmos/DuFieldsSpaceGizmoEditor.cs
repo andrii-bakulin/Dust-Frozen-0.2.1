@@ -3,8 +3,9 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuFieldsSpaceGizmo)), CanEditMultipleObjects]
-    public class DuFieldsSpaceGizmoEditor : DuGizmoEditor
+    [CustomEditor(typeof(DuFieldsSpaceGizmo))]
+    [CanEditMultipleObjects]
+    public class DuFieldsSpaceGizmoEditor : DuGizmoObjectEditor
     {
         private DuProperty m_FieldsSpace;
 
@@ -20,6 +21,16 @@ namespace DustEngine.DustEditor
         private DuProperty m_ColorVisible;
         private DuProperty m_ColorSize;
         private DuProperty m_ColorAllowTransparent;
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        [MenuItem("Dust/Gizmos/Fields Space")]
+        public static void AddComponentToSelectedObjects()
+        {
+            AddGizmoToSelectedOrNewObject(typeof(DuFieldsSpaceGizmo));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         void OnEnable()
         {

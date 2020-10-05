@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-#if UNITY_EDITOR
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Gizmos/Trigger Gizmo")]
@@ -127,14 +126,6 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        [MenuItem("Dust/Gizmos/Trigger")]
-        public static void AddComponentToSelectedObjects()
-        {
-            AddGizmoToSelectedOrNewObject(typeof(DuTriggerGizmo));
-        }
-
-        //--------------------------------------------------------------------------------------------------------------
-
         void OnEnable()
         {
             if (isEditorUpdatesEnabled)
@@ -196,6 +187,7 @@ namespace DustEngine
             return "Trigger";
         }
 
+#if UNITY_EDITOR
         protected override void DrawGizmos()
         {
             Gizmos.matrix = transform.localToWorldMatrix;
@@ -253,6 +245,7 @@ namespace DustEngine
 
             DustGUIRuntime.ForcedRedrawSceneView();
         }
+#endif
 
         void Reset()
         {
@@ -286,4 +279,3 @@ namespace DustEngine
         }
     }
 }
-#endif

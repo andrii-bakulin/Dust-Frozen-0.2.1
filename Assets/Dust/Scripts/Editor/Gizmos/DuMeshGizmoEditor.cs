@@ -3,13 +3,24 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuMeshGizmo)), CanEditMultipleObjects]
-    public class DuMeshGizmoEditor : DuGizmoEditor
+    [CustomEditor(typeof(DuMeshGizmo))]
+    [CanEditMultipleObjects]
+    public class DuMeshGizmoEditor : DuGizmoObjectEditor
     {
         private DuProperty m_Mesh;
         private DuProperty m_Position;
         private DuProperty m_Rotation;
         private DuProperty m_Scale;
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        [MenuItem("Dust/Gizmos/Mesh")]
+        public static void AddComponentToSelectedObjects()
+        {
+            AddGizmoToSelectedOrNewObject(typeof(DuMeshGizmo));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         void OnEnable()
         {

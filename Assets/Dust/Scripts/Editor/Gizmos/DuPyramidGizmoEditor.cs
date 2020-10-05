@@ -3,14 +3,25 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuPyramidGizmo)), CanEditMultipleObjects]
-    public class DuPyramidGizmoEditor : DuGizmoEditor
+    [CustomEditor(typeof(DuPyramidGizmo))]
+    [CanEditMultipleObjects]
+    public class DuPyramidGizmoEditor : DuGizmoObjectEditor
     {
         private DuProperty m_Radius;
         private DuProperty m_Height;
         private DuProperty m_Faces;
         private DuProperty m_Center;
         private DuProperty m_Direction;
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        [MenuItem("Dust/Gizmos/Pyramid")]
+        public static void AddComponentToSelectedObjects()
+        {
+            AddGizmoToSelectedOrNewObject(typeof(DuPyramidGizmo));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         void OnEnable()
         {
