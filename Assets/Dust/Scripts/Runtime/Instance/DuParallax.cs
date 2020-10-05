@@ -121,16 +121,6 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-#if UNITY_EDITOR
-        [MenuItem("Dust/Instance/Parallax")]
-        public static void AddComponentToSelected()
-        {
-            AddComponentToSelectedOrNewObject("Parallax", typeof(DuParallax));
-        }
-#endif
-
-        //--------------------------------------------------------------------------------------------------------------
-
         void Update()
         {
             if (parallaxControl == ParallaxControl.ParallaxController)
@@ -264,7 +254,7 @@ namespace DustEngine
             UpdateState(0f);
         }
 
-        void DestroyAllInstances()
+        private void DestroyAllInstances()
         {
             for (int i = 0; i < this.transform.childCount;)
             {

@@ -14,6 +14,18 @@ namespace DustEngine.DustEditor
 
         private DuProperty m_UpdateMode;
 
+        //--------------------------------------------------------------------------------------------------------------
+
+#if UNITY_EDITOR
+        [MenuItem("Dust/Instance/Parallax Controller")]
+        public static void AddComponentToSelectedObjects()
+        {
+            AddComponentToSelectedOrNewObject("Parallax Controller", typeof(DuParallaxController));
+        }
+#endif
+
+        //--------------------------------------------------------------------------------------------------------------
+
         void OnEnable()
         {
             m_ParallaxControl = FindProperty("m_ParallaxControl", "Parallax Control");

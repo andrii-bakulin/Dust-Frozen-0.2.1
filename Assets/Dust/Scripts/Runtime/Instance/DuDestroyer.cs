@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
 namespace DustEngine
 {
@@ -73,17 +72,7 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-#if UNITY_EDITOR
-        [MenuItem("Dust/Instance/Destroyer")]
-        public static void AddComponentToSelectedObjects()
-        {
-            AddComponentToSelectedOrNewObject("Destroyer", typeof(DuDestroyer));
-        }
-#endif
-
-        //--------------------------------------------------------------------------------------------------------------
-
-        void Start()
+        private void Start()
         {
             switch (destroyMode)
             {
@@ -105,7 +94,7 @@ namespace DustEngine
             }
         }
 
-        void Update()
+        private void Update()
         {
             switch (destroyMode)
             {
@@ -133,7 +122,7 @@ namespace DustEngine
             }
         }
 
-        bool IsInsideVolume()
+        protected bool IsInsideVolume()
         {
             Vector3 pos = transform.position;
             Vector3 halfSize = volumeSize / 2f;
@@ -151,7 +140,7 @@ namespace DustEngine
         }
 
 #if UNITY_EDITOR
-        void OnDrawGizmosSelected()
+        private void OnDrawGizmosSelected()
         {
             switch (destroyMode)
             {

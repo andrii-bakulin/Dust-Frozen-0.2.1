@@ -25,6 +25,18 @@ namespace DustEngine.DustEditor
         private DuProperty m_SpawnOnAwake;
         private DuProperty m_AllowMultiSpawn;
 
+        //--------------------------------------------------------------------------------------------------------------
+
+#if UNITY_EDITOR
+        [MenuItem("Dust/Instance/Spawner")]
+        public static void AddComponentToSelectedObjects()
+        {
+            AddComponentToSelectedOrNewObject("Spawner", typeof(DuSpawner));
+        }
+#endif
+
+        //--------------------------------------------------------------------------------------------------------------
+
         void OnEnable()
         {
             m_SpawnPointMode = FindProperty("m_SpawnPointMode", "Spawn Point Mode");

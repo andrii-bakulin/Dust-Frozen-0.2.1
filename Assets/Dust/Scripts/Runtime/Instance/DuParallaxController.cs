@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
 
 namespace DustEngine
 {
@@ -57,16 +56,6 @@ namespace DustEngine
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         private float m_OffsetDynamic;
-
-        //--------------------------------------------------------------------------------------------------------------
-
-#if UNITY_EDITOR
-        [MenuItem("Dust/Instance/Parallax Controller")]
-        public static void AddComponentToSelectedObjects()
-        {
-            AddComponentToSelectedOrNewObject("Parallax Controller", typeof(DuParallaxController));
-        }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
 

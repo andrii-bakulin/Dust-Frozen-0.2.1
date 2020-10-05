@@ -16,6 +16,18 @@ namespace DustEngine.DustEditor
         private DuProperty m_VolumeCenter;
         private DuProperty m_VolumeSize;
 
+        //--------------------------------------------------------------------------------------------------------------
+
+#if UNITY_EDITOR
+        [MenuItem("Dust/Instance/Destroyer")]
+        public static void AddComponentToSelectedObjects()
+        {
+            AddComponentToSelectedOrNewObject("Destroyer", typeof(DuDestroyer));
+        }
+#endif
+
+        //--------------------------------------------------------------------------------------------------------------
+
         void OnEnable()
         {
             m_DestroyMode = FindProperty("m_DestroyMode", "Destroy Mode");

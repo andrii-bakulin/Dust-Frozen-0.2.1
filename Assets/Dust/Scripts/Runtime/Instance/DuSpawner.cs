@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 namespace DustEngine
 {
@@ -182,17 +181,7 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-#if UNITY_EDITOR
-        [MenuItem("Dust/Instance/Spawner")]
-        public static void AddComponentToSelectedObjects()
-        {
-            AddComponentToSelectedOrNewObject("Spawner", typeof(DuSpawner));
-        }
-#endif
-
-        //--------------------------------------------------------------------------------------------------------------
-
-        void Awake()
+        private void Awake()
         {
             if (spawnOnAwake)
                 Spawn();
@@ -200,7 +189,7 @@ namespace DustEngine
             m_SpawnTimerLimit = GetDelayLimit();
         }
 
-        void Update()
+        private void Update()
         {
             m_SpawnTimer += Time.deltaTime;
 
@@ -309,7 +298,7 @@ namespace DustEngine
             return obj;
         }
 
-        float GetDelayLimit()
+        private float GetDelayLimit()
         {
             float delay = 0f;
 
