@@ -15,7 +15,7 @@ namespace DustEngine.DustEditor
             DuPopupButtons.AddFactoryMachine(typeof(DuTimeFactoryMachine), "Time");
         }
 
-        [MenuItem("Dust/Factory/Machines/Time Transform")]
+        [MenuItem("Dust/Factory/Machines/Time")]
         public static void AddComponent()
         {
             AddFactoryMachineComponentByType(typeof(DuTimeFactoryMachine));

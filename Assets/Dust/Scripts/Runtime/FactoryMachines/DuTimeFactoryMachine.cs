@@ -2,7 +2,7 @@
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Factory/Machines/Time Transform Machine")]
+    [AddComponentMenu("Dust/Factory/Machines/Time Machine")]
     public class DuTimeFactoryMachine : DuPRSFactoryMachine
     {
         private float m_TimeSinceStart;
