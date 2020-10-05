@@ -22,7 +22,7 @@ namespace DustEngine.DustEditor
         private DuProperty m_StartPosition;
         private DuProperty m_Size;
 
-        private DuProperty m_ColorMode;
+        private DuProperty m_AxisColorMode;
         private DuProperty m_ShowStartPoint;
 
         //--------------------------------------------------------------------------------------------------------------
@@ -43,7 +43,7 @@ namespace DustEngine.DustEditor
             m_StartPosition = FindProperty("m_StartPosition", "Position Offset");
             m_Size = FindProperty("m_Size", "Size");
 
-            m_ColorMode = FindProperty("m_ColorMode", "Color Mode");
+            m_AxisColorMode = FindProperty("m_AxisColorMode", "Axis Color Mode");
             m_ShowStartPoint = FindProperty("m_ShowStartPoint", "Show Start Point");
         }
 
@@ -93,8 +93,8 @@ namespace DustEngine.DustEditor
 
             Space();
 
-            PropertyField(m_ColorMode);
-            PropertyFieldOrHide(m_Color, (DuArrowGizmo.AxisColorMode) m_ColorMode.enumValueIndex != DuArrowGizmo.AxisColorMode.Custom);
+            PropertyField(m_AxisColorMode);
+            PropertyFieldOrHide(m_Color, (DuArrowGizmo.AxisColorMode) m_AxisColorMode.enumValueIndex != DuArrowGizmo.AxisColorMode.Custom);
             PropertyField(m_GizmoVisibility);
             PropertyField(m_ShowStartPoint);
 
