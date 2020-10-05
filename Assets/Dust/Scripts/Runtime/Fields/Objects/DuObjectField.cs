@@ -35,11 +35,6 @@ namespace DustEngine
             return true;
         }
 
-        public override Color GetFieldColor(DuField.Point fieldPoint, float powerByField)
-        {
-            return GetFieldColorFromRemapping(remapping, powerByField);
-        }
-
 #if UNITY_EDITOR
         public override bool IsHasFieldColorPreview()
         {

@@ -60,29 +60,35 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Power
 
-        public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
+        public override void Calculate(DuField.Point fieldPoint, out DuField.Result result, bool calculateColor)
         {
-            if (DuMath.IsZero(radius) || DuMath.IsZero(thickness))
-                return remapping.MapValue(0f);
+            float offset = 0f;
 
-            Vector3 localPosition = transform.worldToLocalMatrix.MultiplyPoint(fieldPoint.inPosition);
+            if (DuMath.IsNotZero(radius) && DuMath.IsNotZero(thickness))
+            {
+                Vector3 localPosition = transform.worldToLocalMatrix.MultiplyPoint(fieldPoint.inPosition);
 
-            // Convert to [X+]-axis-space by direction
-            localPosition = DuAxisDirection.ConvertFromDirectionToAxisXPlus(direction, localPosition);
+                // Convert to [X+]-axis-space by direction
+                localPosition = DuAxisDirection.ConvertFromDirectionToAxisXPlus(direction, localPosition);
 
-            // Convert 3D point to 2D (x; y-&-z) -> (x; y)
-            Vector2 localPoint2D = new Vector2(localPosition.x, DuMath.Length(localPosition.y, localPosition.z));
-            localPoint2D = localPoint2D.abs();
+                // Convert 3D point to 2D (x; y-&-z) -> (x; y)
+                Vector2 localPoint2D = new Vector2(localPosition.x, DuMath.Length(localPosition.y, localPosition.z));
+                localPoint2D = localPoint2D.abs();
 
-            // Move center to torus radius (center of thickness-radius)
-            localPoint2D.y -= radius;
+                // Move center to torus radius (center of thickness-radius)
+                localPoint2D.y -= radius;
 
-            float distanceToPoint = localPoint2D.magnitude;
-            float distanceToEdge = thickness;
+                float distanceToPoint = localPoint2D.magnitude;
+                float distanceToEdge = thickness;
 
-            float offset = 1f - distanceToPoint / distanceToEdge;
+                offset = 1f - distanceToPoint / distanceToEdge;
+            }
 
-            return remapping.MapValue(offset);
+            result.fieldPower = remapping.MapValue(offset);
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            result.fieldColor = calculateColor ? GetFieldColorFromRemapping(remapping, result.fieldPower) : Color.clear;
         }
 
         //--------------------------------------------------------------------------------------------------------------

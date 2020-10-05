@@ -60,54 +60,55 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Power
 
-        public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
+        public override void Calculate(DuField.Point fieldPoint, out DuField.Result result, bool calculateColor)
         {
-            InitCalcData();
+            if (Dust.IsNull(m_Calc))
+            {
+                Vector3 halfSize = size / 2f;
 
-            if (DuMath.IsZero(size.x) || DuMath.IsZero(size.y) || DuMath.IsZero(size.z))
-                return remapping.MapValue(0f);
+                m_Calc = new Calc();
 
-            Vector3 localPosition = transform.worldToLocalMatrix.MultiplyPoint(fieldPoint.inPosition);
+                m_Calc.ray.origin = Vector3.zero;
+                m_Calc.planeX.Set3Points(new Vector3(halfSize.x, 0, 0), new Vector3(halfSize.x, halfSize.y, 0), new Vector3(halfSize.x, halfSize.y, halfSize.z));
+                m_Calc.planeY.Set3Points(new Vector3(0, halfSize.y, 0), new Vector3(0, halfSize.y, halfSize.z), new Vector3(halfSize.x, halfSize.y, halfSize.z));
+                m_Calc.planeZ.Set3Points(new Vector3(0, 0, halfSize.z), new Vector3(halfSize.x, 0, halfSize.z), new Vector3(halfSize.x, halfSize.y, halfSize.z));
+            }
 
-            float distanceToPoint = localPosition.magnitude;
-            float distanceToEdge = Mathf.Infinity;
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            m_Calc.ray.direction = DuVector3.Abs(localPosition);
+            float offset = 0f;
 
-            float distanceToPlane;
+            if (DuMath.IsNotZero(size.x) && DuMath.IsNotZero(size.y) && DuMath.IsNotZero(size.z))
+            {
+                Vector3 localPosition = transform.worldToLocalMatrix.MultiplyPoint(fieldPoint.inPosition);
 
-            if (m_Calc.planeX.Raycast(m_Calc.ray, out distanceToPlane) && distanceToPlane > 0)
-                distanceToEdge = Mathf.Min(distanceToEdge, distanceToPlane);
+                float distanceToPoint = localPosition.magnitude;
+                float distanceToEdge = Mathf.Infinity;
 
-            if (m_Calc.planeY.Raycast(m_Calc.ray, out distanceToPlane) && distanceToPlane > 0)
-                distanceToEdge = Mathf.Min(distanceToEdge, distanceToPlane);
+                m_Calc.ray.direction = DuVector3.Abs(localPosition);
 
-            if (m_Calc.planeZ.Raycast(m_Calc.ray, out distanceToPlane) && distanceToPlane > 0)
-                distanceToEdge = Mathf.Min(distanceToEdge, distanceToPlane);
+                float distanceToPlane;
 
-            if (DuMath.IsZero(distanceToEdge))
-                return remapping.MapValue(0f); // but this never should execute!
+                if (m_Calc.planeX.Raycast(m_Calc.ray, out distanceToPlane) && distanceToPlane > 0)
+                    distanceToEdge = Mathf.Min(distanceToEdge, distanceToPlane);
 
-            float offset = 1f - distanceToPoint / distanceToEdge;
-            return remapping.MapValue(offset);
+                if (m_Calc.planeY.Raycast(m_Calc.ray, out distanceToPlane) && distanceToPlane > 0)
+                    distanceToEdge = Mathf.Min(distanceToEdge, distanceToPlane);
+
+                if (m_Calc.planeZ.Raycast(m_Calc.ray, out distanceToPlane) && distanceToPlane > 0)
+                    distanceToEdge = Mathf.Min(distanceToEdge, distanceToPlane);
+
+                offset = DuMath.IsNotZero(distanceToEdge) ? (1f - distanceToPoint / distanceToEdge) : 0f;
+            }
+
+            result.fieldPower = remapping.MapValue(offset);
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            result.fieldColor = calculateColor ? GetFieldColorFromRemapping(remapping, result.fieldPower) : Color.clear;
         }
 
         //--------------------------------------------------------------------------------------------------------------
-
-        internal void InitCalcData()
-        {
-            if (Dust.IsNotNull(m_Calc))
-                return;
-
-            Vector3 halfSize = size / 2f;
-
-            m_Calc = new Calc();
-
-            m_Calc.ray.origin = Vector3.zero;
-            m_Calc.planeX.Set3Points(new Vector3(halfSize.x, 0, 0), new Vector3(halfSize.x, halfSize.y, 0), new Vector3(halfSize.x, halfSize.y, halfSize.z));
-            m_Calc.planeY.Set3Points(new Vector3(0, halfSize.y, 0), new Vector3(0, halfSize.y, halfSize.z), new Vector3(halfSize.x, halfSize.y, halfSize.z));
-            m_Calc.planeZ.Set3Points(new Vector3(0, 0, halfSize.z), new Vector3(halfSize.x, 0, halfSize.z), new Vector3(halfSize.x, halfSize.y, halfSize.z));
-        }
 
         public void ResetCalcData()
         {

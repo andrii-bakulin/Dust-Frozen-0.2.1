@@ -85,17 +85,20 @@ namespace DustEngine
             return "Scale " + timeScale.ToString("F2");
         }
 
-        //--------------------------------------------------------------------------------------------------------------
-        // Power
-
-        public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
+        public override void Calculate(DuField.Point fieldPoint, out DuField.Result result, bool calculateColor)
         {
             float globalOffset = m_OffsetDynamic + offset * timeScale;
 
             float power = GetPowerByTimeMode(timeMode, globalOffset);
 
-            return remapping.MapValue(power);
+            result.fieldPower = remapping.MapValue(power);
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            result.fieldColor = calculateColor ? GetFieldColorFromRemapping(remapping, result.fieldPower) : Color.clear;
         }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         public float GetPowerByTimeMode(TimeMode mode, float timeOffset)
         {
@@ -143,11 +146,6 @@ namespace DustEngine
         public override bool IsAllowCalculateFieldColor()
         {
             return true;
-        }
-
-        public override Color GetFieldColor(DuField.Point fieldPoint, float powerByField)
-        {
-            return GetFieldColorFromRemapping(remapping, powerByField);
         }
 
 #if UNITY_EDITOR

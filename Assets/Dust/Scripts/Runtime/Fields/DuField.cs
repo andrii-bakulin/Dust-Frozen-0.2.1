@@ -20,6 +20,12 @@ namespace DustEngine
             public Color endColor; // color calculated by fieldsMap
         }
 
+        public struct Result
+        {
+            public float fieldPower; // power calculated by field
+            public Color fieldColor; // color calculated by field, Color.alpha used as power of color
+        }
+
         //--------------------------------------------------------------------------------------------------------------
 
         private void Start()
@@ -34,18 +40,11 @@ namespace DustEngine
 
         public abstract string FieldDynamicHint();
 
-        //--------------------------------------------------------------------------------------------------------------
-        // Power
+        public abstract void Calculate(DuField.Point fieldPoint, out DuField.Result result, bool calculateColor);
 
-        public abstract float GetPowerForFieldPoint(DuField.Point fieldPoint);
-
-        //--------------------------------------------------------------------------------------------------------------
-        // Color
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         public abstract bool IsAllowCalculateFieldColor();
-
-        /// <returns>Color.alpha used as power of color</returns>
-        public abstract Color GetFieldColor(DuField.Point fieldPoint, float powerByField);
 
 #if UNITY_EDITOR
         public abstract bool IsHasFieldColorPreview();

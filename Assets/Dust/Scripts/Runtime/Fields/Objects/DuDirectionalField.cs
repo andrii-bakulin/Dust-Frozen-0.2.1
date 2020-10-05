@@ -69,31 +69,37 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Power
 
-        public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
+        public override void Calculate(DuField.Point fieldPoint, out DuField.Result result, bool calculateColor)
         {
-            if (DuMath.IsZero(length))
-                return remapping.MapValue(0f);
+            float offset = 0f;
 
-            Vector3 localPosition = transform.worldToLocalMatrix.MultiplyPoint(fieldPoint.inPosition);
-
-            float distanceToPoint;
-
-            switch (direction)
+            if (DuMath.IsNotZero(length))
             {
-                default:
-                case Axis6xDirection.XPlus:  distanceToPoint = -localPosition.x; break;
-                case Axis6xDirection.XMinus: distanceToPoint = +localPosition.x; break;
-                case Axis6xDirection.YPlus:  distanceToPoint = -localPosition.y; break;
-                case Axis6xDirection.YMinus: distanceToPoint = +localPosition.y; break;
-                case Axis6xDirection.ZPlus:  distanceToPoint = -localPosition.z; break;
-                case Axis6xDirection.ZMinus: distanceToPoint = +localPosition.z; break;
+                Vector3 localPosition = transform.worldToLocalMatrix.MultiplyPoint(fieldPoint.inPosition);
+
+                float distanceToPoint;
+
+                switch (direction)
+                {
+                    default:
+                    case Axis6xDirection.XPlus:  distanceToPoint = -localPosition.x; break;
+                    case Axis6xDirection.XMinus: distanceToPoint = +localPosition.x; break;
+                    case Axis6xDirection.YPlus:  distanceToPoint = -localPosition.y; break;
+                    case Axis6xDirection.YMinus: distanceToPoint = +localPosition.y; break;
+                    case Axis6xDirection.ZPlus:  distanceToPoint = -localPosition.z; break;
+                    case Axis6xDirection.ZMinus: distanceToPoint = +localPosition.z; break;
+                }
+
+                float halfLength = length / 2f;
+
+                offset = 1f - DuMath.Fit(-halfLength, +halfLength, 0f, 1f, distanceToPoint);
             }
 
-            float halfLength = length / 2f;
+            result.fieldPower = remapping.MapValue(offset);
 
-            float offset = 1f - DuMath.Fit(-halfLength, +halfLength, 0f, 1f, distanceToPoint);
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            return remapping.MapValue(offset);
+            result.fieldColor = calculateColor ? GetFieldColorFromRemapping(remapping, result.fieldPower) : Color.clear;
         }
 
         //--------------------------------------------------------------------------------------------------------------

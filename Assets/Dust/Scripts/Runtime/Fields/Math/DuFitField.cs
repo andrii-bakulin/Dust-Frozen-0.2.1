@@ -82,9 +82,11 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Power
 
-        public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
+        public override void Calculate(DuField.Point fieldPoint, out DuField.Result result, bool calculateColor)
         {
-            return DuMath.Fit(minInput, maxInput, minOutput, maxOutput, fieldPoint.endPower);
+            result.fieldPower = DuMath.Fit(minInput, maxInput, minOutput, maxOutput, fieldPoint.endPower);
+
+            result.fieldColor = Color.clear;
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -93,11 +95,6 @@ namespace DustEngine
         public override bool IsAllowCalculateFieldColor()
         {
             return false;
-        }
-
-        public override Color GetFieldColor(DuField.Point fieldPoint, float powerByField)
-        {
-            return Color.magenta;
         }
 
 #if UNITY_EDITOR

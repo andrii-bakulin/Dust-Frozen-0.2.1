@@ -47,26 +47,19 @@ namespace DustEngine
             return "Power " + power.ToString("F2");
         }
 
-        //--------------------------------------------------------------------------------------------------------------
-        // Power
-
-        public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
+        public override void Calculate(DuField.Point fieldPoint, out DuField.Result result, bool calculateColor)
         {
-            return power;
+            result.fieldPower = power;
+
+            // Notice: ignore power in alpha, but used what user defined in editor
+            result.fieldColor = calculateColor ? color : Color.clear;
         }
 
         //--------------------------------------------------------------------------------------------------------------
-        // Color
 
         public override bool IsAllowCalculateFieldColor()
         {
             return true;
-        }
-
-        public override Color GetFieldColor(DuField.Point fieldPoint, float powerByField)
-        {
-            // Notice: ignore incoming powerByField value
-            return color;
         }
 
 #if UNITY_EDITOR

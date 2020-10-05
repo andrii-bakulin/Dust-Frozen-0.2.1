@@ -278,6 +278,8 @@ namespace DustEngine
             if (fields.Count == 0)
                 return false;
 
+            DuField.Result fieldResultData;
+
             foreach (FieldRecord fieldRecord in fields)
             {
                 // @WARNING!!! require sync code in: GetDynamicStateHashCode() + Calculate()
@@ -299,7 +301,7 @@ namespace DustEngine
                                          && fieldRecord.blendColorMode != FieldRecord.BlendColorMode.Ignore
                                          && fieldRecord.field.IsAllowCalculateFieldColor();
 
-                float fieldPower = fieldRecord.field.GetPowerForFieldPoint(fieldPoint);
+                fieldRecord.field.Calculate(fieldPoint, out fieldResultData, calculateColorNow);
 
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                 // Calculate Power
@@ -312,35 +314,35 @@ namespace DustEngine
                     {
                         default:
                         case FieldRecord.BlendPowerMode.Set:
-                            afterBlendPower = fieldPower;
+                            afterBlendPower = fieldResultData.fieldPower;
                             break;
 
                         case FieldRecord.BlendPowerMode.Add:
-                            afterBlendPower = fieldPoint.endPower + fieldPower;
+                            afterBlendPower = fieldPoint.endPower + fieldResultData.fieldPower;
                             break;
 
                         case FieldRecord.BlendPowerMode.Subtract:
-                            afterBlendPower = fieldPoint.endPower - fieldPower;
+                            afterBlendPower = fieldPoint.endPower - fieldResultData.fieldPower;
                             break;
 
                         case FieldRecord.BlendPowerMode.Multiply:
-                            afterBlendPower = fieldPoint.endPower * fieldPower;
+                            afterBlendPower = fieldPoint.endPower * fieldResultData.fieldPower;
                             break;
 
                         case FieldRecord.BlendPowerMode.Divide:
-                            afterBlendPower = DuMath.IsNotZero(fieldPower) ? fieldPoint.endPower / fieldPower : 0f;
+                            afterBlendPower = DuMath.IsNotZero(fieldResultData.fieldPower) ? fieldPoint.endPower / fieldResultData.fieldPower : 0f;
                             break;
 
                         case FieldRecord.BlendPowerMode.Avg:
-                            afterBlendPower = (fieldPoint.endPower + fieldPower) / 2f;
+                            afterBlendPower = (fieldPoint.endPower + fieldResultData.fieldPower) / 2f;
                             break;
 
                         case FieldRecord.BlendPowerMode.Min:
-                            afterBlendPower = Mathf.Min(fieldPoint.endPower, fieldPower);
+                            afterBlendPower = Mathf.Min(fieldPoint.endPower, fieldResultData.fieldPower);
                             break;
 
                         case FieldRecord.BlendPowerMode.Max:
-                            afterBlendPower = Mathf.Max(fieldPoint.endPower, fieldPower);
+                            afterBlendPower = Mathf.Max(fieldPoint.endPower, fieldResultData.fieldPower);
                             break;
                     }
 
@@ -352,38 +354,37 @@ namespace DustEngine
 
                 if (calculateColorNow)
                 {
-                    Color fieldColor = fieldRecord.field.GetFieldColor(fieldPoint, fieldPower);
                     Color blendedColor;
 
                     switch (fieldRecord.blendColorMode)
                     {
                         default:
                         case FieldRecord.BlendColorMode.Set:
-                            blendedColor = fieldColor;
+                            blendedColor = fieldResultData.fieldColor;
                             break;
 
                         case FieldRecord.BlendColorMode.Blend:
-                            blendedColor = DuColorBlend.AlphaBlend(fieldPoint.endColor, fieldColor);
+                            blendedColor = DuColorBlend.AlphaBlend(fieldPoint.endColor, fieldResultData.fieldColor);
                             break;
 
                         case FieldRecord.BlendColorMode.Add:
-                            blendedColor = DuColorBlend.Add(fieldPoint.endColor, fieldColor);
+                            blendedColor = DuColorBlend.Add(fieldPoint.endColor, fieldResultData.fieldColor);
                             break;
 
                         case FieldRecord.BlendColorMode.Subtract:
-                            blendedColor = DuColorBlend.Subtract(fieldPoint.endColor, fieldColor);
+                            blendedColor = DuColorBlend.Subtract(fieldPoint.endColor, fieldResultData.fieldColor);
                             break;
 
                         case FieldRecord.BlendColorMode.Multiply:
-                            blendedColor = DuColorBlend.Multiply(fieldPoint.endColor, fieldColor);
+                            blendedColor = DuColorBlend.Multiply(fieldPoint.endColor, fieldResultData.fieldColor);
                             break;
 
                         case FieldRecord.BlendColorMode.Min:
-                            blendedColor = DuColorBlend.MinAfterBlend(fieldPoint.endColor, fieldColor);
+                            blendedColor = DuColorBlend.MinAfterBlend(fieldPoint.endColor, fieldResultData.fieldColor);
                             break;
 
                         case FieldRecord.BlendColorMode.Max:
-                            blendedColor = DuColorBlend.MaxAfterBlend(fieldPoint.endColor,fieldColor);
+                            blendedColor = DuColorBlend.MaxAfterBlend(fieldPoint.endColor,fieldResultData.fieldColor);
                             break;
                     }
 

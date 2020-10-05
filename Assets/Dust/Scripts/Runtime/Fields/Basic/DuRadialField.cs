@@ -112,7 +112,7 @@ namespace DustEngine
         // *-----*                          *------*
         // 0'    A       B              C   D      360'
         //
-        public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
+        public override void Calculate(DuField.Point fieldPoint, out DuField.Result result, bool calculateColor)
         {
             Vector3 localPosition = transform.worldToLocalMatrix.MultiplyPoint(fieldPoint.inPosition);
 
@@ -158,9 +158,11 @@ namespace DustEngine
                 }
             }
 
+            result.fieldPower = remapping.MapValue(power);
+
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            return remapping.MapValue(power);
+            result.fieldColor = calculateColor ? GetFieldColorFromRemapping(remapping, result.fieldPower) : Color.clear;
         }
 
         //--------------------------------------------------------------------------------------------------------------

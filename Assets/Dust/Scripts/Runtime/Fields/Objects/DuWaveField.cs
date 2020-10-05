@@ -178,14 +178,18 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Power
 
-        public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
+        public override void Calculate(DuField.Point fieldPoint, out DuField.Result result, bool calculateColor)
         {
             Vector3 localPosition = transform.worldToLocalMatrix.MultiplyPoint(fieldPoint.inPosition);
 
             // Convert to Axis X+ (xp) space
             var xpLocalPosition = DuAxisDirection.ConvertFromDirectionToAxisXPlus(direction, localPosition);
 
-            return GetPowerForLocalPositionInAxisXPlus(xpLocalPosition);
+            result.fieldPower = GetPowerForLocalPositionInAxisXPlus(xpLocalPosition);
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            result.fieldColor = calculateColor ? GetFieldColorFromRemapping(remapping, result.fieldPower) : Color.clear;
         }
 
         internal float GetPowerForLocalPositionInAxisXPlus(Vector3 xpLocalPosition)

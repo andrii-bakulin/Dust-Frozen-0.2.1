@@ -101,29 +101,30 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
-        // Power
 
-        public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
+        public override void Calculate(DuField.Point fieldPoint, out DuField.Result result, bool calculateColor)
         {
-            return shape.Evaluate(RecalculateValue(fieldPoint.endPower));
+            result.fieldPower = shape.Evaluate(RecalculateValue(fieldPoint.endPower));
+
+            if (calculateColor)
+            {
+                result.fieldColor = fieldPoint.endColor;
+                result.fieldColor.r = shape.Evaluate(RecalculateValue(result.fieldColor.r));
+                result.fieldColor.g = shape.Evaluate(RecalculateValue(result.fieldColor.g));
+                result.fieldColor.b = shape.Evaluate(RecalculateValue(result.fieldColor.b));
+                result.fieldColor.Clamp01();
+            }
+            else
+            {
+                result.fieldColor = Color.clear;
+            }
         }
 
         //--------------------------------------------------------------------------------------------------------------
-        // Color
 
         public override bool IsAllowCalculateFieldColor()
         {
             return true;
-        }
-
-        public override Color GetFieldColor(DuField.Point fieldPoint, float powerByField)
-        {
-            Color color = fieldPoint.endColor;
-            color.r = shape.Evaluate(RecalculateValue(color.r));
-            color.g = shape.Evaluate(RecalculateValue(color.g));
-            color.b = shape.Evaluate(RecalculateValue(color.b));
-            color.Clamp01();
-            return color;
         }
 
 #if UNITY_EDITOR

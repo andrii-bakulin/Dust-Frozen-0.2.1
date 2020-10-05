@@ -195,101 +195,102 @@ namespace DustEngine
             return hint;
         }
 
-        //--------------------------------------------------------------------------------------------------------------
-        // Power
-
-        public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
+        public override void Calculate(DuField.Point fieldPoint, out DuField.Result result, bool calculateColor)
         {
-            if (!powerEnabled)
-                return 0f;
+            Vector3 localPoint = transform.worldToLocalMatrix.MultiplyPoint(fieldPoint.inPosition);
 
-            Vector3 point = transform.worldToLocalMatrix.MultiplyPoint(fieldPoint.inPosition);
-
-            point = DuVector3.Abs(point);
-
-            float value = 0f;
-
-            if (powerUseAxisX && powerUseAxisY && powerUseAxisZ)
+            if (powerEnabled)
             {
-                switch (powerAggregate)
+                localPoint = DuVector3.Abs(localPoint);
+
+                float value = 0f;
+
+                if (powerUseAxisX && powerUseAxisY && powerUseAxisZ)
                 {
-                    default:
-                    case AggregateMode.Avg: value = (point.x + point.y + point.z) / 3f; break;
-                    case AggregateMode.Min: value = Mathf.Min(Mathf.Min(point.x, point.y), point.z); break;
-                    case AggregateMode.Max: value = Mathf.Max(Mathf.Max(point.x, point.y), point.z); break;
-                    case AggregateMode.Sum: value = point.x + point.y + point.z; break;
+                    switch (powerAggregate)
+                    {
+                        default:
+                        case AggregateMode.Avg: value = (localPoint.x + localPoint.y + localPoint.z) / 3f; break;
+                        case AggregateMode.Min: value = Mathf.Min(Mathf.Min(localPoint.x, localPoint.y), localPoint.z); break;
+                        case AggregateMode.Max: value = Mathf.Max(Mathf.Max(localPoint.x, localPoint.y), localPoint.z); break;
+                        case AggregateMode.Sum: value = localPoint.x + localPoint.y + localPoint.z; break;
+                    }
                 }
-            }
-            else if (powerUseAxisX && powerUseAxisY)
-            {
-                switch (powerAggregate)
+                else if (powerUseAxisX && powerUseAxisY)
                 {
-                    default:
-                    case AggregateMode.Avg: value = (point.x + point.y) / 2f; break;
-                    case AggregateMode.Min: value = Mathf.Min(point.x, point.y); break;
-                    case AggregateMode.Max: value = Mathf.Max(point.x, point.y); break;
-                    case AggregateMode.Sum: value = point.x + point.y; break;
+                    switch (powerAggregate)
+                    {
+                        default:
+                        case AggregateMode.Avg: value = (localPoint.x + localPoint.y) / 2f; break;
+                        case AggregateMode.Min: value = Mathf.Min(localPoint.x, localPoint.y); break;
+                        case AggregateMode.Max: value = Mathf.Max(localPoint.x, localPoint.y); break;
+                        case AggregateMode.Sum: value = localPoint.x + localPoint.y; break;
+                    }
                 }
-            }
-            else if (powerUseAxisY && powerUseAxisZ)
-            {
-                switch (powerAggregate)
+                else if (powerUseAxisY && powerUseAxisZ)
                 {
-                    default:
-                    case AggregateMode.Avg: value = (point.y + point.z) / 2f; break;
-                    case AggregateMode.Min: value = Mathf.Min(point.y, point.z); break;
-                    case AggregateMode.Max: value = Mathf.Max(point.y, point.z); break;
-                    case AggregateMode.Sum: value = point.y + point.z; break;
+                    switch (powerAggregate)
+                    {
+                        default:
+                        case AggregateMode.Avg: value = (localPoint.y + localPoint.z) / 2f; break;
+                        case AggregateMode.Min: value = Mathf.Min(localPoint.y, localPoint.z); break;
+                        case AggregateMode.Max: value = Mathf.Max(localPoint.y, localPoint.z); break;
+                        case AggregateMode.Sum: value = localPoint.y + localPoint.z; break;
+                    }
                 }
-            }
-            else if (powerUseAxisX && powerUseAxisZ)
-            {
-                switch (powerAggregate)
+                else if (powerUseAxisX && powerUseAxisZ)
                 {
-                    default:
-                    case AggregateMode.Avg: value = (point.x + point.z) / 2f; break;
-                    case AggregateMode.Min: value = Mathf.Min(point.x, point.z); break;
-                    case AggregateMode.Max: value = Mathf.Max(point.x, point.z); break;
-                    case AggregateMode.Sum: value = point.x + point.z; break;
+                    switch (powerAggregate)
+                    {
+                        default:
+                        case AggregateMode.Avg: value = (localPoint.x + localPoint.z) / 2f; break;
+                        case AggregateMode.Min: value = Mathf.Min(localPoint.x, localPoint.z); break;
+                        case AggregateMode.Max: value = Mathf.Max(localPoint.x, localPoint.z); break;
+                        case AggregateMode.Sum: value = localPoint.x + localPoint.z; break;
+                    }
                 }
+                else if (powerUseAxisX)
+                {
+                    value = localPoint.x;
+                }
+                else if (powerUseAxisY)
+                {
+                    value = localPoint.y;
+                }
+                else if (powerUseAxisZ)
+                {
+                    value = localPoint.z;
+                }
+
+                result.fieldPower = RepackValueByShape(powerShape, value * powerScale, powerMin, powerMax);
             }
-            else if (powerUseAxisX)
+            else
             {
-                value = point.x;
-            }
-            else if (powerUseAxisY)
-            {
-                value = point.y;
-            }
-            else if (powerUseAxisZ)
-            {
-                value = point.z;
+                result.fieldPower = 0f;
             }
 
-            return RepackValueByShape(powerShape, value * powerScale, powerMin, powerMax);
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            if (calculateColor && colorEnabled && DuMath.IsNotZero(colorScale))
+            {
+                result.fieldColor = localPoint.ToColor();
+
+                result.fieldColor.r = RepackValueByShape(colorShape, result.fieldColor.r / colorScale, 0f, 1f);
+                result.fieldColor.g = RepackValueByShape(colorShape, result.fieldColor.g / colorScale, 0f, 1f);
+                result.fieldColor.b = RepackValueByShape(colorShape, result.fieldColor.b / colorScale, 0f, 1f);
+                result.fieldColor.a = 1f;
+            }
+            else
+            {
+                result.fieldColor = Color.clear;
+            }
         }
 
         //--------------------------------------------------------------------------------------------------------------
-        // Color
 
         public override bool IsAllowCalculateFieldColor()
         {
             return colorEnabled;
-        }
-
-        public override Color GetFieldColor(DuField.Point fieldPoint, float powerByField)
-        {
-            if (DuMath.IsZero(colorScale))
-                return Color.black;
-
-            Color color = transform.worldToLocalMatrix.MultiplyPoint(fieldPoint.inPosition).ToColor();
-
-            color.r = RepackValueByShape(colorShape, color.r / colorScale, 0f, 1f);
-            color.g = RepackValueByShape(colorShape, color.g / colorScale, 0f, 1f);
-            color.b = RepackValueByShape(colorShape, color.b / colorScale, 0f, 1f);
-            color.a = 1f;
-
-            return color;
         }
 
 #if UNITY_EDITOR

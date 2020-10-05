@@ -136,17 +136,32 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Power
 
-        public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
+        public override void Calculate(DuField.Point fieldPoint, out DuField.Result result, bool calculateColor)
         {
-            float value = fieldPoint.endPower;
+            result.fieldPower = fieldPoint.endPower;
 
             if (powerClampMode == ClampMode.MinAndMax || powerClampMode == ClampMode.MinOnly)
-                value = Mathf.Max(value, powerClampMin);
+                result.fieldPower = Mathf.Max(result.fieldPower, powerClampMin);
 
             if (powerClampMode == ClampMode.MinAndMax || powerClampMode == ClampMode.MaxOnly)
-                value = Mathf.Min(value, powerClampMax);
+                result.fieldPower = Mathf.Min(result.fieldPower, powerClampMax);
 
-            return value;
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            if (calculateColor)
+            {
+                result.fieldColor = fieldPoint.endColor;
+
+                if (colorClampMode == ClampMode.MinAndMax || colorClampMode == ClampMode.MinOnly)
+                    result.fieldColor = DuColor.Max(result.fieldColor, colorClampMin);
+
+                if (colorClampMode == ClampMode.MinAndMax || colorClampMode == ClampMode.MaxOnly)
+                    result.fieldColor = DuColor.Min(result.fieldColor, colorClampMax);
+            }
+            else
+            {
+                result.fieldColor = Color.clear;
+            }
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -155,19 +170,6 @@ namespace DustEngine
         public override bool IsAllowCalculateFieldColor()
         {
             return true;
-        }
-
-        public override Color GetFieldColor(DuField.Point fieldPoint, float powerByField)
-        {
-            Color color = fieldPoint.endColor;
-
-            if (colorClampMode == ClampMode.MinAndMax || colorClampMode == ClampMode.MinOnly)
-                color = DuColor.Max(color, colorClampMin);
-
-            if (colorClampMode == ClampMode.MinAndMax || colorClampMode == ClampMode.MaxOnly)
-                color = DuColor.Min(color, colorClampMax);
-
-            return color;
         }
 
 #if UNITY_EDITOR

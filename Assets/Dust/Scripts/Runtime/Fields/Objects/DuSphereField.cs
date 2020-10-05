@@ -42,19 +42,25 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Power
 
-        public override float GetPowerForFieldPoint(DuField.Point fieldPoint)
+        public override void Calculate(DuField.Point fieldPoint, out DuField.Result result, bool calculateColor)
         {
-            if (DuMath.IsZero(radius))
-                return remapping.MapValue(0f);
+            float offset = 0f;
 
-            Vector3 localPosition = transform.worldToLocalMatrix.MultiplyPoint(fieldPoint.inPosition);
+            if (DuMath.IsNotZero(radius))
+            {
+                Vector3 localPosition = transform.worldToLocalMatrix.MultiplyPoint(fieldPoint.inPosition);
 
-            float distanceToPoint = localPosition.magnitude;
-            float distanceToEdge = radius;
+                float distanceToPoint = localPosition.magnitude;
+                float distanceToEdge = radius;
 
-            float offset = 1f - distanceToPoint / distanceToEdge;
+                offset = 1f - distanceToPoint / distanceToEdge;
+            }
 
-            return remapping.MapValue(offset);
+            result.fieldPower = remapping.MapValue(offset);
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            result.fieldColor = calculateColor ? GetFieldColorFromRemapping(remapping, result.fieldPower) : Color.clear;
         }
 
         //--------------------------------------------------------------------------------------------------------------
