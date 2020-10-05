@@ -117,7 +117,7 @@ namespace DustEngine.DustEditor
             var showColumnPower = DuFieldsMapEditor.ColumnVisibility.Auto;
             var showColumnColor = DuFieldsMapEditor.ColumnVisibility.Auto;
 
-            if (colorImpactSource != DuExtendedFactoryMachine.ColorImpactSource.FieldsMapColor)
+            if (!m_ColorImpactEnabled.IsTrue || colorImpactSource != DuExtendedFactoryMachine.ColorImpactSource.FieldsMapColor)
                 showColumnColor = DuFieldsMapEditor.ColumnVisibility.ForcedHide;
 
             m_FieldsMapEditor.OnInspectorGUI(showColumnPower, showColumnColor);
