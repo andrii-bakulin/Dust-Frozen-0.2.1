@@ -6,7 +6,6 @@ namespace DustEngine.DustEditor
     public abstract class DuExtendedFactoryMachineEditor : DuFactoryMachineEditor
     {
         protected DuProperty m_ValueImpactEnabled;
-        protected DuProperty m_ValueImpactSource;
         protected DuProperty m_ValueImpactIntensity;
         protected DuProperty m_ValueBlendMode;
         protected DuProperty m_ValueClampEnabled;
@@ -14,7 +13,6 @@ namespace DustEngine.DustEditor
         protected DuProperty m_ValueClampMax;
 
         protected DuProperty m_ColorImpactEnabled;
-        protected DuProperty m_ColorImpactSource;
         protected DuProperty m_ColorImpactIntensity;
         protected DuProperty m_ColorBlendMode;
 
@@ -27,7 +25,6 @@ namespace DustEngine.DustEditor
             base.OnEnableFactoryMachine();
 
             m_ValueImpactEnabled = FindProperty("m_ValueImpactEnabled", "Enabled");
-            m_ValueImpactSource = FindProperty("m_ValueImpactSource", "Source");
             m_ValueImpactIntensity = FindProperty("m_ValueImpactIntensity", "Intensity");
             m_ValueBlendMode = FindProperty("m_ValueBlendMode", "Blend Mode");
             m_ValueClampEnabled = FindProperty("m_ValueClampEnabled", "Clamp");
@@ -35,21 +32,11 @@ namespace DustEngine.DustEditor
             m_ValueClampMax = FindProperty("m_ValueClampMax", "Max");
 
             m_ColorImpactEnabled = FindProperty("m_ColorImpactEnabled", "Enabled");
-            m_ColorImpactSource = FindProperty("m_ColorImpactSource", "Source");
             m_ColorImpactIntensity = FindProperty("m_ColorImpactIntensity", "Intensity");
             m_ColorBlendMode = FindProperty("m_ColorBlendMode", "Blend Mode");
 
             m_FieldsMapEditor = new DuFieldsMapEditor(this, serializedObject.FindProperty("m_FieldsMap"), (target as DuExtendedFactoryMachine).fieldsMap);
         }
-
-        //--------------------------------------------------------------------------------------------------------------
-        // Helper
-
-        private DuExtendedFactoryMachine.ValueImpactSource valueImpactSource
-            => (DuExtendedFactoryMachine.ValueImpactSource) m_ValueImpactSource.enumValueIndex;
-
-        private DuExtendedFactoryMachine.ColorImpactSource colorImpactSource
-            => (DuExtendedFactoryMachine.ColorImpactSource) m_ColorImpactSource.enumValueIndex;
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -61,7 +48,6 @@ namespace DustEngine.DustEditor
 
                 if (m_ValueImpactEnabled.IsTrue)
                 {
-                    PropertyField(m_ValueImpactSource);
                     PropertyField(m_ValueBlendMode);
                     PropertyExtendedSlider(m_ValueImpactIntensity, 0f, +1f, 0.01f);
 
@@ -91,7 +77,6 @@ namespace DustEngine.DustEditor
 
                 if (m_ColorImpactEnabled.IsTrue)
                 {
-                    PropertyField(m_ColorImpactSource);
                     PropertyField(m_ColorBlendMode);
                     PropertyExtendedSlider(m_ColorImpactIntensity, 0f, +1f, 0.01f);
                 }
@@ -105,7 +90,7 @@ namespace DustEngine.DustEditor
             var showColumnPower = DuFieldsMapEditor.ColumnVisibility.Auto;
             var showColumnColor = DuFieldsMapEditor.ColumnVisibility.Auto;
 
-            if (!m_ColorImpactEnabled.IsTrue || colorImpactSource != DuExtendedFactoryMachine.ColorImpactSource.FieldsMapColor)
+            if (!m_ColorImpactEnabled.IsTrue)
                 showColumnColor = DuFieldsMapEditor.ColumnVisibility.ForcedHide;
 
             m_FieldsMapEditor.OnInspectorGUI(showColumnPower, showColumnColor);

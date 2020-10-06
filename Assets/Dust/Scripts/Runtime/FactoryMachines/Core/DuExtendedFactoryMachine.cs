@@ -4,11 +4,6 @@ namespace DustEngine
 {
     public abstract class DuExtendedFactoryMachine : DuFactoryMachine
     {
-        public enum ValueImpactSource
-        {
-            FieldsMapPower = 0,
-        }
-
         public enum ValueBlendMode
         {
             Set = 0,
@@ -24,11 +19,6 @@ namespace DustEngine
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-        public enum ColorImpactSource
-        {
-            FieldsMapColor = 0,
-        }
 
         public enum ColorBlendMode
         {
@@ -49,14 +39,6 @@ namespace DustEngine
         {
             get => m_ValueImpactEnabled;
             set => m_ValueImpactEnabled = value;
-        }
-
-        [SerializeField]
-        protected ValueImpactSource m_ValueImpactSource = ValueImpactSource.FieldsMapPower;
-        public ValueImpactSource valueImpactSource
-        {
-            get => m_ValueImpactSource;
-            set => m_ValueImpactSource = value;
         }
 
         [SerializeField]
@@ -107,14 +89,6 @@ namespace DustEngine
         {
             get => m_ColorImpactEnabled;
             set => m_ColorImpactEnabled = value;
-        }
-
-        [SerializeField]
-        protected ColorImpactSource m_ColorImpactSource = ColorImpactSource.FieldsMapColor;
-        public ColorImpactSource colorImpactSource
-        {
-            get => m_ColorImpactSource;
-            set => m_ColorImpactSource = value;
         }
 
         [SerializeField]
@@ -183,18 +157,7 @@ namespace DustEngine
 
             var instanceState = factoryInstanceState.instance.stateDynamic;
 
-            float newValue;
-
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            // Calculate value
-
-            switch (valueImpactSource)
-            {
-                default:
-                case ValueImpactSource.FieldsMapPower:
-                    newValue = factoryInstanceState.fieldPower;
-                    break;
-            }
+            float newValue = factoryInstanceState.fieldPower;
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // Blending
@@ -268,18 +231,7 @@ namespace DustEngine
 
             var instanceState = factoryInstanceState.instance.stateDynamic;
 
-            Color newColor;
-
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            // Calculate color
-
-            switch (colorImpactSource)
-            {
-                default:
-                case ColorImpactSource.FieldsMapColor:
-                    newColor = factoryInstanceState.fieldColor;
-                    break;
-            }
+            Color newColor = factoryInstanceState.fieldColor;
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // Blending
