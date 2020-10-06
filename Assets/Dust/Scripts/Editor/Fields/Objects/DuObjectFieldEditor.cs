@@ -24,7 +24,7 @@ namespace DustEngine.DustEditor
 
         protected void OnInspectorGUI_RemappingBlock()
         {
-            m_RemappingEditor.OnInspectorGUI(false);
+            m_RemappingEditor.OnInspectorGUI();
         }
 
         protected void OnInspectorGUI_GizmoBlock()

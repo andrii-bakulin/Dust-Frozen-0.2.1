@@ -40,7 +40,7 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            m_RemappingEditor.OnInspectorGUI(false);
+            m_RemappingEditor.OnInspectorGUI();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

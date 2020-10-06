@@ -101,7 +101,7 @@ namespace DustEngine.DustEditor
             }
             DustGUI.FoldoutEnd();
 
-            m_RemappingEditor.OnInspectorGUI(false);
+            m_RemappingEditor.OnInspectorGUI();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

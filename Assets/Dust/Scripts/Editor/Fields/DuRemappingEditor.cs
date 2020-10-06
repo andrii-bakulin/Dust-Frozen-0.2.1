@@ -52,13 +52,19 @@ namespace DustEngine.DustEditor
             m_Gradient = DuEditor.FindProperty(remappingProperty, "m_Gradient", "Gradient");
         }
 
+        public void OnInspectorGUI()
+            => OnInspectorGUI(false, true);
+
         public void OnInspectorGUI(bool showGraphMirrored)
+            => OnInspectorGUI(showGraphMirrored, true);
+
+        public void OnInspectorGUI(bool showGraphMirrored, bool showColorBlock)
         {
             if (DustGUI.FoldoutBegin("Force", "DuRemapping.Force"))
             {
                 DuEditor.PropertyField(m_RemapForceEnabled);
 
-                PropertyMappingGraph(m_Remapping, m_Color.valColor, showGraphMirrored);
+                PropertyMappingGraph(m_Remapping, m_Color.valColor.ToRGBWithoutAlpha(), showGraphMirrored);
 
                 if (m_RemapForceEnabled.IsTrue)
                 {
@@ -101,24 +107,27 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            if (DustGUI.FoldoutBegin("Color", "DuRemapping.Color"))
+            if (showColorBlock)
             {
-                DuEditor.PropertyField(m_ColorMode);
-
-                switch ((DuRemapping.ColorMode) m_ColorMode.enumValueIndex)
+                if (DustGUI.FoldoutBegin("Color", "DuRemapping.Color"))
                 {
-                    case DuRemapping.ColorMode.Color:
-                        DuEditor.PropertyField(m_Color);
-                        break;
+                    DuEditor.PropertyField(m_ColorMode);
 
-                    case DuRemapping.ColorMode.Gradient:
-                        DuEditor.PropertyField(m_Gradient);
-                        break;
+                    switch ((DuRemapping.ColorMode) m_ColorMode.enumValueIndex)
+                    {
+                        case DuRemapping.ColorMode.Color:
+                            DuEditor.PropertyField(m_Color);
+                            break;
+
+                        case DuRemapping.ColorMode.Gradient:
+                            DuEditor.PropertyField(m_Gradient);
+                            break;
+                    }
+
+                    DuEditor.Space();
                 }
-
-                DuEditor.Space();
+                DustGUI.FoldoutEnd();
             }
-            DustGUI.FoldoutEnd();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
