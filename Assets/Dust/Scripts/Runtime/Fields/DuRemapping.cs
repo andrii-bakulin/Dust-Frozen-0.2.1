@@ -129,7 +129,7 @@ namespace DustEngine
         }
 
         [SerializeField]
-        protected Color m_Color = new Color(0.00f, 0.75f, 1.00f);
+        protected Color m_Color = new Color(0.0f, 0.5f, 1.0f);
         public Color color
         {
             get => m_Color;
@@ -137,7 +137,7 @@ namespace DustEngine
         }
 
         [SerializeField]
-        protected Gradient m_Gradient;
+        protected Gradient m_Gradient = DuGradient.CreateBlackToColor(new Color(0.0f, 0.5f, 1.0f));
         public Gradient gradient
         {
             get => m_Gradient;

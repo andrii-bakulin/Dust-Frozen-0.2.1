@@ -4,8 +4,8 @@ namespace DustEngine
 {
     public abstract class DuField : DuMonoBehaviour, DuDynamicStateInterface
     {
-        public static readonly Color k_GizmosColorRangeZero = new Color(0.00f, 0.50f, 0.66f);
-        public static readonly Color k_GizmosColorRangeOne = new Color(0.00f, 0.75f, 1.00f);
+        public static readonly Color k_GizmosColorRangeZero = new Color(0.0f, 0.3f, 0.6f);
+        public static readonly Color k_GizmosColorRangeOne = new Color(0.0f, 0.5f, 1.0f);
 
         //--------------------------------------------------------------------------------------------------------------
 
