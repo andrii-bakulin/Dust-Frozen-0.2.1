@@ -159,6 +159,35 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
+        public static void DrawRect(float width, float height, Vector3 center, Axis3xDirection direction)
+            => DrawRect(width, height, center, DuAxisDirection.ConvertToAxis6(direction));
+
+        public static void DrawRect(float width, float height, Vector3 center, Axis6xDirection direction)
+            => DrawRect(new Vector2(width, height), center, direction);
+
+        public static void DrawRect(Vector2 size, Vector3 center, Axis3xDirection direction)
+            => DrawRect(size, center, DuAxisDirection.ConvertToAxis6(direction));
+
+        public static void DrawRect(Vector2 size, Vector3 center, Axis6xDirection direction)
+        {
+            Vector3 p0 = new Vector3(0f, -size.y / 2f, -size.x / 2f);
+            Vector3 p1 = new Vector3(0f, +size.y / 2f, -size.x / 2f);
+            Vector3 p2 = new Vector3(0f, -size.y / 2f, +size.x / 2f);
+            Vector3 p3 = new Vector3(0f, +size.y / 2f, +size.x / 2f);
+
+            p0 = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, p0);
+            p1 = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, p1);
+            p2 = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, p2);
+            p3 = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, p3);
+
+            Gizmos.DrawLine(center + p0, center + p1);
+            Gizmos.DrawLine(center + p1, center + p3);
+            Gizmos.DrawLine(center + p3, center + p2);
+            Gizmos.DrawLine(center + p2, center + p0);
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
         public static void DrawCircle(float radius, Vector3 center, Axis3xDirection direction, int circlePoints)
         {
             DrawCircle(radius, center, DuAxisDirection.ConvertToAxis6(direction), circlePoints);

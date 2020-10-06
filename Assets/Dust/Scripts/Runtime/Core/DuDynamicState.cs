@@ -93,5 +93,10 @@ namespace DustEngine
         {
             dynamicState ^= sequenceIndex * 848409 + (Dust.IsNotNull(mesh) ? mesh.GetHashCode() : 123456);
         }
+
+        public static void Append(ref int dynamicState, int sequenceIndex, Texture2D texture2D)
+        {
+            dynamicState ^= sequenceIndex * 828581 + (Dust.IsNotNull(texture2D) ? texture2D.GetHashCode() : 123456);
+        }
     }
 }
