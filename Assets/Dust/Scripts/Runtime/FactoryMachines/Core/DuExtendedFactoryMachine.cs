@@ -7,8 +7,7 @@ namespace DustEngine
         public enum ValueImpactSource
         {
             FieldsMapPower = 0,
-            FactoryMachinePower = 1,
-            FixedValue = 2,
+            FixedValue = 1,
         }
 
         public enum ValueBlendMode
@@ -30,8 +29,7 @@ namespace DustEngine
         public enum ColorImpactSource
         {
             FieldsMapColor = 0,
-            FactoryMachineColor = 1,
-            FixedColor = 2,
+            FixedColor = 1,
         }
 
         public enum ColorBlendMode
@@ -215,10 +213,6 @@ namespace DustEngine
                     newValue = valueFixed;
                     break;
 
-                case ValueImpactSource.FactoryMachinePower:
-                    newValue = GetFactoryMachinePower(factoryInstanceState);
-                    break;
-
                 case ValueImpactSource.FieldsMapPower:
                     newValue = factoryInstanceState.fieldPower;
                     break;
@@ -309,10 +303,6 @@ namespace DustEngine
                     newColor.a = factoryInstanceState.fieldPower;
                     break;
 
-                case ColorImpactSource.FactoryMachineColor:
-                    newColor = GetFactoryMachineColor(factoryInstanceState);
-                    break;
-
                 case ColorImpactSource.FieldsMapColor:
                     newColor = factoryInstanceState.fieldColor;
                     break;
@@ -360,18 +350,6 @@ namespace DustEngine
 
             instanceState.color = Color.LerpUnclamped(instanceState.color, newColor, finalIntensity);
             instanceState.color.Clamp01();
-        }
-
-        //--------------------------------------------------------------------------------------------------------------
-
-        protected virtual float GetFactoryMachinePower(FactoryInstanceState factoryInstanceState)
-        {
-            return factoryInstanceState.intensityByMachine;
-        }
-
-        protected virtual Color GetFactoryMachineColor(FactoryInstanceState factoryInstanceState)
-        {
-            return Color.white;
         }
     }
 }
