@@ -5,6 +5,7 @@ namespace DustEngine.DustEditor
 {
     public abstract class DuFactoryMachineEditor : DuEditor
     {
+        protected DuProperty m_CustomHint;
         protected DuProperty m_Intensity;
 
         //--------------------------------------------------------------------------------------------------------------
@@ -50,6 +51,7 @@ namespace DustEngine.DustEditor
 
         protected virtual void OnEnableFactoryMachine()
         {
+            m_CustomHint = FindProperty("m_CustomHint", "Hint for Machine");
             m_Intensity = FindProperty("m_Intensity", "Intensity");
         }
 
@@ -64,6 +66,9 @@ namespace DustEngine.DustEditor
             if (DustGUI.FoldoutBegin("Parameters", "DuFactoryMachine.Parameters"))
             {
                 PropertyExtendedSlider(m_Intensity, 0f, 1f, 0.01f);
+                Space();
+
+                PropertyField(m_CustomHint);
                 Space();
             }
             DustGUI.FoldoutEnd();

@@ -54,6 +54,14 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
 
         [SerializeField]
+        protected string m_CustomHint = "";
+        public string customHint
+        {
+            get => m_CustomHint;
+            set => m_CustomHint = value;
+        }
+
+        [SerializeField]
         protected float m_Intensity = 1.0f;
         public float intensity
         {
