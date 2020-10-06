@@ -7,7 +7,6 @@ namespace DustEngine
         public enum ValueImpactSource
         {
             FieldsMapPower = 0,
-            FixedValue = 1,
         }
 
         public enum ValueBlendMode
@@ -29,7 +28,6 @@ namespace DustEngine
         public enum ColorImpactSource
         {
             FieldsMapColor = 0,
-            FixedColor = 1,
         }
 
         public enum ColorBlendMode
@@ -75,14 +73,6 @@ namespace DustEngine
         {
             get => m_ValueBlendMode;
             set => m_ValueBlendMode = value;
-        }
-
-        [SerializeField]
-        protected float m_ValueFixed = 0f;
-        public float valueFixed
-        {
-            get => m_ValueFixed;
-            set => m_ValueFixed = value;
         }
 
         [SerializeField]
@@ -143,14 +133,6 @@ namespace DustEngine
             set => m_ColorBlendMode = value;
         }
 
-        [SerializeField]
-        protected Color m_ColorFixed = Color.white;
-        public Color colorFixed
-        {
-            get => m_ColorFixed;
-            set => m_ColorFixed = value;
-        }
-
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
@@ -209,10 +191,6 @@ namespace DustEngine
             switch (valueImpactSource)
             {
                 default:
-                case ValueImpactSource.FixedValue:
-                    newValue = valueFixed;
-                    break;
-
                 case ValueImpactSource.FieldsMapPower:
                     newValue = factoryInstanceState.fieldPower;
                     break;
@@ -298,11 +276,6 @@ namespace DustEngine
             switch (colorImpactSource)
             {
                 default:
-                case ColorImpactSource.FixedColor:
-                    newColor = colorFixed;
-                    newColor.a = factoryInstanceState.fieldPower;
-                    break;
-
                 case ColorImpactSource.FieldsMapColor:
                     newColor = factoryInstanceState.fieldColor;
                     break;
