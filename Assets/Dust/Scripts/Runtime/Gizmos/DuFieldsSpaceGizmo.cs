@@ -68,7 +68,7 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private Gradient m_PowerDotsColor = new Gradient();
+        private Gradient m_PowerDotsColor = DuGradient.CreateBlackToRed();
         public Gradient powerDotsColor
         {
             get => m_PowerDotsColor;
@@ -167,17 +167,6 @@ namespace DustEngine
             }
         }
 #endif
-
-        //--------------------------------------------------------------------------------------------------------------
-
-        private void Reset()
-        {
-            powerDotsColor = new Gradient();
-            powerDotsColor.SetKeys(
-                new[] {new GradientColorKey(Color.black, 0f), new GradientColorKey(Color.red, 1f)},
-                new[] {new GradientAlphaKey(1f, 0f), new GradientAlphaKey(1f, 1f)}
-                );
-        }
 
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
