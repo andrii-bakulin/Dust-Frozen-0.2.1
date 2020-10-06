@@ -176,7 +176,6 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
-        // Power
 
         public override void Calculate(DuField.Point fieldPoint, out DuField.Result result, bool calculateColor)
         {

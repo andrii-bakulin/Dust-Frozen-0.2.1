@@ -141,7 +141,6 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
-        // Color
 
         public override bool IsAllowCalculateFieldColor()
         {

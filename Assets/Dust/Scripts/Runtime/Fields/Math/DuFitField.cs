@@ -80,7 +80,6 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
-        // Power
 
         public override void Calculate(DuField.Point fieldPoint, out DuField.Result result, bool calculateColor)
         {
@@ -90,7 +89,6 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
-        // Color
 
         public override bool IsAllowCalculateFieldColor()
         {
