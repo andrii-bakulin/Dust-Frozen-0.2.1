@@ -3,10 +3,10 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuTextureField))]
+    [CustomEditor(typeof(DuTextureSpaceField))]
     [CanEditMultipleObjects]
     [InitializeOnLoad]
-    public class DuTextureFieldEditor : DuSpaceFieldEditor
+    public class DuTextureSpaceFieldEditor : DuSpaceFieldEditor
     {
         private DuProperty m_Texture;
         private DuProperty m_WrapMode;
@@ -23,15 +23,15 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        static DuTextureFieldEditor()
+        static DuTextureSpaceFieldEditor()
         {
-            DuPopupButtons.AddSpace2DField(typeof(DuTextureField), "Texture");
+            DuPopupButtons.AddSpace2DField(typeof(DuTextureSpaceField), "Texture Space");
         }
 
-        [MenuItem("Dust/Fields/2D Fields/Texture")]
+        [MenuItem("Dust/Fields/2D Fields/Texture Space")]
         public static void AddComponent()
         {
-            AddFieldComponentByType(typeof(DuTextureField));
+            AddFieldComponentByType(typeof(DuTextureSpaceField));
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -90,7 +90,7 @@ namespace DustEngine.DustEditor
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // OnInspectorGUI_RemappingBlock();
 
-            if ((DuTextureField.ColorComponent) m_PowerSource.enumValueIndex != DuTextureField.ColorComponent.Ignore)
+            if ((DuTextureSpaceField.ColorComponent) m_PowerSource.enumValueIndex != DuTextureSpaceField.ColorComponent.Ignore)
             {
                 m_RemappingEditor.OnInspectorGUI(false, false);
             }

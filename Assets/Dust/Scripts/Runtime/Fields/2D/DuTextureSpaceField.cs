@@ -2,8 +2,8 @@
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Fields/2D Fields/Texture Field")]
-    public class DuTextureField : DuSpaceField
+    [AddComponentMenu("Dust/Fields/2D Fields/Texture Space Field")]
+    public class DuTextureSpaceField : DuSpaceField
     {
         public enum ColorComponent
         {
@@ -131,7 +131,7 @@ namespace DustEngine
 
         public override string FieldName()
         {
-            return "Texture";
+            return "Texture Space";
         }
 
         public override string FieldDynamicHint()
