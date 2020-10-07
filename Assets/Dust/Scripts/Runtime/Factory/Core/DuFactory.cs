@@ -131,7 +131,7 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private Color m_DefaultColor = Color.white;
+        private Color m_DefaultColor = Color.gray;
         public Color defaultColor
         {
             get => m_DefaultColor;
