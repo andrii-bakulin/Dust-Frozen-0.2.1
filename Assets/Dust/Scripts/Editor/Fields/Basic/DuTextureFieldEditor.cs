@@ -70,8 +70,6 @@ namespace DustEngine.DustEditor
                 PropertyExtendedSlider(m_Width, 0f, 50f, 0.01f);
                 PropertyExtendedSlider(m_Height, 0f, 50f, 0.01f);
                 PropertyField(m_Direction);
-                Space();
-
                 PropertyField(m_FlipX);
                 PropertyField(m_FlipY);
                 Space();
