@@ -10,7 +10,8 @@ namespace DustEngine
 
         public override int GetDynamicStateHashCode()
         {
-            int seq = 0, dynamicState = 0;
+            var seq = 0;
+            var dynamicState = base.GetDynamicStateHashCode();
 
             DuDynamicState.Append(ref dynamicState, ++seq, true);
 

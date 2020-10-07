@@ -75,7 +75,15 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // DuDynamicStateInterface
 
-        public abstract int GetDynamicStateHashCode();
+        public virtual int GetDynamicStateHashCode()
+        {
+            int seq = 0, dynamicState = 0;
+
+            // Paste here local vars
+            DuDynamicState.Append(ref dynamicState, ++seq, true);
+
+            return DuDynamicState.Normalize(dynamicState);
+        }
 
         //--------------------------------------------------------------------------------------------------------------
 

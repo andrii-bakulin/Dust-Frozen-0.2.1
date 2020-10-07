@@ -126,10 +126,13 @@ namespace DustEngine
 
         public override int GetDynamicStateHashCode()
         {
-            int seq = 0, dynamicState = 0;
+            var seq = 0;
+            var dynamicState = base.GetDynamicStateHashCode();
 
             DuDynamicState.Append(ref dynamicState, ++seq, transform);
+
             DuDynamicState.Append(ref dynamicState, ++seq, powerEnabled);
+            DuDynamicState.Append(ref dynamicState, ++seq, colorEnabled);
 
             if (powerEnabled)
             {
@@ -142,8 +145,6 @@ namespace DustEngine
                 DuDynamicState.Append(ref dynamicState, ++seq, powerMax);
                 DuDynamicState.Append(ref dynamicState, ++seq, powerShape);
             }
-
-            DuDynamicState.Append(ref dynamicState, ++seq, colorEnabled);
 
             if (colorEnabled)
             {
