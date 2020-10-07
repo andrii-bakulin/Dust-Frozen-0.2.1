@@ -2,8 +2,8 @@
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Fields/Object Fields/Cone Field")]
-    public class DuConeField : DuObjectField
+    [AddComponentMenu("Dust/Fields/3D Fields/Cylinder Field")]
+    public class DuCylinderField : DuSpaceField
     {
         [SerializeField]
         private float m_Radius = 1.0f;
@@ -22,8 +22,8 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private Axis6xDirection m_Direction = Axis6xDirection.YPlus;
-        public Axis6xDirection direction
+        private Axis3xDirection m_Direction = Axis3xDirection.Y;
+        public Axis3xDirection direction
         {
             get => m_Direction;
             set => m_Direction = value;
@@ -49,7 +49,7 @@ namespace DustEngine
 
         public override string FieldName()
         {
-            return "Cone";
+            return "Cylinder";
         }
 
         public override string FieldDynamicHint()
@@ -67,7 +67,7 @@ namespace DustEngine
             localPosition = DuAxisDirection.ConvertFromDirectionToAxisXPlus(direction, localPosition);
 
             float distanceToPoint = localPosition.magnitude;
-            float distanceToEdge = DuMath.Cone.DistanceToEdge(radius, height, localPosition);
+            float distanceToEdge = DuMath.Cylinder.DistanceToEdge(radius, height, localPosition);
 
             float offset = distanceToEdge > 0f ? 1f - distanceToPoint / distanceToEdge : 0f;
 
@@ -93,15 +93,15 @@ namespace DustEngine
             if (remapping.remapForceEnabled)
             {
                 Gizmos.color = !remapping.invert ? colorRange1 : colorRange0;
-                DuGizmos.DrawWireCone(radius * innerScale, height * innerScale, Vector3.zero, direction, 32, 4);
+                DuGizmos.DrawWireCylinder(radius * innerScale, height * innerScale, Vector3.zero, direction, 32, 4);
 
                 Gizmos.color = !remapping.invert ? colorRange0 : colorRange1;
-                DuGizmos.DrawWireCone(radius, height, Vector3.zero, direction, 32, 4);
+                DuGizmos.DrawWireCylinder(radius, height, Vector3.zero, direction, 32, 4);
             }
             else
             {
                 Gizmos.color = colorRange0;
-                DuGizmos.DrawWireCone(radius, height, Vector3.zero, direction, 32, 4);
+                DuGizmos.DrawWireCylinder(radius, height, Vector3.zero, direction, 32, 4);
             }
         }
 #endif

@@ -2,8 +2,8 @@ using UnityEngine;
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Fields/Object Fields/Cube Field")]
-    public class DuCubeField : DuObjectField
+    [AddComponentMenu("Dust/Fields/3D Fields/Cube Field")]
+    public class DuCubeField : DuSpaceField
     {
         private class Calc
         {

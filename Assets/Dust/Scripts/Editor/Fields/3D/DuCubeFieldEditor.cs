@@ -6,7 +6,7 @@ namespace DustEngine.DustEditor
     [CustomEditor(typeof(DuCubeField))]
     [CanEditMultipleObjects]
     [InitializeOnLoad]
-    public class DuCubeFieldEditor : DuObjectFieldEditor
+    public class DuCubeFieldEditor : DuSpaceFieldEditor
     {
         private DuProperty m_Size;
 
@@ -14,10 +14,10 @@ namespace DustEngine.DustEditor
 
         static DuCubeFieldEditor()
         {
-            DuPopupButtons.AddObjectField(typeof(DuCubeField), "Cube");
+            DuPopupButtons.AddSpace3DField(typeof(DuCubeField), "Cube");
         }
 
-        [MenuItem("Dust/Fields/Object Fields/Cube")]
+        [MenuItem("Dust/Fields/3D Fields/Cube")]
         public static void AddComponent()
         {
             AddFieldComponentByType(typeof(DuCubeField));

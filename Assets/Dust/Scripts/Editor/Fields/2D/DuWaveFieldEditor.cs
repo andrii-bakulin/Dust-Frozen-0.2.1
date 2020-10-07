@@ -6,7 +6,7 @@ namespace DustEngine.DustEditor
     [CustomEditor(typeof(DuWaveField))]
     [CanEditMultipleObjects]
     [InitializeOnLoad]
-    public class DuWaveFieldEditor : DuObjectFieldEditor
+    public class DuWaveFieldEditor : DuSpaceFieldEditor
     {
         private DuProperty m_Amplitude;
         private DuProperty m_Size;
@@ -23,10 +23,10 @@ namespace DustEngine.DustEditor
 
         static DuWaveFieldEditor()
         {
-            DuPopupButtons.AddObjectField(typeof(DuWaveField), "Wave");
+            DuPopupButtons.AddSpace2DField(typeof(DuWaveField), "Wave");
         }
 
-        [MenuItem("Dust/Fields/Object Fields/Wave")]
+        [MenuItem("Dust/Fields/2D Fields/Wave")]
         public static void AddComponent()
         {
             AddFieldComponentByType(typeof(DuWaveField));

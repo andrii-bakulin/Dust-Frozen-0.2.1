@@ -2,8 +2,8 @@
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Fields/Basic Fields/Radial Field")]
-    public class DuRadialField : DuObjectField
+    [AddComponentMenu("Dust/Fields/2D Fields/Radial Field")]
+    public class DuRadialField : DuSpaceField
     {
         [SerializeField]
         private float m_StartAngle = 0.0f;

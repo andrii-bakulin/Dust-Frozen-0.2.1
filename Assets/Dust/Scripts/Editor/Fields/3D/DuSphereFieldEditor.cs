@@ -6,7 +6,7 @@ namespace DustEngine.DustEditor
     [CustomEditor(typeof(DuSphereField))]
     [CanEditMultipleObjects]
     [InitializeOnLoad]
-    public class DuSphereFieldEditor : DuObjectFieldEditor
+    public class DuSphereFieldEditor : DuSpaceFieldEditor
     {
         private DuProperty m_Radius;
 
@@ -14,10 +14,10 @@ namespace DustEngine.DustEditor
 
         static DuSphereFieldEditor()
         {
-            DuPopupButtons.AddObjectField(typeof(DuSphereField), "Sphere");
+            DuPopupButtons.AddSpace3DField(typeof(DuSphereField), "Sphere");
         }
 
-        [MenuItem("Dust/Fields/Object Fields/Sphere")]
+        [MenuItem("Dust/Fields/3D Fields/Sphere")]
         public static void AddComponent()
         {
             AddFieldComponentByType(typeof(DuSphereField));

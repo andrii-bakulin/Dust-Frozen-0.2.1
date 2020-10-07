@@ -6,7 +6,7 @@ namespace DustEngine.DustEditor
     [CustomEditor(typeof(DuRadialField))]
     [CanEditMultipleObjects]
     [InitializeOnLoad]
-    public class DuRadialFieldEditor : DuObjectFieldEditor
+    public class DuRadialFieldEditor : DuSpaceFieldEditor
     {
         private DuProperty m_StartAngle;
         private DuProperty m_EndAngle;
@@ -25,10 +25,10 @@ namespace DustEngine.DustEditor
 
         static DuRadialFieldEditor()
         {
-            DuPopupButtons.AddBasicField(typeof(DuRadialField), "Radial");
+            DuPopupButtons.AddSpace2DField(typeof(DuRadialField), "Radial");
         }
 
-        [MenuItem("Dust/Fields/Basic Fields/Radial")]
+        [MenuItem("Dust/Fields/2D Fields/Radial")]
         public static void AddComponent()
         {
             AddFieldComponentByType(typeof(DuRadialField));

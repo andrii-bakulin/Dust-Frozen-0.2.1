@@ -3,9 +3,9 @@ using UnityEditor;
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Fields/Object Fields/Wave Field")]
+    [AddComponentMenu("Dust/Fields/2D Fields/Wave Field")]
     [ExecuteInEditMode]
-    public class DuWaveField : DuObjectField
+    public class DuWaveField : DuSpaceField
     {
         public enum GizmoQuality
         {

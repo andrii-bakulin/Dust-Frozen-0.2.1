@@ -3,10 +3,10 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuCylinderField))]
+    [CustomEditor(typeof(DuConeField))]
     [CanEditMultipleObjects]
     [InitializeOnLoad]
-    public class DuCylinderFieldEditor : DuObjectFieldEditor
+    public class DuConeFieldEditor : DuSpaceFieldEditor
     {
         private DuProperty m_Height;
         private DuProperty m_Radius;
@@ -14,15 +14,15 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        static DuCylinderFieldEditor()
+        static DuConeFieldEditor()
         {
-            DuPopupButtons.AddObjectField(typeof(DuCylinderField), "Cylinder");
+            DuPopupButtons.AddSpace3DField(typeof(DuConeField), "Cone");
         }
 
-        [MenuItem("Dust/Fields/Object Fields/Cylinder")]
+        [MenuItem("Dust/Fields/3D Fields/Cone")]
         public static void AddComponent()
         {
-            AddFieldComponentByType(typeof(DuCylinderField));
+            AddFieldComponentByType(typeof(DuConeField));
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -44,7 +44,7 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            if (DustGUI.FoldoutBegin("Field Parameters", "DuCylinderField.Params"))
+            if (DustGUI.FoldoutBegin("Field Parameters", "DuConeField.Params"))
             {
                 PropertyExtendedSlider(m_Radius, 0f, 10f, 0.01f);
                 PropertyExtendedSlider(m_Height, 0f, 10f, 0.01f);
@@ -62,10 +62,10 @@ namespace DustEngine.DustEditor
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             if (m_Height.isChanged)
-                m_Height.valFloat = DuCylinderField.ShapeNormalizer.Height(m_Height.valFloat);
+                m_Height.valFloat = DuConeField.ShapeNormalizer.Height(m_Height.valFloat);
 
             if (m_Radius.isChanged)
-                m_Radius.valFloat = DuCylinderField.ShapeNormalizer.Radius(m_Radius.valFloat);
+                m_Radius.valFloat = DuConeField.ShapeNormalizer.Radius(m_Radius.valFloat);
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

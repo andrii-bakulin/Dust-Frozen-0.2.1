@@ -2,8 +2,8 @@ using UnityEngine;
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Fields/Object Fields/Directional Field")]
-    public class DuDirectionalField : DuObjectField
+    [AddComponentMenu("Dust/Fields/2D Fields/Directional Field")]
+    public class DuDirectionalField : DuSpaceField
     {
         [SerializeField]
         private float m_Length = 1.0f;

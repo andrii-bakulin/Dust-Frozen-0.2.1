@@ -6,7 +6,7 @@ namespace DustEngine.DustEditor
     [CustomEditor(typeof(DuDirectionalField))]
     [CanEditMultipleObjects]
     [InitializeOnLoad]
-    public class DuDirectionalFieldEditor : DuObjectFieldEditor
+    public class DuDirectionalFieldEditor : DuSpaceFieldEditor
     {
         private DuProperty m_Length;
         private DuProperty m_Direction;
@@ -18,10 +18,10 @@ namespace DustEngine.DustEditor
 
         static DuDirectionalFieldEditor()
         {
-            DuPopupButtons.AddObjectField(typeof(DuDirectionalField), "Directional");
+            DuPopupButtons.AddSpace2DField(typeof(DuDirectionalField), "Directional");
         }
 
-        [MenuItem("Dust/Fields/Object Fields/Directional")]
+        [MenuItem("Dust/Fields/2D Fields/Directional")]
         public static void AddComponent()
         {
             AddFieldComponentByType(typeof(DuDirectionalField));

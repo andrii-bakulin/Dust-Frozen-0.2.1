@@ -3,26 +3,26 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuConeField))]
+    [CustomEditor(typeof(DuTorusField))]
     [CanEditMultipleObjects]
     [InitializeOnLoad]
-    public class DuConeFieldEditor : DuObjectFieldEditor
+    public class DuTorusFieldEditor : DuSpaceFieldEditor
     {
-        private DuProperty m_Height;
         private DuProperty m_Radius;
+        private DuProperty m_Thickness;
         private DuProperty m_Direction;
 
         //--------------------------------------------------------------------------------------------------------------
 
-        static DuConeFieldEditor()
+        static DuTorusFieldEditor()
         {
-            DuPopupButtons.AddObjectField(typeof(DuConeField), "Cone");
+            DuPopupButtons.AddSpace3DField(typeof(DuTorusField), "Torus");
         }
 
-        [MenuItem("Dust/Fields/Object Fields/Cone")]
+        [MenuItem("Dust/Fields/3D Fields/Torus")]
         public static void AddComponent()
         {
-            AddFieldComponentByType(typeof(DuConeField));
+            AddFieldComponentByType(typeof(DuTorusField));
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -31,8 +31,8 @@ namespace DustEngine.DustEditor
         {
             OnEnableField();
 
-            m_Height = FindProperty("m_Height", "Height");
             m_Radius = FindProperty("m_Radius", "Radius");
+            m_Thickness = FindProperty("m_Thickness", "Thickness");
             m_Direction = FindProperty("m_Direction", "Direction");
         }
 
@@ -44,10 +44,10 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            if (DustGUI.FoldoutBegin("Field Parameters", "DuConeField.Params"))
+            if (DustGUI.FoldoutBegin("Field Parameters", "DuTorusField.Params"))
             {
                 PropertyExtendedSlider(m_Radius, 0f, 10f, 0.01f);
-                PropertyExtendedSlider(m_Height, 0f, 10f, 0.01f);
+                PropertyExtendedSlider(m_Thickness, 0f, 10f, 0.01f);
                 PropertyField(m_Direction);
                 Space();
 
@@ -61,11 +61,11 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            if (m_Height.isChanged)
-                m_Height.valFloat = DuConeField.ShapeNormalizer.Height(m_Height.valFloat);
-
             if (m_Radius.isChanged)
-                m_Radius.valFloat = DuConeField.ShapeNormalizer.Radius(m_Radius.valFloat);
+                m_Radius.valFloat = DuTorusField.Normalizer.Radius(m_Radius.valFloat);
+
+            if (m_Thickness.isChanged)
+                m_Thickness.valFloat = DuTorusField.Normalizer.Thickness(m_Thickness.valFloat);
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

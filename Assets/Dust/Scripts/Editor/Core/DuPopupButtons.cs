@@ -24,8 +24,9 @@ namespace DustEngine.DustEditor
             FactoryMachine = 21,
 
             BasicField = 31,
-            ObjectField = 32,
-            MathField = 33,
+            Space2DField = 32,
+            Space3DField = 33,
+            MathField = 34,
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -89,7 +90,8 @@ namespace DustEngine.DustEditor
             popup.m_FieldsMap = fieldsMap;
 
             GenerateColumn(popup, EntityType.BasicField, "Basic Fields");
-            GenerateColumn(popup, EntityType.ObjectField, "Object Fields");
+            GenerateColumn(popup, EntityType.Space2DField, "2D Fields");
+            GenerateColumn(popup, EntityType.Space3DField, "3D Fields");
             GenerateColumn(popup, EntityType.MathField, "Math Fields");
 
             return popup;
@@ -112,9 +114,14 @@ namespace DustEngine.DustEditor
             AddEntity(EntityType.BasicField, type, title);
         }
 
-        public static void AddObjectField(System.Type type, string title)
+        public static void AddSpace2DField(System.Type type, string title)
         {
-            AddEntity(EntityType.ObjectField, type, title);
+            AddEntity(EntityType.Space2DField, type, title);
+        }
+
+        public static void AddSpace3DField(System.Type type, string title)
+        {
+            AddEntity(EntityType.Space3DField, type, title);
         }
 
         public static void AddMathField(System.Type type, string title)

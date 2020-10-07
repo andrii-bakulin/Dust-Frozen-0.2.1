@@ -2,8 +2,8 @@
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Fields/Basic Fields/Texture Field")]
-    public class DuTextureField : DuObjectField
+    [AddComponentMenu("Dust/Fields/2D Fields/Texture Field")]
+    public class DuTextureField : DuSpaceField
     {
         public enum ColorComponent
         {

@@ -6,7 +6,7 @@ namespace DustEngine.DustEditor
     [CustomEditor(typeof(DuTextureField))]
     [CanEditMultipleObjects]
     [InitializeOnLoad]
-    public class DuTextureFieldEditor : DuObjectFieldEditor
+    public class DuTextureFieldEditor : DuSpaceFieldEditor
     {
         private DuProperty m_Texture;
         private DuProperty m_WrapMode;
@@ -25,10 +25,10 @@ namespace DustEngine.DustEditor
 
         static DuTextureFieldEditor()
         {
-            DuPopupButtons.AddBasicField(typeof(DuTextureField), "Texture");
+            DuPopupButtons.AddSpace2DField(typeof(DuTextureField), "Texture");
         }
 
-        [MenuItem("Dust/Fields/Basic Fields/Texture")]
+        [MenuItem("Dust/Fields/2D Fields/Texture")]
         public static void AddComponent()
         {
             AddFieldComponentByType(typeof(DuTextureField));

@@ -2,28 +2,28 @@
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Fields/Object Fields/Torus Field")]
-    public class DuTorusField : DuObjectField
+    [AddComponentMenu("Dust/Fields/3D Fields/Cone Field")]
+    public class DuConeField : DuSpaceField
     {
         [SerializeField]
-        private float m_Radius = 2f;
+        private float m_Radius = 1.0f;
         public float radius
         {
             get => m_Radius;
-            set => m_Radius = Normalizer.Radius(value);
+            set => m_Radius = ShapeNormalizer.Radius(value);
         }
 
         [SerializeField]
-        private float m_Thickness = 0.5f;
-        public float thickness
+        private float m_Height = 2.0f;
+        public float height
         {
-            get => m_Thickness;
-            set => m_Thickness = Normalizer.Thickness(value);
+            get => m_Height;
+            set => m_Height = ShapeNormalizer.Height(value);
         }
 
         [SerializeField]
-        private Axis3xDirection m_Direction = Axis3xDirection.Y;
-        public Axis3xDirection direction
+        private Axis6xDirection m_Direction = Axis6xDirection.YPlus;
+        public Axis6xDirection direction
         {
             get => m_Direction;
             set => m_Direction = value;
@@ -38,7 +38,7 @@ namespace DustEngine
             var dynamicState = base.GetDynamicStateHashCode();
 
             DuDynamicState.Append(ref dynamicState, ++seq, radius);
-            DuDynamicState.Append(ref dynamicState, ++seq, thickness);
+            DuDynamicState.Append(ref dynamicState, ++seq, height);
             DuDynamicState.Append(ref dynamicState, ++seq, direction);
 
             return DuDynamicState.Normalize(dynamicState);
@@ -49,7 +49,7 @@ namespace DustEngine
 
         public override string FieldName()
         {
-            return "Torus";
+            return "Cone";
         }
 
         public override string FieldDynamicHint()
@@ -61,27 +61,15 @@ namespace DustEngine
 
         public override void Calculate(DuField.Point fieldPoint, out DuField.Result result, bool calculateColor)
         {
-            float offset = 0f;
+            Vector3 localPosition = transform.worldToLocalMatrix.MultiplyPoint(fieldPoint.inPosition);
 
-            if (DuMath.IsNotZero(radius) && DuMath.IsNotZero(thickness))
-            {
-                Vector3 localPosition = transform.worldToLocalMatrix.MultiplyPoint(fieldPoint.inPosition);
+            // Convert to [X+]-axis-space by direction
+            localPosition = DuAxisDirection.ConvertFromDirectionToAxisXPlus(direction, localPosition);
 
-                // Convert to [X+]-axis-space by direction
-                localPosition = DuAxisDirection.ConvertFromDirectionToAxisXPlus(direction, localPosition);
+            float distanceToPoint = localPosition.magnitude;
+            float distanceToEdge = DuMath.Cone.DistanceToEdge(radius, height, localPosition);
 
-                // Convert 3D point to 2D (x; y-&-z) -> (x; y)
-                Vector2 localPoint2D = new Vector2(localPosition.x, DuMath.Length(localPosition.y, localPosition.z));
-                localPoint2D = localPoint2D.abs();
-
-                // Move center to torus radius (center of thickness-radius)
-                localPoint2D.y -= radius;
-
-                float distanceToPoint = localPoint2D.magnitude;
-                float distanceToEdge = thickness;
-
-                offset = 1f - distanceToPoint / distanceToEdge;
-            }
+            float offset = distanceToEdge > 0f ? 1f - distanceToPoint / distanceToEdge : 0f;
 
             result.fieldPower = remapping.MapValue(offset);
 
@@ -95,6 +83,8 @@ namespace DustEngine
 #if UNITY_EDITOR
         protected override void DrawFieldGizmos()
         {
+            float innerScale = remapping.innerOffset;
+
             Gizmos.matrix = transform.localToWorldMatrix;
 
             Color colorRange0 = GetGizmoColorRange0();
@@ -103,15 +93,15 @@ namespace DustEngine
             if (remapping.remapForceEnabled)
             {
                 Gizmos.color = !remapping.invert ? colorRange1 : colorRange0;
-                DuGizmos.DrawWireTorus(radius, thickness * remapping.innerOffset, Vector3.zero, direction, 64, 32);
+                DuGizmos.DrawWireCone(radius * innerScale, height * innerScale, Vector3.zero, direction, 32, 4);
 
                 Gizmos.color = !remapping.invert ? colorRange0 : colorRange1;
-                DuGizmos.DrawWireTorus(radius, thickness, Vector3.zero, direction, 64, 32);
+                DuGizmos.DrawWireCone(radius, height, Vector3.zero, direction, 32, 4);
             }
             else
             {
                 Gizmos.color = colorRange0;
-                DuGizmos.DrawWireTorus(radius, thickness, Vector3.zero, direction, 64, 32);
+                DuGizmos.DrawWireCone(radius, height, Vector3.zero, direction, 32, 4);
             }
         }
 #endif
@@ -119,14 +109,14 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        public static class Normalizer
+        public static class ShapeNormalizer
         {
-            public static float Radius(float value)
+            public static float Height(float value)
             {
                 return Mathf.Abs(value);
             }
 
-            public static float Thickness(float value)
+            public static float Radius(float value)
             {
                 return Mathf.Abs(value);
             }

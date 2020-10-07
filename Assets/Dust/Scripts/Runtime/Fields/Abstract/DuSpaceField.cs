@@ -3,7 +3,7 @@ using UnityEditor;
 
 namespace DustEngine
 {
-    public abstract class DuObjectField : DuField
+    public abstract class DuSpaceField : DuField
     {
         [SerializeField]
         private DuRemapping m_Remapping = new DuRemapping();
