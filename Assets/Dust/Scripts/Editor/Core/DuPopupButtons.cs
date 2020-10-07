@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEditor;
 
@@ -148,7 +149,11 @@ namespace DustEngine.DustEditor
 
             if (m_Entities.ContainsKey(entityType))
             {
-                foreach (var pair in m_Entities[entityType])
+                var sortedEntities = from entry in m_Entities[entityType]
+                    orderby entry.Value ascending
+                    select entry;
+
+                foreach (var pair in sortedEntities)
                 {
                     CellRecord button;
                     button.title = pair.Value;
