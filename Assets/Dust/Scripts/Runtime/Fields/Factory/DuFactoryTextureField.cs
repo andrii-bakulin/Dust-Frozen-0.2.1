@@ -25,13 +25,6 @@ namespace DustEngine
             UW = 2,
         }
 
-        public enum WrapMode
-        {
-            Repeat = 0,
-            Clamp = 1,
-            Mirror = 2,
-        }
-
         //--------------------------------------------------------------------------------------------------------------
 
         [SerializeField]
@@ -48,14 +41,6 @@ namespace DustEngine
         {
             get => m_SpaceUVW;
             set => m_SpaceUVW = value;
-        }
-
-        [SerializeField]
-        protected WrapMode m_WrapMode = WrapMode.Repeat;
-        public WrapMode wrapMode
-        {
-            get => m_WrapMode;
-            set => m_WrapMode = value;
         }
 
         [SerializeField]
@@ -116,7 +101,6 @@ namespace DustEngine
 
             DuDynamicState.Append(ref dynamicState, ++seq, texture);
             DuDynamicState.Append(ref dynamicState, ++seq, spaceUVW);
-            DuDynamicState.Append(ref dynamicState, ++seq, wrapMode);
             DuDynamicState.Append(ref dynamicState, ++seq, flipU);
             DuDynamicState.Append(ref dynamicState, ++seq, flipV);
             DuDynamicState.Append(ref dynamicState, ++seq, flipW);
@@ -178,24 +162,6 @@ namespace DustEngine
                 }
 
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-                switch (wrapMode)
-                {
-                    default:
-                    case WrapMode.Repeat:
-                        // nothing need to do
-                        break;
-
-                    case WrapMode.Clamp:
-                        x = Mathf.Clamp01(x);
-                        y = Mathf.Clamp01(y);
-                        break;
-
-                    case WrapMode.Mirror:
-                        x = Mathf.PingPong(x, 1f);
-                        y = Mathf.PingPong(y, 1f);
-                        break;
-                }
 
                 int xOnTexture = Mathf.RoundToInt(x * (texture.width - 1));
                 int yOnTexture = Mathf.RoundToInt(y * (texture.height - 1));

@@ -10,7 +10,6 @@ namespace DustEngine.DustEditor
     {
         private DuProperty m_Texture;
         private DuProperty m_SpaceUVW;
-        private DuProperty m_WrapMode;
 
         private DuProperty m_FlipU;
         private DuProperty m_FlipV;
@@ -42,7 +41,6 @@ namespace DustEngine.DustEditor
 
             m_Texture = FindProperty("m_Texture", "Texture");
             m_SpaceUVW = FindProperty("m_SpaceUVW", "Space");
-            m_WrapMode = FindProperty("m_WrapMode", "Wrap Mode");
 
             m_FlipU = FindProperty("m_FlipU", "Flip U");
             m_FlipV = FindProperty("m_FlipV", "Flip V");
@@ -67,7 +65,6 @@ namespace DustEngine.DustEditor
             {
                 PropertyField(m_Texture);
                 PropertyField(m_SpaceUVW);
-                PropertyField(m_WrapMode);
 
                 switch ((DuFactoryTextureField.SpaceUVW) m_SpaceUVW.enumValueIndex)
                 {
