@@ -44,6 +44,9 @@ namespace DustEngine.DustEditor
             {
                 PropertyField(m_Size);
                 Space();
+
+                PropertyField(m_CustomHint);
+                Space();
             }
             DustGUI.FoldoutEnd();
 

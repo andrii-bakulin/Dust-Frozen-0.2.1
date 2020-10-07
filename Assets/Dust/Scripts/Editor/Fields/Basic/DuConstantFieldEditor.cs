@@ -47,6 +47,9 @@ namespace DustEngine.DustEditor
                 PropertyExtendedSlider(m_Power, 0f, 1f, 0.01f);
                 PropertyField(m_Color);
                 Space();
+
+                PropertyField(m_CustomHint);
+                Space();
             }
             DustGUI.FoldoutEnd();
 

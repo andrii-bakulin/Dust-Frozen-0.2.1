@@ -214,8 +214,12 @@ namespace DustEngine.DustEditor
 
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-                var fieldName = new GUIContent(newRecord.field.FieldName(), newRecord.field.gameObject.name);
-                var fieldHint = fieldEnabledInScene ? newRecord.field.FieldDynamicHint() : "Field not active";
+                var fieldName = newRecord.field.gameObject.name;
+                var fieldHint = newRecord.field.customHint;
+                var dynamicHint = newRecord.field.FieldDynamicHint();
+
+                if (dynamicHint != "")
+                    fieldHint += (fieldHint != "" ? ", " : "" ) + dynamicHint;
 
                 if (fieldHint != "")
                 {

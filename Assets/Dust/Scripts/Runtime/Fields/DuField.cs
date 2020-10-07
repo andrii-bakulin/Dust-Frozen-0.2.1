@@ -28,13 +28,22 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
+        [SerializeField]
+        protected string m_CustomHint = "";
+        public string customHint
+        {
+            get => m_CustomHint;
+            set => m_CustomHint = value;
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
         private void Start()
         {
             // Require to show enabled-checkbox in editor for all fields
         }
 
         //--------------------------------------------------------------------------------------------------------------
-        // Basic
 
         public abstract string FieldName();
 

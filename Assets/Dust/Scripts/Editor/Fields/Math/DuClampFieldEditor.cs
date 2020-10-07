@@ -72,6 +72,7 @@ namespace DustEngine.DustEditor
             }
             DustGUI.FoldoutEnd();
 
+
             if (DustGUI.FoldoutBegin("Color", "DuClampField.Color"))
             {
                 PropertyField(m_ColorClampMode);
@@ -91,6 +92,9 @@ namespace DustEngine.DustEditor
                 Space();
             }
             DustGUI.FoldoutEnd();
+
+
+            PropertyField(m_CustomHint);
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

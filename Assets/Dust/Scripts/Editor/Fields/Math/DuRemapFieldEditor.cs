@@ -42,6 +42,10 @@ namespace DustEngine.DustEditor
 
             m_RemappingEditor.OnInspectorGUI();
 
+            Space();
+
+            PropertyField(m_CustomHint);
+
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             serializedObject.ApplyModifiedProperties();

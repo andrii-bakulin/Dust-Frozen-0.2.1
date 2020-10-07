@@ -90,6 +90,7 @@ namespace DustEngine.DustEditor
             }
             DustGUI.FoldoutEnd();
 
+
             if (DustGUI.FoldoutBegin("Color", "DuCoordinatesField.Color"))
             {
                 PropertyField(m_ColorEnabled);
@@ -104,6 +105,9 @@ namespace DustEngine.DustEditor
                 if (!m_ColorEnabled.IsTrue) DustGUI.Unlock();
             }
             DustGUI.FoldoutEnd();
+
+
+            PropertyField(m_CustomHint);
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

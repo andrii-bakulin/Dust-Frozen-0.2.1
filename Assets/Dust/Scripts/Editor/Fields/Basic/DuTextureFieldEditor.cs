@@ -83,6 +83,9 @@ namespace DustEngine.DustEditor
                 DustGUI.Header("Color Impact");
                 PropertyField(m_ApplyPowerToAlpha);
                 Space();
+
+                PropertyField(m_CustomHint);
+                Space();
             }
             DustGUI.FoldoutEnd();
 

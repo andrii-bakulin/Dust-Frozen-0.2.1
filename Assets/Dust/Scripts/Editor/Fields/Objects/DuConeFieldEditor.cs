@@ -50,6 +50,9 @@ namespace DustEngine.DustEditor
                 PropertyExtendedSlider(m_Height, 0f, 10f, 0.01f);
                 PropertyField(m_Direction);
                 Space();
+
+                PropertyField(m_CustomHint);
+                Space();
             }
             DustGUI.FoldoutEnd();
 

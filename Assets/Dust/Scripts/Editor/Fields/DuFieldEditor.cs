@@ -5,6 +5,8 @@ namespace DustEngine.DustEditor
 {
     public abstract class DuFieldEditor : DuEditor
     {
+        protected DuProperty m_CustomHint;
+
         //--------------------------------------------------------------------------------------------------------------
 
         public static void AddFieldComponentByType(System.Type duFieldType)
@@ -75,6 +77,7 @@ namespace DustEngine.DustEditor
 
         protected virtual void OnEnableField()
         {
+            m_CustomHint = FindProperty("m_CustomHint", "Hint for Field");
         }
 
         public override void OnInspectorGUI()

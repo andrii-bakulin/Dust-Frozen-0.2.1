@@ -59,6 +59,10 @@ namespace DustEngine.DustEditor
             PropertyField(m_BeforeCurve);
             PropertyField(m_AfterCurve);
 
+            Space();
+
+            PropertyField(m_CustomHint);
+
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             if (m_Shape.isChanged)

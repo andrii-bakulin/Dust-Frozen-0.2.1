@@ -56,6 +56,10 @@ namespace DustEngine.DustEditor
             PropertyExtendedSlider(m_MinOutput, -1f, +2f, 0.01f);
             PropertyExtendedSlider(m_MaxOutput, -1f, +2f, 0.01f);
 
+            Space();
+
+            PropertyField(m_CustomHint);
+
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             serializedObject.ApplyModifiedProperties();
