@@ -219,6 +219,8 @@ namespace DustEngine
             m_CalcFieldPoint.inPosition = worldPosition;
             m_CalcFieldPoint.inOffset = sequenceOffset;
 
+            m_CalcFieldPoint.inFactoryInstanceState = null;
+
             bool result = Calculate(m_CalcFieldPoint);
 
             power = m_CalcFieldPoint.endPower;
@@ -237,6 +239,8 @@ namespace DustEngine
 
             m_CalcFieldPoint.inPosition = worldPosition;
             m_CalcFieldPoint.inOffset = sequenceOffset;
+
+            m_CalcFieldPoint.inFactoryInstanceState = null;
 
             bool result = Calculate(m_CalcFieldPoint);
 
@@ -259,6 +263,8 @@ namespace DustEngine
 
             m_CalcFieldPoint.inPosition = factoryInstanceState.factory.GetInstancePositionInWorldSpace(factoryInstanceState.instance);
             m_CalcFieldPoint.inOffset = factoryInstanceState.instance.offset;
+
+            m_CalcFieldPoint.inFactoryInstanceState = factoryInstanceState;
 
             bool result = Calculate(m_CalcFieldPoint);
 

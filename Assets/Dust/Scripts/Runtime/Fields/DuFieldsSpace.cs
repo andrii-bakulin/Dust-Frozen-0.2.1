@@ -20,6 +20,8 @@ namespace DustEngine
             m_CalcFieldPoint.inPosition = worldPosition;
             m_CalcFieldPoint.inOffset = 0;
 
+            m_CalcFieldPoint.inFactoryInstanceState = null;
+
             fieldsMap.Calculate(m_CalcFieldPoint);
 
             return m_CalcFieldPoint.endPower;
@@ -30,6 +32,8 @@ namespace DustEngine
             m_CalcFieldPoint.inPosition = worldPosition;
             m_CalcFieldPoint.inOffset = 0;
 
+            m_CalcFieldPoint.inFactoryInstanceState = null;
+
             fieldsMap.Calculate(m_CalcFieldPoint);
 
             return m_CalcFieldPoint.endColor;
@@ -39,6 +43,8 @@ namespace DustEngine
         {
             m_CalcFieldPoint.inPosition = worldPosition;
             m_CalcFieldPoint.inOffset = 0;
+
+            m_CalcFieldPoint.inFactoryInstanceState = null;
 
             fieldsMap.Calculate(m_CalcFieldPoint);
 
