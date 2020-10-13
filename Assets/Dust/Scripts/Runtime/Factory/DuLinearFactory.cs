@@ -31,7 +31,7 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private Vector3 m_Position = Vector3.up;
+        private Vector3 m_Position = Vector3.right * 5f;
         public Vector3 position
         {
             get => m_Position;
