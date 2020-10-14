@@ -3,7 +3,10 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    public abstract class DuExtendedFactoryMachineEditor : DuFactoryMachineEditor
+    [CustomEditor(typeof(DuBasicFactoryMachine))]
+    [CanEditMultipleObjects]
+    [InitializeOnLoad]
+    public class DuBasicFactoryMachineEditor : DuFactoryMachineEditor
     {
         protected DuProperty m_ValueImpactEnabled;
         protected DuProperty m_ValueImpactIntensity;
@@ -20,6 +23,24 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
+        static DuBasicFactoryMachineEditor()
+        {
+            DuPopupButtons.AddFactoryMachine(typeof(DuBasicFactoryMachine), "Basic");
+        }
+
+        [MenuItem("Dust/Factory/Machines/Basic")]
+        public static void AddComponent()
+        {
+            AddFactoryMachineComponentByType(typeof(DuBasicFactoryMachine));
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        void OnEnable()
+        {
+            OnEnableFactoryMachine();
+        }
+
         protected override void OnEnableFactoryMachine()
         {
             base.OnEnableFactoryMachine();
@@ -35,7 +56,27 @@ namespace DustEngine.DustEditor
             m_ColorImpactIntensity = FindProperty("m_ColorImpactIntensity", "Intensity");
             m_ColorBlendMode = FindProperty("m_ColorBlendMode", "Blend Mode");
 
-            m_FieldsMapEditor = new DuFieldsMapEditor(this, serializedObject.FindProperty("m_FieldsMap"), (target as DuExtendedFactoryMachine).fieldsMap);
+            m_FieldsMapEditor = new DuFieldsMapEditor(this, serializedObject.FindProperty("m_FieldsMap"), (target as DuBasicFactoryMachine).fieldsMap);
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
+
+            serializedObject.Update();
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            OnInspectorGUI_BaseParameters();
+            OnInspectorGUI_ImpactOnValueBlock();
+            OnInspectorGUI_ImpactOnColorBlock();
+            OnInspectorGUI_FieldsMap();
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            serializedObject.ApplyModifiedProperties();
         }
 
         //--------------------------------------------------------------------------------------------------------------

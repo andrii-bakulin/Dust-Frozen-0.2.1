@@ -6,7 +6,7 @@ namespace DustEngine.DustEditor
     [CustomEditor(typeof(DuLookAtFactoryMachine))]
     [CanEditMultipleObjects]
     [InitializeOnLoad]
-    public class DuLookAtFactoryMachineEditor : DuExtendedFactoryMachineEditor
+    public class DuLookAtFactoryMachineEditor : DuBasicFactoryMachineEditor
     {
         private DuProperty m_TargetMode;
         private DuProperty m_TargetObject;
@@ -26,7 +26,7 @@ namespace DustEngine.DustEditor
         }
 
         [MenuItem("Dust/Factory/Machines/LookAt")]
-        public static void AddComponent()
+        public new static void AddComponent()
         {
             AddFactoryMachineComponentByType(typeof(DuLookAtFactoryMachine));
         }

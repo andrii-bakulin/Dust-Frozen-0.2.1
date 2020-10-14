@@ -29,7 +29,7 @@ namespace DustEngine.DustEditor
         }
 
         [MenuItem("Dust/Factory/Machines/Noise")]
-        public static void AddComponent()
+        public new static void AddComponent()
         {
             AddFactoryMachineComponentByType(typeof(DuNoiseFactoryMachine));
         }

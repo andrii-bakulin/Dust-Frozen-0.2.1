@@ -3,7 +3,7 @@
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Factory/Machines/LookAt Machine")]
-    public class DuLookAtFactoryMachine : DuExtendedFactoryMachine
+    public class DuLookAtFactoryMachine : DuBasicFactoryMachine
     {
         public enum TargetMode
         {

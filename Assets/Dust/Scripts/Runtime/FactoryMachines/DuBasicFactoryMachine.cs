@@ -2,7 +2,7 @@
 
 namespace DustEngine
 {
-    public abstract class DuExtendedFactoryMachine : DuFactoryMachine
+    public class DuBasicFactoryMachine : DuFactoryMachine
     {
         public enum ValueBlendMode
         {
@@ -114,6 +114,18 @@ namespace DustEngine
         public DuFieldsMap fieldsMap => m_FieldsMap;
 
         //--------------------------------------------------------------------------------------------------------------
+
+        public override string FactoryMachineName()
+        {
+            return "Basic";
+        }
+
+        public override string FactoryMachineDynamicHint()
+        {
+            return "";
+        }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         public override bool PrepareForUpdateInstancesStates(FactoryInstanceState factoryInstanceState)
         {
@@ -275,6 +287,16 @@ namespace DustEngine
 
             instanceState.color = Color.LerpUnclamped(instanceState.color, newColor, finalIntensity);
             instanceState.color.Clamp01();
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        void Reset()
+        {
+            valueImpactEnabled = true;
+            colorImpactEnabled = true;
+
+            fieldsMap.defaultColor = new Color(0.66f, 0.12f, 0.83f);
         }
     }
 }

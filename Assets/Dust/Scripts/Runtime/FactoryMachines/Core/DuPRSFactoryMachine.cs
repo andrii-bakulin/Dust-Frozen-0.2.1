@@ -2,7 +2,7 @@
 
 namespace DustEngine
 {
-    public abstract class DuPRSFactoryMachine : DuExtendedFactoryMachine
+    public abstract class DuPRSFactoryMachine : DuBasicFactoryMachine
     {
         /**
          * Calculation steps:

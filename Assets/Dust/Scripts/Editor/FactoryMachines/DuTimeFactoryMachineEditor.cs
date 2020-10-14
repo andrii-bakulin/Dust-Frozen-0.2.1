@@ -16,7 +16,7 @@ namespace DustEngine.DustEditor
         }
 
         [MenuItem("Dust/Factory/Machines/Time")]
-        public static void AddComponent()
+        public new static void AddComponent()
         {
             AddFactoryMachineComponentByType(typeof(DuTimeFactoryMachine));
         }
@@ -37,9 +37,7 @@ namespace DustEngine.DustEditor
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             OnInspectorGUI_BaseParameters();
-
             OnInspectorGUI_TransformBlock();
-
             OnInspectorGUI_ImpactOnValueBlock();
             OnInspectorGUI_ImpactOnColorBlock();
             OnInspectorGUI_FieldsMap();
