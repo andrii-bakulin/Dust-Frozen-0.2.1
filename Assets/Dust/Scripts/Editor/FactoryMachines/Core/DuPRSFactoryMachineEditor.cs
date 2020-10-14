@@ -47,14 +47,12 @@ namespace DustEngine.DustEditor
         {
             if (DustGUI.FoldoutBegin("Parameters", "DuFactoryMachine.Parameters"))
             {
+                PropertyField(m_CustomHint);
                 PropertyExtendedSlider(m_Intensity, 0f, 1f, 0.01f);
                 Space();
 
                 PropertyExtendedSlider(m_Max, -1f, +1f, 0.01f);
                 PropertyExtendedSlider(m_Min, -1f, +1f, 0.01f);
-                Space();
-
-                PropertyField(m_CustomHint);
                 Space();
             }
             DustGUI.FoldoutEnd();
