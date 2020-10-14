@@ -153,8 +153,11 @@ namespace DustEngine
 
             var instanceState = factoryInstanceState.instance.stateDynamic;
 
+            float endIntensity = factoryInstanceState.intensityByFactory
+                                 * factoryInstanceState.intensityByMachine
+                                 * factoryInstanceState.fieldPower;
+
             Vector3 updateForValue = position;
-            updateForValue *= factoryInstanceState.intensityByFactory * factoryInstanceState.intensityByMachine;
 
             if (factoryInstanceState.extraIntensityEnabled)
                 updateForValue.Scale(factoryInstanceState.extraIntensityPosition);
@@ -166,11 +169,11 @@ namespace DustEngine
             switch (positionTransformMode)
             {
                 case TransformMode.Relative:
-                    instanceState.position += updateForValue * factoryInstanceState.fieldPower;
+                    instanceState.position += updateForValue * endIntensity;
                     break;
 
                 case TransformMode.Absolute:
-                    instanceState.position = Vector3.LerpUnclamped(instanceState.position, updateForValue, factoryInstanceState.fieldPower);
+                    instanceState.position = Vector3.LerpUnclamped(instanceState.position, updateForValue, endIntensity);
                     break;
             }
         }
@@ -182,8 +185,11 @@ namespace DustEngine
 
             var instanceState = factoryInstanceState.instance.stateDynamic;
 
+            float endIntensity = factoryInstanceState.intensityByFactory
+                                 * factoryInstanceState.intensityByMachine
+                                 * factoryInstanceState.fieldPower;
+
             Vector3 updateForValue = rotation;
-            updateForValue *= factoryInstanceState.intensityByFactory * factoryInstanceState.intensityByMachine;
 
             if (factoryInstanceState.extraIntensityEnabled)
                 updateForValue.Scale(factoryInstanceState.extraIntensityRotation);
@@ -191,11 +197,11 @@ namespace DustEngine
             switch (rotationTransformMode)
             {
                 case TransformMode.Relative:
-                    instanceState.rotation += updateForValue * factoryInstanceState.fieldPower;
+                    instanceState.rotation += updateForValue * endIntensity;
                     break;
 
                 case TransformMode.Absolute:
-                    instanceState.rotation = Vector3.LerpUnclamped(instanceState.rotation, updateForValue, factoryInstanceState.fieldPower);
+                    instanceState.rotation = Vector3.LerpUnclamped(instanceState.rotation, updateForValue, endIntensity);
                     break;
             }
         }
@@ -207,7 +213,11 @@ namespace DustEngine
 
             var instanceState = factoryInstanceState.instance.stateDynamic;
 
-            Vector3 endScale = scale * (factoryInstanceState.intensityByFactory * factoryInstanceState.intensityByMachine);
+            float endIntensity = factoryInstanceState.intensityByFactory
+                                 * factoryInstanceState.intensityByMachine
+                                 * factoryInstanceState.fieldPower;
+
+            Vector3 endScale = scale;
 
             if (factoryInstanceState.extraIntensityEnabled)
                 endScale.Scale(factoryInstanceState.extraIntensityScale);
@@ -216,16 +226,16 @@ namespace DustEngine
             // then result should be 4.0f (not 3.0f)
             // So here require recalculate updateForValue bases on current object scale
             // And later apply field-power
-            Vector3 newRelativeValue = Vector3.Scale(instanceState.scale, endScale);
+            endScale = Vector3.Scale(instanceState.scale, endScale);
 
             switch (scaleTransformMode)
             {
                 case TransformMode.Relative:
-                    instanceState.scale += newRelativeValue * factoryInstanceState.fieldPower;
+                    instanceState.scale += endScale * endIntensity;
                     break;
 
                 case TransformMode.Absolute:
-                    instanceState.scale = Vector3.LerpUnclamped(instanceState.scale, newRelativeValue, factoryInstanceState.fieldPower);
+                    instanceState.scale = Vector3.LerpUnclamped(instanceState.scale, endScale, endIntensity);
                     break;
             }
         }
