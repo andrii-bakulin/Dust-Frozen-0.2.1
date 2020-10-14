@@ -146,8 +146,7 @@ namespace DustEngine
         private DuNoise duNoiseRot => m_DuNoiseRot ?? (m_DuNoiseRot = new DuNoise(seed + 1235));
         private DuNoise duNoiseScl => m_DuNoiseScl ?? (m_DuNoiseScl = new DuNoise(seed - 1235));
 
-        private float m_TimeSinceStart;
-        public float timeSinceStart => m_TimeSinceStart;
+        private float m_OffsetDynamic;
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -165,7 +164,7 @@ namespace DustEngine
 
         void Update()
         {
-            m_TimeSinceStart += Time.deltaTime;
+            m_OffsetDynamic += Time.deltaTime * animationSpeed;
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -220,7 +219,7 @@ namespace DustEngine
 
                 case NoiseMode.Perlin:
                 {
-                    float animTotalOffset = (m_TimeSinceStart + animationOffset) * animationSpeed;
+                    float animTotalOffset = m_OffsetDynamic + animationOffset * animationSpeed;
                     Vector3 inSpaceOffset;
 
                     switch (noiseSpace)
