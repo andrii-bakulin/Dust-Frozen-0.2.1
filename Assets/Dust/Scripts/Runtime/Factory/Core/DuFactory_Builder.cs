@@ -44,13 +44,17 @@ namespace DustEngine
             // Instantiate All Instances + Ignore NULL elements + finally repack to array
 
             var instancesPacked = new List<DuFactoryInstance>();
+            var instancesRandom = new DuRandom(seed);
 
             builder.ObjectsQueue_Initialize();
 
             int instancesCount = builder.GetTotalInstancesCount();
             for (int instanceIndex = 0; instanceIndex < instancesCount; instanceIndex++)
             {
-                var instance = builder.CreateFactoryInstance(instanceIndex, instancesCount);
+                float randomScalar = instancesRandom.Next();
+                Vector3 randomVector = instancesRandom.NextVector3();
+
+                var instance = builder.CreateFactoryInstance(instanceIndex, instancesCount, randomScalar, randomVector);
 
                 if (Dust.IsNull(instance))
                     continue;
@@ -63,7 +67,7 @@ namespace DustEngine
             m_Instances = instancesPacked.ToArray();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            // Create prev/next instance refernces
+            // Create prev/next instance references
 
             for (int i = 0; i < m_Instances.Length; i++)
             {

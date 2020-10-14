@@ -26,7 +26,7 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Instance Manager
 
-        internal DuFactoryInstance CreateFactoryInstance(int instanceIndex, int instancesCount)
+        internal DuFactoryInstance CreateFactoryInstance(int instanceIndex, int instancesCount, float randomScalar, Vector3 randomVector)
         {
             GameObject prefab = ObjectsQueue_GetNextPrefab();
 
@@ -64,7 +64,7 @@ namespace DustEngine
 
             float instanceOffset = instancesCount > 1 ? (float) instanceIndex / (instancesCount - 1) : 0f;
 
-            duFactoryInstance.Initialize(m_DuFactory, instanceIndex, instanceOffset);
+            duFactoryInstance.Initialize(m_DuFactory, instanceIndex, instanceOffset, randomScalar, randomVector);
 
             return duFactoryInstance;
         }

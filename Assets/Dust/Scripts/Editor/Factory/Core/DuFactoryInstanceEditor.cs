@@ -9,6 +9,8 @@ namespace DustEngine.DustEditor
     {
         private DuProperty m_Index;
         private DuProperty m_Offset;
+        private DuProperty m_RandomScalar;
+        private DuProperty m_RandomVector;
         private DuProperty m_MaterialReferences;
 
         //--------------------------------------------------------------------------------------------------------------
@@ -25,6 +27,8 @@ namespace DustEngine.DustEditor
         {
             m_Index = FindProperty("m_Index", "Index");
             m_Offset = FindProperty("m_Offset", "Offset");
+            m_RandomScalar = FindProperty("m_RandomScalar", "Random Scalar");
+            m_RandomVector = FindProperty("m_RandomVector", "Random Vector");
             m_MaterialReferences = FindProperty("m_MaterialReferences");
         }
 
@@ -42,6 +46,8 @@ namespace DustEngine.DustEditor
             {
                 PropertyFieldOrLock(m_Index, true);
                 PropertyFieldOrLock(m_Offset, true);
+                PropertyFieldOrLock(m_RandomScalar, true);
+                PropertyFieldOrLock(m_RandomVector, true);
                 Space();
             }
 
