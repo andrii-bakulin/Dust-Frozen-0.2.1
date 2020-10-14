@@ -58,7 +58,7 @@ namespace DustEngine.DustEditor
 
             OnInspectorGUI_BaseParameters();
 
-            if (DustGUI.FoldoutBegin("LookAt", "DuLookAtFactoryMachine.LookAt"))
+            if (DustGUI.FoldoutBegin("LookAt", "DuFactoryMachine.LookAt"))
             {
                 PropertyField(m_TargetMode);
                 PropertyFieldOrHide(m_TargetObject, (DuLookAtFactoryMachine.TargetMode) m_TargetMode.enumValueIndex

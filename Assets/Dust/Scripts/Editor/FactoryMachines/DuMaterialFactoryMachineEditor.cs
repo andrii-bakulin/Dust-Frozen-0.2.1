@@ -36,7 +36,7 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            if (DustGUI.FoldoutBegin("Parameters", "DuMaterialFactoryMachine.Parameters"))
+            if (DustGUI.FoldoutBegin("Parameters", "DuFactoryMachine.Parameters"))
             {
                 PropertyExtendedSlider(m_Intensity, 0f, 1f, 0.01f);
                 Space();

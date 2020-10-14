@@ -40,6 +40,9 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
+        // WARNING!
+        // On change logic/structure here, also required to check changes in parent/children methods
+        // with same method name/links
         protected void OnInspectorGUI_ImpactOnValueBlock()
         {
             if (DustGUI.FoldoutBegin("Impact On Instances Value", "DuFactoryMachine.ImpactOnValue"))
@@ -69,6 +72,9 @@ namespace DustEngine.DustEditor
             DustGUI.FoldoutEnd();
         }
 
+        // WARNING!
+        // On change logic/structure here, also required to check changes in parent/children methods
+        // with same method name/links
         protected void OnInspectorGUI_ImpactOnColorBlock()
         {
             if (DustGUI.FoldoutBegin("Impact On Instances Color", "DuFactoryMachine.ImpactOnColor"))
@@ -85,6 +91,9 @@ namespace DustEngine.DustEditor
             DustGUI.FoldoutEnd();
         }
 
+        // WARNING!
+        // On change logic/structure here, also required to check changes in parent/children methods
+        // with same method name/links
         protected void OnInspectorGUI_FieldsMap()
         {
             var showColumnPower = DuFieldsMapEditor.ColumnVisibility.Auto;

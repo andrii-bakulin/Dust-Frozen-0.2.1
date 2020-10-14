@@ -40,6 +40,9 @@ namespace DustEngine.DustEditor
             m_Scale = FindProperty("m_Scale", "Value");
         }
 
+        // WARNING!
+        // On change logic/structure here, also required to check changes in parent/children methods
+        // with same method name/links
         protected override void OnInspectorGUI_BaseParameters()
         {
             if (DustGUI.FoldoutBegin("Parameters", "DuFactoryMachine.Parameters"))
@@ -57,6 +60,9 @@ namespace DustEngine.DustEditor
             DustGUI.FoldoutEnd();
         }
 
+        // WARNING!
+        // On change logic/structure here, also required to check changes in parent/children methods
+        // with same method name/links
         protected void OnInspectorGUI_TransformBlock()
         {
             if (DustGUI.FoldoutBegin("Transform", "DuFactoryMachine.Transform"))
