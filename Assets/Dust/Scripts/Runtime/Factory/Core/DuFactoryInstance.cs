@@ -140,6 +140,19 @@ namespace DustEngine
         public float offset => m_Offset;
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        // This random values generated once on create Factory Instance.
+        // If factory will regenerate instances in future with the same inner parameters,
+        // then this values will be also the same
+
+        [SerializeField]
+        private float m_RandomScalar;
+        public float randomScalar => m_RandomScalar;
+
+        [SerializeField]
+        private Vector3 m_RandomVector;
+        public Vector3 randomVector => m_RandomVector;
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
         private State m_StateZero = new State();
@@ -194,11 +207,13 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public void Initialize(DuFactory duFactory, int initIndex, float initOffset)
+        public void Initialize(DuFactory duFactory, int initIndex, float initOffset, float initRandomScalar, Vector3 initRandomVector)
         {
             m_ParentFactory = duFactory;
             m_Index = initIndex;
             m_Offset = initOffset;
+            m_RandomScalar = initRandomScalar;
+            m_RandomVector = initRandomVector;
         }
 
         internal void SetPrevNextInstances(DuFactoryInstance prevFactoryInstance, DuFactoryInstance nextFactoryInstance)
