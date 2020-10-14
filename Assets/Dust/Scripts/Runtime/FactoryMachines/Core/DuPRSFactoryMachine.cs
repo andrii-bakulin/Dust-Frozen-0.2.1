@@ -50,24 +50,6 @@ namespace DustEngine
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
-        protected TransformMode m_TransformMode = TransformMode.Relative;
-        public TransformMode transformMode
-        {
-            get => m_TransformMode;
-            set => m_TransformMode = value;
-        }
-
-        [SerializeField]
-        protected TransformSpace m_TransformSpace = TransformSpace.Factory;
-        public TransformSpace transformSpace
-        {
-            get => m_TransformSpace;
-            set => m_TransformSpace = value;
-        }
-
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-        [SerializeField]
         protected bool m_PositionEnabled = true;
         public bool positionEnabled
         {
@@ -81,6 +63,22 @@ namespace DustEngine
         {
             get => m_Position;
             set => m_Position = value;
+        }
+
+        [SerializeField]
+        protected TransformSpace m_PositionTransformSpace = TransformSpace.Instance;
+        public TransformSpace positionTransformSpace
+        {
+            get => m_PositionTransformSpace;
+            set => m_PositionTransformSpace = value;
+        }
+
+        [SerializeField]
+        protected TransformMode m_PositionTransformMode = TransformMode.Relative;
+        public TransformMode positionTransformMode
+        {
+            get => m_PositionTransformMode;
+            set => m_PositionTransformMode = value;
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -101,6 +99,14 @@ namespace DustEngine
             set => m_Rotation = value;
         }
 
+        [SerializeField]
+        protected TransformMode m_RotationTransformMode = TransformMode.Relative;
+        public TransformMode rotationTransformMode
+        {
+            get => m_RotationTransformMode;
+            set => m_RotationTransformMode = value;
+        }
+
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
@@ -117,6 +123,14 @@ namespace DustEngine
         {
             get => m_Scale;
             set => m_Scale = value;
+        }
+
+        [SerializeField]
+        protected TransformMode m_ScaleTransformMode = TransformMode.Relative;
+        public TransformMode scaleTransformMode
+        {
+            get => m_ScaleTransformMode;
+            set => m_ScaleTransformMode = value;
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -145,33 +159,19 @@ namespace DustEngine
             if (factoryInstanceState.extraIntensityEnabled)
                 updateForValue.Scale(factoryInstanceState.extraIntensityPosition);
 
-            switch (transformSpace)
+            if (positionTransformSpace == TransformSpace.Instance)
+                updateForValue = DuMath.RotatePoint(updateForValue, instanceState.rotation);
+            // else: if TransformSpace.Factory -> nothing need to do
+
+            switch (positionTransformMode)
             {
-                case TransformSpace.Factory:
-                {
-                    // Work same for both TransformModes
-
-                    updateForValue = DuMath.RotatePoint(updateForValue, instanceState.rotation);
-
+                case TransformMode.Relative:
                     instanceState.position += updateForValue * factoryInstanceState.fieldPower;
                     break;
-                }
 
-                case TransformSpace.Instance:
-                {
-                    switch (transformMode)
-                    {
-                        case TransformMode.Relative:
-                            instanceState.position += updateForValue * factoryInstanceState.fieldPower;
-                            break;
-
-                        case TransformMode.Absolute:
-                            instanceState.position = Vector3.LerpUnclamped(instanceState.position, updateForValue, factoryInstanceState.fieldPower);
-                            break;
-                    }
-
+                case TransformMode.Absolute:
+                    instanceState.position = Vector3.LerpUnclamped(instanceState.position, updateForValue, factoryInstanceState.fieldPower);
                     break;
-                }
             }
         }
 
@@ -188,7 +188,7 @@ namespace DustEngine
             if (factoryInstanceState.extraIntensityEnabled)
                 updateForValue.Scale(factoryInstanceState.extraIntensityRotation);
 
-            switch (transformMode)
+            switch (rotationTransformMode)
             {
                 case TransformMode.Relative:
                     instanceState.rotation += updateForValue * factoryInstanceState.fieldPower;
@@ -218,7 +218,7 @@ namespace DustEngine
             // And later apply field-power
             Vector3 newRelativeValue = Vector3.Scale(instanceState.scale, endScale);
 
-            switch (transformMode)
+            switch (scaleTransformMode)
             {
                 case TransformMode.Relative:
                     instanceState.scale += newRelativeValue * factoryInstanceState.fieldPower;
@@ -228,6 +228,13 @@ namespace DustEngine
                     instanceState.scale = Vector3.LerpUnclamped(instanceState.scale, newRelativeValue, factoryInstanceState.fieldPower);
                     break;
             }
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        void Reset()
+        {
+            // Define default states
         }
     }
 }
