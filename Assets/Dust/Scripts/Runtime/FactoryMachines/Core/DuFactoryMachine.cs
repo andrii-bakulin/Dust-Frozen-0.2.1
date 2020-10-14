@@ -16,7 +16,7 @@ namespace DustEngine
             public float fieldPower;
             public Color fieldColor;
 
-            // Calculated-n-Supported params:               // Use by FactoryMachine: Random
+            // Calculated-n-Supported params:               // Use by FactoryMachine: Noise
             public bool extraIntensityEnabled;
             public Vector3 extraIntensityPosition;
             public Vector3 extraIntensityRotation;

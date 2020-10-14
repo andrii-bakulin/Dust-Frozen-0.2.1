@@ -261,7 +261,7 @@ namespace DustEngine
                 return false;
             }
 
-            m_CalcFieldPoint.inPosition = factoryInstanceState.factory.GetInstancePositionInWorldSpace(factoryInstanceState.instance);
+            m_CalcFieldPoint.inPosition = factoryInstanceState.factory.GetPositionInWorldSpace(factoryInstanceState.instance);
             m_CalcFieldPoint.inOffset = factoryInstanceState.instance.offset;
 
             m_CalcFieldPoint.inFactoryInstanceState = factoryInstanceState;

@@ -128,7 +128,14 @@ namespace DustEngine
         public int seed
         {
             get => m_Seed;
-            set => m_Seed = value;
+            set
+            {
+                if (m_Seed == value)
+                    return;
+
+                m_Seed = value;
+                m_DuRandom = null;
+            }
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

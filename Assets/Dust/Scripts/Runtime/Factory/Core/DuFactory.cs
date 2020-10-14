@@ -171,7 +171,7 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public Vector3 GetInstancePositionInWorldSpace(DuFactoryInstance factoryInstance)
+        public Vector3 GetPositionInWorldSpace(DuFactoryInstance factoryInstance)
         {
             return transform.TransformPoint(factoryInstance.stateDynamic.position);
         }
