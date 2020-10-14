@@ -31,5 +31,12 @@ namespace DustEngine
         public override void FinalizeUpdateInstancesStates(FactoryInstanceState factoryInstanceState)
         {
         }
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        void Reset()
+        {
+            // Define default states
+        }
     }
 }

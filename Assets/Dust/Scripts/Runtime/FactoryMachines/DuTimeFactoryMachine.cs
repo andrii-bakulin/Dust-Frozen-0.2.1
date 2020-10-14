@@ -35,5 +35,12 @@ namespace DustEngine
 
             UpdateInstanceDynamicState(factoryInstanceState, intensityByMachine);
         }
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        void Reset()
+        {
+            // Define default states
+        }
     }
 }

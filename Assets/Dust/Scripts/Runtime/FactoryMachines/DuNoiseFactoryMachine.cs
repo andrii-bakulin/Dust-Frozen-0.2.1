@@ -316,6 +316,7 @@ namespace DustEngine
         void Reset()
         {
             min = -1f;
+            ResetStates();
         }
 
         public void ResetStates()

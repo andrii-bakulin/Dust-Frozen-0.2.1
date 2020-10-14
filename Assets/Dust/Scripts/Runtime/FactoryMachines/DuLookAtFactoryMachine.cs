@@ -213,5 +213,12 @@ namespace DustEngine
 
             factoryInstance.stateDynamic.rotation = endRotation;
         }
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        void Reset()
+        {
+            // Define default states
+        }
     }
 }
