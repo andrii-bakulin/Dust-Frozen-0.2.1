@@ -55,12 +55,6 @@ namespace DustEngine.DustEditor
             m_Intensity = FindProperty("m_Intensity", "Intensity");
         }
 
-        public override void OnInspectorGUI()
-        {
-            // Hide default OnInspectorGUI() call
-            // Extend all-factoryMachines-view if need in future...
-        }
-
         // WARNING!
         // On change logic/structure here, also required to check changes in parent/children methods
         // with same method name/links
