@@ -21,7 +21,14 @@ namespace DustEngine
         public int seed
         {
             get => m_Seed;
-            set => m_Seed = value;
+            set
+            {
+                if (m_Seed == value)
+                    return;
+
+                m_Seed = value;
+                n_DuNoise = null;
+            }
         }
 
         [SerializeField]
@@ -201,7 +208,7 @@ namespace DustEngine
                 if (power > 0f)
                 {
                     deltaPosition = positionAmplitude * power;
-                    deltaPosition.Scale(duNoise.PerlinNoiseWideVector3(m_PositionTimeOffset));
+                    deltaPosition.Scale(duNoise.Perlin1D_asWideVector3(0f, m_PositionTimeOffset));
                 }
 
                 switch (transformMode)
@@ -233,7 +240,7 @@ namespace DustEngine
                 if (power > 0f)
                 {
                     deltaRotation = rotationAmplitude * power;
-                    deltaRotation.Scale(duNoise.PerlinNoiseWideVector3(m_RotationTimeOffset));
+                    deltaRotation.Scale(duNoise.Perlin1D_asWideVector3(0f, m_RotationTimeOffset));
                 }
 
                 switch (transformMode)
@@ -268,11 +275,11 @@ namespace DustEngine
 
                     if (scaleUniform)
                     {
-                        noiseValue.x = noiseValue.y = noiseValue.z = duNoise.PerlinNoiseWide(m_ScaleTimeOffset);
+                        noiseValue.x = noiseValue.y = noiseValue.z = duNoise.Perlin1D_asWide(0f, m_ScaleTimeOffset);
                     }
                     else
                     {
-                        noiseValue = duNoise.PerlinNoiseWideVector3(m_ScaleTimeOffset);
+                        noiseValue = duNoise.Perlin1D_asWideVector3(0f, m_ScaleTimeOffset);
                     }
 
                     multScale.x = CalcScaleValue(scaleAmplitude.x, noiseValue.x);
