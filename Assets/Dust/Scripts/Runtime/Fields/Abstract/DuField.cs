@@ -111,7 +111,7 @@ namespace DustEngine
                 color.a = 1f;
             }
 
-            color.Clamp01();
+            color.duClamp01();
             return color;
         }
 
@@ -136,7 +136,7 @@ namespace DustEngine
             {
                 case DuRemapping.ColorMode.Color:
                     intensity = remapping.color.a;
-                    return remapping.color.ToGradient();
+                    return remapping.color.duToGradient();
 
                 case DuRemapping.ColorMode.Gradient:
                     intensity = 1f;
@@ -144,7 +144,7 @@ namespace DustEngine
 
                 default:
                     intensity = 1f;
-                    return Color.magenta.ToGradient();
+                    return Color.magenta.duToGradient();
             }
         }
     }

@@ -113,7 +113,7 @@ namespace DustEngine
                 result.fieldColor.r = shape.Evaluate(RecalculateValue(result.fieldColor.r));
                 result.fieldColor.g = shape.Evaluate(RecalculateValue(result.fieldColor.g));
                 result.fieldColor.b = shape.Evaluate(RecalculateValue(result.fieldColor.b));
-                result.fieldColor.Clamp01();
+                result.fieldColor.duClamp01();
             }
             else
             {
@@ -201,8 +201,7 @@ namespace DustEngine
         {
             public static AnimationCurve Shape(AnimationCurve curve)
             {
-                curve.ClampTime(0f, 1f, true);
-                curve.ClampValues(0f, 1f);
+                curve.duClamp01TimeAndValues(true);
                 return curve;
             }
         }

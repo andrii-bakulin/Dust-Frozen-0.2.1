@@ -78,7 +78,7 @@ namespace DustEngine
             switch (axisColorMode)
             {
                 case AxisColorMode.AutoSetByDirection:
-                    Handles.color = direction.normalized.abs().ToColor();
+                    Handles.color = direction.normalized.duToAbs().duToColor();
                     break;
 
                 case AxisColorMode.AxisX:

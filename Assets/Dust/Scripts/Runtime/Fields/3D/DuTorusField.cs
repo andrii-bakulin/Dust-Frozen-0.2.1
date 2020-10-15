@@ -72,7 +72,7 @@ namespace DustEngine
 
                 // Convert 3D point to 2D (x; y-&-z) -> (x; y)
                 Vector2 localPoint2D = new Vector2(localPosition.x, DuMath.Length(localPosition.y, localPosition.z));
-                localPoint2D = localPoint2D.abs();
+                localPoint2D.duAbs();
 
                 // Move center to torus radius (center of thickness-radius)
                 localPoint2D.y -= radius;

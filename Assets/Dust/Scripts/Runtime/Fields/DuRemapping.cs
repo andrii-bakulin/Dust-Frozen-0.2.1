@@ -262,8 +262,7 @@ namespace DustEngine
 
             public static AnimationCurve PostCurve(AnimationCurve curve)
             {
-                curve.ClampTime(0f, 1f, true);
-                curve.ClampValues(0f, 1f);
+                curve.duClamp01TimeAndValues(true);
                 return curve;
             }
         }

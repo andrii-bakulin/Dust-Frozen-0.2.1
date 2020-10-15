@@ -286,7 +286,7 @@ namespace DustEngine
             }
 
             instanceState.color = Color.LerpUnclamped(instanceState.color, newColor, finalIntensity);
-            instanceState.color.Clamp01();
+            instanceState.color.duClamp01();
         }
 
         //--------------------------------------------------------------------------------------------------------------

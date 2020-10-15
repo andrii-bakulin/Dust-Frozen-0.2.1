@@ -274,7 +274,7 @@ namespace DustEngine
 
             if (calculateColor && colorEnabled && DuMath.IsNotZero(colorScale))
             {
-                result.fieldColor = localPoint.ToColor();
+                result.fieldColor = localPoint.duToColor();
 
                 result.fieldColor.r = RepackValueByShape(colorShape, result.fieldColor.r / colorScale, 0f, 1f);
                 result.fieldColor.g = RepackValueByShape(colorShape, result.fieldColor.g / colorScale, 0f, 1f);

@@ -295,7 +295,7 @@ namespace DustEngine
                     case TransformMode.Relative:
                     {
                         Vector3 scale = transform.localScale;
-                        scale.InverseScale(m_LastMultScale);
+                        scale.duInverseScale(m_LastMultScale);
                         scale.Scale(multScale);
                         transform.localScale = scale;
                         break;

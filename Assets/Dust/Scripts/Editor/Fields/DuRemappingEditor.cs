@@ -64,7 +64,7 @@ namespace DustEngine.DustEditor
             {
                 DuEditor.PropertyField(m_RemapForceEnabled);
 
-                PropertyMappingGraph(m_Remapping, m_Color.valColor.ToRGBWithoutAlpha(), showGraphMirrored);
+                PropertyMappingGraph(m_Remapping, m_Color.valColor.duToRGBWithoutAlpha(), showGraphMirrored);
 
                 if (m_RemapForceEnabled.IsTrue)
                 {

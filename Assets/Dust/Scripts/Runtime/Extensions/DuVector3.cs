@@ -4,72 +4,12 @@ namespace DustEngine
 {
     public static class DuVector3
     {
-        //--------------------------------------------------------------------------------------------------------------
-        // Extensions for Vector3
-
-        public static void InverseScale(ref this Vector3 self, Vector3 scale)
-        {
-            self.x /= scale.x;
-            self.y /= scale.y;
-            self.z /= scale.z;
-        }
-
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-        public static void Abs(ref this Vector3 self)
-        {
-            self = DuVector3.Abs(self);
-        }
-
-        public static Vector3 abs(this Vector3 self) => DuVector3.Abs(self);
-
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-        public static void Fit01To(ref this Vector3 self, float min, float max)
-            => Fit01To(ref self, min, max, false);
-
-        public static void Fit01To(ref this Vector3 self, float min, float max, bool clamped)
-        {
-            self.x = DuMath.Fit01To(min, max, self.x, clamped);
-            self.y = DuMath.Fit01To(min, max, self.y, clamped);
-            self.z = DuMath.Fit01To(min, max, self.z, clamped);
-        }
-
-        public static void Fit01To(ref this Vector3 self, Vector3 min, Vector3 max)
-            => Fit01To(ref self, min, max, false);
-
-        public static void Fit01To(ref this Vector3 self, Vector3 min, Vector3 max, bool clamped)
-        {
-            self.x = DuMath.Fit01To(min.x, max.x, self.x, clamped);
-            self.y = DuMath.Fit01To(min.y, max.y, self.y, clamped);
-            self.z = DuMath.Fit01To(min.z, max.z, self.z, clamped);
-        }
-
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-        public static Color ToColor(this Vector3 self)
-            => ToColor(self, 1.0f);
-
-        public static Color ToColor(this Vector3 self, float alpha)
-        {
-            return new Color(self.x, self.y, self.z, alpha);
-        }
-
-        public static Vector3 ToRound(this Vector3 self, int digits)
-        {
-            self.x = DuMath.Round(self.x, digits);
-            self.y = DuMath.Round(self.y, digits);
-            self.z = DuMath.Round(self.z, digits);
-            return self;
-        }
-
-        //--------------------------------------------------------------------------------------------------------------
-        // Helpers
-
         public static Vector3 New(float xyz)
         {
             return new Vector3(xyz, xyz, xyz);
         }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         public static Vector3 Abs(Vector3 value)
         {
@@ -78,6 +18,26 @@ namespace DustEngine
             value.z = Mathf.Abs(value.z);
             return value;
         }
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        public static Vector3 Min(Vector3 value, Vector3 value2)
+        {
+            value.x = Mathf.Min(value.x, value2.x);
+            value.y = Mathf.Min(value.y, value2.y);
+            value.z = Mathf.Min(value.z, value2.z);
+            return value;
+        }
+
+        public static Vector3 Max(Vector3 value, Vector3 value2)
+        {
+            value.x = Mathf.Max(value.x, value2.x);
+            value.y = Mathf.Max(value.y, value2.y);
+            value.z = Mathf.Max(value.z, value2.z);
+            return value;
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         public static Vector3 Clamp(Vector3 value, Vector3 min, Vector3 max)
         {
@@ -91,6 +51,8 @@ namespace DustEngine
         {
             return Clamp(value, Vector3.zero, Vector3.one);
         }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         public static Vector3 NormalizeAngle180(Vector3 value)
         {
@@ -108,16 +70,20 @@ namespace DustEngine
             return value;
         }
 
+        //--------------------------------------------------------------------------------------------------------------
+
         public static Vector3 Round(Vector3 value)
             => Round(value, DuConstants.ROUND_DIGITS_COUNT);
 
-        public static Vector3 Round(Vector3 value, int digits)
+        public static Vector3 Round(Vector3 value, int roundToDigits)
         {
-            value.x = DuMath.Round(value.x, digits);
-            value.y = DuMath.Round(value.y, digits);
-            value.z = DuMath.Round(value.z, digits);
+            value.x = DuMath.Round(value.x, roundToDigits);
+            value.y = DuMath.Round(value.y, roundToDigits);
+            value.z = DuMath.Round(value.z, roundToDigits);
             return value;
         }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         public static Vector3 Fit(float inMin, float inMax, Vector3 outMin, Vector3 outMax, float inValue)
             => Fit(inMin, inMax, outMin, outMax, inValue, false);
@@ -143,7 +109,7 @@ namespace DustEngine
             return r;
         }
 
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        //--------------------------------------------------------------------------------------------------------------
 
         public static Vector3 SmoothDamp(Vector3 current, Vector3 target, ref Vector3 currentVelocity, float smoothTime)
             => SmoothDamp(current, target, ref currentVelocity, smoothTime, Mathf.Infinity);

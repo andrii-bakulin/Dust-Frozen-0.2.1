@@ -271,9 +271,9 @@ namespace DustEngine
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            noisePowerPos.Fit01To(min, max);
-            noisePowerRot.Fit01To(min, max);
-            noisePowerScl.Fit01To(min, max);
+            noisePowerPos.duFit01To(min, max);
+            noisePowerRot.duFit01To(min, max);
+            noisePowerScl.duFit01To(min, max);
 
             if (synchronized && noiseDimension == NoiseDimension.Noise3D)
             {

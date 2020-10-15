@@ -24,12 +24,12 @@ namespace DustEngine
         public static float Round(float value)
             => Round(value, DuConstants.ROUND_DIGITS_COUNT);
 
-        public static float Round(float value, int digits)
+        public static float Round(float value, int roundToDigits)
         {
-            if (digits == 0)
+            if (roundToDigits == 0)
                 return value;
 
-            return (float) System.Math.Round(value, digits);
+            return (float) System.Math.Round(value, roundToDigits);
         }
 
         //--------------------------------------------------------------------------------------------------------------
