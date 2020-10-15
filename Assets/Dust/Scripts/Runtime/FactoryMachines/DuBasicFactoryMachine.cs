@@ -2,6 +2,7 @@
 
 namespace DustEngine
 {
+    [AddComponentMenu("Dust/Factory/Machines/Basic Machine")]
     public class DuBasicFactoryMachine : DuFactoryMachine
     {
         public enum ValueBlendMode
