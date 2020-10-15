@@ -18,6 +18,17 @@ namespace DustEngine.DustEditor.UI
 
         private static readonly Dictionary<string, Texture> classIconsCache = new Dictionary<string, Texture>();
 
+        private static readonly string[] resourcePaths =
+        {
+            "Components/Deformers/",
+            "Components/Events/",
+            "Components/Factory/",
+            "Components/FactoryMachine/",
+            "Components/Fields/",
+            "Components/Gizmos/",
+            "Components/",
+        };
+
         //--------------------------------------------------------------------------------------------------------------
 
         public static Texture GetTextureByComponent(Component component)
@@ -40,12 +51,20 @@ namespace DustEngine.DustEditor.UI
 
             if (!classIconsCache.ContainsKey(classNameId))
             {
-                string resourceId = "Components/" + className;
+                string resourceFilename = className;
 
                 if (suffix != "")
-                    resourceId += "-" + suffix;
+                    resourceFilename += "-" + suffix;
 
-                classIconsCache[className] = Resources.Load(resourceId) as Texture;
+                foreach (var resourcePath in resourcePaths)
+                {
+                    var resourceId = resourcePath + resourceFilename;
+
+                    classIconsCache[className] = Resources.Load(resourceId) as Texture;
+
+                    if (Dust.IsNotNull(classIconsCache[className]))
+                        break;
+                }
             }
 
             return classIconsCache[className];
