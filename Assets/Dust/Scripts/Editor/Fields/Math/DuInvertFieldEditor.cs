@@ -36,7 +36,12 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            PropertyField(m_CustomHint);
+            if (DustGUI.FoldoutBegin("Parameters", "DuAnyField.Parameters"))
+            {
+                PropertyField(m_CustomHint);
+                Space();
+            }
+            DustGUI.FoldoutEnd();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

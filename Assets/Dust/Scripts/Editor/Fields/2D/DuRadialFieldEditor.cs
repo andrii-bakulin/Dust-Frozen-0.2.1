@@ -62,8 +62,11 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            if (DustGUI.FoldoutBegin("Field Parameters", "DuRadialField.Params"))
+            if (DustGUI.FoldoutBegin("Field Parameters", "DuAnyField.Parameters"))
             {
+                PropertyField(m_CustomHint);
+                Space();
+
                 PropertyExtendedSlider(m_StartAngle, 0f, 360f, 1f);
                 PropertyExtendedSlider(m_EndAngle, 0f, 360f, 1f);
                 Space();
@@ -78,9 +81,6 @@ namespace DustEngine.DustEditor
 
                 PropertyField(m_Direction);
                 Space();
-
-                PropertyField(m_CustomHint);
-                Space();
             }
             DustGUI.FoldoutEnd();
 
@@ -89,7 +89,7 @@ namespace DustEngine.DustEditor
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // OnInspectorGUI_GizmoBlock();
 
-            if (DustGUI.FoldoutBegin("Gizmo", "DuField.Gizmo"))
+            if (DustGUI.FoldoutBegin("Gizmo", "DuAnyField.Gizmo"))
             {
                 PropertyField(m_GizmoVisibility);
                 PropertyField(m_GizmoFieldColor);

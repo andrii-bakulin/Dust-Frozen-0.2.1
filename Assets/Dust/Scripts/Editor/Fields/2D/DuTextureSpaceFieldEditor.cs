@@ -63,8 +63,11 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            if (DustGUI.FoldoutBegin("Field Parameters", "DuTextureField.Params"))
+            if (DustGUI.FoldoutBegin("Field Parameters", "DuAnyField.Parameters"))
             {
+                PropertyField(m_CustomHint);
+                Space();
+
                 PropertyField(m_Texture);
                 PropertyField(m_WrapMode);
                 PropertyExtendedSlider(m_Width, 0f, 50f, 0.01f);
@@ -80,9 +83,6 @@ namespace DustEngine.DustEditor
 
                 DustGUI.Header("Color Impact");
                 PropertyField(m_ApplyPowerToAlpha);
-                Space();
-
-                PropertyField(m_CustomHint);
                 Space();
             }
             DustGUI.FoldoutEnd();

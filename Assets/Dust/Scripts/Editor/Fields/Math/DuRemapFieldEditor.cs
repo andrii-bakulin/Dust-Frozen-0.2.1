@@ -40,11 +40,15 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+            if (DustGUI.FoldoutBegin("Parameters", "DuAnyField.Parameters"))
+            {
+                PropertyField(m_CustomHint);
+                Space();
+            }
+            DustGUI.FoldoutEnd();
+
+
             m_RemappingEditor.OnInspectorGUI();
-
-            Space();
-
-            PropertyField(m_CustomHint);
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

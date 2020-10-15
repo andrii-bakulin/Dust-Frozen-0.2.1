@@ -44,14 +44,14 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            if (DustGUI.FoldoutBegin("Field Parameters", "DuConeField.Params"))
+            if (DustGUI.FoldoutBegin("Field Parameters", "DuAnyField.Parameters"))
             {
-                PropertyExtendedSlider(m_Radius, 0f, 10f, 0.01f);
-                PropertyExtendedSlider(m_Height, 0f, 10f, 0.01f);
-                PropertyField(m_Direction);
+                PropertyField(m_CustomHint);
                 Space();
 
-                PropertyField(m_CustomHint);
+                PropertyExtendedSlider(m_Radius, 0f, 20f, 0.01f);
+                PropertyExtendedSlider(m_Height, 0f, 20f, 0.01f);
+                PropertyField(m_Direction);
                 Space();
             }
             DustGUI.FoldoutEnd();

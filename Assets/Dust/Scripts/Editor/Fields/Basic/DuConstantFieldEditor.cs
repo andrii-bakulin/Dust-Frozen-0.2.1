@@ -42,13 +42,13 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            if (DustGUI.FoldoutBegin("Field Parameters", "DuConstantField.Params"))
+            if (DustGUI.FoldoutBegin("Field Parameters", "DuAnyField.Parameters"))
             {
-                PropertyExtendedSlider(m_Power, 0f, 1f, 0.01f);
-                PropertyField(m_Color);
+                PropertyField(m_CustomHint);
                 Space();
 
-                PropertyField(m_CustomHint);
+                PropertyExtendedSlider(m_Power, 0f, 1f, 0.01f);
+                PropertyField(m_Color);
                 Space();
             }
             DustGUI.FoldoutEnd();

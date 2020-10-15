@@ -48,17 +48,20 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            PropertyExtendedSlider(m_MinInput, -1f, +2f, 0.01f);
-            PropertyExtendedSlider(m_MaxInput, -1f, +2f, 0.01f);
+            if (DustGUI.FoldoutBegin("Parameters", "DuAnyField.Parameters"))
+            {
+                PropertyField(m_CustomHint);
+                Space();
 
-            Space();
+                PropertyExtendedSlider(m_MinInput, -1f, +2f, 0.01f);
+                PropertyExtendedSlider(m_MaxInput, -1f, +2f, 0.01f);
+                Space();
 
-            PropertyExtendedSlider(m_MinOutput, -1f, +2f, 0.01f);
-            PropertyExtendedSlider(m_MaxOutput, -1f, +2f, 0.01f);
-
-            Space();
-
-            PropertyField(m_CustomHint);
+                PropertyExtendedSlider(m_MinOutput, -1f, +2f, 0.01f);
+                PropertyExtendedSlider(m_MaxOutput, -1f, +2f, 0.01f);
+                Space();
+            }
+            DustGUI.FoldoutEnd();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

@@ -52,7 +52,15 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            if (DustGUI.FoldoutBegin("Power", "DuClampField.Power"))
+            if (DustGUI.FoldoutBegin("Parameters", "DuAnyField.Parameters"))
+            {
+                PropertyField(m_CustomHint);
+                Space();
+            }
+            DustGUI.FoldoutEnd();
+
+
+            if (DustGUI.FoldoutBegin("Power", "DuAnyField.Power"))
             {
                 PropertyField(m_PowerClampMode);
 
@@ -73,7 +81,7 @@ namespace DustEngine.DustEditor
             DustGUI.FoldoutEnd();
 
 
-            if (DustGUI.FoldoutBegin("Color", "DuClampField.Color"))
+            if (DustGUI.FoldoutBegin("Color", "DuAnyField.Color"))
             {
                 PropertyField(m_ColorClampMode);
 
@@ -92,9 +100,6 @@ namespace DustEngine.DustEditor
                 Space();
             }
             DustGUI.FoldoutEnd();
-
-
-            PropertyField(m_CustomHint);
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

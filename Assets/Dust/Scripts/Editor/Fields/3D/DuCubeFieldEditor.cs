@@ -40,12 +40,12 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            if (DustGUI.FoldoutBegin("Field Parameters", "DuCubeField.Params"))
+            if (DustGUI.FoldoutBegin("Field Parameters", "DuAnyField.Parameters"))
             {
-                PropertyField(m_Size);
+                PropertyField(m_CustomHint);
                 Space();
 
-                PropertyField(m_CustomHint);
+                PropertyField(m_Size);
                 Space();
             }
             DustGUI.FoldoutEnd();

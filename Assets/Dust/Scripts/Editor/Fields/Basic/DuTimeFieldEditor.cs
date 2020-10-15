@@ -48,8 +48,11 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            if (DustGUI.FoldoutBegin("Parameters", "DuTimeField.Parameters"))
+            if (DustGUI.FoldoutBegin("Field Parameters", "DuAnyField.Parameters"))
             {
+                PropertyField(m_CustomHint);
+                Space();
+
                 PropertyField(m_TimeMode);
                 PropertyExtendedSlider(m_TimeScale, 0f, 10f, 0.01f);
                 PropertyExtendedSlider(m_Offset, 0f, 1f, 0.01f);
@@ -99,9 +102,6 @@ namespace DustEngine.DustEditor
                     DuSessionState.SetFloat("DuTimeField.Preview.Length", previewLength);
                 }
 
-                Space();
-
-                PropertyField(m_CustomHint);
                 Space();
             }
             DustGUI.FoldoutEnd();

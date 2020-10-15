@@ -58,8 +58,11 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            if (DustGUI.FoldoutBegin("Parameters", "DuWaveField.Params"))
+            if (DustGUI.FoldoutBegin("Field Parameters", "DuAnyField.Parameters"))
             {
+                PropertyField(m_CustomHint);
+                Space();
+
                 PropertyExtendedSlider(m_Amplitude, 0f, 10f, 0.01f);
                 PropertyExtendedSlider(m_Size, 0f, 10f, 0.01f);
                 PropertyExtendedSlider(m_LinearFalloff, 0f, 10f, 0.01f);
@@ -68,9 +71,6 @@ namespace DustEngine.DustEditor
                 PropertyExtendedSlider(m_Offset, 0f, 1f, 0.01f);
                 PropertyExtendedSlider(m_AnimationSpeed, -2f, +2f, 0.01f);
                 PropertyField(m_Direction);
-                Space();
-
-                PropertyField(m_CustomHint);
                 Space();
             }
             DustGUI.FoldoutEnd();
@@ -82,7 +82,7 @@ namespace DustEngine.DustEditor
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // @ignore: OnInspectorGUI_GizmoBlock();
 
-            if (DustGUI.FoldoutBegin("Gizmo", "DuWaveField.Gizmo"))
+            if (DustGUI.FoldoutBegin("Gizmo", "DuAnyField.Gizmo"))
             {
                 PropertyExtendedSlider(m_GizmoSize, 0.1f, 10f, 0.1f);
                 PropertyField(m_GizmoQuality);

@@ -64,7 +64,15 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            if (DustGUI.FoldoutBegin("Power", "DuCoordinatesField.Power"))
+            if (DustGUI.FoldoutBegin("Field Parameters", "DuAnyField.Parameters"))
+            {
+                PropertyField(m_CustomHint);
+                Space();
+            }
+            DustGUI.FoldoutEnd();
+
+
+            if (DustGUI.FoldoutBegin("Power", "DuAnyField.Power"))
             {
                 PropertyField(m_PowerEnabled);
                 Space();
@@ -91,7 +99,7 @@ namespace DustEngine.DustEditor
             DustGUI.FoldoutEnd();
 
 
-            if (DustGUI.FoldoutBegin("Color", "DuCoordinatesField.Color"))
+            if (DustGUI.FoldoutBegin("Color", "DuAnyField.Color"))
             {
                 PropertyField(m_ColorEnabled);
                 Space();
@@ -105,9 +113,6 @@ namespace DustEngine.DustEditor
                 if (!m_ColorEnabled.IsTrue) DustGUI.Unlock();
             }
             DustGUI.FoldoutEnd();
-
-
-            PropertyField(m_CustomHint);
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

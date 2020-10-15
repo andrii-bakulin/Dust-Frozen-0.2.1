@@ -29,7 +29,7 @@ namespace DustEngine.DustEditor
 
         protected void OnInspectorGUI_GizmoBlock()
         {
-            if (DustGUI.FoldoutBegin("Gizmo", "DuField.Gizmo"))
+            if (DustGUI.FoldoutBegin("Gizmo", "DuAnyField.Gizmo"))
             {
                 PropertyField(m_GizmoVisibility);
                 PropertyField(m_GizmoFieldColor);
