@@ -31,6 +31,49 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
+        private int m_SourceObjectsHolderLastState = 0;
+
+        private int GetSourceObjectsHolderStateId()
+        {
+            int stateId;
+
+            switch (sourceObjectsMode)
+            {
+                case SourceObjectsMode.Holder:
+                default:
+                    stateId = 10001;
+                    break;
+
+                case SourceObjectsMode.HolderAndList:
+                    stateId = 20002;
+                    break;
+
+                case SourceObjectsMode.List:
+                    return 0;
+            }
+
+            if (Dust.IsNull(sourceObjectsHolder))
+                return stateId;
+
+            for (int i = 0; i < sourceObjectsHolder.transform.childCount; i++)
+            {
+                var child = sourceObjectsHolder.transform.GetChild(i);
+                stateId ^= i * 835141 + child.GetInstanceID();
+            }
+
+            return stateId;
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        private void RebuildInstancesIfRequired()
+        {
+            if (m_SourceObjectsHolderLastState == GetSourceObjectsHolderStateId())
+                return;
+
+            RebuildInstances();
+        }
+
         public void RebuildInstances()
         {
             DestroyAllInstances();
@@ -60,6 +103,22 @@ namespace DustEngine
                     continue;
 
                 instancesPacked.Add(instance);
+
+                switch (instanceAccessMode)
+                {
+                    case InstanceAccessMode.Normal:
+                    default:
+                        // Nothing need to do
+                        break;
+
+                    case InstanceAccessMode.NotEditable:
+                        instance.gameObject.hideFlags = HideFlags.NotEditable;
+                        break;
+
+                    case InstanceAccessMode.HideInHierarchy:
+                        instance.gameObject.hideFlags = HideFlags.HideInHierarchy;
+                        break;
+                }
             }
 
             builder.ObjectsQueue_Release();
@@ -80,29 +139,47 @@ namespace DustEngine
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             UpdateInstancesZeroStates();
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            m_SourceObjectsHolderLastState = GetSourceObjectsHolderStateId();
         }
 
         protected void DestroyAllInstances()
         {
-            for (int i = 0; i < transform.childCount;)
+            // Step 1: drop by list
+            for (int i = 0; i < m_Instances.Length; i++)
             {
-                DuFactoryInstance instance = transform.GetChild(i).gameObject.GetComponent<DuFactoryInstance>();
-
-                if (Dust.IsNull(instance))
-                {
-                    i++;
+                if (Dust.IsNull(m_Instances[i]))
                     continue;
-                }
 
-                if (instance.parentFactory != this)
-                {
-                    i++;
-                    continue;
-                }
-
-                Dust.DestroyObjectWhenReady(instance.gameObject);
+                Dust.DestroyObjectWhenReady(m_Instances[i].gameObject);
             }
 
+            // Step 2: drop all object which left same how from previous state
+            GameObject[] holders =
+            {
+                this.instancesHolder,
+                this.gameObject
+            };
+
+            foreach (var holder in holders)
+            {
+                if (Dust.IsNull(holder))
+                    continue;
+
+                for (int i = holder.transform.childCount - 1; i >= 0; i--)
+                {
+                    DuFactoryInstance instance = holder.transform.GetChild(i).GetComponent<DuFactoryInstance>();
+
+                    if (Dust.IsNotNull(instance) && instance.parentFactory == this)
+                    {
+                        Dust.DestroyObjectWhenReady(instance.gameObject);
+                    }
+                }
+            }
+
+            // Reset array (but it cannot be null)
             m_Instances = new DuFactoryInstance[0];
         }
 

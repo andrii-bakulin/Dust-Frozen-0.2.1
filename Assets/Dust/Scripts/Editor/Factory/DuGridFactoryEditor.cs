@@ -43,12 +43,12 @@ namespace DustEngine.DustEditor
             DustGUI.FoldoutEnd();
 
             m_IsRequireRebuildInstances |= m_Count.isChanged;
-
             m_IsRequireResetupInstances |= m_Size.isChanged;
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            OnInspectorGUI_Objects();
+            OnInspectorGUI_SourceObjects();
+            OnInspectorGUI_Instances();
             OnInspectorGUI_FactoryMachines();
             OnInspectorGUI_Transform();
             OnInspectorGUI_Display();

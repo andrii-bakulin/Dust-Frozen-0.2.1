@@ -70,7 +70,8 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            OnInspectorGUI_Objects();
+            OnInspectorGUI_SourceObjects();
+            OnInspectorGUI_Instances();
             OnInspectorGUI_FactoryMachines();
             OnInspectorGUI_Transform();
             OnInspectorGUI_Display();

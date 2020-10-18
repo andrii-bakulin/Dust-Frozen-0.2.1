@@ -12,21 +12,27 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        private DuProperty m_Objects;
+        private DuProperty m_SourceObjectsMode;
+        private DuProperty m_SourceObjectsHolder;
+        private DuProperty m_SourceObjects;
         private DuProperty m_IterateMode;
-        private DuProperty m_InstanceMode;
+        private DuProperty m_InstanceAccessMode;
+        private DuProperty m_InstanceTypeMode;
         private DuProperty m_ForcedSetActive;
         private DuProperty m_Seed;
 
         private DuProperty m_DefaultValue;
         private DuProperty m_DefaultColor;
         private DuProperty m_FactoryMachines;
+        private DuProperty m_FactoryMachinesHolder;
 
         private DuProperty m_TransformSpace;
         private DuProperty m_TransformSequence;
         private DuProperty m_TransformPosition;
         private DuProperty m_TransformRotation;
         private DuProperty m_TransformScale;
+
+        private DuProperty m_InstancesHolder;
 
         private DuProperty m_InspectorDisplay;
         private DuProperty m_InspectorScale;
@@ -60,15 +66,19 @@ namespace DustEngine.DustEditor
 
         protected void OnEnableFactory()
         {
-            m_Objects = FindProperty("m_Objects", "Objects");
+            m_SourceObjectsMode = FindProperty("m_SourceObjectsMode", "Source Mode");
+            m_SourceObjectsHolder = FindProperty("m_SourceObjectsHolder", "Holder");
+            m_SourceObjects = FindProperty("m_SourceObjects", "Source Objects");
             m_IterateMode = FindProperty("m_IterateMode", "Iterate");
-            m_InstanceMode = FindProperty("m_InstanceMode", "Instance Mode");
+            m_InstanceAccessMode = FindProperty("m_InstanceAccessMode", "Access Mode");
+            m_InstanceTypeMode = FindProperty("m_InstanceTypeMode", "Type Mode");
             m_ForcedSetActive = FindProperty("m_ForcedSetActive", "Forced Set Active");
             m_Seed = FindProperty("m_Seed", "Forced Set Active");
 
             m_DefaultValue = FindProperty("m_DefaultValue", "Default Value");
             m_DefaultColor = FindProperty("m_DefaultColor", "Default Color");
             m_FactoryMachines = FindProperty("m_FactoryMachines", "Factory Machines");
+            m_FactoryMachinesHolder = FindProperty("m_FactoryMachinesHolder", "Machines Holder");
 
             m_TransformSpace = FindProperty("m_TransformSpace", "Transform Space");
             m_TransformSequence = FindProperty("m_TransformSequence", "Transform Sequence");
@@ -76,9 +86,22 @@ namespace DustEngine.DustEditor
             m_TransformRotation = FindProperty("m_TransformRotation", "Rotation");
             m_TransformScale = FindProperty("m_TransformScale", "Scale");
 
+            m_InstancesHolder = FindProperty("m_InstancesHolder", "Instances Holder");
+
             m_InspectorDisplay = FindProperty("m_InspectorDisplay", "Display");
             m_InspectorScale = FindProperty("m_InspectorScale", "Scale");
         }
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        protected DuFactory.SourceObjectsMode sourceObjectsMode
+            => (DuFactory.SourceObjectsMode) m_SourceObjectsMode.enumValueIndex;
+
+        protected DuFactory.IterateMode iterateMode
+            => (DuFactory.IterateMode) m_IterateMode.enumValueIndex;
+
+        protected DuFactory.TransformSpace transformSpace
+            => (DuFactory.TransformSpace) m_TransformSpace.enumValueIndex;
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -93,42 +116,74 @@ namespace DustEngine.DustEditor
         {
             serializedObject.ApplyModifiedProperties();
 
-            foreach (var subTarget in targets)
+            if (m_IsRequireRebuildInstances || m_IsRequireResetupInstances)
             {
-                var origin = subTarget as DuFactory;
+                foreach (var subTarget in targets)
+                {
+                    var origin = subTarget as DuFactory;
 
-                if (m_IsRequireRebuildInstances)
-                    origin.RebuildInstances();
+                    if (m_IsRequireRebuildInstances)
+                        origin.RebuildInstances();
 
-                if (m_IsRequireResetupInstances)
-                    origin.UpdateInstancesZeroStates();
+                    if (m_IsRequireResetupInstances)
+                        origin.UpdateInstancesZeroStates();
+                }
             }
         }
 
         //--------------------------------------------------------------------------------------------------------------
 
-        protected void OnInspectorGUI_Objects()
+        protected void OnInspectorGUI_SourceObjects()
         {
             if (DustGUI.FoldoutBegin("Source Objects", "DuFactory.Objects"))
             {
-                PropertyField(m_Objects);
-                Space();
+                PropertyField(m_SourceObjectsMode);
+
+                if (sourceObjectsMode == DuFactory.SourceObjectsMode.Holder ||
+                    sourceObjectsMode == DuFactory.SourceObjectsMode.HolderAndList)
+                {
+                    PropertyField(m_SourceObjectsHolder);
+                }
+
+                if (sourceObjectsMode == DuFactory.SourceObjectsMode.List ||
+                    sourceObjectsMode == DuFactory.SourceObjectsMode.HolderAndList)
+                {
+                    PropertyField(m_SourceObjects);
+                }
+
                 PropertyField(m_IterateMode);
 
-                if ((DuFactory.IterateMode) m_IterateMode.enumValueIndex == DuFactory.IterateMode.Random)
+                if (iterateMode == DuFactory.IterateMode.Random)
                     PropertySeedFixed(m_Seed);
 
-                PropertyField(m_InstanceMode);
-                PropertyField(m_ForcedSetActive);
                 Space();
             }
             DustGUI.FoldoutEnd();
 
-            m_IsRequireRebuildInstances |= m_Objects.isChanged;
+            m_IsRequireRebuildInstances |= m_SourceObjectsHolder.isChanged;
+            m_IsRequireRebuildInstances |= m_SourceObjects.isChanged;
             m_IsRequireRebuildInstances |= m_IterateMode.isChanged;
-            m_IsRequireRebuildInstances |= m_InstanceMode.isChanged;
             m_IsRequireRebuildInstances |= m_Seed.isChanged;
+        }
+
+        protected void OnInspectorGUI_Instances()
+        {
+            if (DustGUI.FoldoutBegin("Instances", "DuFactory.Instances"))
+            {
+                PropertyField(m_InstanceTypeMode);
+                PropertyField(m_ForcedSetActive);
+                Space();
+
+                PropertyFieldOrLock(m_InstancesHolder, targets.Length > 1);
+                PropertyField(m_InstanceAccessMode);
+                Space();
+            }
+            DustGUI.FoldoutEnd();
+
+            m_IsRequireRebuildInstances |= m_InstanceTypeMode.isChanged;
             m_IsRequireRebuildInstances |= m_ForcedSetActive.isChanged;
+            m_IsRequireRebuildInstances |= m_InstanceAccessMode.isChanged;
+            m_IsRequireRebuildInstances |= m_InstancesHolder.isChanged;
         }
 
         protected void OnInspectorGUI_FactoryMachines()
@@ -141,6 +196,9 @@ namespace DustEngine.DustEditor
 
                 DrawFactoryMachinesBlock();
                 // Space();
+
+                PropertyField(m_FactoryMachinesHolder);
+                Space();
             }
             DustGUI.FoldoutEnd();
 
@@ -158,7 +216,7 @@ namespace DustEngine.DustEditor
                 PropertyField(m_TransformScale);
                 PropertyField(m_TransformSpace);
 
-                if ((DuFactory.TransformSpace) m_TransformSpace.enumValueIndex == DuFactory.TransformSpace.Instance)
+                if (transformSpace == DuFactory.TransformSpace.Instance)
                     PropertyField(m_TransformSequence);
 
                 Space();
@@ -187,7 +245,7 @@ namespace DustEngine.DustEditor
         {
             if (DustGUI.FoldoutBegin("Tools", "DuFactory.Tools", false))
             {
-                if (DustGUI.Button("Forced Rebuild Instances"))
+                if (DustGUI.Button("Rebuild Instances"))
                     m_IsRequireRebuildInstances |= true;
             }
             DustGUI.FoldoutEnd();

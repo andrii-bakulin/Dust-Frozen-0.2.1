@@ -35,20 +35,24 @@ namespace DustEngine
 
             GameObject instanceGameObject;
 
+            Transform parent = Dust.IsNotNull(m_DuFactory.instancesHolder)
+                ? m_DuFactory.instancesHolder.transform
+                : m_DuFactory.transform;
+
 #if UNITY_EDITOR
-            if (m_DuFactory.instanceMode == DuFactory.InstanceMode.Inherit && Dust.IsPrefab(prefab))
+            if (m_DuFactory.instanceTypeMode == DuFactory.InstanceTypeMode.Inherit && Dust.IsPrefab(prefab))
             {
                 instanceGameObject = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
 
                 if (Dust.IsNull(instanceGameObject))
                     return null;
 
-                instanceGameObject.transform.parent = m_DuFactory.transform;
+                instanceGameObject.transform.parent = parent;
             }
             else
 #endif
             {
-                instanceGameObject = Object.Instantiate(prefab, m_DuFactory.transform);
+                instanceGameObject = Object.Instantiate(prefab, parent);
             }
 
             if (Dust.IsNull(instanceGameObject))
@@ -74,9 +78,36 @@ namespace DustEngine
 
         private int m_ObjectsQueue_index;
         private DuRandom m_ObjectsQueue_duRandom;
+        private List<GameObject> m_FinalSourceObjects;
 
         internal void ObjectsQueue_Initialize()
         {
+            m_FinalSourceObjects = new List<GameObject>();
+
+            if (m_DuFactory.sourceObjectsMode == DuFactory.SourceObjectsMode.Holder ||
+                m_DuFactory.sourceObjectsMode == DuFactory.SourceObjectsMode.HolderAndList)
+            {
+                // Make SourceObject list. Step 1:
+                if (Dust.IsNotNull(m_DuFactory.sourceObjectsHolder))
+                {
+                    var holder = m_DuFactory.sourceObjectsHolder.transform;
+                    for (int i = 0; i < holder.childCount; i++)
+                    {
+                        m_FinalSourceObjects.Add(holder.GetChild(i).gameObject);
+                    }
+                }
+            }
+
+            if (m_DuFactory.sourceObjectsMode == DuFactory.SourceObjectsMode.List ||
+                m_DuFactory.sourceObjectsMode == DuFactory.SourceObjectsMode.HolderAndList)
+            {
+                // Make SourceObject list. Step 2:
+                foreach (var sourceObject in m_DuFactory.sourceObjects)
+                {
+                    m_FinalSourceObjects.Add(sourceObject);
+                }
+            }
+
             switch (m_DuFactory.iterateMode)
             {
                 case DuFactory.IterateMode.Iterate:
@@ -91,24 +122,23 @@ namespace DustEngine
 
         private GameObject ObjectsQueue_GetNextPrefab()
         {
-            if (m_DuFactory.objects.Count == 0)
+            if (m_FinalSourceObjects.Count == 0)
                 return null;
 
             switch (m_DuFactory.iterateMode)
             {
                 case DuFactory.IterateMode.Iterate:
-                    return m_DuFactory.objects[(m_ObjectsQueue_index++) % m_DuFactory.objects.Count];
+                default:
+                    return m_FinalSourceObjects[m_ObjectsQueue_index++ % m_FinalSourceObjects.Count];
 
                 case DuFactory.IterateMode.Random:
-                    return m_DuFactory.objects[m_ObjectsQueue_duRandom.Range(0, m_DuFactory.objects.Count)];
-
-                default:
-                    return null;
+                    return m_FinalSourceObjects[m_ObjectsQueue_duRandom.Range(0, m_FinalSourceObjects.Count)];
             }
         }
 
         internal void ObjectsQueue_Release()
         {
+            m_FinalSourceObjects = null;
             m_ObjectsQueue_duRandom = null;
         }
 

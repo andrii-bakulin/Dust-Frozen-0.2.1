@@ -34,6 +34,16 @@ namespace DustEngine.DustEditor
                 if (Dust.IsNotNull(selectedFactory))
                 {
                     selectedFactory.AddFactoryMachine(factoryMachine);
+
+                    if (Dust.IsNotNull(selectedFactory.factoryMachinesHolder))
+                    {
+                        factoryMachine.transform.parent = selectedFactory.factoryMachinesHolder.transform;
+                    }
+                    else
+                    {
+                        factoryMachine.transform.parent = selectedFactory.transform.parent;
+                        factoryMachine.transform.SetSiblingIndex(selectedFactory.transform.GetSiblingIndex() + 1);
+                    }
                 }
 
                 gameObject.name = factoryMachine.FactoryMachineName() + " Machine";

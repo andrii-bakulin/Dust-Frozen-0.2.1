@@ -4,11 +4,6 @@ namespace DustEngine
 {
     public partial class DuFactory
     {
-        private void Update()
-        {
-            UpdateInstancesDynamicStates();
-        }
-
         public void UpdateInstancesDynamicStates(bool forced = false)
         {
             if (!forced)
