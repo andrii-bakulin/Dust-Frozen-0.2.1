@@ -35,7 +35,7 @@ namespace DustEngine
 #if UNITY_EDITOR
         public static bool IsPrefab(GameObject obj)
         {
-            return PrefabUtility.IsPartOfRegularPrefab(obj);
+            return PrefabUtility.IsPartOfPrefabAsset(obj);
         }
 #endif
 
