@@ -13,6 +13,10 @@ namespace DustEngine.DustEditor
         private DuProperty m_RandomVector;
         private DuProperty m_MaterialReferences;
 
+        private DuProperty m_ParentFactory;
+        private DuProperty m_PrevInstance;
+        private DuProperty m_NextInstance;
+
         //--------------------------------------------------------------------------------------------------------------
 
         [MenuItem("Dust/Factory/Support/Factory Instance")]
@@ -30,6 +34,10 @@ namespace DustEngine.DustEditor
             m_RandomScalar = FindProperty("m_RandomScalar", "Random Scalar");
             m_RandomVector = FindProperty("m_RandomVector", "Random Vector");
             m_MaterialReferences = FindProperty("m_MaterialReferences");
+
+            m_ParentFactory = FindProperty("m_ParentFactory", "Parent Factory");
+            m_PrevInstance = FindProperty("m_PrevInstance", "Previous Instance");
+            m_NextInstance = FindProperty("m_NextInstance", "Next Instance");
         }
 
         public override void OnInspectorGUI()
@@ -48,6 +56,11 @@ namespace DustEngine.DustEditor
                 PropertyFieldOrLock(m_Offset, true);
                 PropertyFieldOrLock(m_RandomScalar, true);
                 PropertyFieldOrLock(m_RandomVector, true);
+                Space();
+
+                PropertyFieldOrLock(m_ParentFactory, true);
+                PropertyFieldOrLock(m_PrevInstance, true);
+                PropertyFieldOrLock(m_NextInstance, true);
                 Space();
             }
 
