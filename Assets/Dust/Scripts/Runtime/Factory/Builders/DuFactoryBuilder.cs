@@ -33,26 +33,25 @@ namespace DustEngine
             if (Dust.IsNull(prefab))
                 return null;
 
-            GameObject instanceGameObject;
-
             Transform parent = Dust.IsNotNull(m_DuFactory.instancesHolder)
                 ? m_DuFactory.instancesHolder.transform
                 : m_DuFactory.transform;
 
+            GameObject instanceGameObject = null;
+
 #if UNITY_EDITOR
-            if (m_DuFactory.instanceTypeMode == DuFactory.InstanceTypeMode.Inherit && Dust.IsPrefab(prefab))
+            if (m_DuFactory.instanceTypeMode == DuFactory.InstanceTypeMode.Inherit)
             {
-                instanceGameObject = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
-
-                if (Dust.IsNull(instanceGameObject))
-                    return null;
-
-                instanceGameObject.transform.parent = parent;
+                instanceGameObject = PrefabUtility.InstantiatePrefab(prefab, parent) as GameObject;
             }
-            else
 #endif
+
+            // Notice: When I create prefab by PrefabUtility.InstantiatePrefab() call sometimes it cannot be created
+            // and instanceGameObject is NULL. In that cases I forced create instance as object!
+            if (Dust.IsNull(instanceGameObject))
             {
                 instanceGameObject = Object.Instantiate(prefab, parent);
+                instanceGameObject.name = instanceGameObject.name.Replace("(Clone)", "");
             }
 
             if (Dust.IsNull(instanceGameObject))
