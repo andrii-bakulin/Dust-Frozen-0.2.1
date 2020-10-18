@@ -72,6 +72,12 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
+        public static void print_war(object message) => Debug.LogWarning(message);
+
+        public static void print_err(object message) => Debug.LogError(message);
+
+        //--------------------------------------------------------------------------------------------------------------
+
 #if UNITY_EDITOR
         private float editorUpdate_deltaTime;
         private double editorUpdate_lastTimeStamp;
