@@ -162,7 +162,7 @@ namespace DustEngine
             // @notice: after next call I can modify sharedMesh without involve to real sharedMesh
             //          and will no have any error in console in editor mode
             Mesh meshClone = Instantiate(m_MeshOriginal);
-            meshClone.hideFlags = HideFlags.DontSaveInEditor | HideFlags.DontSaveInBuild;
+            meshClone.hideFlags = HideFlags.DontSave;
             meshClone.name = m_MeshOriginal.name + " (Deformed)";
             meshClone.MarkDynamic();
             meshFilter.sharedMesh = meshClone;
