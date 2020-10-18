@@ -54,39 +54,38 @@ namespace DustEngine.DustEditor
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // @DUST.todo: make control more then one element
 
-            int count = m_MaterialReferences.property.arraySize;
-
-            if (count == 0)
+            if (IsFreeInstance)
             {
-                if (DustGUI.Button("Add Material Reference"))
+                if (m_MaterialReferences.property.arraySize == 0)
                 {
-                    m_MaterialReferences.property.InsertArrayElementAtIndex(0);
-                    count++;
+                    if (DustGUI.Button("Add Material Reference"))
+                    {
+                        m_MaterialReferences.property.InsertArrayElementAtIndex(0);
 
-                    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-                    // Set default values
+                        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                        // Set default values
 
-                    var matRef = mainScript.GetDefaultMaterialReference();
+                        var matRef = mainScript.GetDefaultMaterialReference();
 
-                    var item = m_MaterialReferences.property.GetArrayElementAtIndex(0);
+                        var item = m_MaterialReferences.property.GetArrayElementAtIndex(0);
 
-                    DuProperty m_MeshRenderer      = FindProperty(item, "m_MeshRenderer");
-                    DuProperty m_ValuePropertyName = FindProperty(item, "m_ValuePropertyName");
-                    DuProperty m_ColorPropertyName = FindProperty(item, "m_ColorPropertyName");
-                    DuProperty m_UvwPropertyName   = FindProperty(item, "m_UvwPropertyName");
+                        DuProperty m_MeshRenderer      = FindProperty(item, "m_MeshRenderer");
+                        DuProperty m_ValuePropertyName = FindProperty(item, "m_ValuePropertyName");
+                        DuProperty m_ColorPropertyName = FindProperty(item, "m_ColorPropertyName");
+                        DuProperty m_UvwPropertyName   = FindProperty(item, "m_UvwPropertyName");
 
-                    m_MeshRenderer.property.objectReferenceValue = matRef.meshRenderer;
-                    m_ValuePropertyName.property.stringValue = matRef.valuePropertyName;
-                    m_ColorPropertyName.property.stringValue = matRef.colorPropertyName;
-                    m_UvwPropertyName.property.stringValue = matRef.uvwPropertyName;
+                        m_MeshRenderer.property.objectReferenceValue = matRef.meshRenderer;
+                        m_ValuePropertyName.property.stringValue = matRef.valuePropertyName;
+                        m_ColorPropertyName.property.stringValue = matRef.colorPropertyName;
+                        m_UvwPropertyName.property.stringValue = matRef.uvwPropertyName;
+                    }
                 }
-            }
-            else
-            {
-                if (DustGUI.Button("Remove Material Reference"))
+                else
                 {
-                    m_MaterialReferences.property.DeleteArrayElementAtIndex(0);
-                    count--;
+                    if (DustGUI.Button("Remove Material Reference"))
+                    {
+                        m_MaterialReferences.property.DeleteArrayElementAtIndex(0);
+                    }
                 }
             }
 
