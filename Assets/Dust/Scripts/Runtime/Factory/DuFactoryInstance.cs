@@ -277,6 +277,7 @@ namespace DustEngine
 
                 material = new Material(matRef.originalMaterial);
                 material.name += " (Clone)";
+                material.hideFlags = HideFlags.DontSave;
 
                 // Creating clone of material
                 matRef.meshRenderer.sharedMaterial = material;
@@ -285,6 +286,9 @@ namespace DustEngine
             {
                 material = matRef.meshRenderer.sharedMaterial;
             }
+
+            if (Dust.IsNull(material))
+                return; // This may happen when you move factory to the prefab
 
             if (!Dust.IsNullOrEmpty(matRef.valuePropertyName))
                 material.SetFloat(matRef.valuePropertyName, stateDynamic.value * intensity);

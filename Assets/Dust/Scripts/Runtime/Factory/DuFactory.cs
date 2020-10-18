@@ -220,7 +220,6 @@ namespace DustEngine
         // Why I use array[] and not List<> ?
         //   1. array[] faster then iterate (+ need iterate via for, not foreach)
         //   2. I always know capacity of instances
-        [SerializeField]
         private DuFactoryInstance[] m_Instances = new DuFactoryInstance[0]; // shouldn't be null
         public DuFactoryInstance[] instances => m_Instances;
 
@@ -294,13 +293,13 @@ namespace DustEngine
                 if (Dust.IsNotNull(sourceObjectsHolder))
                     sourceObjectsHolder.SetActive(false);
             }
+
+            RebuildInstances();
         }
 
         private void Update()
         {
             RebuildInstancesIfRequired();
-
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             UpdateInstancesDynamicStates();
         }

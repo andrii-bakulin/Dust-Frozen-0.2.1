@@ -31,7 +31,7 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        private int m_SourceObjectsHolderLastState = 0;
+        private int m_SourceObjectsHolderLastStateId = 0;
 
         private int GetSourceObjectsHolderStateId()
         {
@@ -49,7 +49,7 @@ namespace DustEngine
                     break;
 
                 case SourceObjectsMode.List:
-                    return 0;
+                    return 30003;
             }
 
             if (Dust.IsNull(sourceObjectsHolder))
@@ -61,6 +61,9 @@ namespace DustEngine
                 stateId ^= i * 835141 + child.GetInstanceID();
             }
 
+            if (stateId == 0)
+                stateId = 1;
+
             return stateId;
         }
 
@@ -68,7 +71,7 @@ namespace DustEngine
 
         private void RebuildInstancesIfRequired()
         {
-            if (m_SourceObjectsHolderLastState == GetSourceObjectsHolderStateId())
+            if (m_SourceObjectsHolderLastStateId == GetSourceObjectsHolderStateId())
                 return;
 
             RebuildInstances();
@@ -108,15 +111,15 @@ namespace DustEngine
                 {
                     case InstanceAccessMode.Normal:
                     default:
-                        // Nothing need to do
+                        instance.gameObject.hideFlags = HideFlags.DontSave;
                         break;
 
                     case InstanceAccessMode.NotEditable:
-                        instance.gameObject.hideFlags = HideFlags.NotEditable;
+                        instance.gameObject.hideFlags = HideFlags.DontSave | HideFlags.NotEditable;
                         break;
 
                     case InstanceAccessMode.HideInHierarchy:
-                        instance.gameObject.hideFlags = HideFlags.HideInHierarchy;
+                        instance.gameObject.hideFlags = HideFlags.DontSave | HideFlags.NotEditable | HideFlags.HideInHierarchy;
                         break;
                 }
             }
@@ -142,7 +145,7 @@ namespace DustEngine
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            m_SourceObjectsHolderLastState = GetSourceObjectsHolderStateId();
+            m_SourceObjectsHolderLastStateId = GetSourceObjectsHolderStateId();
         }
 
         protected void DestroyAllInstances()
