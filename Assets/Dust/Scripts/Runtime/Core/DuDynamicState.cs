@@ -54,6 +54,18 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
+        public static void Append(ref int dynamicState, int sequenceIndex, GameObject gameObject)
+        {
+            if (Dust.IsNotNull(gameObject))
+            {
+                Append(ref dynamicState, sequenceIndex, gameObject.transform);
+            }
+            else
+            {
+                dynamicState ^= 123456;
+            }
+        }
+
         public static void Append(ref int dynamicState, int sequenceIndex, Transform transform)
         {
             if (Dust.IsNotNull(transform))
@@ -72,6 +84,11 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
+        public static void Append(ref int dynamicState, int sequenceIndex, DuRemapping ramapping)
+        {
+            dynamicState ^= sequenceIndex * 291422 + (Dust.IsNotNull(ramapping) ? ramapping.GetDynamicStateHashCode() : 123456);
+        }
+
         public static void Append(ref int dynamicState, int sequenceIndex, DuDeformer deformer)
         {
             dynamicState ^= sequenceIndex * 291422 + (Dust.IsNotNull(deformer) ? deformer.GetDynamicStateHashCode() : 123456);
@@ -85,6 +102,11 @@ namespace DustEngine
         public static void Append(ref int dynamicState, int sequenceIndex, DuField field)
         {
             dynamicState ^= sequenceIndex * 512661 + (Dust.IsNotNull(field) ? field.GetDynamicStateHashCode() : 123456);
+        }
+
+        public static void Append(ref int dynamicState, int sequenceIndex, DuFactoryMachine factoryMachine)
+        {
+            dynamicState ^= sequenceIndex * 814356 + (Dust.IsNotNull(factoryMachine) ? factoryMachine.GetDynamicStateHashCode() : 123456);
         }
 
         //--------------------------------------------------------------------------------------------------------------

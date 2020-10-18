@@ -134,6 +134,42 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
+        // DuDynamicStateInterface
+
+        public override int GetDynamicStateHashCode()
+        {
+            var seq = 0;
+            var dynamicState = base.GetDynamicStateHashCode();
+
+            DuDynamicState.Append(ref dynamicState, ++seq, min);
+            DuDynamicState.Append(ref dynamicState, ++seq, max);
+
+            DuDynamicState.Append(ref dynamicState, ++seq, positionEnabled);
+            if (positionEnabled)
+            {
+                DuDynamicState.Append(ref dynamicState, ++seq, position);
+                DuDynamicState.Append(ref dynamicState, ++seq, positionTransformSpace);
+                DuDynamicState.Append(ref dynamicState, ++seq, positionTransformMode);
+            }
+
+            DuDynamicState.Append(ref dynamicState, ++seq, rotationEnabled);
+            if (rotationEnabled)
+            {
+                DuDynamicState.Append(ref dynamicState, ++seq, rotation);
+                DuDynamicState.Append(ref dynamicState, ++seq, rotationTransformMode);
+            }
+
+            DuDynamicState.Append(ref dynamicState, ++seq, scaleEnabled);
+            if (scaleEnabled)
+            {
+                DuDynamicState.Append(ref dynamicState, ++seq, scale);
+                DuDynamicState.Append(ref dynamicState, ++seq, scaleTransformMode);
+            }
+
+            return DuDynamicState.Normalize(dynamicState);
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         protected override void UpdateInstanceDynamicState(FactoryInstanceState factoryInstanceState, float intensityByMachine)
         {

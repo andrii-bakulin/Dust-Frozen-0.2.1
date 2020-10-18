@@ -2,7 +2,7 @@
 
 namespace DustEngine
 {
-    public abstract class DuFactoryMachine : DuMonoBehaviour
+    public abstract class DuFactoryMachine : DuMonoBehaviour, DuDynamicStateInterface
     {
         public class FactoryInstanceState
         {
@@ -74,6 +74,18 @@ namespace DustEngine
         private void Start()
         {
             // Require to show enabled-checkbox in editor for all factory-machine
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+        // DuDynamicStateInterface
+
+        public virtual int GetDynamicStateHashCode()
+        {
+            int seq = 0, dynamicState = 0;
+
+            DuDynamicState.Append(ref dynamicState, ++seq, intensity);
+
+            return DuDynamicState.Normalize(dynamicState);
         }
 
         //--------------------------------------------------------------------------------------------------------------

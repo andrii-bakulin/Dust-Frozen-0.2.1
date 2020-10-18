@@ -13,15 +13,57 @@ namespace DustEngine
 
         public readonly Stats stats = new Stats();
 #endif
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        private int m_LastDynamicStateHashCode = 0;
+        public int lastDynamicStateHashCode => m_LastDynamicStateHashCode;
+
+        //--------------------------------------------------------------------------------------------------------------
+        // DuDynamicStateInterface
+
+        public virtual int GetDynamicStateHashCode()
+        {
+            int seq = 0, dynamicState = 0;
+
+            if (Dust.IsNotNull(instancesHolder))
+                DuDynamicState.Append(ref dynamicState, ++seq, instancesHolder);
+            else
+                DuDynamicState.Append(ref dynamicState, ++seq, transform);
+
+            DuDynamicState.Append(ref dynamicState, ++seq, factoryMachines.Count);
+
+            foreach (DuFactoryMachine.Record record in factoryMachines)
+            {
+                // @WARNING!!! require sync code in: GetDynamicStateHashCode() + UpdateInstancesDynamicStates()
+
+                if (Dust.IsNull(record) || !record.enabled || Dust.IsNull(record.factoryMachine))
+                    continue;
+
+                if (!record.factoryMachine.enabled || !record.factoryMachine.gameObject.activeInHierarchy)
+                    continue;
+
+                // @END
+
+                DuDynamicState.Append(ref dynamicState, ++seq, record.enabled);
+                DuDynamicState.Append(ref dynamicState, ++seq, record.intensity);
+                DuDynamicState.Append(ref dynamicState, ++seq, record.factoryMachine);
+            }
+
+            return DuDynamicState.Normalize(dynamicState);
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
 
         public void UpdateInstancesDynamicStates(bool forced = false)
         {
+            int newDynamicStateHash = GetDynamicStateHashCode();
+
             if (!forced)
             {
-                // @DUST.todo: make optimization here!
-                // If factory-machines/fields/etc... didn't change states, then no need to update.
-
                 if (factoryMachines.Count == 0)
+                    return;
+
+                if (m_LastDynamicStateHashCode == newDynamicStateHash)
                     return;
             }
 
@@ -46,7 +88,6 @@ namespace DustEngine
             foreach (DuFactoryMachine.Record record in factoryMachines)
             {
                 // @WARNING!!! require sync code in: GetDynamicStateHashCode() + UpdateInstancesDynamicStates()
-                // @DUST.todo!
 
                 if (Dust.IsNull(record) || !record.enabled || Dust.IsNull(record.factoryMachine))
                     continue;
@@ -104,6 +145,8 @@ namespace DustEngine
             stats.updatesCount++;
             stats.lastUpdateTime = timer.Stop();
 #endif
+
+            m_LastDynamicStateHashCode = newDynamicStateHash;
         }
     }
 }

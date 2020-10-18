@@ -313,6 +313,34 @@ namespace DustEngine
             return v;
         }
 
+        //--------------------------------------------------------------------------------------------------------------
+        // DuDynamicStateInterface
+
+        public override int GetDynamicStateHashCode()
+        {
+            var seq = 0;
+            var dynamicState = base.GetDynamicStateHashCode();
+
+            DuDynamicState.Append(ref dynamicState, ++seq, noiseMode);
+            DuDynamicState.Append(ref dynamicState, ++seq, noiseDimension);
+            DuDynamicState.Append(ref dynamicState, ++seq, animationSpeed);
+            DuDynamicState.Append(ref dynamicState, ++seq, animationOffset);
+            DuDynamicState.Append(ref dynamicState, ++seq, synchronized);
+
+            DuDynamicState.Append(ref dynamicState, ++seq, positionAxisRemapping);
+            DuDynamicState.Append(ref dynamicState, ++seq, rotationAxisRemapping);
+            DuDynamicState.Append(ref dynamicState, ++seq, scaleAxisRemapping);
+
+            DuDynamicState.Append(ref dynamicState, ++seq, noiseSpace);
+            DuDynamicState.Append(ref dynamicState, ++seq, noiseScale);
+
+            DuDynamicState.Append(ref dynamicState, ++seq, seed);
+
+            return DuDynamicState.Normalize(dynamicState);
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
         void Reset()
         {
             min = -1f;

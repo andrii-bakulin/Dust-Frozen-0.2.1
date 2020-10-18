@@ -64,7 +64,7 @@ namespace DustEngine
             DuDynamicState.Append(ref dynamicState, ++seq, timeScale);
             DuDynamicState.Append(ref dynamicState, ++seq, offset);
 
-            DuDynamicState.Append(ref dynamicState, ++seq, remapping.GetDynamicStateHashCode());
+            DuDynamicState.Append(ref dynamicState, ++seq, remapping);
             DuDynamicState.Append(ref dynamicState, ++seq, m_OffsetDynamic);
 
             return DuDynamicState.Normalize(dynamicState);

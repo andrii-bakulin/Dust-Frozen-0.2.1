@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace DustEngine
 {
-    public abstract partial class DuFactory : DuMonoBehaviour
+    public abstract partial class DuFactory : DuMonoBehaviour, DuDynamicStateInterface
     {
         internal readonly string kGameObjectName_SourceObjects = "Source Objects";
         internal readonly string kGameObjectName_Instances = "Instances";

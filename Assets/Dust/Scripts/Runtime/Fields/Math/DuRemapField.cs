@@ -17,7 +17,7 @@ namespace DustEngine
             var seq = 0;
             var dynamicState = base.GetDynamicStateHashCode();
 
-            DuDynamicState.Append(ref dynamicState, ++seq, remapping.GetDynamicStateHashCode());
+            DuDynamicState.Append(ref dynamicState, ++seq, remapping);
 
             return DuDynamicState.Normalize(dynamicState);
         }
