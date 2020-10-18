@@ -54,7 +54,6 @@ namespace DustEngine
             return res;
         }
 
-        // @todo@: here allow optimize
         public static Color Multiply(Color colorBase, Color colorOver)
         {
             if (DuMath.IsZero(colorOver.a))
