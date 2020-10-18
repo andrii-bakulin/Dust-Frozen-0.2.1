@@ -61,6 +61,71 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
+        protected static bool UpdatePropertyValue(ref bool originValue, bool newValue)
+        {
+            if (originValue.Equals(newValue))
+                return false;
+
+            originValue = newValue;
+            return true;
+        }
+
+        protected static bool UpdatePropertyValue(ref int originValue, int newValue)
+        {
+            if (originValue.Equals(newValue))
+                return false;
+
+            originValue = newValue;
+            return true;
+        }
+
+        protected static bool UpdatePropertyValue(ref float originValue, float newValue)
+        {
+            if (originValue.Equals(newValue))
+                return false;
+
+            originValue = newValue;
+            return true;
+        }
+
+        protected static bool UpdatePropertyValue(ref Color originValue, Color newValue)
+        {
+            if (originValue.Equals(newValue))
+                return false;
+
+            originValue = newValue;
+            return true;
+        }
+
+        protected static bool UpdatePropertyValue(ref Vector3 originValue, Vector3 newValue)
+        {
+            if (originValue.Equals(newValue))
+                return false;
+
+            originValue = newValue;
+            return true;
+        }
+
+        protected static bool UpdatePropertyValue(ref Vector3Int originValue, Vector3Int newValue)
+        {
+            if (originValue.Equals(newValue))
+                return false;
+
+            originValue = newValue;
+            return true;
+        }
+
+        protected static bool UpdatePropertyValue(ref GameObject originValue, GameObject newValue)
+        {
+            if (originValue.Equals(newValue))
+                return false;
+
+            originValue = newValue;
+            return true;
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
         internal Space WorkSpaceToSpace(WorkSpace space)
         {
             if (space == WorkSpace.World)

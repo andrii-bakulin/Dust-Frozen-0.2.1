@@ -11,7 +11,13 @@ namespace DustEngine
         public Vector3Int count
         {
             get => m_Count;
-            set => m_Count = Normalizer.Count(value);
+            set
+            {
+                if (!UpdatePropertyValue(ref m_Count, Normalizer.Count(value)))
+                    return;
+
+                RebuildInstances();
+            }
         }
 
         [SerializeField]
@@ -19,7 +25,13 @@ namespace DustEngine
         public Vector3 size
         {
             get => m_Size;
-            set => m_Size = value;
+            set
+            {
+                if (!UpdatePropertyValue(ref m_Size, value))
+                    return;
+
+                UpdateInstancesZeroStates();
+            }
         }
 
         //--------------------------------------------------------------------------------------------------------------

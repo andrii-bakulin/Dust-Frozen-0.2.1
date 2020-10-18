@@ -11,7 +11,13 @@ namespace DustEngine
         public int count
         {
             get => m_Count;
-            set => m_Count = Normalizer.Count(value);
+            set
+            {
+                if (!UpdatePropertyValue(ref m_Count, Normalizer.Count(value)))
+                    return;
+
+                RebuildInstances();
+            }
         }
 
         [SerializeField]
@@ -19,7 +25,13 @@ namespace DustEngine
         public float radius
         {
             get => m_Radius;
-            set => m_Radius = value;
+            set
+            {
+                if (!UpdatePropertyValue(ref m_Radius, value))
+                    return;
+
+                UpdateInstancesZeroStates();
+            }
         }
 
         [SerializeField]
@@ -27,7 +39,14 @@ namespace DustEngine
         public Orientation orientation
         {
             get => m_Orientation;
-            set => m_Orientation = value;
+            set
+            {
+                if (m_Orientation == value)
+                    return;
+
+                m_Orientation = value;
+                UpdateInstancesZeroStates();
+            }
         }
 
         [SerializeField]
@@ -35,7 +54,13 @@ namespace DustEngine
         public bool align
         {
             get => m_Align;
-            set => m_Align = value;
+            set
+            {
+                if (!UpdatePropertyValue(ref m_Align, value))
+                    return;
+
+                UpdateInstancesZeroStates();
+            }
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -45,7 +70,13 @@ namespace DustEngine
         public float startAngle
         {
             get => m_StartAngle;
-            set => m_StartAngle = value;
+            set
+            {
+                if (!UpdatePropertyValue(ref m_StartAngle, value))
+                    return;
+
+                UpdateInstancesZeroStates();
+            }
         }
 
         [SerializeField]
@@ -53,7 +84,13 @@ namespace DustEngine
         public float endAngle
         {
             get => m_EndAngle;
-            set => m_EndAngle = value;
+            set
+            {
+                if (!UpdatePropertyValue(ref m_EndAngle, value))
+                    return;
+
+                UpdateInstancesZeroStates();
+            }
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -63,7 +100,13 @@ namespace DustEngine
         public float offset
         {
             get => m_Offset;
-            set => m_Offset = value;
+            set
+            {
+                if (!UpdatePropertyValue(ref m_Offset, value))
+                    return;
+
+                UpdateInstancesZeroStates();
+            }
         }
 
         [SerializeField]
@@ -71,7 +114,13 @@ namespace DustEngine
         public float offsetVariation
         {
             get => m_OffsetVariation;
-            set => m_OffsetVariation = value;
+            set
+            {
+                if (!UpdatePropertyValue(ref m_OffsetVariation, value))
+                    return;
+
+                UpdateInstancesZeroStates();
+            }
         }
 
         [SerializeField]
@@ -79,7 +128,13 @@ namespace DustEngine
         public int offsetSeed
         {
             get => m_OffsetSeed;
-            set => m_OffsetSeed = Normalizer.OffsetSeed(value);
+            set
+            {
+                if (!UpdatePropertyValue(ref m_OffsetSeed, Normalizer.OffsetSeed(value)))
+                    return;
+
+                UpdateInstancesZeroStates();
+            }
         }
 
         //--------------------------------------------------------------------------------------------------------------

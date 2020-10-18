@@ -9,6 +9,8 @@ namespace DustEngine
         internal readonly string kGameObjectName_Instances = "Instances";
         internal readonly string kGameObjectName_Machines = "Machines";
 
+        //--------------------------------------------------------------------------------------------------------------
+
         public enum InspectorDisplay
         {
             None = 0,
@@ -70,7 +72,14 @@ namespace DustEngine
         public IterateMode iterateMode
         {
             get => m_IterateMode;
-            set => m_IterateMode = value;
+            set
+            {
+                if (m_IterateMode == value)
+                    return;
+
+                m_IterateMode = value;
+                RebuildInstances();
+            }
         }
 
         [SerializeField]
@@ -89,12 +98,42 @@ namespace DustEngine
             set => m_InstanceTypeMode = value;
         }
 
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        [SerializeField]
+        private GameObject m_InstancesHolder;
+        public GameObject instancesHolder
+        {
+            get => m_InstancesHolder;
+            set
+            {
+                if (!UpdatePropertyValue(ref m_InstancesHolder, value))
+                    return;
+
+                RebuildInstances();
+            }
+        }
+
+        // Why I use array[] and not List<> ?
+        //   1. array[] faster then iterate (+ need iterate via for, not foreach)
+        //   2. I always know capacity of instances
+        private DuFactoryInstance[] m_Instances = new DuFactoryInstance[0]; // shouldn't be null
+        public DuFactoryInstance[] instances => m_Instances;
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
         [SerializeField]
         private bool m_ForcedSetActive = false;
         public bool forcedSetActive
         {
             get => m_ForcedSetActive;
-            set => m_ForcedSetActive = value;
+            set
+            {
+                if (!UpdatePropertyValue(ref m_ForcedSetActive, value))
+                    return;
+
+                RebuildInstances();
+            }
         }
 
         [SerializeField]
@@ -102,16 +141,30 @@ namespace DustEngine
         public int seed
         {
             get => m_Seed;
-            set => m_Seed = value;
+            set
+            {
+                if (!UpdatePropertyValue(ref m_Seed, value))
+                    return;
+
+                RebuildInstances();
+            }
         }
 
         //--------------------------------------------------------------------------------------------------------------
+
         [SerializeField]
         protected TransformSpace m_TransformSpace = TransformSpace.Factory;
         public TransformSpace transformSpace
         {
             get => m_TransformSpace;
-            set => m_TransformSpace = value;
+            set
+            {
+                if (m_TransformSpace == value)
+                    return;
+
+                m_TransformSpace = value;
+                UpdateInstancesZeroStates();
+            }
         }
 
         [SerializeField]
@@ -119,7 +172,14 @@ namespace DustEngine
         public TransformSequence transformSequence
         {
             get => m_TransformSequence;
-            set => m_TransformSequence = value;
+            set
+            {
+                if (m_TransformSequence == value)
+                    return;
+
+                m_TransformSequence = value;
+                UpdateInstancesZeroStates();
+            }
         }
 
         [SerializeField]
@@ -127,7 +187,13 @@ namespace DustEngine
         public Vector3 transformPosition
         {
             get => m_TransformPosition;
-            set => m_TransformPosition = value;
+            set
+            {
+                if (!UpdatePropertyValue(ref m_TransformPosition, value))
+                    return;
+
+                UpdateInstancesZeroStates();
+            }
         }
 
         [SerializeField]
@@ -135,7 +201,13 @@ namespace DustEngine
         public Vector3 transformRotation
         {
             get => m_TransformRotation;
-            set => m_TransformRotation = value;
+            set
+            {
+                if (!UpdatePropertyValue(ref m_TransformRotation, value))
+                    return;
+
+                UpdateInstancesZeroStates();
+            }
         }
 
         [SerializeField]
@@ -143,7 +215,13 @@ namespace DustEngine
         public Vector3 transformScale
         {
             get => m_TransformScale;
-            set => m_TransformScale = value;
+            set
+            {
+                if (!UpdatePropertyValue(ref m_TransformScale, value))
+                    return;
+
+                UpdateInstancesZeroStates();
+            }
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -153,7 +231,13 @@ namespace DustEngine
         public float defaultValue
         {
             get => m_DefaultValue;
-            set => m_DefaultValue = value;
+            set
+            {
+                if (!UpdatePropertyValue(ref m_DefaultValue, value))
+                    return;
+
+                UpdateInstancesZeroStates();
+            }
         }
 
         [SerializeField]
@@ -161,7 +245,13 @@ namespace DustEngine
         public Color defaultColor
         {
             get => m_DefaultColor;
-            set => m_DefaultColor = value;
+            set
+            {
+                if (!UpdatePropertyValue(ref m_DefaultColor, value))
+                    return;
+
+                UpdateInstancesZeroStates();
+            }
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -199,29 +289,6 @@ namespace DustEngine
         [SerializeField]
         private List<GameObject> m_SourceObjects = new List<GameObject>();
         public List<GameObject> sourceObjects => m_SourceObjects;
-
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-        [SerializeField]
-        private GameObject m_InstancesHolder;
-        public GameObject instancesHolder
-        {
-            get => m_InstancesHolder;
-            set
-            {
-                if (m_InstancesHolder == value)
-                    return;
-
-                m_InstancesHolder = value;
-                RebuildInstances();
-            }
-        }
-
-        // Why I use array[] and not List<> ?
-        //   1. array[] faster then iterate (+ need iterate via for, not foreach)
-        //   2. I always know capacity of instances
-        private DuFactoryInstance[] m_Instances = new DuFactoryInstance[0]; // shouldn't be null
-        public DuFactoryInstance[] instances => m_Instances;
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

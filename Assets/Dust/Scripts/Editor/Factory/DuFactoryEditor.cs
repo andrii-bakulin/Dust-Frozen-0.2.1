@@ -160,6 +160,7 @@ namespace DustEngine.DustEditor
             }
             DustGUI.FoldoutEnd();
 
+            m_IsRequireRebuildInstances |= m_SourceObjectsMode.isChanged;
             m_IsRequireRebuildInstances |= m_SourceObjectsHolder.isChanged;
             m_IsRequireRebuildInstances |= m_SourceObjects.isChanged;
             m_IsRequireRebuildInstances |= m_IterateMode.isChanged;
@@ -204,7 +205,6 @@ namespace DustEngine.DustEditor
 
             m_IsRequireResetupInstances |= m_DefaultValue.isChanged;
             m_IsRequireResetupInstances |= m_DefaultColor.isChanged;
-            m_IsRequireResetupInstances |= m_FactoryMachines.isChanged;
         }
 
         protected void OnInspectorGUI_Transform()

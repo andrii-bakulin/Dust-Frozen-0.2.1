@@ -31,47 +31,44 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        private int m_SourceObjectsHolderLastStateId = 0;
+        private int m_SourceObjectsLastStampId = 0;
 
-        private int GetSourceObjectsHolderStateId()
+        private int GetSourceObjectsStampId()
         {
-            int stateId;
+            int stampId = ((int) sourceObjectsMode + 25) * 1001;
 
-            switch (sourceObjectsMode)
+            if (sourceObjectsMode == SourceObjectsMode.Holder ||
+                sourceObjectsMode == SourceObjectsMode.HolderAndList)
             {
-                case SourceObjectsMode.Holder:
-                default:
-                    stateId = 10001;
-                    break;
-
-                case SourceObjectsMode.HolderAndList:
-                    stateId = 20002;
-                    break;
-
-                case SourceObjectsMode.List:
-                    return 30003;
+                if (Dust.IsNotNull(sourceObjectsHolder))
+                {
+                    for (int i = 0; i < sourceObjectsHolder.transform.childCount; i++)
+                    {
+                        stampId ^= i * 835141 + sourceObjectsHolder.transform.GetChild(i).GetInstanceID();
+                    }
+                }
             }
 
-            if (Dust.IsNull(sourceObjectsHolder))
-                return stateId;
-
-            for (int i = 0; i < sourceObjectsHolder.transform.childCount; i++)
+            if (sourceObjectsMode == SourceObjectsMode.List ||
+                sourceObjectsMode == SourceObjectsMode.HolderAndList)
             {
-                var child = sourceObjectsHolder.transform.GetChild(i);
-                stateId ^= i * 835141 + child.GetInstanceID();
+                for (int i = 0; i < sourceObjects.Count; i++)
+                {
+                    stampId ^= i * 835141 + sourceObjects[i].GetInstanceID();
+                }
             }
 
-            if (stateId == 0)
-                stateId = 1;
+            if (stampId == 0)
+                stampId = 1;
 
-            return stateId;
+            return stampId;
         }
 
         //--------------------------------------------------------------------------------------------------------------
 
         private void RebuildInstancesIfRequired()
         {
-            if (m_SourceObjectsHolderLastStateId == GetSourceObjectsHolderStateId())
+            if (m_SourceObjectsLastStampId == GetSourceObjectsStampId())
                 return;
 
             RebuildInstances();
@@ -145,7 +142,7 @@ namespace DustEngine
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            m_SourceObjectsHolderLastStateId = GetSourceObjectsHolderStateId();
+            m_SourceObjectsLastStampId = GetSourceObjectsStampId();
         }
 
         protected void DestroyAllInstances()

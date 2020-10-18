@@ -11,7 +11,13 @@ namespace DustEngine
         public int count
         {
             get => m_Count;
-            set => m_Count = Normalizer.Count(value);
+            set
+            {
+                if (!UpdatePropertyValue(ref m_Count, Normalizer.Count(value)))
+                    return;
+
+                RebuildInstances();
+            }
         }
 
         [SerializeField]
@@ -19,7 +25,13 @@ namespace DustEngine
         public int offset
         {
             get => m_Offset;
-            set => m_Offset = Normalizer.Offset(value);
+            set
+            {
+                if (!UpdatePropertyValue(ref m_Offset, Normalizer.Offset(value)))
+                    return;
+
+                UpdateInstancesZeroStates();
+            }
         }
 
         [SerializeField]
@@ -27,7 +39,13 @@ namespace DustEngine
         public float amount
         {
             get => m_Amount;
-            set => m_Amount = value;
+            set
+            {
+                if (!UpdatePropertyValue(ref m_Amount, value))
+                    return;
+
+                UpdateInstancesZeroStates();
+            }
         }
 
         [SerializeField]
@@ -35,7 +53,13 @@ namespace DustEngine
         public Vector3 position
         {
             get => m_Position;
-            set => m_Position = value;
+            set
+            {
+                if (!UpdatePropertyValue(ref m_Position, value))
+                    return;
+
+                UpdateInstancesZeroStates();
+            }
         }
 
         [SerializeField]
@@ -43,7 +67,13 @@ namespace DustEngine
         public Vector3 rotation
         {
             get => m_Rotation;
-            set => m_Rotation = value;
+            set
+            {
+                if (!UpdatePropertyValue(ref m_Rotation, value))
+                    return;
+
+                UpdateInstancesZeroStates();
+            }
         }
 
         [SerializeField]
@@ -51,7 +81,13 @@ namespace DustEngine
         public Vector3 scale
         {
             get => m_Scale;
-            set => m_Scale = value;
+            set
+            {
+                if (!UpdatePropertyValue(ref m_Scale, value))
+                    return;
+
+                UpdateInstancesZeroStates();
+            }
         }
 
         [SerializeField]
@@ -59,7 +95,13 @@ namespace DustEngine
         public Vector3 stepRotation
         {
             get => m_StepRotation;
-            set => m_StepRotation = value;
+            set
+            {
+                if (!UpdatePropertyValue(ref m_StepRotation, value))
+                    return;
+
+                UpdateInstancesZeroStates();
+            }
         }
 
         //--------------------------------------------------------------------------------------------------------------
