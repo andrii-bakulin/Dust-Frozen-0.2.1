@@ -91,7 +91,10 @@ namespace DustEngine.DustEditor
             popup.m_FieldsMap = fieldsMap;
 
             GenerateColumn(popup, EntityType.BasicField, "Basic Fields");
-            GenerateColumn(popup, EntityType.FactoryField, "Factory Fields");
+
+            if (fieldsMap.fieldsMapInstance.fieldsMapMode == DuFieldsMap.FieldsMapMode.FactoryMachine)
+                GenerateColumn(popup, EntityType.FactoryField, "Factory Fields");
+
             GenerateColumn(popup, EntityType.Space2DField, "2D Fields");
             GenerateColumn(popup, EntityType.Space3DField, "3D Fields");
             GenerateColumn(popup, EntityType.MathField, "Math Fields");

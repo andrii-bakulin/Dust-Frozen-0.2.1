@@ -24,6 +24,7 @@ namespace DustEngine.DustEditor
         //--------------------------------------------------------------------------------------------------------------
 
         private DuFieldsMap m_FieldsMapInstance;
+        public DuFieldsMap fieldsMapInstance => m_FieldsMapInstance;
 
         private DuEditor m_Editor;
 

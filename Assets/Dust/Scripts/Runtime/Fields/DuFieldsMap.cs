@@ -89,6 +89,22 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
+        public enum FieldsMapMode
+        {
+            Custom = 0,
+            Deformer = 1,
+            FactoryMachine = 2,
+            FieldsSpace = 3,
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        [SerializeField]
+        private FieldsMapMode m_FieldsMapMode = FieldsMapMode.Custom;
+        public FieldsMapMode fieldsMapMode => m_FieldsMapMode;
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
         [SerializeField]
         private bool m_CalculatePower;
         public bool calculatePower
@@ -139,6 +155,8 @@ namespace DustEngine
         {
             return new DuFieldsMap()
             {
+                m_FieldsMapMode = FieldsMapMode.Deformer,
+
                 calculatePower = true,
                 calculateColor = false,
 
@@ -150,6 +168,8 @@ namespace DustEngine
         {
             return new DuFieldsMap()
             {
+                m_FieldsMapMode = FieldsMapMode.FactoryMachine,
+
                 calculatePower = true,
                 calculateColor = true,
 
@@ -162,6 +182,8 @@ namespace DustEngine
         {
             return new DuFieldsMap()
             {
+                m_FieldsMapMode = FieldsMapMode.FieldsSpace,
+
                 calculatePower = true,
                 calculateColor = true,
 
