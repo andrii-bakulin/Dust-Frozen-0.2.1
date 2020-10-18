@@ -39,8 +39,15 @@ namespace DustEngine.DustEditor
                     {
                         factoryMachine.transform.parent = selectedFactory.factoryMachinesHolder.transform;
                     }
+                    else if(Dust.IsNotNull(selectedFactory.instancesHolder) && selectedFactory.instancesHolder != selectedFactory.gameObject)
+                    {
+                        // If has instancesHolder and it's not same object as factory
+                        // then add factoryMachine as a child for factory object
+                        factoryMachine.transform.parent = selectedFactory.transform;
+                    }
                     else
                     {
+                        // Add factoryMachine on the same level as factory, and right after factory
                         factoryMachine.transform.parent = selectedFactory.transform.parent;
                         factoryMachine.transform.SetSiblingIndex(selectedFactory.transform.GetSiblingIndex() + 1);
                     }
