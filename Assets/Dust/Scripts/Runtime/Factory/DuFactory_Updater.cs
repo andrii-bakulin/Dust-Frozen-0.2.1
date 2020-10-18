@@ -4,6 +4,16 @@ namespace DustEngine
 {
     public partial class DuFactory
     {
+#if UNITY_EDITOR
+        public class Stats
+        {
+            public int updatesCount { get; internal set; }
+            public float lastUpdateTime { get; internal set; }
+        }
+
+        public readonly Stats stats = new Stats();
+#endif
+
         public void UpdateInstancesDynamicStates(bool forced = false)
         {
             if (!forced)
@@ -14,6 +24,10 @@ namespace DustEngine
                 if (factoryMachines.Count == 0)
                     return;
             }
+
+#if UNITY_EDITOR
+            var timer = Dust.Debug.StartTimer();
+#endif
 
             //----------------------------------------------------------------------------------------------------------
             // Step 1: reset instanceState to ZERO-State
@@ -83,6 +97,13 @@ namespace DustEngine
 
                 factoryInstance.ApplyDynamicStateToObject();
             }
+
+            //----------------------------------------------------------------------------------------------------------
+
+#if UNITY_EDITOR
+            stats.updatesCount++;
+            stats.lastUpdateTime = timer.Stop();
+#endif
         }
     }
 }

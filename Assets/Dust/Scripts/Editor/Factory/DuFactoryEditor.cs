@@ -245,6 +245,20 @@ namespace DustEngine.DustEditor
         {
             if (DustGUI.FoldoutBegin("Tools", "DuFactory.Tools", false))
             {
+                var main = target as DuFactory;
+
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                // Stats
+
+                string statsInfo = "STATS:" + "\n";
+                statsInfo += "Mesh updates: " + main.stats.updatesCount + "\n";
+                statsInfo += "Last update: " + main.stats.lastUpdateTime + " sec";
+
+                DustGUI.HelpBoxWarning(statsInfo);
+                this.Repaint();
+
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
                 if (DustGUI.Button("Rebuild Instances"))
                     m_IsRequireRebuildInstances |= true;
             }
