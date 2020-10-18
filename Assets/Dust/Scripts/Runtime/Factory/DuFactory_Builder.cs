@@ -194,10 +194,10 @@ namespace DustEngine
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            int instancesCount = instances.Length;
+            int instancesCount = m_Instances.Length;
             for (int i = 0; i < instancesCount; i++)
             {
-                DuFactoryInstance factoryInstance = instances[i];
+                DuFactoryInstance factoryInstance = m_Instances[i];
 
                 if (Dust.IsNull(factoryInstance))
                     continue;

@@ -32,7 +32,7 @@ namespace DustEngine
             //----------------------------------------------------------------------------------------------------------
             // Step 1: reset instanceState to ZERO-State
 
-            foreach (var factoryInstance in instances)
+            foreach (var factoryInstance in m_Instances)
             {
                 if (Dust.IsNull(factoryInstance))
                     continue;
@@ -74,7 +74,7 @@ namespace DustEngine
                 if (record.factoryMachine.PrepareForUpdateInstancesStates(factoryInstanceState) == false)
                     continue;
 
-                foreach (var instance in instances)
+                foreach (var instance in m_Instances)
                 {
                     if (Dust.IsNull(instance))
                         continue;
@@ -90,7 +90,7 @@ namespace DustEngine
             //----------------------------------------------------------------------------------------------------------
             // Step 3: Apply Dynamic state to transform objects in scenes
 
-            foreach (var factoryInstance in instances)
+            foreach (var factoryInstance in m_Instances)
             {
                 if (Dust.IsNull(factoryInstance))
                     continue;

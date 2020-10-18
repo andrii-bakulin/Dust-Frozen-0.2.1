@@ -27,10 +27,10 @@ namespace DustEngine
             GUIStyle style = new GUIStyle("Label");
             style.fontSize = Mathf.RoundToInt(style.fontSize * inspectorScale);
 
-            int instancesCount = instances.Length;
+            int instancesCount = m_Instances.Length;
             for (int i = 0; i < instancesCount; i++)
             {
-                var instance = instances[i];
+                var instance = m_Instances[i];
 
                 if (Dust.IsNull(instance))
                 {
