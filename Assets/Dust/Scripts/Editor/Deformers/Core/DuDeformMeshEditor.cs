@@ -137,7 +137,7 @@ namespace DustEngine.DustEditor
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             string statsInfo = "STATS:" + "\n";
-            statsInfo += "Mesh updates: " + main.stats.updatesCount + "\n";
+            statsInfo += "Updates count: " + main.stats.updatesCount + "\n";
             statsInfo += "Last update: " + main.stats.lastUpdateTime + " sec";
 
             DustGUI.HelpBoxWarning(statsInfo);
