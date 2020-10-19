@@ -66,6 +66,50 @@ namespace DustEngine
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
+        private int m_LevelsCount = 1;
+        public int levelsCount
+        {
+            get => m_LevelsCount;
+            set
+            {
+                if (!UpdatePropertyValue(ref m_LevelsCount, Normalizer.LevelsCount(value)))
+                    return;
+
+                RebuildInstances();
+            }
+        }
+
+        [SerializeField]
+        private float m_LevelRadiusOffset = 2.0f;
+        public float levelRadiusOffset
+        {
+            get => m_LevelRadiusOffset;
+            set
+            {
+                if (!UpdatePropertyValue(ref m_LevelRadiusOffset, value))
+                    return;
+
+                UpdateInstancesZeroStates();
+            }
+        }
+
+        [SerializeField]
+        private int m_DeltaCountPerLevel = 0;
+        public int deltaCountPerLevel
+        {
+            get => m_DeltaCountPerLevel;
+            set
+            {
+                if (!UpdatePropertyValue(ref m_DeltaCountPerLevel, value))
+                    return;
+
+                RebuildInstances();
+            }
+        }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        [SerializeField]
         private float m_StartAngle = 0f;
         public float startAngle
         {
@@ -162,6 +206,11 @@ namespace DustEngine
             public static int OffsetSeed(int value)
             {
                 return Mathf.Clamp(value, 1, DuConstants.RANDOM_SEED_MAX);
+            }
+
+            public static int LevelsCount(int value)
+            {
+                return Mathf.Max(1, value);
             }
         }
     }
