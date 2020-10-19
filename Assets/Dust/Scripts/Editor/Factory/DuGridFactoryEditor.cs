@@ -10,6 +10,15 @@ namespace DustEngine.DustEditor
         private DuProperty m_Count;
         private DuProperty m_Size;
 
+        private DuProperty m_OffsetDirection;
+        private DuProperty m_OffsetWidth;
+        private DuProperty m_OffsetHeight;
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        private DuGridFactory.OffsetDirection offsetDirection
+            => (DuGridFactory.OffsetDirection) m_OffsetDirection.enumValueIndex;
+
         //--------------------------------------------------------------------------------------------------------------
 
         [MenuItem("Dust/Factory/Grid Factory")]
@@ -26,6 +35,10 @@ namespace DustEngine.DustEditor
 
             m_Count = FindProperty("m_Count", "Count");
             m_Size = FindProperty("m_Size", "Size");
+
+            m_OffsetDirection = FindProperty("m_OffsetDirection", "Offset Direction");
+            m_OffsetWidth = FindProperty("m_OffsetWidth", "Offset Width");
+            m_OffsetHeight = FindProperty("m_OffsetHeight", "Offset Height");
         }
 
         public override void OnInspectorGUI()
@@ -39,11 +52,24 @@ namespace DustEngine.DustEditor
                 PropertyField(m_Count);
                 PropertyField(m_Size);
                 Space();
+
+                PropertyField(m_OffsetDirection);
+
+                if (offsetDirection != DuGridFactory.OffsetDirection.Disabled)
+                {
+                    PropertyExtendedSlider(m_OffsetWidth, -1f, +1f, 0.01f);
+                    PropertyExtendedSlider(m_OffsetHeight, -1f, +1f, 0.01f);
+                }
+                Space();
             }
             DustGUI.FoldoutEnd();
 
             m_IsRequireRebuildInstances |= m_Count.isChanged;
             m_IsRequireResetupInstances |= m_Size.isChanged;
+
+            m_IsRequireResetupInstances |= m_OffsetDirection.isChanged;
+            m_IsRequireResetupInstances |= m_OffsetWidth.isChanged;
+            m_IsRequireResetupInstances |= m_OffsetHeight.isChanged;
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

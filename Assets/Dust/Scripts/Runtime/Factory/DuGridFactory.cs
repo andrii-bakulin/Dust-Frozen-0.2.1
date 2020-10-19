@@ -6,6 +6,16 @@ namespace DustEngine
     [ExecuteInEditMode]
     public class DuGridFactory : DuFactory
     {
+        public enum OffsetDirection
+        {
+            Disabled = 0,
+            X = 1,
+            Y = 2,
+            Z = 3,
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
         [SerializeField]
         private Vector3Int m_Count = new Vector3Int(3, 1, 3);
         public Vector3Int count
@@ -28,6 +38,49 @@ namespace DustEngine
             set
             {
                 if (!UpdatePropertyValue(ref m_Size, value))
+                    return;
+
+                UpdateInstancesZeroStates();
+            }
+        }
+
+        [SerializeField]
+        private OffsetDirection m_OffsetDirection = OffsetDirection.Disabled;
+        public OffsetDirection offsetDirection
+        {
+            get => m_OffsetDirection;
+            set
+            {
+                if (m_OffsetDirection == value)
+                    return;
+
+                m_OffsetDirection = value;
+                UpdateInstancesZeroStates();
+            }
+        }
+
+        [SerializeField]
+        private float m_OffsetWidth = 0f;
+        public float offsetWidth
+        {
+            get => m_OffsetWidth;
+            set
+            {
+                if (!UpdatePropertyValue(ref m_OffsetWidth, value))
+                    return;
+
+                UpdateInstancesZeroStates();
+            }
+        }
+
+        [SerializeField]
+        private float m_OffsetHeight = 0f;
+        public float offsetHeight
+        {
+            get => m_OffsetHeight;
+            set
+            {
+                if (!UpdatePropertyValue(ref m_OffsetHeight, value))
                     return;
 
                 UpdateInstancesZeroStates();

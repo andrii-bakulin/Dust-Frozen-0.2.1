@@ -30,7 +30,36 @@ namespace DustEngine
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                 // Set position/rotation/scale
 
-                instanceState.position = new Vector3(zeroPoint.x + stepOffset.x * x, zeroPoint.y + stepOffset.y * y, zeroPoint.z + stepOffset.z * z);
+                Vector3 offsetByDirection = Vector3.zero;
+
+                switch (gridFactory.offsetDirection)
+                {
+                    case DuGridFactory.OffsetDirection.Disabled:
+                    default:
+                        // Nothing to do
+                        break;
+
+                    case DuGridFactory.OffsetDirection.X:
+                        offsetByDirection.x += y % 2 == 1 ? stepOffset.x * gridFactory.offsetHeight : 0f;
+                        offsetByDirection.x += z % 2 == 1 ? stepOffset.x * gridFactory.offsetWidth  : 0f;
+                        break;
+
+                    case DuGridFactory.OffsetDirection.Y:
+                        offsetByDirection.y += x % 2 == 1 ? stepOffset.y * gridFactory.offsetWidth  : 0f;
+                        offsetByDirection.y += z % 2 == 1 ? stepOffset.y * gridFactory.offsetHeight : 0f;
+                        break;
+
+                    case DuGridFactory.OffsetDirection.Z:
+                        offsetByDirection.z += x % 2 == 1 ? stepOffset.z * gridFactory.offsetWidth  : 0f;
+                        offsetByDirection.z += y % 2 == 1 ? stepOffset.z * gridFactory.offsetHeight : 0f;
+                        break;
+                }
+
+                instanceState.position = new Vector3(
+                    zeroPoint.x + stepOffset.x * x + offsetByDirection.x,
+                    zeroPoint.y + stepOffset.y * y + offsetByDirection.y,
+                    zeroPoint.z + stepOffset.z * z + offsetByDirection.z);
+
                 instanceState.rotation = Vector3.zero;
                 instanceState.scale = Vector3.one;
 
