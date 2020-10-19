@@ -33,9 +33,7 @@ namespace DustEngine
             if (Dust.IsNull(prefab))
                 return null;
 
-            Transform parent = Dust.IsNotNull(m_DuFactory.instancesHolder)
-                ? m_DuFactory.instancesHolder.transform
-                : m_DuFactory.transform;
+            Transform parent = m_DuFactory.GetInstancesHolderTransform();
 
             GameObject instanceGameObject = null;
 

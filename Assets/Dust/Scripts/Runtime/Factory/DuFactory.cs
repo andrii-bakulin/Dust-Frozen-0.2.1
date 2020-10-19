@@ -320,19 +320,24 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
+        internal Transform GetInstancesHolderTransform()
+        {
+            return Dust.IsNotNull(instancesHolder) ? instancesHolder.transform : transform;
+        }
+
         public Vector3 GetPositionInWorldSpace(DuFactoryInstance factoryInstance)
         {
-            return transform.TransformPoint(factoryInstance.stateDynamic.position);
+            return GetInstancesHolderTransform().TransformPoint(factoryInstance.stateDynamic.position);
         }
 
         public Vector3 GetPositionInWorldSpace(Vector3 localPosition)
         {
-            return transform.TransformPoint(localPosition);
+            return GetInstancesHolderTransform().TransformPoint(localPosition);
         }
 
         public Vector3 GetPositionInLocalSpace(Vector3 worldPoint)
         {
-            return transform.InverseTransformPoint(worldPoint);
+            return GetInstancesHolderTransform().InverseTransformPoint(worldPoint);
         }
 
         //--------------------------------------------------------------------------------------------------------------

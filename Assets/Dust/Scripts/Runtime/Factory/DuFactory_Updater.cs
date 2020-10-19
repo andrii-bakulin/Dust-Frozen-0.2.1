@@ -25,11 +25,7 @@ namespace DustEngine
         {
             int seq = 0, dynamicState = 0;
 
-            if (Dust.IsNotNull(instancesHolder))
-                DuDynamicState.Append(ref dynamicState, ++seq, instancesHolder);
-            else
-                DuDynamicState.Append(ref dynamicState, ++seq, transform);
-
+            DuDynamicState.Append(ref dynamicState, ++seq, GetInstancesHolderTransform());
             DuDynamicState.Append(ref dynamicState, ++seq, factoryMachines.Count);
 
             foreach (DuFactoryMachine.Record record in factoryMachines)
