@@ -21,6 +21,8 @@ namespace DustEngine
 
         private void DrawFieldGizmos()
         {
+            const float kBaseDotSize = 0.25f;
+
             if (inspectorDisplay == InspectorDisplay.None)
                 return;
 
@@ -53,7 +55,7 @@ namespace DustEngine
                         Handles.DotHandleCap(0,
                             GetPositionInWorldSpace(instance.stateDynamic.position),
                             transform.rotation,
-                            0.05f * inspectorScale,
+                            kBaseDotSize * inspectorScale,
                             EventType.Repaint);
                         break;
 
@@ -69,7 +71,7 @@ namespace DustEngine
                         Handles.DotHandleCap(0,
                             GetPositionInWorldSpace(instance.stateDynamic.position),
                             transform.rotation,
-                            0.05f * inspectorScale,
+                            kBaseDotSize * inspectorScale,
                             EventType.Repaint);
                         break;
                 }
