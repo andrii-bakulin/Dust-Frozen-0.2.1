@@ -48,10 +48,18 @@ namespace DustEngine
 
                     instanceState.scale = Vector3.one;
 
+                    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                    // Build UVW
+
+                    instanceState.uvw = Vector3.zero;
+
                     if (instancesCountLevelN > 1)
-                        instanceState.uvw = Vector3.Lerp(Vector3.zero, Vector3.right, 1f / (instancesCountLevelN - 1) * instanceIndex);
-                    else
-                        instanceState.uvw = Vector3.zero;
+                        instanceState.uvw.x = Mathf.Lerp(0f, 1f, 1f / (instancesCountLevelN - 1) * instanceIndex);
+
+                    if (levelIndex > 1)
+                        instanceState.uvw.y = Mathf.Lerp(0f, 1f, 1f / (radialFactory.levelsCount - 1) * levelIndex);
+
+                    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
                     m_InstancesStates.Add(instanceState);
                 }
