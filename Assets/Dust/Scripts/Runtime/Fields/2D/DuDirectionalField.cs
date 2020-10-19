@@ -72,29 +72,32 @@ namespace DustEngine
         {
             float offset = 0f;
 
-            if (DuMath.IsNotZero(length))
+            Vector3 localPosition = transform.worldToLocalMatrix.MultiplyPoint(fieldPoint.inPosition);
+
+            float distanceToPoint;
+
+            switch (direction)
             {
-                Vector3 localPosition = transform.worldToLocalMatrix.MultiplyPoint(fieldPoint.inPosition);
-
-                float distanceToPoint;
-
-                switch (direction)
-                {
-                    default:
-                    case Axis6xDirection.XPlus:  distanceToPoint = -localPosition.x; break;
-                    case Axis6xDirection.XMinus: distanceToPoint = +localPosition.x; break;
-                    case Axis6xDirection.YPlus:  distanceToPoint = -localPosition.y; break;
-                    case Axis6xDirection.YMinus: distanceToPoint = +localPosition.y; break;
-                    case Axis6xDirection.ZPlus:  distanceToPoint = -localPosition.z; break;
-                    case Axis6xDirection.ZMinus: distanceToPoint = +localPosition.z; break;
-                }
-
-                float halfLength = length / 2f;
-
-                offset = 1f - DuMath.Fit(-halfLength, +halfLength, 0f, 1f, distanceToPoint);
+                default:
+                case Axis6xDirection.XPlus:  distanceToPoint = -localPosition.x; break;
+                case Axis6xDirection.XMinus: distanceToPoint = +localPosition.x; break;
+                case Axis6xDirection.YPlus:  distanceToPoint = -localPosition.y; break;
+                case Axis6xDirection.YMinus: distanceToPoint = +localPosition.y; break;
+                case Axis6xDirection.ZPlus:  distanceToPoint = -localPosition.z; break;
+                case Axis6xDirection.ZMinus: distanceToPoint = +localPosition.z; break;
             }
 
-            result.fieldPower = remapping.MapValue(offset);
+            if (DuMath.IsNotZero(length))
+            {
+                float halfLength = length / 2f;
+                offset = DuMath.Fit(-halfLength, +halfLength, 0f, 1f, distanceToPoint);
+            }
+            else
+            {
+                offset = distanceToPoint >= 0f ? +1f : -1f;
+            }
+
+            result.fieldPower = remapping.MapValue(1f - offset);
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
