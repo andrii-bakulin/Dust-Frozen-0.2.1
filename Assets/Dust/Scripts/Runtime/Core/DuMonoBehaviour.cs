@@ -117,7 +117,7 @@ namespace DustEngine
 
         protected static bool UpdatePropertyValue(ref GameObject originValue, GameObject newValue)
         {
-            if (originValue.Equals(newValue))
+            if (Dust.IsNotNull(originValue) && Dust.IsNotNull(newValue) && originValue.Equals(newValue))
                 return false;
 
             originValue = newValue;
