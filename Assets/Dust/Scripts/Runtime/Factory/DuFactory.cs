@@ -426,7 +426,7 @@ namespace DustEngine
                 factoryMachinesHolder.transform.localScale = Vector3.one;
             }
 
-            DestroyAllInstances();
+            RebuildInstances();
         }
     }
 }
