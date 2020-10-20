@@ -182,6 +182,25 @@ namespace DustEngine.DustEditor
                 DustGUI.FoldoutEnd();
             }
 
+            if (!IsFreeInstance && Dust.IsNotNull(mainScript.stateDynamicPrevious))
+            {
+                if (DustGUI.FoldoutBegin("Dynamic Previous State", "DuFactoryInstance.DynamicStatesPrevious"))
+                {
+                    DustGUI.Lock();
+                    DustGUI.Field("Position", mainScript.stateDynamicPrevious.position.duToRound(3));
+                    DustGUI.Field("Rotation", mainScript.stateDynamicPrevious.rotation.duToRound(3));
+                    DustGUI.Field("Scale", mainScript.stateDynamicPrevious.scale.duToRound(3));
+                    Space();
+                    DustGUI.Field("Value", mainScript.stateDynamicPrevious.value);
+                    DustGUI.Field("Color", mainScript.stateDynamicPrevious.color);
+                    DustGUI.Field("Color Values", mainScript.stateDynamicPrevious.color.duToVector3(2));
+                    DustGUI.Field("Color RGB", (mainScript.stateDynamicPrevious.color * 255).duToVector3Int());
+                    DustGUI.Field("UVW", mainScript.stateDynamicPrevious.uvw.duToRound(3));
+                    DustGUI.Unlock();
+                }
+                DustGUI.FoldoutEnd();
+            }
+
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             serializedObject.ApplyModifiedProperties();

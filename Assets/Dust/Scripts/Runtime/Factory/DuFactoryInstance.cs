@@ -180,6 +180,9 @@ namespace DustEngine
         private readonly State m_StateDynamic = new State();
         public State stateDynamic => m_StateDynamic;
 
+        private readonly State m_StateDynamicPrevious = new State();
+        public State stateDynamicPrevious => m_StateDynamicPrevious;
+
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         // Material reference(s)
 
@@ -253,6 +256,7 @@ namespace DustEngine
 
         internal void ResetDynamicStateToZeroState()
         {
+            m_StateDynamicPrevious.CopyFrom(m_StateDynamic);
             m_StateDynamic.CopyFrom(m_StateZero);
 
             m_DidApplyMaterialUpdatesLastIteration = false;
