@@ -307,6 +307,24 @@ namespace DustEngine
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
+        private bool m_ForcedUpdateEachFrame = false;
+        public bool forcedUpdateEachFrame
+        {
+            get => m_ForcedUpdateEachFrame;
+            set
+            {
+                m_ForcedUpdateEachFrame = value;
+
+                if (m_ForcedUpdateEachFrame)
+                    m_LastDynamicStateHashCode = 0;
+                else
+                    m_LastDynamicStateHashCode = GetDynamicStateHashCode();
+            }
+        }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        [SerializeField]
         private InspectorDisplay m_InspectorDisplay = InspectorDisplay.None;
         public InspectorDisplay inspectorDisplay => m_InspectorDisplay;
 

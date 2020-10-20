@@ -33,6 +33,7 @@ namespace DustEngine.DustEditor
         private DuProperty m_InstanceTypeMode;
         private DuProperty m_InstancesHolder;
         private DuProperty m_ForcedSetActive;
+        private DuProperty m_ForcedUpdateEachFrame;
 
         private DuProperty m_InspectorDisplay;
         private DuProperty m_InspectorScale;
@@ -87,6 +88,8 @@ namespace DustEngine.DustEditor
             m_InstanceTypeMode = FindProperty("m_InstanceTypeMode", "Type Mode");
             m_InstancesHolder = FindProperty("m_InstancesHolder", "Instances Holder");
             m_ForcedSetActive = FindProperty("m_ForcedSetActive", "Forced Set Active");
+
+            m_ForcedUpdateEachFrame = FindProperty("m_ForcedUpdateEachFrame", "Forced Updates", "If TRUE, then the calculation for all instances will be execute forced each frame, even if nothing changed. Otherwise, Factory try to optimize calculations.");
 
             m_InspectorDisplay = FindProperty("m_InspectorDisplay", "Display");
             m_InspectorScale = FindProperty("m_InspectorScale", "Scale");
@@ -177,6 +180,9 @@ namespace DustEngine.DustEditor
 
                 PropertyFieldOrLock(m_InstancesHolder, targets.Length > 1);
                 PropertyField(m_InstanceAccessMode);
+                Space();
+
+                PropertyField(m_ForcedUpdateEachFrame);
                 Space();
             }
             DustGUI.FoldoutEnd();

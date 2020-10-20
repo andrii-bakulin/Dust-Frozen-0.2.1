@@ -52,15 +52,23 @@ namespace DustEngine
 
         public void UpdateInstancesDynamicStates(bool forced = false)
         {
-            int newDynamicStateHash = GetDynamicStateHashCode();
-
-            if (!forced)
+            if (forcedUpdateEachFrame)
+            {
+                // Nothing need to do
+                // Just execute down logic.
+                // Even if factoryMachines.Count is ZERO
+            }
+            else if (!forced)
             {
                 if (factoryMachines.Count == 0)
                     return;
 
+                int newDynamicStateHash = GetDynamicStateHashCode();
+
                 if (m_LastDynamicStateHashCode == newDynamicStateHash)
                     return;
+
+                m_LastDynamicStateHashCode = newDynamicStateHash;
             }
 
 #if UNITY_EDITOR
@@ -141,8 +149,6 @@ namespace DustEngine
             stats.updatesCount++;
             stats.lastUpdateTime = timer.Stop();
 #endif
-
-            m_LastDynamicStateHashCode = newDynamicStateHash;
         }
     }
 }
