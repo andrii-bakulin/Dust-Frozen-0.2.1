@@ -1,12 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Factory/Support/Factory Instance")]
     public class DuFactoryInstance : DuMonoBehaviour
     {
+        [Serializable]
+        public class InstanceUpdateEvent : UnityEvent<DuFactoryInstance>
+        {
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
         [System.Serializable]
         public class State
         {
@@ -227,6 +235,12 @@ namespace DustEngine
             }
         }
 
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        [SerializeField]
+        private InstanceUpdateEvent m_OnInstanceUpdate = null;
+        public InstanceUpdateEvent onInstanceUpdate => m_OnInstanceUpdate;
+
         //--------------------------------------------------------------------------------------------------------------
 
         public void Initialize(DuFactory duFactory, int initIndex, float initOffset, float initRandomScalar, Vector3 initRandomVector)
@@ -264,6 +278,8 @@ namespace DustEngine
 
         internal void ApplyDynamicStateToObject()
         {
+            onInstanceUpdate?.Invoke(this);
+
             if (updatePosition)
                 transform.localPosition = m_StateDynamic.position;
 

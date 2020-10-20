@@ -21,6 +21,8 @@ namespace DustEngine.DustEditor
         private DuProperty m_PrevInstance;
         private DuProperty m_NextInstance;
 
+        private DuProperty m_OnInstanceUpdate;
+
         //--------------------------------------------------------------------------------------------------------------
 
         [MenuItem("Dust/Factory/Support/Factory Instance")]
@@ -46,6 +48,8 @@ namespace DustEngine.DustEditor
             m_ParentFactory = FindProperty("m_ParentFactory", "Parent Factory");
             m_PrevInstance = FindProperty("m_PrevInstance", "Previous Instance");
             m_NextInstance = FindProperty("m_NextInstance", "Next Instance");
+
+            m_OnInstanceUpdate = FindProperty("m_OnInstanceUpdate", "On Instance Update");
         }
 
         public override void OnInspectorGUI()
@@ -61,6 +65,9 @@ namespace DustEngine.DustEditor
             PropertyField(m_UpdatePosition);
             PropertyField(m_UpdateRotation);
             PropertyField(m_UpdateScale);
+            Space();
+
+            PropertyField(m_OnInstanceUpdate);
             Space();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
