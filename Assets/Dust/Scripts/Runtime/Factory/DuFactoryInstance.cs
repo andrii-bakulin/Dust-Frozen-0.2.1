@@ -18,13 +18,6 @@ namespace DustEngine
             public Color color = Color.magenta;
             public Vector3 uvw = Vector3.zero;
 
-            public void ApplyToTransform(Transform t)
-            {
-                t.localPosition = position;
-                t.localEulerAngles = rotation;
-                t.localScale = scale;
-            }
-
             public State Clone()
             {
                 var clone = new State
@@ -112,6 +105,32 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
+
+        [SerializeField]
+        protected bool m_UpdatePosition = true;
+        public bool updatePosition
+        {
+            get => m_UpdatePosition;
+            set => m_UpdatePosition = value;
+        }
+
+        [SerializeField]
+        protected bool m_UpdateRotation = true;
+        public bool updateRotation
+        {
+            get => m_UpdateRotation;
+            set => m_UpdateRotation = value;
+        }
+
+        [SerializeField]
+        protected bool m_UpdateScale = true;
+        public bool updateScale
+        {
+            get => m_UpdateScale;
+            set => m_UpdateScale = value;
+        }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
         internal DuFactory m_ParentFactory = null;
@@ -241,7 +260,14 @@ namespace DustEngine
 
         internal void ApplyDynamicStateToObject()
         {
-            m_StateDynamic.ApplyToTransform(this.transform);
+            if (updatePosition)
+                transform.localPosition = m_StateDynamic.position;
+
+            if (updateRotation)
+                transform.localEulerAngles = m_StateDynamic.rotation;
+
+            if (updateScale)
+                transform.localScale = m_StateDynamic.scale;
 
             if (m_DidApplyMaterialUpdatesBefore && !m_DidApplyMaterialUpdatesLastIteration)
             {

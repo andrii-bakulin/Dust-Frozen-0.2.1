@@ -7,6 +7,10 @@ namespace DustEngine.DustEditor
     // [CanEditMultipleObjects] -> Cannot!
     public class DuFactoryInstanceEditor : DuEditor
     {
+        private DuProperty m_UpdatePosition;
+        private DuProperty m_UpdateRotation;
+        private DuProperty m_UpdateScale;
+
         private DuProperty m_Index;
         private DuProperty m_Offset;
         private DuProperty m_RandomScalar;
@@ -29,6 +33,10 @@ namespace DustEngine.DustEditor
 
         void OnEnable()
         {
+            m_UpdatePosition = FindProperty("m_UpdatePosition", "Update Position");
+            m_UpdateRotation = FindProperty("m_UpdateRotation", "Update Rotation");
+            m_UpdateScale = FindProperty("m_UpdateScale", "Update Scale");
+
             m_Index = FindProperty("m_Index", "Index");
             m_Offset = FindProperty("m_Offset", "Offset");
             m_RandomScalar = FindProperty("m_RandomScalar", "Random Scalar");
@@ -46,9 +54,16 @@ namespace DustEngine.DustEditor
 
             DuFactoryInstance mainScript = target as DuFactoryInstance;
 
+            bool IsFreeInstance = Dust.IsNull(mainScript.parentFactory);
+
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            bool IsFreeInstance = Dust.IsNull(mainScript.parentFactory);
+            PropertyField(m_UpdatePosition);
+            PropertyField(m_UpdateRotation);
+            PropertyField(m_UpdateScale);
+            Space();
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             if (!IsFreeInstance)
             {
