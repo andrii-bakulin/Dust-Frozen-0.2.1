@@ -16,9 +16,6 @@ namespace DustEngine.DustEditor
         private DuProperty m_SourceObjectsHolder;
         private DuProperty m_SourceObjects;
         private DuProperty m_IterateMode;
-        private DuProperty m_InstanceAccessMode;
-        private DuProperty m_InstanceTypeMode;
-        private DuProperty m_ForcedSetActive;
         private DuProperty m_Seed;
 
         private DuProperty m_DefaultValue;
@@ -32,7 +29,10 @@ namespace DustEngine.DustEditor
         private DuProperty m_TransformRotation;
         private DuProperty m_TransformScale;
 
+        private DuProperty m_InstanceAccessMode;
+        private DuProperty m_InstanceTypeMode;
         private DuProperty m_InstancesHolder;
+        private DuProperty m_ForcedSetActive;
 
         private DuProperty m_InspectorDisplay;
         private DuProperty m_InspectorScale;
@@ -70,9 +70,6 @@ namespace DustEngine.DustEditor
             m_SourceObjectsHolder = FindProperty("m_SourceObjectsHolder", "Holder");
             m_SourceObjects = FindProperty("m_SourceObjects", "Source Objects");
             m_IterateMode = FindProperty("m_IterateMode", "Iterate");
-            m_InstanceAccessMode = FindProperty("m_InstanceAccessMode", "Access Mode");
-            m_InstanceTypeMode = FindProperty("m_InstanceTypeMode", "Type Mode");
-            m_ForcedSetActive = FindProperty("m_ForcedSetActive", "Forced Set Active");
             m_Seed = FindProperty("m_Seed", "Forced Set Active");
 
             m_DefaultValue = FindProperty("m_DefaultValue", "Default Value");
@@ -86,7 +83,10 @@ namespace DustEngine.DustEditor
             m_TransformRotation = FindProperty("m_TransformRotation", "Rotation");
             m_TransformScale = FindProperty("m_TransformScale", "Scale");
 
+            m_InstanceAccessMode = FindProperty("m_InstanceAccessMode", "Access Mode");
+            m_InstanceTypeMode = FindProperty("m_InstanceTypeMode", "Type Mode");
             m_InstancesHolder = FindProperty("m_InstancesHolder", "Instances Holder");
+            m_ForcedSetActive = FindProperty("m_ForcedSetActive", "Forced Set Active");
 
             m_InspectorDisplay = FindProperty("m_InspectorDisplay", "Display");
             m_InspectorScale = FindProperty("m_InspectorScale", "Scale");
