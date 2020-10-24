@@ -287,7 +287,7 @@ namespace DustEngine
 
             int newDynamicStateHash = GetDynamicStateHashCode();
 
-            if (m_LastDynamicStateHashCode == newDynamicStateHash)
+            if (newDynamicStateHash != 0 && m_LastDynamicStateHashCode == newDynamicStateHash)
                 return;
 
 #if UNITY_EDITOR
