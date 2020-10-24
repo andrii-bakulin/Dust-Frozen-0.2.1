@@ -43,16 +43,16 @@ namespace DustEngine
 
         public float Perlin1D(float v, float offset)
         {
-            return Mathf.Clamp01(Mathf.PerlinNoise(PerlinNoise_XX + v, PerlinNoise_XY + offset));
+            return ImproveResult(Mathf.PerlinNoise(PerlinNoise_XX + v, PerlinNoise_XY + offset));
         }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         public float Perlin1D_asWide(float v)
             => Perlin1D_asWide(v, 0f);
 
         public float Perlin1D_asWide(float v, float offset)
-        {
-            return Perlin1D(v, offset) * 2f - 1f;
-        }
+            => Perlin1D(v, offset) * 2f - 1f;
 
         //--------------------------------------------------------------------------------------------------------------
         // Perlin 1D noise
@@ -65,19 +65,19 @@ namespace DustEngine
         public Vector3 Perlin1D_asVector3(float v, float offset)
         {
             Vector3 result;
-            result.x = Mathf.Clamp01(Mathf.PerlinNoise(PerlinNoise_XX + v, PerlinNoise_XY + offset));
-            result.y = Mathf.Clamp01(Mathf.PerlinNoise(PerlinNoise_YX + v, PerlinNoise_YY + offset));
-            result.z = Mathf.Clamp01(Mathf.PerlinNoise(PerlinNoise_ZX + v, PerlinNoise_ZY + offset));
+            result.x = ImproveResult(Mathf.PerlinNoise(PerlinNoise_XX + v, PerlinNoise_XY + offset));
+            result.y = ImproveResult(Mathf.PerlinNoise(PerlinNoise_YX + v, PerlinNoise_YY + offset));
+            result.z = ImproveResult(Mathf.PerlinNoise(PerlinNoise_ZX + v, PerlinNoise_ZY + offset));
             return result;
         }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         public Vector3 Perlin1D_asWideVector3(float v)
             => Perlin1D_asWideVector3(v, 0f);
 
         public Vector3 Perlin1D_asWideVector3(float v, float offset)
-        {
-            return Perlin1D_asVector3(offset) * 2f - Vector3.one;
-        }
+            => Perlin1D_asVector3(offset) * 2f - Vector3.one;
 
         //--------------------------------------------------------------------------------------------------------------
         // Perlin 2D noise
@@ -95,7 +95,7 @@ namespace DustEngine
 
         public float Perlin2D(float x, float y, float offset)
         {
-            return Mathf.PerlinNoise(PerlinNoise_XX + x + offset, PerlinNoise_YY + y + offset);
+            return ImproveResult(Mathf.PerlinNoise(PerlinNoise_XX + x + offset, PerlinNoise_YY + y + offset));
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -113,12 +113,10 @@ namespace DustEngine
             => Perlin2D_asVector2(x, y, 0f);
 
         public Vector2 Perlin2D_asVector2(float x, float y, float offset)
-        {
-            Vector2 result;
-            result.x = Perlin2D(x, y, +offset);
-            result.y = Perlin2D(y, x, -offset);
-            return result;
-        }
+            => new Vector2(
+                Perlin2D(x, y, +offset),
+                Perlin2D(y, x, -offset)
+            );
 
         //--------------------------------------------------------------------------------------------------------------
         // Perlin 3D noise
@@ -145,7 +143,7 @@ namespace DustEngine
             float z1 = Mathf.PerlinNoise(PerlinNoise_ZX + z + offset, PerlinNoise_ZY + x + offset);
             float z2 = Mathf.PerlinNoise(PerlinNoise_ZX + z + offset, PerlinNoise_ZY + y + offset);
 
-            return Mathf.Clamp01((x1 + x2 + y1 + y2 + z1 + z2) / 6f);
+            return ImproveResult((x1 + x2 + y1 + y2 + z1 + z2) / 6f);
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -163,12 +161,19 @@ namespace DustEngine
             => Perlin3D_asVector3(x, y, z, 0f);
 
         public Vector3 Perlin3D_asVector3(float x, float y, float z, float offset)
+            => new Vector3(
+                Perlin3D(x, y, z, offset),
+                Perlin3D(y, z, x, offset),
+                Perlin3D(z, x, y, offset)
+            );
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        // - input: value is 0..1 (but may be slightly lower/higger then limits)
+        // - result: improved value
+        protected float ImproveResult(float result)
         {
-            Vector3 result;
-            result.x = Perlin3D(x, y, z, offset);
-            result.y = Perlin3D(y, z, x, offset);
-            result.z = Perlin3D(z, x, y, offset);
-            return result;
+            return Mathf.PingPong((result - 0.5f) * 1.33f + 0.5f, 1f);
         }
     }
 }
