@@ -125,5 +125,12 @@ namespace DustEngine
         {
             dynamicState ^= sequenceIndex * 828581 + (Dust.IsNotNull(texture2D) ? texture2D.GetHashCode() : 123456);
         }
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        public static void AppendRandomState(ref int dynamicState)
+        {
+            dynamicState ^= Random.Range(-1000000, +1000000);
+        }
     }
 }
