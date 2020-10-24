@@ -16,6 +16,13 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
+        public static void duClamp01(ref this Vector3 self)
+        {
+            self = DuVector3.Clamp01(self);
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
         public static void duFit01To(ref this Vector3 self, float min, float max)
             => duFit01To(ref self, min, max, false);
 

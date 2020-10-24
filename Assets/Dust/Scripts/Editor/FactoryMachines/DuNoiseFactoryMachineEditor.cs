@@ -14,6 +14,7 @@ namespace DustEngine.DustEditor
         private DuProperty m_AnimationSpeed;
         private DuProperty m_AnimationOffset;
         private DuProperty m_NoiseSpace;
+        private DuProperty m_NoiseForce;
         private DuProperty m_NoiseScale;
         private DuProperty m_Seed;
 
@@ -45,6 +46,7 @@ namespace DustEngine.DustEditor
             m_AnimationSpeed = FindProperty("m_AnimationSpeed", "Animation Speed");
             m_AnimationOffset = FindProperty("m_AnimationOffset", "Animation Offset");
             m_NoiseSpace = FindProperty("m_NoiseSpace", "Noise Space");
+            m_NoiseForce = FindProperty("m_NoiseForce", "Noise Force");
             m_NoiseScale = FindProperty("m_NoiseScale", "Noise Scale");
             m_Synchronized = FindProperty("m_Synchronized", "Synchronize P.R.S.", "If TRUE, noises will be equal for Position, Rotation and Scale");
             m_Seed = FindProperty("m_Seed", "Seed");
@@ -66,6 +68,7 @@ namespace DustEngine.DustEditor
             {
                 PropertyField(m_NoiseMode);
                 PropertyField(m_NoiseDimension);
+                PropertySeedFixed(m_Seed);
                 PropertyField(m_Synchronized);
                 Space();
 
@@ -78,17 +81,15 @@ namespace DustEngine.DustEditor
 
                     case DuNoiseFactoryMachine.NoiseMode.Perlin:
                         PropertyField(m_NoiseSpace);
+                        PropertyExtendedSlider(m_NoiseForce, 0.0f, 4.0f, 0.01f, 0.00f, 10f);
                         PropertyExtendedSlider(m_NoiseScale, 0.01f, 16f, 0.01f, 0.01f);
                         Space();
 
                         PropertyExtendedSlider(m_AnimationSpeed, 0f, 10f, 0.01f);
-                        PropertyExtendedSlider(m_AnimationOffset, 0f, 3f, 0.01f);
+                        PropertyExtendedSlider(m_AnimationOffset, -5f, 5f, 0.01f);
                         Space();
                         break;
                 }
-
-                PropertySeedFixed(m_Seed);
-                Space();
             }
             DustGUI.FoldoutEnd();
 
@@ -113,6 +114,9 @@ namespace DustEngine.DustEditor
             OnInspectorGUI_FieldsMap();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            if (m_NoiseForce.isChanged)
+                m_NoiseForce.valFloat = DuNoiseFactoryMachine.Normalizer.NoiseForce(m_NoiseForce.valFloat);
 
             if (m_NoiseScale.isChanged)
                 m_NoiseScale.valFloat = DuNoiseFactoryMachine.Normalizer.NoiseScale(m_NoiseScale.valFloat);

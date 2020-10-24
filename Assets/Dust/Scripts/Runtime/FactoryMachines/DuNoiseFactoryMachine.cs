@@ -112,6 +112,14 @@ namespace DustEngine
         }
 
         [SerializeField]
+        private float m_NoiseForce = 1f;
+        public float noiseForce
+        {
+            get => m_NoiseForce;
+            set => m_NoiseForce = Normalizer.NoiseForce(value);
+        }
+
+        [SerializeField]
         private float m_NoiseScale = 1f;
         public float noiseScale
         {
@@ -219,7 +227,7 @@ namespace DustEngine
 
                 case NoiseMode.Perlin:
                 {
-                    float animTotalOffset = m_OffsetDynamic + animationOffset * animationSpeed;
+                    float animTotalOffset = m_OffsetDynamic + animationOffset;
                     Vector3 inSpaceOffset;
 
                     switch (noiseSpace)
@@ -240,6 +248,8 @@ namespace DustEngine
                     if (noiseDimension == NoiseDimension.Noise1D)
                     {
                         noisePowerPos = DuVector3.New(duNoisePos.Perlin3D(inSpaceOffset, animTotalOffset));
+                        noisePowerPos *= noiseForce;
+                        noisePowerPos.duClamp01();
 
                         if (synchronized)
                         {
@@ -248,12 +258,19 @@ namespace DustEngine
                         else
                         {
                             noisePowerRot = DuVector3.New(duNoiseRot.Perlin3D(inSpaceOffset, animTotalOffset));
+                            noisePowerRot *= noiseForce;
+                            noisePowerRot.duClamp01();
+
                             noisePowerScl = DuVector3.New(duNoiseScl.Perlin3D(inSpaceOffset, animTotalOffset));
+                            noisePowerScl *= noiseForce;
+                            noisePowerScl.duClamp01();
                         }
                     }
                     else // NoiseDimension.Noise3D
                     {
                         noisePowerPos = duNoisePos.Perlin3D_asVector3(inSpaceOffset, animTotalOffset);
+                        noisePowerPos *= noiseForce;
+                        noisePowerPos.duClamp01();
 
                         if (synchronized)
                         {
@@ -262,7 +279,12 @@ namespace DustEngine
                         else
                         {
                             noisePowerRot = duNoiseRot.Perlin3D_asVector3(inSpaceOffset, animTotalOffset);
+                            noisePowerRot *= noiseForce;
+                            noisePowerRot.duClamp01();
+
                             noisePowerScl = duNoiseScl.Perlin3D_asVector3(inSpaceOffset, animTotalOffset);
+                            noisePowerScl *= noiseForce;
+                            noisePowerScl.duClamp01();
                         }
                     }
                     break;
@@ -332,9 +354,12 @@ namespace DustEngine
             DuDynamicState.Append(ref dynamicState, ++seq, scaleAxisRemapping);
 
             DuDynamicState.Append(ref dynamicState, ++seq, noiseSpace);
+            DuDynamicState.Append(ref dynamicState, ++seq, noiseForce);
             DuDynamicState.Append(ref dynamicState, ++seq, noiseScale);
 
             DuDynamicState.Append(ref dynamicState, ++seq, seed);
+
+            DuDynamicState.Append(ref dynamicState, ++seq, m_OffsetDynamic);
 
             return DuDynamicState.Normalize(dynamicState);
         }
@@ -359,6 +384,11 @@ namespace DustEngine
 
         public static class Normalizer
         {
+            public static float NoiseForce(float value)
+            {
+                return Mathf.Clamp(value, 0f, 10f);
+            }
+
             public static float NoiseScale(float value)
             {
                 return Mathf.Clamp(value, 0.0001f, float.MaxValue);
