@@ -50,6 +50,8 @@ namespace DustEngine
         private DuRemapping m_Remapping = new DuRemapping();
         public DuRemapping remapping => m_Remapping;
 
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
         private float m_OffsetDynamic;
 
         //--------------------------------------------------------------------------------------------------------------

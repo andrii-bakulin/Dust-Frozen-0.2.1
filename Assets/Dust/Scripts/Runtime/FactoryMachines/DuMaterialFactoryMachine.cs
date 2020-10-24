@@ -25,7 +25,10 @@ namespace DustEngine
 
         public override void UpdateInstanceState(FactoryInstanceState factoryInstanceState)
         {
-            factoryInstanceState.instance.ApplyMaterialUpdatesToObject(factoryInstanceState.intensityByFactory * intensity);
+            float endIntensity = factoryInstanceState.intensityByFactory
+                                 * intensity;
+
+            factoryInstanceState.instance.ApplyMaterialUpdatesToObject(endIntensity);
         }
 
         public override void FinalizeUpdateInstancesStates(FactoryInstanceState factoryInstanceState)
