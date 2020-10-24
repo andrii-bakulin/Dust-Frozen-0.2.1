@@ -17,10 +17,10 @@ namespace DustEngine
             public Color fieldColor;
 
             // Calculated-n-Supported params:               // Use by FactoryMachine: Noise
-            public bool extraIntensityEnabled;
-            public Vector3 extraIntensityPosition;
-            public Vector3 extraIntensityRotation;
-            public Vector3 extraIntensityScale;
+            public bool extraPowerEnabled;
+            public Vector3 extraPowerPosition;
+            public Vector3 extraPowerRotation;
+            public Vector3 extraPowerScale;
         }
 
         [System.Serializable]

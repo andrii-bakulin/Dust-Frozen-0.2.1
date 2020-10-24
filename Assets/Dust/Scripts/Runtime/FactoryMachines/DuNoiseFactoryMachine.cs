@@ -287,10 +287,10 @@ namespace DustEngine
                     noisePowerScl = AxisRemap(noisePowerScl, scaleAxisRemapping);
             }
 
-            factoryInstanceState.extraIntensityEnabled = true;
-            factoryInstanceState.extraIntensityPosition = noisePowerPos;
-            factoryInstanceState.extraIntensityRotation = noisePowerRot;
-            factoryInstanceState.extraIntensityScale = noisePowerScl;
+            factoryInstanceState.extraPowerEnabled = true;
+            factoryInstanceState.extraPowerPosition = noisePowerPos;
+            factoryInstanceState.extraPowerRotation = noisePowerRot;
+            factoryInstanceState.extraPowerScale = noisePowerScl;
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

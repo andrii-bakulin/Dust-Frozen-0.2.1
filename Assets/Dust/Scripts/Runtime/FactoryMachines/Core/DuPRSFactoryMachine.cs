@@ -195,8 +195,8 @@ namespace DustEngine
 
             Vector3 updateForValue = position;
 
-            if (factoryInstanceState.extraIntensityEnabled)
-                updateForValue.Scale(factoryInstanceState.extraIntensityPosition);
+            if (factoryInstanceState.extraPowerEnabled)
+                updateForValue.Scale(factoryInstanceState.extraPowerPosition);
 
             if (positionTransformSpace == TransformSpace.Instance)
                 updateForValue = DuMath.RotatePoint(updateForValue, instanceState.rotation);
@@ -227,8 +227,8 @@ namespace DustEngine
 
             Vector3 updateForValue = rotation;
 
-            if (factoryInstanceState.extraIntensityEnabled)
-                updateForValue.Scale(factoryInstanceState.extraIntensityRotation);
+            if (factoryInstanceState.extraPowerEnabled)
+                updateForValue.Scale(factoryInstanceState.extraPowerRotation);
 
             switch (rotationTransformMode)
             {
@@ -255,8 +255,8 @@ namespace DustEngine
 
             Vector3 endScale = scale;
 
-            if (factoryInstanceState.extraIntensityEnabled)
-                endScale.Scale(factoryInstanceState.extraIntensityScale);
+            if (factoryInstanceState.extraPowerEnabled)
+                endScale.Scale(factoryInstanceState.extraPowerScale);
 
             // Notice: if instanceState.scale is 2.0f and I need scale relative +1.0f
             // then result should be 4.0f (not 3.0f)
