@@ -79,7 +79,7 @@ namespace DustEngine.DustEditor
                     case DuNoiseFactoryMachine.NoiseMode.Perlin:
                         Space();
                         PropertyField(m_NoiseSpace);
-                        PropertyExtendedSlider(m_AnimationSpeed, 0f, 10f, 0.01f, 0f);
+                        PropertyExtendedSlider(m_AnimationSpeed, 0f, 10f, 0.01f);
                         PropertyExtendedSlider(m_AnimationOffset, 0f, 3f, 0.01f);
                         PropertyExtendedSlider(m_NoiseScale, 0.01f, 16f, 0.01f, 0.01f);
                         break;
@@ -111,9 +111,6 @@ namespace DustEngine.DustEditor
             OnInspectorGUI_FieldsMap();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-            if (m_AnimationSpeed.isChanged)
-                m_AnimationSpeed.valFloat = DuNoiseFactoryMachine.Normalizer.AnimationSpeed(m_AnimationSpeed.valFloat);
 
             if (m_NoiseScale.isChanged)
                 m_NoiseScale.valFloat = DuNoiseFactoryMachine.Normalizer.NoiseScale(m_NoiseScale.valFloat);

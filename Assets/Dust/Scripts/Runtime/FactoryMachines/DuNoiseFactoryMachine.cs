@@ -56,7 +56,7 @@ namespace DustEngine
         public float animationSpeed
         {
             get => m_AnimationSpeed;
-            set => m_AnimationSpeed = Normalizer.AnimationSpeed(value);
+            set => m_AnimationSpeed = value;
         }
 
         [SerializeField]
@@ -359,11 +359,6 @@ namespace DustEngine
 
         public static class Normalizer
         {
-            public static float AnimationSpeed(float value)
-            {
-                return Mathf.Clamp(value, 0f, float.MaxValue);
-            }
-
             public static float NoiseScale(float value)
             {
                 return Mathf.Clamp(value, 0.0001f, float.MaxValue);
