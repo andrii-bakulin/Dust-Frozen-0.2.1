@@ -4,16 +4,6 @@ namespace DustEngine
 {
     public abstract class DuPRSFactoryMachine : DuBasicFactoryMachine
     {
-        /**
-         * Calculation steps:
-         *     1. calculate new value
-         *     2. RESULT multiply for Intensity(s)
-         * for Relative:
-         *     3. RESULT multiply for fieldPower
-         *     4. RESULT added to current value
-         * for Absolute:
-         *     3. Calculate END-RESULT value as Lerp(current, RESULT, fieldPower)
-         */
         public enum TransformMode
         {
             Relative = 0,
@@ -189,29 +179,32 @@ namespace DustEngine
 
             var instanceState = factoryInstanceState.instance.stateDynamic;
 
-            float endIntensity = factoryInstanceState.intensityByFactory
-                                 * factoryInstanceState.intensityByMachine
-                                 * factoryInstanceState.fieldPower;
-
-            Vector3 updateForValue = position;
+            Vector3 newPosition = position * factoryInstanceState.fieldPower;
 
             if (factoryInstanceState.extraPowerEnabled)
-                updateForValue.Scale(factoryInstanceState.extraPowerPosition);
+                newPosition.Scale(factoryInstanceState.extraPowerPosition);
 
             if (positionTransformSpace == TransformSpace.Instance)
-                updateForValue = DuMath.RotatePoint(updateForValue, instanceState.rotation);
-            // else: if TransformSpace.Factory -> nothing need to do
+                newPosition = DuMath.RotatePoint(newPosition, instanceState.rotation);
+            // else:
+            //  if TransformSpace.Factory -> nothing need to do
 
             switch (positionTransformMode)
             {
                 case TransformMode.Relative:
-                    instanceState.position += updateForValue * endIntensity;
+                default:
+                    newPosition += instanceState.position;
                     break;
 
                 case TransformMode.Absolute:
-                    instanceState.position = Vector3.LerpUnclamped(instanceState.position, updateForValue, endIntensity);
+                    // Nothing need to do!
                     break;
             }
+
+            float transferPower = factoryInstanceState.intensityByFactory
+                                  * factoryInstanceState.intensityByMachine;
+
+            instanceState.position = Vector3.LerpUnclamped(instanceState.position, newPosition, transferPower);
         }
 
         protected void UpdateInstanceDynamicState_Rotation(FactoryInstanceState factoryInstanceState)
@@ -221,25 +214,27 @@ namespace DustEngine
 
             var instanceState = factoryInstanceState.instance.stateDynamic;
 
-            float endIntensity = factoryInstanceState.intensityByFactory
-                                 * factoryInstanceState.intensityByMachine
-                                 * factoryInstanceState.fieldPower;
-
-            Vector3 updateForValue = rotation;
+            Vector3 newRotation = rotation * factoryInstanceState.fieldPower;
 
             if (factoryInstanceState.extraPowerEnabled)
-                updateForValue.Scale(factoryInstanceState.extraPowerRotation);
+                newRotation.Scale(factoryInstanceState.extraPowerRotation);
 
             switch (rotationTransformMode)
             {
                 case TransformMode.Relative:
-                    instanceState.rotation += updateForValue * endIntensity;
+                default:
+                    newRotation += instanceState.rotation;
                     break;
 
                 case TransformMode.Absolute:
-                    instanceState.rotation = Vector3.LerpUnclamped(instanceState.rotation, updateForValue, endIntensity);
+                    // Nothing need to do!
                     break;
             }
+
+            float transferPower = factoryInstanceState.intensityByFactory
+                                  * factoryInstanceState.intensityByMachine;
+
+            instanceState.rotation = Vector3.LerpUnclamped(instanceState.rotation, newRotation, transferPower);
         }
 
         protected void UpdateInstanceDynamicState_Scale(FactoryInstanceState factoryInstanceState)
@@ -249,31 +244,33 @@ namespace DustEngine
 
             var instanceState = factoryInstanceState.instance.stateDynamic;
 
-            float endIntensity = factoryInstanceState.intensityByFactory
-                                 * factoryInstanceState.intensityByMachine
-                                 * factoryInstanceState.fieldPower;
-
-            Vector3 endScale = scale;
+            Vector3 newScale = scale * factoryInstanceState.fieldPower;
 
             if (factoryInstanceState.extraPowerEnabled)
-                endScale.Scale(factoryInstanceState.extraPowerScale);
+                newScale.Scale(factoryInstanceState.extraPowerScale);
 
             // Notice: if instanceState.scale is 2.0f and I need scale relative +1.0f
             // then result should be 4.0f (not 3.0f)
             // So here require recalculate updateForValue bases on current object scale
             // And later apply field-power
-            endScale = Vector3.Scale(instanceState.scale, endScale);
+            newScale = Vector3.Scale(instanceState.scale, newScale);
 
             switch (scaleTransformMode)
             {
                 case TransformMode.Relative:
-                    instanceState.scale += endScale * endIntensity;
+                default:
+                    newScale += instanceState.scale;
                     break;
 
                 case TransformMode.Absolute:
-                    instanceState.scale = Vector3.LerpUnclamped(instanceState.scale, endScale, endIntensity);
+                    // Nothing need to do!
                     break;
             }
+
+            float transferPower = factoryInstanceState.intensityByFactory
+                                  * factoryInstanceState.intensityByMachine;
+
+            instanceState.scale = Vector3.LerpUnclamped(instanceState.scale, newScale, transferPower);
         }
 
         //--------------------------------------------------------------------------------------------------------------

@@ -115,15 +115,16 @@ namespace DustEngine
 
             var instanceState = factoryInstanceState.instance.stateDynamic;
 
+            // @notice: here fieldPower also involve to transferPower (not like in PRS-Factory)
+            float transferPower = factoryInstanceState.intensityByFactory
+                                  * factoryInstanceState.intensityByMachine
+                                  * factoryInstanceState.fieldPower;
+
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // Position
 
             if (positionMode != ClampMode.NoClamp)
             {
-                float endIntensity = factoryInstanceState.intensityByFactory
-                                     * factoryInstanceState.intensityByMachine
-                                     * factoryInstanceState.fieldPower;
-
                 Vector3 endPosition = instanceState.position;
 
                 if (positionMode == ClampMode.MinOnly || positionMode == ClampMode.MinAndMax)
@@ -132,7 +133,7 @@ namespace DustEngine
                 if (positionMode == ClampMode.MaxOnly || positionMode == ClampMode.MinAndMax)
                     endPosition = DuVector3.Min(endPosition, positionMax);
 
-                instanceState.position = Vector3.LerpUnclamped(instanceState.position, endPosition, endIntensity);
+                instanceState.position = Vector3.LerpUnclamped(instanceState.position, endPosition, transferPower);
             }
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -140,10 +141,6 @@ namespace DustEngine
 
             if (rotationMode != ClampMode.NoClamp)
             {
-                float endIntensity = factoryInstanceState.intensityByFactory
-                                     * factoryInstanceState.intensityByMachine
-                                     * factoryInstanceState.fieldPower;
-
                 Vector3 endRotation = instanceState.rotation;
 
                 if (rotationMode == ClampMode.MinOnly || rotationMode == ClampMode.MinAndMax)
@@ -152,7 +149,7 @@ namespace DustEngine
                 if (rotationMode == ClampMode.MaxOnly || rotationMode == ClampMode.MinAndMax)
                     endRotation = DuVector3.Min(endRotation, rotationMax);
 
-                instanceState.rotation = Vector3.LerpUnclamped(instanceState.rotation, endRotation, endIntensity);
+                instanceState.rotation = Vector3.LerpUnclamped(instanceState.rotation, endRotation, transferPower);
             }
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -160,10 +157,6 @@ namespace DustEngine
 
             if (scaleMode != ClampMode.NoClamp)
             {
-                float endIntensity = factoryInstanceState.intensityByFactory
-                                     * factoryInstanceState.intensityByMachine
-                                     * factoryInstanceState.fieldPower;
-
                 Vector3 endScale = instanceState.scale;
 
                 if (scaleMode == ClampMode.MinOnly || scaleMode == ClampMode.MinAndMax)
@@ -172,7 +165,7 @@ namespace DustEngine
                 if (scaleMode == ClampMode.MaxOnly || scaleMode == ClampMode.MinAndMax)
                     endScale = DuVector3.Min(endScale, scaleMax);
 
-                instanceState.scale = Vector3.LerpUnclamped(instanceState.scale, endScale, endIntensity);
+                instanceState.scale = Vector3.LerpUnclamped(instanceState.scale, endScale, transferPower);
             }
         }
 
