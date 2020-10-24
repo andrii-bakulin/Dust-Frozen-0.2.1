@@ -52,7 +52,7 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private float m_AnimationSpeed = 1f;
+        private float m_AnimationSpeed = 0f;
         public float animationSpeed
         {
             get => m_AnimationSpeed;

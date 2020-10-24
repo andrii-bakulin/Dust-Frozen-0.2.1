@@ -67,7 +67,7 @@ namespace DustEngine.DustEditor
                 PropertyField(m_NoiseMode);
                 PropertyField(m_NoiseDimension);
                 PropertyField(m_Synchronized);
-                PropertySeedFixed(m_Seed);
+                Space();
 
                 switch ((DuNoiseFactoryMachine.NoiseMode) m_NoiseMode.enumValueIndex)
                 {
@@ -77,14 +77,17 @@ namespace DustEngine.DustEditor
                         break;
 
                     case DuNoiseFactoryMachine.NoiseMode.Perlin:
-                        Space();
                         PropertyField(m_NoiseSpace);
+                        PropertyExtendedSlider(m_NoiseScale, 0.01f, 16f, 0.01f, 0.01f);
+                        Space();
+
                         PropertyExtendedSlider(m_AnimationSpeed, 0f, 10f, 0.01f);
                         PropertyExtendedSlider(m_AnimationOffset, 0f, 3f, 0.01f);
-                        PropertyExtendedSlider(m_NoiseScale, 0.01f, 16f, 0.01f, 0.01f);
+                        Space();
                         break;
                 }
 
+                PropertySeedFixed(m_Seed);
                 Space();
             }
             DustGUI.FoldoutEnd();
@@ -102,7 +105,6 @@ namespace DustEngine.DustEditor
                 }
                 DustGUI.FoldoutEnd();
             }
-
 
             OnInspectorGUI_TransformBlock();
 
