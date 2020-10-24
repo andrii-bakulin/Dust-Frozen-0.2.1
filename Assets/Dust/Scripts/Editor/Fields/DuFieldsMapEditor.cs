@@ -272,7 +272,7 @@ namespace DustEngine.DustEditor
 
                         if (newRecord.field.IsHasFieldColorPreview())
                         {
-                            Gradient previewGradient = newRecord.field.GetFieldColorPreview(out float intensity);
+                            Gradient previewGradient = newRecord.field.GetFieldColorPreview(out float colorPower);
 
                             if (Dust.IsNotNull(previewGradient))
                             {
@@ -285,7 +285,7 @@ namespace DustEngine.DustEditor
                                 if (lastElement.width > 0 && lastElement.height > 0)
                                 {
                                     // like for 0.0 intensity I still should draw small color-box (width = 8f)
-                                    lastElement.width = DuMath.Fit(0f, 1f, 8f, lastElement.width, intensity, false);
+                                    lastElement.width = DuMath.Fit(0f, 1f, 8f, lastElement.width, colorPower, false);
 
                                     var opacity = newRecord.blendColorMode != DuFieldsMap.FieldRecord.BlendColorMode.Ignore ? 1f : 0.25f;
                                     DustGUI.Gradient(lastElement, previewGradient, opacity);

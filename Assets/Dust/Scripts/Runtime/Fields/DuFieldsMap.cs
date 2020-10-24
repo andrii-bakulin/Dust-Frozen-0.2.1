@@ -10,7 +10,7 @@ namespace DustEngine
     /// - R+G+B define color
     /// - A     define intensity of color in this point
     ///
-    /// 1) If need change intensity of some color only require multiple A for required value
+    /// If need change intensity of some color only require multiple A for required value
     ///
     /// </summary>
     [Serializable]

@@ -69,9 +69,9 @@ namespace DustEngine
             return true;
         }
 
-        public override Gradient GetFieldColorPreview(out float intensity)
+        public override Gradient GetFieldColorPreview(out float colorPower)
         {
-            intensity = color.a;
+            colorPower = color.a;
             return color.duToGradient();
         }
 #endif
