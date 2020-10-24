@@ -34,12 +34,17 @@ namespace DustEngine
 
         public static void Append(ref int dynamicState, int sequenceIndex, Vector3 value)
         {
-            dynamicState ^= sequenceIndex * 575673 + value.GetHashCode();
+            dynamicState ^= sequenceIndex * 575673 + value.x.GetHashCode();
+            dynamicState ^= sequenceIndex * 124751 + value.y.GetHashCode();
+            dynamicState ^= sequenceIndex * 917254 + value.z.GetHashCode();
         }
 
         public static void Append(ref int dynamicState, int sequenceIndex, Color value)
         {
-            dynamicState ^= sequenceIndex * 625751 + value.GetHashCode();
+            dynamicState ^= sequenceIndex * 625751 + value.r.GetHashCode();
+            dynamicState ^= sequenceIndex * 328127 + value.g.GetHashCode();
+            dynamicState ^= sequenceIndex * 874751 + value.b.GetHashCode();
+            dynamicState ^= sequenceIndex * 127345 + value.a.GetHashCode();
         }
 
         public static void Append(ref int dynamicState, int sequenceIndex, Gradient value)
