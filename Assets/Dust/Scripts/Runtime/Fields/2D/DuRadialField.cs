@@ -159,10 +159,7 @@ namespace DustEngine
             }
 
             result.fieldPower = remapping.MapValue(power);
-
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-            result.fieldColor = calculateColor ? GetFieldColorFromRemapping(remapping, result.fieldPower) : Color.clear;
+            result.fieldColor = GetFieldColorFromRemapping(remapping, result.fieldPower, calculateColor);
         }
 
         //--------------------------------------------------------------------------------------------------------------

@@ -115,8 +115,11 @@ namespace DustEngine
             return color;
         }
 
-        protected Color GetFieldColorFromRemapping(DuRemapping remapping, float powerByField)
+        protected Color GetFieldColorFromRemapping(DuRemapping remapping, float powerByField, bool calculateColor)
         {
+            if (calculateColor == false)
+                return Color.clear;
+
             switch (remapping.colorMode)
             {
                 case DuRemapping.ColorMode.Color:

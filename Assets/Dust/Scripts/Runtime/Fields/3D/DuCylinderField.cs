@@ -72,10 +72,7 @@ namespace DustEngine
             float offset = distanceToEdge > 0f ? 1f - distanceToPoint / distanceToEdge : 0f;
 
             result.fieldPower = remapping.MapValue(offset);
-
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-            result.fieldColor = calculateColor ? GetFieldColorFromRemapping(remapping, result.fieldPower) : Color.clear;
+            result.fieldColor = GetFieldColorFromRemapping(remapping, result.fieldPower, calculateColor);
         }
 
         //--------------------------------------------------------------------------------------------------------------

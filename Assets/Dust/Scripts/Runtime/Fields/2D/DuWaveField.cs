@@ -185,10 +185,7 @@ namespace DustEngine
             var xpLocalPosition = DuAxisDirection.ConvertFromDirectionToAxisXPlus(direction, localPosition);
 
             result.fieldPower = GetPowerForLocalPositionInAxisXPlus(xpLocalPosition);
-
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-            result.fieldColor = calculateColor ? GetFieldColorFromRemapping(remapping, result.fieldPower) : Color.clear;
+            result.fieldColor = GetFieldColorFromRemapping(remapping, result.fieldPower, calculateColor);
         }
 
         internal float GetPowerForLocalPositionInAxisXPlus(Vector3 xpLocalPosition)

@@ -52,10 +52,7 @@ namespace DustEngine
         public override void Calculate(DuField.Point fieldPoint, out DuField.Result result, bool calculateColor)
         {
             result.fieldPower = remapping.MapValue(fieldPoint.endPower);
-
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-            result.fieldColor = calculateColor ? GetFieldColorFromRemapping(remapping, result.fieldPower) : Color.clear;
+            result.fieldColor = GetFieldColorFromRemapping(remapping, result.fieldPower, calculateColor);
         }
 
         //--------------------------------------------------------------------------------------------------------------
