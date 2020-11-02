@@ -31,7 +31,7 @@ namespace DustEngine
 
         public override bool IsAllowCalculateFieldColor()
         {
-            return true;
+            return remapping.colorMode != DuRemapping.ColorMode.Ignore;
         }
 
 #if UNITY_EDITOR

@@ -38,6 +38,20 @@ namespace DustEngine
             set => m_CustomHint = value;
         }
 
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        protected DuNoise m_ColorRandomNoise;
+        protected DuNoise colorRandomNoise
+        {
+            get
+            {
+                if (Dust.IsNull(m_ColorRandomNoise))
+                    m_ColorRandomNoise = new DuNoise(876805);
+
+                return m_ColorRandomNoise;
+            }
+        }
+
         //--------------------------------------------------------------------------------------------------------------
 
         private void Start()
@@ -122,11 +136,46 @@ namespace DustEngine
 
             switch (remapping.colorMode)
             {
+                case DuRemapping.ColorMode.Ignore:
+                    return Color.clear;
+
                 case DuRemapping.ColorMode.Color:
                     return GetFieldColorByPower(remapping.color, powerByField);
 
                 case DuRemapping.ColorMode.Gradient:
                     return remapping.gradient.Evaluate(powerByField);
+
+                case DuRemapping.ColorMode.Rainbow:
+                {
+                    var rainbowOffset = remapping.rainbowRepeat ? Mathf.Repeat(powerByField, 1f) : Mathf.Clamp01(powerByField);
+                    rainbowOffset = DuMath.Fit01To(remapping.rainbowMinOffset, remapping.rainbowMaxOffset, rainbowOffset);
+                    rainbowOffset = Mathf.Repeat(rainbowOffset, 1f);
+                    return Color.HSVToRGB(rainbowOffset, 1f, 1f);
+                }
+
+                case DuRemapping.ColorMode.RandomColor:
+                {
+                    var colorRandomOffset = colorRandomNoise.Perlin1D(powerByField * 2589.7515f, 0f, 2f);
+                    return Color.HSVToRGB(colorRandomOffset, 1f, 1f);
+                }
+
+                case DuRemapping.ColorMode.RandomColorInRange:
+                {
+                    var colorRandomOffset = colorRandomNoise.Perlin1D_asVector3(powerByField * 2589.7515f, 0f, 2f);
+                    var colorAlpha = remapping.randomMinColor.a;
+
+                    if (Mathf.Approximately(remapping.randomMinColor.a, remapping.randomMaxColor.a) == false)
+                    {
+                        var colorRandomAlpha = colorRandomNoise.Perlin1D(powerByField * 2589.7515f, 0f, 2f);
+                        colorAlpha = DuMath.Fit01To(remapping.randomMinColor.a, remapping.randomMaxColor.a, colorRandomAlpha);
+                    }
+
+                    return new Color(
+                        DuMath.Fit01To(remapping.randomMinColor.r, remapping.randomMaxColor.r, colorRandomOffset.x),
+                        DuMath.Fit01To(remapping.randomMinColor.g, remapping.randomMaxColor.g, colorRandomOffset.y),
+                        DuMath.Fit01To(remapping.randomMinColor.b, remapping.randomMaxColor.b, colorRandomOffset.z),
+                        colorAlpha);
+                }
 
                 default:
                     return Color.magenta;
@@ -135,18 +184,30 @@ namespace DustEngine
 
         protected Gradient GetFieldColorPreview(DuRemapping remapping, out float colorPower)
         {
+            colorPower = 1f;
+
             switch (remapping.colorMode)
             {
+                case DuRemapping.ColorMode.Ignore:
+                    return Color.clear.duToGradient();
+
                 case DuRemapping.ColorMode.Color:
                     colorPower = remapping.color.a;
                     return remapping.color.duToGradient();
 
                 case DuRemapping.ColorMode.Gradient:
-                    colorPower = 1f;
                     return remapping.gradient;
 
+                case DuRemapping.ColorMode.Rainbow:
+                    return DuGradient.CreateRainbow(remapping.rainbowMinOffset, remapping.rainbowMaxOffset);
+
+                case DuRemapping.ColorMode.RandomColor:
+                    return DuGradient.CreateRandomSet();
+
+                case DuRemapping.ColorMode.RandomColorInRange:
+                    return DuGradient.CreateBetweenColors(remapping.randomMinColor, remapping.randomMaxColor);
+
                 default:
-                    colorPower = 1f;
                     return Color.magenta.duToGradient();
             }
         }

@@ -14,8 +14,12 @@ namespace DustEngine
 
         public enum ColorMode
         {
-            Color = 0,
-            Gradient = 1,
+            Ignore = 0,
+            Color = 1,
+            Gradient = 2,
+            Rainbow = 3,
+            RandomColor = 4,
+            RandomColorInRange = 5,
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -144,6 +148,50 @@ namespace DustEngine
             set => m_Gradient = value;
         }
 
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        [SerializeField]
+        private float m_RainbowMinOffset = 0.0f;
+        public float rainbowMinOffset
+        {
+            get => m_RainbowMinOffset;
+            set => m_RainbowMinOffset = value;
+        }
+
+        [SerializeField]
+        private float m_RainbowMaxOffset = 1.0f;
+        public float rainbowMaxOffset
+        {
+            get => m_RainbowMaxOffset;
+            set => m_RainbowMaxOffset = value;
+        }
+
+        [SerializeField]
+        private bool m_RainbowRepeat = false;
+        public bool rainbowRepeat
+        {
+            get => m_RainbowRepeat;
+            set => m_RainbowRepeat = value;
+        }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        [SerializeField]
+        protected Color m_RandomMinColor = Color.black;
+        public Color randomMinColor
+        {
+            get => m_RandomMinColor;
+            set => m_RandomMinColor = value;
+        }
+
+        [SerializeField]
+        protected Color m_RandomMaxColor = Color.red;
+        public Color randomMaxColor
+        {
+            get => m_RandomMaxColor;
+            set => m_RandomMaxColor = value;
+        }
+
         //--------------------------------------------------------------------------------------------------------------
         // DuDynamicStateInterface
 
@@ -166,8 +214,33 @@ namespace DustEngine
             DuDynamicState.Append(ref dynamicState, ++seq, postCurve);
 
             DuDynamicState.Append(ref dynamicState, ++seq, colorMode);
-            DuDynamicState.Append(ref dynamicState, ++seq, color);
-            DuDynamicState.Append(ref dynamicState, ++seq, gradient);
+
+            switch (colorMode)
+            {
+                case ColorMode.Ignore:
+                case ColorMode.RandomColor:
+                    // none
+                    break;
+
+                case ColorMode.Color:
+                    DuDynamicState.Append(ref dynamicState, ++seq, color);
+                    break;
+
+                case ColorMode.Gradient:
+                    DuDynamicState.Append(ref dynamicState, ++seq, gradient);
+                    break;
+
+                case ColorMode.Rainbow:
+                    DuDynamicState.Append(ref dynamicState, ++seq, rainbowMinOffset);
+                    DuDynamicState.Append(ref dynamicState, ++seq, rainbowMaxOffset);
+                    DuDynamicState.Append(ref dynamicState, ++seq, rainbowRepeat);
+                    break;
+
+                case ColorMode.RandomColorInRange:
+                    DuDynamicState.Append(ref dynamicState, ++seq, randomMinColor);
+                    DuDynamicState.Append(ref dynamicState, ++seq, randomMaxColor);
+                    break;
+            }
 
             return DuDynamicState.Normalize(dynamicState);
         }

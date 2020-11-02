@@ -47,6 +47,8 @@ namespace DustEngine
             for (int i = 0; i < blocksCount; i++)
             {
                 float offsetCol = minRange + (maxRange - minRange) / (blocksCount - 1f) * i;
+                offsetCol = Mathf.Repeat(offsetCol, 1f);
+
                 float offsetPos = 1f / (blocksCount - 1f) * i;
 
                 colorKeys[i] = new GradientColorKey(Color.HSVToRGB(offsetCol, 1f, 1f), offsetPos);

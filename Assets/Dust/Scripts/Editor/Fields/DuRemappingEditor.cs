@@ -27,6 +27,13 @@ namespace DustEngine.DustEditor
         protected DuEditor.DuProperty m_Color;
         protected DuEditor.DuProperty m_Gradient;
 
+        protected DuEditor.DuProperty m_RainbowMinOffset;
+        protected DuEditor.DuProperty m_RainbowMaxOffset;
+        protected DuEditor.DuProperty m_RainbowRepeat;
+
+        protected DuEditor.DuProperty m_RandomMinColor;
+        protected DuEditor.DuProperty m_RandomMaxColor;
+
         public DuRemappingEditor(DuRemapping duRemapping, SerializedProperty remappingProperty)
         {
             m_Remapping = duRemapping;
@@ -50,6 +57,13 @@ namespace DustEngine.DustEditor
             m_ColorMode = DuEditor.FindProperty(remappingProperty, "m_ColorMode", "Mode");
             m_Color = DuEditor.FindProperty(remappingProperty, "m_Color", "Color");
             m_Gradient = DuEditor.FindProperty(remappingProperty, "m_Gradient", "Gradient");
+
+            m_RainbowMinOffset = DuEditor.FindProperty(remappingProperty, "m_RainbowMinOffset", "Min Offset");
+            m_RainbowMaxOffset = DuEditor.FindProperty(remappingProperty, "m_RainbowMaxOffset", "Max Offset");
+            m_RainbowRepeat = DuEditor.FindProperty(remappingProperty, "m_RainbowRepeat", "Repeat");
+
+            m_RandomMinColor = DuEditor.FindProperty(remappingProperty, "m_RandomMinColor", "Min Color");
+            m_RandomMaxColor = DuEditor.FindProperty(remappingProperty, "m_RandomMaxColor", "Max Color");
         }
 
         public void OnInspectorGUI()
@@ -115,12 +129,35 @@ namespace DustEngine.DustEditor
 
                     switch ((DuRemapping.ColorMode) m_ColorMode.enumValueIndex)
                     {
+                        case DuRemapping.ColorMode.Ignore:
+                        case DuRemapping.ColorMode.RandomColor:
+                            break;
+
                         case DuRemapping.ColorMode.Color:
                             DuEditor.PropertyField(m_Color);
                             break;
 
                         case DuRemapping.ColorMode.Gradient:
                             DuEditor.PropertyField(m_Gradient);
+                            break;
+
+                        case DuRemapping.ColorMode.Rainbow:
+                            DuEditor.PropertyExtendedSlider(m_RainbowMinOffset, 0f, 1f, 0.01f);
+                            DuEditor.PropertyExtendedSlider(m_RainbowMaxOffset, 0f, 1f, 0.01f);
+                            DuEditor.PropertyField(m_RainbowRepeat);
+
+                            DustGUI.Lock();
+                            DustGUI.Field("Preview", DuGradient.CreateRainbow(m_RainbowMinOffset.valFloat, m_RainbowMaxOffset.valFloat));
+                            DustGUI.Unlock();
+                            break;
+
+                        case DuRemapping.ColorMode.RandomColorInRange:
+                            DuEditor.PropertyField(m_RandomMinColor);
+                            DuEditor.PropertyField(m_RandomMaxColor);
+
+                            DustGUI.Lock();
+                            DustGUI.Field("Preview", DuGradient.CreateBetweenColors(m_RandomMinColor.valColor, m_RandomMaxColor.valColor));
+                            DustGUI.Unlock();
                             break;
                     }
 
