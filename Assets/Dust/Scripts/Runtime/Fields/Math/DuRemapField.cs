@@ -3,7 +3,7 @@
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Fields/Math Fields/Remap Field")]
-    public class DuRemapField : DuField
+    public class DuRemapField : DuMathField
     {
         [SerializeField]
         private DuRemapping m_Remapping = new DuRemapping();
@@ -33,18 +33,6 @@ namespace DustEngine
         public override string FieldDynamicHint()
         {
             return "";
-        }
-
-        //--------------------------------------------------------------------------------------------------------------
-
-        public override DuFieldsMap.FieldRecord.BlendPowerMode GetBlendPowerMode()
-        {
-            return DuFieldsMap.FieldRecord.BlendPowerMode.Set;
-        }
-
-        public override DuFieldsMap.FieldRecord.BlendColorMode GetBlendColorMode()
-        {
-            return DuFieldsMap.FieldRecord.BlendColorMode.Set;
         }
 
         //--------------------------------------------------------------------------------------------------------------

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Fields/Math Fields/Clamp Field")]
-    public class DuClampField : DuField
+    public class DuClampField : DuMathField
     {
         public enum ClampMode
         {
@@ -124,18 +124,6 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public override DuFieldsMap.FieldRecord.BlendPowerMode GetBlendPowerMode()
-        {
-            return DuFieldsMap.FieldRecord.BlendPowerMode.Set;
-        }
-
-        public override DuFieldsMap.FieldRecord.BlendColorMode GetBlendColorMode()
-        {
-            return DuFieldsMap.FieldRecord.BlendColorMode.Set;
-        }
-
-        //--------------------------------------------------------------------------------------------------------------
-
         public override void Calculate(DuField.Point fieldPoint, out DuField.Result result, bool calculateColor)
         {
             result.fieldPower = fieldPoint.endPower;
@@ -163,25 +151,5 @@ namespace DustEngine
                 result.fieldColor = Color.clear;
             }
         }
-
-        //--------------------------------------------------------------------------------------------------------------
-
-        public override bool IsAllowCalculateFieldColor()
-        {
-            return true;
-        }
-
-#if UNITY_EDITOR
-        public override bool IsHasFieldColorPreview()
-        {
-            return false;
-        }
-
-        public override Gradient GetFieldColorPreview(out float colorPower)
-        {
-            colorPower = 0f;
-            return null;
-        }
-#endif
     }
 }
