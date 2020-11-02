@@ -34,6 +34,15 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
+        // Notice: Nov 2, 2020 in Unity.2020.1.6f1 I found that globally total avarage for unity Perlin noise move
+        //         to average value 0.465f, so I forced try to move it to 0.5f
+
+        public static float PerlinNoise(float x, float y)
+        {
+            return Mathf.Clamp01(Mathf.PerlinNoise(x, y) * 1.075268817204301f);
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
         // Perlin 1D noise
         // - input: float
         // - return: float
@@ -46,7 +55,7 @@ namespace DustEngine
 
         public float Perlin1D(float v, float offset, float power)
         {
-            return ImproveResult(Mathf.PerlinNoise(PerlinNoise_XX + v, PerlinNoise_XY + offset), power);
+            return ImproveResult(PerlinNoise(PerlinNoise_XX + v, PerlinNoise_XY + offset), power);
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -74,9 +83,9 @@ namespace DustEngine
         public Vector3 Perlin1D_asVector3(float v, float offset, float power)
         {
             Vector3 result;
-            result.x = ImproveResult(Mathf.PerlinNoise(PerlinNoise_XX + v, PerlinNoise_XY + offset), power);
-            result.y = ImproveResult(Mathf.PerlinNoise(PerlinNoise_YX + v, PerlinNoise_YY + offset), power);
-            result.z = ImproveResult(Mathf.PerlinNoise(PerlinNoise_ZX + v, PerlinNoise_ZY + offset), power);
+            result.x = ImproveResult(PerlinNoise(PerlinNoise_XX + v, PerlinNoise_XY + offset), power);
+            result.y = ImproveResult(PerlinNoise(PerlinNoise_YX + v, PerlinNoise_YY + offset), power);
+            result.z = ImproveResult(PerlinNoise(PerlinNoise_ZX + v, PerlinNoise_ZY + offset), power);
             return result;
         }
 
@@ -110,7 +119,7 @@ namespace DustEngine
 
         public float Perlin2D(float x, float y, float offset, float power)
         {
-            return ImproveResult(Mathf.PerlinNoise(PerlinNoise_XX + x + offset, PerlinNoise_YY + y + offset), power);
+            return ImproveResult(PerlinNoise(PerlinNoise_XX + x + offset, PerlinNoise_YY + y + offset), power);
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -161,14 +170,14 @@ namespace DustEngine
 
         public float Perlin3D(float x, float y, float z, float offset, float power)
         {
-            float x1 = Mathf.PerlinNoise(PerlinNoise_XX + x + offset, PerlinNoise_XY + y + offset);
-            float x2 = Mathf.PerlinNoise(PerlinNoise_XX + x + offset, PerlinNoise_XY + z + offset);
+            float x1 = PerlinNoise(PerlinNoise_XX + x + offset, PerlinNoise_XY + y + offset);
+            float x2 = PerlinNoise(PerlinNoise_XX + x + offset, PerlinNoise_XY + z + offset);
 
-            float y1 = Mathf.PerlinNoise(PerlinNoise_YX + y + offset, PerlinNoise_YY + x + offset);
-            float y2 = Mathf.PerlinNoise(PerlinNoise_YX + y + offset, PerlinNoise_YY + z + offset);
+            float y1 = PerlinNoise(PerlinNoise_YX + y + offset, PerlinNoise_YY + x + offset);
+            float y2 = PerlinNoise(PerlinNoise_YX + y + offset, PerlinNoise_YY + z + offset);
 
-            float z1 = Mathf.PerlinNoise(PerlinNoise_ZX + z + offset, PerlinNoise_ZY + x + offset);
-            float z2 = Mathf.PerlinNoise(PerlinNoise_ZX + z + offset, PerlinNoise_ZY + y + offset);
+            float z1 = PerlinNoise(PerlinNoise_ZX + z + offset, PerlinNoise_ZY + x + offset);
+            float z2 = PerlinNoise(PerlinNoise_ZX + z + offset, PerlinNoise_ZY + y + offset);
 
             return ImproveResult((x1 + x2 + y1 + y2 + z1 + z2) / 6f, power);
         }
