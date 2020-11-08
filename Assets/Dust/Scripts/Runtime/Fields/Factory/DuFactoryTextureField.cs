@@ -108,7 +108,8 @@ namespace DustEngine
             DuDynamicState.Append(ref dynamicState, ++seq, powerSource);
             DuDynamicState.Append(ref dynamicState, ++seq, applyPowerToAlpha);
 
-            DuDynamicState.Append(ref dynamicState, ++seq, remapping);
+            if (powerSource != ColorComponent.Ignore)
+                DuDynamicState.Append(ref dynamicState, ++seq, remapping);
 
             return DuDynamicState.Normalize(dynamicState);
         }

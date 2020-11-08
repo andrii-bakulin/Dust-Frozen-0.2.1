@@ -344,22 +344,35 @@ namespace DustEngine
             var dynamicState = base.GetDynamicStateHashCode();
 
             DuDynamicState.Append(ref dynamicState, ++seq, noiseMode);
+
             DuDynamicState.Append(ref dynamicState, ++seq, noiseDimension);
-            DuDynamicState.Append(ref dynamicState, ++seq, animationSpeed);
-            DuDynamicState.Append(ref dynamicState, ++seq, animationOffset);
+            DuDynamicState.Append(ref dynamicState, ++seq, seed);
             DuDynamicState.Append(ref dynamicState, ++seq, synchronized);
 
-            DuDynamicState.Append(ref dynamicState, ++seq, positionAxisRemapping);
-            DuDynamicState.Append(ref dynamicState, ++seq, rotationAxisRemapping);
-            DuDynamicState.Append(ref dynamicState, ++seq, scaleAxisRemapping);
+            if (synchronized)
+            {
+                DuDynamicState.Append(ref dynamicState, ++seq, positionAxisRemapping);
+                DuDynamicState.Append(ref dynamicState, ++seq, rotationAxisRemapping);
+                DuDynamicState.Append(ref dynamicState, ++seq, scaleAxisRemapping);
+            }
 
-            DuDynamicState.Append(ref dynamicState, ++seq, noiseSpace);
-            DuDynamicState.Append(ref dynamicState, ++seq, noiseForce);
-            DuDynamicState.Append(ref dynamicState, ++seq, noiseScale);
+            switch (noiseMode)
+            {
+                case NoiseMode.Random:
+                    // Nothing need to do
+                    break;
 
-            DuDynamicState.Append(ref dynamicState, ++seq, seed);
+                case NoiseMode.Perlin:
+                    DuDynamicState.Append(ref dynamicState, ++seq, noiseSpace);
+                    DuDynamicState.Append(ref dynamicState, ++seq, noiseForce);
+                    DuDynamicState.Append(ref dynamicState, ++seq, noiseScale);
 
-            DuDynamicState.Append(ref dynamicState, ++seq, m_OffsetDynamic);
+                    DuDynamicState.Append(ref dynamicState, ++seq, animationSpeed);
+                    DuDynamicState.Append(ref dynamicState, ++seq, animationOffset);
+
+                    DuDynamicState.Append(ref dynamicState, ++seq, m_OffsetDynamic);
+                    break;
+            }
 
             return DuDynamicState.Normalize(dynamicState);
         }

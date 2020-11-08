@@ -224,12 +224,11 @@ namespace DustEngine
 
             DuDynamicState.Append(ref dynamicState, ++seq, targetMode);
             if (targetMode == TargetMode.ObjectTarget)
-            {
                 DuDynamicState.Append(ref dynamicState, ++seq, targetObject);
-            }
 
             DuDynamicState.Append(ref dynamicState, ++seq, upVectorMode);
-            DuDynamicState.Append(ref dynamicState, ++seq, upVectorObject);
+            if (upVectorMode == UpVectorMode.Object)
+                DuDynamicState.Append(ref dynamicState, ++seq, upVectorObject);
 
             DuDynamicState.Append(ref dynamicState, ++seq, lockAxisX);
             DuDynamicState.Append(ref dynamicState, ++seq, lockAxisY);

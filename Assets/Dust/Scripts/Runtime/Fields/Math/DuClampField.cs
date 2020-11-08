@@ -75,12 +75,21 @@ namespace DustEngine
             var dynamicState = base.GetDynamicStateHashCode();
 
             DuDynamicState.Append(ref dynamicState, ++seq, powerClampMode);
-            DuDynamicState.Append(ref dynamicState, ++seq, powerClampMin);
-            DuDynamicState.Append(ref dynamicState, ++seq, powerClampMax);
+
+            if (powerClampMode != ClampMode.NoClamp)
+            {
+                DuDynamicState.Append(ref dynamicState, ++seq, powerClampMin);
+                DuDynamicState.Append(ref dynamicState, ++seq, powerClampMax);
+            }
+
 
             DuDynamicState.Append(ref dynamicState, ++seq, colorClampMode);
-            DuDynamicState.Append(ref dynamicState, ++seq, colorClampMin);
-            DuDynamicState.Append(ref dynamicState, ++seq, colorClampMax);
+
+            if (colorClampMode != ClampMode.NoClamp)
+            {
+                DuDynamicState.Append(ref dynamicState, ++seq, colorClampMin);
+                DuDynamicState.Append(ref dynamicState, ++seq, colorClampMax);
+            }
 
             return DuDynamicState.Normalize(dynamicState);
         }

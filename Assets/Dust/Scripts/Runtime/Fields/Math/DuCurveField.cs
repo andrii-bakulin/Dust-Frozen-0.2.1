@@ -71,6 +71,7 @@ namespace DustEngine
             DuDynamicState.Append(ref dynamicState, ++seq, animationSpeed);
             DuDynamicState.Append(ref dynamicState, ++seq, beforeCurve);
             DuDynamicState.Append(ref dynamicState, ++seq, afterCurve);
+
             DuDynamicState.Append(ref dynamicState, ++seq, m_OffsetDynamic);
 
             return DuDynamicState.Normalize(dynamicState);
