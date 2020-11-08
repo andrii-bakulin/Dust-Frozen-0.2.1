@@ -68,6 +68,14 @@ namespace DustEngine
         }
 
         [SerializeField]
+        private bool m_PowerImpactOnDotsSize = false;
+        public bool powerImpactOnDotsSize
+        {
+            get => m_PowerImpactOnDotsSize;
+            set => m_PowerImpactOnDotsSize = value;
+        }
+
+        [SerializeField]
         private Gradient m_PowerDotsColor = DuGradient.CreateBlackToRed();
         public Gradient powerDotsColor
         {
@@ -91,6 +99,14 @@ namespace DustEngine
         {
             get => m_ColorSize;
             set => m_ColorSize = Normalizer.Size(value);
+        }
+
+        [SerializeField]
+        private bool m_PowerImpactOnColorSize = false;
+        public bool powerImpactOnColorSize
+        {
+            get => m_PowerImpactOnColorSize;
+            set => m_PowerImpactOnColorSize = value;
         }
 
         [SerializeField]
@@ -146,8 +162,12 @@ namespace DustEngine
                     if (!colorAllowTransparent)
                         fieldColor = DuColorBlend.AlphaBlend(Color.black, fieldColor);
 
+                    float dotSize = 0.1f * colorSize;
+                    if (powerImpactOnColorSize)
+                        dotSize *= fieldPower;
+
                     Handles.color = fieldColor;
-                    Handles.DotHandleCap(0, worldPosition, transform.rotation, 0.1f * colorSize, EventType.Repaint);
+                    Handles.DotHandleCap(0, worldPosition, transform.rotation, dotSize, EventType.Repaint);
                 }
 
                 if (showPower)
@@ -161,7 +181,11 @@ namespace DustEngine
                         else
                             Handles.color = Color.Lerp(Color.black, Color.white, fieldPower);
 
-                        Handles.DotHandleCap(0, worldPosition, transform.rotation, 0.1f * powerDotsSize, EventType.Repaint);
+                        float dotSize = 0.1f * powerDotsSize;
+                        if (powerImpactOnDotsSize)
+                            dotSize *= fieldPower;
+
+                        Handles.DotHandleCap(0, worldPosition, transform.rotation, dotSize, EventType.Repaint);
                     }
                 }
             }
