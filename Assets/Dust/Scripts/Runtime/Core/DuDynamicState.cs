@@ -89,9 +89,9 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public static void Append(ref int dynamicState, int sequenceIndex, DuRemapping ramapping)
+        public static void Append(ref int dynamicState, int sequenceIndex, DuRemapping remapping)
         {
-            dynamicState ^= sequenceIndex * 291422 + (Dust.IsNotNull(ramapping) ? ramapping.GetDynamicStateHashCode() : 123456);
+            dynamicState ^= sequenceIndex * 291422 + (Dust.IsNotNull(remapping) ? remapping.GetDynamicStateHashCode() : 123456);
         }
 
         public static void Append(ref int dynamicState, int sequenceIndex, DuDeformer deformer)
