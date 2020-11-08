@@ -168,7 +168,6 @@ namespace DustEngine
 
         private void Reset()
         {
-            remapping.innerOffset = 0f;
             remapping.clampMinEnabled = false;
             remapping.clampMaxEnabled = false;
         }

@@ -80,7 +80,7 @@ namespace DustEngine
 #if UNITY_EDITOR
         protected override void DrawFieldGizmos()
         {
-            float innerScale = remapping.innerOffset;
+            float innerScale = remapping.offset;
 
             Gizmos.matrix = transform.localToWorldMatrix;
 

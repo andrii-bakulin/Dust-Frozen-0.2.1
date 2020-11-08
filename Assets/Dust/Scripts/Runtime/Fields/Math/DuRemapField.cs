@@ -61,12 +61,5 @@ namespace DustEngine
             return GetFieldColorPreview(remapping, out colorPower);
         }
 #endif
-
-        //--------------------------------------------------------------------------------------------------------------
-
-        private void Reset()
-        {
-            remapping.innerOffset = 0f;
-        }
     }
 }

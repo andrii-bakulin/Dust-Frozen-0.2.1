@@ -41,11 +41,19 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private float m_InnerOffset = 0.5f;
-        public float innerOffset
+        private float m_Offset = 0.0f;
+        public float offset
         {
-            get => m_InnerOffset;
-            set => m_InnerOffset = ObjectNormalizer.InnerOffset(value);
+            get => m_Offset;
+            set => m_Offset = ObjectNormalizer.Offset(value);
+        }
+
+        [SerializeField]
+        private bool m_LimitByStrength = false;
+        public bool limitByStrength
+        {
+            get => m_LimitByStrength;
+            set => m_LimitByStrength = value;
         }
 
         [SerializeField]
@@ -204,7 +212,8 @@ namespace DustEngine
             if (remapForceEnabled)
             {
                 DuDynamicState.Append(ref dynamicState, ++seq, strength);
-                DuDynamicState.Append(ref dynamicState, ++seq, innerOffset);
+                DuDynamicState.Append(ref dynamicState, ++seq, offset);
+                DuDynamicState.Append(ref dynamicState, ++seq, limitByStrength);
                 DuDynamicState.Append(ref dynamicState, ++seq, invert);
                 DuDynamicState.Append(ref dynamicState, ++seq, min);
                 DuDynamicState.Append(ref dynamicState, ++seq, max);
@@ -261,7 +270,7 @@ namespace DustEngine
             //----------------------------------------------------------------------------------------------------------
 
             float inMin = 0f;
-            float inMax = 1f - innerOffset;
+            float inMax = 1f - offset;
 
             if (Mathf.Approximately(inMin, inMax))
                 inMax = 0.0001f;
@@ -280,7 +289,7 @@ namespace DustEngine
                 outMax = Mathf.LerpUnclamped(1f - min, 1f - max, strength);
             }
 
-            if (innerOffset > 0f && inValue > inMax)
+            if (limitByStrength && inValue > inMax)
                 inValue = inMax;
 
             float outValue = DuMath.Fit(inMin, inMax, outMin, outMax, inValue);
@@ -329,7 +338,7 @@ namespace DustEngine
 
         public static class ObjectNormalizer
         {
-            public static float InnerOffset(float value)
+            public static float Offset(float value)
             {
                 return Mathf.Clamp01(value);
             }

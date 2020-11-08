@@ -276,8 +276,6 @@ namespace DustEngine
         private void Reset()
         {
             ResetDefaults();
-
-            remapping.innerOffset = 0f;
         }
     }
 }

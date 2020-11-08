@@ -72,7 +72,7 @@ namespace DustEngine
             if (remapping.remapForceEnabled)
             {
                 Gizmos.color = !remapping.invert ? colorRange1 : colorRange0;
-                Gizmos.DrawWireSphere(Vector3.zero, radius * remapping.innerOffset);
+                Gizmos.DrawWireSphere(Vector3.zero, radius * remapping.offset);
 
                 Gizmos.color = !remapping.invert ? colorRange0 : colorRange1;
                 Gizmos.DrawWireSphere(Vector3.zero, radius);

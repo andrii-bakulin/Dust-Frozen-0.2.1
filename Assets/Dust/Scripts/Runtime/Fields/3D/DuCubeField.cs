@@ -124,7 +124,7 @@ namespace DustEngine
             if (remapping.remapForceEnabled)
             {
                 Gizmos.color = !remapping.invert ? colorRange1 : colorRange0;
-                Gizmos.DrawWireCube(Vector3.zero, size * remapping.innerOffset);
+                Gizmos.DrawWireCube(Vector3.zero, size * remapping.offset);
 
                 Gizmos.color = !remapping.invert ? colorRange0 : colorRange1;
                 Gizmos.DrawWireCube(Vector3.zero, size);

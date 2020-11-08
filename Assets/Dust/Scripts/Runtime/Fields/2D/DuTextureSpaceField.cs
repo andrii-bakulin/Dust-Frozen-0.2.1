@@ -279,11 +279,6 @@ namespace DustEngine
         }
 #endif
 
-        void Reset()
-        {
-            remapping.innerOffset = 0f;
-        }
-
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 

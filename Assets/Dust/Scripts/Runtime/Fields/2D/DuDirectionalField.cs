@@ -124,7 +124,7 @@ namespace DustEngine
                 Gizmos.DrawWireCube(offsetPlane1, plainSize);
 
                 // Middle plane
-                Gizmos.DrawWireCube(DuVector3.Fit01To(offsetPlane0, offsetPlane1, 1f - remapping.innerOffset), plainSize);
+                Gizmos.DrawWireCube(DuVector3.Fit01To(offsetPlane0, offsetPlane1, 1f - remapping.offset), plainSize);
 
                 // Begin plane
                 Gizmos.color = !remapping.invert ? colorRange0 : colorRange1;
@@ -154,8 +154,6 @@ namespace DustEngine
         private void Reset()
         {
             ResetDefaults();
-
-            remapping.innerOffset = 0f;
         }
 #endif
 

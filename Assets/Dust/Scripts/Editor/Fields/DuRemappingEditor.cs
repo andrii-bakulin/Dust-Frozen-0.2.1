@@ -10,7 +10,8 @@ namespace DustEngine.DustEditor
 
         protected DuEditor.DuProperty m_RemapForceEnabled;
         protected DuEditor.DuProperty m_Strength;
-        protected DuEditor.DuProperty m_InnerOffset;
+        protected DuEditor.DuProperty m_LimitByStrength;
+        protected DuEditor.DuProperty m_Offset;
         protected DuEditor.DuProperty m_Invert;
 
         protected DuEditor.DuProperty m_Min;
@@ -41,7 +42,8 @@ namespace DustEngine.DustEditor
 
             m_RemapForceEnabled = DuEditor.FindProperty(remappingProperty, "m_RemapForceEnabled", "Enabled");
             m_Strength = DuEditor.FindProperty(remappingProperty, "m_Strength", "Strength");
-            m_InnerOffset = DuEditor.FindProperty(remappingProperty, "m_InnerOffset", "Inner Offset");
+            m_LimitByStrength = DuEditor.FindProperty(remappingProperty, "m_LimitByStrength", "Limit By Strength");
+            m_Offset = DuEditor.FindProperty(remappingProperty, "m_Offset", "Offset");
             m_Invert = DuEditor.FindProperty(remappingProperty, "m_Invert", "Invert");
 
             m_Min = DuEditor.FindProperty(remappingProperty, "m_Min", "Min");
@@ -83,7 +85,8 @@ namespace DustEngine.DustEditor
                 if (m_RemapForceEnabled.IsTrue)
                 {
                     DuEditor.PropertyExtendedSlider(m_Strength, 0f, 1f, 0.01f);
-                    DuEditor.PropertyExtendedSlider01(m_InnerOffset);
+                    DuEditor.PropertyExtendedSlider01(m_Offset);
+                    DuEditor.PropertyField(m_LimitByStrength);
                     DuEditor.PropertyField(m_Invert);
                     DuEditor.Space();
 
@@ -91,7 +94,6 @@ namespace DustEngine.DustEditor
                     DuEditor.PropertyExtendedSlider(m_Max, 0f, 1f, 0.01f);
                     DuEditor.Space();
 
-                    DustGUI.Header("Clamping");
                     DuEditor.PropertyField(m_ClampMinEnabled);
                     DuEditor.PropertyField(m_ClampMaxEnabled);
                     DuEditor.Space();
@@ -168,8 +170,8 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            if (m_InnerOffset.isChanged)
-                m_InnerOffset.valFloat = DuRemapping.ObjectNormalizer.InnerOffset(m_InnerOffset.valFloat);
+            if (m_Offset.isChanged)
+                m_Offset.valFloat = DuRemapping.ObjectNormalizer.Offset(m_Offset.valFloat);
 
             if (m_PostStepsCount.isChanged)
                 m_PostStepsCount.valInt = DuRemapping.ObjectNormalizer.PostStepsCount(m_PostStepsCount.valInt);
@@ -184,6 +186,9 @@ namespace DustEngine.DustEditor
         {
             // Begin to draw a horizontal layout, using the helpBox EditorStyle
             GUILayout.BeginHorizontal(EditorStyles.helpBox);
+
+            float kPaddingH = 20f;
+            float kPaddingV = 10f;
 
             Color bgColor = new Color(0.15f, 0.15f, 0.15f);
             float kHeight = 100;
@@ -221,8 +226,11 @@ namespace DustEngine.DustEditor
                 GL.Begin(GL.LINES);
                 GL.Color(color);
 
-                float rangeMin = 0f;
-                float rangeMax = 1f;
+                float rangePaddingH = (kWidth / (kWidth - 2f * kPaddingH) - 1f) / 2f;
+                float rangePaddingV = (kHeight / (kHeight - 2f * kPaddingV) - 1f) / 2f;
+
+                float rangeMin = 0f - rangePaddingH;
+                float rangeMax = 1f + rangePaddingH;
 
                 for (int i = 0; i <= kWidth; i++)
                 {
@@ -239,26 +247,26 @@ namespace DustEngine.DustEditor
                     }
 
                     float value = duRemapping.MapValue(offset);
+                    value = 1f - value; // To draw upside down
+                    value = Mathf.Clamp(value, 0f - rangePaddingV, 1f + rangePaddingV);
 
-                    if (value < 0f)
-                        continue;
+                    float yDrawFrom = DuMath.Fit(0f - rangePaddingV, 1f + rangePaddingV, 0, kHeight, value);
 
-                    if (value > 1f)
-                        value = 1f;
-
-                    float yFrom = kHeight * (1 - value);
-                    float yTo = kHeight;
-
-                    GL.Vertex3(i, yFrom, 0);
-                    GL.Vertex3(i, yTo, 0);
-
-                    if (EditorGUIUtility.pixelsPerPoint > 1.0f)
-                    {
-                        // This require for retina display
-                        GL.Vertex3(i + 0.5f, yFrom, 0);
-                        GL.Vertex3(i + 0.5f, yTo, 0);
-                    }
+                    DrawLine(i, yDrawFrom, i, kHeight);
                 }
+
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                // Show over grid
+
+                GL.Color(Color.black);
+
+                DrawLine(kPaddingH, 0, kPaddingH, kHeight);
+                DrawLine(kWidth - kPaddingH, 0, kWidth - kPaddingH, kHeight);
+
+                DrawLine(0, kPaddingV, kWidth, kPaddingV);
+                DrawLine(0, kHeight - kPaddingV + 1f, kWidth, kHeight - kPaddingV + 1f);
+
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
                 // End lines drawing.
                 GL.End();
@@ -270,6 +278,19 @@ namespace DustEngine.DustEditor
 
             // End our horizontal
             GUILayout.EndHorizontal();
+        }
+
+        private void DrawLine(float x0, float y0, float x1, float y1)
+        {
+            GL.Vertex3(x0, y0, 0);
+            GL.Vertex3(x1, y1, 0);
+
+            if (EditorGUIUtility.pixelsPerPoint > 1.0f && !y0.Equals(y1))
+            {
+                // This require for retina display
+                GL.Vertex3(x0 + 0.5f, y0, 0);
+                GL.Vertex3(x1 + 0.5f, y1, 0);
+            }
         }
     }
 }
