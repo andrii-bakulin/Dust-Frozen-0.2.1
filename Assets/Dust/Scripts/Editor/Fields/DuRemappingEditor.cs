@@ -81,7 +81,7 @@ namespace DustEngine.DustEditor
 
         public void OnInspectorGUI(bool showColorBlock)
         {
-            if (DustGUI.FoldoutBegin("Force", "DuRemapping.Force"))
+            if (DustGUI.FoldoutBegin("Remap Force", "DuRemapping.Force"))
             {
                 DuEditor.PropertyField(m_RemapForceEnabled);
 
