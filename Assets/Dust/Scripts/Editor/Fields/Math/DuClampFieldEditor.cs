@@ -16,6 +16,11 @@ namespace DustEngine.DustEditor
         protected DuProperty m_ColorClampMin;
         protected DuProperty m_ColorClampMax;
 
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        private ClampMode powerClampMode => (ClampMode) m_PowerClampMode.enumValueIndex;
+        private ClampMode colorClampMode => (ClampMode) m_ColorClampMode.enumValueIndex;
+
         //--------------------------------------------------------------------------------------------------------------
 
         static DuClampFieldEditor()
@@ -64,9 +69,8 @@ namespace DustEngine.DustEditor
             {
                 PropertyField(m_PowerClampMode);
 
-                var powerClampMode = (DuClampField.ClampMode) m_PowerClampMode.enumValueIndex;
-                bool isMinEnabled = powerClampMode == DuClampField.ClampMode.MinAndMax || powerClampMode == DuClampField.ClampMode.MinOnly;
-                bool isMaxEnabled = powerClampMode == DuClampField.ClampMode.MinAndMax || powerClampMode == DuClampField.ClampMode.MaxOnly;
+                bool isMinEnabled = powerClampMode == ClampMode.MinAndMax || powerClampMode == ClampMode.MinOnly;
+                bool isMaxEnabled = powerClampMode == ClampMode.MinAndMax || powerClampMode == ClampMode.MaxOnly;
 
                 if (!isMinEnabled) DustGUI.Lock();
                 PropertyExtendedSlider(m_PowerClampMin, 0f, 1f, 0.01f);
@@ -85,9 +89,8 @@ namespace DustEngine.DustEditor
             {
                 PropertyField(m_ColorClampMode);
 
-                var colorClampMode = (DuClampField.ClampMode) m_ColorClampMode.enumValueIndex;
-                bool isMinEnabled = colorClampMode == DuClampField.ClampMode.MinAndMax || colorClampMode == DuClampField.ClampMode.MinOnly;
-                bool isMaxEnabled = colorClampMode == DuClampField.ClampMode.MinAndMax || colorClampMode == DuClampField.ClampMode.MaxOnly;
+                bool isMinEnabled = colorClampMode == ClampMode.MinAndMax || colorClampMode == ClampMode.MinOnly;
+                bool isMaxEnabled = colorClampMode == ClampMode.MinAndMax || colorClampMode == ClampMode.MaxOnly;
 
                 if (!isMinEnabled) DustGUI.Lock();
                 PropertyField(m_ColorClampMin);

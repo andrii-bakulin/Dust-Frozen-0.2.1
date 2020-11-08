@@ -5,16 +5,6 @@ namespace DustEngine
     [AddComponentMenu("Dust/Factory/Machines/Clamp Machine")]
     public class DuClampFactoryMachine : DuBasicFactoryMachine
     {
-        public enum ClampMode
-        {
-            MinAndMax = 0,
-            MinOnly = 1,
-            MaxOnly = 2,
-            NoClamp = 3,
-        }
-
-        //--------------------------------------------------------------------------------------------------------------
-
         [SerializeField]
         private ClampMode m_PositionMode = ClampMode.NoClamp;
         public ClampMode positionMode

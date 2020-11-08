@@ -22,14 +22,9 @@ namespace DustEngine.DustEditor
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        private DuClampFactoryMachine.ClampMode positionMode
-            => (DuClampFactoryMachine.ClampMode) m_PositionMode.enumValueIndex;
-
-        private DuClampFactoryMachine.ClampMode rotationMode
-            => (DuClampFactoryMachine.ClampMode) m_RotationMode.enumValueIndex;
-
-        private DuClampFactoryMachine.ClampMode scaleMode
-            => (DuClampFactoryMachine.ClampMode) m_ScaleMode.enumValueIndex;
+        private ClampMode positionMode => (ClampMode) m_PositionMode.enumValueIndex;
+        private ClampMode rotationMode => (ClampMode) m_RotationMode.enumValueIndex;
+        private ClampMode scaleMode => (ClampMode) m_ScaleMode.enumValueIndex;
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -81,11 +76,11 @@ namespace DustEngine.DustEditor
                     bool showMin = false;
                     bool showMax = false;
 
-                    showMin |= positionMode == DuClampFactoryMachine.ClampMode.MinOnly;
-                    showMin |= positionMode == DuClampFactoryMachine.ClampMode.MinAndMax;
+                    showMin |= positionMode == ClampMode.MinOnly;
+                    showMin |= positionMode == ClampMode.MinAndMax;
 
-                    showMax |= positionMode == DuClampFactoryMachine.ClampMode.MaxOnly;
-                    showMax |= positionMode == DuClampFactoryMachine.ClampMode.MinAndMax;
+                    showMax |= positionMode == ClampMode.MaxOnly;
+                    showMax |= positionMode == ClampMode.MinAndMax;
 
                     PropertyFieldOrHide(m_PositionMin, !showMin);
                     PropertyFieldOrHide(m_PositionMax, !showMax);
@@ -97,11 +92,11 @@ namespace DustEngine.DustEditor
                     bool showMin = false;
                     bool showMax = false;
 
-                    showMin |= rotationMode == DuClampFactoryMachine.ClampMode.MinOnly;
-                    showMin |= rotationMode == DuClampFactoryMachine.ClampMode.MinAndMax;
+                    showMin |= rotationMode == ClampMode.MinOnly;
+                    showMin |= rotationMode == ClampMode.MinAndMax;
 
-                    showMax |= rotationMode == DuClampFactoryMachine.ClampMode.MaxOnly;
-                    showMax |= rotationMode == DuClampFactoryMachine.ClampMode.MinAndMax;
+                    showMax |= rotationMode == ClampMode.MaxOnly;
+                    showMax |= rotationMode == ClampMode.MinAndMax;
 
                     PropertyFieldOrHide(m_RotationMin, !showMin);
                     PropertyFieldOrHide(m_RotationMax, !showMax);
@@ -113,11 +108,11 @@ namespace DustEngine.DustEditor
                     bool showMin = false;
                     bool showMax = false;
 
-                    showMin |= scaleMode == DuClampFactoryMachine.ClampMode.MinOnly;
-                    showMin |= scaleMode == DuClampFactoryMachine.ClampMode.MinAndMax;
+                    showMin |= scaleMode == ClampMode.MinOnly;
+                    showMin |= scaleMode == ClampMode.MinAndMax;
 
-                    showMax |= scaleMode == DuClampFactoryMachine.ClampMode.MaxOnly;
-                    showMax |= scaleMode == DuClampFactoryMachine.ClampMode.MinAndMax;
+                    showMax |= scaleMode == ClampMode.MaxOnly;
+                    showMax |= scaleMode == ClampMode.MinAndMax;
 
                     PropertyFieldOrHide(m_ScaleMin, !showMin);
                     PropertyFieldOrHide(m_ScaleMax, !showMax);

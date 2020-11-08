@@ -6,16 +6,6 @@ namespace DustEngine
     [AddComponentMenu("Dust/Fields/Math Fields/Clamp Field")]
     public class DuClampField : DuMathField
     {
-        public enum ClampMode
-        {
-            MinAndMax = 0,
-            MinOnly = 1,
-            MaxOnly = 2,
-            NoClamp = 3,
-        }
-
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
         [SerializeField]
         private ClampMode m_PowerClampMode = ClampMode.MinAndMax;
         public ClampMode powerClampMode
