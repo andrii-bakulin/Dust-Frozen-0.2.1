@@ -74,6 +74,32 @@ namespace DustEngine
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
+        private bool m_IgnoreAxisX = false;
+        public bool ignoreAxisX
+        {
+            get => m_IgnoreAxisX;
+            set => m_IgnoreAxisX = value;
+        }
+
+        [SerializeField]
+        private bool m_IgnoreAxisY = false;
+        public bool ignoreAxisY
+        {
+            get => m_IgnoreAxisY;
+            set => m_IgnoreAxisY = value;
+        }
+
+        [SerializeField]
+        private bool m_IgnoreAxisZ = false;
+        public bool ignoreAxisZ
+        {
+            get => m_IgnoreAxisZ;
+            set => m_IgnoreAxisZ = value;
+        }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        [SerializeField]
         private int m_Seed = DuConstants.RANDOM_SEED_DEFAULT;
         public int seed
         {
@@ -104,15 +130,31 @@ namespace DustEngine
             var seq = 0;
             var dynamicState = base.GetDynamicStateHashCode();
 
-            DuDynamicState.Append(ref dynamicState, ++seq, m_NoiseMode);
-            DuDynamicState.Append(ref dynamicState, ++seq, m_AnimationSpeed);
-            DuDynamicState.Append(ref dynamicState, ++seq, m_AnimationOffset);
-            DuDynamicState.Append(ref dynamicState, ++seq, m_NoiseSpace);
-            DuDynamicState.Append(ref dynamicState, ++seq, m_NoiseScale);
-            DuDynamicState.Append(ref dynamicState, ++seq, m_NoisePower);
             DuDynamicState.Append(ref dynamicState, ++seq, m_Seed);
 
-            DuDynamicState.Append(ref dynamicState, ++seq, m_OffsetDynamic);
+            DuDynamicState.Append(ref dynamicState, ++seq, m_NoiseMode);
+
+            switch (m_NoiseMode)
+            {
+                case NoiseMode.Random:
+                    // Nothing for now
+                    break;
+
+                case NoiseMode.Perlin:
+                    DuDynamicState.Append(ref dynamicState, ++seq, m_NoiseSpace);
+                    DuDynamicState.Append(ref dynamicState, ++seq, m_NoiseScale);
+                    DuDynamicState.Append(ref dynamicState, ++seq, m_NoisePower);
+
+                    DuDynamicState.Append(ref dynamicState, ++seq, m_AnimationSpeed);
+                    DuDynamicState.Append(ref dynamicState, ++seq, m_AnimationOffset);
+
+                    DuDynamicState.Append(ref dynamicState, ++seq, m_IgnoreAxisX);
+                    DuDynamicState.Append(ref dynamicState, ++seq, m_IgnoreAxisY);
+                    DuDynamicState.Append(ref dynamicState, ++seq, m_IgnoreAxisZ);
+
+                    DuDynamicState.Append(ref dynamicState, ++seq, m_OffsetDynamic);
+                    break;
+            }
 
             return DuDynamicState.Normalize(dynamicState);
         }
@@ -167,6 +209,10 @@ namespace DustEngine
 
                     if (noiseSpace == NoiseSpace.Local)
                         inSpaceOffset = transform.worldToLocalMatrix.MultiplyPoint(inSpaceOffset);
+
+                    if (ignoreAxisX) inSpaceOffset.x = 0f;
+                    if (ignoreAxisY) inSpaceOffset.y = 0f;
+                    if (ignoreAxisZ) inSpaceOffset.z = 0f;
 
                     float animTotalOffset = m_OffsetDynamic + animationOffset;
 

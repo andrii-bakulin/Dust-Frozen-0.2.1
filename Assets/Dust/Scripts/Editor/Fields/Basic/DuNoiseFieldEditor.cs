@@ -9,12 +9,18 @@ namespace DustEngine.DustEditor
     public class DuNoiseFieldEditor : DuSpaceFieldEditor
     {
         private DuProperty m_NoiseMode;
-        private DuProperty m_AnimationSpeed;
-        private DuProperty m_AnimationOffset;
+        private DuProperty m_Seed;
+
         private DuProperty m_NoiseSpace;
         private DuProperty m_NoiseScale;
         private DuProperty m_NoisePower;
-        private DuProperty m_Seed;
+
+        private DuProperty m_AnimationSpeed;
+        private DuProperty m_AnimationOffset;
+
+        private DuProperty m_IgnoreAxisX;
+        private DuProperty m_IgnoreAxisY;
+        private DuProperty m_IgnoreAxisZ;
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -36,12 +42,18 @@ namespace DustEngine.DustEditor
             OnEnableField();
 
             m_NoiseMode = FindProperty("m_NoiseMode", "Noise Mode");
-            m_AnimationSpeed = FindProperty("m_AnimationSpeed", "Animation Speed");
-            m_AnimationOffset = FindProperty("m_AnimationOffset", "Animation Offset");
+            m_Seed = FindProperty("m_Seed", "Seed");
+
             m_NoiseSpace = FindProperty("m_NoiseSpace", "Noise Space");
             m_NoiseScale = FindProperty("m_NoiseScale", "Noise Scale");
             m_NoisePower = FindProperty("m_NoisePower", "Noise Power");
-            m_Seed = FindProperty("m_Seed", "Seed");
+
+            m_AnimationSpeed = FindProperty("m_AnimationSpeed", "Animation Speed");
+            m_AnimationOffset = FindProperty("m_AnimationOffset", "Animation Offset");
+
+            m_IgnoreAxisX = FindProperty("m_IgnoreAxisX", "Ignore Axis X");
+            m_IgnoreAxisY = FindProperty("m_IgnoreAxisY", "Ignore Axis Y");
+            m_IgnoreAxisZ = FindProperty("m_IgnoreAxisZ", "Ignore Axis Z");
         }
 
         public override void OnInspectorGUI()
@@ -80,6 +92,11 @@ namespace DustEngine.DustEditor
 
                         PropertyExtendedSlider(m_AnimationSpeed, 0f, 10f, 0.01f);
                         PropertyExtendedSlider(m_AnimationOffset, -5f, 5f, 0.01f);
+                        Space();
+
+                        PropertyField(m_IgnoreAxisX);
+                        PropertyField(m_IgnoreAxisY);
+                        PropertyField(m_IgnoreAxisZ);
                         Space();
                         break;
                 }
