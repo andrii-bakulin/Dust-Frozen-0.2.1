@@ -104,7 +104,7 @@ namespace DustEngine.DustEditor
 
             if ((DuFactoryTextureField.ColorComponent) m_PowerSource.enumValueIndex != DuFactoryTextureField.ColorComponent.Ignore)
             {
-                m_RemappingEditor.OnInspectorGUI(false, false);
+                m_RemappingEditor.OnInspectorGUI(false);
             }
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

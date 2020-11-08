@@ -69,18 +69,15 @@ namespace DustEngine.DustEditor
         }
 
         public void OnInspectorGUI()
-            => OnInspectorGUI(false, true);
+            => OnInspectorGUI(true);
 
-        public void OnInspectorGUI(bool showGraphMirrored)
-            => OnInspectorGUI(showGraphMirrored, true);
-
-        public void OnInspectorGUI(bool showGraphMirrored, bool showColorBlock)
+        public void OnInspectorGUI(bool showColorBlock)
         {
             if (DustGUI.FoldoutBegin("Force", "DuRemapping.Force"))
             {
                 DuEditor.PropertyField(m_RemapForceEnabled);
 
-                PropertyMappingGraph(m_Remapping, m_Color.valColor.duToRGBWithoutAlpha(), showGraphMirrored);
+                PropertyMappingGraph(m_Remapping, m_Color.valColor.duToRGBWithoutAlpha());
 
                 if (m_RemapForceEnabled.IsTrue)
                 {
@@ -182,7 +179,7 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        protected void PropertyMappingGraph(DuRemapping duRemapping, Color color, bool showGraphMirrored)
+        protected void PropertyMappingGraph(DuRemapping duRemapping, Color color)
         {
             // Begin to draw a horizontal layout, using the helpBox EditorStyle
             GUILayout.BeginHorizontal(EditorStyles.helpBox);
@@ -234,17 +231,7 @@ namespace DustEngine.DustEditor
 
                 for (int i = 0; i <= kWidth; i++)
                 {
-                    float offset;
-
-                    if (showGraphMirrored)
-                    {
-                        offset = Mathf.LerpUnclamped(rangeMin, rangeMax, i / kWidth * 2f);
-                        offset = Mathf.PingPong(offset, 1f);
-                    }
-                    else
-                    {
-                        offset = Mathf.LerpUnclamped(rangeMin, rangeMax, i / kWidth);
-                    }
+                    float offset = Mathf.LerpUnclamped(rangeMin, rangeMax, i / kWidth);
 
                     float value = duRemapping.MapValue(offset);
                     value = 1f - value; // To draw upside down
