@@ -12,12 +12,10 @@ namespace DustEngine
 
             Vector3Int gridCount = Vector3Int.Max(Vector3Int.one, gridFactory.count);
 
-            Vector3 stepOffset = gridFactory.size;
-
             Vector3 zeroPoint;
-            zeroPoint.x = -(gridCount.x - 1) / 2f * stepOffset.x;
-            zeroPoint.y = -(gridCount.y - 1) / 2f * stepOffset.y;
-            zeroPoint.z = -(gridCount.z - 1) / 2f * stepOffset.z;
+            zeroPoint.x = -(gridCount.x - 1) / 2f * gridFactory.step.x;
+            zeroPoint.y = -(gridCount.y - 1) / 2f * gridFactory.step.y;
+            zeroPoint.z = -(gridCount.z - 1) / 2f * gridFactory.step.z;
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -40,25 +38,25 @@ namespace DustEngine
                         break;
 
                     case DuGridFactory.OffsetDirection.X:
-                        offsetByDirection.x += y % 2 == 1 ? stepOffset.x * gridFactory.offsetHeight : 0f;
-                        offsetByDirection.x += z % 2 == 1 ? stepOffset.x * gridFactory.offsetWidth  : 0f;
+                        offsetByDirection.x += y % 2 == 1 ? gridFactory.step.x * gridFactory.offsetHeight : 0f;
+                        offsetByDirection.x += z % 2 == 1 ? gridFactory.step.x * gridFactory.offsetWidth  : 0f;
                         break;
 
                     case DuGridFactory.OffsetDirection.Y:
-                        offsetByDirection.y += x % 2 == 1 ? stepOffset.y * gridFactory.offsetWidth  : 0f;
-                        offsetByDirection.y += z % 2 == 1 ? stepOffset.y * gridFactory.offsetHeight : 0f;
+                        offsetByDirection.y += x % 2 == 1 ? gridFactory.step.y * gridFactory.offsetWidth  : 0f;
+                        offsetByDirection.y += z % 2 == 1 ? gridFactory.step.y * gridFactory.offsetHeight : 0f;
                         break;
 
                     case DuGridFactory.OffsetDirection.Z:
-                        offsetByDirection.z += x % 2 == 1 ? stepOffset.z * gridFactory.offsetWidth  : 0f;
-                        offsetByDirection.z += y % 2 == 1 ? stepOffset.z * gridFactory.offsetHeight : 0f;
+                        offsetByDirection.z += x % 2 == 1 ? gridFactory.step.z * gridFactory.offsetWidth  : 0f;
+                        offsetByDirection.z += y % 2 == 1 ? gridFactory.step.z * gridFactory.offsetHeight : 0f;
                         break;
                 }
 
                 instanceState.position = new Vector3(
-                    zeroPoint.x + stepOffset.x * x + offsetByDirection.x,
-                    zeroPoint.y + stepOffset.y * y + offsetByDirection.y,
-                    zeroPoint.z + stepOffset.z * z + offsetByDirection.z);
+                    zeroPoint.x + gridFactory.step.x * x + offsetByDirection.x,
+                    zeroPoint.y + gridFactory.step.y * y + offsetByDirection.y,
+                    zeroPoint.z + gridFactory.step.z * z + offsetByDirection.z);
 
                 instanceState.rotation = Vector3.zero;
                 instanceState.scale = Vector3.one;

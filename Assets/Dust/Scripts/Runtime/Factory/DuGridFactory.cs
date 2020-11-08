@@ -17,7 +17,7 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
 
         [SerializeField]
-        private Vector3Int m_Count = new Vector3Int(3, 1, 3);
+        private Vector3Int m_Count = new Vector3Int(5, 1, 5);
         public Vector3Int count
         {
             get => m_Count;
@@ -31,13 +31,13 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private Vector3 m_Size = new Vector3(3f, 3f, 3f);
-        public Vector3 size
+        private Vector3 m_Step = new Vector3(2f, 2f, 2f);
+        public Vector3 step
         {
-            get => m_Size;
+            get => m_Step;
             set
             {
-                if (!UpdatePropertyValue(ref m_Size, value))
+                if (!UpdatePropertyValue(ref m_Step, value))
                     return;
 
                 UpdateInstancesZeroStates();

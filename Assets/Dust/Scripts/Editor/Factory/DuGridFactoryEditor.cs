@@ -8,7 +8,7 @@ namespace DustEngine.DustEditor
     public class DuGridFactoryEditor : DuFactoryEditor
     {
         private DuProperty m_Count;
-        private DuProperty m_Size;
+        private DuProperty m_Step;
 
         private DuProperty m_OffsetDirection;
         private DuProperty m_OffsetWidth;
@@ -34,7 +34,7 @@ namespace DustEngine.DustEditor
             OnEnableFactory();
 
             m_Count = FindProperty("m_Count", "Count");
-            m_Size = FindProperty("m_Size", "Size");
+            m_Step = FindProperty("m_Step", "Step");
 
             m_OffsetDirection = FindProperty("m_OffsetDirection", "Offset Direction");
             m_OffsetWidth = FindProperty("m_OffsetWidth", "Offset Width");
@@ -50,7 +50,7 @@ namespace DustEngine.DustEditor
             if (DustGUI.FoldoutBegin("Grid", "DuFactory.Grid"))
             {
                 PropertyField(m_Count);
-                PropertyField(m_Size);
+                PropertyField(m_Step);
                 Space();
 
                 PropertyField(m_OffsetDirection);
@@ -65,7 +65,7 @@ namespace DustEngine.DustEditor
             DustGUI.FoldoutEnd();
 
             m_IsRequireRebuildInstances |= m_Count.isChanged;
-            m_IsRequireResetupInstances |= m_Size.isChanged;
+            m_IsRequireResetupInstances |= m_Step.isChanged;
 
             m_IsRequireResetupInstances |= m_OffsetDirection.isChanged;
             m_IsRequireResetupInstances |= m_OffsetWidth.isChanged;
