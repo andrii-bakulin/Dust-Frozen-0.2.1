@@ -28,6 +28,14 @@ namespace DustEngine
             self.b = 1f - self.b;
         }
 
+        public static void duInvertRGBA(ref this Color self)
+        {
+            self.r = 1f - self.r;
+            self.g = 1f - self.g;
+            self.b = 1f - self.b;
+            self.a = 1f - self.a;
+        }
+
         //--------------------------------------------------------------------------------------------------------------
 
         public static Color duToRGBWithoutAlpha(this Color self)

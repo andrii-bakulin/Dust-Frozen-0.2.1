@@ -5,6 +5,14 @@ namespace DustEngine
     [AddComponentMenu("Dust/Fields/Math Fields/Invert Field")]
     public class DuInvertField : DuMathField
     {
+        [SerializeField]
+        private bool m_ColorInvertAlpha = false;
+        public bool colorInvertAlpha
+        {
+            get => m_ColorInvertAlpha;
+            set => m_ColorInvertAlpha = value;
+        }
+
         //--------------------------------------------------------------------------------------------------------------
         // DuDynamicStateInterface
 
@@ -13,7 +21,7 @@ namespace DustEngine
             var seq = 0;
             var dynamicState = base.GetDynamicStateHashCode();
 
-            DuDynamicState.Append(ref dynamicState, ++seq, true);
+            DuDynamicState.Append(ref dynamicState, ++seq, colorInvertAlpha);
 
             return DuDynamicState.Normalize(dynamicState);
         }
@@ -37,7 +45,17 @@ namespace DustEngine
         {
             result.fieldPower = 1f - fieldPoint.endPower;
 
-            result.fieldColor = calculateColor ? DuColor.InvertRGB(fieldPoint.endColor) : Color.clear;
+            if (calculateColor)
+            {
+                if (colorInvertAlpha)
+                    result.fieldColor = DuColor.InvertRGBA(fieldPoint.endColor);
+                else
+                    result.fieldColor = DuColor.InvertRGB(fieldPoint.endColor);
+            }
+            else
+            {
+                result.fieldColor = Color.clear;
+            }
         }
     }
 }

@@ -8,6 +8,10 @@ namespace DustEngine.DustEditor
     [InitializeOnLoad]
     public class DuInvertFieldEditor : DuFieldEditor
     {
+        protected DuProperty m_ColorInvertAlpha;
+
+        //--------------------------------------------------------------------------------------------------------------
+
         static DuInvertFieldEditor()
         {
             DuPopupButtons.AddMathField(typeof(DuInvertField), "Invert");
@@ -18,6 +22,8 @@ namespace DustEngine.DustEditor
         void OnEnable()
         {
             OnEnableField();
+
+            m_ColorInvertAlpha = FindProperty("m_ColorInvertAlpha", "Invert Alpha");
         }
 
         [MenuItem("Dust/Fields/Math Fields/Invert")]
@@ -39,6 +45,10 @@ namespace DustEngine.DustEditor
             if (DustGUI.FoldoutBegin("Parameters", "DuAnyField.Parameters"))
             {
                 PropertyField(m_CustomHint);
+                Space();
+
+                DustGUI.Header("Color");
+                PropertyField(m_ColorInvertAlpha);
                 Space();
             }
             DustGUI.FoldoutEnd();

@@ -17,6 +17,12 @@ namespace DustEngine
             return color;
         }
 
+        public static Color InvertRGBA(Color color)
+        {
+            color.duInvertRGBA();
+            return color;
+        }
+
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         public static Color Min(Color a, Color b)
