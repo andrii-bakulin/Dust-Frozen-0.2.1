@@ -80,20 +80,30 @@ namespace DustEngine
             set => m_Max = value;
         }
 
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
         [SerializeField]
-        private bool m_ClampMinEnabled = true;
-        public bool clampMinEnabled
+        private ClampMode m_ClampMode = ClampMode.MinAndMax;
+        public ClampMode clampMode
         {
-            get => m_ClampMinEnabled;
-            set => m_ClampMinEnabled = value;
+            get => m_ClampMode;
+            set => m_ClampMode = value;
         }
 
         [SerializeField]
-        private bool m_ClampMaxEnabled = true;
-        public bool clampMaxEnabled
+        private float m_ClampMin = 0.0f;
+        public float clampMin
         {
-            get => m_ClampMaxEnabled;
-            set => m_ClampMaxEnabled = value;
+            get => m_ClampMin;
+            set => m_ClampMin = value;
+        }
+
+        [SerializeField]
+        private float m_ClampMax = 1.0f;
+        public float clampMax
+        {
+            get => m_ClampMax;
+            set => m_ClampMax = value;
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -217,8 +227,13 @@ namespace DustEngine
                 DuDynamicState.Append(ref dynamicState, ++seq, invert);
                 DuDynamicState.Append(ref dynamicState, ++seq, min);
                 DuDynamicState.Append(ref dynamicState, ++seq, max);
-                DuDynamicState.Append(ref dynamicState, ++seq, clampMinEnabled);
-                DuDynamicState.Append(ref dynamicState, ++seq, clampMaxEnabled);
+                DuDynamicState.Append(ref dynamicState, ++seq, clampMode);
+
+                if (clampMode == ClampMode.MinOnly || clampMode == ClampMode.MinAndMax)
+                    DuDynamicState.Append(ref dynamicState, ++seq, clampMin);
+
+                if (clampMode == ClampMode.MaxOnly || clampMode == ClampMode.MinAndMax)
+                    DuDynamicState.Append(ref dynamicState, ++seq, clampMax);
 
                 DuDynamicState.Append(ref dynamicState, ++seq, postPower);
                 DuDynamicState.Append(ref dynamicState, ++seq, postReshapeMode);
@@ -297,11 +312,11 @@ namespace DustEngine
             //----------------------------------------------------------------------------------------------------------
             // Clamp values if need
 
-            if (clampMinEnabled)
-                outValue = Mathf.Max(outValue, Mathf.Min(min, max)); // 2nd argument: find totally min value
+            if (clampMode == ClampMode.MinOnly || clampMode == ClampMode.MinAndMax)
+                outValue = Mathf.Max(outValue, clampMin);
 
-            if (clampMaxEnabled)
-                outValue = Mathf.Min(outValue, Mathf.Max(min, max)); // 2nd argument: find totally max value
+            if (clampMode == ClampMode.MaxOnly || clampMode == ClampMode.MinAndMax)
+                outValue = Mathf.Min(outValue, clampMax);
 
             //----------------------------------------------------------------------------------------------------------
             // Post Reshape

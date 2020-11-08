@@ -16,8 +16,9 @@ namespace DustEngine.DustEditor
 
         protected DuEditor.DuProperty m_Min;
         protected DuEditor.DuProperty m_Max;
-        protected DuEditor.DuProperty m_ClampMinEnabled;
-        protected DuEditor.DuProperty m_ClampMaxEnabled;
+        protected DuEditor.DuProperty m_ClampMode;
+        protected DuEditor.DuProperty m_ClampMin;
+        protected DuEditor.DuProperty m_ClampMax;
 
         protected DuEditor.DuProperty m_PostPower;
         protected DuEditor.DuProperty m_PostReshapeMode;
@@ -35,6 +36,12 @@ namespace DustEngine.DustEditor
         protected DuEditor.DuProperty m_RandomMinColor;
         protected DuEditor.DuProperty m_RandomMaxColor;
 
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        private ClampMode clampMode => (ClampMode) m_ClampMode.enumValueIndex;
+
+        //--------------------------------------------------------------------------------------------------------------
+
         public DuRemappingEditor(DuRemapping duRemapping, SerializedProperty remappingProperty)
         {
             m_Remapping = duRemapping;
@@ -48,8 +55,9 @@ namespace DustEngine.DustEditor
 
             m_Min = DuEditor.FindProperty(remappingProperty, "m_Min", "Min");
             m_Max = DuEditor.FindProperty(remappingProperty, "m_Max", "Max");
-            m_ClampMinEnabled = DuEditor.FindProperty(remappingProperty, "m_ClampMinEnabled", "Clamp Min");
-            m_ClampMaxEnabled = DuEditor.FindProperty(remappingProperty, "m_ClampMaxEnabled", "Clamp Max");
+            m_ClampMode = DuEditor.FindProperty(remappingProperty, "m_ClampMode", "Clamp Mode");
+            m_ClampMin = DuEditor.FindProperty(remappingProperty, "m_ClampMin", "Clamp Min");
+            m_ClampMax = DuEditor.FindProperty(remappingProperty, "m_ClampMax", "Clamp Max");
 
             m_PostPower = DuEditor.FindProperty(remappingProperty, "m_PostPower", "Post Power");
             m_PostReshapeMode = DuEditor.FindProperty(remappingProperty, "m_PostReshapeMode", "Post Reshape");
@@ -91,8 +99,11 @@ namespace DustEngine.DustEditor
                     DuEditor.PropertyExtendedSlider(m_Max, 0f, 1f, 0.01f);
                     DuEditor.Space();
 
-                    DuEditor.PropertyField(m_ClampMinEnabled);
-                    DuEditor.PropertyField(m_ClampMaxEnabled);
+                    DuEditor.PropertyField(m_ClampMode);
+                    if (clampMode == ClampMode.MinOnly || clampMode == ClampMode.MinAndMax)
+                        DuEditor.PropertyExtendedSlider(m_ClampMin, 0f, 1f, 0.01f);
+                    if (clampMode == ClampMode.MaxOnly || clampMode == ClampMode.MinAndMax)
+                        DuEditor.PropertyExtendedSlider(m_ClampMax, 0f, 1f, 0.01f);
                     DuEditor.Space();
 
                     DustGUI.Header("Post Update");

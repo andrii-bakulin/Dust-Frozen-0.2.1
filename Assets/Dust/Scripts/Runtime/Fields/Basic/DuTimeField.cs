@@ -168,8 +168,7 @@ namespace DustEngine
 
         private void Reset()
         {
-            remapping.clampMinEnabled = false;
-            remapping.clampMaxEnabled = false;
+            remapping.clampMode = ClampMode.NoClamp;
         }
     }
 }
