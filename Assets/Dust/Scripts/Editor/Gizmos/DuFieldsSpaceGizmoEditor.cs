@@ -101,8 +101,22 @@ namespace DustEngine.DustEditor
             }
             DustGUI.FoldoutEnd();
 
-
             PropertyField(m_GizmoVisibility);
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            // Validate & Normalize Data
+
+            if (m_GridCount.isChanged)
+                m_GridCount.valVector3Int = DuFieldsSpaceGizmo.Normalizer.GridCount(m_GridCount.valVector3Int);
+
+            if (m_PowerSize.isChanged)
+                m_PowerSize.valFloat = DuFieldsSpaceGizmo.Normalizer.Size(m_PowerSize.valFloat);
+
+            if (m_PowerDotsSize.isChanged)
+                m_PowerDotsSize.valFloat = DuFieldsSpaceGizmo.Normalizer.Size(m_PowerDotsSize.valFloat);
+
+            if (m_ColorSize.isChanged)
+                m_ColorSize.valFloat = DuFieldsSpaceGizmo.Normalizer.Size(m_ColorSize.valFloat);
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
