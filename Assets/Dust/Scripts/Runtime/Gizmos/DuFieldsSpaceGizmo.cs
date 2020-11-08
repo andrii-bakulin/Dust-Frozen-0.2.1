@@ -146,6 +146,9 @@ namespace DustEngine
             zeroPoint.y = -(gridCount.y - 1) / 2f * gridStep.y;
             zeroPoint.z = -(gridCount.z - 1) / 2f * gridStep.z;
 
+            float offset = 0f;
+            float deltaOffset = 1f / Mathf.Max(1, gridCount.x * gridCount.y * gridCount.z);
+
             for (int z = 0; z < gridCount.z; z++)
             for (int y = 0; y < gridCount.y; y++)
             for (int x = 0; x < gridCount.x; x++)
@@ -155,7 +158,7 @@ namespace DustEngine
                 Vector3 worldPosition = transform.TransformPoint(position);
 
                 Color fieldColor;
-                float fieldPower = fieldsSpace.GetPowerAndColor(worldPosition, out fieldColor);
+                float fieldPower = fieldsSpace.GetPowerAndColor(worldPosition, offset, out fieldColor);
 
                 if (showColor)
                 {
@@ -188,6 +191,8 @@ namespace DustEngine
                         Handles.DotHandleCap(0, worldPosition, transform.rotation, dotSize, EventType.Repaint);
                     }
                 }
+
+                offset += deltaOffset;
             }
         }
 #endif
