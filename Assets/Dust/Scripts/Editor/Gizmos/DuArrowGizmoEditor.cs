@@ -7,7 +7,7 @@ namespace DustEngine.DustEditor
     [CanEditMultipleObjects]
     public class DuArrowGizmoEditor : DuGizmoObjectEditor
     {
-        public static string[] s_DirectionOptions = new string[]
+        private static string[] s_DirectionOptions = new string[]
         {
             "Select",
             "Up (0, +1, 0)",

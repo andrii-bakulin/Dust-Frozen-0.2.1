@@ -7,7 +7,7 @@ namespace DustEngine.DustEditor
     [InitializeOnLoad]
     public class DuiHierarchy
     {
-        public static bool isEnabled = true;
+        private static bool isEnabled = true;
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -57,7 +57,7 @@ namespace DustEngine.DustEditor
             }
             catch (Exception exception)
             {
-                Dust.Debug.Error("DuiHierarchy: " + exception.ToString());
+                Dust.Debug.Error("DuiHierarchy: " + exception);
             }
         }
     }

@@ -134,10 +134,10 @@ namespace DustEngine.DustEditor
                 m_Interval.valFloat = DuSpawner.Normalizer.IntervalValue(m_Interval.valFloat);
 
             if (m_IntervalRange.isChanged)
+            {
                 m_IntervalRange.FindProperty("min").floatValue = DuSpawner.Normalizer.IntervalValue(m_IntervalRange.FindProperty("min").floatValue);
-
-            if (m_IntervalRange.isChanged)
                 m_IntervalRange.FindProperty("max").floatValue = DuSpawner.Normalizer.IntervalValue(m_IntervalRange.FindProperty("max").floatValue);
+            }
 
             if (m_Limit.isChanged)
                 m_Limit.valInt = DuSpawner.Normalizer.Limit(m_Limit.valInt);
