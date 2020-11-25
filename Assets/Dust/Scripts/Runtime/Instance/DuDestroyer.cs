@@ -100,6 +100,7 @@ namespace DustEngine
             {
                 default:
                 case DestroyMode.Manual:
+                    // Nothing need to do...
                     break;
 
                 case DestroyMode.Time:

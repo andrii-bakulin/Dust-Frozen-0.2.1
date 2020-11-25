@@ -179,6 +179,7 @@ namespace DustEngine
             {
                 default:
                 case ValueBlendMode.Set:
+                    // Nothing need to do...
                     break;
 
                 case ValueBlendMode.Add:
