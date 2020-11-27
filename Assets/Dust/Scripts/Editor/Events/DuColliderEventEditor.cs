@@ -61,6 +61,10 @@ namespace DustEngine.DustEditor
                     case 2:
                         PropertyField(m_OnExit);
                         break;
+
+                    default:
+                        // Undefined state:
+                        break;
                 }
 
                 Space();

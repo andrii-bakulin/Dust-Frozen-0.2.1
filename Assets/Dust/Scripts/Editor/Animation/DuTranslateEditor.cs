@@ -65,6 +65,10 @@ namespace DustEngine.DustEditor
                     PropertyField(m_WaveSpeed);
                     PropertyField(m_WaveOffset);
                     break;
+
+                default:
+                    // Undefined state:
+                    break;
             }
 
             Space();
