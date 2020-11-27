@@ -121,8 +121,8 @@ namespace DustEngine.DustEditor
 
         public class SerializedEntity
         {
-            public Object target;
-            public SerializedObject serializedObject;
+            internal Object target;
+            internal SerializedObject serializedObject;
         }
 
         // If I change some parameters for list of targets then I need to create SerializedObject for each target.

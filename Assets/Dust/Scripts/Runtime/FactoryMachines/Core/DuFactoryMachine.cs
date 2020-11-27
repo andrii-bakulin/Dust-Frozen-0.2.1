@@ -7,20 +7,20 @@ namespace DustEngine
         public class FactoryInstanceState
         {
             // In
-            public DuFactory factory;
-            public DuFactoryInstance instance;
-            public float intensityByFactory;
-            public float intensityByMachine;
+            internal DuFactory factory;
+            internal DuFactoryInstance instance;
+            internal float intensityByFactory;
+            internal float intensityByMachine;
 
             // Calculated values
-            public float fieldPower;
-            public Color fieldColor;
+            internal float fieldPower;
+            internal Color fieldColor;
 
             // Calculated-n-Supported params:               // Use by FactoryMachine: Noise
-            public bool extraPowerEnabled;
-            public Vector3 extraPowerPosition;
-            public Vector3 extraPowerRotation;
-            public Vector3 extraPowerScale;
+            internal bool extraPowerEnabled;
+            internal Vector3 extraPowerPosition;
+            internal Vector3 extraPowerRotation;
+            internal Vector3 extraPowerScale;
         }
 
         [System.Serializable]

@@ -12,20 +12,20 @@ namespace DustEngine
         public class Point
         {
             // In
-            public Vector3 inPosition; // point in world position
-            public float inOffset; // offset for point in sequence of points [0..1]
+            internal Vector3 inPosition; // point in world position
+            internal float inOffset; // offset for point in sequence of points [0..1]
 
-            public DuFactoryMachine.FactoryInstanceState inFactoryInstanceState;
+            internal DuFactoryMachine.FactoryInstanceState inFactoryInstanceState;
 
             // Out/End/Resulted values
-            public float endPower; // power calculated by fieldsMap
-            public Color endColor; // color calculated by fieldsMap
+            internal float endPower; // power calculated by fieldsMap
+            internal Color endColor; // color calculated by fieldsMap
         }
 
         public struct Result
         {
-            public float fieldPower; // power calculated by field
-            public Color fieldColor; // color calculated by field, Color.alpha used as power of color
+            internal float fieldPower; // power calculated by field
+            internal Color fieldColor; // color calculated by field, Color.alpha used as power of color
         }
 
         //--------------------------------------------------------------------------------------------------------------
