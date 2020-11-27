@@ -11,3 +11,5 @@ Welcome!
   - Members should not be initialized to default values (`SonarCSharp_S3052`)
   - "out" and "ref" parameters should not be used (`SonarCSharp_S3874`)
   - Empty "case" clauses that fall through to the "default" should be omitted (`SonarCSharp_S3458`)
+  - Sections of code should not be commented out (`SonarCSharp_S125`)
+  - Empty "default" clauses should be removed (`SonarCSharp_S3532`)
