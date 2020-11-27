@@ -153,6 +153,9 @@ namespace DustEngine
 
                     DuDynamicState.Append(ref dynamicState, ++seq, m_OffsetDynamic);
                     break;
+
+                default:
+                    break;
             }
 
             return DuDynamicState.Normalize(dynamicState);
@@ -182,6 +185,9 @@ namespace DustEngine
 
                 case NoiseMode.Perlin:
                     return "Perlin";
+
+                default:
+                    break;
             }
 
             return "";

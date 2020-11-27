@@ -79,6 +79,9 @@ namespace DustEngine.DustEditor
                     case DuParallax.ParallaxControl.ParallaxController:
                         PropertyField(m_ParallaxController);
                         break;
+
+                    default:
+                        break;
                 }
 
                 Space();

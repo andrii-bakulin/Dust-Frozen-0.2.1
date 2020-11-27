@@ -99,6 +99,9 @@ namespace DustEngine
                 case ParallaxControl.Time:
                     m_OffsetDynamic += deltaTime * timeScale;
                     break;
+
+                default:
+                    break;
             }
         }
 

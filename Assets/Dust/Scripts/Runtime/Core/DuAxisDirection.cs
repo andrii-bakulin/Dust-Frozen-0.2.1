@@ -68,6 +68,7 @@ namespace DustEngine
 
             switch (direction)
             {
+                default:
                 case Axis3xDirection.X: break;
                 case Axis3xDirection.Y: convertedPoint.x = +originPoint.y; convertedPoint.y = +originPoint.x; break;
                 case Axis3xDirection.Z: convertedPoint.x = +originPoint.z; convertedPoint.z = +originPoint.x; break;
@@ -82,6 +83,7 @@ namespace DustEngine
 
             switch (direction)
             {
+                default:
                 case Axis3xDirection.X: break;
                 case Axis3xDirection.Y: originPoint.y = +convertedPoint.x; originPoint.x = +convertedPoint.y; break;
                 case Axis3xDirection.Z: originPoint.z = +convertedPoint.x; originPoint.x = +convertedPoint.z; break;
@@ -98,6 +100,7 @@ namespace DustEngine
 
             switch (direction)
             {
+                default:
                 case Axis6xDirection.XPlus:  break;
                 case Axis6xDirection.XMinus: convertedPoint.x = -originPoint.x; break;
                 case Axis6xDirection.YPlus:  convertedPoint.x = +originPoint.y; convertedPoint.y = +originPoint.x; break;
@@ -115,6 +118,7 @@ namespace DustEngine
 
             switch (direction)
             {
+                default:
                 case Axis6xDirection.XPlus:  break;
                 case Axis6xDirection.XMinus: originPoint.x = -convertedPoint.x; break;
                 case Axis6xDirection.YPlus:  originPoint.y = +convertedPoint.x; originPoint.x = +convertedPoint.y; break;

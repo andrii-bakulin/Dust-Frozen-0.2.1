@@ -96,6 +96,9 @@ namespace DustEngine
                 case AxisColorMode.Custom:
                     Handles.color = color;
                     break;
+
+                default:
+                    break;
             }
 
             Handles.ArrowHandleCap(0,

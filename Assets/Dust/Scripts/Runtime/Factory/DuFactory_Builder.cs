@@ -220,6 +220,9 @@ namespace DustEngine
                         SetInstanceZeroStates_Position(instanceState);
                         SetInstanceZeroStates_Scale(instanceState);
                         break;
+
+                    default:
+                        break;
                 }
 
                 SetInstanceZeroStates_Value(instanceState);
@@ -249,6 +252,9 @@ namespace DustEngine
 
                 case TransformSpace.Instance:
                     instanceState.position += transformPosition;
+                    break;
+
+                default:
                     break;
             }
         }

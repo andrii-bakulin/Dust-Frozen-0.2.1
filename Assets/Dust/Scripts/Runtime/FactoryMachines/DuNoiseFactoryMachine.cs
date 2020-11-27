@@ -325,6 +325,7 @@ namespace DustEngine
         {
             switch (axisRemapping)
             {
+                default:
                 case AxisRemapping.Off: break;
                 case AxisRemapping.XyzToXzy: v = new Vector3(v.x, v.z, v.y); break;
                 case AxisRemapping.XyzToYxz: v = new Vector3(v.y, v.x, v.z); break;
@@ -371,6 +372,9 @@ namespace DustEngine
                     DuDynamicState.Append(ref dynamicState, ++seq, animationOffset);
 
                     DuDynamicState.Append(ref dynamicState, ++seq, m_OffsetDynamic);
+                    break;
+
+                default:
                     break;
             }
 

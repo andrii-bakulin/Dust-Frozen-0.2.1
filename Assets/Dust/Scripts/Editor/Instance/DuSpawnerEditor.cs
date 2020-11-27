@@ -82,6 +82,9 @@ namespace DustEngine.DustEditor
                             PropertySeedRandomOrFixed(m_SpawnPointsSeed);
                     }
                     break;
+
+                default:
+                    break;
             }
 
             Space();
@@ -114,6 +117,9 @@ namespace DustEngine.DustEditor
 
                 case DuSpawner.IntervalMode.Range:
                     PropertyFieldRange(m_IntervalRange);
+                    break;
+
+                default:
                     break;
             }
 

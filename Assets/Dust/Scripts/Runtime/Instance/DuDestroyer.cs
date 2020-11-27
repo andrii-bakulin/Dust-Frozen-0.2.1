@@ -171,6 +171,9 @@ namespace DustEngine
                 case VolumeCenterMode.World:
                     Gizmos.DrawWireCube(volumeCenter, volumeSize);
                     break;
+
+                default:
+                    break;
             }
         }
 #endif

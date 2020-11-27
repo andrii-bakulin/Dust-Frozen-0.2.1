@@ -63,7 +63,6 @@ namespace DustEngine.DustEditor
                         break;
 
                     default:
-                        // Undefined state:
                         break;
                 }
 

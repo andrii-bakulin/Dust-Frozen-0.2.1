@@ -190,6 +190,9 @@ namespace DustEngine
                     if (Dust.IsNotNull(parallaxController))
                         m_OffsetDynamic = parallaxController.GetGlobalOffset() * speed;
                     break;
+
+                default:
+                    break;
             }
         }
 

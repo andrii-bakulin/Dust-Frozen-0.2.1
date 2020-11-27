@@ -114,6 +114,9 @@ namespace DustEngine
                 case DuFactory.IterateMode.Random:
                     m_ObjectsQueue_duRandom = new DuRandom(Mathf.Max(m_DuFactory.seed, 1));
                     break;
+
+                default:
+                    break;
             }
         }
 

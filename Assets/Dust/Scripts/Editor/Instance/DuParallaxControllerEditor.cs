@@ -57,6 +57,9 @@ namespace DustEngine.DustEditor
                         PropertyExtendedSlider(m_TimeScale, -10f, 10f, 0.01f);
                         PropertyField(m_Freeze);
                         break;
+
+                    default:
+                        break;
                 }
 
                 Space();

@@ -80,8 +80,13 @@ namespace DustEngine.DustEditor
                             PropertyField(m_VolumeCenter);
                             PropertyField(m_VolumeSize);
                             break;
-                    }
 
+                        default:
+                            break;
+                    }
+                    break;
+
+                default:
                     break;
             }
 

@@ -245,6 +245,9 @@ namespace DustEngine
                         offset = Vector3.zero;
                         style.alignment = TextAnchor.MiddleCenter;
                         break;
+
+                    default:
+                        break;
                 }
 
                 Handles.Label(worldPosition + offset * (1f + messageOffset), message, style);
