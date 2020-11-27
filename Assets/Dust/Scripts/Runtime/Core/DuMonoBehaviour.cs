@@ -32,7 +32,10 @@ namespace DustEngine
             }
         }
 
-        public static Component AddComponentToNewObject(string gameObjectName, System.Type duComponentType, bool fixUndoState = true)
+        public static Component AddComponentToNewObject(string gameObjectName, System.Type duComponentType)
+            => AddComponentToNewObject(gameObjectName, duComponentType, true);
+
+        public static Component AddComponentToNewObject(string gameObjectName, System.Type duComponentType, bool fixUndoState)
         {
             var gameObject = new GameObject();
             gameObject.name = gameObjectName;

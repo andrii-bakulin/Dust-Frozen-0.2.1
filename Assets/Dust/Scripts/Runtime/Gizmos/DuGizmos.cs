@@ -210,24 +210,24 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public static Vector3 GetCirclePointByAngle(float angle, Axis3xDirection direction = Axis3xDirection.X)
+        public static Vector3 GetCirclePointByAngle(float angle, Axis3xDirection direction)
         {
             return GetCirclePointByOffset(angle / 360f, DuAxisDirection.ConvertToAxis6(direction));
         }
 
-        public static Vector3 GetCirclePointByOffset(float offset, Axis3xDirection direction = Axis3xDirection.X)
+        public static Vector3 GetCirclePointByOffset(float offset, Axis3xDirection direction)
         {
             return GetCirclePointByOffset(offset, DuAxisDirection.ConvertToAxis6(direction));
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        public static Vector3 GetCirclePointByAngle(float angle, Axis6xDirection direction = Axis6xDirection.XPlus)
+        public static Vector3 GetCirclePointByAngle(float angle, Axis6xDirection direction)
         {
             return GetCirclePointByOffset(angle / 360f, direction);
         }
 
-        public static Vector3 GetCirclePointByOffset(float offset, Axis6xDirection direction = Axis6xDirection.XPlus)
+        public static Vector3 GetCirclePointByOffset(float offset, Axis6xDirection direction)
         {
             Vector3 point = new Vector3(0f, Mathf.Sin(DuConstants.PI2 * offset), Mathf.Cos(DuConstants.PI2 * offset));
 

@@ -72,7 +72,13 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public DuProperty FindProperty(string propertyPath, string title = "", string tooltip = "")
+        public DuProperty FindProperty(string propertyPath)
+            => FindProperty(propertyPath, "", "");
+
+        public DuProperty FindProperty(string propertyPath, string title)
+            => FindProperty(propertyPath, title, "");
+
+        public DuProperty FindProperty(string propertyPath, string title, string tooltip)
         {
             var duProperty = new DuProperty
             {
@@ -172,7 +178,10 @@ namespace DustEngine.DustEditor
             }
         }
 
-        public static Component AddComponentToNewObject(string gameObjectName, System.Type duComponentType, bool fixUndoState = true)
+        public static Component AddComponentToNewObject(string gameObjectName, System.Type duComponentType)
+            => AddComponentToNewObject(gameObjectName, duComponentType, true);
+
+        public static Component AddComponentToNewObject(string gameObjectName, System.Type duComponentType, bool fixUndoState)
         {
             var gameObject = new GameObject();
             gameObject.name = gameObjectName;
@@ -200,7 +209,10 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public static bool PropertyField(DuProperty duProperty, string label, string tooltip = "")
+        public static bool PropertyField(DuProperty duProperty, string label)
+            => PropertyField(duProperty, label, "");
+
+        public static bool PropertyField(DuProperty duProperty, string label, string tooltip)
         {
             if (Dust.IsNull(duProperty.property))
             {
@@ -214,7 +226,10 @@ namespace DustEngine.DustEditor
             return duProperty.isChanged;
         }
 
-        public static bool PropertyFieldOrLock(DuProperty duProperty, bool isLocked, string label, string tooltip = "")
+        public static bool PropertyFieldOrLock(DuProperty duProperty, bool isLocked, string label)
+            => PropertyFieldOrLock(duProperty, isLocked, label, "");
+
+        public static bool PropertyFieldOrLock(DuProperty duProperty, bool isLocked, string label, string tooltip)
         {
             if (isLocked) DustGUI.Lock();
             PropertyField(duProperty, label, tooltip);
@@ -222,7 +237,10 @@ namespace DustEngine.DustEditor
             return duProperty.isChanged;
         }
 
-        public static bool PropertyFieldOrHide(DuProperty duProperty, bool isHidden, string label, string tooltip = "")
+        public static bool PropertyFieldOrHide(DuProperty duProperty, bool isHidden, string label)
+            => PropertyFieldOrHide(duProperty, isHidden, label, "");
+
+        public static bool PropertyFieldOrHide(DuProperty duProperty, bool isHidden, string label, string tooltip)
         {
             if (isHidden)
                 return false;
@@ -317,7 +335,15 @@ namespace DustEngine.DustEditor
             return duProperty.isChanged;
         }
 
-        public static bool PropertyExtendedIntSlider(DuProperty duProperty, int leftValue, int rightValue, int stepValue, int leftLimit = int.MinValue, int rightLimit = int.MaxValue)
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        public static bool PropertyExtendedIntSlider(DuProperty duProperty, int leftValue, int rightValue, int stepValue)
+            => PropertyExtendedIntSlider(duProperty, leftValue, rightValue, stepValue, int.MinValue, int.MaxValue);
+
+        public static bool PropertyExtendedIntSlider(DuProperty duProperty, int leftValue, int rightValue, int stepValue, int leftLimit)
+            => PropertyExtendedIntSlider(duProperty, leftValue, rightValue, stepValue, leftLimit, int.MaxValue);
+
+        public static bool PropertyExtendedIntSlider(DuProperty duProperty, int leftValue, int rightValue, int stepValue, int leftLimit, int rightLimit)
         {
             var slider = new DustGUI.ExtraIntSlider(leftValue, rightValue, stepValue, leftLimit, rightLimit);
             slider.LinkEditor(duProperty.parentEditor);
@@ -325,13 +351,23 @@ namespace DustEngine.DustEditor
             return duProperty.isChanged;
         }
 
-        public static bool PropertyExtendedSlider(DuProperty duProperty, float leftValue, float rightValue, float stepValue, float leftLimit = float.MinValue, float rightLimit = float.MaxValue)
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        public static bool PropertyExtendedSlider(DuProperty duProperty, float leftValue, float rightValue, float stepValue)
+            => PropertyExtendedSlider(duProperty, leftValue, rightValue, stepValue, float.MinValue, float.MaxValue);
+
+        public static bool PropertyExtendedSlider(DuProperty duProperty, float leftValue, float rightValue, float stepValue, float leftLimit)
+            => PropertyExtendedSlider(duProperty, leftValue, rightValue, stepValue, leftLimit, float.MaxValue);
+
+        public static bool PropertyExtendedSlider(DuProperty duProperty, float leftValue, float rightValue, float stepValue, float leftLimit, float rightLimit)
         {
             var slider = new DustGUI.ExtraSlider(leftValue, rightValue, stepValue, leftLimit, rightLimit);
             slider.LinkEditor(duProperty.parentEditor);
             duProperty.isChanged = slider.Draw(new GUIContent(duProperty.title, duProperty.tooltip), duProperty.property);
             return duProperty.isChanged;
         }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         public static bool PropertyExtendedSlider01(DuProperty duProperty)
         {
@@ -340,12 +376,20 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public static bool PropertyFieldCurve(DuProperty duProperty, int height = 100)
+        public static bool PropertyFieldCurve(DuProperty duProperty)
+            => PropertyFieldCurve(duProperty, 100);
+
+        public static bool PropertyFieldCurve(DuProperty duProperty, int height)
         {
             return PropertyFieldCurve(duProperty, duProperty.title);
         }
 
-        public static bool PropertyFieldCurve(DuProperty duProperty, string label, int height = 100)
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        public static bool PropertyFieldCurve(DuProperty duProperty, string label)
+            => PropertyFieldCurve(duProperty, label, 100);
+
+        public static bool PropertyFieldCurve(DuProperty duProperty, string label, int height)
         {
             if (Dust.IsNull(duProperty.property))
             {
@@ -361,14 +405,22 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public static bool PropertyField(SerializedProperty property, string label, string tooltip = "")
+        public static bool PropertyField(SerializedProperty property, string label)
+            => PropertyField(property, label, "");
+
+        public static bool PropertyField(SerializedProperty property, string label, string tooltip)
         {
             EditorGUI.BeginChangeCheck();
             DustGUI.Field(new GUIContent(label, tooltip), property);
             return EditorGUI.EndChangeCheck();
         }
 
-        public static bool PropertyFieldOrLock(SerializedProperty property, bool isLocked, string label, string tooltip = "")
+        //--------------------------------------------------------------------------------------------------------------
+
+        public static bool PropertyFieldOrLock(SerializedProperty property, bool isLocked, string label)
+            => PropertyFieldOrLock(property, isLocked, label, "");
+
+        public static bool PropertyFieldOrLock(SerializedProperty property, bool isLocked, string label, string tooltip)
         {
             if (isLocked) DustGUI.Lock();
 

@@ -25,7 +25,10 @@ namespace DustEngine.DustEditor
             }
         }
 
-        public static Component AddGizmoToNewObject(System.Type duComponentType, bool fixUndoState = true)
+        public static Component AddGizmoToNewObject(System.Type duComponentType)
+            => AddGizmoToNewObject(duComponentType, true);
+
+        public static Component AddGizmoToNewObject(System.Type duComponentType, bool fixUndoState)
         {
             var gameObject = new GameObject();
 
