@@ -33,6 +33,7 @@ namespace DustEngine
 
         public override void FinalizeUpdateInstancesStates(FactoryInstanceState factoryInstanceState)
         {
+            // Hide base implementation
         }
 
         //--------------------------------------------------------------------------------------------------------------

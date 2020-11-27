@@ -53,9 +53,9 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
+#if UNITY_EDITOR
         void OnEnable()
         {
-#if UNITY_EDITOR
             if (isEditorUpdatesEnabled)
             {
                 EditorUpdateReset();
@@ -63,18 +63,16 @@ namespace DustEngine
                 EditorApplication.update -= EditorUpdate;
                 EditorApplication.update += EditorUpdate;
             }
-#endif
         }
 
         void OnDisable()
         {
-#if UNITY_EDITOR
             if (isEditorUpdatesEnabled)
             {
                 EditorApplication.update -= EditorUpdate;
             }
-#endif
         }
+#endif
 
         void Update()
         {

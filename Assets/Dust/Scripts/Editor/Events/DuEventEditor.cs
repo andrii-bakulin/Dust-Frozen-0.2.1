@@ -15,6 +15,7 @@ namespace DustEngine.DustEditor
 
         public override void OnInspectorGUI()
         {
+            // Hide base implementation
         }
     }
 }

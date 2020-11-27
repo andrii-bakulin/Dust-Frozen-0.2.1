@@ -172,20 +172,18 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
+#if UNITY_EDITOR
         public void Trigger()
         {
-#if UNITY_EDITOR
             m_TriggerState = 1.0f;
-#endif
         }
 
         public void Trigger(string newMessage)
         {
-#if UNITY_EDITOR
             m_TriggerState = 1.0f;
             m_Message = newMessage;
-#endif
         }
+#endif
 
         //--------------------------------------------------------------------------------------------------------------
 
