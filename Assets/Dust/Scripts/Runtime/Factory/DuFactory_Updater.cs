@@ -110,7 +110,7 @@ namespace DustEngine
                 // if (DuMath.IsZero(record.intensity))
                 //     continue;
 
-                var factoryInstanceState = new DuFactoryMachine.FactoryInstanceState()
+                var factoryInstanceState = new DuFactoryMachine.FactoryInstanceState
                 {
                     factory = this,
                     intensityByFactory = record.intensity,

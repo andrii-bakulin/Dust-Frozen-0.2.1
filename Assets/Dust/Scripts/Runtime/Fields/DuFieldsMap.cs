@@ -153,7 +153,7 @@ namespace DustEngine
 
         public static DuFieldsMap Deformer()
         {
-            return new DuFieldsMap()
+            return new DuFieldsMap
             {
                 m_FieldsMapMode = FieldsMapMode.Deformer,
 
@@ -166,7 +166,7 @@ namespace DustEngine
 
         public static DuFieldsMap FactoryMachine()
         {
-            return new DuFieldsMap()
+            return new DuFieldsMap
             {
                 m_FieldsMapMode = FieldsMapMode.FactoryMachine,
 
@@ -180,7 +180,7 @@ namespace DustEngine
 
         public static DuFieldsMap FieldsSpace()
         {
-            return new DuFieldsMap()
+            return new DuFieldsMap
             {
                 m_FieldsMapMode = FieldsMapMode.FieldsSpace,
 

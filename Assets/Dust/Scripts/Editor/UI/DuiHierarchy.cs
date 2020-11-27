@@ -33,7 +33,7 @@ namespace DustEngine.DustEditor
                 float iconWidth = selectionRect.size.y;
                 float iconHeight = selectionRect.size.y;
 
-                Rect iconRect = new Rect()
+                Rect iconRect = new Rect
                 {
                     x = selectionRect.position.x + selectionRect.size.x - iconWidth,
                     y = selectionRect.position.y,

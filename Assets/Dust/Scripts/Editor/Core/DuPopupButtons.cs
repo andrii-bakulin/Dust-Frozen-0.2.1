@@ -163,7 +163,7 @@ namespace DustEngine.DustEditor
             if (Dust.IsNull(m_Entities))
                 return;
 
-            var column = new ColumnRecord()
+            var column = new ColumnRecord
             {
                 title = title
             };
