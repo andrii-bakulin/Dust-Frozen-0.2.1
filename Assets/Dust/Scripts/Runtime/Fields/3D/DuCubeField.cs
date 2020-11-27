@@ -5,12 +5,12 @@ namespace DustEngine
     [AddComponentMenu("Dust/Fields/3D Fields/Cube Field")]
     public class DuCubeField : DuSpaceField
     {
-        private class Calc
+        internal class Calc
         {
-            public Ray ray;
-            public Plane planeX;
-            public Plane planeY;
-            public Plane planeZ;
+            internal Ray ray;
+            internal Plane planeX;
+            internal Plane planeY;
+            internal Plane planeZ;
         }
 
         //--------------------------------------------------------------------------------------------------------------
