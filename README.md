@@ -14,3 +14,4 @@ Welcome!
   - Sections of code should not be commented out (`SonarCSharp_S125`)
   - Empty "default" clauses should be removed (`SonarCSharp_S3532`)
   - Fields that are only assigned in the constructor should be "readonly" (`SonarCSharp_S2933`)
+  - Unused method parameters should be removed (`SonarCSharp_S1172`)
