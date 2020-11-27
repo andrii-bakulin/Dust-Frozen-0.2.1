@@ -13,3 +13,4 @@ Welcome!
   - Empty "case" clauses that fall through to the "default" should be omitted (`SonarCSharp_S3458`)
   - Sections of code should not be commented out (`SonarCSharp_S125`)
   - Empty "default" clauses should be removed (`SonarCSharp_S3532`)
+  - Fields that are only assigned in the constructor should be "readonly" (`SonarCSharp_S2933`)
