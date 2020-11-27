@@ -196,7 +196,7 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        public class Normalizer
+        public static class Normalizer
         {
             public static int Count(int value)
             {

@@ -3,7 +3,7 @@ using UnityEditor;
 
 namespace DustEngine
 {
-    public class Dust
+    public static class Dust
     {
         public static bool IsNull(System.Object obj)
         {

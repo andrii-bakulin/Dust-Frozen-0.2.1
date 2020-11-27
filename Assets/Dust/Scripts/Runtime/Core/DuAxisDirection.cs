@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace DustEngine
 {
-    public class DuAxisDirection
+    public static class DuAxisDirection
     {
         public static string ToString(Axis3xDirection direction)
         {

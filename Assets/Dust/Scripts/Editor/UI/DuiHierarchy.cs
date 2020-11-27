@@ -5,7 +5,7 @@ using UnityEngine;
 namespace DustEngine.DustEditor
 {
     [InitializeOnLoad]
-    public class DuiHierarchy
+    public static class DuiHierarchy
     {
         private static bool isEnabled = true;
 

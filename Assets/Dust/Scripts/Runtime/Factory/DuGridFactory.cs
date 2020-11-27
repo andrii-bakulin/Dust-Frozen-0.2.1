@@ -102,7 +102,7 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        public class Normalizer
+        public static class Normalizer
         {
             public static Vector3Int Count(Vector3Int value)
             {
