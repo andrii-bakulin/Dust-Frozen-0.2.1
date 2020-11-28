@@ -38,18 +38,18 @@ namespace DustEngine
                         break;
 
                     case DuGridFactory.OffsetDirection.X:
-                        offsetByDirection.x += y % 2 == 1 ? gridFactory.step.x * gridFactory.offsetHeight : 0f;
-                        offsetByDirection.x += z % 2 == 1 ? gridFactory.step.x * gridFactory.offsetWidth  : 0f;
+                        offsetByDirection.x += y % 2 != 0 ? gridFactory.step.x * gridFactory.offsetHeight : 0f;
+                        offsetByDirection.x += z % 2 != 0 ? gridFactory.step.x * gridFactory.offsetWidth  : 0f;
                         break;
 
                     case DuGridFactory.OffsetDirection.Y:
-                        offsetByDirection.y += x % 2 == 1 ? gridFactory.step.y * gridFactory.offsetWidth  : 0f;
-                        offsetByDirection.y += z % 2 == 1 ? gridFactory.step.y * gridFactory.offsetHeight : 0f;
+                        offsetByDirection.y += x % 2 != 0 ? gridFactory.step.y * gridFactory.offsetWidth  : 0f;
+                        offsetByDirection.y += z % 2 != 0 ? gridFactory.step.y * gridFactory.offsetHeight : 0f;
                         break;
 
                     case DuGridFactory.OffsetDirection.Z:
-                        offsetByDirection.z += x % 2 == 1 ? gridFactory.step.z * gridFactory.offsetWidth  : 0f;
-                        offsetByDirection.z += y % 2 == 1 ? gridFactory.step.z * gridFactory.offsetHeight : 0f;
+                        offsetByDirection.z += x % 2 != 0 ? gridFactory.step.z * gridFactory.offsetWidth  : 0f;
+                        offsetByDirection.z += y % 2 != 0 ? gridFactory.step.z * gridFactory.offsetHeight : 0f;
                         break;
                 }
 
