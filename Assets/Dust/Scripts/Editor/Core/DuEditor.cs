@@ -18,7 +18,7 @@ namespace DustEngine.DustEditor
             //--------------------------------------------------------------------------------------------------------------
             // Helpers
 
-            public SerializedProperty FindProperty(string relativePropertyPath)
+            public SerializedProperty FindInnerProperty(string relativePropertyPath)
             {
                 return property.FindPropertyRelative(relativePropertyPath);
             }
@@ -275,8 +275,8 @@ namespace DustEngine.DustEditor
                 return false;
             }
 
-            duProperty.isChanged |= PropertyField(duProperty.FindProperty("min"), "Range Min");
-            duProperty.isChanged |= PropertyField(duProperty.FindProperty("max"), "Range Max");
+            duProperty.isChanged |= PropertyField(duProperty.FindInnerProperty("min"), "Range Min");
+            duProperty.isChanged |= PropertyField(duProperty.FindInnerProperty("max"), "Range Max");
             return duProperty.isChanged;
         }
 
