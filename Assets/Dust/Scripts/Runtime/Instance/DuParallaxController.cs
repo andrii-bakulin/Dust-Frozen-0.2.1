@@ -85,7 +85,7 @@ namespace DustEngine
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        internal void UpdateState(float deltaTime)
+        public void UpdateState(float deltaTime)
         {
             if (freeze)
                 return;

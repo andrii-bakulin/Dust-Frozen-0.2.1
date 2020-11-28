@@ -76,6 +76,27 @@ namespace DustEngine.DustEditor
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             serializedObject.ApplyModifiedProperties();
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            if (m_Offset.isChanged)
+            {
+                var parallaxChildren = FindObjectsOfType<DuParallax>();
+
+                foreach (var subTarget in targets)
+                {
+                    var origin = subTarget as DuParallaxController;
+                    origin.UpdateState(0f);
+
+                    foreach (var parallaxChild in parallaxChildren)
+                    {
+                        if (parallaxChild.parallaxController != origin)
+                            continue;
+
+                        parallaxChild.UpdateState(0f);
+                    }
+                }
+            }
         }
     }
 }
