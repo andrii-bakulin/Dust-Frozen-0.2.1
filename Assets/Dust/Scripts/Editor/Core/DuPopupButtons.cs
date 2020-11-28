@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEditor;
@@ -38,10 +39,15 @@ namespace DustEngine.DustEditor
             public List<CellRecord> cells = new List<CellRecord>();
         }
 
-        private struct CellRecord
+        private struct CellRecord : IEquatable<CellRecord>
         {
             public string title;
             public System.Type type;
+
+            public bool Equals(CellRecord other)
+            {
+                throw new NotImplementedException();
+            }
         }
 
         //--------------------------------------------------------------------------------------------------------------

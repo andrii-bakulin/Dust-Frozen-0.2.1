@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace DustEngine
 {
@@ -22,10 +23,15 @@ namespace DustEngine
             internal Color endColor; // color calculated by fieldsMap
         }
 
-        public struct Result
+        public struct Result : IEquatable<Result>
         {
             internal float fieldPower; // power calculated by field
             internal Color fieldColor; // color calculated by field, Color.alpha used as power of color
+
+            public bool Equals(Result other)
+            {
+                throw new NotImplementedException();
+            }
         }
 
         //--------------------------------------------------------------------------------------------------------------

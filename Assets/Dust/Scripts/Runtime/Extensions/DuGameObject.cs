@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace DustEngine
 {
     public class DuGameObject
     {
-        public struct Data
+        public struct Data : IEquatable<Data>
         {
             public int meshesCount { get; set; }
             public int vertexCount { get; set; }
@@ -18,6 +19,11 @@ namespace DustEngine
                 a.triangleCount += b.triangleCount;
                 a.unreadableCount += b.unreadableCount;
                 return a;
+            }
+
+            public bool Equals(Data other)
+            {
+                throw new NotImplementedException();
             }
         }
 

@@ -1,7 +1,10 @@
-﻿namespace DustEngine
+﻿using System;
+using UnityEngine;
+
+namespace DustEngine
 {
-    [System.Serializable]
-    public struct DuRange
+    [Serializable]
+    public struct DuRange : IEquatable<DuRange>
     {
         public float min { get; set; }
         public float max { get; set; }
@@ -16,6 +19,11 @@
         {
             this.min = min;
             this.max = max;
+        }
+
+        public bool Equals(DuRange other)
+        {
+            return Mathf.Approximately(this.min, other.min) && Mathf.Approximately(this.max, other.max);
         }
     }
 }
