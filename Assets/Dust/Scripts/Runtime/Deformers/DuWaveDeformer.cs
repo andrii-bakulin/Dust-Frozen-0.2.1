@@ -156,7 +156,7 @@ namespace DustEngine
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        public override bool DeformPoint(ref Vector3 localPosition, float strength = 1f)
+        public override bool DeformPoint(ref Vector3 localPosition, float strength)
         {
             // xp = x+
             var xpAxisPosition = DuAxisDirection.ConvertFromDirectionToAxisXPlus(direction, localPosition);
@@ -243,10 +243,10 @@ namespace DustEngine
                 pointZ0 = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, pointZ0);
                 pointZ1 = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, pointZ1);
 
-                DeformPoint(ref pointY0);
-                DeformPoint(ref pointY1);
-                DeformPoint(ref pointZ0);
-                DeformPoint(ref pointZ1);
+                DeformPoint(ref pointY0, 1f);
+                DeformPoint(ref pointY1, 1f);
+                DeformPoint(ref pointZ0, 1f);
+                DeformPoint(ref pointZ1, 1f);
 
                 Gizmos.DrawLine(pointY0, pointY1);
                 Gizmos.DrawLine(pointZ0, pointZ1);

@@ -50,7 +50,10 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public void UpdateInstancesDynamicStates(bool forced = false)
+        public void UpdateInstancesDynamicStates()
+            => UpdateInstancesDynamicStates(false);
+
+        public void UpdateInstancesDynamicStates(bool forced)
         {
             if (forcedUpdateEachFrame)
             {

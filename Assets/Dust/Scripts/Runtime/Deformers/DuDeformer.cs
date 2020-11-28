@@ -75,7 +75,7 @@ namespace DustEngine
         public abstract string DeformerName();
         public abstract string DeformerDynamicHint();
 
-        public abstract bool DeformPoint(ref Vector3 localPosition, float strength = 1f);
+        public abstract bool DeformPoint(ref Vector3 localPosition, float strength);
 
         //--------------------------------------------------------------------------------------------------------------
         // DuDynamicStateInterface

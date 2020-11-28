@@ -60,7 +60,7 @@ namespace DustEngine
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        public override bool DeformPoint(ref Vector3 localPosition, float strength = 1f)
+        public override bool DeformPoint(ref Vector3 localPosition, float strength)
         {
             if (deformMode == DeformMode.WithinBox && !IsPointInsideDeformBox(localPosition, size))
                 return false;
@@ -149,8 +149,8 @@ namespace DustEngine
 
         private void DrawGizmosLine(Vector3 point0, Vector3 point1)
         {
-            DeformPoint(ref point0);
-            DeformPoint(ref point1);
+            DeformPoint(ref point0, 1f);
+            DeformPoint(ref point1, 1f);
             Gizmos.DrawLine(point0, point1);
         }
 #endif

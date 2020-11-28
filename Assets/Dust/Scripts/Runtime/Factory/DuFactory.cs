@@ -360,7 +360,10 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public DuFactoryMachine.Record AddFactoryMachine(DuFactoryMachine factoryMachine, float intensity = 1f, bool isEnabled = true)
+        public DuFactoryMachine.Record AddFactoryMachine(DuFactoryMachine factoryMachine)
+            => AddFactoryMachine(factoryMachine, 1f, true);
+
+        public DuFactoryMachine.Record AddFactoryMachine(DuFactoryMachine factoryMachine, float intensity, bool isEnabled)
         {
             var record = new DuFactoryMachine.Record
             {
