@@ -259,17 +259,16 @@ namespace DustEngine
 
         private void DestroyAllInstances()
         {
-            for (int i = 0; i < this.transform.childCount;)
+            int index = this.transform.childCount - 1;
+
+            while (index >= 0)
             {
-                DuParallaxInstance instance = transform.GetChild(i).gameObject.GetComponent<DuParallaxInstance>();
+                DuParallaxInstance instance = transform.GetChild(index).gameObject.GetComponent<DuParallaxInstance>();
 
-                if (Dust.IsNull(instance) || instance.parentParallax != this)
-                {
-                    i++;
-                    continue;
-                }
+                if (Dust.IsNotNull(instance) && instance.parentParallax == this)
+                    Dust.DestroyObjectWhenReady(instance.gameObject);
 
-                Dust.DestroyObjectWhenReady(instance.gameObject);
+                index--;
             }
 
             this.m_Instances.Clear();
