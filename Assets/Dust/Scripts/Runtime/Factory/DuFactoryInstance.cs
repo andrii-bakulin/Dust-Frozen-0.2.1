@@ -18,13 +18,13 @@ namespace DustEngine
         [System.Serializable]
         public class State
         {
-            public Vector3 position = Vector3.zero;
-            public Vector3 rotation = Vector3.zero;
-            public Vector3 scale = Vector3.one;
+            public Vector3 position { get; set; } = Vector3.zero;
+            public Vector3 rotation { get; set; } = Vector3.zero;
+            public Vector3 scale { get; set; } = Vector3.one;
 
-            public float value = 0f;
-            public Color color = Color.magenta;
-            public Vector3 uvw = Vector3.zero;
+            public float value { get; set; } = 0f;
+            public Color color { get; set; } = Color.magenta;
+            public Vector3 uvw { get; set; } = Vector3.zero;
 
             public State Clone()
             {
