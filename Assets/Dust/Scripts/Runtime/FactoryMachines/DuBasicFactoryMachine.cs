@@ -290,8 +290,7 @@ namespace DustEngine
                                   * factoryInstanceState.intensityByMachine
                                   * colorImpactIntensity;
 
-            instanceState.color = Color.LerpUnclamped(instanceState.color, newColor, transferPower);
-            instanceState.color.duClamp01();
+            instanceState.color = Color.LerpUnclamped(instanceState.color, newColor, transferPower).duClamped01();
         }
 
         //--------------------------------------------------------------------------------------------------------------

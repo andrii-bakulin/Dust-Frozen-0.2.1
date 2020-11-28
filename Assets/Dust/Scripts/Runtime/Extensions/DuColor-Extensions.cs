@@ -19,6 +19,12 @@ namespace DustEngine
             self.duClamp(0f, 1f);
         }
 
+        public static Color duClamped01(this Color self)
+        {
+            self.duClamp01();
+            return self;
+        }
+
         //--------------------------------------------------------------------------------------------------------------
 
         public static void duInvertRGB(ref this Color self)

@@ -6,10 +6,10 @@ namespace DustEngine
     {
         public struct Data
         {
-            public int meshesCount;
-            public int vertexCount;
-            public int triangleCount;
-            public int unreadableCount;
+            public int meshesCount { get; set; }
+            public int vertexCount { get; set; }
+            public int triangleCount { get; set; }
+            public int unreadableCount { get; set; }
 
             public static Data operator +(Data a, Data b)
             {

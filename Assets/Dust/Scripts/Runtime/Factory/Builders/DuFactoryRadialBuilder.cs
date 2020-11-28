@@ -51,13 +51,15 @@ namespace DustEngine
                     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                     // Build UVW
 
-                    instanceState.uvw = Vector3.zero;
+                    Vector3 uvw = Vector3.zero;
 
                     if (instancesCountLevelN > 1)
-                        instanceState.uvw.x = Mathf.Lerp(0f, 1f, 1f / (instancesCountLevelN - 1) * instanceIndex);
+                        uvw.x = Mathf.Lerp(0f, 1f, 1f / (instancesCountLevelN - 1) * instanceIndex);
 
                     if (levelIndex > 1)
-                        instanceState.uvw.y = Mathf.Lerp(0f, 1f, 1f / (radialFactory.levelsCount - 1) * levelIndex);
+                        uvw.y = Mathf.Lerp(0f, 1f, 1f / (radialFactory.levelsCount - 1) * levelIndex);
+
+                    instanceState.uvw = uvw;
 
                     // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
