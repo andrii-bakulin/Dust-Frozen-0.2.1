@@ -101,6 +101,38 @@ namespace DustEngine
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
+        private float m_InstancesFillRate = 1.0f;
+        public float instancesFillRate
+        {
+            get => m_InstancesFillRate;
+            set
+            {
+                value = NormalizerCore.InstancesFillRate(value);
+
+                if (!UpdatePropertyValue(ref m_InstancesFillRate, value))
+                    return;
+
+                RebuildInstances();
+            }
+        }
+
+        [SerializeField]
+        private int m_InstancesFillSeed = DuConstants.RANDOM_SEED_DEFAULT;
+        public int instancesFillSeed
+        {
+            get => m_InstancesFillSeed;
+            set
+            {
+                value = NormalizerCore.InstancesFillSeed(value);
+
+                if (!UpdatePropertyValue(ref m_InstancesFillSeed, value))
+                    return;
+
+                RebuildInstances();
+            }
+        }
+
+        [SerializeField]
         private GameObject m_InstancesHolder;
         public GameObject instancesHolder
         {
@@ -457,6 +489,16 @@ namespace DustEngine
         public static class NormalizerCore
         {
             public static int Seed(int value)
+            {
+                return DuRandom.NormalizeSeedToNonRandom(value);
+            }
+
+            public static float InstancesFillRate(float value)
+            {
+                return Mathf.Clamp01(value);
+            }
+
+            public static int InstancesFillSeed(int value)
             {
                 return DuRandom.NormalizeSeedToNonRandom(value);
             }

@@ -32,6 +32,8 @@ namespace DustEngine.DustEditor
         private DuProperty m_InstanceAccessMode;
         private DuProperty m_InstanceTypeMode;
         private DuProperty m_InstancesHolder;
+        private DuProperty m_InstancesFillRate;
+        private DuProperty m_InstancesFillSeed;
         private DuProperty m_ForcedSetActive;
         private DuProperty m_ForcedUpdateEachFrame;
 
@@ -87,6 +89,8 @@ namespace DustEngine.DustEditor
             m_InstanceAccessMode = FindProperty("m_InstanceAccessMode", "Access Mode");
             m_InstanceTypeMode = FindProperty("m_InstanceTypeMode", "Type Mode");
             m_InstancesHolder = FindProperty("m_InstancesHolder", "Instances Holder");
+            m_InstancesFillRate = FindProperty("m_InstancesFillRate", "Fill Rate");
+            m_InstancesFillSeed = FindProperty("m_InstancesFillSeed", "Fill Seed");
             m_ForcedSetActive = FindProperty("m_ForcedSetActive", "Forced Set Active");
 
             m_ForcedUpdateEachFrame = FindProperty("m_ForcedUpdateEachFrame", "Forced Updates", "If TRUE, then the calculation for all instances will be execute forced each frame, even if nothing changed. Otherwise, Factory try to optimize calculations.");
@@ -177,6 +181,11 @@ namespace DustEngine.DustEditor
         {
             if (DustGUI.FoldoutBegin("Instances", "DuFactory.Instances"))
             {
+                PropertyExtendedSlider01(m_InstancesFillRate);
+                if (m_InstancesFillRate.valFloat < 1f)
+                    PropertySeedFixed(m_InstancesFillSeed);
+                Space();
+
                 PropertyField(m_InstanceTypeMode);
                 PropertyField(m_ForcedSetActive);
                 Space();
@@ -190,10 +199,18 @@ namespace DustEngine.DustEditor
             }
             DustGUI.FoldoutEnd();
 
+            m_IsRequireRebuildInstances |= m_InstancesFillRate.isChanged;
+            m_IsRequireRebuildInstances |= m_InstancesFillSeed.isChanged;
             m_IsRequireRebuildInstances |= m_InstanceTypeMode.isChanged;
             m_IsRequireRebuildInstances |= m_ForcedSetActive.isChanged;
             m_IsRequireRebuildInstances |= m_InstanceAccessMode.isChanged;
             m_IsRequireRebuildInstances |= m_InstancesHolder.isChanged;
+
+            if (m_InstancesFillRate.isChanged)
+                m_InstancesFillRate.valFloat = DuFactory.NormalizerCore.InstancesFillRate(m_InstancesFillRate.valFloat);
+
+            if (m_InstancesFillSeed.isChanged)
+                m_InstancesFillSeed.valInt = DuFactory.NormalizerCore.InstancesFillSeed(m_InstancesFillSeed.valInt);
         }
 
         protected void OnInspectorGUI_FactoryMachines()
@@ -239,9 +256,9 @@ namespace DustEngine.DustEditor
             m_IsRequireResetupInstances |= m_TransformSequence.isChanged;
         }
 
-        protected void OnInspectorGUI_Display()
+        protected void OnInspectorGUI_Gizmos()
         {
-            if (DustGUI.FoldoutBegin("Display", "DuFactory.Display"))
+            if (DustGUI.FoldoutBegin("Gizmos", "DuFactory.Gizmos"))
             {
                 PropertyField(m_InspectorDisplay);
                 PropertyExtendedSlider(m_InspectorScale, 0.5f, 3f, 0.01f, 0.01f);

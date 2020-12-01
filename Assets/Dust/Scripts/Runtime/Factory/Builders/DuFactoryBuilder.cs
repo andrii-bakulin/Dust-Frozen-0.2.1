@@ -26,6 +26,9 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Instance Manager
 
+        // WARNING!
+        //     If some logic change here, then require to do same changes in CreateFactoryFakeInstance() method !!!
+        //
         internal DuFactoryInstance CreateFactoryInstance(int instanceIndex, int instancesCount, float randomScalar, Vector3 randomVector)
         {
             GameObject prefab = ObjectsQueue_GetNextPrefab();
@@ -70,6 +73,17 @@ namespace DustEngine
             return duFactoryInstance;
         }
 
+        // WARNING! Why need this method?
+        //     This method will be call when fill-rate is less then 1.0f.
+        //     So when need to skip instance creating Builder will call this method.
+        //     It should not create anything, but it should "call sub-method" to make offset in random generators
+        //     or others data
+        internal DuFactoryInstance CreateFactoryFakeInstance(int instanceIndex, int instancesCount, float randomScalar, Vector3 randomVector)
+        {
+            ObjectsQueue_GetNextPrefab();
+            return null;
+        }
+
         //--------------------------------------------------------------------------------------------------------------
         // Objects Queue
 
@@ -112,7 +126,7 @@ namespace DustEngine
                     break;
 
                 case DuFactory.IterateMode.Random:
-                    m_ObjectsQueue_duRandom = new DuRandom(Mathf.Max(m_DuFactory.seed, 1));
+                    m_ObjectsQueue_duRandom = new DuRandom( DuRandom.NormalizeSeedToNonRandom(m_DuFactory.seed) );
                     break;
 
                 default:

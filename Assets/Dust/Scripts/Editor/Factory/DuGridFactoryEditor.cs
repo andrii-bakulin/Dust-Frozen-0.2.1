@@ -77,7 +77,7 @@ namespace DustEngine.DustEditor
             OnInspectorGUI_Instances();
             OnInspectorGUI_FactoryMachines();
             OnInspectorGUI_Transform();
-            OnInspectorGUI_Display();
+            OnInspectorGUI_Gizmos();
             OnInspectorGUI_Tools();
 
             //----------------------------------------------------------------------------------------------------------

@@ -92,10 +92,32 @@ namespace DustEngine
             builder.ObjectsQueue_Initialize();
 
             int instancesCount = builder.GetTotalInstancesCount();
+
+            List<bool> fillStates = null;
+
+            if (instancesFillRate < 1f)
+            {
+                DuRandom duRandom = new DuRandom(DuRandom.NormalizeSeedToNonRandom(instancesFillSeed));
+
+                fillStates = new List<bool>(instancesCount);
+                int enabledItemsCount = Mathf.RoundToInt(instancesCount * instancesFillRate);
+
+                for (int i = 0; i < instancesCount; i++)
+                {
+                    fillStates.Insert(duRandom.Range(0, fillStates.Count), i < enabledItemsCount);
+                }
+            }
+
             for (int instanceIndex = 0; instanceIndex < instancesCount; instanceIndex++)
             {
                 float randomScalar = instancesRandom.Next();
                 Vector3 randomVector = instancesRandom.NextVector3();
+
+                if (Dust.IsNotNull(fillStates) && fillStates[instanceIndex] == false)
+                {
+                    builder.CreateFactoryFakeInstance(instanceIndex, instancesCount, randomScalar, randomVector);
+                    continue;
+                }
 
                 var instance = builder.CreateFactoryInstance(instanceIndex, instancesCount, randomScalar, randomVector);
 
