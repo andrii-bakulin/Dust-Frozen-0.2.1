@@ -10,8 +10,10 @@ namespace DustEngine
 
         public static readonly int ROUND_DIGITS_COUNT = 6;
 
-        public static readonly int RANDOM_SEED_DEFAULT = 12345;
         public static readonly int RANDOM_SEED_MIN = 1;
-        public static readonly int RANDOM_SEED_MAX = 99999;
+        public static readonly int RANDOM_SEED_MAX = int.MaxValue;
+        public static readonly int RANDOM_SEED_DEFAULT = 12345;
+        public static readonly int RANDOM_SEED_MIN_IN_EDITOR = 1;
+        public static readonly int RANDOM_SEED_MAX_IN_EDITOR = 99999;
     }
 }

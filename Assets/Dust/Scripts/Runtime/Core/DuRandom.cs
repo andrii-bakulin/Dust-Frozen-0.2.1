@@ -9,7 +9,7 @@ namespace DustEngine
         public DuRandom(int seed)
         {
             if (seed <= 0)
-                seed = Random.Range(1, int.MaxValue);
+                seed = Random.Range(DuConstants.RANDOM_SEED_MIN, DuConstants.RANDOM_SEED_MAX);
 
             random = new System.Random(seed);
         }
@@ -19,6 +19,9 @@ namespace DustEngine
          */
         public static int NormalizeSeedToNonRandom(int seed)
         {
+            if (seed == int.MinValue)
+                return 1;
+
             return Mathf.Abs(seed);
         }
 
