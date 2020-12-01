@@ -15,6 +15,14 @@ namespace DustEngine
         }
 
         /**
+         * This normalization prevent usage of negative values
+         */
+        public static int NormalizeSeedToNonRandom(int seed)
+        {
+            return Mathf.Abs(seed);
+        }
+
+        /**
          * return: (0..1)
          */
         public float Next()

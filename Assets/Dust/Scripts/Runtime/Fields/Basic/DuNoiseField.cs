@@ -106,6 +106,8 @@ namespace DustEngine
             get => m_Seed;
             set
             {
+                value = Normalizer.Seed(value);
+
                 if (m_Seed == value)
                     return;
 
@@ -269,6 +271,11 @@ namespace DustEngine
             public static float NoisePower(float value)
             {
                 return Mathf.Clamp(value, 0.0001f, float.MaxValue);
+            }
+
+            public static int Seed(int value)
+            {
+                return DuRandom.NormalizeSeedToNonRandom(value);
             }
         }
     }

@@ -174,6 +174,8 @@ namespace DustEngine
             get => m_OffsetSeed;
             set
             {
+                value = DuRandom.NormalizeSeedToNonRandom(value);
+
                 if (!UpdatePropertyValue(ref m_OffsetSeed, Normalizer.OffsetSeed(value)))
                     return;
 
@@ -205,7 +207,7 @@ namespace DustEngine
 
             public static int OffsetSeed(int value)
             {
-                return Mathf.Clamp(value, 1, DuConstants.RANDOM_SEED_MAX);
+                return DuRandom.NormalizeSeedToNonRandom(value);
             }
 
             public static int LevelsCount(int value)

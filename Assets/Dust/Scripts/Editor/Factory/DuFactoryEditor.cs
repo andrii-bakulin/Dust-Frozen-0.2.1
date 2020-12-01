@@ -168,6 +168,9 @@ namespace DustEngine.DustEditor
             m_IsRequireRebuildInstances |= m_SourceObjects.isChanged;
             m_IsRequireRebuildInstances |= m_IterateMode.isChanged;
             m_IsRequireRebuildInstances |= m_Seed.isChanged;
+
+            if (m_Seed.isChanged)
+                m_Seed.valInt = DuFactory.NormalizerCore.Seed(m_Seed.valInt);
         }
 
         protected void OnInspectorGUI_Instances()

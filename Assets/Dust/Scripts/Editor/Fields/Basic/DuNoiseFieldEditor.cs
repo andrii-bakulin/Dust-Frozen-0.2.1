@@ -117,6 +117,9 @@ namespace DustEngine.DustEditor
             if (m_NoisePower.isChanged)
                 m_NoisePower.valFloat = DuNoiseField.Normalizer.NoisePower(m_NoisePower.valFloat);
 
+            if (m_Seed.isChanged)
+                m_Seed.valInt = DuNoiseField.Normalizer.Seed(m_Seed.valInt);
+
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             serializedObject.ApplyModifiedProperties();

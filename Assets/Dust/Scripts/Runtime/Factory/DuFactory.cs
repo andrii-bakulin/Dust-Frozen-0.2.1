@@ -143,6 +143,8 @@ namespace DustEngine
             get => m_Seed;
             set
             {
+                value = NormalizerCore.Seed(value);
+
                 if (!UpdatePropertyValue(ref m_Seed, value))
                     return;
 
@@ -448,6 +450,16 @@ namespace DustEngine
             }
 
             RebuildInstances();
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        public static class NormalizerCore
+        {
+            public static int Seed(int value)
+            {
+                return DuRandom.NormalizeSeedToNonRandom(value);
+            }
         }
     }
 }
