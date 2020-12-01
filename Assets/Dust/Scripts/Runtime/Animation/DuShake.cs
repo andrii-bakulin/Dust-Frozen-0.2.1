@@ -27,7 +27,7 @@ namespace DustEngine
                     return;
 
                 m_Seed = value;
-                n_DuNoise = null;
+                ResetStates();
             }
         }
 
@@ -327,6 +327,18 @@ namespace DustEngine
                 return Mathf.Lerp(1f, amplitude, offset);
 
             return Mathf.Lerp(1f, 1f / amplitude, -offset);
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        void Reset()
+        {
+            ResetStates();
+        }
+
+        public void ResetStates()
+        {
+            n_DuNoise = null;
         }
 
         //--------------------------------------------------------------------------------------------------------------

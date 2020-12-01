@@ -148,6 +148,16 @@ namespace DustEngine.DustEditor
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             serializedObject.ApplyModifiedProperties();
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            foreach (var subTarget in targets)
+            {
+                var origin = subTarget as DuShake;
+
+                if (m_Seed.isChanged || DustGUI.IsUndoRedoPerformed())
+                    origin.ResetStates();
+            }
         }
     }
 }
