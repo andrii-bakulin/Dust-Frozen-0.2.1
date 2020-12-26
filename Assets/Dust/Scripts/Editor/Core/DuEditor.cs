@@ -275,8 +275,8 @@ namespace DustEngine.DustEditor
                 return false;
             }
 
-            duProperty.isChanged |= PropertyField(duProperty.FindInnerProperty("min"), "Range Min");
-            duProperty.isChanged |= PropertyField(duProperty.FindInnerProperty("max"), "Range Max");
+            duProperty.isChanged |= PropertyField(duProperty.FindInnerProperty("m_Min"), "Range Min");
+            duProperty.isChanged |= PropertyField(duProperty.FindInnerProperty("m_Max"), "Range Max");
             return duProperty.isChanged;
         }
 

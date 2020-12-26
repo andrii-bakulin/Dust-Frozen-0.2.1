@@ -137,12 +137,12 @@ namespace DustEngine.DustEditor
             // Validate & Normalize Data
 
             if (m_Interval.isChanged)
-                m_Interval.valFloat = DuSpawner.Normalizer.IntervalValue(m_Interval.valFloat);
+                NormalizeIntervalValue(m_Interval.property);
 
             if (m_IntervalRange.isChanged)
             {
-                m_IntervalRange.FindInnerProperty("min").floatValue = DuSpawner.Normalizer.IntervalValue(m_IntervalRange.FindInnerProperty("min").floatValue);
-                m_IntervalRange.FindInnerProperty("max").floatValue = DuSpawner.Normalizer.IntervalValue(m_IntervalRange.FindInnerProperty("max").floatValue);
+                NormalizeIntervalValue(m_IntervalRange.FindInnerProperty("m_Min"));
+                NormalizeIntervalValue(m_IntervalRange.FindInnerProperty("m_Max"));
             }
 
             if (m_Limit.isChanged)
@@ -151,6 +151,11 @@ namespace DustEngine.DustEditor
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             serializedObject.ApplyModifiedProperties();
+        }
+
+        private void NormalizeIntervalValue(SerializedProperty property)
+        {
+            property.floatValue = DuSpawner.Normalizer.IntervalValue(property.floatValue);
         }
     }
 }
