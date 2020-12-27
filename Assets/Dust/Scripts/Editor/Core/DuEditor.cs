@@ -39,6 +39,12 @@ namespace DustEngine.DustEditor
                 set => property.floatValue = value;
             }
 
+            public string valString
+            {
+                get => property.stringValue;
+                set => property.stringValue = value;
+            }
+
             public Vector3 valVector3
             {
                 get => property.vector3Value;
