@@ -57,6 +57,12 @@ namespace DustEngine.DustEditor
                 set => property.vector3IntValue = value;
             }
 
+            public Quaternion valQuaternion
+            {
+                get => property.quaternionValue;
+                set => property.quaternionValue = value;
+            }
+
             public AnimationCurve valAnimationCurve
             {
                 get => property.animationCurveValue;
