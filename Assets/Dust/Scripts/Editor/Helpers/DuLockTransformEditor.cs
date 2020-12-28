@@ -23,7 +23,7 @@ namespace DustEngine.DustEditor
         [MenuItem("Dust/Helpers/Lock Transform")]
         public static void AddComponentToSelectedObjects()
         {
-            AddComponent(typeof(DuLockTransform));
+            AddComponentToSelectedObjects(typeof(DuLockTransform));
         }
 #endif
 

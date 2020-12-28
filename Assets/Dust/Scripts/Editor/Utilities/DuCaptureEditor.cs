@@ -50,7 +50,7 @@ namespace DustEngine.DustEditor
         [MenuItem("Dust/Utilities/Capture")]
         public static void AddComponentToSelectedObjects()
         {
-            AddComponent(typeof(DuCapture));
+            AddComponentToSelectedObjects(typeof(DuCapture));
         }
 #endif
 

@@ -164,7 +164,7 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public static void AddComponent(System.Type duComponentType)
+        public static void AddComponentToSelectedObjects(System.Type duComponentType)
         {
             if (Selection.gameObjects.Length == 0)
                 return;
