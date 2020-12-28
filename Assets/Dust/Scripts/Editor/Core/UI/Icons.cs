@@ -26,6 +26,8 @@ namespace DustEngine.DustEditor.UI
             "Components/FactoryMachine/",
             "Components/Fields/",
             "Components/Gizmos/",
+            "Components/Helpers/",
+            "Components/Utilities/",
             "Components/",
         };
 
