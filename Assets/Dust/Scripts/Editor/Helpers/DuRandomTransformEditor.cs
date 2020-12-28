@@ -28,7 +28,7 @@ namespace DustEngine.DustEditor
         //--------------------------------------------------------------------------------------------------------------
 
 #if UNITY_EDITOR
-        [MenuItem("Dust/Modifiers/Random Transform")]
+        [MenuItem("Dust/Helpers/Random Transform")]
         public static void AddComponentToSelectedObjects()
         {
             AddComponentToSelectedOrNewObject("Random Transform", typeof(DuRandomTransform));

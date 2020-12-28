@@ -197,8 +197,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb443279d95ea4feca98323499ae4579, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_ActivateMode: 1
   m_TransformMode: 0
   m_Space: 0
@@ -318,8 +318,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6ca60b4c16a44b3a90c15195ff9d7c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_TranslateType: 1
   m_LinearSpeed: {x: 0, y: 0, z: 1}
   m_WaveAmplitude: {x: 0, y: 0, z: 1}
@@ -580,8 +580,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: be9e3ee166b04429a9768c0227d5fea5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_TargetObject: {fileID: 1451324202}
   m_UpVectorObject: {fileID: 0}
   m_UpdateMode: 1
@@ -708,8 +708,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9aae950d37f94c5b8313c87990e077d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_SpawnPointMode: 1
   m_SpawnPoints:
   - {fileID: 16861171}
@@ -773,7 +773,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1020447890}
   m_Layer: 0
-  m_Name: DuObjects-Modifiers
+  m_Name: DuObjects-Helpers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -867,8 +867,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d389611d372bf4e9aa066ef324269ec2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_Seed: -12345
   m_Power: 1
   m_Freeze: 0
@@ -1152,8 +1152,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f54f53bbe16fc4edbaedf71b11564bd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_Axis: {x: 0, y: 1, z: 0}
   m_Speed: 180
   m_Space: 1
@@ -1331,8 +1331,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: beb00f9036a4a4d3a906d88701bdcac9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_Power: 1
   m_Freeze: 0
   m_PositionEnabled: 0
@@ -1390,8 +1390,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe05c6256f5404729a33e64c244c061b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_FollowObject: {fileID: 1704549467}
   m_FollowDistance: {x: -5.75, y: 1.5, z: 0}
   m_UseSmoothDamp: 1
@@ -1521,8 +1521,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 283fbedaa26ee430db6e98171daf2562, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_DestroyMode: 3
   m_Timeout: 1
   m_TimeoutRange:
@@ -1737,8 +1737,8 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d389611d372bf4e9aa066ef324269ec2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_Seed: 909118
   m_Power: 1
   m_Freeze: 0
