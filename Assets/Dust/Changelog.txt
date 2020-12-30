@@ -1,3 +1,12 @@
+## [0.1.1] - Unreleased
+
+### Dropped
+
+- Dropped DuCapture component (deprecated)
+
+
+
+
 ## [0.1.0] - 2020-12-29
 
 Base alpha version
