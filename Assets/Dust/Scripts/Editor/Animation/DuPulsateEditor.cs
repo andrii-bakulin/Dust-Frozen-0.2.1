@@ -8,6 +8,7 @@ namespace DustEngine.DustEditor
     public class DuPulsateEditor : DuEditor
     {
         private DuProperty m_Power;
+        private DuProperty m_SleepTime;
         private DuProperty m_Freeze;
 
         private DuProperty m_PositionEnabled;
@@ -39,6 +40,7 @@ namespace DustEngine.DustEditor
         void OnEnable()
         {
             m_Power = FindProperty("m_Power", "Power");
+            m_SleepTime = FindProperty("m_SleepTime", "Sleep Time");
             m_Freeze = FindProperty("m_Freeze", "Freeze");
 
             m_PositionEnabled = FindProperty("m_PositionEnabled", "Enable");
@@ -116,6 +118,7 @@ namespace DustEngine.DustEditor
             {
                 PropertyField(m_EaseMode);
                 PropertyExtendedSlider(m_Power, 0f, 1f, 0.01f, 0f, 1f);
+                PropertyExtendedSlider(m_SleepTime, 0f, 10f, 0.01f, 0f);
                 PropertyField(m_Freeze);
 
                 Space();
@@ -138,6 +141,9 @@ namespace DustEngine.DustEditor
 
             if (m_Power.isChanged)
                 m_Power.valFloat = DuPulsate.Normalizer.Power(m_Power.valFloat);
+
+            if (m_SleepTime.isChanged)
+                m_SleepTime.valFloat = DuPulsate.Normalizer.SleepTime(m_SleepTime.valFloat);
 
             if (m_ScaleAmplitude.isChanged)
                 m_ScaleAmplitude.valVector3 = DuPulsate.Normalizer.ScaleAmplitude(m_ScaleAmplitude.valVector3);

@@ -1,5 +1,9 @@
 ## [0.1.1] - Unreleased
 
+### Added
+
+- DuPulsate: added sleep time value
+
 ### Dropped
 
 - Dropped DuCapture component (deprecated)

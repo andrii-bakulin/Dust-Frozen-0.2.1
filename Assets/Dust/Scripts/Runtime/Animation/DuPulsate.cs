@@ -31,6 +31,14 @@ namespace DustEngine
         }
 
         [SerializeField]
+        private float m_SleepTime = 0f;
+        public float sleepTime
+        {
+            get => m_SleepTime;
+            set => m_SleepTime = Normalizer.SleepTime(value);
+        }
+
+        [SerializeField]
         private bool m_Freeze = false;
         public bool freeze
         {
@@ -186,6 +194,12 @@ namespace DustEngine
 
         void UpdateState(float deltaTime)
         {
+            if (sleepTime > 0f)
+            {
+                sleepTime = Mathf.Max(sleepTime - deltaTime, 0f);
+                return;
+            }
+
             if (positionEnabled)
             {
                 Vector3 deltaPosition = Vector3.zero;
@@ -329,6 +343,11 @@ namespace DustEngine
             public static float Power(float value)
             {
                 return Mathf.Clamp01(value);
+            }
+
+            public static float SleepTime(float value)
+            {
+                return Mathf.Max(value, 0f);
             }
 
             public static Vector3 ScaleAmplitude(Vector3 value)
