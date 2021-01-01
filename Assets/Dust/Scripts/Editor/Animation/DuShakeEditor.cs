@@ -8,6 +8,7 @@ namespace DustEngine.DustEditor
     public class DuShakeEditor : DuEditor
     {
         private DuProperty m_Power;
+        private DuProperty m_WarmUpTime;
         private DuProperty m_Freeze;
         private DuProperty m_Seed;
 
@@ -40,6 +41,7 @@ namespace DustEngine.DustEditor
         void OnEnable()
         {
             m_Power = FindProperty("m_Power", "Power");
+            m_WarmUpTime = FindProperty("m_WarmUpTime", "Warm Up Time");
             m_Freeze = FindProperty("m_Freeze", "Freeze");
             m_Seed = FindProperty("m_Seed", "Seed");
 
@@ -118,6 +120,7 @@ namespace DustEngine.DustEditor
             if (DustGUI.FoldoutBegin("Shake Parameters", "DuShake.Parameters"))
             {
                 PropertyExtendedSlider(m_Power, 0f, 1f, 0.01f, 0f, 1f);
+                PropertyExtendedSlider(m_WarmUpTime, 0f, 5f, 0.01f, 0f);
                 PropertyField(m_Freeze);
                 PropertySeedRandomOrFixed(m_Seed);
 
@@ -141,6 +144,9 @@ namespace DustEngine.DustEditor
 
             if (m_Power.isChanged)
                 m_Power.valFloat = DuShake.Normalizer.Power(m_Power.valFloat);
+
+            if (m_WarmUpTime.isChanged)
+                m_WarmUpTime.valFloat = DuShake.Normalizer.WarmUpTime(m_WarmUpTime.valFloat);
 
             if (m_ScaleAmplitude.isChanged)
                 m_ScaleAmplitude.valVector3 = DuShake.Normalizer.ScaleAmplitude(m_ScaleAmplitude.valVector3);

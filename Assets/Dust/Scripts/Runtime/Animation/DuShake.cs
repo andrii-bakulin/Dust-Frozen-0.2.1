@@ -40,6 +40,14 @@ namespace DustEngine
         }
 
         [SerializeField]
+        private float m_WarmUpTime = 0f;
+        public float warmUpTime
+        {
+            get => m_WarmUpTime;
+            set => m_WarmUpTime = Normalizer.WarmUpTime(value);
+        }
+
+        [SerializeField]
         private bool m_Freeze = false;
         public bool freeze
         {
@@ -166,6 +174,8 @@ namespace DustEngine
         private DuNoise n_DuNoise;
         private DuNoise duNoise => n_DuNoise ?? (n_DuNoise = new DuNoise(seed));
 
+        private float m_TimeOffset = 0f;
+
         private float m_PositionTimeOffset;
         private float m_RotationTimeOffset;
         private float m_ScaleTimeOffset;
@@ -198,6 +208,10 @@ namespace DustEngine
 
         void UpdateState(float deltaTime)
         {
+            m_TimeOffset += deltaTime;
+
+            float warmUpOffset = warmUpTime > 0f ? m_TimeOffset / warmUpTime : 1f;
+
             if (positionEnabled)
             {
                 Vector3 deltaPosition = Vector3.zero;
@@ -210,6 +224,9 @@ namespace DustEngine
                     deltaPosition = positionAmplitude * power;
                     deltaPosition.Scale(duNoise.Perlin1D_asWideVector3(0f, m_PositionTimeOffset));
                 }
+
+                if (warmUpOffset < 1f)
+                    deltaPosition = Vector3.Lerp(Vector3.zero, deltaPosition, warmUpOffset);
 
                 switch (transformMode)
                 {
@@ -242,6 +259,9 @@ namespace DustEngine
                     deltaRotation = rotationAmplitude * power;
                     deltaRotation.Scale(duNoise.Perlin1D_asWideVector3(0f, m_RotationTimeOffset));
                 }
+
+                if (warmUpOffset < 1f)
+                    deltaRotation = Vector3.Lerp(Vector3.zero, deltaRotation, warmUpOffset);
 
                 switch (transformMode)
                 {
@@ -288,6 +308,9 @@ namespace DustEngine
 
                     multScale = Vector3.Lerp(Vector3.one, multScale, power);
                 }
+
+                if (warmUpOffset < 1f)
+                    multScale = Vector3.Lerp(Vector3.one, multScale, warmUpOffset);
 
                 switch (transformMode)
                 {
@@ -351,10 +374,14 @@ namespace DustEngine
                 return Mathf.Clamp01(value);
             }
 
+            public static float WarmUpTime(float value)
+            {
+                return Mathf.Max(value, 0f);
+            }
+
             public static Vector3 ScaleAmplitude(Vector3 value)
             {
-                value = Vector3.Max(value, DuVector3.New(k_MinScaleValue));
-                return value;
+                return Vector3.Max(value, DuVector3.New(k_MinScaleValue));
             }
         }
     }

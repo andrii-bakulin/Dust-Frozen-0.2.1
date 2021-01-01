@@ -3,6 +3,7 @@
 ### Added
 
 - DuPulsate: added sleep time value
+- DuShake: added wakeUpTime value
 
 ### Fixed
 
