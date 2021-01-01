@@ -30,13 +30,15 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            if (DustGUI.FoldoutBegin("Tags", "DuColliderEvent.Tags"))
+            DustGUI.Header("Tags");
+            PropertyField(m_TagProcessingMode);
+
+            var tagProcessingMode = (DuColliderEvent.TagProcessingMode) m_TagProcessingMode.enumValueIndex;
+
+            if (tagProcessingMode != DuColliderEvent.TagProcessingMode.Ignore)
             {
-                PropertyField(m_TagProcessingMode);
                 PropertyField(m_ObjectTags);
-                Space();
             }
-            DustGUI.FoldoutEnd();
 
             Space();
 

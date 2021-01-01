@@ -9,8 +9,9 @@ namespace DustEngine
     {
         public enum TagProcessingMode
         {
-            Contains = 0,
-            NotContains = 1,
+            Ignore = 0,
+            Contains = 1,
+            NotContains = 2,
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -53,6 +54,9 @@ namespace DustEngine
 
         protected bool IsRequireSendEvent(GameObject otherGameObject)
         {
+            if (tagProcessingMode == TagProcessingMode.Ignore)
+                return true;
+
             if (Dust.IsNull(objectTags) || objectTags.Count == 0)
                 return true;
 
