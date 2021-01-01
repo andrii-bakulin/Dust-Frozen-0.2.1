@@ -4,6 +4,10 @@
 
 - DuPulsate: added sleep time value
 
+### Fixed
+
+- DustGUI: fixed when ExtraSlider & ExtraIntSlider broke values on multiple objects selection
+
 ### Dropped
 
 - Dropped DuCapture component (deprecated)
