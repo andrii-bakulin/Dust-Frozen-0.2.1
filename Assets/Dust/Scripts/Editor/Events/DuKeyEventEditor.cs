@@ -44,29 +44,17 @@ namespace DustEngine.DustEditor
 
             Space();
 
-            var titleOnKeyDown = "On Down" + (m_OnKeyDown.valUnityEvent.arraySize > 0 ? " (" + m_OnKeyDown.valUnityEvent.arraySize + ")" : "");
-            var titleOnKeyHold = "On Hold" + (m_OnKeyHold.valUnityEvent.arraySize > 0 ? " (" + m_OnKeyHold.valUnityEvent.arraySize + ")" : "");
-            var titleOnKeyUp   = "On Up"   + (m_OnKeyUp.valUnityEvent.arraySize   > 0 ? " (" + m_OnKeyUp.valUnityEvent.arraySize   + ")" : "");
+            var titleOnKeyDown = "Down" + (m_OnKeyDown.valUnityEvent.arraySize > 0 ? " (" + m_OnKeyDown.valUnityEvent.arraySize + ")" : "");
+            var titleOnKeyHold = "Hold" + (m_OnKeyHold.valUnityEvent.arraySize > 0 ? " (" + m_OnKeyHold.valUnityEvent.arraySize + ")" : "");
+            var titleOnKeyUp   = "Up"   + (m_OnKeyUp.valUnityEvent.arraySize   > 0 ? " (" + m_OnKeyUp.valUnityEvent.arraySize   + ")" : "");
 
             var tabIndex = DustGUI.Toolbar("DuKeyEvent.Events", new[] {titleOnKeyDown, titleOnKeyHold, titleOnKeyUp});
 
             switch (tabIndex)
             {
-                case 0:
-                    PropertyField(m_OnKeyDown);
-                    break;
-
-                case 1:
-                    PropertyField(m_OnKeyHold);
-                    break;
-
-                case 2:
-                    PropertyField(m_OnKeyUp);
-                    break;
-
-                default:
-                    // Nothing
-                    break;
+                case 0: PropertyField(m_OnKeyDown); break;
+                case 1: PropertyField(m_OnKeyHold); break;
+                case 2: PropertyField(m_OnKeyUp); break;
             }
 
             Space();
