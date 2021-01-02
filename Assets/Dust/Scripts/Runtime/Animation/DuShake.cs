@@ -152,7 +152,7 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private UpdateMode m_UpdateMode = UpdateMode.LateUpdate;
+        private UpdateMode m_UpdateMode = UpdateMode.Update;
         public UpdateMode updateMode
         {
             get => m_UpdateMode;
