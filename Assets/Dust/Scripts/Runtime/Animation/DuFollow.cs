@@ -92,7 +92,7 @@ namespace DustEngine
 #if UNITY_EDITOR
         void OnEnable()
         {
-            if (isEditorUpdatesEnabled)
+            if (isInEditorMode)
             {
                 EditorUpdateReset();
 
@@ -103,7 +103,7 @@ namespace DustEngine
 
         void OnDisable()
         {
-            if (isEditorUpdatesEnabled)
+            if (isInEditorMode)
             {
                 EditorApplication.update -= EditorUpdate;
             }
@@ -113,7 +113,7 @@ namespace DustEngine
         void Update()
         {
 #if UNITY_EDITOR
-            if (isEditorUpdatesEnabled && !updateInEditor) return;
+            if (isInEditorMode && !updateInEditor) return;
 #endif
 
             if (updateMode != UpdateMode.Update)
@@ -125,7 +125,7 @@ namespace DustEngine
         void LateUpdate()
         {
 #if UNITY_EDITOR
-            if (isEditorUpdatesEnabled && !updateInEditor) return;
+            if (isInEditorMode && !updateInEditor) return;
 #endif
 
             if (updateMode != UpdateMode.LateUpdate)

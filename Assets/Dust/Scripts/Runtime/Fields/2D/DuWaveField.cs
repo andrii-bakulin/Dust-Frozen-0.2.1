@@ -100,7 +100,7 @@ namespace DustEngine
 #if UNITY_EDITOR
         void OnEnable()
         {
-            if (isEditorUpdatesEnabled)
+            if (isInEditorMode)
             {
                 EditorUpdateReset();
 
@@ -111,7 +111,7 @@ namespace DustEngine
 
         void OnDisable()
         {
-            if (isEditorUpdatesEnabled)
+            if (isInEditorMode)
             {
                 EditorApplication.update -= EditorUpdate;
             }
@@ -136,7 +136,7 @@ namespace DustEngine
         void Update()
         {
 #if UNITY_EDITOR
-            if (isEditorUpdatesEnabled) return;
+            if (isInEditorMode) return;
 #endif
 
             m_OffsetDynamic += Time.deltaTime * animationSpeed;

@@ -110,7 +110,7 @@ namespace DustEngine
         void OnEnable()
         {
 #if UNITY_EDITOR
-            if (isEditorUpdatesEnabled)
+            if (isInEditorMode)
             {
                 EditorUpdateReset();
 
@@ -125,7 +125,7 @@ namespace DustEngine
         void OnDisable()
         {
 #if UNITY_EDITOR
-            if (isEditorUpdatesEnabled)
+            if (isInEditorMode)
             {
                 EditorApplication.update -= EditorUpdate;
             }
@@ -206,7 +206,7 @@ namespace DustEngine
         void Update()
         {
 #if UNITY_EDITOR
-            if (isEditorUpdatesEnabled) return;
+            if (isInEditorMode) return;
 #endif
 
             UpdateMeshPoints(Time.deltaTime);

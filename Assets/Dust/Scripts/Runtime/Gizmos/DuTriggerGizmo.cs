@@ -130,7 +130,7 @@ namespace DustEngine
 
         private void OnEnable()
         {
-            if (isEditorUpdatesEnabled)
+            if (isInEditorMode)
             {
                 EditorUpdateReset();
 
@@ -141,7 +141,7 @@ namespace DustEngine
 
         private void OnDisable()
         {
-            if (isEditorUpdatesEnabled)
+            if (isInEditorMode)
             {
                 EditorApplication.update -= EditorUpdate;
             }
@@ -159,7 +159,7 @@ namespace DustEngine
 
         private void Update()
         {
-            if (isEditorUpdatesEnabled) return;
+            if (isInEditorMode) return;
 
             UpdateState(Time.deltaTime);
         }

@@ -43,7 +43,7 @@ namespace DustEngine
         void Update()
         {
 #if UNITY_EDITOR
-            if (isEditorUpdatesEnabled && !updateInEditor) return;
+            if (isInEditorMode && !updateInEditor) return;
 #endif
 
             if (updateMode != UpdateMode.Update)
@@ -55,7 +55,7 @@ namespace DustEngine
         void LateUpdate()
         {
 #if UNITY_EDITOR
-            if (isEditorUpdatesEnabled && !updateInEditor) return;
+            if (isInEditorMode && !updateInEditor) return;
 #endif
 
             if (updateMode != UpdateMode.LateUpdate)

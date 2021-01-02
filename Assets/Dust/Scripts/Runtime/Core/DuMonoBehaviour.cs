@@ -150,7 +150,7 @@ namespace DustEngine
         private float editorUpdate_deltaTime;
         private double editorUpdate_lastTimeStamp;
 
-        protected bool isEditorUpdatesEnabled => !Application.isPlaying;
+        protected bool isInEditorMode => !Application.isPlaying;
 
         protected void EditorUpdateReset()
         {
