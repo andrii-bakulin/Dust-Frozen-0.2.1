@@ -23,17 +23,29 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private UpdateMode m_UpdateMode = UpdateMode.LateUpdate;
+        private UpdateMode m_UpdateMode = UpdateMode.Update;
         public UpdateMode updateMode
         {
             get => m_UpdateMode;
             set => m_UpdateMode = value;
         }
 
+        [SerializeField]
+        private bool m_UpdateInEditor = true;
+        public bool updateInEditor
+        {
+            get => m_UpdateInEditor;
+            set => m_UpdateInEditor = value;
+        }
+
         //--------------------------------------------------------------------------------------------------------------
 
         void Update()
         {
+#if UNITY_EDITOR
+            if (isEditorUpdatesEnabled && !updateInEditor) return;
+#endif
+
             if (updateMode != UpdateMode.Update)
                 return;
 
@@ -42,6 +54,10 @@ namespace DustEngine
 
         void LateUpdate()
         {
+#if UNITY_EDITOR
+            if (isEditorUpdatesEnabled && !updateInEditor) return;
+#endif
+
             if (updateMode != UpdateMode.LateUpdate)
                 return;
 

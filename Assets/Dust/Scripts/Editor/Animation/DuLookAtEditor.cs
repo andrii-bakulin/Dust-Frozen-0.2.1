@@ -11,6 +11,7 @@ namespace DustEngine.DustEditor
         private DuProperty m_UpVectorObject;
 
         private DuProperty m_UpdateMode;
+        private DuProperty m_UpdateInEditor;
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -28,6 +29,7 @@ namespace DustEngine.DustEditor
             m_UpVectorObject = FindProperty("m_UpVectorObject", "Up Vector Object");
 
             m_UpdateMode = FindProperty("m_UpdateMode", "Update Mode");
+            m_UpdateInEditor = FindProperty("m_UpdateInEditor", "Update In Editor");
         }
 
         public override void OnInspectorGUI()
@@ -42,6 +44,7 @@ namespace DustEngine.DustEditor
             Space();
 
             PropertyField(m_UpdateMode);
+            PropertyFieldOrLock(m_UpdateInEditor, Application.isPlaying);
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
