@@ -6,6 +6,7 @@
 - DuShake: added wakeUpTime value
 - Added new component DuKeyEvent
 - Added new component DuMouseEvent
+- Improve DuFollow: added speed mode, speed limit, offset, updateInEditor, etc
 
 ### Fixed
 
