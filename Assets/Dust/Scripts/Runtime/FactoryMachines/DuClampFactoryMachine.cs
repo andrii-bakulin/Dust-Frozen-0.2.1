@@ -118,10 +118,10 @@ namespace DustEngine
                 Vector3 endPosition = instanceState.position;
 
                 if (positionMode == ClampMode.MinOnly || positionMode == ClampMode.MinAndMax)
-                    endPosition = DuVector3.Max(endPosition, positionMin);
+                    endPosition = Vector3.Max(endPosition, positionMin);
 
                 if (positionMode == ClampMode.MaxOnly || positionMode == ClampMode.MinAndMax)
-                    endPosition = DuVector3.Min(endPosition, positionMax);
+                    endPosition = Vector3.Min(endPosition, positionMax);
 
                 instanceState.position = Vector3.LerpUnclamped(instanceState.position, endPosition, transferPower);
             }
@@ -134,10 +134,10 @@ namespace DustEngine
                 Vector3 endRotation = instanceState.rotation;
 
                 if (rotationMode == ClampMode.MinOnly || rotationMode == ClampMode.MinAndMax)
-                    endRotation = DuVector3.Max(endRotation, rotationMin);
+                    endRotation = Vector3.Max(endRotation, rotationMin);
 
                 if (rotationMode == ClampMode.MaxOnly || rotationMode == ClampMode.MinAndMax)
-                    endRotation = DuVector3.Min(endRotation, rotationMax);
+                    endRotation = Vector3.Min(endRotation, rotationMax);
 
                 instanceState.rotation = Vector3.LerpUnclamped(instanceState.rotation, endRotation, transferPower);
             }
@@ -150,10 +150,10 @@ namespace DustEngine
                 Vector3 endScale = instanceState.scale;
 
                 if (scaleMode == ClampMode.MinOnly || scaleMode == ClampMode.MinAndMax)
-                    endScale = DuVector3.Max(endScale, scaleMin);
+                    endScale = Vector3.Max(endScale, scaleMin);
 
                 if (scaleMode == ClampMode.MaxOnly || scaleMode == ClampMode.MinAndMax)
-                    endScale = DuVector3.Min(endScale, scaleMax);
+                    endScale = Vector3.Min(endScale, scaleMax);
 
                 instanceState.scale = Vector3.LerpUnclamped(instanceState.scale, endScale, transferPower);
             }

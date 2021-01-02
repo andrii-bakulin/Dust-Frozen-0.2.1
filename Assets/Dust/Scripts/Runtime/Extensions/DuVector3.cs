@@ -21,24 +21,6 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public static Vector3 Min(Vector3 value, Vector3 value2)
-        {
-            value.x = Mathf.Min(value.x, value2.x);
-            value.y = Mathf.Min(value.y, value2.y);
-            value.z = Mathf.Min(value.z, value2.z);
-            return value;
-        }
-
-        public static Vector3 Max(Vector3 value, Vector3 value2)
-        {
-            value.x = Mathf.Max(value.x, value2.x);
-            value.y = Mathf.Max(value.y, value2.y);
-            value.z = Mathf.Max(value.z, value2.z);
-            return value;
-        }
-
-        //--------------------------------------------------------------------------------------------------------------
-
         public static Vector3 Clamp(Vector3 value, Vector3 min, Vector3 max)
         {
             value.x = Mathf.Clamp(value.x, min.x, max.x);
