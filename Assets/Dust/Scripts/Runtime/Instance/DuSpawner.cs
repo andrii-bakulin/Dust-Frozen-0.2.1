@@ -8,10 +8,11 @@ namespace DustEngine
     {
         internal const float k_MinIntervalValue = 0.01f;
 
-        public enum IntervalMode
+        public enum SpawnEvent
         {
-            Fixed = 0,
-            Range = 1,
+            Manual = 0,
+            FixedInterval = 1,
+            IntervalInRange = 2,
         }
 
         public enum IterateMode
@@ -106,11 +107,11 @@ namespace DustEngine
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
-        private IntervalMode m_IntervalMode = IntervalMode.Fixed;
-        public IntervalMode intervalMode
+        private SpawnEvent m_SpawnEvent = SpawnEvent.FixedInterval;
+        public SpawnEvent spawnEvent
         {
-            get => m_IntervalMode;
-            set => m_IntervalMode = value;
+            get => m_SpawnEvent;
+            set => m_SpawnEvent = value;
         }
 
         [SerializeField]
@@ -128,6 +129,34 @@ namespace DustEngine
             get => m_IntervalRange;
             set => m_IntervalRange = value;
         }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        [SerializeField]
+        private bool m_MultipleSpawnEnabled = false;
+        public bool multipleSpawnEnabled
+        {
+            get => m_MultipleSpawnEnabled;
+            set => m_MultipleSpawnEnabled = value;
+        }
+
+        [SerializeField]
+        private DuIntRange m_MultipleSpawnCount = DuIntRange.oneToFive;
+        public DuIntRange multipleSpawnCount
+        {
+            get => m_MultipleSpawnCount;
+            set => m_MultipleSpawnCount = Normalizer.MultipleSpawnCount(value);
+        }
+
+        [SerializeField]
+        private int m_MultipleSpawnSeed = 0;
+        public int multipleSpawnSeed
+        {
+            get => m_MultipleSpawnSeed;
+            set => m_MultipleSpawnSeed = value;
+        }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
         private SpawnParentMode m_ParentMode = SpawnParentMode.Spawner;
@@ -153,14 +182,6 @@ namespace DustEngine
             set => m_SpawnOnAwake = value;
         }
 
-        [SerializeField]
-        private bool m_AllowMultiSpawn = false;
-        public bool allowMultiSpawn
-        {
-            get => m_AllowMultiSpawn;
-            set => m_AllowMultiSpawn = value;
-        }
-
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
@@ -173,11 +194,14 @@ namespace DustEngine
         private DuRandom m_SpawnObjectsRandom;
         private DuRandom spawnObjectsRandom => m_SpawnObjectsRandom ?? (m_SpawnObjectsRandom = new DuRandom(spawnObjectsSeed));
 
+        private DuRandom m_MultipleSpawnRandom;
+        private DuRandom multipleSpawnRandom => m_MultipleSpawnRandom ?? (m_MultipleSpawnRandom = new DuRandom(multipleSpawnSeed));
+
         private DuRandom m_SpawnIntervalRandom;
-        private DuRandom spawnIntervalRandom => m_SpawnIntervalRandom ?? (m_SpawnIntervalRandom = new DuRandom((int)(intervalRange.min*123f + intervalRange.max*456f)));
+        private DuRandom spawnIntervalRandom => m_SpawnIntervalRandom ?? (m_SpawnIntervalRandom = new DuRandom((int)(intervalRange.min*123.45f + intervalRange.max*456.78f)));
 
         private float m_SpawnTimer;
-        private float m_SpawnTimerLimit;
+        private float m_SpawnDelay;
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -186,37 +210,49 @@ namespace DustEngine
             if (spawnOnAwake)
                 Spawn();
 
-            m_SpawnTimerLimit = GetDelayLimit();
+            m_SpawnDelay = GetDelayLimit();
         }
 
         private void Update()
         {
+            if (spawnEvent == SpawnEvent.Manual)
+                return;
+
             m_SpawnTimer += Time.deltaTime;
 
+            if (m_SpawnDelay <= 0f || m_SpawnTimer < m_SpawnDelay)
+                return;
+
+            Spawn();
+
+            m_SpawnTimer = 0f;
+            m_SpawnDelay = GetDelayLimit();
+        }
+
+        public void Spawn()
+        {
             if (m_Limit > 0 && m_Count >= m_Limit)
                 return;
 
-            if (m_SpawnTimerLimit <= 0f || m_SpawnTimer < m_SpawnTimerLimit)
-                return;
-
-            if (allowMultiSpawn)
+            if (multipleSpawnEnabled)
             {
-                while (m_SpawnTimer > m_SpawnTimerLimit)
+                int spawnCount = multipleSpawnRandom.Range(multipleSpawnCount.min, multipleSpawnCount.max + 1);
+
+                if (m_Limit > 0)
+                    spawnCount = Mathf.Min(spawnCount, m_Limit - m_Count);
+
+                for (int i = 0; i < spawnCount; i++)
                 {
-                    Spawn();
-                    m_SpawnTimer -= m_SpawnTimerLimit;
+                    SpawnSingleObject();
                 }
             }
             else
             {
-                Spawn();
-                m_SpawnTimer = 0f;
+                SpawnSingleObject();
             }
-
-            m_SpawnTimerLimit = GetDelayLimit();
         }
 
-        public GameObject Spawn()
+        public GameObject SpawnSingleObject()
         {
             GameObject useSpawnPoint = null;
             GameObject useSpawnObject = null;
@@ -300,17 +336,23 @@ namespace DustEngine
 
         private float GetDelayLimit()
         {
-            float delay = 0f;
+            float delay;
 
-            switch (intervalMode)
+            switch (spawnEvent)
             {
-                default:
-                case IntervalMode.Fixed:
+                case SpawnEvent.Manual:
+                    return 0f;
+
+                case SpawnEvent.FixedInterval:
                     delay = interval;
                     break;
 
-                case IntervalMode.Range:
+                case SpawnEvent.IntervalInRange:
                     delay = spawnIntervalRandom.Range(intervalRange.min, intervalRange.max);
+                    break;
+
+                default:
+                    delay = k_MinIntervalValue;
                     break;
             }
 
@@ -333,6 +375,13 @@ namespace DustEngine
             public static int Limit(int value)
             {
                 return Mathf.Max(0, value);
+            }
+
+            public static DuIntRange MultipleSpawnCount(DuIntRange range)
+            {
+                range.min = Mathf.Max(range.min, 0);
+                range.max = Mathf.Max(range.max, range.min);
+                return range;
             }
 
             public static float IntervalValue(float value)

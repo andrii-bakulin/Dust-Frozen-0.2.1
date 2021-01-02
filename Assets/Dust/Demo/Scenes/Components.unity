@@ -979,24 +979,27 @@ MonoBehaviour:
   m_SpawnPointMode: 1
   m_SpawnPoints:
   - {fileID: 16861171}
-  - {fileID: 1403010353}
   m_SpawnPointsIterate: 0
   m_SpawnPointsIteration: 0
-  m_SpawnPointsSeed: 0
+  m_SpawnPointsSeed: -12345
   m_SpawnObjects:
   - {fileID: 2362738959988550132, guid: e3b3ef1688e5545f2b7e70f021a14209, type: 3}
   m_SpawnObjectsIterate: 0
   m_SpawnObjectsIteration: 0
-  m_SpawnObjectsSeed: 0
-  m_IntervalMode: 0
+  m_SpawnObjectsSeed: -44318
+  m_SpawnEvent: 1
   m_Interval: 1
   m_IntervalRange:
     m_Min: 1
     m_Max: 2
+  m_MultipleSpawnEnabled: 1
+  m_MultipleSpawnCount:
+    m_Min: 3
+    m_Max: 8
+  m_MultipleSpawnSeed: 0
   m_ParentMode: 0
-  m_Limit: 0
+  m_Limit: 25
   m_SpawnOnAwake: 0
-  m_AllowMultiSpawn: 0
   m_Count: 0
 --- !u!1 &851263602
 GameObject:

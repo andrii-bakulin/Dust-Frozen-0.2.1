@@ -280,6 +280,9 @@ namespace DustEngine.DustEditor
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         public static bool PropertyFieldRange(DuProperty duProperty)
+            => PropertyFieldRange(duProperty, "Range Min", "Range Max");
+
+        public static bool PropertyFieldRange(DuProperty duProperty, string titleRangeMin, string titleRangeMax)
         {
             if (Dust.IsNull(duProperty.property))
             {
@@ -287,8 +290,8 @@ namespace DustEngine.DustEditor
                 return false;
             }
 
-            duProperty.isChanged |= PropertyField(duProperty.FindInnerProperty("m_Min"), "Range Min");
-            duProperty.isChanged |= PropertyField(duProperty.FindInnerProperty("m_Max"), "Range Max");
+            duProperty.isChanged |= PropertyField(duProperty.FindInnerProperty("m_Min"), titleRangeMin);
+            duProperty.isChanged |= PropertyField(duProperty.FindInnerProperty("m_Max"), titleRangeMax);
             return duProperty.isChanged;
         }
 
