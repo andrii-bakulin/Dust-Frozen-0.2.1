@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace DustEngine
 {
@@ -32,6 +33,13 @@ namespace DustEngine
             Spawner = 0,
             SpawnPoint = 1,
             World = 2,
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        [System.Serializable]
+        public class SpawnerEvent : UnityEvent<GameObject>
+        {
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -185,6 +193,12 @@ namespace DustEngine
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
+        private SpawnerEvent m_OnSpawn = null;
+        public SpawnerEvent onSpawn => m_OnSpawn;
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        [SerializeField]
         private int m_Count = 0;
         public int count => m_Count;
 
@@ -331,6 +345,12 @@ namespace DustEngine
             }
 
             m_Count++;
+
+            if (Dust.IsNotNull(onSpawn) && onSpawn.GetPersistentEventCount() > 0)
+            {
+                onSpawn.Invoke(obj);
+            }
+
             return obj;
         }
 

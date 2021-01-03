@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEditor;
-using UnityEngine.UIElements;
 
 namespace DustEngine.DustEditor
 {
@@ -29,6 +28,8 @@ namespace DustEngine.DustEditor
         private DuProperty m_ParentMode;
         private DuProperty m_Limit;
         private DuProperty m_SpawnOnAwake;
+
+        private DuProperty m_OnSpawn;
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -65,6 +66,8 @@ namespace DustEngine.DustEditor
             m_ParentMode = FindProperty("m_ParentMode", "Set Parent As");
             m_Limit = FindProperty("m_Limit", "Total Limit");
             m_SpawnOnAwake = FindProperty("m_SpawnOnAwake", "Spawn On Awake");
+
+            m_OnSpawn = FindProperty("m_OnSpawn", "On Spawn");
         }
 
         public override void OnInspectorGUI()
@@ -163,12 +166,20 @@ namespace DustEngine.DustEditor
             PropertyField(m_SpawnOnAwake);
             PropertyField(m_ParentMode);
 
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            Space();
+
+            if (DustGUI.FoldoutBegin("Events", "DuSpawner.Events", false))
+            {
+                PropertyField(m_OnSpawn);
+            }
+            DustGUI.FoldoutEnd();
+
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             if (Application.isPlaying)
             {
-                Space();
-
                 if (DustGUI.FoldoutBegin("Debug", "DuSpawner.Debug"))
                 {
                     DustGUI.BeginHorizontal();
@@ -201,7 +212,7 @@ namespace DustEngine.DustEditor
                 DustGUI.FoldoutEnd();
             }
 
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // Validate & Normalize Data
 
             if (m_Interval.isChanged)
