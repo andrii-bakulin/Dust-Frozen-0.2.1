@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 namespace DustEngine
 {
@@ -17,7 +18,15 @@ namespace DustEngine
         public enum VolumeCenterMode
         {
             StartPosition = 0,
-            World = 1,
+            FixedWorldPosition = 1,
+            SourceObject = 2,
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        [System.Serializable]
+        public class DestroyerEvent : UnityEvent<GameObject>
+        {
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -63,6 +72,14 @@ namespace DustEngine
         }
 
         [SerializeField]
+        private Vector3 m_VolumeOffset = Vector3.zero;
+        public Vector3 volumeOffset
+        {
+            get => m_VolumeOffset;
+            set => m_VolumeOffset = value;
+        }
+
+        [SerializeField]
         private Vector3 m_VolumeSize = Vector3.one;
         public Vector3 volumeSize
         {
@@ -70,20 +87,56 @@ namespace DustEngine
             set => m_VolumeSize = Normalizer.VolumeSize(value);
         }
 
+        [SerializeField]
+        private GameObject m_VolumeSourceCenter = null;
+        public GameObject volumeSourceCenter
+        {
+            get => m_VolumeSourceCenter;
+            set => m_VolumeSourceCenter = value;
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        [SerializeField]
+        private bool m_DisableColliders = true;
+        public bool disableColliders
+        {
+            get => m_DisableColliders;
+            set => m_DisableColliders = value;
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        [SerializeField]
+        private DestroyerEvent m_OnDestroy = null;
+        public DestroyerEvent onDestroy => m_OnDestroy;
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        private float m_TimeAlive;
+        public float timeAlive => m_TimeAlive;
+
+        private float m_TimeLimit;
+        public float timeLimit => m_TimeLimit;
+
         //--------------------------------------------------------------------------------------------------------------
 
         private void Start()
         {
+            m_TimeAlive = 0f;
+            m_TimeLimit = 0f;
+
             switch (destroyMode)
             {
                 default:
                 case DestroyMode.Manual:
                 case DestroyMode.Time:
                     // Nothing need to do...
+                    m_TimeLimit = timeout;
                     break;
 
                 case DestroyMode.TimeRange:
-                    m_Timeout = Random.Range(timeoutRange.min, timeoutRange.max);
+                    m_TimeLimit = Random.Range(timeoutRange.min, timeoutRange.max);
                     break;
 
                 case DestroyMode.AliveZone:
@@ -105,37 +158,49 @@ namespace DustEngine
 
                 case DestroyMode.Time:
                 case DestroyMode.TimeRange:
-                    m_Timeout -= Time.deltaTime;
+                    m_TimeAlive += Time.deltaTime;
 
-                    if (m_Timeout <= 0f)
-                        DestroyNow();
+                    if (m_TimeAlive >= m_TimeLimit)
+                        Destroy();
                     break;
 
                 case DestroyMode.AliveZone:
                     if (!IsInsideVolume())
-                        DestroyNow();
+                        Destroy();
                     break;
 
                 case DestroyMode.DeadZone:
                     if (IsInsideVolume())
-                        DestroyNow();
+                        Destroy();
                     break;
             }
         }
 
         protected bool IsInsideVolume()
         {
-            Vector3 pos = transform.position;
+            Vector3 selfPos = transform.position;
+
+            Vector3 volCenter = volumeCenter;
             Vector3 halfSize = volumeSize / 2f;
 
-            if (volumeCenter.x - halfSize.x > pos.x) return false;
-            if (volumeCenter.x + halfSize.x < pos.x) return false;
+            if (volumeCenterMode == VolumeCenterMode.SourceObject)
+            {
+                if (Dust.IsNull(volumeSourceCenter))
+                    return false;
 
-            if (volumeCenter.y - halfSize.y > pos.y) return false;
-            if (volumeCenter.y + halfSize.y < pos.y) return false;
+                volCenter = volumeSourceCenter.transform.position;
+            }
 
-            if (volumeCenter.z - halfSize.z > pos.z) return false;
-            if (volumeCenter.z + halfSize.z < pos.z) return false;
+            volCenter += volumeOffset;
+
+            if (volCenter.x - halfSize.x > selfPos.x) return false;
+            if (volCenter.x + halfSize.x < selfPos.x) return false;
+
+            if (volCenter.y - halfSize.y > selfPos.y) return false;
+            if (volCenter.y + halfSize.y < selfPos.y) return false;
+
+            if (volCenter.z - halfSize.z > selfPos.z) return false;
+            if (volCenter.z + halfSize.z < selfPos.z) return false;
 
             return true;
         }
@@ -147,8 +212,6 @@ namespace DustEngine
             {
                 default:
                 case DestroyMode.Manual:
-                    break;
-
                 case DestroyMode.Time:
                 case DestroyMode.TimeRange:
                     return;
@@ -162,25 +225,56 @@ namespace DustEngine
                     break;
             }
 
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            Vector3 gizmoCenter;
+
             switch (volumeCenterMode)
             {
                 case VolumeCenterMode.StartPosition:
-                    Gizmos.DrawWireCube(Application.isPlaying ? volumeCenter : transform.position, volumeSize);
+                    gizmoCenter = Application.isPlaying ? volumeCenter : transform.position;
                     break;
 
-                case VolumeCenterMode.World:
-                    Gizmos.DrawWireCube(volumeCenter, volumeSize);
+                case VolumeCenterMode.FixedWorldPosition:
+                    gizmoCenter = volumeCenter;
+                    break;
+
+                case VolumeCenterMode.SourceObject:
+                    if (Dust.IsNull(volumeSourceCenter))
+                        return;
+
+                    gizmoCenter = volumeSourceCenter.transform.position;
                     break;
 
                 default:
-                    break;
+                    return;
             }
+
+            Gizmos.DrawWireCube(gizmoCenter + volumeOffset, volumeSize);
         }
 #endif
 
-        public void DestroyNow()
+        //--------------------------------------------------------------------------------------------------------------
+
+        public void Destroy()
         {
+            if (Dust.IsNotNull(onDestroy) && onDestroy.GetPersistentEventCount() > 0)
+            {
+                onDestroy.Invoke(gameObject);
+            }
+
+            if (disableColliders)
+            {
+                Collider[] colliders = gameObject.GetComponents<Collider>();
+
+                foreach (var coll in colliders)
+                {
+                    coll.enabled = false;
+                }
+            }
+
             this.enabled = false;
+
             Destroy(this.gameObject);
         }
 

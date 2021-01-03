@@ -14,7 +14,15 @@ namespace DustEngine.DustEditor
 
         private DuProperty m_VolumeCenterMode;
         private DuProperty m_VolumeCenter;
+        private DuProperty m_VolumeOffset;
         private DuProperty m_VolumeSize;
+        private DuProperty m_VolumeSourceCenter;
+
+        private DuProperty m_DisableColliders;
+
+        private DuProperty m_OnDestroy;
+
+        private DuDestroyer.DestroyMode destroyMode => (DuDestroyer.DestroyMode) m_DestroyMode.enumValueIndex;
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -35,9 +43,15 @@ namespace DustEngine.DustEditor
             m_Timeout = FindProperty("m_Timeout", "Timeout");
             m_TimeoutRange = FindProperty("m_TimeoutRange", "Timeout Range");
 
-            m_VolumeCenterMode = FindProperty("m_VolumeCenterMode", "Volume Center Mode");
+            m_VolumeCenterMode = FindProperty("m_VolumeCenterMode", "Volume Center At");
             m_VolumeCenter = FindProperty("m_VolumeCenter", "Center");
+            m_VolumeOffset = FindProperty("m_VolumeOffset", "Offset");
             m_VolumeSize = FindProperty("m_VolumeSize", "Size");
+            m_VolumeSourceCenter = FindProperty("m_VolumeSourceCenter", "Center Source Object");
+
+            m_DisableColliders = FindProperty("m_DisableColliders", "Disable Colliders");
+
+            m_OnDestroy = FindProperty("m_OnDestroy", "On Destroy");
         }
 
         public override void OnInspectorGUI()
@@ -48,10 +62,10 @@ namespace DustEngine.DustEditor
 
             PropertyField(m_DestroyMode);
 
-            switch ((DuDestroyer.DestroyMode) m_DestroyMode.enumValueIndex)
+            switch (destroyMode)
             {
                 case DuDestroyer.DestroyMode.Manual:
-                    DustGUI.HelpBoxInfo("To destroy object you need call DestroyNow() method");
+                    // Nothing need to show here
                     break;
 
                 case DuDestroyer.DestroyMode.Time:
@@ -59,7 +73,7 @@ namespace DustEngine.DustEditor
                     break;
 
                 case DuDestroyer.DestroyMode.TimeRange:
-                    PropertyFieldRange(m_TimeoutRange);
+                    PropertyFieldRange(m_TimeoutRange, "Timeout Range Min", "Timeout Range Max");
                     break;
 
                 case DuDestroyer.DestroyMode.AliveZone:
@@ -72,22 +86,92 @@ namespace DustEngine.DustEditor
                             if (Application.isPlaying)
                                 PropertyFieldOrLock(m_VolumeCenter, true);
                             else
-                                DustGUI.StaticTextField("Center", "Will be set up from object position when it'll appear in scene");
+                                DustGUI.StaticTextField("Center", "Self position when object appears in scene");
+                            PropertyField(m_VolumeOffset);
                             PropertyField(m_VolumeSize, "Size");
                             break;
 
-                        case DuDestroyer.VolumeCenterMode.World:
+                        case DuDestroyer.VolumeCenterMode.FixedWorldPosition:
                             PropertyField(m_VolumeCenter);
+                            PropertyField(m_VolumeOffset);
                             PropertyField(m_VolumeSize);
                             break;
 
-                        default:
+                        case DuDestroyer.VolumeCenterMode.SourceObject:
+                            PropertyField(m_VolumeSourceCenter);
+                            PropertyField(m_VolumeOffset);
+                            PropertyField(m_VolumeSize);
                             break;
                     }
                     break;
 
                 default:
+                    return;
+            }
+
+            Space();
+
+            PropertyField(m_DisableColliders);
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            Space();
+
+            if (DustGUI.FoldoutBegin("Events", "DuDestroyer.Events", false))
+            {
+                PropertyField(m_OnDestroy);
+            }
+            DustGUI.FoldoutEnd();
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            switch (destroyMode)
+            {
+                case DuDestroyer.DestroyMode.Manual:
+                    Space();
+                    DustGUI.HelpBoxInfo("To destroy this GameObject call Destroy() method");
                     break;
+
+                case DuDestroyer.DestroyMode.Time:
+                case DuDestroyer.DestroyMode.TimeRange:
+                    // Nothing need to show here
+                    break;
+
+                case DuDestroyer.DestroyMode.AliveZone:
+                    Space();
+                    DustGUI.HelpBoxInfo("GameObject will be destroyed\nwhen it will leave Alive Zone");
+                    break;
+
+                case DuDestroyer.DestroyMode.DeadZone:
+                    Space();
+                    DustGUI.HelpBoxInfo("GameObject will be destroyed\nwhen it will get inside Dead Zone");
+                    break;
+
+                default:
+                    return;
+            }
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            if (Application.isPlaying && targets.Length == 1)
+            {
+                if (destroyMode == DuDestroyer.DestroyMode.Time || destroyMode == DuDestroyer.DestroyMode.TimeRange)
+                {
+                    var main = target as DuDestroyer;
+
+                    if (main.timeLimit > 0)
+                    {
+                        Space();
+
+                        var progressBarState = Mathf.Max(1f - main.timeAlive / main.timeLimit, 0f);
+                        var progressBarTitle = Mathf.Max(main.timeLimit - main.timeAlive, 0f).ToString("F1") + " sec";
+
+                        var rect = EditorGUILayout.GetControlRect(false, EditorGUIUtility.singleLineHeight);
+                        EditorGUI.ProgressBar(rect, progressBarState, progressBarTitle);
+
+                        DustGUI.ForcedRedrawInspector(this);
+                    }
+                }
             }
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
