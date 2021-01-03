@@ -15,7 +15,7 @@ namespace DustEngine.DustEditor
         void OnEnable()
         {
             m_ObjectTags = FindProperty("m_ObjectTags", "Object Tags");
-            m_TagProcessingMode = FindProperty("m_TagProcessingMode", "Processing Mode");
+            m_TagProcessingMode = FindProperty("m_TagProcessingMode", "Tag Check");
 
             m_OnEnter = FindProperty("m_OnEnter", "On Enter Callbacks");
             m_OnStay = FindProperty("m_OnStay", "On Stay Callbacks");
@@ -30,7 +30,7 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            DustGUI.Header("Tags");
+            DustGUI.Header("Tag");
             PropertyField(m_TagProcessingMode);
 
             var tagProcessingMode = (DuColliderEvent.TagProcessingMode) m_TagProcessingMode.enumValueIndex;

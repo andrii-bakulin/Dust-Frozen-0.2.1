@@ -15,7 +15,7 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        [MenuItem("Dust/Events/Key Event")]
+        [MenuItem("Dust/Events/On Mouse Button")]
         public static DuKeyEvent AddComponent()
         {
             return AddComponentByEventType(typeof(DuKeyEvent)) as DuKeyEvent;

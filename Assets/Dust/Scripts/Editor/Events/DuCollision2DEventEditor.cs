@@ -7,7 +7,7 @@ namespace DustEngine.DustEditor
     [CanEditMultipleObjects]
     public class DuCollision2DEventEditor : DuColliderEventEditor
     {
-        [MenuItem("Dust/Events/Collision Event 2D")]
+        [MenuItem("Dust/Events/On Collision 2D")]
         public static DuCollision2DEvent AddComponent()
         {
             return AddComponentByEventType(typeof(DuCollision2DEvent)) as DuCollision2DEvent;

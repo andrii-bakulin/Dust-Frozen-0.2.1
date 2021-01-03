@@ -2,7 +2,7 @@
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Events/Trigger Event")]
+    [AddComponentMenu("Dust/Events/On Trigger Event")]
     public class DuTriggerEvent : DuColliderEvent
     {
         [SerializeField]

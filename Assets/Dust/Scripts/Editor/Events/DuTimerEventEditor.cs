@@ -15,7 +15,7 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        [MenuItem("Dust/Events/Timer Event")]
+        [MenuItem("Dust/Events/On Timer")]
         public static DuTimerEvent AddComponent()
         {
             if (Dust.IsNull(Selection.activeGameObject))

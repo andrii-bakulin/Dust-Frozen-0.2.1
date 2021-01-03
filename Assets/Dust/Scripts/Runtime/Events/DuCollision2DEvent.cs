@@ -2,7 +2,7 @@
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Events/Collision Event 2D")]
+    [AddComponentMenu("Dust/Events/On Collision Event 2D")]
     public class DuCollision2DEvent : DuColliderEvent
     {
         [SerializeField]

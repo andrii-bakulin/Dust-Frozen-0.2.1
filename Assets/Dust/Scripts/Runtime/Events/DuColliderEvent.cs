@@ -43,7 +43,7 @@ namespace DustEngine
         public List<string> objectTags => m_ObjectTags;
 
         [SerializeField]
-        private TagProcessingMode m_TagProcessingMode = TagProcessingMode.Contains;
+        private TagProcessingMode m_TagProcessingMode = TagProcessingMode.Ignore;
         public TagProcessingMode tagProcessingMode
         {
             get => m_TagProcessingMode;

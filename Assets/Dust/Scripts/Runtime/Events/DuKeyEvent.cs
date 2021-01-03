@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Events/Key Event")]
+    [AddComponentMenu("Dust/Events/On Key Event")]
     public class DuKeyEvent : DuEvent
     {
         [SerializeField]
