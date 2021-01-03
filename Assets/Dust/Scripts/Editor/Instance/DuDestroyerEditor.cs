@@ -128,7 +128,6 @@ namespace DustEngine.DustEditor
             switch (destroyMode)
             {
                 case DuDestroyer.DestroyMode.Manual:
-                    Space();
                     DustGUI.HelpBoxInfo("To destroy this GameObject call Destroy() method");
                     break;
 
@@ -138,12 +137,10 @@ namespace DustEngine.DustEditor
                     break;
 
                 case DuDestroyer.DestroyMode.AliveZone:
-                    Space();
                     DustGUI.HelpBoxInfo("GameObject will be destroyed\nwhen it will leave Alive Zone");
                     break;
 
                 case DuDestroyer.DestroyMode.DeadZone:
-                    Space();
                     DustGUI.HelpBoxInfo("GameObject will be destroyed\nwhen it will get inside Dead Zone");
                     break;
 
@@ -161,8 +158,6 @@ namespace DustEngine.DustEditor
 
                     if (main.timeLimit > 0)
                     {
-                        Space();
-
                         var progressBarState = Mathf.Max(1f - main.timeAlive / main.timeLimit, 0f);
                         var progressBarTitle = Mathf.Max(main.timeLimit - main.timeAlive, 0f).ToString("F1") + " sec";
 
