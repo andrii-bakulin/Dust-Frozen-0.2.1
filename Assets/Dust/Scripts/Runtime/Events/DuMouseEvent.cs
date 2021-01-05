@@ -9,14 +9,15 @@ namespace DustEngine
     {
         public enum MouseButtonIndex
         {
-            Button0 = 0,
-            Button1 = 1
+            Primary = 0,
+            Secondary = 1,
+            Middle = 2,
         }
 
         //--------------------------------------------------------------------------------------------------------------
 
         [SerializeField]
-        private MouseButtonIndex m_MouseButtonIndex = MouseButtonIndex.Button0;
+        private MouseButtonIndex m_MouseButtonIndex = MouseButtonIndex.Primary;
         public MouseButtonIndex mouseButtonIndex
         {
             get => m_MouseButtonIndex;
