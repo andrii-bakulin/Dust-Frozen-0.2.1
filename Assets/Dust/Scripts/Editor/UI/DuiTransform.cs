@@ -38,8 +38,6 @@ namespace DustEngine.DustEditor
             DestroyImmediate(defaultEditor);
         }
 
-        // @DUST.todo: Show world transform data
-        // @DUST.todo: Show mesh info + for children
         public override void OnInspectorGUI()
         {
             defaultEditor.OnInspectorGUI();
