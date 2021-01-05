@@ -20,14 +20,15 @@ namespace DustEngine.DustEditor.UI
 
         private static readonly string[] resourcePaths =
         {
+            "Components/Animations/",
             "Components/Deformers/",
             "Components/Events/",
             "Components/Factory/",
-            "Components/FactoryMachine/",
+            "Components/FactoryMachines/",
             "Components/Fields/",
             "Components/Gizmos/",
             "Components/Helpers/",
-            "Components/Utilities/",
+            "Components/Instances/",
             "Components/",
         };
 
