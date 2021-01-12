@@ -9,11 +9,19 @@ namespace DustEngine
     {
         public enum MessagePosition
         {
-            Top,
-            Bottom,
-            Left,
-            Right,
-            Center,
+            Top = 0,
+            Bottom = 1,
+            Left = 2,
+            Right = 3,
+            Center = 4,
+        }
+
+        public enum DebugLog
+        {
+            None = 0,
+            Notice = 1,
+            Warning = 2,
+            Error = 3,
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -120,6 +128,16 @@ namespace DustEngine
             set => m_Center = value;
         }
 
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        [SerializeField]
+        private DebugLog m_DebugLog = DebugLog.None;
+        public DebugLog debugLog
+        {
+            get => m_DebugLog;
+            set => m_DebugLog = value;
+        }
+
         //--------------------------------------------------------------------------------------------------------------
 
 #if UNITY_EDITOR
@@ -182,6 +200,26 @@ namespace DustEngine
         {
             m_TriggerState = 1.0f;
             m_Message = newMessage;
+
+            switch (debugLog)
+            {
+                default:
+                case DebugLog.None:
+                    // Ignore:
+                    break;
+
+                case DebugLog.Notice:
+                    Debug.Log(gameObject.name + ": " + newMessage);
+                    break;
+
+                case DebugLog.Warning:
+                    Debug.LogWarning(gameObject.name + ": " + newMessage);
+                    break;
+
+                case DebugLog.Error:
+                    Debug.LogError(gameObject.name + ": " + newMessage);
+                    break;
+            }
         }
 #endif
 

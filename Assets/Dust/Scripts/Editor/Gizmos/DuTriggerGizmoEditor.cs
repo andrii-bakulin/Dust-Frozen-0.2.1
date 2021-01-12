@@ -23,6 +23,8 @@ namespace DustEngine.DustEditor
         private DuProperty m_FalloffDuration;
         private DuProperty m_Center;
 
+        private DuProperty m_DebugLog;
+
         //--------------------------------------------------------------------------------------------------------------
 
         [MenuItem("Dust/Gizmos/Trigger")]
@@ -52,6 +54,8 @@ namespace DustEngine.DustEditor
 
             m_FalloffDuration = FindProperty("m_FalloffDuration", "Falloff Duration");
             m_Center = FindProperty("m_Center", "Center");
+
+            m_DebugLog = FindProperty("m_DebugLog", "Write To Console As");
         }
 
         public override void OnInspectorGUI()
@@ -94,6 +98,10 @@ namespace DustEngine.DustEditor
 
             PropertyExtendedSlider(m_FalloffDuration, 0.01f, 1.0f, +0.01f, 0.01f);
             PropertyField(m_Center);
+
+            Space();
+
+            PropertyField(m_DebugLog);
 
             Space();
 
