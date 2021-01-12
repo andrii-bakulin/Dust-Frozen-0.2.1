@@ -30,7 +30,7 @@ namespace DustEngine.DustEditor
 
         static DuClampFactoryMachineEditor()
         {
-            DuPopupButtons.AddFactoryMachine(typeof(DuClampFactoryMachine), "Clamp");
+            DuFactoryMachinesPopupButtons.AddMachine(typeof(DuClampFactoryMachine), "Clamp");
         }
 
         [MenuItem("Dust/Factory/Machines/Clamp")]

@@ -18,7 +18,7 @@ namespace DustEngine.DustEditor
 
         static DuTimeFieldEditor()
         {
-            DuPopupButtons.AddBasicField(typeof(DuTimeField), "Time");
+            DuFieldsPopupButtons.AddBasicField(typeof(DuTimeField), "Time");
         }
 
         [MenuItem("Dust/Fields/Basic Fields/Time")]

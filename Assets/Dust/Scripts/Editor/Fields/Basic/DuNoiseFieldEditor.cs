@@ -26,7 +26,7 @@ namespace DustEngine.DustEditor
 
         static DuNoiseFieldEditor()
         {
-            DuPopupButtons.AddBasicField(typeof(DuNoiseField), "Noise");
+            DuFieldsPopupButtons.AddBasicField(typeof(DuNoiseField), "Noise");
         }
 
         [MenuItem("Dust/Fields/Basic Fields/Noise")]

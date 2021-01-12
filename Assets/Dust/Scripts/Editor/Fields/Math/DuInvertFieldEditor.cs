@@ -14,7 +14,7 @@ namespace DustEngine.DustEditor
 
         static DuInvertFieldEditor()
         {
-            DuPopupButtons.AddMathField(typeof(DuInvertField), "Invert");
+            DuFieldsPopupButtons.AddMathField(typeof(DuInvertField), "Invert");
         }
 
         //--------------------------------------------------------------------------------------------------------------

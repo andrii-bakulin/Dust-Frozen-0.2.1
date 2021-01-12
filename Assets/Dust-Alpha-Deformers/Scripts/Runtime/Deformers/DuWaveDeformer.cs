@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
+#if DUST_ALPHA_DEFORMERS
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Deformers/Wave Deformer")]
@@ -257,3 +258,4 @@ namespace DustEngine
 #endif
     }
 }
+#endif

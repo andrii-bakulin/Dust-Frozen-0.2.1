@@ -14,7 +14,7 @@ namespace DustEngine.DustEditor
 
         static DuCubeFieldEditor()
         {
-            DuPopupButtons.AddSpace3DField(typeof(DuCubeField), "Cube");
+            DuFieldsPopupButtons.Add3DField(typeof(DuCubeField), "Cube");
         }
 
         [MenuItem("Dust/Fields/3D Fields/Cube")]

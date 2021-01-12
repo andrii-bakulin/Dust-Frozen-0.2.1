@@ -16,16 +16,20 @@ namespace DustEngine.DustEditor
 
         public static GameObject AddFieldComponentByType(GameObject activeGameObject, System.Type duFieldType)
         {
+#if DUST_ALPHA_DEFORMERS
             DuDeformer selectedDeformer = null;
+#endif
             DuFieldsSpace selectedFieldsSpace = null;
             DuBasicFactoryMachine selectedFactoryMachine = null;
 
             if (Dust.IsNotNull(activeGameObject))
             {
+#if DUST_ALPHA_DEFORMERS
                 selectedDeformer = activeGameObject.GetComponent<DuDeformer>();
 
                 if (Dust.IsNull(selectedDeformer) && Dust.IsNotNull(activeGameObject.transform.parent))
                     selectedDeformer = activeGameObject.transform.parent.GetComponent<DuDeformer>();
+#endif
 
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -46,12 +50,15 @@ namespace DustEngine.DustEditor
             {
                 DuField field = gameObject.AddComponent(duFieldType) as DuField;
 
+#if DUST_ALPHA_DEFORMERS
                 if (Dust.IsNotNull(selectedDeformer))
                 {
                     field.transform.parent = selectedDeformer.transform;
                     selectedDeformer.fieldsMap.AddField(field);
                 }
-                else if (Dust.IsNotNull(selectedFieldsSpace))
+                else
+#endif
+                if (Dust.IsNotNull(selectedFieldsSpace))
                 {
                     field.transform.parent = selectedFieldsSpace.transform;
                     selectedFieldsSpace.fieldsMap.AddField(field);

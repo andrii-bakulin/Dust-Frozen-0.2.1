@@ -16,7 +16,7 @@ namespace DustEngine.DustEditor
 
         static DuConeFieldEditor()
         {
-            DuPopupButtons.AddSpace3DField(typeof(DuConeField), "Cone");
+            DuFieldsPopupButtons.Add3DField(typeof(DuConeField), "Cone");
         }
 
         [MenuItem("Dust/Fields/3D Fields/Cone")]

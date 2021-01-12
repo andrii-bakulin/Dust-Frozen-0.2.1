@@ -92,9 +92,11 @@ namespace DustEngine
         public enum FieldsMapMode
         {
             Custom = 0,
-            Deformer = 1,
+            FieldsSpace = 1,
             FactoryMachine = 2,
-            FieldsSpace = 3,
+#if DUST_ALPHA_DEFORMERS
+            Deformer = 3,
+#endif
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -151,6 +153,7 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
+#if DUST_ALPHA_DEFORMERS
         public static DuFieldsMap Deformer()
         {
             return new DuFieldsMap
@@ -163,6 +166,7 @@ namespace DustEngine
                 defaultPower = 1f,
             };
         }
+#endif
 
         public static DuFieldsMap FactoryMachine()
         {

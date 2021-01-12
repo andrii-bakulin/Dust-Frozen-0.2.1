@@ -12,7 +12,7 @@ namespace DustEngine.DustEditor
 
         static DuRemapFieldEditor()
         {
-            DuPopupButtons.AddMathField(typeof(DuRemapField), "Remap");
+            DuFieldsPopupButtons.AddMathField(typeof(DuRemapField), "Remap");
         }
 
         //--------------------------------------------------------------------------------------------------------------

@@ -25,7 +25,7 @@ namespace DustEngine.DustEditor
 
         static DuRadialFieldEditor()
         {
-            DuPopupButtons.AddSpace2DField(typeof(DuRadialField), "Radial");
+            DuFieldsPopupButtons.Add2DField(typeof(DuRadialField), "Radial");
         }
 
         [MenuItem("Dust/Fields/2D Fields/Radial")]

@@ -26,7 +26,7 @@ namespace DustEngine.DustEditor
 
         static DuCoordinatesFieldEditor()
         {
-            DuPopupButtons.AddBasicField(typeof(DuCoordinatesField), "Coordinates");
+            DuFieldsPopupButtons.AddBasicField(typeof(DuCoordinatesField), "Coordinates");
         }
 
         [MenuItem("Dust/Fields/Basic Fields/Coordinates")]

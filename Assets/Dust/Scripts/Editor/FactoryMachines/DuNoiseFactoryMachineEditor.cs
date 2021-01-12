@@ -26,7 +26,7 @@ namespace DustEngine.DustEditor
 
         static DuNoiseFactoryMachineEditor()
         {
-            DuPopupButtons.AddFactoryMachine(typeof(DuNoiseFactoryMachine), "Noise");
+            DuFactoryMachinesPopupButtons.AddMachine(typeof(DuNoiseFactoryMachine), "Noise");
         }
 
         [MenuItem("Dust/Factory/Machines/Noise")]

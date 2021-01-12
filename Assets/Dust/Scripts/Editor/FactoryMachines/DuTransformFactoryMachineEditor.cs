@@ -12,7 +12,7 @@ namespace DustEngine.DustEditor
 
         static DuTransformFactoryMachineEditor()
         {
-            DuPopupButtons.AddFactoryMachine(typeof(DuTransformFactoryMachine), "Transform");
+            DuFactoryMachinesPopupButtons.AddMachine(typeof(DuTransformFactoryMachine), "Transform");
         }
 
         [MenuItem("Dust/Factory/Machines/Transform")]

@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEditor;
 
+#if DUST_ALPHA_DEFORMERS
 namespace DustEngine.DustEditor
 {
     [CustomEditor(typeof(DuDeformMesh))]
@@ -289,7 +290,7 @@ namespace DustEngine.DustEditor
             DustGUI.BeginHorizontal();
             {
                 if (DustGUI.IconButton(UI.Icons.ACTION_ADD_DEFORMER, CELL_WIDTH_ICON, CELL_WIDTH_ICON, UI.ExtraList.styleMiniButton))
-                    PopupWindow.Show(m_RectsUI["Add"], DuPopupButtons.Deformers(this));
+                    PopupWindow.Show(m_RectsUI["Add"], DuDeformersPopupButtons.Popup(this));
 
                 if (Event.current.type == EventType.Repaint)
                     m_RectsUI["Add"] = GUILayoutUtility.GetLastRect();
@@ -362,3 +363,4 @@ namespace DustEngine.DustEditor
         }
     }
 }
+#endif

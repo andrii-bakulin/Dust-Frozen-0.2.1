@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
+#if DUST_ALPHA_DEFORMERS
 namespace DustEngine.DustEditor
 {
     public abstract class DuDeformerEditor : DuEditor
@@ -80,3 +81,4 @@ namespace DustEngine.DustEditor
         }
     }
 }
+#endif

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
+#if DUST_ALPHA_DEFORMERS
 namespace DustEngine.DustEditor
 {
     [CustomEditor(typeof(DuWaveDeformer))]
@@ -23,7 +24,7 @@ namespace DustEngine.DustEditor
 
         static DuWaveDeformerEditor()
         {
-            DuPopupButtons.AddDeformer(typeof(DuWaveDeformer), "Wave");
+            DuDeformersPopupButtons.AddDeformer(typeof(DuWaveDeformer), "Wave");
         }
 
         [MenuItem("Dust/Deformers/Wave")]
@@ -100,3 +101,4 @@ namespace DustEngine.DustEditor
         }
     }
 }
+#endif

@@ -18,7 +18,7 @@ namespace DustEngine.DustEditor
 
         static DuFitFieldEditor()
         {
-            DuPopupButtons.AddMathField(typeof(DuFitField), "Fit");
+            DuFieldsPopupButtons.AddMathField(typeof(DuFitField), "Fit");
         }
 
         [MenuItem("Dust/Fields/Math Fields/Fit")]

@@ -16,7 +16,7 @@ namespace DustEngine.DustEditor
 
         static DuCylinderFieldEditor()
         {
-            DuPopupButtons.AddSpace3DField(typeof(DuCylinderField), "Cylinder");
+            DuFieldsPopupButtons.Add3DField(typeof(DuCylinderField), "Cylinder");
         }
 
         [MenuItem("Dust/Fields/3D Fields/Cylinder")]

@@ -1,6 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
+#if DUST_ALPHA_DEFORMERS
 namespace DustEngine
 {
     public abstract class DuDeformer : DuMonoBehaviour, DuDynamicStateInterface
@@ -126,3 +127,4 @@ namespace DustEngine
 #endif
     }
 }
+#endif

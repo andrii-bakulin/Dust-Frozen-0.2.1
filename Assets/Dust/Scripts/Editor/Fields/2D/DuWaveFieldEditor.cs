@@ -23,7 +23,7 @@ namespace DustEngine.DustEditor
 
         static DuWaveFieldEditor()
         {
-            DuPopupButtons.AddSpace2DField(typeof(DuWaveField), "Wave");
+            DuFieldsPopupButtons.Add2DField(typeof(DuWaveField), "Wave");
         }
 
         [MenuItem("Dust/Fields/2D Fields/Wave")]

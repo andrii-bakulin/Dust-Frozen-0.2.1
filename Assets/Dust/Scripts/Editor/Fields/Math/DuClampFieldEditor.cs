@@ -25,7 +25,7 @@ namespace DustEngine.DustEditor
 
         static DuClampFieldEditor()
         {
-            DuPopupButtons.AddMathField(typeof(DuClampField), "Clamp");
+            DuFieldsPopupButtons.AddMathField(typeof(DuClampField), "Clamp");
         }
 
         [MenuItem("Dust/Fields/Math Fields/Clamp")]

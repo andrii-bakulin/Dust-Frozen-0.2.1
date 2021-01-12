@@ -15,7 +15,7 @@ namespace DustEngine.DustEditor
 
         static DuRoundFieldEditor()
         {
-            DuPopupButtons.AddMathField(typeof(DuRoundField), "Round");
+            DuFieldsPopupButtons.AddMathField(typeof(DuRoundField), "Round");
         }
 
         [MenuItem("Dust/Fields/Math Fields/Round")]

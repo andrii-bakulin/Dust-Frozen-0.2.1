@@ -25,7 +25,7 @@ namespace DustEngine.DustEditor
 
         static DuBasicFactoryMachineEditor()
         {
-            DuPopupButtons.AddFactoryMachine(typeof(DuBasicFactoryMachine), "Basic");
+            DuFactoryMachinesPopupButtons.AddMachine(typeof(DuBasicFactoryMachine), "Basic");
         }
 
         [MenuItem("Dust/Factory/Machines/Basic")]

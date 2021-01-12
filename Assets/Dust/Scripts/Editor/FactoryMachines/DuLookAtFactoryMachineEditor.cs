@@ -22,7 +22,7 @@ namespace DustEngine.DustEditor
 
         static DuLookAtFactoryMachineEditor()
         {
-            DuPopupButtons.AddFactoryMachine(typeof(DuLookAtFactoryMachine), "LookAt");
+            DuFactoryMachinesPopupButtons.AddMachine(typeof(DuLookAtFactoryMachine), "LookAt");
         }
 
         [MenuItem("Dust/Factory/Machines/LookAt")]

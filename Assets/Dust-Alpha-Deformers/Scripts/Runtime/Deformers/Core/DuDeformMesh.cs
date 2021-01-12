@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEditor;
 
+#if DUST_ALPHA_DEFORMERS
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Deformers/Core/Deform Mesh")]
@@ -347,3 +348,4 @@ namespace DustEngine
         }
     }
 }
+#endif

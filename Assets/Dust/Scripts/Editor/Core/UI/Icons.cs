@@ -6,7 +6,9 @@ namespace DustEngine.DustEditor.UI
     public static class Icons
     {
         internal const string ACTION_DELETE = "UI/Action-Delete";
+#if DUST_ALPHA_DEFORMERS
         internal const string ACTION_ADD_DEFORMER = "UI/Add-Deformer";
+#endif
         internal const string ACTION_ADD_FACTORY_MACHINE = "UI/Add-Factory-Machine";
         internal const string ACTION_ADD_FIELD = "UI/Add-Field";
 
@@ -21,7 +23,9 @@ namespace DustEngine.DustEditor.UI
         private static readonly string[] resourcePaths =
         {
             "Components/Animations/",
+#if DUST_ALPHA_DEFORMERS
             "Components/Deformers/",
+#endif
             "Components/Events/",
             "Components/Factory/",
             "Components/FactoryMachines/",

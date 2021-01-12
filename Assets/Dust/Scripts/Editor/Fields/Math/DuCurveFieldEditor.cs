@@ -19,7 +19,7 @@ namespace DustEngine.DustEditor
 
         static DuCurveFieldEditor()
         {
-            DuPopupButtons.AddMathField(typeof(DuCurveField), "Curve");
+            DuFieldsPopupButtons.AddMathField(typeof(DuCurveField), "Curve");
         }
 
         [MenuItem("Dust/Fields/Math Fields/Curve")]

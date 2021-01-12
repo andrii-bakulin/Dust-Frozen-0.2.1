@@ -25,7 +25,7 @@ namespace DustEngine.DustEditor
 
         static DuTextureSpaceFieldEditor()
         {
-            DuPopupButtons.AddSpace2DField(typeof(DuTextureSpaceField), "Texture Space");
+            DuFieldsPopupButtons.Add2DField(typeof(DuTextureSpaceField), "Texture Space");
         }
 
         [MenuItem("Dust/Fields/2D Fields/Texture Space")]

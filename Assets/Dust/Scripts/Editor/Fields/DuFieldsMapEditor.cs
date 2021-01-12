@@ -368,7 +368,7 @@ namespace DustEngine.DustEditor
             DustGUI.BeginHorizontal();
             {
                 if (DustGUI.IconButton(UI.Icons.ACTION_ADD_FIELD, CELL_WIDTH_ICON, CELL_WIDTH_ICON, UI.ExtraList.styleMiniButton))
-                    PopupWindow.Show(m_RectsUI["Add"], DuPopupButtons.Fields(this));
+                    PopupWindow.Show(m_RectsUI["Add"], DuFieldsPopupButtons.Popup(this));
 
                 if (Event.current.type == EventType.Repaint)
                     m_RectsUI["Add"] = GUILayoutUtility.GetLastRect();

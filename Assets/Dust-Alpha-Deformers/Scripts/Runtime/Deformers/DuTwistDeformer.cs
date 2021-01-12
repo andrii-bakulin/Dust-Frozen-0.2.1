@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+#if DUST_ALPHA_DEFORMERS
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Deformers/Twist Deformer")]
@@ -167,3 +168,4 @@ namespace DustEngine
         }
     }
 }
+#endif

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
+#if DUST_ALPHA_DEFORMERS
 namespace DustEngine.DustEditor
 {
     [CustomEditor(typeof(DuTwistDeformer))]
@@ -17,7 +18,7 @@ namespace DustEngine.DustEditor
 
         static DuTwistDeformerEditor()
         {
-            DuPopupButtons.AddDeformer(typeof(DuTwistDeformer), "Twist");
+            DuDeformersPopupButtons.AddDeformer(typeof(DuTwistDeformer), "Twist");
         }
 
         [MenuItem("Dust/Deformers/Twist")]
@@ -77,3 +78,4 @@ namespace DustEngine.DustEditor
         }
     }
 }
+#endif

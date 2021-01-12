@@ -18,7 +18,7 @@ namespace DustEngine.DustEditor
 
         static DuDirectionalFieldEditor()
         {
-            DuPopupButtons.AddSpace2DField(typeof(DuDirectionalField), "Directional");
+            DuFieldsPopupButtons.Add2DField(typeof(DuDirectionalField), "Directional");
         }
 
         [MenuItem("Dust/Fields/2D Fields/Directional")]

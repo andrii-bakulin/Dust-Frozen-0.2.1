@@ -15,7 +15,7 @@ namespace DustEngine.DustEditor
 
         static DuConstantFieldEditor()
         {
-            DuPopupButtons.AddBasicField(typeof(DuConstantField), "Constant");
+            DuFieldsPopupButtons.AddBasicField(typeof(DuConstantField), "Constant");
         }
 
         [MenuItem("Dust/Fields/Basic Fields/Constant")]

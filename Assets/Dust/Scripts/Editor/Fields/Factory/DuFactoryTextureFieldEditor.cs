@@ -24,7 +24,7 @@ namespace DustEngine.DustEditor
 
         static DuFactoryTextureFieldEditor()
         {
-            DuPopupButtons.AddFactoryField(typeof(DuFactoryTextureField), "Factory Texture");
+            DuFieldsPopupButtons.AddFactoryField(typeof(DuFactoryTextureField), "Factory Texture");
         }
 
         [MenuItem("Dust/Fields/Factory Fields/Factory Texture")]

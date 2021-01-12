@@ -16,7 +16,7 @@ namespace DustEngine.DustEditor
 
         static DuTorusFieldEditor()
         {
-            DuPopupButtons.AddSpace3DField(typeof(DuTorusField), "Torus");
+            DuFieldsPopupButtons.Add3DField(typeof(DuTorusField), "Torus");
         }
 
         [MenuItem("Dust/Fields/3D Fields/Torus")]

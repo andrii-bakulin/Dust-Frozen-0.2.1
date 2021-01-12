@@ -12,7 +12,7 @@ namespace DustEngine.DustEditor
 
         static DuTimeFactoryMachineEditor()
         {
-            DuPopupButtons.AddFactoryMachine(typeof(DuTimeFactoryMachine), "Time");
+            DuFactoryMachinesPopupButtons.AddMachine(typeof(DuTimeFactoryMachine), "Time");
         }
 
         [MenuItem("Dust/Factory/Machines/Time")]
