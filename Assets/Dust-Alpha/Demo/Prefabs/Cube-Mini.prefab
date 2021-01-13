@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8641450813989619451}
   - component: {fileID: 3678655902962754624}
   - component: {fileID: 4165638225452331897}
-  - component: {fileID: -3847983509749296127}
   m_Layer: 0
   m_Name: Cube-Mini
   m_TagString: Untagged
@@ -96,23 +95,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-3847983509749296127
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2362738959988550132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6ca60b4c16a44b3a90c15195ff9d7c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TranslateType: 0
-  m_LinearSpeed: {x: 0, y: 0, z: -1}
-  m_WaveAmplitude: {x: 0, y: 0, z: 1}
-  m_WaveSpeed: {x: 0, y: 0, z: 360}
-  m_WaveOffset: {x: 0, y: 0, z: 0}
-  m_DirectionSpace: 1
-  m_Freeze: 0
-  m_UpdateMode: 0
