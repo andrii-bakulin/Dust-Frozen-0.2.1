@@ -8,9 +8,9 @@ namespace DustEngine.DustEditor
     public class DuCollisionEventEditor : DuColliderEventEditor
     {
         [MenuItem("Dust/Events/On Collision")]
-        public static DuCollisionEvent AddComponent()
+        public static void AddComponent()
         {
-            return AddComponentByEventType(typeof(DuCollisionEvent)) as DuCollisionEvent;
+            AddComponentToSelectedOrNewObject("DuCollision", typeof(DuCollisionEvent));
         }
     }
 }
