@@ -325,12 +325,17 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
+        protected void ResetToDefaults()
+        {
+            fieldsMap.defaultColor = new Color(0.66f, 0.12f, 0.83f);
+        }
+
         void Reset()
         {
-            valueImpactEnabled = true;
-            colorImpactEnabled = true;
+            ResetToDefaults();
 
-            fieldsMap.defaultColor = new Color(0.66f, 0.12f, 0.83f);
+            m_ValueImpactEnabled = true;
+            m_ColorImpactEnabled = true;
         }
     }
 }

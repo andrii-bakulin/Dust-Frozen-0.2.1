@@ -241,7 +241,7 @@ namespace DustEngine
 
         void Reset()
         {
-            // Define default states
+            ResetToDefaults();
         }
     }
 }

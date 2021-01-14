@@ -387,8 +387,10 @@ namespace DustEngine
 
         void Reset()
         {
-            min = -1f;
+            ResetToDefaults();
             ResetStates();
+
+            min = -1f;
         }
 
         public void ResetStates()
