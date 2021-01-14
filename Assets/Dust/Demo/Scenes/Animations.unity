@@ -3388,7 +3388,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4555384661247630378, guid: de011416d1efd411495a050805ad2357, type: 3}
       propertyPath: m_Name
-      value: Animation / Translate
+      value: Animation / Move
       objectReference: {fileID: 0}
     - target: {fileID: 4555384661247630378, guid: de011416d1efd411495a050805ad2357, type: 3}
       propertyPath: m_IsActive
@@ -3440,7 +3440,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6020086575731987624, guid: de011416d1efd411495a050805ad2357, type: 3}
       propertyPath: m_Text
-      value: Translate
+      value: Move
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de011416d1efd411495a050805ad2357, type: 3}
