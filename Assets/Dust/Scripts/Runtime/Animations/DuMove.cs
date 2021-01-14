@@ -2,8 +2,8 @@
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Animation/Translate")]
-    public class DuTranslate : DuMonoBehaviour
+    [AddComponentMenu("Dust/Animation/Move")]
+    public class DuMove : DuMonoBehaviour
     {
         public enum DirectionSpace
         {

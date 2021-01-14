@@ -3,9 +3,9 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuTranslate))]
+    [CustomEditor(typeof(DuMove))]
     [CanEditMultipleObjects]
-    public class DuTranslateEditor : DuEditor
+    public class DuMoveEditor : DuEditor
     {
         private DuProperty m_TranslateType;
 
@@ -22,10 +22,10 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        [MenuItem("Dust/Animation/Translate")]
+        [MenuItem("Dust/Animation/Move")]
         public static void AddComponentToSelectedObjects()
         {
-            AddComponentToSelectedOrNewObject("Translate", typeof(DuTranslate));
+            AddComponentToSelectedOrNewObject("Move", typeof(DuMove));
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -54,19 +54,16 @@ namespace DustEngine.DustEditor
 
             PropertyField(m_TranslateType);
 
-            switch ((DuTranslate.TranslateType) m_TranslateType.enumValueIndex)
+            switch ((DuMove.TranslateType) m_TranslateType.enumValueIndex)
             {
-                case DuTranslate.TranslateType.Linear:
+                case DuMove.TranslateType.Linear:
                     PropertyField(m_LinearSpeed);
                     break;
 
-                case DuTranslate.TranslateType.Wave:
+                case DuMove.TranslateType.Wave:
                     PropertyField(m_WaveAmplitude);
                     PropertyField(m_WaveSpeed);
                     PropertyField(m_WaveOffset);
-                    break;
-
-                default:
                     break;
             }
 
