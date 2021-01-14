@@ -29,6 +29,30 @@ namespace DustEngine
             set => m_PositionMax = value;
         }
 
+        [SerializeField]
+        public bool m_PositionClampX = true;
+        public bool positionClampX
+        {
+            get => m_PositionClampX;
+            set => m_PositionClampX = value;
+        }
+
+        [SerializeField]
+        private bool m_PositionClampY = true;
+        public bool positionClampY
+        {
+            get => m_PositionClampY;
+            set => m_PositionClampY = value;
+        }
+
+        [SerializeField]
+        private bool m_PositionClampZ = true;
+        public bool positionClampZ
+        {
+            get => m_PositionClampZ;
+            set => m_PositionClampZ = value;
+        }
+
         //--------------------------------------------------------------------------------------------------------------
 
         [SerializeField]
@@ -40,7 +64,7 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private Vector3 m_RotationMin = Vector3.zero;
+        private Vector3 m_RotationMin = Vector3.one * -90f;
         public Vector3 rotationMin
         {
             get => m_RotationMin;
@@ -48,11 +72,35 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private Vector3 m_RotationMax = Vector3.one;
+        private Vector3 m_RotationMax = Vector3.one * +90f;
         public Vector3 rotationMax
         {
             get => m_RotationMax;
             set => m_RotationMax = value;
+        }
+
+        [SerializeField]
+        private bool m_RotationClampX = true;
+        public bool rotationClampX
+        {
+            get => m_RotationClampX;
+            set => m_RotationClampX = value;
+        }
+
+        [SerializeField]
+        private bool m_RotationClampY = true;
+        public bool rotationClampY
+        {
+            get => m_RotationClampY;
+            set => m_RotationClampY = value;
+        }
+
+        [SerializeField]
+        private bool m_RotationClampZ = true;
+        public bool rotationClampZ
+        {
+            get => m_RotationClampZ;
+            set => m_RotationClampZ = value;
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -79,6 +127,30 @@ namespace DustEngine
         {
             get => m_ScaleMax;
             set => m_ScaleMax = value;
+        }
+
+        [SerializeField]
+        private bool m_ScaleClampX = true;
+        public bool scaleClampX
+        {
+            get => m_ScaleClampX;
+            set => m_ScaleClampX = value;
+        }
+
+        [SerializeField]
+        private bool m_ScaleClampY = true;
+        public bool scaleClampY
+        {
+            get => m_ScaleClampY;
+            set => m_ScaleClampY = value;
+        }
+
+        [SerializeField]
+        private bool m_ScaleClampZ = true;
+        public bool scaleClampZ
+        {
+            get => m_ScaleClampZ;
+            set => m_ScaleClampZ = value;
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -113,15 +185,23 @@ namespace DustEngine
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // Position
 
-            if (positionMode != ClampMode.NoClamp)
+            if (positionMode != ClampMode.NoClamp && (positionClampX || positionClampY || positionClampZ))
             {
                 Vector3 endPosition = instanceState.position;
 
                 if (positionMode == ClampMode.MinOnly || positionMode == ClampMode.MinAndMax)
-                    endPosition = Vector3.Max(endPosition, positionMin);
+                {
+                    if (positionClampX) endPosition.x = Mathf.Max(endPosition.x, positionMin.x);
+                    if (positionClampY) endPosition.y = Mathf.Max(endPosition.y, positionMin.y);
+                    if (positionClampZ) endPosition.z = Mathf.Max(endPosition.z, positionMin.z);
+                }
 
                 if (positionMode == ClampMode.MaxOnly || positionMode == ClampMode.MinAndMax)
-                    endPosition = Vector3.Min(endPosition, positionMax);
+                {
+                    if (positionClampX) endPosition.x = Mathf.Min(endPosition.x, positionMax.x);
+                    if (positionClampY) endPosition.y = Mathf.Min(endPosition.y, positionMax.y);
+                    if (positionClampZ) endPosition.z = Mathf.Min(endPosition.z, positionMax.z);
+                }
 
                 instanceState.position = Vector3.LerpUnclamped(instanceState.position, endPosition, transferPower);
             }
@@ -129,15 +209,23 @@ namespace DustEngine
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // Rotation
 
-            if (rotationMode != ClampMode.NoClamp)
+            if (rotationMode != ClampMode.NoClamp && (rotationClampX || rotationClampY || rotationClampZ))
             {
                 Vector3 endRotation = instanceState.rotation;
 
                 if (rotationMode == ClampMode.MinOnly || rotationMode == ClampMode.MinAndMax)
-                    endRotation = Vector3.Max(endRotation, rotationMin);
+                {
+                    if (rotationClampX) endRotation.x = Mathf.Max(endRotation.x, rotationMin.x);
+                    if (rotationClampY) endRotation.y = Mathf.Max(endRotation.y, rotationMin.y);
+                    if (rotationClampZ) endRotation.z = Mathf.Max(endRotation.z, rotationMin.z);
+                }
 
                 if (rotationMode == ClampMode.MaxOnly || rotationMode == ClampMode.MinAndMax)
-                    endRotation = Vector3.Min(endRotation, rotationMax);
+                {
+                    if (rotationClampX) endRotation.x = Mathf.Min(endRotation.x, rotationMax.x);
+                    if (rotationClampY) endRotation.y = Mathf.Min(endRotation.y, rotationMax.y);
+                    if (rotationClampZ) endRotation.z = Mathf.Min(endRotation.z, rotationMax.z);
+                }
 
                 instanceState.rotation = Vector3.LerpUnclamped(instanceState.rotation, endRotation, transferPower);
             }
@@ -145,15 +233,23 @@ namespace DustEngine
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // Scale
 
-            if (scaleMode != ClampMode.NoClamp)
+            if (scaleMode != ClampMode.NoClamp && (scaleClampX || scaleClampY || scaleClampZ))
             {
                 Vector3 endScale = instanceState.scale;
 
                 if (scaleMode == ClampMode.MinOnly || scaleMode == ClampMode.MinAndMax)
-                    endScale = Vector3.Max(endScale, scaleMin);
+                {
+                    if (scaleClampX) endScale.x = Mathf.Max(endScale.x, scaleMin.x);
+                    if (scaleClampY) endScale.y = Mathf.Max(endScale.y, scaleMin.y);
+                    if (scaleClampZ) endScale.z = Mathf.Max(endScale.z, scaleMin.z);
+                }
 
                 if (scaleMode == ClampMode.MaxOnly || scaleMode == ClampMode.MinAndMax)
-                    endScale = Vector3.Min(endScale, scaleMax);
+                {
+                    if (scaleClampX) endScale.x = Mathf.Min(endScale.x, scaleMax.x);
+                    if (scaleClampY) endScale.y = Mathf.Min(endScale.y, scaleMax.y);
+                    if (scaleClampZ) endScale.z = Mathf.Min(endScale.z, scaleMax.z);
+                }
 
                 instanceState.scale = Vector3.LerpUnclamped(instanceState.scale, endScale, transferPower);
             }
@@ -172,6 +268,9 @@ namespace DustEngine
             {
                 DuDynamicState.Append(ref dynamicState, ++seq, positionMin);
                 DuDynamicState.Append(ref dynamicState, ++seq, positionMax);
+                DuDynamicState.Append(ref dynamicState, ++seq, positionClampX);
+                DuDynamicState.Append(ref dynamicState, ++seq, positionClampY);
+                DuDynamicState.Append(ref dynamicState, ++seq, positionClampZ);
             }
 
             DuDynamicState.Append(ref dynamicState, ++seq, rotationMode);
@@ -179,6 +278,9 @@ namespace DustEngine
             {
                 DuDynamicState.Append(ref dynamicState, ++seq, rotationMin);
                 DuDynamicState.Append(ref dynamicState, ++seq, rotationMax);
+                DuDynamicState.Append(ref dynamicState, ++seq, rotationClampX);
+                DuDynamicState.Append(ref dynamicState, ++seq, rotationClampY);
+                DuDynamicState.Append(ref dynamicState, ++seq, rotationClampZ);
             }
 
             DuDynamicState.Append(ref dynamicState, ++seq, scaleMode);
@@ -186,6 +288,9 @@ namespace DustEngine
             {
                 DuDynamicState.Append(ref dynamicState, ++seq, scaleMin);
                 DuDynamicState.Append(ref dynamicState, ++seq, scaleMax);
+                DuDynamicState.Append(ref dynamicState, ++seq, scaleClampX);
+                DuDynamicState.Append(ref dynamicState, ++seq, scaleClampY);
+                DuDynamicState.Append(ref dynamicState, ++seq, scaleClampZ);
             }
 
             return DuDynamicState.Normalize(dynamicState);

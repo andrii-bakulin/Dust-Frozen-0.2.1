@@ -3,6 +3,7 @@
 ### Fixed
 
 - DuTranslate renamed to DuMove
+- DuClampFactoryMachine: added flags to turn on/off PSR clamp for each or XYZ-axises 
 
 
 ________________________________________________________________________________________________________________________
