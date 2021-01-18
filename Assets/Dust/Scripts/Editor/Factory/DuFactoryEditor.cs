@@ -40,6 +40,8 @@ namespace DustEngine.DustEditor
         private DuProperty m_InspectorDisplay;
         private DuProperty m_InspectorScale;
 
+        private DuProperty m_AutoRebuildOnPrefabUpdated;
+
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         private readonly Dictionary<string, Rect> m_RectsUI = new Dictionary<string, Rect>();
@@ -97,6 +99,8 @@ namespace DustEngine.DustEditor
 
             m_InspectorDisplay = FindProperty("m_InspectorDisplay", "Display");
             m_InspectorScale = FindProperty("m_InspectorScale", "Scale");
+
+            m_AutoRebuildOnPrefabUpdated = FindProperty("m_AutoRebuildOnPrefabUpdated", "Auto Rebuild", "Auto Rebuild all factory instances on any of prefab params updated");
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -287,6 +291,10 @@ namespace DustEngine.DustEditor
 
                 if (DustGUI.Button("Rebuild Instances"))
                     m_IsRequireRebuildInstances |= true;
+
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+                PropertyField(m_AutoRebuildOnPrefabUpdated);
             }
             DustGUI.FoldoutEnd();
         }

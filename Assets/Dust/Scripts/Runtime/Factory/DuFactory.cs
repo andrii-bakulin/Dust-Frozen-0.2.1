@@ -368,6 +368,18 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
+#if UNITY_EDITOR
+        [SerializeField]
+        private bool m_AutoRebuildOnPrefabUpdated = true;
+        public bool autoRebuildOnPrefabUpdated
+        {
+            get => m_AutoRebuildOnPrefabUpdated;
+            set => m_AutoRebuildOnPrefabUpdated = value;
+        }
+#endif
+
+        //--------------------------------------------------------------------------------------------------------------
+
         public abstract string FactoryName();
 
         //--------------------------------------------------------------------------------------------------------------
