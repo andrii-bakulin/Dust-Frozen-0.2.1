@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEditor;
 
@@ -57,7 +58,18 @@ namespace DustEngine.DustEditor
             if (m_QueueUpdateFactory.Count == 0)
                 return;
 
-            foreach (var duFactory in m_QueueUpdateFactory)
+            // Why need this?
+            // I had situation when I edit prefab but DuFactory object already not existed in the Scene.
+            // As a result, I tried to call RebuildInstances() method for non-existed objects and had Error in console.
+            // After that m_QueueUpdateFactory.Clear() not called (it was after the loop).
+            // So, I decide to move Clear() call before the loop.
+            //
+            // Hm... Hello to Garbage Collector?!
+
+            DuFactory[] duFactories = m_QueueUpdateFactory.ToArray();
+            m_QueueUpdateFactory.Clear();
+
+            foreach (var duFactory in duFactories)
             {
 #if DUST_DEBUG_FACTORY_BUILDER
                 Dust.Debug.CheckpointWarning("Factory.Controller", "UpdateParentFactory",
@@ -66,8 +78,6 @@ namespace DustEngine.DustEditor
 
                 duFactory.RebuildInstances();
             }
-
-            m_QueueUpdateFactory.Clear();
         }
     }
 }
