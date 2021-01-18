@@ -45,7 +45,13 @@ namespace DustEngine
                 DuDynamicState.Append(ref dynamicState, ++seq, record.factoryMachine);
             }
 
-            return DuDynamicState.Normalize(dynamicState);
+            int stampId = DuDynamicState.Normalize(dynamicState);
+
+#if DUST_DEBUG_FACTORY_UPDATER
+            Dust.Debug.Checkpoint("Factory.Updater", "GetDynamicStateHashCode", stampId);
+#endif
+
+            return stampId;
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -55,6 +61,10 @@ namespace DustEngine
 
         public void UpdateInstancesDynamicStates(bool forced)
         {
+#if DUST_DEBUG_FACTORY_UPDATER
+            Dust.Debug.Checkpoint("Factory.Updater", "UpdateInstancesDynamicStates");
+#endif
+
             if (forcedUpdateEachFrame)
             {
                 // Nothing need to do
@@ -64,12 +74,22 @@ namespace DustEngine
             else if (!forced)
             {
                 if (factoryMachines.Count == 0)
+                {
+#if DUST_DEBUG_FACTORY_UPDATER
+                    Dust.Debug.Checkpoint("Factory.Updater", "UpdateInstancesDynamicStates", "Ignore: no factory machines");
+#endif
                     return;
+                }
 
                 int newDynamicStateHash = GetDynamicStateHashCode();
 
                 if (newDynamicStateHash != 0 && m_LastDynamicStateHashCode == newDynamicStateHash)
+                {
+#if DUST_DEBUG_FACTORY_UPDATER
+                    Dust.Debug.Checkpoint("Factory.Updater", "UpdateInstancesDynamicStates", "Ignore: by stateHashCode");
+#endif
                     return;
+                }
 
                 m_LastDynamicStateHashCode = newDynamicStateHash;
             }
@@ -151,6 +171,10 @@ namespace DustEngine
 #if UNITY_EDITOR
             stats.updatesCount++;
             stats.lastUpdateTime = timer.Stop();
+#endif
+
+#if DUST_DEBUG_FACTORY_UPDATER
+            Dust.Debug.Checkpoint("Factory.Updater", "UpdateInstancesDynamicStates", "Compeleted");
 #endif
         }
     }

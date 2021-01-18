@@ -61,6 +61,10 @@ namespace DustEngine
             if (stampId == 0)
                 stampId = 1;
 
+#if DUST_DEBUG_FACTORY_BUILDER
+            Dust.Debug.Checkpoint("Factory.Builder", "GetSourceObjectsStampId", stampId);
+#endif
+
             return stampId;
         }
 
@@ -68,14 +72,28 @@ namespace DustEngine
 
         private void RebuildInstancesIfRequired()
         {
+#if DUST_DEBUG_FACTORY_BUILDER
+            Dust.Debug.Checkpoint("Factory.Builder", "RebuildInstancesIfRequired");
+#endif
+
             if (m_SourceObjectsLastStampId == GetSourceObjectsStampId())
+            {
+#if DUST_DEBUG_FACTORY_BUILDER
+                Dust.Debug.Checkpoint("Factory.Builder", "RebuildInstancesIfRequired", "Ignore by same stampId: " + m_SourceObjectsLastStampId);
+#endif
                 return;
+            }
 
             RebuildInstances();
         }
 
         public void RebuildInstances()
         {
+#if DUST_DEBUG_FACTORY_BUILDER
+            Dust.Debug.Checkpoint("Factory.Builder", "RebuildInstances");
+            var tsExecute = Dust.Debug.StartTimer();
+#endif
+
             DestroyAllInstances();
             DestroyBuilder();
 
@@ -165,10 +183,21 @@ namespace DustEngine
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             m_SourceObjectsLastStampId = GetSourceObjectsStampId();
+
+#if DUST_DEBUG_FACTORY_BUILDER
+            Dust.Debug.Checkpoint("Factory.Builder", "RebuildInstances",
+                "Done: StampId=" + m_SourceObjectsLastStampId.ToString() + " (" + tsExecute.Stop() + "sec)");
+#endif
         }
 
         protected void DestroyAllInstances()
         {
+#if DUST_DEBUG_FACTORY_BUILDER
+            Dust.Debug.Checkpoint("Factory.Builder", "DestroyAllInstances");
+#endif
+
+            int destroyedObjects = 0;
+
             // Step 1: drop by list
             for (int i = 0; i < m_Instances.Length; i++)
             {
@@ -176,6 +205,7 @@ namespace DustEngine
                     continue;
 
                 Dust.DestroyObjectWhenReady(m_Instances[i].gameObject);
+                destroyedObjects++;
             }
 
             // Step 2: drop all object which left same how from previous state
@@ -197,18 +227,27 @@ namespace DustEngine
                     if (Dust.IsNotNull(instance) && instance.parentFactory == this)
                     {
                         Dust.DestroyObjectWhenReady(instance.gameObject);
+                        destroyedObjects++;
                     }
                 }
             }
 
             // Reset array (but it cannot be null)
             m_Instances = new DuFactoryInstance[0];
+
+#if DUST_DEBUG_FACTORY_BUILDER
+            Dust.Debug.Checkpoint("Factory.Builder", "DestroyAllInstances", "Done: Destroyed Objects = " + destroyedObjects);
+#endif
         }
 
         //--------------------------------------------------------------------------------------------------------------
 
         public void UpdateInstancesZeroStates()
         {
+#if DUST_DEBUG_FACTORY_BUILDER
+            Dust.Debug.Checkpoint("Factory.Builder", "UpdateInstancesZeroStates");
+#endif
+
             if (Dust.IsNull(builder))
                 return;
 
@@ -261,6 +300,10 @@ namespace DustEngine
 
 #if UNITY_EDITOR
             EditorUtility.SetDirty(gameObject);
+#endif
+
+#if DUST_DEBUG_FACTORY_BUILDER
+            Dust.Debug.Checkpoint("Factory.Builder", "UpdateInstancesZeroStates", "Done");
 #endif
         }
 

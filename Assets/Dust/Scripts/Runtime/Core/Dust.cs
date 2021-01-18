@@ -85,6 +85,22 @@ namespace DustEngine
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+            public static void Checkpoint(string scope, string eventId) => Checkpoint(scope, eventId, "");
+
+            public static void Checkpoint(string scope, string eventId, object message)
+            {
+                UnityEngine.Debug.Log(string.Format("Dust: {0}: {1}: {2}", scope, eventId, message));
+            }
+
+            public static void CheckpointWarning(string scope, string eventId) => CheckpointWarning(scope, eventId, "");
+
+            public static void CheckpointWarning(string scope, string eventId, object message)
+            {
+                UnityEngine.Debug.LogWarning(string.Format("Dust: {0}: {1}: {2}", scope, eventId, message));
+            }
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
             public static void StrangeState(string scope, object message)
             {
                 UnityEngine.Debug.LogError("Dust: STRANGE STATE [" + scope + "]" + message);
