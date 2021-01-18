@@ -6,6 +6,7 @@ using UnityEngine.Events;
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Factory/Support/Factory Instance")]
+    [DisallowMultipleComponent]
     public class DuFactoryInstance : DuMonoBehaviour
     {
         [Serializable]

@@ -5,6 +5,7 @@
 - DuTranslate renamed to DuMove
 - DuClampFactoryMachine: added flags to turn on/off PSR clamp for each or XYZ-axises 
 - On add Du*Event component it correct append to Undo stack
+- DuFactoryInstance: allow add only one component to object (Issue #24)
 
 
 ________________________________________________________________________________________________________________________
