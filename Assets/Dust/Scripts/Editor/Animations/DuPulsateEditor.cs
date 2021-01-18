@@ -29,7 +29,7 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        [MenuItem("Dust/Animation/Pulsate")]
+        [MenuItem("Dust/Animations/Pulsate")]
         public static void AddComponentToSelectedObjects()
         {
             AddComponentToSelectedOrNewObject("Pulsate", typeof(DuPulsate));

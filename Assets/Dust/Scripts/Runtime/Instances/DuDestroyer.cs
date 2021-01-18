@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Instance/Destroyer")]
+    [AddComponentMenu("Dust/Instances/Destroyer")]
     public class DuDestroyer : DuMonoBehaviour
     {
         public enum DestroyMode

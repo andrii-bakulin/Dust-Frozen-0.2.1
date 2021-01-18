@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Instance/Spawner")]
+    [AddComponentMenu("Dust/Instances/Spawner")]
     public class DuSpawner : DuMonoBehaviour
     {
         internal const float k_MinIntervalValue = 0.01f;

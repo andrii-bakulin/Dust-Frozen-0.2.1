@@ -2,7 +2,7 @@
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Instance/Parallax Controller")]
+    [AddComponentMenu("Dust/Instances/Parallax Controller")]
     public class DuParallaxController : DuMonoBehaviour
     {
         public enum ParallaxControl

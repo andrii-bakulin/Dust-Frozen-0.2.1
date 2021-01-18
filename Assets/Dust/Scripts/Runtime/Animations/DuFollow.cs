@@ -3,7 +3,7 @@ using UnityEditor;
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Animation/Follow")]
+    [AddComponentMenu("Dust/Animations/Follow")]
     [ExecuteInEditMode]
     public class DuFollow : DuMonoBehaviour
     {

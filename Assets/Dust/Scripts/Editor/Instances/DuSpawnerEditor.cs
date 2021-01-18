@@ -34,7 +34,7 @@ namespace DustEngine.DustEditor
         //--------------------------------------------------------------------------------------------------------------
 
 #if UNITY_EDITOR
-        [MenuItem("Dust/Instance/Spawner")]
+        [MenuItem("Dust/Instances/Spawner")]
         public static void AddComponentToSelectedObjects()
         {
             AddComponentToSelectedOrNewObject("Spawner", typeof(DuSpawner));

@@ -2,7 +2,7 @@
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Animation/LookAt")]
+    [AddComponentMenu("Dust/Animations/LookAt")]
     [ExecuteInEditMode]
     public class DuLookAt : DuMonoBehaviour
     {

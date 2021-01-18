@@ -2,7 +2,7 @@
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Animation/Rotate")]
+    [AddComponentMenu("Dust/Animations/Rotate")]
     public class DuRotate : DuMonoBehaviour
     {
         [SerializeField]

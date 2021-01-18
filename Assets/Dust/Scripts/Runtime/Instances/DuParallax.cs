@@ -4,7 +4,7 @@ using UnityEditor;
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Instance/Parallax")]
+    [AddComponentMenu("Dust/Instances/Parallax")]
     public class DuParallax : DuMonoBehaviour
     {
         public enum ParallaxControl

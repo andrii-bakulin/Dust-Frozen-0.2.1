@@ -2,7 +2,7 @@
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Animation/Pulsate")]
+    [AddComponentMenu("Dust/Animations/Pulsate")]
     public class DuPulsate : DuMonoBehaviour
     {
         internal const float k_MinScaleValue = 0.0001f;

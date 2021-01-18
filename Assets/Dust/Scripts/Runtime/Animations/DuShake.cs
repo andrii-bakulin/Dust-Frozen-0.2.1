@@ -2,7 +2,7 @@
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Animation/Shake")]
+    [AddComponentMenu("Dust/Animations/Shake")]
     public class DuShake : DuMonoBehaviour
     {
         internal const float k_MinScaleValue = 0.0001f;

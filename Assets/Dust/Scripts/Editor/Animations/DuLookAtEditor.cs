@@ -15,7 +15,7 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        [MenuItem("Dust/Animation/LookAt")]
+        [MenuItem("Dust/Animations/LookAt")]
         public static void AddComponentToSelectedObjects()
         {
             AddComponentToSelectedOrNewObject("LookAt", typeof(DuLookAt));

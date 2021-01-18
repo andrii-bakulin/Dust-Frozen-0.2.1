@@ -22,7 +22,7 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        [MenuItem("Dust/Animation/Move")]
+        [MenuItem("Dust/Animations/Move")]
         public static void AddComponentToSelectedObjects()
         {
             AddComponentToSelectedOrNewObject("Move", typeof(DuMove));
