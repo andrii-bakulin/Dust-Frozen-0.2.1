@@ -60,7 +60,6 @@ crashlytics-build.properties
 
 # Dust
 .idea/
-Assets/Dust*Sandbox*
 UserSettings/
 
 # Helpers

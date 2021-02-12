@@ -150,8 +150,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6fae4c382d364205b566f7f7cf952d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_Color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   m_GizmoVisibility: 2
   m_Size: 1
@@ -159,7 +159,7 @@ MonoBehaviour:
   m_TriggeredSize: 1
   m_ShowMessage: 1
   m_HideMessageOnIdleState: 1
-  m_Message: 
+  m_Message:
   m_MessagePosition: 0
   m_MessageOffset: 0.25
   m_MessageSize: 1
@@ -211,14 +211,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af0082c57a4e3467c80807d598b8e30b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_MouseButtonIndex: 0
   m_OnMouseButtonDown:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1334552460}
-        m_TargetAssemblyTypeName: DustEngine.DuTriggerGizmo, Assembly-CSharp
+        m_TargetAssemblyTypeName: DustEngine.DuTriggerGizmo, DustEngine
         m_MethodName: Trigger
         m_Mode: 5
         m_Arguments:
@@ -233,7 +233,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 41659175}
-        m_TargetAssemblyTypeName: DustEngine.DuTriggerGizmo, Assembly-CSharp
+        m_TargetAssemblyTypeName: DustEngine.DuTriggerGizmo, DustEngine
         m_MethodName: Trigger
         m_Mode: 5
         m_Arguments:
@@ -248,7 +248,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1856077459}
-        m_TargetAssemblyTypeName: DustEngine.DuTriggerGizmo, Assembly-CSharp
+        m_TargetAssemblyTypeName: DustEngine.DuTriggerGizmo, DustEngine
         m_MethodName: Trigger
         m_Mode: 5
         m_Arguments:
@@ -358,8 +358,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7814d86aa9001422ab9cc7106cfb76ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_ObjectTags:
   - TestTag1
   m_TagProcessingMode: 0
@@ -520,8 +520,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d02e180e2dd9f4751807b75db6637b9a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!1001 &607486128
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -595,6 +595,71 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de011416d1efd411495a050805ad2357, type: 3}
+--- !u!1 &739166344
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 739166346}
+  - component: {fileID: 739166345}
+  m_Layer: 0
+  m_Name: TEST
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &739166345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739166344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1f0bc81b95f5448eb7faf3e09e0c144, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  m_KeyCode: 0
+  m_OnKeyDown:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1957680932}
+        m_TargetAssemblyTypeName: DustEngine.DuTriggerGizmo, DustEngine
+        m_MethodName: set_message
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: asdasda123
+          m_BoolArgument: 1
+        m_CallState: 2
+  m_OnKeyHold:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnKeyUp:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!4 &739166346
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739166344}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.9629412, y: 8.255284, z: 6.7702637}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1045015948
 GameObject:
   m_ObjectHideFlags: 0
@@ -905,8 +970,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6fae4c382d364205b566f7f7cf952d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_Color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   m_GizmoVisibility: 2
   m_Size: 1
@@ -914,7 +979,7 @@ MonoBehaviour:
   m_TriggeredSize: 1
   m_ShowMessage: 1
   m_HideMessageOnIdleState: 1
-  m_Message: 
+  m_Message:
   m_MessagePosition: 0
   m_MessageOffset: 0.25
   m_MessageSize: 1
@@ -963,8 +1028,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6fae4c382d364205b566f7f7cf952d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_Color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   m_GizmoVisibility: 2
   m_Size: 1
@@ -972,7 +1037,7 @@ MonoBehaviour:
   m_TriggeredSize: 1
   m_ShowMessage: 1
   m_HideMessageOnIdleState: 1
-  m_Message: 
+  m_Message:
   m_MessagePosition: 0
   m_MessageOffset: 0.25
   m_MessageSize: 1
@@ -1027,8 +1092,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60d6029f47d2140b2adc01591a093873, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_Delay: 0.2
   m_Repeat: 25
   m_FireOnStart: 0
@@ -1057,8 +1122,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60d6029f47d2140b2adc01591a093873, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_Delay: 2.5
   m_Repeat: 0
   m_FireOnStart: 0
@@ -1074,11 +1139,11 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1377957374}
-        m_TargetAssemblyTypeName: DustEngine.DuTriggerGizmo, Assembly-CSharp
+        m_TargetAssemblyTypeName: DustEngine.DuTriggerGizmo, DustEngine
         m_MethodName: Trigger
         m_Mode: 5
         m_Arguments:
@@ -1191,8 +1256,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6fae4c382d364205b566f7f7cf952d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_Color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   m_GizmoVisibility: 2
   m_Size: 0.5
@@ -1200,7 +1265,7 @@ MonoBehaviour:
   m_TriggeredSize: 0.5
   m_ShowMessage: 1
   m_HideMessageOnIdleState: 1
-  m_Message: 
+  m_Message:
   m_MessagePosition: 0
   m_MessageOffset: 0.25
   m_MessageSize: 1
@@ -1238,14 +1303,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a1f0bc81b95f5448eb7faf3e09e0c144, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_KeyCode: 32
   m_OnKeyDown:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1653948614}
-        m_TargetAssemblyTypeName: DustEngine.DuTriggerGizmo, Assembly-CSharp
+        m_TargetAssemblyTypeName: DustEngine.DuTriggerGizmo, DustEngine
         m_MethodName: Trigger
         m_Mode: 5
         m_Arguments:
@@ -1260,7 +1325,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1708793785}
-        m_TargetAssemblyTypeName: DustEngine.DuTriggerGizmo, Assembly-CSharp
+        m_TargetAssemblyTypeName: DustEngine.DuTriggerGizmo, DustEngine
         m_MethodName: Trigger
         m_Mode: 5
         m_Arguments:
@@ -1275,7 +1340,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1251986851}
-        m_TargetAssemblyTypeName: DustEngine.DuTriggerGizmo, Assembly-CSharp
+        m_TargetAssemblyTypeName: DustEngine.DuTriggerGizmo, DustEngine
         m_MethodName: Trigger
         m_Mode: 5
         m_Arguments:
@@ -1392,8 +1457,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6fae4c382d364205b566f7f7cf952d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_Color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   m_GizmoVisibility: 2
   m_Size: 1
@@ -1401,7 +1466,7 @@ MonoBehaviour:
   m_TriggeredSize: 1
   m_ShowMessage: 1
   m_HideMessageOnIdleState: 1
-  m_Message: 
+  m_Message:
   m_MessagePosition: 0
   m_MessageOffset: 0.25
   m_MessageSize: 1
@@ -1450,8 +1515,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6fae4c382d364205b566f7f7cf952d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_Color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   m_GizmoVisibility: 2
   m_Size: 1
@@ -1459,7 +1524,7 @@ MonoBehaviour:
   m_TriggeredSize: 1
   m_ShowMessage: 1
   m_HideMessageOnIdleState: 1
-  m_Message: 
+  m_Message:
   m_MessagePosition: 0
   m_MessageOffset: 0.25
   m_MessageSize: 1
@@ -1508,8 +1573,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6fae4c382d364205b566f7f7cf952d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_Color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   m_GizmoVisibility: 2
   m_Size: 1
@@ -1517,7 +1582,7 @@ MonoBehaviour:
   m_TriggeredSize: 1
   m_ShowMessage: 1
   m_HideMessageOnIdleState: 1
-  m_Message: 
+  m_Message:
   m_MessagePosition: 0
   m_MessageOffset: 0.25
   m_MessageSize: 1
@@ -1663,8 +1728,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6fae4c382d364205b566f7f7cf952d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_Color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   m_GizmoVisibility: 2
   m_Size: 0.5
@@ -1672,7 +1737,7 @@ MonoBehaviour:
   m_TriggeredSize: 0.5
   m_ShowMessage: 1
   m_HideMessageOnIdleState: 1
-  m_Message: 
+  m_Message:
   m_MessagePosition: 0
   m_MessageOffset: 0.25
   m_MessageSize: 1
@@ -1690,8 +1755,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60d6029f47d2140b2adc01591a093873, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_Delay: 3
   m_Repeat: 0
   m_FireOnStart: 0
@@ -1707,11 +1772,11 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1957680932}
-        m_TargetAssemblyTypeName: DustEngine.DuTriggerGizmo, Assembly-CSharp
+        m_TargetAssemblyTypeName: DustEngine.DuTriggerGizmo, DustEngine
         m_MethodName: Trigger
         m_Mode: 5
         m_Arguments:
