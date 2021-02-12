@@ -1,5 +1,9 @@
 ## [0.1.3] - ?
 
+### Added
+
+- Added component Animation.DuScale
+
 ### Fixed
 
 - DuTranslate renamed to DuMove
