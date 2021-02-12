@@ -729,6 +729,7 @@ MonoBehaviour:
   m_ForcedUpdateEachFrame: 0
   m_InspectorDisplay: 0
   m_InspectorScale: 1
+  m_AutoRebuildOnPrefabUpdated: 1
   m_Count: 6
   m_Offset: 0
   m_Amount: 1
