@@ -38,8 +38,10 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        void OnEnable()
+        protected override void InitializeEditor()
         {
+            base.InitializeEditor();
+
             m_Power = FindProperty("m_Power", "Power");
             m_WarmUpTime = FindProperty("m_WarmUpTime", "Warm Up Time");
             m_Freeze = FindProperty("m_Freeze", "Freeze");
@@ -64,7 +66,7 @@ namespace DustEngine.DustEditor
 
         public override void OnInspectorGUI()
         {
-            serializedObject.Update();
+            InspectorInitStates();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -153,7 +155,7 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            serializedObject.ApplyModifiedProperties();
+            InspectorCommitUpdates();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

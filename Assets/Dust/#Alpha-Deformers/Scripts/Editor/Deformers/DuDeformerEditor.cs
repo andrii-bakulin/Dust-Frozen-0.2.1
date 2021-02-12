@@ -52,8 +52,10 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        protected virtual void OnEnableDeformer()
+        protected override void InitializeEditor()
         {
+            base.InitializeEditor();
+
             m_GizmoVisibility = FindProperty("m_GizmoVisibility", "Visibility");
 
             m_FieldsMapEditor = new DuFieldsMapEditor(this, serializedObject.FindProperty("m_FieldsMap"), (target as DuDeformer).fieldsMap);

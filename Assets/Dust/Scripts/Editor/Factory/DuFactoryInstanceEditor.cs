@@ -33,8 +33,10 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        void OnEnable()
+        protected override void InitializeEditor()
         {
+            base.InitializeEditor();
+
             m_UpdatePosition = FindProperty("m_UpdatePosition", "Update Position");
             m_UpdateRotation = FindProperty("m_UpdateRotation", "Update Rotation");
             m_UpdateScale = FindProperty("m_UpdateScale", "Update Scale");
@@ -54,7 +56,7 @@ namespace DustEngine.DustEditor
 
         public override void OnInspectorGUI()
         {
-            serializedObject.Update();
+            InspectorInitStates();
 
             DuFactoryInstance mainScript = target as DuFactoryInstance;
 
@@ -210,7 +212,7 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            serializedObject.ApplyModifiedProperties();
+            InspectorCommitUpdates();
         }
     }
 }

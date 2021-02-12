@@ -23,8 +23,10 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        void OnEnable()
+        protected override void InitializeEditor()
         {
+            base.InitializeEditor();
+
             m_Delay = FindProperty("m_Delay", "Delay");
             m_Repeat = FindProperty("m_Repeat", "Repeat");
             m_FireOnStart = FindProperty("m_FireOnStart", "Fire On Start");
@@ -34,9 +36,7 @@ namespace DustEngine.DustEditor
 
         public override void OnInspectorGUI()
         {
-            base.OnInspectorGUI();
-
-            serializedObject.Update();
+            InspectorInitStates();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -60,7 +60,7 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            serializedObject.ApplyModifiedProperties();
+            InspectorCommitUpdates();
         }
     }
 }

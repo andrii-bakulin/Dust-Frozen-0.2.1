@@ -50,9 +50,9 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        void OnEnable()
+        protected override void InitializeEditor()
         {
-            OnEnableFactoryMachine();
+            base.InitializeEditor();
 
             m_PositionMode = FindProperty("m_PositionMode", "Position");
             m_PositionMin = FindProperty("m_PositionMin", "Min");
@@ -78,7 +78,7 @@ namespace DustEngine.DustEditor
 
         public override void OnInspectorGUI()
         {
-            serializedObject.Update();
+            InspectorInitStates();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // OnInspectorGUI_BaseParameters();
@@ -166,7 +166,7 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            serializedObject.ApplyModifiedProperties();
+            InspectorCommitUpdates();
         }
     }
 }

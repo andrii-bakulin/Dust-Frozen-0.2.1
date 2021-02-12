@@ -25,18 +25,16 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        void OnEnable()
+        protected override void InitializeEditor()
         {
-            OnEnableField();
+            base.InitializeEditor();
 
             m_Size = FindProperty("m_Size", "Size");
         }
 
         public override void OnInspectorGUI()
         {
-            base.OnInspectorGUI();
-
-            serializedObject.Update();
+            InspectorInitStates();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -58,9 +56,7 @@ namespace DustEngine.DustEditor
             if (m_Size.isChanged)
                 m_Size.valVector3 = DuCubeField.ShapeNormalizer.Size(m_Size.valVector3);
 
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-            serializedObject.ApplyModifiedProperties();
+            InspectorCommitUpdates();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

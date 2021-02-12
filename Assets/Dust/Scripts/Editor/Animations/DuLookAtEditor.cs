@@ -23,8 +23,10 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        void OnEnable()
+        protected override void InitializeEditor()
         {
+            base.InitializeEditor();
+
             m_TargetObject = FindProperty("m_TargetObject", "Target Object");
             m_UpVectorObject = FindProperty("m_UpVectorObject", "Up Vector Object");
 
@@ -34,7 +36,7 @@ namespace DustEngine.DustEditor
 
         public override void OnInspectorGUI()
         {
-            serializedObject.Update();
+            InspectorInitStates();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -48,7 +50,7 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            serializedObject.ApplyModifiedProperties();
+            InspectorCommitUpdates();
         }
     }
 }

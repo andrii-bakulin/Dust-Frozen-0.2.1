@@ -34,8 +34,10 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        void OnEnable()
+        protected override void InitializeEditor()
         {
+            base.InitializeEditor();
+
             m_ParallaxControl = FindProperty("m_ParallaxControl", "Parallax Control");
             m_Offset = FindProperty("m_Offset", "Offset");
             m_ParallaxController = FindProperty("m_ParallaxController", "Parallax Controller");
@@ -54,7 +56,7 @@ namespace DustEngine.DustEditor
 
         public override void OnInspectorGUI()
         {
-            serializedObject.Update();
+            InspectorInitStates();
 
             bool isRequireRebuildTiles = DustGUI.IsUndoRedoPerformed();
             bool isRequireResetupTiles = DustGUI.IsUndoRedoPerformed();
@@ -123,9 +125,7 @@ namespace DustEngine.DustEditor
             if (m_TilesCount.isChanged)
                 m_TilesCount.valInt = DuParallax.Normalizer.TilesCount(m_TilesCount.valInt);
 
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-            serializedObject.ApplyModifiedProperties();
+            InspectorCommitUpdates();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

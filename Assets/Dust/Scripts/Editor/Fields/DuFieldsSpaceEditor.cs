@@ -21,8 +21,10 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        protected void OnEnable()
+        protected override void InitializeEditor()
         {
+            base.InitializeEditor();
+
             SerializedProperty propertyFieldsMap = serializedObject.FindProperty("m_FieldsMap");
 
             m_CalculatePower = FindProperty(propertyFieldsMap, "m_CalculatePower", "Calculate Power");
@@ -33,7 +35,7 @@ namespace DustEngine.DustEditor
 
         public override void OnInspectorGUI()
         {
-            serializedObject.Update();
+            InspectorInitStates();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -49,7 +51,7 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            serializedObject.ApplyModifiedProperties();
+            InspectorCommitUpdates();
         }
     }
 }

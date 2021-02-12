@@ -30,9 +30,9 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        void OnEnable()
+        protected override void InitializeEditor()
         {
-            OnEnableField();
+            base.InitializeEditor();
 
             m_Shape = FindProperty("m_Shape", "Shape");
             m_Offset = FindProperty("m_Offset", "Offset");
@@ -44,9 +44,7 @@ namespace DustEngine.DustEditor
 
         public override void OnInspectorGUI()
         {
-            base.OnInspectorGUI();
-
-            serializedObject.Update();
+            InspectorInitStates();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -71,7 +69,7 @@ namespace DustEngine.DustEditor
             if (m_Shape.isChanged)
                 m_Shape.valAnimationCurve = DuCurveField.Normalizer.Shape(m_Shape.valAnimationCurve);
 
-            serializedObject.ApplyModifiedProperties();
+            InspectorCommitUpdates();
         }
     }
 }

@@ -29,9 +29,9 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        void OnEnable()
+        protected override void InitializeEditor()
         {
-            OnEnableField();
+            base.InitializeEditor();
 
             m_MinInput = FindProperty("m_MinInput", "Min Input");
             m_MaxInput = FindProperty("m_MaxInput", "Max Input");
@@ -42,9 +42,7 @@ namespace DustEngine.DustEditor
 
         public override void OnInspectorGUI()
         {
-            base.OnInspectorGUI();
-
-            serializedObject.Update();
+            InspectorInitStates();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -65,7 +63,7 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            serializedObject.ApplyModifiedProperties();
+            InspectorCommitUpdates();
         }
     }
 }

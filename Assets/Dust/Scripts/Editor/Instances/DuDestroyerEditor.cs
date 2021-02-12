@@ -36,8 +36,10 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        void OnEnable()
+        protected override void InitializeEditor()
         {
+            base.InitializeEditor();
+
             m_DestroyMode = FindProperty("m_DestroyMode", "Destroy Mode");
 
             m_Timeout = FindProperty("m_Timeout", "Timeout");
@@ -56,7 +58,7 @@ namespace DustEngine.DustEditor
 
         public override void OnInspectorGUI()
         {
-            serializedObject.Update();
+            InspectorInitStates();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -175,9 +177,7 @@ namespace DustEngine.DustEditor
             if (m_VolumeSize.isChanged)
                 m_VolumeSize.valVector3 = DuDestroyer.Normalizer.VolumeSize(m_VolumeSize.valVector3);
 
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-            serializedObject.ApplyModifiedProperties();
+            InspectorCommitUpdates();
         }
     }
 }

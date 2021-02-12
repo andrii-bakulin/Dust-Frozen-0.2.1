@@ -34,9 +34,9 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        void OnEnable()
+        protected override void InitializeEditor()
         {
-            OnEnableGizmo();
+            base.InitializeEditor();
 
             m_FieldsSpace = FindProperty("m_FieldsSpace", "Fields Space");
 
@@ -58,9 +58,7 @@ namespace DustEngine.DustEditor
 
         public override void OnInspectorGUI()
         {
-            base.OnInspectorGUI();
-
-            serializedObject.Update();
+            InspectorInitStates();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -118,9 +116,7 @@ namespace DustEngine.DustEditor
             if (m_ColorSize.isChanged)
                 m_ColorSize.valFloat = DuFieldsSpaceGizmo.Normalizer.Size(m_ColorSize.valFloat);
 
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-            serializedObject.ApplyModifiedProperties();
+            InspectorCommitUpdates();
         }
     }
 }

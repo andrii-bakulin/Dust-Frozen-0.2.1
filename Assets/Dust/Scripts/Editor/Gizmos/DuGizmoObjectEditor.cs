@@ -51,15 +51,12 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        protected virtual void OnEnableGizmo()
+        protected override void InitializeEditor()
         {
+            base.InitializeEditor();
+
             m_Color = FindProperty("m_Color", "Color");
             m_GizmoVisibility = FindProperty("m_GizmoVisibility", "Visibility");
-        }
-
-        public override void OnInspectorGUI()
-        {
-            // Hide base implementation
         }
     }
 }

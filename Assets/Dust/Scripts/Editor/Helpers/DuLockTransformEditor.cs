@@ -29,8 +29,10 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        void OnEnable()
+        protected override void InitializeEditor()
         {
+            base.InitializeEditor();
+
             m_LockPosition = FindProperty("m_LockPosition", "Lock Position");
             m_LockRotation = FindProperty("m_LockRotation", "Lock Rotation");
             m_LockScale = FindProperty("m_LockScale", "Lock Scale");
@@ -46,7 +48,7 @@ namespace DustEngine.DustEditor
         {
             var main = target as DuLockTransform;
 
-            serializedObject.Update();
+            InspectorInitStates();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -106,7 +108,7 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            serializedObject.ApplyModifiedProperties();
+            InspectorCommitUpdates();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

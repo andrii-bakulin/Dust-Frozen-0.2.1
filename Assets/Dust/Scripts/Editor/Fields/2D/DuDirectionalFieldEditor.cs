@@ -29,9 +29,9 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        void OnEnable()
+        protected override void InitializeEditor()
         {
-            OnEnableField();
+            base.InitializeEditor();
 
             m_Length = FindProperty("m_Length", "Length");
             m_Direction = FindProperty("m_Direction", "Direction");
@@ -42,9 +42,7 @@ namespace DustEngine.DustEditor
 
         public override void OnInspectorGUI()
         {
-            base.OnInspectorGUI();
-
-            serializedObject.Update();
+            InspectorInitStates();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -85,9 +83,7 @@ namespace DustEngine.DustEditor
             if (m_GizmoHeight.isChanged)
                 m_GizmoHeight.valFloat = DuDirectionalField.ShapeNormalizer.GizmoHeight(m_GizmoHeight.valFloat);
 
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-            serializedObject.ApplyModifiedProperties();
+            InspectorCommitUpdates();
         }
     }
 }

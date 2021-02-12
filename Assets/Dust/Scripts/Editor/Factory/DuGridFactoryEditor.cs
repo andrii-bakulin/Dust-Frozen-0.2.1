@@ -29,9 +29,9 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        void OnEnable()
+        protected override void InitializeEditor()
         {
-            OnEnableFactory();
+            base.InitializeEditor();
 
             m_Count = FindProperty("m_Count", "Count");
             m_Step = FindProperty("m_Step", "Step");
@@ -43,7 +43,7 @@ namespace DustEngine.DustEditor
 
         public override void OnInspectorGUI()
         {
-            BeginData();
+            InspectorInitStates();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -86,9 +86,7 @@ namespace DustEngine.DustEditor
             if (m_Count.isChanged)
                 m_Count.valVector3Int = DuGridFactory.Normalizer.Count(m_Count.valVector3Int);
 
-            //----------------------------------------------------------------------------------------------------------
-
-            CommitDataAndUpdateStates();
+            InspectorCommitUpdates();
         }
     }
 }

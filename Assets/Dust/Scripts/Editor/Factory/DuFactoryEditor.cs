@@ -69,8 +69,10 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        protected void OnEnableFactory()
+        protected override void InitializeEditor()
         {
+            base.InitializeEditor();
+
             m_SourceObjectsMode = FindProperty("m_SourceObjectsMode", "Source Mode");
             m_SourceObjectsHolder = FindProperty("m_SourceObjectsHolder", "Holder");
             m_SourceObjects = FindProperty("m_SourceObjects", "Source Objects");
@@ -116,16 +118,16 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        protected void BeginData()
+        protected override void InspectorInitStates()
         {
-            m_IsRequireRebuildInstances = m_IsRequireResetupInstances = DustGUI.IsUndoRedoPerformed();
+            base.InspectorInitStates();
 
-            serializedObject.Update();
+            m_IsRequireRebuildInstances = m_IsRequireResetupInstances = DustGUI.IsUndoRedoPerformed();
         }
 
-        protected void CommitDataAndUpdateStates()
+        protected override void InspectorCommitUpdates()
         {
-            serializedObject.ApplyModifiedProperties();
+            base.InspectorCommitUpdates();
 
             if (m_IsRequireRebuildInstances || m_IsRequireResetupInstances)
             {

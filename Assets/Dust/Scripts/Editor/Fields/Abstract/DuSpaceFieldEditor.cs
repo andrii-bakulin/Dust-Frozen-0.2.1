@@ -12,9 +12,9 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        protected override void OnEnableField()
+        protected override void InitializeEditor()
         {
-            base.OnEnableField();
+            base.InitializeEditor();
 
             m_RemappingEditor = new DuRemappingEditor((target as DuSpaceField).remapping, serializedObject.FindProperty("m_Remapping"));
 

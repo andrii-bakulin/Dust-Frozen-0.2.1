@@ -37,8 +37,10 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        void OnEnable()
+        protected override void InitializeEditor()
         {
+            base.InitializeEditor();
+
             m_Power = FindProperty("m_Power", "Power");
             m_SleepTime = FindProperty("m_SleepTime", "Sleep Time");
             m_Freeze = FindProperty("m_Freeze", "Freeze");
@@ -62,7 +64,7 @@ namespace DustEngine.DustEditor
 
         public override void OnInspectorGUI()
         {
-            serializedObject.Update();
+            InspectorInitStates();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -148,9 +150,7 @@ namespace DustEngine.DustEditor
             if (m_ScaleAmplitude.isChanged)
                 m_ScaleAmplitude.valVector3 = DuPulsate.Normalizer.ScaleAmplitude(m_ScaleAmplitude.valVector3);
 
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-            serializedObject.ApplyModifiedProperties();
+            InspectorCommitUpdates();
         }
     }
 }

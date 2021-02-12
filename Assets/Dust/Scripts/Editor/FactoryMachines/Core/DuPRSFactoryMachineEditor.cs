@@ -21,9 +21,9 @@ namespace DustEngine.DustEditor
         protected DuProperty m_Scale;
         protected DuProperty m_ScaleTransformMode;
 
-        protected override void OnEnableFactoryMachine()
+        protected override void InitializeEditor()
         {
-            base.OnEnableFactoryMachine();
+            base.InitializeEditor();
 
             m_Min = FindProperty("m_Min", "Min");
             m_Max = FindProperty("m_Max", "Max");

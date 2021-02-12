@@ -36,14 +36,9 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        void OnEnable()
+        protected override void InitializeEditor()
         {
-            OnEnableFactoryMachine();
-        }
-
-        protected override void OnEnableFactoryMachine()
-        {
-            base.OnEnableFactoryMachine();
+            base.InitializeEditor();
 
             m_ValueImpactEnabled = FindProperty("m_ValueImpactEnabled", "Enabled");
             m_ValueImpactIntensity = FindProperty("m_ValueImpactIntensity", "Intensity");
@@ -63,7 +58,7 @@ namespace DustEngine.DustEditor
 
         public override void OnInspectorGUI()
         {
-            serializedObject.Update();
+            InspectorInitStates();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -74,7 +69,7 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            serializedObject.ApplyModifiedProperties();
+            InspectorCommitUpdates();
         }
 
         //--------------------------------------------------------------------------------------------------------------

@@ -66,8 +66,10 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        protected virtual void OnEnableFactoryMachine()
+        protected override void InitializeEditor()
         {
+            base.InitializeEditor();
+
             m_CustomHint = FindProperty("m_CustomHint", "Hint for Machine");
             m_Intensity = FindProperty("m_Intensity", "Intensity");
         }

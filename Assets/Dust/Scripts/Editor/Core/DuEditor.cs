@@ -255,14 +255,21 @@ namespace DustEngine.DustEditor
             InitializeEditor();
         }
 
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
         protected virtual void InitializeEditor()
         {
 
         }
 
-        protected virtual void PostValidateModifiedProperties()
+        protected virtual void InspectorInitStates()
         {
+            serializedObject.Update();
+        }
 
+        protected virtual void InspectorCommitUpdates()
+        {
+            serializedObject.ApplyModifiedProperties();
         }
 
         //--------------------------------------------------------------------------------------------------------------

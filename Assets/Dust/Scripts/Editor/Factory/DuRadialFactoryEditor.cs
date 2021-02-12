@@ -33,9 +33,9 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        void OnEnable()
+        protected override void InitializeEditor()
         {
-            OnEnableFactory();
+            base.InitializeEditor();
 
             m_Count = FindProperty("m_Count", "Count");
             m_Radius = FindProperty("m_Radius", "Radius");
@@ -56,7 +56,7 @@ namespace DustEngine.DustEditor
 
         public override void OnInspectorGUI()
         {
-            BeginData();
+            InspectorInitStates();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -130,9 +130,7 @@ namespace DustEngine.DustEditor
             if (m_LevelsCount.isChanged)
                 m_LevelsCount.valInt = DuRadialFactory.Normalizer.LevelsCount(m_LevelsCount.valInt);
 
-            //----------------------------------------------------------------------------------------------------------
-
-            CommitDataAndUpdateStates();
+            InspectorCommitUpdates();
         }
     }
 }

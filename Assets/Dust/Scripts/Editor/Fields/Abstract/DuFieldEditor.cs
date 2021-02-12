@@ -82,15 +82,11 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        protected virtual void OnEnableField()
+        protected override void InitializeEditor()
         {
-            m_CustomHint = FindProperty("m_CustomHint", "Hint for Field");
-        }
+            base.InitializeEditor();
 
-        public override void OnInspectorGUI()
-        {
-            // Hide default OnInspectorGUI() call
-            // Extend all-fields-view if need in future...
+            m_CustomHint = FindProperty("m_CustomHint", "Hint for Field");
         }
     }
 }

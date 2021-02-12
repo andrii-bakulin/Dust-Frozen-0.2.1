@@ -35,9 +35,9 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        void OnEnable()
+        protected override void InitializeEditor()
         {
-            OnEnableGizmo();
+            base.InitializeEditor();
 
             m_Size = FindProperty("m_Size", "Size");
 
@@ -60,9 +60,7 @@ namespace DustEngine.DustEditor
 
         public override void OnInspectorGUI()
         {
-            base.OnInspectorGUI();
-
-            serializedObject.Update();
+            InspectorInitStates();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -131,9 +129,7 @@ namespace DustEngine.DustEditor
             if (m_MessageSize.isChanged)
                 m_MessageSize.valFloat = DuTriggerGizmo.Normalizer.MessageSize(m_MessageSize.valFloat);
 
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-            serializedObject.ApplyModifiedProperties();
+            InspectorCommitUpdates();
         }
     }
 }

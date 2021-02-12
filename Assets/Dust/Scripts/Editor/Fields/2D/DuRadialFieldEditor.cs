@@ -36,9 +36,9 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        void OnEnable()
+        protected override void InitializeEditor()
         {
-            OnEnableField();
+            base.InitializeEditor();
 
             m_StartAngle = FindProperty("m_StartAngle", "Start Angle");
             m_EndAngle = FindProperty("m_EndAngle", "End Angle");
@@ -56,9 +56,7 @@ namespace DustEngine.DustEditor
 
         public override void OnInspectorGUI()
         {
-            base.OnInspectorGUI();
-
-            serializedObject.Update();
+            InspectorInitStates();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -112,9 +110,7 @@ namespace DustEngine.DustEditor
             if (m_GizmoRadius.isChanged)
                 m_GizmoRadius.valFloat = DuRadialField.ShapeNormalizer.GizmoRadius(m_GizmoRadius.valFloat);
 
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-            serializedObject.ApplyModifiedProperties();
+            InspectorCommitUpdates();
         }
     }
 }

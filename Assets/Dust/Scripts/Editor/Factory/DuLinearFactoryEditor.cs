@@ -25,9 +25,9 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        void OnEnable()
+        protected override void InitializeEditor()
         {
-            OnEnableFactory();
+            base.InitializeEditor();
 
             m_Count = FindProperty("m_Count", "Count");
             m_Offset = FindProperty("m_Offset", "Offset");
@@ -40,7 +40,7 @@ namespace DustEngine.DustEditor
 
         public override void OnInspectorGUI()
         {
-            BeginData();
+            InspectorInitStates();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -86,9 +86,7 @@ namespace DustEngine.DustEditor
             if (m_Offset.isChanged)
                 m_Offset.valInt = DuLinearFactory.Normalizer.Offset(m_Offset.valInt);
 
-            //----------------------------------------------------------------------------------------------------------
-
-            CommitDataAndUpdateStates();
+            InspectorCommitUpdates();
         }
     }
 }

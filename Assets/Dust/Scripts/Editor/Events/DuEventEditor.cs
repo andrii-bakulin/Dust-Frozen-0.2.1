@@ -5,9 +5,5 @@ namespace DustEngine.DustEditor
 {
     public abstract class DuEventEditor : DuEditor
     {
-        public override void OnInspectorGUI()
-        {
-            // Hide base implementation
-        }
     }
 }

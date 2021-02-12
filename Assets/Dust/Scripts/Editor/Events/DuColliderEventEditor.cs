@@ -12,8 +12,10 @@ namespace DustEngine.DustEditor
         private DuProperty m_OnStay;
         private DuProperty m_OnExit;
 
-        void OnEnable()
+        protected override void InitializeEditor()
         {
+            base.InitializeEditor();
+
             m_ObjectTags = FindProperty("m_ObjectTags", "Object Tags");
             m_TagProcessingMode = FindProperty("m_TagProcessingMode", "Tag Check");
 
@@ -24,9 +26,7 @@ namespace DustEngine.DustEditor
 
         public override void OnInspectorGUI()
         {
-            base.OnInspectorGUI();
-
-            serializedObject.Update();
+            InspectorInitStates();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -59,7 +59,7 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            serializedObject.ApplyModifiedProperties();
+            InspectorCommitUpdates();
         }
     }
 }

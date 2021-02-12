@@ -43,8 +43,10 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        void OnEnable()
+        protected override void InitializeEditor()
         {
+            base.InitializeEditor();
+
             m_SpawnEvent = FindProperty("m_SpawnEvent", "Spawn Event");
             m_Interval = FindProperty("m_Interval", "Interval");
             m_IntervalRange = FindProperty("m_IntervalRange", "Interval Range");
@@ -72,7 +74,7 @@ namespace DustEngine.DustEditor
 
         public override void OnInspectorGUI()
         {
-            serializedObject.Update();
+            InspectorInitStates();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -237,9 +239,7 @@ namespace DustEngine.DustEditor
             if (m_Limit.isChanged)
                 m_Limit.valInt = DuSpawner.Normalizer.Limit(m_Limit.valInt);
 
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-            serializedObject.ApplyModifiedProperties();
+            InspectorCommitUpdates();
         }
 
         private void NormalizeIntervalValue(SerializedProperty property)

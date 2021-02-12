@@ -33,8 +33,10 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        void OnEnable()
+        protected override void InitializeEditor()
         {
+            base.InitializeEditor();
+
             m_FollowObject = FindProperty("m_FollowObject", "Follow Object");
             m_FollowOffset = FindProperty("m_FollowOffset", "Follow Offset");
 
@@ -50,7 +52,7 @@ namespace DustEngine.DustEditor
 
         public override void OnInspectorGUI()
         {
-            serializedObject.Update();
+            InspectorInitStates();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -107,9 +109,7 @@ namespace DustEngine.DustEditor
             if (m_SmoothTime.isChanged)
                 m_SmoothTime.valVector3 = DuFollow.Normalizer.SmoothTime(m_SmoothTime.valVector3);
 
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-            serializedObject.ApplyModifiedProperties();
+            InspectorCommitUpdates();
         }
     }
 }

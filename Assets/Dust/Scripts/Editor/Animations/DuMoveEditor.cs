@@ -30,8 +30,10 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        void OnEnable()
+        protected override void InitializeEditor()
         {
+            base.InitializeEditor();
+
             m_TranslateType = FindProperty("m_TranslateType", "Translate Kind");
 
             m_LinearSpeed = FindProperty("m_LinearSpeed", "Speed");
@@ -48,7 +50,7 @@ namespace DustEngine.DustEditor
 
         public override void OnInspectorGUI()
         {
-            serializedObject.Update();
+            InspectorInitStates();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -82,9 +84,7 @@ namespace DustEngine.DustEditor
             if (GUI.changed)
                 m_WaveOffset.valVector3 = DuVector3.Clamp01(m_WaveOffset.valVector3);
 
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-            serializedObject.ApplyModifiedProperties();
+            InspectorCommitUpdates();
         }
     }
 }

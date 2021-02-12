@@ -23,9 +23,9 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        void OnEnable()
+        protected override void InitializeEditor()
         {
-            OnEnableGizmo();
+            base.InitializeEditor();
 
             m_Radius = FindProperty("m_Radius", "Radius");
             m_Height = FindProperty("m_Height", "Height");
@@ -36,9 +36,7 @@ namespace DustEngine.DustEditor
 
         public override void OnInspectorGUI()
         {
-            base.OnInspectorGUI();
-
-            serializedObject.Update();
+            InspectorInitStates();
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -57,9 +55,7 @@ namespace DustEngine.DustEditor
             if (m_Faces.isChanged)
                 m_Faces.valInt = DuPyramidGizmo.Normalizer.Faces(m_Faces.valInt);
 
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-            serializedObject.ApplyModifiedProperties();
+            InspectorCommitUpdates();
         }
     }
 }
