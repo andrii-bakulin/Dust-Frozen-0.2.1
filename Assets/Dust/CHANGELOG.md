@@ -11,6 +11,7 @@
 - On add Du*Event component it correct append to Undo stack
 - DuFactoryInstance: allow add only one component to object (Issue #24)
 - DuFactory: forced rebuild factory instances on change any param of depended prefabs (Issue #18)
+- DuRandomTransform: default activate is OnAwake now
 
 
 ________________________________________________________________________________________________________________________

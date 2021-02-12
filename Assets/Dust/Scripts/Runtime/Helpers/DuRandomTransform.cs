@@ -20,7 +20,7 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
 
         [SerializeField]
-        private ActivateMode m_ActivateMode = ActivateMode.Start;
+        private ActivateMode m_ActivateMode = ActivateMode.Awake;
         public ActivateMode activateMode
         {
             get => m_ActivateMode;
