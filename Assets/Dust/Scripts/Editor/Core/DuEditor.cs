@@ -75,7 +75,10 @@ namespace DustEngine.DustEditor
                 set => property.colorValue = value;
             }
 
-            public SerializedProperty valUnityEvent => property.FindPropertyRelative("m_PersistentCalls.m_Calls");
+            public SerializedProperty valUnityEvent
+            {
+                get => property.FindPropertyRelative("m_PersistentCalls.m_Calls");
+            }
 
             public GameObject GameObjectReference => property.objectReferenceValue as GameObject;
 
@@ -100,6 +103,31 @@ namespace DustEngine.DustEditor
                 property = serializedObject.FindProperty(propertyPath),
                 isChanged = false,
                 parentEditor = this
+            };
+            return duProperty;
+        }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        public static DuProperty FindProperty(SerializedObject parentObject, string propertyPath)
+            => FindProperty(null, parentObject, propertyPath, "", "");
+
+        public static DuProperty FindProperty(SerializedObject parentObject, string propertyPath, string title)
+            => FindProperty(null, parentObject, propertyPath, title, "");
+
+        public static DuProperty FindProperty(DuEditor parentEditor, SerializedObject parentObject, string propertyPath, string title)
+            => FindProperty(parentEditor, parentObject, propertyPath, title, "");
+
+        public static DuProperty FindProperty(DuEditor parentEditor, SerializedObject parentObject, string propertyPath, string title, string tooltip)
+        {
+            var duProperty = new DuProperty
+            {
+                propertyPath = propertyPath,
+                title = title,
+                tooltip = tooltip,
+                property = parentObject.FindProperty(propertyPath),
+                isChanged = false,
+                parentEditor = parentEditor,
             };
             return duProperty;
         }
@@ -217,6 +245,24 @@ namespace DustEngine.DustEditor
         protected static bool IsAllowExecMenuCommandOnce(MenuCommand menuCommand)
         {
             return Selection.objects.Length == 0 || menuCommand.context == Selection.objects[0];
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        // Notice: on redefine OnEnable() method require manually call InitializeEditor();
+        void OnEnable()
+        {
+            InitializeEditor();
+        }
+
+        protected virtual void InitializeEditor()
+        {
+
+        }
+
+        protected virtual void PostValidateModifiedProperties()
+        {
+
         }
 
         //--------------------------------------------------------------------------------------------------------------
