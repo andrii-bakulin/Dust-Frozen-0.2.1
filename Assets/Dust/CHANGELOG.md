@@ -6,6 +6,7 @@
 - Added DuActions [core]
 - Added DuActionMoveBy & DuActionMoveTo
 - Added DuActionDelay
+- Added DuActionCallback
 
 ### Fixed
 
