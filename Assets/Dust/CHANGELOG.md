@@ -5,6 +5,7 @@
 - Added component Animation.DuScale
 - Added DuActions [core]
 - Added DuActionMoveBy & DuActionMoveTo
+- Added DuActionDelay
 
 ### Fixed
 
