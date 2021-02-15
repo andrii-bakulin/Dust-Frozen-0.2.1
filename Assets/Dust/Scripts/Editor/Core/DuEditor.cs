@@ -27,6 +27,12 @@ namespace DustEngine.DustEditor
 
             public int enumValueIndex => property?.enumValueIndex ?? 0;
 
+            public bool valBool
+            {
+                get => property.boolValue;
+                set => property.boolValue = value;
+            }
+
             public int valInt
             {
                 get => property.intValue;

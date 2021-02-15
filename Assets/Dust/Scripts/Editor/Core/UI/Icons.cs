@@ -9,8 +9,13 @@ namespace DustEngine.DustEditor.UI
 #if DUST_ALPHA_DEFORMERS
         internal const string ACTION_ADD_DEFORMER = "UI/Add-Deformer";
 #endif
+        internal const string ACTION_ADD_ACTION = "UI/Add-Action";
         internal const string ACTION_ADD_FACTORY_MACHINE = "UI/Add-Factory-Machine";
         internal const string ACTION_ADD_FIELD = "UI/Add-Field";
+
+        internal const string ACTION_PLAY = "UI/Action-Play";
+        internal const string ACTION_IDLE = "UI/Action-Idle";
+        internal const string ACTION_NEXT = "UI/Action-Next";
 
         internal const string STATE_ENABLED = "UI/State-Enabled";
         internal const string STATE_DISABLED = "UI/State-Disabled";
@@ -22,6 +27,7 @@ namespace DustEngine.DustEditor.UI
 
         private static readonly string[] resourcePaths =
         {
+            "Components/Actions/",
             "Components/Animations/",
 #if DUST_ALPHA_DEFORMERS
             "Components/Deformers/",
