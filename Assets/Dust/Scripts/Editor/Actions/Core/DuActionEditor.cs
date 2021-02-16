@@ -11,7 +11,7 @@ namespace DustEngine.DustEditor
         protected DuProperty m_TargetMode;
         protected DuProperty m_TargetObject;
 
-        protected DuProperty m_OnCompete;
+        protected DuProperty m_OnComplete;
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -28,7 +28,7 @@ namespace DustEngine.DustEditor
             m_TargetMode = FindProperty("m_TargetMode", "Target Mode");
             m_TargetObject = FindProperty("m_TargetObject", "Target Object");
 
-            m_OnCompete = FindProperty("m_OnCompete", "On Complete Start Next Actions");
+            m_OnComplete = FindProperty("m_OnComplete", "On Complete Start Next Actions");
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -94,7 +94,7 @@ namespace DustEngine.DustEditor
 
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-                foreach (DuAction nextAction in duAction.onCompete)
+                foreach (DuAction nextAction in duAction.onComplete)
                 {
                     if (Dust.IsNull(nextAction))
                         continue;
@@ -120,7 +120,7 @@ namespace DustEngine.DustEditor
 
         protected void OnInspectorGUI_AnyActionFields(string actionId)
         {
-            PropertyField(m_OnCompete);
+            PropertyField(m_OnComplete);
 
             if (DustGUI.FoldoutBegin("Extended", actionId + ".Extended", false))
             {

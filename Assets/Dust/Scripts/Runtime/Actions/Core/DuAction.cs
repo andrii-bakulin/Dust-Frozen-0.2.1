@@ -39,15 +39,15 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private List<DuAction> m_OnCompete = null;
-        public List<DuAction> onCompete
+        private List<DuAction> m_OnComplete = null;
+        public List<DuAction> onComplete
         {
             get
             {
-                if (Dust.IsNull(m_OnCompete))
-                    m_OnCompete = new List<DuAction>();
+                if (Dust.IsNull(m_OnComplete))
+                    m_OnComplete = new List<DuAction>();
 
-                return m_OnCompete;
+                return m_OnComplete;
             }
         }
 
@@ -120,11 +120,11 @@ namespace DustEngine
 
             OnActionStop(isTerminated);
 
-            if (!isTerminated && Dust.IsNotNull(onCompete))
+            if (!isTerminated && Dust.IsNotNull(onComplete))
             {
-                for (int i = 0; i < onCompete.Count; i++)
+                for (int i = 0; i < onComplete.Count; i++)
                 {
-                    onCompete[i].Play();
+                    onComplete[i].Play();
                 }
             }
         }
