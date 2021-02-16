@@ -7,12 +7,12 @@ namespace DustEngine
     {
         public static bool IsNull(System.Object obj)
         {
-            return obj == null;
+            return obj is null;
         }
 
         public static bool IsNotNull(System.Object obj)
         {
-            return obj != null;
+            return !(obj is null);
         }
 
         public static bool IsNull(Object obj)
@@ -27,7 +27,7 @@ namespace DustEngine
 
         public static bool IsNullOrEmpty(string str)
         {
-            return IsNull(str) || str.Equals("");
+            return str is null || str.Equals("");
         }
 
         //--------------------------------------------------------------------------------------------------------------
