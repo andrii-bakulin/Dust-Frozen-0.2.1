@@ -14,28 +14,28 @@ namespace DustEngine.Test
         public void IsNull_ShouldTrue_WhenSystemObjectIsNull()
         {
             String sut = null;
-            Assert.True(Dust.IsNull(sut));
+            Assert.That(Dust.IsNull(sut), Is.True);
         }
 
         [Test]
         public void IsNull_ShouldFalse_WhenSystemObjectIsText()
         {
             String sut = "Test";
-            Assert.False(Dust.IsNull(sut));
+            Assert.That(Dust.IsNull(sut), Is.False);
         }
 
         [Test]
         public void IsNotNull_ShouldTrue_WhenSystemObjectIsText()
         {
             String sut = "Test";
-            Assert.True(Dust.IsNotNull(sut));
+            Assert.That(Dust.IsNotNull(sut), Is.True);
         }
 
         [Test]
         public void IsNotNull_ShouldFalse_WhenSystemObjectIsNull()
         {
             String sut = null;
-            Assert.False(Dust.IsNotNull(sut));
+            Assert.That(Dust.IsNotNull(sut), Is.False);
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -46,7 +46,7 @@ namespace DustEngine.Test
             var gameObject = new GameObject();
             var sut = gameObject.GetComponent<Collider2D>(); // Collider2D definitely NOT EXISTS in empty GameObject
 
-            Assert.True(Dust.IsNull(sut));
+            Assert.That(Dust.IsNull(sut), Is.True);
 
             UnityEngine.Object.DestroyImmediate(gameObject);
         }
@@ -57,7 +57,7 @@ namespace DustEngine.Test
             var gameObject = new GameObject();
             var sut = gameObject.GetComponent<Transform>(); // Transform definitely EXISTS in empty GameObject
 
-            Assert.False(Dust.IsNull(sut));
+            Assert.That(Dust.IsNull(sut), Is.False);
 
             UnityEngine.Object.DestroyImmediate(gameObject);
         }
@@ -68,7 +68,7 @@ namespace DustEngine.Test
             var gameObject = new GameObject();
             var sut = gameObject.GetComponent<Transform>(); // Transform definitely EXISTS in empty GameObject
 
-            Assert.True(Dust.IsNotNull(sut));
+            Assert.That(Dust.IsNotNull(sut), Is.True);
 
             UnityEngine.Object.DestroyImmediate(gameObject);
         }
@@ -79,7 +79,7 @@ namespace DustEngine.Test
             var gameObject = new GameObject();
             var sut = gameObject.GetComponent<Collider2D>(); // Collider2D definitely NOT EXISTS in empty GameObject
 
-            Assert.False(Dust.IsNotNull(sut));
+            Assert.That(Dust.IsNotNull(sut), Is.False);
 
             UnityEngine.Object.DestroyImmediate(gameObject);
         }
@@ -91,7 +91,7 @@ namespace DustEngine.Test
         [TestCase("")]
         public void IsNullOrEmpty_ShouldTrue_WhenStringIs(string sut)
         {
-            Assert.True(Dust.IsNullOrEmpty(sut));
+            Assert.That(Dust.IsNullOrEmpty(sut), Is.True);
         }
 
         [Test]
@@ -99,7 +99,7 @@ namespace DustEngine.Test
         [TestCase("Test")]
         public void IsNullOrEmpty_ShouldFalse_WhenStringIs(string sut)
         {
-            Assert.False(Dust.IsNullOrEmpty(sut));
+            Assert.That(Dust.IsNullOrEmpty(sut), Is.False);
         }
     }
 }
