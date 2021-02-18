@@ -29,7 +29,7 @@ namespace DustEngine
 
         public enum NoiseSpace
         {
-            Global = 0,
+            World = 0,
             Local = 1,
         }
 
@@ -234,7 +234,7 @@ namespace DustEngine
 
                     switch (noiseSpace)
                     {
-                        case NoiseSpace.Global:
+                        case NoiseSpace.World:
                             inSpaceOffset = factoryInstanceState.factory.GetPositionInWorldSpace(factoryInstance);
                             break;
 
