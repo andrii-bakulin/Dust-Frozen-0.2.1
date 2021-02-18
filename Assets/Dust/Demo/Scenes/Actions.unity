@@ -395,7 +395,7 @@ MonoBehaviour:
   m_OnCompleteActions:
   - {fileID: 1797361647}
   m_Duration: 1
-  m_EndPoint: {x: 2, y: 1, z: 3}
+  m_EndPosition: {x: 1, y: 2, z: 3}
   m_Space: 1
 --- !u!23 &1797361649
 MeshRenderer:
