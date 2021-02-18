@@ -15,11 +15,11 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
 
         [SerializeField]
-        private Vector3 m_Angle = Vector3.forward;
-        public Vector3 angle
+        private Vector3 m_RotateBy = Vector3.zero;
+        public Vector3 rotateBy
         {
-            get => m_Angle;
-            set => m_Angle = value;
+            get => m_RotateBy;
+            set => m_RotateBy = value;
         }
 
         [SerializeField]
@@ -40,7 +40,7 @@ namespace DustEngine
             if (Dust.IsNull(tr))
                 return;
 
-            Vector3 deltaRotate = angle * (percentsCompletedNow - percentsCompletedLast);
+            Vector3 deltaRotate = rotateBy * (percentsCompletedNow - percentsCompletedLast);
 
             switch (space)
             {

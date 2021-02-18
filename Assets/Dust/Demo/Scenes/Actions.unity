@@ -176,7 +176,7 @@ MonoBehaviour:
       m_Calls: []
   m_OnCompleteActions: []
   m_Duration: 3
-  m_EndRotation: {x: 0, y: 0, z: 0}
+  m_RotateTo: {x: 0, y: 0, z: 0}
   m_Space: 1
 --- !u!23 &2487039
 MeshRenderer:
@@ -373,7 +373,7 @@ MonoBehaviour:
   m_OnCompleteActions:
   - {fileID: 470722150}
   m_Duration: 3
-  m_Angle: {x: 0, y: 90, z: 0}
+  m_RotateBy: {x: 0, y: 90, z: 0}
   m_Space: 1
 --- !u!23 &470722151
 MeshRenderer:
@@ -604,7 +604,7 @@ MonoBehaviour:
       m_Calls: []
   m_OnCompleteActions: []
   m_Duration: 3
-  m_EndRotation: {x: 0, y: 0, z: 0}
+  m_RotateTo: {x: 0, y: 0, z: 0}
   m_Space: 0
 --- !u!23 &835955207
 MeshRenderer:
@@ -893,7 +893,7 @@ MonoBehaviour:
   m_OnCompleteActions:
   - {fileID: 1034323473}
   m_Duration: 3
-  m_Angle: {x: 0, y: 90, z: 0}
+  m_RotateBy: {x: 0, y: 90, z: 0}
   m_Space: 2
 --- !u!23 &1034323474
 MeshRenderer:
@@ -1462,7 +1462,7 @@ MonoBehaviour:
   m_OnCompleteActions:
   - {fileID: 2093178289}
   m_Duration: 3
-  m_Angle: {x: 0, y: 90, z: 0}
+  m_RotateBy: {x: 0, y: 90, z: 0}
   m_Space: 0
 --- !u!23 &2093178290
 MeshRenderer:

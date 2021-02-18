@@ -8,7 +8,7 @@ namespace DustEngine.DustEditor
     [InitializeOnLoad]
     public class DuActionRotateByEditor : DuIntervalActionEditor
     {
-        private DuProperty m_Angle;
+        private DuProperty m_RotateBy;
         private DuProperty m_Space;
 
         //--------------------------------------------------------------------------------------------------------------
@@ -30,7 +30,7 @@ namespace DustEngine.DustEditor
         {
             base.InitializeEditor();
 
-            m_Angle = FindProperty("m_Angle", "Rotate By");
+            m_RotateBy = FindProperty("m_RotateBy", "Rotate By");
             m_Space = FindProperty("m_Space", "Space");
         }
 
@@ -44,7 +44,7 @@ namespace DustEngine.DustEditor
 
             if (DustGUI.FoldoutBegin("Parameters", "DuActionRotateBy.Parameters"))
             {
-                PropertyField(m_Angle);
+                PropertyField(m_RotateBy);
                 PropertyExtendedSlider(m_Duration, 0.00f, 10.0f, +0.01f, 0.00f);
                 PropertyField(m_Space);
             }

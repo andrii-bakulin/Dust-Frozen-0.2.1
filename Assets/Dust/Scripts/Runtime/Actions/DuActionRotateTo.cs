@@ -14,11 +14,11 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
 
         [SerializeField]
-        private Vector3 m_EndRotation = Vector3.zero;
-        public Vector3 endRotation
+        private Vector3 m_RotateTo = Vector3.zero;
+        public Vector3 rotateTo
         {
-            get => m_EndRotation;
-            set => m_EndRotation = value;
+            get => m_RotateTo;
+            set => m_RotateTo = value;
         }
 
         [SerializeField]
@@ -43,16 +43,16 @@ namespace DustEngine
                 ? deltaTime / ((1f - percentsCompletedNow) * duration)
                 : 1f;
 
-            Quaternion quaEndRotation = Quaternion.Euler(endRotation);
+            Quaternion quaRotateTo = Quaternion.Euler(rotateTo);
 
             switch (space)
             {
                 case Space.World:
-                    tr.rotation = Quaternion.Lerp(tr.rotation, quaEndRotation, lerpOffset);
+                    tr.rotation = Quaternion.Lerp(tr.rotation, quaRotateTo, lerpOffset);
                     break;
 
                 case Space.Local:
-                    tr.localRotation = Quaternion.Lerp(tr.localRotation, quaEndRotation, lerpOffset);
+                    tr.localRotation = Quaternion.Lerp(tr.localRotation, quaRotateTo, lerpOffset);
                     break;
             }
         }
