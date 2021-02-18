@@ -10,8 +10,9 @@ namespace DustEngine
         public enum TargetMode
         {
             Self = 0,
-            Parent = 1,
-            GameObject = 2
+            ParentObject = 1,
+            GameObject = 2,
+            Inherit = 3,
         }
 
         [Serializable]
@@ -93,12 +94,14 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public void Play()
+        public void Play() => Play(null);
+
+        public void Play(DuAction previousAction)
         {
             if (isPlaying)
                 return;
 
-            ActionInnerStart();
+            ActionInnerStart(previousAction);
         }
 
         public void Stop()
@@ -112,8 +115,19 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // DuAction lifecycle INNER
 
-        internal void ActionInnerStart()
+        internal void ActionInnerStart(DuAction previousAction)
         {
+            if (targetMode == TargetMode.Inherit)
+            {
+                if (Dust.IsNull(previousAction))
+                {
+                    Dust.Debug.Error("Cannot start action [" + gameObject.name + "]->["+GetType()+"] because previousAction is null, but it required to inherit target object");
+                    return;
+                }
+
+                targetObject = previousAction.GetTargetObject();
+            }
+
             m_IsPlaying = true;
 
             m_PercentsCompletedLast = 0f;
@@ -141,7 +155,7 @@ namespace DustEngine
                 {
                     for (int i = 0; i < onCompleteActions.Count; i++)
                     {
-                        onCompleteActions[i].Play();
+                        onCompleteActions[i].Play(this);
                     }
                 }
             }
@@ -164,22 +178,33 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        protected Transform GetTargetTransform()
+        internal GameObject GetTargetObject()
         {
             switch (targetMode)
             {
                 case TargetMode.Self:
-                    return transform;
+                    return this.gameObject;
 
-                case TargetMode.Parent:
-                    return transform.parent;
+                case TargetMode.ParentObject:
+                    return transform.parent.gameObject;
 
                 case TargetMode.GameObject:
-                    return targetObject.transform;
+                case TargetMode.Inherit:
+                    return this.targetObject;
 
                 default:
                     return null;
             }
+        }
+
+        protected Transform GetTargetTransform()
+        {
+            var target = GetTargetObject();
+
+            if (Dust.IsNull(target))
+                return null;
+
+            return target.transform;
         }
     }
 }
