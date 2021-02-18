@@ -15,7 +15,7 @@ namespace DustEngine.DustEditor
         private DuProperty m_WaveSpeed;
         private DuProperty m_WaveOffset;
 
-        private DuProperty m_DirectionSpace;
+        private DuProperty m_Space;
         private DuProperty m_Freeze;
 
         private DuProperty m_UpdateMode;
@@ -42,7 +42,7 @@ namespace DustEngine.DustEditor
             m_WaveSpeed = FindProperty("m_WaveSpeed", "Speed in Degrees");
             m_WaveOffset = FindProperty("m_WaveOffset", "Offset");
 
-            m_DirectionSpace = FindProperty("m_DirectionSpace", "Direction Space");
+            m_Space = FindProperty("m_Space", "Space");
             m_Freeze = FindProperty("m_Freeze", "Freeze");
 
             m_UpdateMode = FindProperty("m_UpdateMode", "Update Mode");
@@ -71,7 +71,7 @@ namespace DustEngine.DustEditor
 
             Space();
 
-            PropertyField(m_DirectionSpace);
+            PropertyField(m_Space);
             PropertyField(m_Freeze);
 
             Space();

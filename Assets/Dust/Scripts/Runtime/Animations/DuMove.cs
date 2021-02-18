@@ -5,11 +5,11 @@ namespace DustEngine
     [AddComponentMenu("Dust/Animations/Move")]
     public class DuMove : DuMonoBehaviour
     {
-        public enum DirectionSpace
+        public enum Space
         {
-            Self = 0,
-            Parent = 1,
-            World = 2,
+            World = 0,
+            Local = 1,
+            Self = 2,
         }
 
         public enum TranslateType
@@ -67,11 +67,11 @@ namespace DustEngine
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
-        private DirectionSpace m_DirectionSpace = DirectionSpace.Parent;
-        public DirectionSpace directionSpace
+        private Space m_Space = Space.Local;
+        public Space space
         {
-            get => m_DirectionSpace;
-            set => m_DirectionSpace = value;
+            get => m_Space;
+            set => m_Space = value;
         }
 
         [SerializeField]
@@ -151,7 +151,7 @@ namespace DustEngine
                     return;
             }
 
-            if (directionSpace == DirectionSpace.Self)
+            if (space == Space.Self)
                 deltaPosition = DuMath.RotatePoint(deltaPosition, this.transform.localEulerAngles);
 
             Vector3 extDeltaPosition = deltaPosition;
@@ -159,16 +159,15 @@ namespace DustEngine
             if (requireRollbackLastTranslate)
                 extDeltaPosition -= m_LastDeltaPosition;
 
-            switch (directionSpace)
+            switch (space)
             {
-                default:
-                case DirectionSpace.Self:
-                case DirectionSpace.Parent:
-                    this.transform.localPosition += extDeltaPosition;
+                case Space.World:
+                    this.transform.position += extDeltaPosition;
                     break;
 
-                case DirectionSpace.World:
-                    this.transform.position += extDeltaPosition;
+                case Space.Local:
+                case Space.Self:
+                    this.transform.localPosition += extDeltaPosition;
                     break;
             }
 
