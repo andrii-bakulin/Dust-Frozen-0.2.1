@@ -11,6 +11,12 @@ namespace DustEngine
             Start = 1,
         }
 
+        public enum Space
+        {
+            World = 1,
+            Local = 0,
+        }
+
         public enum TransformMode
         {
             Relative = 0,
@@ -36,8 +42,8 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private WorkSpace m_Space = WorkSpace.Local;
-        public WorkSpace space
+        private Space m_Space = Space.Local;
+        public Space space
         {
             get => m_Space;
             set => m_Space = value;
@@ -166,13 +172,12 @@ namespace DustEngine
 
                 switch (space)
                 {
-                    default:
-                    case WorkSpace.Local:
-                        position = transform.localPosition;
+                    case Space.World:
+                        position = transform.position;
                         break;
 
-                    case WorkSpace.World:
-                        position = transform.position;
+                    case Space.Local:
+                        position = transform.localPosition;
                         break;
                 }
 
@@ -190,13 +195,12 @@ namespace DustEngine
 
                 switch (space)
                 {
-                    default:
-                    case WorkSpace.Local:
-                        transform.localPosition = position;
+                    case Space.World:
+                        transform.position = position;
                         break;
 
-                    case WorkSpace.World:
-                        transform.position = position;
+                    case Space.Local:
+                        transform.localPosition = position;
                         break;
                 }
             }
@@ -208,13 +212,12 @@ namespace DustEngine
 
                 switch (space)
                 {
-                    default:
-                    case WorkSpace.Local:
-                        rotation = transform.localEulerAngles;
+                    case Space.World:
+                        rotation = transform.eulerAngles;
                         break;
 
-                    case WorkSpace.World:
-                        rotation = transform.eulerAngles;
+                    case Space.Local:
+                        rotation = transform.localEulerAngles;
                         break;
                 }
 
@@ -232,13 +235,12 @@ namespace DustEngine
 
                 switch (space)
                 {
-                    default:
-                    case WorkSpace.Local:
-                        transform.localEulerAngles = rotation;
+                    case Space.World:
+                        transform.eulerAngles = rotation;
                         break;
 
-                    case WorkSpace.World:
-                        transform.eulerAngles = rotation;
+                    case Space.Local:
+                        transform.localEulerAngles = rotation;
                         break;
                 }
             }
@@ -250,13 +252,12 @@ namespace DustEngine
 
                 switch (space)
                 {
-                    default:
-                    case WorkSpace.Local:
-                        scale = transform.localScale;
+                    case Space.World:
+                        // Ignore for now
                         break;
 
-                    case WorkSpace.World:
-                        // Ignore for now
+                    case Space.Local:
+                        scale = transform.localScale;
                         break;
                 }
 
@@ -274,13 +275,12 @@ namespace DustEngine
 
                 switch (space)
                 {
-                    default:
-                    case WorkSpace.Local:
-                        transform.localScale = scale;
+                    case Space.World:
+                        // Ignore for now
                         break;
 
-                    case WorkSpace.World:
-                        // Ignore for now
+                    case Space.Local:
+                        transform.localScale = scale;
                         break;
                 }
             }
