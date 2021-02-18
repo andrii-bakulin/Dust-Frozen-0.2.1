@@ -6,7 +6,7 @@ namespace DustEngine
     [ExecuteAlways]
     public class DuLockTransform : MonoBehaviour
     {
-        public enum LockInSpace
+        public enum Space
         {
             World = 0,
             Local = 1,
@@ -88,16 +88,16 @@ namespace DustEngine
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
-        public LockInSpace m_LockInSpace;
-        public LockInSpace lockInSpace
+        public Space m_Space;
+        public Space space
         {
-            get => m_LockInSpace;
+            get => m_Space;
             set
             {
-                if (m_LockInSpace == value)
+                if (m_Space == value)
                     return;
 
-                m_LockInSpace = value;
+                m_Space = value;
                 FixLockStates();
             }
         }
@@ -125,7 +125,7 @@ namespace DustEngine
 
             if (lockPosition)
             {
-                if (lockInSpace == LockInSpace.Local)
+                if (space == Space.Local)
                     t.localPosition = m_Position;
                 else
                     t.position = m_Position;
@@ -133,7 +133,7 @@ namespace DustEngine
 
             if (lockRotation)
             {
-                if (lockInSpace == LockInSpace.Local)
+                if (space == Space.Local)
                     t.localRotation = m_Rotation;
                 else
                     t.rotation = m_Rotation;
@@ -150,12 +150,12 @@ namespace DustEngine
             Transform t = transform;
 
             if (lockPosition)
-                m_Position = lockInSpace == LockInSpace.Local ? t.localPosition : t.position;
+                m_Position = space == Space.Local ? t.localPosition : t.position;
             else
                 m_Position = Vector3.zero;
 
             if (lockRotation)
-                m_Rotation = lockInSpace == LockInSpace.Local ? t.localRotation : t.rotation;
+                m_Rotation = space == Space.Local ? t.localRotation : t.rotation;
             else
                 m_Rotation = Quaternion.identity;
 

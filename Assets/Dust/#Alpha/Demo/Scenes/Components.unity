@@ -589,7 +589,7 @@ MonoBehaviour:
   m_Position: {x: 0, y: 0, z: -1}
   m_Rotation: {x: 0.19996412, y: 0.3736123, z: -0.08282785, w: 0.90198}
   m_Scale: {x: 1, y: 1, z: 1}
-  m_LockInSpace: 1
+  m_Space: 1
 --- !u!65 &1046881254
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -734,7 +734,7 @@ MonoBehaviour:
   m_Position: {x: 4, y: 0.787, z: -3.9999998}
   m_Rotation: {x: -0, y: 0.38268343, z: -0, w: 0.92387956}
   m_Scale: {x: 1, y: 1, z: 1}
-  m_LockInSpace: 0
+  m_Space: 0
 --- !u!135 &1825887463
 SphereCollider:
   m_ObjectHideFlags: 0

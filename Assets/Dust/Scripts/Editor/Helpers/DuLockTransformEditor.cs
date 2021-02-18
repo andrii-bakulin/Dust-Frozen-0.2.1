@@ -15,7 +15,7 @@ namespace DustEngine.DustEditor
         private DuProperty m_Rotation;
         private DuProperty m_Scale;
 
-        private DuProperty m_LockInSpace;
+        private DuProperty m_Space;
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -41,7 +41,7 @@ namespace DustEngine.DustEditor
             m_Rotation = FindProperty("m_Rotation", "Rotation");
             m_Scale = FindProperty("m_Scale", "Scale");
 
-            m_LockInSpace = FindProperty("m_LockInSpace", "Lock In Space");
+            m_Space = FindProperty("m_Space", "Lock In Space");
         }
 
         public override void OnInspectorGUI()
@@ -58,7 +58,7 @@ namespace DustEngine.DustEditor
 
             Space();
 
-            PropertyField(m_LockInSpace);
+            PropertyField(m_Space);
 
             if (targets.Length == 1)
             {
@@ -70,11 +70,11 @@ namespace DustEngine.DustEditor
 
                     if (main.enabled && (m_LockPosition.IsTrue || m_LockRotation.IsTrue || m_LockScale.IsTrue))
                     {
-                        var lockInSpace = (DuLockTransform.LockInSpace) m_LockInSpace.enumValueIndex;
+                        var space = (DuLockTransform.Space) m_Space.enumValueIndex;
 
                         if (m_LockPosition.IsTrue)
                         {
-                            string title = lockInSpace == DuLockTransform.LockInSpace.Local
+                            string title = space == DuLockTransform.Space.Local
                                 ? "Local Position"
                                 : "World Position";
                             DustGUI.Field(title, m_Position.valVector3);
@@ -82,7 +82,7 @@ namespace DustEngine.DustEditor
 
                         if (m_LockRotation.IsTrue)
                         {
-                            string title = lockInSpace == DuLockTransform.LockInSpace.Local
+                            string title = space == DuLockTransform.Space.Local
                                 ? "Local Rotation"
                                 : "World Rotation";
                             DustGUI.Field(title, m_Rotation.valQuaternion.eulerAngles);
@@ -90,7 +90,7 @@ namespace DustEngine.DustEditor
 
                         if (m_LockScale.IsTrue)
                         {
-                            string title = lockInSpace == DuLockTransform.LockInSpace.Local
+                            string title = space == DuLockTransform.Space.Local
                                 ? "Local Scale"
                                 : "Local* Scale";
                             DustGUI.Field(title, m_Scale.valVector3);
@@ -116,7 +116,7 @@ namespace DustEngine.DustEditor
             reLockState |= m_LockPosition.isChanged;
             reLockState |= m_LockRotation.isChanged;
             reLockState |= m_LockScale.isChanged;
-            reLockState |= m_LockInSpace.isChanged;
+            reLockState |= m_Space.isChanged;
 
             if (reLockState)
             {
