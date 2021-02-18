@@ -8,7 +8,7 @@ namespace DustEngine.DustEditor
     [InitializeOnLoad]
     public class DuActionMoveByEditor : DuIntervalActionEditor
     {
-        private DuProperty m_Distance;
+        private DuProperty m_MoveBy;
         private DuProperty m_Space;
 
         //--------------------------------------------------------------------------------------------------------------
@@ -30,7 +30,7 @@ namespace DustEngine.DustEditor
         {
             base.InitializeEditor();
 
-            m_Distance = FindProperty("m_Distance", "Move By");
+            m_MoveBy = FindProperty("m_MoveBy", "Move By");
             m_Space = FindProperty("m_Space", "Space");
         }
 
@@ -44,7 +44,7 @@ namespace DustEngine.DustEditor
 
             if (DustGUI.FoldoutBegin("Parameters", "DuActionMoveBy.Parameters"))
             {
-                PropertyField(m_Distance);
+                PropertyField(m_MoveBy);
                 PropertyExtendedSlider(m_Duration, 0.00f, 10.0f, +0.01f, 0.00f);
                 PropertyField(m_Space);
             }

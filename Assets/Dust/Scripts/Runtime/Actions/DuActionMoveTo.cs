@@ -14,11 +14,11 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
 
         [SerializeField]
-        private Vector3 m_EndPosition = Vector3.zero;
-        public Vector3 endPosition
+        private Vector3 m_MoveTo = Vector3.zero;
+        public Vector3 moveTo
         {
-            get => m_EndPosition;
-            set => m_EndPosition = value;
+            get => m_MoveTo;
+            set => m_MoveTo = value;
         }
 
         [SerializeField]
@@ -46,11 +46,11 @@ namespace DustEngine
             switch (space)
             {
                 case Space.World:
-                    tr.position = Vector3.Lerp(tr.position, endPosition, lerpOffset);
+                    tr.position = Vector3.Lerp(tr.position, moveTo, lerpOffset);
                     break;
 
                 case Space.Local:
-                    tr.localPosition = Vector3.Lerp(tr.localPosition, endPosition, lerpOffset);
+                    tr.localPosition = Vector3.Lerp(tr.localPosition, moveTo, lerpOffset);
                     break;
             }
         }

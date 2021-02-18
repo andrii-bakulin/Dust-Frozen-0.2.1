@@ -15,11 +15,11 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
 
         [SerializeField]
-        private Vector3 m_Distance = Vector3.forward;
-        public Vector3 distance
+        private Vector3 m_MoveBy = Vector3.zero;
+        public Vector3 moveBy
         {
-            get => m_Distance;
-            set => m_Distance = value;
+            get => m_MoveBy;
+            set => m_MoveBy = value;
         }
 
         [SerializeField]
@@ -40,7 +40,7 @@ namespace DustEngine
             if (Dust.IsNull(tr))
                 return;
 
-            Vector3 deltaMove = distance * (percentsCompletedNow - percentsCompletedLast);
+            Vector3 deltaMove = moveBy * (percentsCompletedNow - percentsCompletedLast);
 
             switch (space)
             {
