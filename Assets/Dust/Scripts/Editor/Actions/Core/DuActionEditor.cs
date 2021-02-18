@@ -11,7 +11,8 @@ namespace DustEngine.DustEditor
         protected DuProperty m_TargetMode;
         protected DuProperty m_TargetObject;
 
-        protected DuProperty m_OnComplete;
+        protected DuProperty m_OnCompleteCallback;
+        protected DuProperty m_OnCompleteActions;
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -28,7 +29,8 @@ namespace DustEngine.DustEditor
             m_TargetMode = FindProperty("m_TargetMode", "Target Mode");
             m_TargetObject = FindProperty("m_TargetObject", "Target Object");
 
-            m_OnComplete = FindProperty("m_OnComplete", "On Complete Start Next Actions");
+            m_OnCompleteCallback = FindProperty("m_OnCompleteCallback", "Callback");
+            m_OnCompleteActions = FindProperty("m_OnCompleteActions", "On Complete Start Actions");
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -94,7 +96,7 @@ namespace DustEngine.DustEditor
 
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-                foreach (DuAction nextAction in duAction.onComplete)
+                foreach (DuAction nextAction in duAction.onCompleteActions)
                 {
                     if (Dust.IsNull(nextAction))
                         continue;
@@ -120,7 +122,13 @@ namespace DustEngine.DustEditor
 
         protected void OnInspectorGUI_AnyActionFields(string actionId)
         {
-            PropertyField(m_OnComplete);
+            if (DustGUI.FoldoutBegin("On Complete Callback", actionId + ".Callback", false))
+            {
+                PropertyField(m_OnCompleteCallback);
+            }
+            DustGUI.FoldoutEnd();
+
+            PropertyField(m_OnCompleteActions);
 
             if (DustGUI.FoldoutBegin("Extended", actionId + ".Extended", false))
             {

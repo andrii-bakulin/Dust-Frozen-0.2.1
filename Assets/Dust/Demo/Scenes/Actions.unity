@@ -288,6 +288,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de011416d1efd411495a050805ad2357, type: 3}
+--- !u!1 &1462614155 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4555384661247630378, guid: de011416d1efd411495a050805ad2357, type: 3}
+  m_PrefabInstance: {fileID: 971463478}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1462614156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462614155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a7b8e19a8ec43ca841ebdb88c92561b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1797361645
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,8 +354,10 @@ MonoBehaviour:
   m_AutoStart: 0
   m_TargetMode: 0
   m_TargetObject: {fileID: 0}
-  m_OnComplete:
-  - {fileID: 1797361648}
+  m_OnCompleteCallback:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnCompleteActions: []
   m_Duration: 5
   m_Distance: {x: 5, y: 0, z: 0}
   m_DirectionSpace: 1
@@ -357,8 +376,10 @@ MonoBehaviour:
   m_AutoStart: 1
   m_TargetMode: 0
   m_TargetObject: {fileID: 0}
-  m_OnComplete:
-  - {fileID: 1797361647}
+  m_OnCompleteCallback:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnCompleteActions: []
   m_Duration: 1
   m_EndPoint: {x: 2, y: 1, z: 3}
   m_EndPointSpace: 0

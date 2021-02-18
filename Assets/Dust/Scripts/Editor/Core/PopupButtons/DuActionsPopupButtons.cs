@@ -37,7 +37,7 @@ namespace DustEngine.DustEditor
         protected override bool OnButtonClicked(CellRecord cellRecord)
         {
             Component newAction = Undo.AddComponent(m_DuAction.gameObject, cellRecord.type);
-            m_DuAction.onComplete.Add((DuAction)newAction);
+            m_DuAction.onCompleteActions.Add((DuAction)newAction);
             return true;
         }
     }

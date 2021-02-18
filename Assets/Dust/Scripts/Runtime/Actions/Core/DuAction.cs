@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace DustEngine
 {
@@ -10,6 +12,11 @@ namespace DustEngine
             Self = 0,
             Parent = 1,
             GameObject = 2
+        }
+
+        [Serializable]
+        public class ActionCallback : UnityEvent<DuAction>
+        {
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -38,16 +45,22 @@ namespace DustEngine
             set => m_TargetObject = value;
         }
 
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
         [SerializeField]
-        private List<DuAction> m_OnComplete = null;
-        public List<DuAction> onComplete
+        private ActionCallback m_OnCompleteCallback = null;
+        public ActionCallback onCompleteCallback => m_OnCompleteCallback;
+
+        [SerializeField]
+        private List<DuAction> m_OnCompleteActions = null;
+        public List<DuAction> onCompleteActions
         {
             get
             {
-                if (Dust.IsNull(m_OnComplete))
-                    m_OnComplete = new List<DuAction>();
+                if (Dust.IsNull(m_OnCompleteActions))
+                    m_OnCompleteActions = new List<DuAction>();
 
-                return m_OnComplete;
+                return m_OnCompleteActions;
             }
         }
 
@@ -120,11 +133,16 @@ namespace DustEngine
 
             OnActionStop(isTerminated);
 
-            if (!isTerminated && Dust.IsNotNull(onComplete))
+            if (!isTerminated)
             {
-                for (int i = 0; i < onComplete.Count; i++)
+                onCompleteCallback?.Invoke(this);
+
+                if (Dust.IsNotNull(onCompleteActions))
                 {
-                    onComplete[i].Play();
+                    for (int i = 0; i < onCompleteActions.Count; i++)
+                    {
+                        onCompleteActions[i].Play();
+                    }
                 }
             }
         }
