@@ -5,6 +5,16 @@ namespace DustEngine
     [AddComponentMenu("Dust/Animations/Rotate")]
     public class DuRotate : DuMonoBehaviour
     {
+        public enum Space
+        {
+            World = 0,
+            Local = 1,
+            Self = 2,
+            AroundObject = 3,
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
         [SerializeField]
         private Vector3 m_Axis = Vector3.up;
         public Vector3 axis
@@ -22,8 +32,8 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private WorkSpace m_Space = WorkSpace.Local;
-        public WorkSpace space
+        private Space m_Space = Space.Self;
+        public Space space
         {
             get => m_Space;
             set => m_Space = value;
@@ -73,10 +83,29 @@ namespace DustEngine
 
         void UpdateState(float deltaTime)
         {
-            if (Dust.IsNotNull(rotateAroundObject) && rotateAroundObject != this.gameObject)
-                this.transform.RotateAround(rotateAroundObject.transform.position, axis, speed * deltaTime);
-            else
-                this.transform.Rotate(axis, speed * deltaTime, WorkSpaceToSpace(space));
+            switch (space)
+            {
+                case Space.World:
+                    transform.Rotate(axis, speed * deltaTime, UnityEngine.Space.World);
+                    break;
+
+                case Space.Local:
+                    var localAxis = transform.parent.TransformDirection(axis);
+                    transform.Rotate(localAxis, speed * deltaTime, UnityEngine.Space.World);
+                    break;
+
+                case Space.Self:
+                    var selfAxis = transform.TransformDirection(axis);
+                    transform.Rotate(selfAxis, speed * deltaTime, UnityEngine.Space.World);
+                    break;
+
+                case Space.AroundObject:
+                    if (Dust.IsNull(rotateAroundObject) || rotateAroundObject == this.gameObject)
+                        break;
+
+                    transform.RotateAround(rotateAroundObject.transform.position, axis, speed * deltaTime);
+                    break;
+            }
         }
     }
 }

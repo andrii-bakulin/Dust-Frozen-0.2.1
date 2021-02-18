@@ -129,17 +129,6 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        internal Space WorkSpaceToSpace(WorkSpace space)
-        {
-            if (space == WorkSpace.World)
-                return Space.World;
-
-            // WorkSpace.Local [or] default
-            return Space.Self;
-        }
-
-        //--------------------------------------------------------------------------------------------------------------
-
         public static void print_war(object message) => Debug.LogWarning(message);
 
         public static void print_err(object message) => Debug.LogError(message);

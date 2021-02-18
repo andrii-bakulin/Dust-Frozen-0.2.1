@@ -15,6 +15,10 @@ namespace DustEngine.DustEditor
 
         private DuProperty m_UpdateMode;
 
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        private DuRotate.Space space => (DuRotate.Space) m_Space.enumValueIndex;
+
         //--------------------------------------------------------------------------------------------------------------
 
         [MenuItem("Dust/Animations/Rotate")]
@@ -45,12 +49,13 @@ namespace DustEngine.DustEditor
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             PropertyField(m_Axis);
-            PropertyExtendedSlider(m_Speed, -100f, +100f, 1f);
-            PropertyFieldOrLock(m_Space, m_RotateAroundObject.ObjectReferenceExists);
+            PropertyExtendedSlider(m_Speed, -180f, +180f, 1f);
+            PropertyField(m_Space);
 
-            Space();
-
-            PropertyField(m_RotateAroundObject);
+            if (space == DuRotate.Space.AroundObject)
+            {
+                PropertyField(m_RotateAroundObject);
+            }
 
             Space();
 
