@@ -30,7 +30,7 @@ namespace DustEngine.DustEditor
         {
             base.InitializeEditor();
 
-            m_Distance = FindProperty("m_Distance", "Distance");
+            m_Distance = FindProperty("m_Distance", "Move By");
             m_Space = FindProperty("m_Space", "Space");
         }
 
