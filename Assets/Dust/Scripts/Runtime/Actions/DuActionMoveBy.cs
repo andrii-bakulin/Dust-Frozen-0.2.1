@@ -5,11 +5,11 @@ namespace DustEngine
     [AddComponentMenu("Dust/Actions/Action MoveBy")]
     public class DuActionMoveBy : DuIntervalAction
     {
-        public enum DirectionSpace
+        public enum Space
         {
-            Self = 0,
-            Parent = 1,
-            World = 2,
+            World = 0,
+            Local = 1,
+            Self = 2,
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -23,11 +23,11 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private DirectionSpace m_DirectionSpace = DirectionSpace.Parent;
-        public DirectionSpace directionSpace
+        private Space m_Space = Space.Local;
+        public Space space
         {
-            get => m_DirectionSpace;
-            set => m_DirectionSpace = value;
+            get => m_Space;
+            set => m_Space = value;
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -42,18 +42,18 @@ namespace DustEngine
 
             Vector3 deltaMove = distance * (percentsCompletedNow - percentsCompletedLast);
 
-            switch (directionSpace)
+            switch (space)
             {
-                case DirectionSpace.Self:
-                    tr.localPosition += DuMath.RotatePoint(deltaMove, tr.localEulerAngles);
+                case Space.World:
+                    tr.position += deltaMove;
                     break;
 
-                case DirectionSpace.Parent:
+                case Space.Local:
                     tr.localPosition += deltaMove;
                     break;
 
-                case DirectionSpace.World:
-                    tr.position += deltaMove;
+                case Space.Self:
+                    tr.localPosition += DuMath.RotatePoint(deltaMove, tr.localEulerAngles);
                     break;
             }
         }

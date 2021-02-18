@@ -5,10 +5,10 @@ namespace DustEngine
     [AddComponentMenu("Dust/Actions/Action MoveTo")]
     public class DuActionMoveTo : DuIntervalAction
     {
-        public enum EndPointSpace
+        public enum Space
         {
-            Local = 0,
-            World = 1,
+            World = 0,
+            Local = 1,
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -22,11 +22,11 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private EndPointSpace m_EndPointSpace = EndPointSpace.Local;
-        public EndPointSpace endPointSpace
+        private Space m_Space = Space.Local;
+        public Space space
         {
-            get => m_EndPointSpace;
-            set => m_EndPointSpace = value;
+            get => m_Space;
+            set => m_Space = value;
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -43,14 +43,14 @@ namespace DustEngine
                 ? deltaTime / ((1f - percentsCompletedNow) * duration)
                 : 1f;
 
-            switch (endPointSpace)
+            switch (space)
             {
-                case EndPointSpace.Local:
-                    tr.localPosition = Vector3.Lerp(tr.localPosition, endPoint, lerpOffset);
+                case Space.World:
+                    tr.position = Vector3.Lerp(tr.position, endPoint, lerpOffset);
                     break;
 
-                case EndPointSpace.World:
-                    tr.position = Vector3.Lerp(tr.position, endPoint, lerpOffset);
+                case Space.Local:
+                    tr.localPosition = Vector3.Lerp(tr.localPosition, endPoint, lerpOffset);
                     break;
             }
         }

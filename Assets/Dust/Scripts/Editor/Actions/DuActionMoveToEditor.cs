@@ -9,7 +9,7 @@ namespace DustEngine.DustEditor
     public class DuActionMoveToEditor : DuIntervalActionEditor
     {
         private DuProperty m_EndPoint;
-        private DuProperty m_EndPointSpace;
+        private DuProperty m_Space;
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -31,7 +31,7 @@ namespace DustEngine.DustEditor
             base.InitializeEditor();
 
             m_EndPoint = FindProperty("m_EndPoint", "End Point");
-            m_EndPointSpace = FindProperty("m_EndPointSpace", "End Point Space");
+            m_Space = FindProperty("m_Space", "Space");
         }
 
         public override void OnInspectorGUI()
@@ -46,7 +46,7 @@ namespace DustEngine.DustEditor
             {
                 PropertyField(m_EndPoint);
                 PropertyExtendedSlider(m_Duration, 0.00f, 10.0f, +0.01f, 0.00f);
-                PropertyField(m_EndPointSpace);
+                PropertyField(m_Space);
             }
             DustGUI.FoldoutEnd();
 
