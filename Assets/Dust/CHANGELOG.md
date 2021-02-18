@@ -15,6 +15,7 @@
 - DuFactoryInstance: allow add only one component to object (Issue #24)
 - DuFactory: forced rebuild factory instances on change any param of depended prefabs (Issue #18)
 - DuRandomTransform: default activate is OnAwake now
+- Fully review usage of Space enums. Sync diff values/types; Dropped WorkSpace enum
 
 
 ________________________________________________________________________________________________________________________
