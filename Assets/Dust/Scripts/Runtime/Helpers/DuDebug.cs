@@ -1,45 +1,109 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace DustEngine
 {
     public class DuDebug : DuMonoBehaviour
     {
+        [SerializeField]
+        private bool m_LogInConsole = true;
+        public bool logInConsole
+        {
+            get => m_LogInConsole;
+            set => m_LogInConsole = value;
+        }
+
+        [SerializeField]
+        private bool m_LogInMessageBox = false;
+        public bool logInMessageBox
+        {
+            get => m_LogInMessageBox;
+            set => m_LogInMessageBox = value;
+        }
+
+        [SerializeField]
+        private int m_MessagesLimit = 32;
+        public int messagesLimit
+        {
+            get => m_MessagesLimit;
+            set
+            {
+                m_MessagesLimit = value;
+                OptimizeLogMessages();
+            }
+        }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        private List<string> m_LogMessages;
+        private List<string> logMessages
+        {
+            get
+            {
+                if (Dust.IsNull(m_LogMessages))
+                    m_LogMessages = new List<string>();
+
+                return m_LogMessages;
+            }
+        }
+
         //--------------------------------------------------------------------------------------------------------------
         // Log: string
 
-        public static void LogNotice(string message)
+        public void LogNotice(string message)
         {
-            Debug.Log("DuDebug: " + message);
+            if (logInConsole)
+                Debug.Log($"DuDebug [{gameObject.name}]: {message}");
+
+            if (logInMessageBox)
+                AppendLogMessages($"[NOTE] {message}");
         }
 
-        public static void LogWarning(string message)
+        public void LogWarning(string message)
         {
-            Debug.LogWarning("DuDebug: " + message);
+            if (logInConsole)
+                Debug.LogWarning($"DuDebug [{gameObject.name}]: {message}");
+
+            if (logInMessageBox)
+                AppendLogMessages($"[WAR] {message}");
         }
 
-        public static void LogError(string message)
+        public void LogError(string message)
         {
-            Debug.LogError("DuDebug: " + message);
-        }
+            if (logInConsole)
+                Debug.LogError($"DuDebug [{gameObject.name}]: {message}");
 
-        //--------------------------------------------------------------------------------------------------------------
-        // Log: GameObject
-
-        public static void LogNotice(GameObject gameObj)
-        {
-            Debug.Log("DuDebug.GameObject: " + gameObj);
-        }
-
-        public static void LogWarning(GameObject gameObj)
-        {
-            Debug.LogWarning("DuDebug.GameObject: " + gameObj);
-        }
-
-        public static void LogError(GameObject gameObj)
-        {
-            Debug.LogError("DuDebug.GameObject: " + gameObj);
+            if (logInMessageBox)
+                AppendLogMessages($"[ERR] {message}");
         }
 
         //--------------------------------------------------------------------------------------------------------------
+
+        private void AppendLogMessages(string message)
+        {
+            logMessages.Add(message);
+
+            OptimizeLogMessages();
+        }
+
+        private void OptimizeLogMessages()
+        {
+            if (messagesLimit <= 0)
+                return;
+
+            while (logMessages.Count > messagesLimit)
+                logMessages.RemoveAt(0);
+        }
+
+        public string GetPlainLogMessages()
+        {
+            return String.Join("\n", logMessages);
+        }
+
+        public void ClearLogMessages()
+        {
+            logMessages.Clear();
+        }
     }
 }
