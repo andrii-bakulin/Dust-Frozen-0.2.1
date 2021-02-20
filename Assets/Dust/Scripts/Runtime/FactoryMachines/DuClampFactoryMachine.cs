@@ -30,7 +30,7 @@ namespace DustEngine
         }
 
         [SerializeField]
-        public bool m_PositionClampX = true;
+        private bool m_PositionClampX = true;
         public bool positionClampX
         {
             get => m_PositionClampX;

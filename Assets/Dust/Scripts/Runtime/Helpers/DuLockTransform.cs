@@ -15,7 +15,7 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
 
         [SerializeField]
-        public bool m_LockPosition = true;
+        private bool m_LockPosition = true;
         public bool lockPosition
         {
             get => m_LockPosition;
@@ -30,7 +30,7 @@ namespace DustEngine
         }
 
         [SerializeField]
-        public bool m_LockRotation = true;
+        private bool m_LockRotation = true;
         public bool lockRotation
         {
             get => m_LockRotation;
@@ -45,7 +45,7 @@ namespace DustEngine
         }
 
         [SerializeField]
-        public bool m_LockScale = true;
+        private bool m_LockScale = true;
         public bool lockScale
         {
             get => m_LockScale;
@@ -62,7 +62,7 @@ namespace DustEngine
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
-        public Vector3 m_Position;
+        private Vector3 m_Position;
         public Vector3 position
         {
             get => m_Position;
@@ -70,7 +70,7 @@ namespace DustEngine
         }
 
         [SerializeField]
-        public Quaternion m_Rotation;
+        private Quaternion m_Rotation;
         public Quaternion rotation
         {
             get => m_Rotation;
@@ -78,7 +78,7 @@ namespace DustEngine
         }
 
         [SerializeField]
-        public Vector3 m_Scale;
+        private Vector3 m_Scale;
         public Vector3 scale
         {
             get => m_Scale;
@@ -88,7 +88,7 @@ namespace DustEngine
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
-        public Space m_Space;
+        private Space m_Space;
         public Space space
         {
             get => m_Space;
