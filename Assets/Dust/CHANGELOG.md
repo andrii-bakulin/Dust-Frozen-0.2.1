@@ -8,6 +8,7 @@
 - Added DuActionRotateBy & DuActionRotateTo
 - Added DuActionScaleBy & DuActionScaleTo
 - Added DuActionDelay
+- Added DuTransformCopyAction
 
 ### Fixed
 
