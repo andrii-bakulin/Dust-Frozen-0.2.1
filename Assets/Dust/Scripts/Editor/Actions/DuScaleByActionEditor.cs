@@ -3,24 +3,24 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuActionScaleBy))]
+    [CustomEditor(typeof(DuScaleByAction))]
     [CanEditMultipleObjects]
     [InitializeOnLoad]
-    public class DuActionScaleByEditor : DuIntervalActionEditor
+    public class DuScaleByActionEditor : DuIntervalActionEditor
     {
         private DuProperty m_ScaleBy;
 
         //--------------------------------------------------------------------------------------------------------------
 
-        static DuActionScaleByEditor()
+        static DuScaleByActionEditor()
         {
-            DuActionsPopupButtons.AddActionTransform(typeof(DuActionScaleBy), "ScaleBy");
+            DuActionsPopupButtons.AddActionTransform(typeof(DuScaleByAction), "ScaleBy");
         }
 
         [MenuItem("Dust/Actions/ScaleBy")]
         public static void AddComponentToSelectedObjects()
         {
-            AddComponentToSelectedOrNewObject("Action ScaleBy", typeof(DuActionScaleBy));
+            AddComponentToSelectedOrNewObject("ScaleBy Action", typeof(DuScaleByAction));
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -40,14 +40,14 @@ namespace DustEngine.DustEditor
 
             OnInspectorGUI_BaseControlUI();
 
-            if (DustGUI.FoldoutBegin("Parameters", "DuActionScaleBy.Parameters"))
+            if (DustGUI.FoldoutBegin("Parameters", "DuScaleByAction.Parameters"))
             {
                 PropertyField(m_ScaleBy);
                 PropertyExtendedSlider(m_Duration, 0.00f, 10.0f, +0.01f, 0.00f);
             }
             DustGUI.FoldoutEnd();
 
-            OnInspectorGUI_AnyActionFields("DuActionScaleBy");
+            OnInspectorGUI_AnyActionFields("DuScaleByAction");
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // Validate & Normalize Data

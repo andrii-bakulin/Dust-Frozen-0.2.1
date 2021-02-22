@@ -2,8 +2,8 @@ using UnityEngine;
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Actions/Action ScaleTo")]
-    public class DuActionScaleTo : DuIntervalAction
+    [AddComponentMenu("Dust/Actions/ScaleTo Action")]
+    public class DuScaleToAction : DuIntervalAction
     {
         [SerializeField]
         private Vector3 m_ScaleTo = Vector3.one;

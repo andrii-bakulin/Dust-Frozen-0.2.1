@@ -2,8 +2,8 @@ using UnityEngine;
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Actions/Action RotateTo")]
-    public class DuActionRotateTo : DuIntervalAction
+    [AddComponentMenu("Dust/Actions/RotateTo Action")]
+    public class DuRotateToAction : DuIntervalAction
     {
         public enum Space
         {

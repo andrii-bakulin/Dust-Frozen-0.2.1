@@ -3,24 +3,25 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuActionScaleTo))]
+    [CustomEditor(typeof(DuMoveByAction))]
     [CanEditMultipleObjects]
     [InitializeOnLoad]
-    public class DuActionScaleToEditor : DuIntervalActionEditor
+    public class DuMoveByActionEditor : DuIntervalActionEditor
     {
-        private DuProperty m_ScaleTo;
+        private DuProperty m_MoveBy;
+        private DuProperty m_Space;
 
         //--------------------------------------------------------------------------------------------------------------
 
-        static DuActionScaleToEditor()
+        static DuMoveByActionEditor()
         {
-            DuActionsPopupButtons.AddActionTransform(typeof(DuActionScaleTo), "ScaleTo");
+            DuActionsPopupButtons.AddActionTransform(typeof(DuMoveByAction), "MoveBy");
         }
 
-        [MenuItem("Dust/Actions/ScaleTo")]
+        [MenuItem("Dust/Actions/MoveBy")]
         public static void AddComponentToSelectedObjects()
         {
-            AddComponentToSelectedOrNewObject("Action ScaleTo", typeof(DuActionScaleTo));
+            AddComponentToSelectedOrNewObject("MoveBy Action", typeof(DuMoveByAction));
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -29,7 +30,8 @@ namespace DustEngine.DustEditor
         {
             base.InitializeEditor();
 
-            m_ScaleTo = FindProperty("m_ScaleTo", "Scale To");
+            m_MoveBy = FindProperty("m_MoveBy", "Move By");
+            m_Space = FindProperty("m_Space", "Space");
         }
 
         public override void OnInspectorGUI()
@@ -40,14 +42,15 @@ namespace DustEngine.DustEditor
 
             OnInspectorGUI_BaseControlUI();
 
-            if (DustGUI.FoldoutBegin("Parameters", "DuActionScaleTo.Parameters"))
+            if (DustGUI.FoldoutBegin("Parameters", "DuMoveByAction.Parameters"))
             {
-                PropertyField(m_ScaleTo);
+                PropertyField(m_MoveBy);
                 PropertyExtendedSlider(m_Duration, 0.00f, 10.0f, +0.01f, 0.00f);
+                PropertyField(m_Space);
             }
             DustGUI.FoldoutEnd();
 
-            OnInspectorGUI_AnyActionFields("DuActionScaleTo");
+            OnInspectorGUI_AnyActionFields("DuMoveByAction");
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // Validate & Normalize Data

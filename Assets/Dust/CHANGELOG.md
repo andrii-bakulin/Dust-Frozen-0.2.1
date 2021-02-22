@@ -4,10 +4,10 @@
 
 - Added component Animation.DuScale
 - Added DuActions [core]
-- Added DuActionMoveBy & DuActionMoveTo
-- Added DuActionRotateBy & DuActionRotateTo
-- Added DuActionScaleBy & DuActionScaleTo
-- Added DuActionDelay
+- Added DuMoveByAction & DuMoveToAction
+- Added DuRotateByAction & DuRotateToAction
+- Added DuScaleByAction & DuScaleToAction
+- Added DuDelayAction
 - Added DuTransformCopyAction
 
 ### Fixed

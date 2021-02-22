@@ -2,23 +2,24 @@ using UnityEngine;
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Actions/Action MoveTo")]
-    public class DuActionMoveTo : DuIntervalAction
+    [AddComponentMenu("Dust/Actions/MoveBy Action")]
+    public class DuMoveByAction : DuIntervalAction
     {
         public enum Space
         {
             World = 0,
             Local = 1,
+            Self = 2,
         }
 
         //--------------------------------------------------------------------------------------------------------------
 
         [SerializeField]
-        private Vector3 m_MoveTo = Vector3.zero;
-        public Vector3 moveTo
+        private Vector3 m_MoveBy = Vector3.zero;
+        public Vector3 moveBy
         {
-            get => m_MoveTo;
-            set => m_MoveTo = value;
+            get => m_MoveBy;
+            set => m_MoveBy = value;
         }
 
         [SerializeField]
@@ -39,18 +40,20 @@ namespace DustEngine
             if (Dust.IsNull(tr))
                 return;
 
-            var lerpOffset = duration > 0f && percentsCompletedNow < 1f
-                ? deltaTime / ((1f - percentsCompletedNow) * duration)
-                : 1f;
+            Vector3 deltaMove = moveBy * (percentsCompletedNow - percentsCompletedLast);
 
             switch (space)
             {
                 case Space.World:
-                    tr.position = Vector3.Lerp(tr.position, moveTo, lerpOffset);
+                    tr.position += deltaMove;
                     break;
 
                 case Space.Local:
-                    tr.localPosition = Vector3.Lerp(tr.localPosition, moveTo, lerpOffset);
+                    tr.localPosition += deltaMove;
+                    break;
+
+                case Space.Self:
+                    tr.localPosition += DuMath.RotatePoint(deltaMove, tr.localEulerAngles);
                     break;
             }
         }

@@ -2,8 +2,8 @@ using UnityEngine;
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Actions/Action MoveBy")]
-    public class DuActionMoveBy : DuIntervalAction
+    [AddComponentMenu("Dust/Actions/RotateBy Action")]
+    public class DuRotateByAction : DuIntervalAction
     {
         public enum Space
         {
@@ -15,11 +15,11 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
 
         [SerializeField]
-        private Vector3 m_MoveBy = Vector3.zero;
-        public Vector3 moveBy
+        private Vector3 m_RotateBy = Vector3.zero;
+        public Vector3 rotateBy
         {
-            get => m_MoveBy;
-            set => m_MoveBy = value;
+            get => m_RotateBy;
+            set => m_RotateBy = value;
         }
 
         [SerializeField]
@@ -40,20 +40,20 @@ namespace DustEngine
             if (Dust.IsNull(tr))
                 return;
 
-            Vector3 deltaMove = moveBy * (percentsCompletedNow - percentsCompletedLast);
+            Vector3 deltaRotate = rotateBy * (percentsCompletedNow - percentsCompletedLast);
 
             switch (space)
             {
                 case Space.World:
-                    tr.position += deltaMove;
+                    transform.Rotate(deltaRotate, UnityEngine.Space.World);
                     break;
 
                 case Space.Local:
-                    tr.localPosition += deltaMove;
+                    transform.Rotate(transform.parent.TransformDirection(deltaRotate), UnityEngine.Space.World);
                     break;
 
                 case Space.Self:
-                    tr.localPosition += DuMath.RotatePoint(deltaMove, tr.localEulerAngles);
+                    transform.Rotate(transform.TransformDirection(deltaRotate), UnityEngine.Space.World);
                     break;
             }
         }

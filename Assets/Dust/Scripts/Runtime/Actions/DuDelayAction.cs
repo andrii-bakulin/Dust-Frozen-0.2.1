@@ -2,8 +2,8 @@ using UnityEngine;
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Actions/Action Delay")]
-    public class DuActionDelay : DuIntervalAction
+    [AddComponentMenu("Dust/Actions/Delay Action")]
+    public class DuDelayAction : DuIntervalAction
     {
         //--------------------------------------------------------------------------------------------------------------
         // DuAction lifecycle

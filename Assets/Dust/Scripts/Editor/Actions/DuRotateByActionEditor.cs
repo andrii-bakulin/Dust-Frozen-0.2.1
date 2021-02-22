@@ -3,25 +3,25 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuActionRotateBy))]
+    [CustomEditor(typeof(DuRotateByAction))]
     [CanEditMultipleObjects]
     [InitializeOnLoad]
-    public class DuActionRotateByEditor : DuIntervalActionEditor
+    public class DuRotateByActionEditor : DuIntervalActionEditor
     {
         private DuProperty m_RotateBy;
         private DuProperty m_Space;
 
         //--------------------------------------------------------------------------------------------------------------
 
-        static DuActionRotateByEditor()
+        static DuRotateByActionEditor()
         {
-            DuActionsPopupButtons.AddActionTransform(typeof(DuActionRotateBy), "RotateBy");
+            DuActionsPopupButtons.AddActionTransform(typeof(DuRotateByAction), "RotateBy");
         }
 
         [MenuItem("Dust/Actions/RotateBy")]
         public static void AddComponentToSelectedObjects()
         {
-            AddComponentToSelectedOrNewObject("Action RotateBy", typeof(DuActionRotateBy));
+            AddComponentToSelectedOrNewObject("RotateBy Action", typeof(DuRotateByAction));
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -42,7 +42,7 @@ namespace DustEngine.DustEditor
 
             OnInspectorGUI_BaseControlUI();
 
-            if (DustGUI.FoldoutBegin("Parameters", "DuActionRotateBy.Parameters"))
+            if (DustGUI.FoldoutBegin("Parameters", "DuRotateByAction.Parameters"))
             {
                 PropertyField(m_RotateBy);
                 PropertyExtendedSlider(m_Duration, 0.00f, 10.0f, +0.01f, 0.00f);
@@ -50,7 +50,7 @@ namespace DustEngine.DustEditor
             }
             DustGUI.FoldoutEnd();
 
-            OnInspectorGUI_AnyActionFields("DuActionRotateBy");
+            OnInspectorGUI_AnyActionFields("DuRotateByAction");
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // Validate & Normalize Data

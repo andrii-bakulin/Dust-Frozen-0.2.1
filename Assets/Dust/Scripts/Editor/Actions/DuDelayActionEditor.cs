@@ -3,25 +3,20 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuActionMoveTo))]
+    [CustomEditor(typeof(DuDelayAction))]
     [CanEditMultipleObjects]
     [InitializeOnLoad]
-    public class DuActionMoveToEditor : DuIntervalActionEditor
+    public class DuDelayActionEditor : DuIntervalActionEditor
     {
-        private DuProperty m_MoveTo;
-        private DuProperty m_Space;
-
-        //--------------------------------------------------------------------------------------------------------------
-
-        static DuActionMoveToEditor()
+        static DuDelayActionEditor()
         {
-            DuActionsPopupButtons.AddActionTransform(typeof(DuActionMoveTo), "MoveTo");
+            DuActionsPopupButtons.AddActionOthers(typeof(DuDelayAction), "Delay");
         }
 
-        [MenuItem("Dust/Actions/MoveTo")]
+        [MenuItem("Dust/Actions/Delay")]
         public static void AddComponentToSelectedObjects()
         {
-            AddComponentToSelectedOrNewObject("Action MoveTo", typeof(DuActionMoveTo));
+            AddComponentToSelectedOrNewObject("Delay Action", typeof(DuDelayAction));
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -29,9 +24,6 @@ namespace DustEngine.DustEditor
         protected override void InitializeEditor()
         {
             base.InitializeEditor();
-
-            m_MoveTo = FindProperty("m_MoveTo", "Move To");
-            m_Space = FindProperty("m_Space", "Space");
         }
 
         public override void OnInspectorGUI()
@@ -42,15 +34,13 @@ namespace DustEngine.DustEditor
 
             OnInspectorGUI_BaseControlUI();
 
-            if (DustGUI.FoldoutBegin("Parameters", "DuActionMoveTo.Parameters"))
+            if (DustGUI.FoldoutBegin("Parameters", "DuDelayAction.Parameters"))
             {
-                PropertyField(m_MoveTo);
                 PropertyExtendedSlider(m_Duration, 0.00f, 10.0f, +0.01f, 0.00f);
-                PropertyField(m_Space);
             }
             DustGUI.FoldoutEnd();
 
-            OnInspectorGUI_AnyActionFields("DuActionMoveTo");
+            OnInspectorGUI_AnyActionFields("DuDelayAction");
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // Validate & Normalize Data
