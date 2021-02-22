@@ -16,13 +16,11 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-#if UNITY_EDITOR
         [MenuItem("Dust/Instances/Parallax Controller")]
         public static void AddComponentToSelectedObjects()
         {
             AddComponentToSelectedOrNewObject("Parallax Controller", typeof(DuParallaxController));
         }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
 

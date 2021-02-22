@@ -26,13 +26,11 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-#if UNITY_EDITOR
         [MenuItem("Dust/Instances/Destroyer")]
         public static void AddComponentToSelectedObjects()
         {
             AddComponentToSelectedOrNewObject("Destroyer", typeof(DuDestroyer));
         }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
 

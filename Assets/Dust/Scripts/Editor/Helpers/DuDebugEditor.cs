@@ -15,13 +15,11 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-#if UNITY_EDITOR
         [MenuItem("Dust/Helpers/Debug")]
         public static void AddComponentToSelectedObjects()
         {
             AddComponentToSelectedObjects(typeof(DuDebug));
         }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
 

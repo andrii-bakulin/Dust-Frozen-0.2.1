@@ -19,13 +19,11 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-#if UNITY_EDITOR
         [MenuItem("Dust/Helpers/Lock Transform")]
         public static void AddComponentToSelectedObjects()
         {
             AddComponentToSelectedObjects(typeof(DuLockTransform));
         }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
 
