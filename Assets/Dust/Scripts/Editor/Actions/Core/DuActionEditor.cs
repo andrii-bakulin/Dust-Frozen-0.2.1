@@ -128,7 +128,7 @@ namespace DustEngine.DustEditor
             }
             DustGUI.FoldoutEnd();
 
-            PropertyField(m_OnCompleteActions);
+            PropertyField(m_OnCompleteActions, $"{m_OnCompleteActions.title} ({m_OnCompleteActions.property.arraySize})");
 
             if (DustGUI.FoldoutBegin("Extended", actionId + ".Extended", false))
             {
