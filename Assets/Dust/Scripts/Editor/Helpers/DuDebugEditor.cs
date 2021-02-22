@@ -13,6 +13,18 @@ namespace DustEngine.DustEditor
 
         private DuProperty m_MessagesLimit;
 
+        //--------------------------------------------------------------------------------------------------------------
+
+#if UNITY_EDITOR
+        [MenuItem("Dust/Helpers/Debug")]
+        public static void AddComponentToSelectedObjects()
+        {
+            AddComponentToSelectedObjects(typeof(DuDebug));
+        }
+#endif
+
+        //--------------------------------------------------------------------------------------------------------------
+
         protected override void InitializeEditor()
         {
             base.InitializeEditor();
