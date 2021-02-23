@@ -155,7 +155,7 @@ namespace DustEngine
                 {
                     for (int i = 0; i < onCompleteActions.Count; i++)
                     {
-                        onCompleteActions[i].Play(this);
+                        onCompleteActions[i]?.Play(this);
                     }
                 }
             }
