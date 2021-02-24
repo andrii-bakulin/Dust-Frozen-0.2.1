@@ -14,7 +14,7 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
 
         [SerializeField]
-        private bool m_AssignPosition = true;
+        private bool m_AssignPosition = false;
         public bool assignPosition
         {
             get => m_AssignPosition;

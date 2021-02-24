@@ -41,9 +41,9 @@ namespace DustEngine.DustEditor
             m_AssignRotation = FindProperty("m_AssignRotation", "Assign Rotation");
             m_AssignScale = FindProperty("m_AssignScale", "Assign Scale");
 
-            m_Position = FindProperty("m_Position", "Position");
-            m_Rotation = FindProperty("m_Rotation", "Rotation");
-            m_Scale = FindProperty("m_Scale", "Scale");
+            m_Position = FindProperty("m_Position", "Set Position");
+            m_Rotation = FindProperty("m_Rotation", "Set Rotation");
+            m_Scale = FindProperty("m_Scale", "Set Scale");
 
             m_Space = FindProperty("m_Space", "Set In Space");
         }
@@ -59,13 +59,11 @@ namespace DustEngine.DustEditor
             if (DustGUI.FoldoutBegin("Parameters", "DuTransformSetAction.Parameters"))
             {
                 PropertyField(m_AssignPosition);
-                PropertyFieldOrLock(m_Position, !m_AssignPosition.IsTrue);
-                
                 PropertyField(m_AssignRotation);
-                PropertyFieldOrLock(m_Rotation, !m_AssignRotation.IsTrue);
-
                 PropertyField(m_AssignScale);
-                PropertyFieldOrLock(m_Scale, !m_AssignScale.IsTrue);
+                PropertyFieldOrHide(m_Position, !m_AssignPosition.IsTrue);
+                PropertyFieldOrHide(m_Rotation, !m_AssignRotation.IsTrue);
+                PropertyFieldOrHide(m_Scale, !m_AssignScale.IsTrue);
 
                 Space();
 
