@@ -19,8 +19,8 @@ namespace DustEngine
 
         public enum TransformMode
         {
-            Relative = 0,
-            Absolute = 1,
+            Add = 0,
+            Set = 1,
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -34,7 +34,7 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private TransformMode m_TransformMode = TransformMode.Relative;
+        private TransformMode m_TransformMode = TransformMode.Add;
         public TransformMode transformMode
         {
             get => m_TransformMode;
@@ -170,39 +170,20 @@ namespace DustEngine
                 Vector3 value = duRandom.Range(positionRangeMin, positionRangeMax);
                 Vector3 position = Vector3.zero;
 
-                switch (space)
-                {
-                    case Space.World:
-                        position = transform.position;
-                        break;
+                if (space == Space.World)
+                    position = transform.position;
+                else if (space == Space.Local)
+                    position = transform.localPosition;
 
-                    case Space.Local:
-                        position = transform.localPosition;
-                        break;
-                }
+                if (transformMode == TransformMode.Add)
+                    position += value;
+                else if (transformMode == TransformMode.Set)
+                    position = value;
 
-                switch (transformMode)
-                {
-                    default:
-                    case TransformMode.Relative:
-                        position += value;
-                        break;
-
-                    case TransformMode.Absolute:
-                        position = value;
-                        break;
-                }
-
-                switch (space)
-                {
-                    case Space.World:
-                        transform.position = position;
-                        break;
-
-                    case Space.Local:
-                        transform.localPosition = position;
-                        break;
-                }
+                if (space == Space.World)
+                    transform.position = position;
+                else if (space == Space.Local)
+                    transform.localPosition = position;
             }
 
             if (rotationEnabled)
@@ -210,39 +191,20 @@ namespace DustEngine
                 Vector3 value = duRandom.Range(rotationRangeMin, rotationRangeMax);
                 Vector3 rotation = Vector3.zero;
 
-                switch (space)
-                {
-                    case Space.World:
-                        rotation = transform.eulerAngles;
-                        break;
+                if (space == Space.World)
+                    rotation = transform.eulerAngles;
+                else if (space == Space.Local)
+                    rotation = transform.localEulerAngles;
 
-                    case Space.Local:
-                        rotation = transform.localEulerAngles;
-                        break;
-                }
+                if (transformMode == TransformMode.Add)
+                    rotation += value;
+                else if (transformMode == TransformMode.Set)
+                    rotation = value;
 
-                switch (transformMode)
-                {
-                    default:
-                    case TransformMode.Relative:
-                        rotation += value;
-                        break;
-
-                    case TransformMode.Absolute:
-                        rotation = value;
-                        break;
-                }
-
-                switch (space)
-                {
-                    case Space.World:
-                        transform.eulerAngles = rotation;
-                        break;
-
-                    case Space.Local:
-                        transform.localEulerAngles = rotation;
-                        break;
-                }
+                if (space == Space.World)
+                    transform.eulerAngles = rotation;
+                else if (space == Space.Local)
+                    transform.localEulerAngles = rotation;
             }
 
             if (scaleEnabled)
@@ -250,39 +212,20 @@ namespace DustEngine
                 Vector3 value = duRandom.Range(scaleRangeMin, scaleRangeMax);
                 Vector3 scale = Vector3.one;
 
-                switch (space)
-                {
-                    case Space.World:
-                        // Ignore for now
-                        break;
+                if (space == Space.World)
+                    scale = transform.lossyScale;
+                else if (space == Space.Local)
+                    scale = transform.localScale;
 
-                    case Space.Local:
-                        scale = transform.localScale;
-                        break;
-                }
+                if (transformMode == TransformMode.Add)
+                    scale += value;
+                else if (transformMode == TransformMode.Set)
+                    scale = value;
 
-                switch (transformMode)
-                {
-                    default:
-                    case TransformMode.Relative:
-                        scale += value;
-                        break;
-
-                    case TransformMode.Absolute:
-                        scale = value;
-                        break;
-                }
-
-                switch (space)
-                {
-                    case Space.World:
-                        // Ignore for now
-                        break;
-
-                    case Space.Local:
-                        transform.localScale = scale;
-                        break;
-                }
+                if (space == Space.World)
+                    DuTransform.SetGlobalScale(transform, scale);
+                else if (space == Space.Local)
+                    transform.localScale = scale;
             }
         }
     }
