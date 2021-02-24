@@ -121,8 +121,11 @@ namespace DustEngine.DustEditor
         }
 
         protected void OnInspectorGUI_AnyActionFields(string actionId)
+            => OnInspectorGUI_AnyActionFields(actionId, false);
+
+        protected void OnInspectorGUI_AnyActionFields(string actionId, bool callbackExpanded)
         {
-            if (DustGUI.FoldoutBegin("On Complete Callback", actionId + ".Callback", false))
+            if (DustGUI.FoldoutBegin("On Complete Callback", actionId + ".Callback", callbackExpanded))
             {
                 PropertyField(m_OnCompleteCallback);
             }

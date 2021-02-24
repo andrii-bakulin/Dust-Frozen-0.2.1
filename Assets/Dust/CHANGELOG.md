@@ -11,6 +11,7 @@
 - Added DuTransformCopyAction
 - Added DuTransformRandomAction
 - Added DuTransformSetAction
+- Added DuCallbackAction
 
 ### Fixed
 
