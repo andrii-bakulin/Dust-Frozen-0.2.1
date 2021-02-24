@@ -14,30 +14,12 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
 
         [SerializeField]
-        private bool m_AssignPosition = false;
-        public bool assignPosition
+        private bool m_PositionEnabled = false;
+        public bool positionEnabled
         {
-            get => m_AssignPosition;
-            set => m_AssignPosition = value;
+            get => m_PositionEnabled;
+            set => m_PositionEnabled = value;
         }
-
-        [SerializeField]
-        private bool m_AssignRotation = false;
-        public bool assignRotation
-        {
-            get => m_AssignRotation;
-            set => m_AssignRotation = value;
-        }
-
-        [SerializeField]
-        private bool m_AssignScale = false;
-        public bool assignScale
-        {
-            get => m_AssignScale;
-            set => m_AssignScale = value;
-        }
-
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
         private Vector3 m_Position = Vector3.zero;
@@ -47,12 +29,32 @@ namespace DustEngine
             set => m_Position = value;
         }
 
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        [SerializeField]
+        private bool m_RotationEnabled = false;
+        public bool rotationEnabled
+        {
+            get => m_RotationEnabled;
+            set => m_RotationEnabled = value;
+        }
+
         [SerializeField]
         private Vector3 m_Rotation = Vector3.zero;
         public Vector3 rotation
         {
             get => m_Rotation;
             set => m_Rotation = value;
+        }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        [SerializeField]
+        private bool m_ScaleEnabled = false;
+        public bool scaleEnabled
+        {
+            get => m_ScaleEnabled;
+            set => m_ScaleEnabled = value;
         }
 
         [SerializeField]
@@ -82,24 +84,24 @@ namespace DustEngine
 
             if (space == Space.World)
             {
-                if (assignPosition)
+                if (positionEnabled)
                     tr.position = position;
 
-                if (assignRotation)
+                if (rotationEnabled)
                     tr.rotation = Quaternion.Euler(rotation);
 
-                if (assignScale)
+                if (scaleEnabled)
                     DuTransform.SetGlobalScale(tr, scale);
             }
             else if (space == Space.Local)
             {
-                if (assignPosition)
+                if (positionEnabled)
                     tr.localPosition = position;
 
-                if (assignRotation)
+                if (rotationEnabled)
                     tr.localRotation = Quaternion.Euler(rotation);
 
-                if (assignScale)
+                if (scaleEnabled)
                     tr.localScale = scale;
             }
         }
