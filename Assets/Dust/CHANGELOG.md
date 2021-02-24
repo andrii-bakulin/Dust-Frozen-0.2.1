@@ -9,6 +9,8 @@
 - Added DuScaleByAction & DuScaleToAction
 - Added DuDelayAction
 - Added DuTransformCopyAction
+- Added DuTransformRandomAction
+- Added DuTransformSetAction
 
 ### Fixed
 
