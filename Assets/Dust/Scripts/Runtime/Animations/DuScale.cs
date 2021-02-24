@@ -70,7 +70,7 @@ namespace DustEngine
             if (freeze)
                 return;
 
-            transform.localScale += deltaScale * speed * deltaTime;
+            transform.localScale += deltaScale * (speed * deltaTime);
         }
     }
 }
