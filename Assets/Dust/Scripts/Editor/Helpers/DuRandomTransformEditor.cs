@@ -7,10 +7,6 @@ namespace DustEngine.DustEditor
     [CanEditMultipleObjects]
     public class DuRandomTransformEditor : DuEditor
     {
-        private DuProperty m_ActivateMode;
-        private DuProperty m_TransformMode;
-        private DuProperty m_Space;
-
         private DuProperty m_PositionEnabled;
         private DuProperty m_PositionRangeMin;
         private DuProperty m_PositionRangeMax;
@@ -23,29 +19,25 @@ namespace DustEngine.DustEditor
         private DuProperty m_ScaleRangeMin;
         private DuProperty m_ScaleRangeMax;
 
+        private DuProperty m_ActivateMode;
+        private DuProperty m_TransformMode;
+        private DuProperty m_Space;
+
         private DuProperty m_Seed;
 
         //--------------------------------------------------------------------------------------------------------------
 
-#if UNITY_EDITOR
         [MenuItem("Dust/Helpers/Random Transform")]
         public static void AddComponentToSelectedObjects()
         {
             AddComponentToSelectedOrNewObject("Random Transform", typeof(DuRandomTransform));
         }
-#endif
 
         //--------------------------------------------------------------------------------------------------------------
 
         protected override void InitializeEditor()
         {
             base.InitializeEditor();
-
-            m_ActivateMode = FindProperty("m_ActivateMode", "Activate On");
-            m_TransformMode = FindProperty("m_TransformMode", "Transform Mode",
-                "Relative - add random values to current transform" + "\n" +
-                "Absolute - set random values as new transform");
-            m_Space = FindProperty("m_Space", "Space");
 
             m_PositionEnabled = FindProperty("m_PositionEnabled", "Random Position");
             m_PositionRangeMin = FindProperty("m_PositionRangeMin", "Position Range Min");
@@ -58,6 +50,12 @@ namespace DustEngine.DustEditor
             m_ScaleEnabled = FindProperty("m_ScaleEnabled", "Random Scale");
             m_ScaleRangeMin = FindProperty("m_ScaleRangeMin", "Scale Range Min");
             m_ScaleRangeMax = FindProperty("m_ScaleRangeMax", "Scale Range Max");
+
+            m_ActivateMode = FindProperty("m_ActivateMode", "Activate On");
+            m_TransformMode = FindProperty("m_TransformMode", "Transform Mode",
+                "Add - add random values to current transform" + "\n" +
+                "Set - set random values as new transform");
+            m_Space = FindProperty("m_Space", "Space");
 
             m_Seed = FindProperty("m_Seed");
         }

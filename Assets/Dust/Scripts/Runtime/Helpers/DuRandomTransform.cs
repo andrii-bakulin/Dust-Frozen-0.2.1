@@ -112,7 +112,7 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private TransformMode m_TransformMode = TransformMode.Add;
+        private TransformMode m_TransformMode = TransformMode.Set;
         public TransformMode transformMode
         {
             get => m_TransformMode;
