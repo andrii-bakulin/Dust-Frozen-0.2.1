@@ -14,22 +14,6 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
 
         [SerializeField]
-        private GameObject m_SourceObject;
-        public GameObject sourceObject
-        {
-            get => m_SourceObject;
-            set => m_SourceObject = value;
-        }
-
-        [SerializeField]
-        private Space m_Space = Space.Local;
-        public Space space
-        {
-            get => m_Space;
-            set => m_Space = value;
-        }
-
-        [SerializeField]
         private bool m_Position = true;
         public bool position
         {
@@ -53,6 +37,24 @@ namespace DustEngine
             set => m_Scale = value;
         }
 
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        [SerializeField]
+        private GameObject m_SourceObject;
+        public GameObject sourceObject
+        {
+            get => m_SourceObject;
+            set => m_SourceObject = value;
+        }
+
+        [SerializeField]
+        private Space m_Space = Space.Local;
+        public Space space
+        {
+            get => m_Space;
+            set => m_Space = value;
+        }
+
         //--------------------------------------------------------------------------------------------------------------
         // DuAction lifecycle
 
@@ -63,36 +65,34 @@ namespace DustEngine
 
             Transform tr = this.transform;
 
-            switch (space)
+            if (space == Space.World)
             {
-                case Space.World:
-                    if (position)
-                        tr.position = sourceObject.transform.position;
+                if (position)
+                    tr.position = sourceObject.transform.position;
 
-                    if (rotation)
-                        tr.rotation = sourceObject.transform.rotation;
+                if (rotation)
+                    tr.rotation = sourceObject.transform.rotation;
 
-                    if (scale)
-                    {
-                        tr.localScale = Vector3.one;
+                if (scale)
+                {
+                    tr.localScale = Vector3.one;
 
-                        Vector3 newScale = sourceObject.transform.lossyScale;
-                        Vector3 curScale = tr.lossyScale;
+                    Vector3 newScale = sourceObject.transform.lossyScale;
+                    Vector3 curScale = tr.lossyScale;
 
-                        tr.localScale = new Vector3(newScale.x / curScale.x, newScale.y / curScale.y, newScale.z / curScale.z);
-                    }
-                    break;
+                    tr.localScale = new Vector3(newScale.x / curScale.x, newScale.y / curScale.y, newScale.z / curScale.z);
+                }
+            }
+            else if (space == Space.Local)
+            {
+                if (position)
+                    tr.localPosition = sourceObject.transform.localPosition;
 
-                case Space.Local:
-                    if (position)
-                        tr.localPosition = sourceObject.transform.localPosition;
+                if (rotation)
+                    tr.localRotation = sourceObject.transform.localRotation;
 
-                    if (rotation)
-                        tr.localRotation = sourceObject.transform.localRotation;
-
-                    if (scale)
-                        tr.localScale = sourceObject.transform.localScale;
-                    break;
+                if (scale)
+                    tr.localScale = sourceObject.transform.localScale;
             }
         }
     }

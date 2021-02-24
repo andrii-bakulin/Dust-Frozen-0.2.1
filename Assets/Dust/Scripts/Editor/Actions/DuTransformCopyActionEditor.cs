@@ -8,14 +8,12 @@ namespace DustEngine.DustEditor
     [InitializeOnLoad]
     public class DuTransformCopyActionEditor : DuInstantActionEditor
     {
-        private DuProperty m_SourceObject;
-        private DuProperty m_Space;
-
         private DuProperty m_Position;
         private DuProperty m_Rotation;
         private DuProperty m_Scale;
 
-        private DuTransformCopyAction.Space space => (DuTransformCopyAction.Space) m_Space.enumValueIndex;
+        private DuProperty m_SourceObject;
+        private DuProperty m_Space;
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -36,12 +34,12 @@ namespace DustEngine.DustEditor
         {
             base.InitializeEditor();
 
-            m_SourceObject = FindProperty("m_SourceObject", "Source Object");
-            m_Space = FindProperty("m_Space", "Copy In Space");
-
             m_Position = FindProperty("m_Position", "Copy Position");
             m_Rotation = FindProperty("m_Rotation", "Copy Rotation");
             m_Scale = FindProperty("m_Scale", "Copy Scale");
+
+            m_SourceObject = FindProperty("m_SourceObject", "Source Object");
+            m_Space = FindProperty("m_Space", "Copy In Space");
         }
 
         public override void OnInspectorGUI()
@@ -54,14 +52,14 @@ namespace DustEngine.DustEditor
 
             if (DustGUI.FoldoutBegin("Parameters", "DuTransformCopyAction.Parameters"))
             {
-                PropertyField(m_SourceObject);
-                PropertyField(m_Space);
-
-                Space();
-
                 PropertyField(m_Position);
                 PropertyField(m_Rotation);
                 PropertyField(m_Scale);
+
+                Space();
+                
+                PropertyField(m_SourceObject);
+                PropertyField(m_Space);
             }
             DustGUI.FoldoutEnd();
 
