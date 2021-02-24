@@ -13,8 +13,8 @@ namespace DustEngine
 
         public enum Space
         {
-            World = 1,
-            Local = 0,
+            World = 0,
+            Local = 1,
         }
 
         public enum TransformMode
@@ -24,32 +24,6 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
-
-        [SerializeField]
-        private ActivateMode m_ActivateMode = ActivateMode.Awake;
-        public ActivateMode activateMode
-        {
-            get => m_ActivateMode;
-            set => m_ActivateMode = value;
-        }
-
-        [SerializeField]
-        private TransformMode m_TransformMode = TransformMode.Add;
-        public TransformMode transformMode
-        {
-            get => m_TransformMode;
-            set => m_TransformMode = value;
-        }
-
-        [SerializeField]
-        private Space m_Space = Space.Local;
-        public Space space
-        {
-            get => m_Space;
-            set => m_Space = value;
-        }
-
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
         private bool m_PositionEnabled = false;
@@ -125,6 +99,32 @@ namespace DustEngine
         {
             get => m_ScaleRangeMax;
             set => m_ScaleRangeMax = value;
+        }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        [SerializeField]
+        private ActivateMode m_ActivateMode = ActivateMode.Awake;
+        public ActivateMode activateMode
+        {
+            get => m_ActivateMode;
+            set => m_ActivateMode = value;
+        }
+
+        [SerializeField]
+        private TransformMode m_TransformMode = TransformMode.Add;
+        public TransformMode transformMode
+        {
+            get => m_TransformMode;
+            set => m_TransformMode = value;
+        }
+
+        [SerializeField]
+        private Space m_Space = Space.Local;
+        public Space space
+        {
+            get => m_Space;
+            set => m_Space = value;
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
