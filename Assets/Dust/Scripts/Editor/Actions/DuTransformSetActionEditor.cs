@@ -45,7 +45,7 @@ namespace DustEngine.DustEditor
             m_Rotation = FindProperty("m_Rotation", "Set Rotation");
             m_Scale = FindProperty("m_Scale", "Set Scale");
 
-            m_Space = FindProperty("m_Space", "Set In Space");
+            m_Space = FindProperty("m_Space", "Space");
         }
 
         public override void OnInspectorGUI()

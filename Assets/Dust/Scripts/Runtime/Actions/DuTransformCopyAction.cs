@@ -74,14 +74,7 @@ namespace DustEngine
                     tr.rotation = sourceObject.transform.rotation;
 
                 if (scale)
-                {
-                    tr.localScale = Vector3.one;
-
-                    Vector3 newScale = sourceObject.transform.lossyScale;
-                    Vector3 curScale = tr.lossyScale;
-
-                    tr.localScale = new Vector3(newScale.x / curScale.x, newScale.y / curScale.y, newScale.z / curScale.z);
-                }
+                    DuTransform.SetGlobalScale(tr, sourceObject.transform.lossyScale);
             }
             else if (space == Space.Local)
             {

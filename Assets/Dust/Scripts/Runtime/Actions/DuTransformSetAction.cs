@@ -89,13 +89,7 @@ namespace DustEngine
                     tr.rotation = Quaternion.Euler(rotation);
 
                 if (assignScale)
-                {
-                    tr.localScale = Vector3.one;
-
-                    Vector3 curScale = tr.lossyScale;
-
-                    tr.localScale = new Vector3(scale.x / curScale.x, scale.y / curScale.y, scale.z / curScale.z);
-                }
+                    DuTransform.SetGlobalScale(tr, scale);
             }
             else if (space == Space.Local)
             {
