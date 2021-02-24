@@ -235,9 +235,7 @@ namespace DustEngine.DustEditor
             if (Dust.IsNotNull(Selection.activeGameObject))
                 gameObject.transform.parent = Selection.activeGameObject.transform;
 
-            gameObject.transform.localPosition = Vector3.zero;
-            gameObject.transform.localRotation = Quaternion.identity;
-            gameObject.transform.localScale = Vector3.one;
+            DuTransform.Reset(gameObject.transform);
 
             var component = gameObject.AddComponent(duComponentType);
 

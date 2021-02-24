@@ -38,9 +38,7 @@ namespace DustEngine.DustEditor
             var component = gameObject.AddComponent(duComponentType) as DuGizmoObject;
 
             gameObject.name = component.GizmoName() + " Gizmo";
-            gameObject.transform.localPosition = Vector3.zero;
-            gameObject.transform.localRotation = Quaternion.identity;
-            gameObject.transform.localScale = Vector3.one;
+            DuTransform.Reset(gameObject.transform);
 
             if (fixUndoState)
                 Undo.RegisterCreatedObjectUndo(gameObject, "Create " + gameObject.name);

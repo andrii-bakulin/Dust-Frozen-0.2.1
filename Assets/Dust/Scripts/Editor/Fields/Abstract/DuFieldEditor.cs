@@ -70,9 +70,7 @@ namespace DustEngine.DustEditor
                 }
 
                 gameObject.name = field.FieldName() + " Field";
-                gameObject.transform.localPosition = Vector3.zero;
-                gameObject.transform.localRotation = Quaternion.identity;
-                gameObject.transform.localScale = Vector3.one;
+                DuTransform.Reset(gameObject.transform);
             }
 
             Undo.RegisterCreatedObjectUndo(gameObject, "Create " + gameObject.name);

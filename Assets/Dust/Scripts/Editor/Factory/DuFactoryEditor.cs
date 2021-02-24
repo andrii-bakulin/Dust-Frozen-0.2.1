@@ -58,9 +58,7 @@ namespace DustEngine.DustEditor
             var factory = gameObject.AddComponent(factoryType) as DuFactory;
 
             gameObject.name = factory.FactoryName() + " Factory";
-            gameObject.transform.localPosition = Vector3.zero;
-            gameObject.transform.localRotation = Quaternion.identity;
-            gameObject.transform.localScale = Vector3.one;
+            DuTransform.Reset(gameObject.transform);
 
             Undo.RegisterCreatedObjectUndo(gameObject, "Create " + gameObject.name);
 

@@ -468,9 +468,7 @@ namespace DustEngine
                 sourceObjectsHolder = new GameObject();
                 sourceObjectsHolder.name = kGameObjectName_SourceObjects;
                 sourceObjectsHolder.transform.parent = transform;
-                sourceObjectsHolder.transform.localPosition = Vector3.zero;
-                sourceObjectsHolder.transform.localRotation = Quaternion.identity;
-                sourceObjectsHolder.transform.localScale = Vector3.one;
+                DuTransform.Reset(sourceObjectsHolder.transform);
             }
 
             if (Dust.IsNull(instancesHolder))
@@ -478,9 +476,7 @@ namespace DustEngine
                 instancesHolder = new GameObject();
                 instancesHolder.name = kGameObjectName_Instances;
                 instancesHolder.transform.parent = transform;
-                instancesHolder.transform.localPosition = Vector3.zero;
-                instancesHolder.transform.localRotation = Quaternion.identity;
-                instancesHolder.transform.localScale = Vector3.one;
+                DuTransform.Reset(instancesHolder.transform);
             }
 
             if (Dust.IsNull(factoryMachinesHolder))
@@ -488,9 +484,7 @@ namespace DustEngine
                 factoryMachinesHolder = new GameObject();
                 factoryMachinesHolder.name = kGameObjectName_Machines;
                 factoryMachinesHolder.transform.parent = transform;
-                factoryMachinesHolder.transform.localPosition = Vector3.zero;
-                factoryMachinesHolder.transform.localRotation = Quaternion.identity;
-                factoryMachinesHolder.transform.localScale = Vector3.one;
+                DuTransform.Reset(factoryMachinesHolder.transform);
             }
 
             RebuildInstances();
