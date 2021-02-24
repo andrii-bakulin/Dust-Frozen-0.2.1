@@ -121,46 +121,42 @@ namespace DustEngine
 
         private void UpdateTransformState()
         {
-            Transform t = transform;
-
             if (lockPosition)
             {
                 if (space == Space.Local)
-                    t.localPosition = m_Position;
+                    transform.localPosition = m_Position;
                 else
-                    t.position = m_Position;
+                    transform.position = m_Position;
             }
 
             if (lockRotation)
             {
                 if (space == Space.Local)
-                    t.localRotation = m_Rotation;
+                    transform.localRotation = m_Rotation;
                 else
-                    t.rotation = m_Rotation;
+                    transform.rotation = m_Rotation;
             }
 
             if (lockScale)
             {
-                t.localScale = m_Scale;
+                transform.localScale = m_Scale;
             }
         }
 
         public void FixLockStates()
         {
-            Transform t = transform;
-
             if (lockPosition)
-                m_Position = space == Space.Local ? t.localPosition : t.position;
+                m_Position = space == Space.Local ? transform.localPosition : transform.position;
             else
                 m_Position = Vector3.zero;
 
             if (lockRotation)
-                m_Rotation = space == Space.Local ? t.localRotation : t.rotation;
+                m_Rotation = space == Space.Local ? transform.localRotation : transform.rotation;
             else
                 m_Rotation = Quaternion.identity;
 
             if (lockScale)
-                m_Scale = t.localScale;
+                m_Scale = transform.localScale;
             else
                 m_Scale = Vector3.one;
         }
