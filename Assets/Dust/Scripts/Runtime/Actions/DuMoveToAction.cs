@@ -43,16 +43,10 @@ namespace DustEngine
                 ? deltaTime / ((1f - percentsCompletedNow) * duration)
                 : 1f;
 
-            switch (space)
-            {
-                case Space.World:
-                    tr.position = Vector3.Lerp(tr.position, moveTo, lerpOffset);
-                    break;
-
-                case Space.Local:
-                    tr.localPosition = Vector3.Lerp(tr.localPosition, moveTo, lerpOffset);
-                    break;
-            }
+            if (space == Space.World)
+                tr.position = Vector3.Lerp(tr.position, moveTo, lerpOffset);
+            else if (space == Space.Local)
+                tr.localPosition = Vector3.Lerp(tr.localPosition, moveTo, lerpOffset);
         }
     }
 }

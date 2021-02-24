@@ -45,16 +45,10 @@ namespace DustEngine
 
             Quaternion quaRotateTo = Quaternion.Euler(rotateTo);
 
-            switch (space)
-            {
-                case Space.World:
-                    tr.rotation = Quaternion.Lerp(tr.rotation, quaRotateTo, lerpOffset);
-                    break;
-
-                case Space.Local:
-                    tr.localRotation = Quaternion.Lerp(tr.localRotation, quaRotateTo, lerpOffset);
-                    break;
-            }
+            if (space == Space.World)
+                tr.rotation = Quaternion.Lerp(tr.rotation, quaRotateTo, lerpOffset);
+            else if (space == Space.Local)
+                tr.localRotation = Quaternion.Lerp(tr.localRotation, quaRotateTo, lerpOffset);
         }
     }
 }

@@ -42,20 +42,12 @@ namespace DustEngine
 
             Vector3 deltaMove = moveBy * (percentsCompletedNow - percentsCompletedLast);
 
-            switch (space)
-            {
-                case Space.World:
-                    tr.position += deltaMove;
-                    break;
-
-                case Space.Local:
-                    tr.localPosition += deltaMove;
-                    break;
-
-                case Space.Self:
-                    tr.localPosition += DuMath.RotatePoint(deltaMove, tr.localEulerAngles);
-                    break;
-            }
+            if (space == Space.World)
+                tr.position += deltaMove;
+            else if (space == Space.Local)
+                tr.localPosition += deltaMove;
+            else if (space == Space.Self)
+                tr.localPosition += DuMath.RotatePoint(deltaMove, tr.localEulerAngles);
         }
     }
 }
