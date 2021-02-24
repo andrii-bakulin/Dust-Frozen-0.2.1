@@ -9,9 +9,9 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public static void AddActionTransform(System.Type type, string title)
+        public static void AddActionAnimate(System.Type type, string title)
         {
-            AddEntity("Actions.Transform", type, title);
+            AddEntity("Actions.Animate", type, title);
         }
 
         public static void AddActionOthers(System.Type type, string title)
@@ -26,7 +26,7 @@ namespace DustEngine.DustEditor
             var popup = new DuActionsPopupButtons();
             popup.m_DuAction = duAction;
 
-            GenerateColumn(popup, "Actions.Transform", "Transform");
+            GenerateColumn(popup, "Actions.Animate", "Animate");
             GenerateColumn(popup, "Actions.Others", "Others");
 
             return popup;

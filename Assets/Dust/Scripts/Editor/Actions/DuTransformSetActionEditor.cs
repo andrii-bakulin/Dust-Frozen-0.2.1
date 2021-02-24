@@ -22,7 +22,7 @@ namespace DustEngine.DustEditor
 
         static DuTransformSetActionEditor()
         {
-            DuActionsPopupButtons.AddActionTransform(typeof(DuTransformSetAction), "Transform Set");
+            DuActionsPopupButtons.AddActionOthers(typeof(DuTransformSetAction), "Transform Set");
         }
 
         [MenuItem("Dust/Actions/Instant Actions/Transform Set")]

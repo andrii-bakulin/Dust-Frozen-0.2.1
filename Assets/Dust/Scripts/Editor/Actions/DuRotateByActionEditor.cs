@@ -15,7 +15,7 @@ namespace DustEngine.DustEditor
 
         static DuRotateByActionEditor()
         {
-            DuActionsPopupButtons.AddActionTransform(typeof(DuRotateByAction), "RotateBy");
+            DuActionsPopupButtons.AddActionAnimate(typeof(DuRotateByAction), "RotateBy");
         }
 
         [MenuItem("Dust/Actions/RotateBy")]

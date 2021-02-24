@@ -8,7 +8,7 @@ namespace DustEngine.DustEditor
 {
     public abstract class DuPopupButtons : PopupWindowContent
     {
-        private const float BUTTON_WIDTH = 128f;
+        private const float BUTTON_WIDTH = 140f;
         private const float BUTTON_HEIGHT = 28f;
 
         //--------------------------------------------------------------------------------------------------------------

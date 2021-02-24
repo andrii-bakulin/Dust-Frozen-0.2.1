@@ -10,7 +10,7 @@ namespace DustEngine.DustEditor
     {
         static DuCallbackActionEditor()
         {
-            DuActionsPopupButtons.AddActionInstant(typeof(DuCallbackAction), "Callback");
+            DuActionsPopupButtons.AddActionOthers(typeof(DuCallbackAction), "Callback");
         }
 
         [MenuItem("Dust/Actions/Instant Actions/Callback")]

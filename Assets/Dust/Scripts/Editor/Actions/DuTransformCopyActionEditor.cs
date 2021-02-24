@@ -19,7 +19,7 @@ namespace DustEngine.DustEditor
 
         static DuTransformCopyActionEditor()
         {
-            DuActionsPopupButtons.AddActionTransform(typeof(DuTransformCopyAction), "Transform Copy");
+            DuActionsPopupButtons.AddActionOthers(typeof(DuTransformCopyAction), "Transform Copy");
         }
 
         [MenuItem("Dust/Actions/Instant Actions/Transform Copy")]

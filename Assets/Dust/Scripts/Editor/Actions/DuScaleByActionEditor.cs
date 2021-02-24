@@ -15,7 +15,7 @@ namespace DustEngine.DustEditor
 
         static DuScaleByActionEditor()
         {
-            DuActionsPopupButtons.AddActionTransform(typeof(DuScaleByAction), "ScaleBy");
+            DuActionsPopupButtons.AddActionAnimate(typeof(DuScaleByAction), "ScaleBy");
         }
 
         [MenuItem("Dust/Actions/ScaleBy")]

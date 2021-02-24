@@ -29,7 +29,7 @@ namespace DustEngine.DustEditor
 
         static DuTransformRandomActionEditor()
         {
-            DuActionsPopupButtons.AddActionTransform(typeof(DuTransformRandomAction), "Transform Random");
+            DuActionsPopupButtons.AddActionOthers(typeof(DuTransformRandomAction), "Transform Random");
         }
 
         [MenuItem("Dust/Actions/Instant Actions/Transform Random")]

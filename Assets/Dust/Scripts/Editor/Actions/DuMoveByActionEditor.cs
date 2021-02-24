@@ -15,7 +15,7 @@ namespace DustEngine.DustEditor
 
         static DuMoveByActionEditor()
         {
-            DuActionsPopupButtons.AddActionTransform(typeof(DuMoveByAction), "MoveBy");
+            DuActionsPopupButtons.AddActionAnimate(typeof(DuMoveByAction), "MoveBy");
         }
 
         [MenuItem("Dust/Actions/MoveBy")]
