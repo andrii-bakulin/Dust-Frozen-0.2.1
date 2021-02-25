@@ -112,6 +112,11 @@ namespace DustEngine
             ActionInnerStop(true);
         }
 
+        private void  Reset()
+        {
+            autoStart = gameObject.GetComponents<DuAction>().Length == 1;
+        }
+
         //--------------------------------------------------------------------------------------------------------------
         // DuAction lifecycle INNER
 
