@@ -112,11 +112,6 @@ namespace DustEngine
             ActionInnerStop(true);
         }
 
-        private void  Reset()
-        {
-            autoStart = gameObject.GetComponents<DuAction>().Length == 1;
-        }
-
         //--------------------------------------------------------------------------------------------------------------
         // DuAction lifecycle INNER
 
@@ -210,6 +205,18 @@ namespace DustEngine
                 return null;
 
             return target.transform;
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        private void Reset()
+        {
+            ResetStates();
+        }
+
+        protected virtual void ResetStates()
+        {
+            autoStart = gameObject.GetComponents<DuAction>().Length == 1;
         }
     }
 }
