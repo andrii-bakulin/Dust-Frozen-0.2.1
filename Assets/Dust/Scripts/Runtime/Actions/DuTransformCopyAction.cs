@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace DustEngine
 {
@@ -63,27 +63,32 @@ namespace DustEngine
             if (Dust.IsNull(sourceObject) || sourceObject.Equals(this.gameObject))
                 return;
 
+            Transform tr = GetTargetTransform();
+
+            if (Dust.IsNull(tr))
+                return;
+
             if (space == Space.World)
             {
                 if (position)
-                    transform.position = sourceObject.transform.position;
+                    tr.position = sourceObject.transform.position;
 
                 if (rotation)
-                    transform.rotation = sourceObject.transform.rotation;
+                    tr.rotation = sourceObject.transform.rotation;
 
                 if (scale)
-                    DuTransform.SetGlobalScale(transform, sourceObject.transform.lossyScale);
+                    DuTransform.SetGlobalScale(tr, sourceObject.transform.lossyScale);
             }
             else if (space == Space.Local)
             {
                 if (position)
-                    transform.localPosition = sourceObject.transform.localPosition;
+                    tr.localPosition = sourceObject.transform.localPosition;
 
                 if (rotation)
-                    transform.localRotation = sourceObject.transform.localRotation;
+                    tr.localRotation = sourceObject.transform.localRotation;
 
                 if (scale)
-                    transform.localScale = sourceObject.transform.localScale;
+                    tr.localScale = sourceObject.transform.localScale;
             }
         }
     }
