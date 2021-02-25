@@ -70,37 +70,45 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            PropertyField(m_PositionEnabled);
-            PropertyField(m_RotationEnabled);
-            PropertyField(m_ScaleEnabled);
+            OnInspectorGUI_BaseControlUI();
 
-            Space();
-
-            if (m_PositionEnabled.IsTrue)
+            if (DustGUI.FoldoutBegin("Parameters", "DuTransformRandomAction.Parameters"))
             {
-                PropertyField(m_PositionRangeMin);
-                PropertyField(m_PositionRangeMax);
+                PropertyField(m_PositionEnabled);
+                PropertyField(m_RotationEnabled);
+                PropertyField(m_ScaleEnabled);
+
                 Space();
+
+                if (m_PositionEnabled.IsTrue)
+                {
+                    PropertyField(m_PositionRangeMin);
+                    PropertyField(m_PositionRangeMax);
+                    Space();
+                }
+
+                if (m_RotationEnabled.IsTrue)
+                {
+                    PropertyField(m_RotationRangeMin);
+                    PropertyField(m_RotationRangeMax);
+                    Space();
+                }
+
+                if (m_ScaleEnabled.IsTrue)
+                {
+                    PropertyField(m_ScaleRangeMin);
+                    PropertyField(m_ScaleRangeMax);
+                    Space();
+                }
+
+                PropertyField(m_TransformMode);
+                PropertyField(m_Space);
+
+                PropertySeedRandomOrFixed(m_Seed);
             }
+            DustGUI.FoldoutEnd();
 
-            if (m_RotationEnabled.IsTrue)
-            {
-                PropertyField(m_RotationRangeMin);
-                PropertyField(m_RotationRangeMax);
-                Space();
-            }
-
-            if (m_ScaleEnabled.IsTrue)
-            {
-                PropertyField(m_ScaleRangeMin);
-                PropertyField(m_ScaleRangeMax);
-                Space();
-            }
-
-            PropertyField(m_TransformMode);
-            PropertyField(m_Space);
-
-            PropertySeedRandomOrFixed(m_Seed);
+            OnInspectorGUI_AnyActionFields("DuTransformRandomAction");
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
