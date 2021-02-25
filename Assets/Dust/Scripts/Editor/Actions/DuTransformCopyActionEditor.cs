@@ -66,7 +66,6 @@ namespace DustEngine.DustEditor
             OnInspectorGUI_AnyActionFields("DuTransformCopyAction");
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            // Validate & Normalize Data
 
             InspectorCommitUpdates();
         }

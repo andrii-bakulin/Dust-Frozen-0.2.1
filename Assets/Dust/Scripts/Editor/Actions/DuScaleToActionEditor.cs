@@ -53,7 +53,6 @@ namespace DustEngine.DustEditor
             OnInspectorGUI_AnyActionFields("DuScaleToAction");
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            // Validate & Normalize Data
 
             InspectorCommitUpdates();
         }

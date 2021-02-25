@@ -53,7 +53,6 @@ namespace DustEngine.DustEditor
             OnInspectorGUI_AnyActionFields("DuRotateByAction");
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            // Validate & Normalize Data
 
             InspectorCommitUpdates();
         }

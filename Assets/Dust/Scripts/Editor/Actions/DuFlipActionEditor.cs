@@ -55,7 +55,6 @@ namespace DustEngine.DustEditor
             OnInspectorGUI_AnyActionFields("DuFlipAction");
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            // Validate & Normalize Data
 
             InspectorCommitUpdates();
         }

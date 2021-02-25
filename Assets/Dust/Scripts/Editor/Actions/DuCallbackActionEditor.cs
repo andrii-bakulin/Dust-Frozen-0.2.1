@@ -21,11 +21,6 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        protected override void InitializeEditor()
-        {
-            base.InitializeEditor();
-        }
-
         public override void OnInspectorGUI()
         {
             InspectorInitStates();
@@ -34,10 +29,9 @@ namespace DustEngine.DustEditor
 
             OnInspectorGUI_BaseControlUI();
 
-            OnInspectorGUI_AnyActionFields("DuCallbackAction", true);
+            OnInspectorGUI_AnyActionFields("DuCallbackAction", callbackExpanded:true);
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            // Validate & Normalize Data
 
             InspectorCommitUpdates();
         }

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace DustEngine
 {
@@ -14,7 +14,7 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
 
         [SerializeField]
-        private bool m_Position = true;
+        private bool m_Position = false;
         public bool position
         {
             get => m_Position;
@@ -22,7 +22,7 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private bool m_Rotation = true;
+        private bool m_Rotation = false;
         public bool rotation
         {
             get => m_Rotation;
@@ -30,7 +30,7 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private bool m_Scale = true;
+        private bool m_Scale = false;
         public bool scale
         {
             get => m_Scale;

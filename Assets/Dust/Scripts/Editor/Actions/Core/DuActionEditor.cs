@@ -137,6 +137,8 @@ namespace DustEngine.DustEditor
             {
                 PropertyField(m_AutoStart);
 
+                // Cannot hide this field even for actions without real target (callback, delay, ...)
+                // User should be able to change target any time (for ex. to "Inherit")
                 PropertyField(m_TargetMode);
                 PropertyFieldOrHide(m_TargetObject, targetMode != DuAction.TargetMode.GameObject);
             }
