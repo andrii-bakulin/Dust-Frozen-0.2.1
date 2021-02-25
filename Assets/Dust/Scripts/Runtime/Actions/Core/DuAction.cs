@@ -70,12 +70,6 @@ namespace DustEngine
         protected bool m_IsPlaying;
         public bool isPlaying => m_IsPlaying;
 
-        protected float m_PercentsCompletedLast;
-        public float percentsCompletedLast => m_PercentsCompletedLast;
-
-        protected float m_PercentsCompletedNow;
-        public float percentsCompletedNow => m_PercentsCompletedNow;
-
         //--------------------------------------------------------------------------------------------------------------
 
         private void Start()
@@ -115,7 +109,7 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // DuAction lifecycle INNER
 
-        internal void ActionInnerStart(DuAction previousAction)
+        internal virtual void ActionInnerStart(DuAction previousAction)
         {
             if (targetMode == TargetMode.Inherit)
             {
@@ -130,20 +124,14 @@ namespace DustEngine
 
             m_IsPlaying = true;
 
-            m_PercentsCompletedLast = 0f;
-            m_PercentsCompletedNow = 0f;
-
             OnActionStart();
         }
 
         internal abstract void ActionInnerUpdate(float deltaTime);
 
-        internal void ActionInnerStop(bool isTerminated)
+        internal virtual void ActionInnerStop(bool isTerminated)
         {
             m_IsPlaying = false;
-
-            m_PercentsCompletedLast = 0f;
-            m_PercentsCompletedNow = 0f;
 
             OnActionStop(isTerminated);
 

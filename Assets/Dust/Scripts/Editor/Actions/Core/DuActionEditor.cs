@@ -45,6 +45,9 @@ namespace DustEngine.DustEditor
             var isAutoStart = m_AutoStart.IsTrue;
             var duAction = target as DuAction;
 
+            if (Dust.IsNull(duAction))
+                return;
+            
             string iconName;
             string iconTitle;
 
@@ -84,7 +87,7 @@ namespace DustEngine.DustEditor
                     DustGUI.SimpleLabel(iconTitle);
 
                     var rect = EditorGUILayout.GetControlRect(false, 8f);
-                    EditorGUI.ProgressBar(rect, duAction.percentsCompletedNow, "");
+                    EditorGUI.ProgressBar(rect, GetActionPercentsDone(duAction), "");
                 }
                 DustGUI.EndVertical();
 
@@ -119,6 +122,16 @@ namespace DustEngine.DustEditor
             if (Application.isPlaying)
                 DustGUI.ForcedRedrawInspector(this);
         }
+
+        protected float GetActionPercentsDone(DuAction duAction)
+        {
+            if (target as DuIntervalAction is DuIntervalAction duActionInterval)
+                return duActionInterval.percentsCompletedNow;
+            
+            return 0f; // For DuInstantAction <or> others > return 0f
+        }
+        
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         protected void OnInspectorGUI_AnyActionFields(string actionId)
             => OnInspectorGUI_AnyActionFields(actionId, false);

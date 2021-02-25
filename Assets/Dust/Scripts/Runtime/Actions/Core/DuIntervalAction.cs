@@ -12,7 +12,31 @@ namespace DustEngine
             set => m_Duration = Normalizer.Duration(value);
         }
 
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        protected float m_PercentsCompletedLast;
+        public float percentsCompletedLast => m_PercentsCompletedLast;
+
+        protected float m_PercentsCompletedNow;
+        public float percentsCompletedNow => m_PercentsCompletedNow;
+
         //--------------------------------------------------------------------------------------------------------------
+
+        internal override void ActionInnerStart(DuAction previousAction)
+        {
+            m_PercentsCompletedLast = 0f;
+            m_PercentsCompletedNow = 0f;
+
+            base.ActionInnerStart(previousAction);
+        }
+
+        internal override void ActionInnerStop(bool isTerminated)
+        {
+            m_PercentsCompletedLast = 0f;
+            m_PercentsCompletedNow = 0f;
+
+            base.ActionInnerStop(isTerminated);
+        }
 
         internal override void ActionInnerUpdate(float deltaTime)
         {
