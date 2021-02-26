@@ -4,7 +4,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace DustEngine.Test
+namespace DustEngine.Test.EditMode
 {
     public class DustTests
     {

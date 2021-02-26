@@ -1,5 +1,5 @@
 {
-    "name": "DustEngine.Tests",
+    "name": "DustEngine.Tests.EditMode",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
