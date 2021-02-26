@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -14,10 +13,8 @@ namespace DustEngine.Test.PlayMode
             var moveTo = new Vector3(x, y, z);
             var testObject = GetTestGameObject(objLevelId);
 
-            var endWorldCheckValue = moveTo;
-            var endLocalCheckValue = testObject.transform.parent != null
-                ? testObject.transform.parent.InverseTransformPoint(endWorldCheckValue)
-                : endWorldCheckValue;
+            var endInWorld = moveTo;
+            var endInLocal = ConvertWorldToLocal(testObject, endInWorld);
 
             var sut = testObject.AddComponent<DuMoveToAction>();
             sut.duration = Sec(duration);
@@ -25,7 +22,7 @@ namespace DustEngine.Test.PlayMode
             sut.moveTo = moveTo;
             sut.Play();
 
-            yield return MoveTest(testObject, duration, endWorldCheckValue, endLocalCheckValue);
+            yield return MoveTest(testObject, duration, endInWorld, endInLocal);
         }
         
         [UnityTest, TestCaseSource(nameof(TestCases))]
@@ -34,10 +31,8 @@ namespace DustEngine.Test.PlayMode
             var moveTo = new Vector3(x, y, z);
             var testObject = GetTestGameObject(objLevelId);
 
-            var endLocalCheckValue = moveTo;
-            var endWorldCheckValue = testObject.transform.parent != null 
-                ? testObject.transform.parent.TransformPoint(endLocalCheckValue)
-                : endLocalCheckValue;
+            var endInLocal = moveTo;
+            var endInWorld = ConvertLocalToWorld(testObject, endInLocal);
 
             var sut = testObject.AddComponent<DuMoveToAction>();
             sut.duration = Sec(duration);
@@ -45,7 +40,7 @@ namespace DustEngine.Test.PlayMode
             sut.moveTo = moveTo;
             sut.Play();
 
-            yield return MoveTest(testObject, duration, endWorldCheckValue, endLocalCheckValue);
+            yield return MoveTest(testObject, duration, endInWorld, endInLocal);
         }
     }
 }

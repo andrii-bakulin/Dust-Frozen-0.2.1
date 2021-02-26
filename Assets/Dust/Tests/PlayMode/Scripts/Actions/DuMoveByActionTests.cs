@@ -13,10 +13,8 @@ namespace DustEngine.Test.PlayMode
             var moveBy = new Vector3(x, y, z);
             var testObject = GetTestGameObject(objLevelId);
 
-            var endWorldCheckValue = testObject.transform.position + moveBy;
-            var endLocalCheckValue = testObject.transform.parent != null 
-                ? testObject.transform.parent.InverseTransformPoint(endWorldCheckValue)
-                : endWorldCheckValue;
+            var endInWorld = testObject.transform.position + moveBy;
+            var endInLocal = ConvertWorldToLocal(testObject, endInWorld);
             
             var sut = testObject.AddComponent<DuMoveByAction>();
             sut.duration = Sec(duration);
@@ -24,7 +22,7 @@ namespace DustEngine.Test.PlayMode
             sut.moveBy = moveBy;
             sut.Play();
 
-            yield return MoveTest(testObject, duration, endWorldCheckValue, endLocalCheckValue);
+            yield return MoveTest(testObject, duration, endInWorld, endInLocal);
         }
         
         [UnityTest, TestCaseSource(nameof(TestCases))]
@@ -33,10 +31,8 @@ namespace DustEngine.Test.PlayMode
             var moveBy = new Vector3(x, y, z);
             var testObject = GetTestGameObject(objLevelId);
 
-            var endLocalCheckValue = testObject.transform.localPosition + moveBy;
-            var endWorldCheckValue = testObject.transform.parent != null
-                ? testObject.transform.parent.TransformPoint(endLocalCheckValue)
-                : endLocalCheckValue;
+            var endInLocal = testObject.transform.localPosition + moveBy;
+            var endInWorld = ConvertLocalToWorld(testObject, endInLocal);
             
             var sut = testObject.AddComponent<DuMoveByAction>();
             sut.duration = Sec(duration);
@@ -44,7 +40,7 @@ namespace DustEngine.Test.PlayMode
             sut.moveBy = moveBy;
             sut.Play();
 
-            yield return MoveTest(testObject, duration, endWorldCheckValue, endLocalCheckValue);
+            yield return MoveTest(testObject, duration, endInWorld, endInLocal);
         }
 
         [UnityTest, TestCaseSource(nameof(TestCases))]
@@ -57,10 +53,8 @@ namespace DustEngine.Test.PlayMode
             subObject.transform.parent = testObject.transform;
             subObject.transform.localPosition = moveBy;
 
-            var endWorldCheckValue = subObject.transform.position;
-            var endLocalCheckValue = testObject.transform.parent != null
-                ? testObject.transform.parent.InverseTransformPoint(endWorldCheckValue)
-                : endWorldCheckValue;
+            var endInWorld = subObject.transform.position;
+            var endInLocal = ConvertWorldToLocal(testObject, endInWorld);
 
             Object.DestroyImmediate(subObject);
 
@@ -70,7 +64,7 @@ namespace DustEngine.Test.PlayMode
             sut.moveBy = moveBy;
             sut.Play();
 
-            yield return MoveTest(testObject, duration, endWorldCheckValue, endLocalCheckValue);
+            yield return MoveTest(testObject, duration, endInWorld, endInLocal);
         }
     }
 }
