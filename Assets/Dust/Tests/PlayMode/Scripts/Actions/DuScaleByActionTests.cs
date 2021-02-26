@@ -3,7 +3,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace DustEngine.Test.Actions
+namespace DustEngine.Test.Actions.Scale
 {
     public class DuScaleByActionTests : DuScaleActionTests
     {

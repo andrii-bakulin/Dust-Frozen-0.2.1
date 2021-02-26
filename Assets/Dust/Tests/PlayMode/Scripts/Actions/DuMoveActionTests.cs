@@ -1,9 +1,9 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 
-namespace DustEngine.Test.Actions
+namespace DustEngine.Test.Actions.Move
 {
     public abstract class DuMoveActionTests : DuActionTests
     {
