@@ -3,7 +3,7 @@ using UnityEngine;
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Actions/MoveTo Action")]
-    public class DuMoveToAction : DuIntervalAction
+    public class DuMoveToAction : DuMoveAction
     {
         public enum Space
         {
@@ -30,23 +30,29 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
-        // DuAction lifecycle
 
-        internal override void OnActionUpdate(float deltaTime)
+        internal override void OnActionStart()
         {
+            base.OnActionStart();
+
             Transform tr = GetTargetTransform();
 
             if (Dust.IsNull(tr))
                 return;
 
-            var lerpOffset = duration > 0f && percentsCompletedNow < 1f
-                ? deltaTime / ((1f - percentsCompletedNow) * duration)
-                : 1f;
+            Vector3 localMoveTo;
 
             if (space == Space.World)
-                tr.position = Vector3.Lerp(tr.position, moveTo, lerpOffset);
+            {
+                localMoveTo = Dust.IsNotNull(tr.parent) ? tr.parent.InverseTransformPoint(m_MoveTo) : m_MoveTo;
+            }
             else if (space == Space.Local)
-                tr.localPosition = Vector3.Lerp(tr.localPosition, moveTo, lerpOffset);
+            {
+                localMoveTo = m_MoveTo;
+            }
+            else return;
+
+            m_DeltaLocalMove = localMoveTo - tr.localPosition; 
         }
     }
 }
