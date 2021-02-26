@@ -174,7 +174,7 @@ namespace DustEngine
                     return this.gameObject;
 
                 case TargetMode.ParentObject:
-                    return transform.parent.gameObject;
+                    return Dust.IsNotNull(transform.parent) ? transform.parent.gameObject : null;
 
                 case TargetMode.GameObject:
                 case TargetMode.Inherit:
