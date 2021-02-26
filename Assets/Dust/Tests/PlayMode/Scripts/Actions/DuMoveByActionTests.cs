@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -49,14 +49,8 @@ namespace DustEngine.Test.Actions.Move
             var moveBy = new Vector3(x, y, z);
             var testObject = GetTestGameObject(objLevelId);
 
-            var subObject = new GameObject();
-            subObject.transform.parent = testObject.transform;
-            subObject.transform.localPosition = moveBy;
-
-            var endInWorld = subObject.transform.position;
-            var endInLocal = ConvertWorldToLocal(testObject, endInWorld);
-
-            Object.DestroyImmediate(subObject);
+            var endInLocal = testObject.transform.localPosition + DuMath.RotatePoint(moveBy, testObject.transform.localEulerAngles);
+            var endInWorld = ConvertLocalToWorld(testObject, endInLocal);
 
             var sut = testObject.AddComponent<DuMoveByAction>();
             sut.duration = Sec(duration);
