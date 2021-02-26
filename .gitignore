@@ -61,6 +61,8 @@ crashlytics-build.properties
 # Dust
 .idea/
 UserSettings/
+Assets/Temp*
+Assets/InitTestScene*
 
 # Helpers
 Assets/FindReference2*
