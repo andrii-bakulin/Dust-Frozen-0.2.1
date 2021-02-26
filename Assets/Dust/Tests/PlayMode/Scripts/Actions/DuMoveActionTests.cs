@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
@@ -11,11 +11,25 @@ namespace DustEngine.Test.Actions
         {
             get
             {
-                foreach (var objLevelId in new[] {ObjectTopLevel, ObjectSubLevel})
-                foreach (var duration in new[] {1.0f, 0.0f})
-                foreach (var x in new[] {0f, 1f,  -5.00f, -1234.56f})
-                foreach (var y in new[] {0f, 1f,   7.50f,  3456.78f})
-                foreach (var z in new[] {0f, 1f, -12.25f, -9999.99f})
+                var objLevelIds = new[] {ObjectTopLevel, ObjectSubLevel};
+                var durations = new[] {1.0f, 0.0f};
+                var xList = new[] {0f, 1f,  -5.00f, -1234.56f};
+                var yList = new[] {0f, 1f,   7.50f,  3456.78f};
+                var zList = new[] {0f, 1f, -12.25f, -9999.99f};
+
+                if (Constants.MINIMIZE_ACTIONS_TESTS)
+                {
+                    durations = new[] {1.0f};
+                    xList = new[] {0f,  -5.00f};
+                    yList = new[] {0f,   7.50f};
+                    zList = new[] {0f, -12.25f};
+                }
+
+                foreach (var objLevelId in objLevelIds)
+                foreach (var duration in durations)
+                foreach (var x in xList)
+                foreach (var y in yList)
+                foreach (var z in zList)
                 {
                     yield return new TestCaseData(objLevelId, duration, x, y, z).Returns(null);                    
                 }
@@ -45,11 +59,11 @@ namespace DustEngine.Test.Actions
 
         protected IEnumerator MoveTest(GameObject testObject, float duration, Vector3 endInWorld, Vector3 endInLocal)
         {
-            Debug.Log($"Start At [WORLD]: {testObject.transform.position.ToString(FLOAT_ACCURACY_MASK)}");
-            Debug.Log($"Start At [LOCAL]: {testObject.transform.localPosition.ToString(FLOAT_ACCURACY_MASK)}");
+            Debug.Log($"Start At [WORLD]: {testObject.transform.position.ToString(Constants.FLOAT_ACCURACY_MASK)}");
+            Debug.Log($"Start At [LOCAL]: {testObject.transform.localPosition.ToString(Constants.FLOAT_ACCURACY_MASK)}");
 
-            Debug.Log($"Expect At [WORLD]: {endInWorld.ToString(FLOAT_ACCURACY_MASK)}");
-            Debug.Log($"Expect At [LOCAL]: {endInLocal.ToString(FLOAT_ACCURACY_MASK)}");
+            Debug.Log($"Expect At [WORLD]: {endInWorld.ToString(Constants.FLOAT_ACCURACY_MASK)}");
+            Debug.Log($"Expect At [LOCAL]: {endInLocal.ToString(Constants.FLOAT_ACCURACY_MASK)}");
 
             yield return new WaitForSeconds(Sec(duration * 0.75f));
 
@@ -65,8 +79,8 @@ namespace DustEngine.Test.Actions
 
             yield return new WaitForSeconds(Sec(duration * 0.75f));
 
-            Debug.Log($"Result At [WORLD]: {testObject.transform.position.ToString(FLOAT_ACCURACY_MASK)}");
-            Debug.Log($"Result At [LOCAL]: {testObject.transform.localPosition.ToString(FLOAT_ACCURACY_MASK)}");
+            Debug.Log($"Result At [WORLD]: {testObject.transform.position.ToString(Constants.FLOAT_ACCURACY_MASK)}");
+            Debug.Log($"Result At [LOCAL]: {testObject.transform.localPosition.ToString(Constants.FLOAT_ACCURACY_MASK)}");
 
             Assert_Equal(testObject.transform.position, endInWorld, "Check end in World space");
             Assert_Equal(testObject.transform.localPosition, endInLocal, "Check end in Local space");
