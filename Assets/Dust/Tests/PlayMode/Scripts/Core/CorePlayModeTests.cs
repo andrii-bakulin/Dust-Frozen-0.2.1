@@ -1,10 +1,10 @@
 ﻿using NUnit.Framework;
 using UnityEngine;
 
-public class CorePlayModeTests
+public abstract class CorePlayModeTests
 {
-    private readonly float TIME_SCALE = 1f;
-    private readonly string FLOAT_ACCURACY_MASK = "F2"; // @todo: F5
+    protected readonly float TIME_SCALE = 0.25f;
+    protected readonly string FLOAT_ACCURACY_MASK = "F2"; // @todo: F5
 
     protected float Sec(float sec)
     {

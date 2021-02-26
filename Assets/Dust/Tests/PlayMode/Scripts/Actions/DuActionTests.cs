@@ -1,56 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using NUnit.Framework;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.TestTools;
+using Object = UnityEngine.Object;
 
 namespace DustEngine.Test.PlayMode
 {
-    public class DuActionTests : CorePlayModeTests
+    public abstract class DuActionTests : CorePlayModeTests
     {
-        protected static IEnumerable<TestCaseData> TestCasesSimple
-        {
-            get
-            {
-                yield return new TestCaseData(0.0f, 0.0f, 0.0f).Returns(null);
-                yield return new TestCaseData(5.0f, 7.0f, 12.0f).Returns(null);
-            }
-        }
-        
-        protected static IEnumerable<TestCaseData> TestCases
-        {
-            get
-            {
-                yield return new TestCaseData(0.0f, 0.0f, 0.0f).Returns(null);
-                yield return new TestCaseData(1.0f, -2.0f, 3.0f).Returns(null);
-                yield return new TestCaseData(2.3f, 5.7f, 12.5f).Returns(null);
-                yield return new TestCaseData(5.0f, 7.0f, 12.0f).Returns(null);
-                yield return new TestCaseData(-123.456f, 345.678f, -321.987f).Returns(null);
-            }
-        }
-        
-        protected GameObject holderLevel1;
-        protected GameObject holderLevel2;
-        protected GameObject testObject;
+        protected const string ObjectTopLevel = "Top-Level";
+        protected const string ObjectSubLevel = "Sub-Level";
+
+        protected GameObject topLevelObj;
+        protected GameObject middleLevelObj;
+        protected GameObject lastLevelObj;
         
         //--------------------------------------------------------------------------------------------------------------
 
         [UnitySetUp]
         protected IEnumerator SetupPreset1()
         {
-            holderLevel1 = new GameObject("Holder1");
-            holderLevel1.transform.localPosition = new Vector3(1f, 2f, 3f);
-            holderLevel1.transform.localRotation = Quaternion.Euler(45f, 0f, 0f);
+            topLevelObj = new GameObject("TopLevelObj");
+            topLevelObj.transform.localPosition = new Vector3(1f, 2f, 3f);
+            topLevelObj.transform.localRotation = Quaternion.Euler(45f, 0f, 0f);
 
-            holderLevel2 = new GameObject("Holder2");
-            holderLevel2.transform.parent = holderLevel1.transform;
-            holderLevel2.transform.localPosition = new Vector3(-1.5f, -2.5f, -3.5f);
-            holderLevel2.transform.localRotation = Quaternion.Euler(0f, 0f, 45f);
+            middleLevelObj = new GameObject("MiddleLevelObj");
+            middleLevelObj.transform.parent = topLevelObj.transform;
+            middleLevelObj.transform.localPosition = new Vector3(-1.5f, -2.5f, -3.5f);
+            middleLevelObj.transform.localRotation = Quaternion.Euler(0f, 0f, 45f);
 
-            testObject = new GameObject("TestObject");
-            testObject.transform.parent = holderLevel2.transform;
-            testObject.transform.localPosition = new Vector3(1.25f, 2.35f, 3.45f);
-            testObject.transform.localRotation = Quaternion.Euler(10f, 20f, 30f);
+            lastLevelObj = new GameObject("LastLevelObj");
+            lastLevelObj.transform.parent = middleLevelObj.transform;
+            lastLevelObj.transform.localPosition = new Vector3(1.25f, 2.35f, 3.45f);
+            lastLevelObj.transform.localRotation = Quaternion.Euler(10f, 20f, 30f);
             
             yield break;
         }
@@ -58,11 +40,22 @@ namespace DustEngine.Test.PlayMode
         [UnityTearDown]
         protected IEnumerator ReleasePreset1()
         {
-            Object.DestroyImmediate(testObject);   
-            Object.DestroyImmediate(holderLevel2);   
-            Object.DestroyImmediate(holderLevel1);
+            Object.DestroyImmediate(lastLevelObj);   
+            Object.DestroyImmediate(middleLevelObj);   
+            Object.DestroyImmediate(topLevelObj);
 
             yield break;
+        }
+
+        protected GameObject GetTestGameObject(string objLevelId)
+        {
+            switch (objLevelId)
+            {
+                case ObjectTopLevel: return topLevelObj;
+                case ObjectSubLevel: return lastLevelObj;
+            }
+
+            throw new Exception("Undefined ObjLevelId");
         }
     }
 }
