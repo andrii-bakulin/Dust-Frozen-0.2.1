@@ -36,14 +36,14 @@ namespace DustEngine
         {
             base.OnActionStart();
 
-            Transform tr = GetTargetTransform();
+            m_TargetTransform = GetTargetTransform();
 
-            if (Dust.IsNull(tr))
+            if (Dust.IsNull(m_TargetTransform))
                 return;
 
             if (space == Space.World)
             {
-                var trParent = tr.parent;
+                var trParent = m_TargetTransform.parent;
                 if (Dust.IsNotNull(trParent))
                     m_DeltaLocalMove = trParent.InverseTransformPoint(moveBy) - trParent.InverseTransformPoint(Vector3.zero);
                 else
@@ -55,7 +55,7 @@ namespace DustEngine
             }
             else if (space == Space.Self)
             {
-                m_DeltaLocalMove = DuMath.RotatePoint(moveBy, tr.localEulerAngles);
+                m_DeltaLocalMove = DuMath.RotatePoint(moveBy, m_TargetTransform.localEulerAngles);
             }
         }
     }

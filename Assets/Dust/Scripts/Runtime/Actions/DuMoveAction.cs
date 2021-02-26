@@ -6,6 +6,8 @@ namespace DustEngine
 {
     public abstract class DuMoveAction : DuIntervalAction
     {
+        protected Transform m_TargetTransform;
+
         protected Vector3 m_DeltaLocalMove;
 
         //--------------------------------------------------------------------------------------------------------------
@@ -13,12 +15,10 @@ namespace DustEngine
         
         internal override void OnActionUpdate(float deltaTime)
         {
-            Transform tr = GetTargetTransform();
-
-            if (Dust.IsNull(tr))
+            if (Dust.IsNull(m_TargetTransform))
                 return;
 
-            tr.localPosition += m_DeltaLocalMove * (percentsCompletedNow - percentsCompletedLast);
+            m_TargetTransform.localPosition += m_DeltaLocalMove * (percentsCompletedNow - percentsCompletedLast);
         }
     }
 }
