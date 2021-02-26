@@ -44,7 +44,8 @@ namespace DustEngine
 
             if (space == Space.World)
             {
-                localMoveTo = Dust.IsNotNull(tr.parent) ? tr.parent.InverseTransformPoint(m_MoveTo) : m_MoveTo;
+                var trParent = tr.parent;
+                localMoveTo = Dust.IsNotNull(trParent) ? trParent.InverseTransformPoint(m_MoveTo) : m_MoveTo;
             }
             else if (space == Space.Local)
             {
