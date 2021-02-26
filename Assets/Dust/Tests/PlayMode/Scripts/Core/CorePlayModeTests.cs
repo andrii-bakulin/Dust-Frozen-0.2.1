@@ -31,9 +31,9 @@ public abstract class CorePlayModeTests
         float distance = Vector3.Distance(testValue, baseValue);
 
         message += (string.IsNullOrEmpty(message) ? "" : "\n" ) +
-                   $"Expected: Vector3({baseValue.ToString("F3")})\n" +
-                   $"But was:  Vector3({testValue.ToString("F3")})\n" +
-                   $"Distance: {distance} is less than delta {VECTOR_DISTANCE_DELTA} so vectors are EQUAL";
+                   $"NOT Expected: Vector3({baseValue.ToString("F3")})\n" +
+                   $"But was:      Vector3({testValue.ToString("F3")})\n" +
+                   $"Distance:     {distance} is less than delta {VECTOR_DISTANCE_DELTA} so vectors are EQUAL";
         
         Assert.That(distance, Is.Not.LessThanOrEqualTo(VECTOR_DISTANCE_DELTA), message);
     }
@@ -55,9 +55,9 @@ public abstract class CorePlayModeTests
         float angle = Quaternion.Angle(testValue, baseValue);
 
         message += (string.IsNullOrEmpty(message) ? "" : "\n" ) +
-                   $"Expected: Quaternion.Euler({baseValue.eulerAngles.ToString("F3")})\n" +
-                   $"But was:  Quaternion.Euler({testValue.eulerAngles.ToString("F3")})\n" +
-                   $"Angle:    {angle} is less than delta {QUATERNION_ANGLE_DELTA} so vectors are EQUAL";
+                   $"NOT Expected: Quaternion.Euler({baseValue.eulerAngles.ToString("F3")})\n" +
+                   $"But was:      Quaternion.Euler({testValue.eulerAngles.ToString("F3")})\n" +
+                   $"Angle:        {angle} is less than delta {QUATERNION_ANGLE_DELTA} so Quaternions are EQUAL";
         
         Assert.That(angle, Is.Not.LessThanOrEqualTo(QUATERNION_ANGLE_DELTA), message);
     }

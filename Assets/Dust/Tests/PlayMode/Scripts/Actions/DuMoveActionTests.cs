@@ -61,9 +61,9 @@ namespace DustEngine.Test.PlayMode
                     Assert_NotEqual(testObject.transform.position, endInWorld, "Check middle point in World space");
                     Assert_NotEqual(testObject.transform.localPosition, endInLocal, "Check middle point in Local space");
                 }
-            
-                yield return new WaitForSeconds(Sec(duration * 0.75f));
             }
+
+            yield return new WaitForSeconds(Sec(duration * 0.75f));
 
             Debug.Log($"Result At [WORLD]: {testObject.transform.position.ToString(FLOAT_ACCURACY_MASK)}");
             Debug.Log($"Result At [LOCAL]: {testObject.transform.localPosition.ToString(FLOAT_ACCURACY_MASK)}");
