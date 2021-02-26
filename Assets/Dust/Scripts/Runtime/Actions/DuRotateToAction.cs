@@ -34,9 +34,7 @@ namespace DustEngine
 
         internal override void OnActionUpdate(float deltaTime)
         {
-            Transform tr = GetTargetTransform();
-
-            if (Dust.IsNull(tr))
+            if (Dust.IsNull(m_TargetTransform))
                 return;
 
             var lerpOffset = duration > 0f && percentsCompletedNow < 1f
@@ -46,9 +44,9 @@ namespace DustEngine
             Quaternion quaRotateTo = Quaternion.Euler(rotateTo);
 
             if (space == Space.World)
-                tr.rotation = Quaternion.Lerp(tr.rotation, quaRotateTo, lerpOffset);
+                m_TargetTransform.rotation = Quaternion.Lerp(m_TargetTransform.rotation, quaRotateTo, lerpOffset);
             else if (space == Space.Local)
-                tr.localRotation = Quaternion.Lerp(tr.localRotation, quaRotateTo, lerpOffset);
+                m_TargetTransform.localRotation = Quaternion.Lerp(m_TargetTransform.localRotation, quaRotateTo, lerpOffset);
         }
     }
 }

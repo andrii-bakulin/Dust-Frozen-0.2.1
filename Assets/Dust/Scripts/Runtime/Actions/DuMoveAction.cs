@@ -6,8 +6,6 @@ namespace DustEngine
 {
     public abstract class DuMoveAction : DuIntervalAction
     {
-        protected Transform m_TargetTransform;
-
         protected Vector3 m_DeltaLocalMove;
 
         //--------------------------------------------------------------------------------------------------------------

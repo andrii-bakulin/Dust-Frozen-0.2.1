@@ -80,32 +80,30 @@ namespace DustEngine
 
         internal override void OnActionUpdate(float deltaTime)
         {
-            Transform tr = GetTargetTransform();
-
-            if (Dust.IsNull(tr))
+            if (Dust.IsNull(m_TargetTransform))
                 return;
 
             if (space == Space.World)
             {
                 if (positionEnabled)
-                    tr.position = position;
+                    m_TargetTransform.position = position;
 
                 if (rotationEnabled)
-                    tr.rotation = Quaternion.Euler(rotation);
+                    m_TargetTransform.rotation = Quaternion.Euler(rotation);
 
                 if (scaleEnabled)
-                    DuTransform.SetGlobalScale(tr, scale);
+                    DuTransform.SetGlobalScale(m_TargetTransform, scale);
             }
             else if (space == Space.Local)
             {
                 if (positionEnabled)
-                    tr.localPosition = position;
+                    m_TargetTransform.localPosition = position;
 
                 if (rotationEnabled)
-                    tr.localRotation = Quaternion.Euler(rotation);
+                    m_TargetTransform.localRotation = Quaternion.Euler(rotation);
 
                 if (scaleEnabled)
-                    tr.localScale = scale;
+                    m_TargetTransform.localScale = scale;
             }
         }
     }

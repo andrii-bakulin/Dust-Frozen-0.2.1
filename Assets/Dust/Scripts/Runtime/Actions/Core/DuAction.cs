@@ -67,6 +67,8 @@ namespace DustEngine
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+        protected Transform m_TargetTransform;
+
         protected bool m_IsPlaying;
         public bool isPlaying => m_IsPlaying;
 
@@ -154,14 +156,19 @@ namespace DustEngine
 
         internal virtual void OnActionStart()
         {
-            // Initialize data if required
+            var target = GetTargetObject();
+
+            if (Dust.IsNull(target))
+                return;
+
+            m_TargetTransform = target.transform;
         }
 
         internal abstract void OnActionUpdate(float deltaTime);
 
         internal virtual void OnActionStop(bool isTerminated)
         {
-            // Release data if required
+            m_TargetTransform = null;
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -183,16 +190,6 @@ namespace DustEngine
                 default:
                     return null;
             }
-        }
-
-        protected Transform GetTargetTransform()
-        {
-            var target = GetTargetObject();
-
-            if (Dust.IsNull(target))
-                return null;
-
-            return target.transform;
         }
 
         //--------------------------------------------------------------------------------------------------------------

@@ -35,9 +35,7 @@ namespace DustEngine
 
         internal override void OnActionUpdate(float deltaTime)
         {
-            Transform tr = GetTargetTransform();
-
-            if (Dust.IsNull(tr))
+            if (Dust.IsNull(m_TargetTransform))
                 return;
 
             Vector3 deltaRotate = rotateBy * (percentsCompletedNow - percentsCompletedLast);

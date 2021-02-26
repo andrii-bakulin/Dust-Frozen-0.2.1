@@ -36,8 +36,6 @@ namespace DustEngine
         {
             base.OnActionStart();
 
-            m_TargetTransform = GetTargetTransform();
-
             if (Dust.IsNull(m_TargetTransform))
                 return;
 

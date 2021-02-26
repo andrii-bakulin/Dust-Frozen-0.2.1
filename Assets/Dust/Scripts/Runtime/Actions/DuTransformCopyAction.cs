@@ -63,32 +63,30 @@ namespace DustEngine
             if (Dust.IsNull(sourceObject) || sourceObject.Equals(this.gameObject))
                 return;
 
-            Transform tr = GetTargetTransform();
-
-            if (Dust.IsNull(tr))
+            if (Dust.IsNull(m_TargetTransform))
                 return;
 
             if (space == Space.World)
             {
                 if (position)
-                    tr.position = sourceObject.transform.position;
+                    m_TargetTransform.position = sourceObject.transform.position;
 
                 if (rotation)
-                    tr.rotation = sourceObject.transform.rotation;
+                    m_TargetTransform.rotation = sourceObject.transform.rotation;
 
                 if (scale)
-                    DuTransform.SetGlobalScale(tr, sourceObject.transform.lossyScale);
+                    DuTransform.SetGlobalScale(m_TargetTransform, sourceObject.transform.lossyScale);
             }
             else if (space == Space.Local)
             {
                 if (position)
-                    tr.localPosition = sourceObject.transform.localPosition;
+                    m_TargetTransform.localPosition = sourceObject.transform.localPosition;
 
                 if (rotation)
-                    tr.localRotation = sourceObject.transform.localRotation;
+                    m_TargetTransform.localRotation = sourceObject.transform.localRotation;
 
                 if (scale)
-                    tr.localScale = sourceObject.transform.localScale;
+                    m_TargetTransform.localScale = sourceObject.transform.localScale;
             }
         }
     }

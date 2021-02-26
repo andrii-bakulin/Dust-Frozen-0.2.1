@@ -24,8 +24,6 @@ namespace DustEngine
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        protected Transform m_TargetTransform;
-
         protected Vector3 m_ScaleStart;
         protected Vector3 m_ScaleFinal;
         
