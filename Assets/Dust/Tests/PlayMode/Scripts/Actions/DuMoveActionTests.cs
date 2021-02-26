@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 
-namespace DustEngine.Test.PlayMode
+namespace DustEngine.Test.Actions
 {
     public abstract class DuMoveActionTests : DuActionTests
     {
@@ -58,8 +58,8 @@ namespace DustEngine.Test.PlayMode
                 var moveByCmp = testObject.GetComponent<DuMoveByAction>();
                 if (moveByCmp != null && !moveByCmp.moveBy.Equals(Vector3.zero))
                 {
-                    Assert_NotEqual(testObject.transform.position, endInWorld, "Check middle point in World space");
-                    Assert_NotEqual(testObject.transform.localPosition, endInLocal, "Check middle point in Local space");
+                    Assert_NotEqual(testObject.transform.position, endInWorld, "Check middle in World space");
+                    Assert_NotEqual(testObject.transform.localPosition, endInLocal, "Check middle in Local space");
                 }
             }
 
@@ -68,8 +68,8 @@ namespace DustEngine.Test.PlayMode
             Debug.Log($"Result At [WORLD]: {testObject.transform.position.ToString(FLOAT_ACCURACY_MASK)}");
             Debug.Log($"Result At [LOCAL]: {testObject.transform.localPosition.ToString(FLOAT_ACCURACY_MASK)}");
 
-            Assert_Equal(testObject.transform.position, endInWorld, "Check end point in World space");
-            Assert_Equal(testObject.transform.localPosition, endInLocal, "Check end point in Local space");
+            Assert_Equal(testObject.transform.position, endInWorld, "Check end in World space");
+            Assert_Equal(testObject.transform.localPosition, endInLocal, "Check end in Local space");
         }
     }
 }

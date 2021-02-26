@@ -3,7 +3,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace DustEngine.Test.PlayMode
+namespace DustEngine.Test.Actions
 {
     public class DuMoveByActionTests : DuMoveActionTests
     {
