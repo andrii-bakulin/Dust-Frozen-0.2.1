@@ -41,11 +41,20 @@ namespace DustEngine
             Vector3 deltaRotate = rotateBy * (percentsCompletedNow - percentsCompletedLast);
 
             if (space == Space.World)
-                transform.Rotate(deltaRotate, UnityEngine.Space.World);
+            {
+                m_TargetTransform.Rotate(deltaRotate, UnityEngine.Space.World);
+            }
             else if (space == Space.Local)
-                transform.Rotate(transform.parent.TransformDirection(deltaRotate), UnityEngine.Space.World);
+            {
+                if (Dust.IsNotNull(m_TargetTransform.parent))
+                    m_TargetTransform.Rotate(m_TargetTransform.parent.TransformDirection(deltaRotate), UnityEngine.Space.World);
+                else
+                    m_TargetTransform.Rotate(deltaRotate, UnityEngine.Space.World);
+            }
             else if (space == Space.Self)
-                transform.Rotate(transform.TransformDirection(deltaRotate), UnityEngine.Space.World);
+            {
+                m_TargetTransform.Rotate(m_TargetTransform.TransformDirection(deltaRotate), UnityEngine.Space.World);
+            }
         }
     }
 }

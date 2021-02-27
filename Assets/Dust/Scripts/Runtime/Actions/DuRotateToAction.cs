@@ -28,9 +28,20 @@ namespace DustEngine
             get => m_Space;
             set => m_Space = value;
         }
+        
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        protected Quaternion m_RotationFinal;
 
         //--------------------------------------------------------------------------------------------------------------
         // DuAction lifecycle
+
+        internal override void OnActionStart()
+        {
+            base.OnActionStart();
+            
+            m_RotationFinal = Quaternion.Euler(rotateTo);
+        }
 
         internal override void OnActionUpdate(float deltaTime)
         {
@@ -41,12 +52,14 @@ namespace DustEngine
                 ? deltaTime / ((1f - percentsCompletedNow) * duration)
                 : 1f;
 
-            Quaternion quaRotateTo = Quaternion.Euler(rotateTo);
-
             if (space == Space.World)
-                m_TargetTransform.rotation = Quaternion.Lerp(m_TargetTransform.rotation, quaRotateTo, lerpOffset);
+            {
+                m_TargetTransform.rotation = Quaternion.Slerp(m_TargetTransform.rotation, m_RotationFinal, lerpOffset);
+            }
             else if (space == Space.Local)
-                m_TargetTransform.localRotation = Quaternion.Lerp(m_TargetTransform.localRotation, quaRotateTo, lerpOffset);
+            {
+                m_TargetTransform.localRotation = Quaternion.Slerp(m_TargetTransform.localRotation, m_RotationFinal, lerpOffset);
+            }
         }
     }
 }
