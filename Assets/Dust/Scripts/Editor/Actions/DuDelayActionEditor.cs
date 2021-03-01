@@ -31,7 +31,7 @@ namespace DustEngine.DustEditor
 
             if (DustGUI.FoldoutBegin("Parameters", "DuDelayAction.Parameters"))
             {
-                PropertyExtendedSlider(m_Duration, 0.00f, 10.0f, +0.01f, 0.00f);
+                PropertyDurationSlider(m_Duration);
             }
             DustGUI.FoldoutEnd();
 

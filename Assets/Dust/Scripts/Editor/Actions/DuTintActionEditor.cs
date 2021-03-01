@@ -47,7 +47,7 @@ namespace DustEngine.DustEditor
             if (DustGUI.FoldoutBegin("Parameters", "DuTintAction.Parameters"))
             {
                 PropertyField(m_TintColor);
-                PropertyExtendedSlider(m_Duration, 0.00f, 10.0f, +0.01f, 0.00f);
+                PropertyDurationSlider(m_Duration);
                 
                 Space();
                 

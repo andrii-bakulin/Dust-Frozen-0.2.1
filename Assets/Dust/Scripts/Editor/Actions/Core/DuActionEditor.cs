@@ -35,6 +35,13 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
+        protected void PropertyDurationSlider(DuProperty durationProperty)
+        {
+            PropertyExtendedSlider(durationProperty, 0.00f, 10.0f, +0.01f, 0.00f);
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
         private Rect m_RectsAddButton;
 
         protected void OnInspectorGUI_BaseControlUI()
