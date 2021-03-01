@@ -467,6 +467,8 @@ MonoBehaviour:
   m_OnCompleteActions:
   - {fileID: 241138151}
   m_Duration: 2.5
+  m_PlayRollback: 0
+  m_RollbackDuration: 1
   m_MoveBy: {x: 0, y: 2.5, z: 0}
   m_Space: 1
 --- !u!114 &241138151
@@ -839,6 +841,8 @@ MonoBehaviour:
   m_OnCompleteActions:
   - {fileID: 408195299}
   m_Duration: 2
+  m_PlayRollback: 0
+  m_RollbackDuration: 1
   m_MoveBy: {x: 0, y: 0, z: 5}
   m_Space: 2
 --- !u!114 &408195299
@@ -1770,6 +1774,8 @@ MonoBehaviour:
       m_Calls: []
   m_OnCompleteActions: []
   m_Duration: 1
+  m_PlayRollback: 0
+  m_RollbackDuration: 1
   m_MoveTo: {x: 0, y: 0, z: 0}
   m_Space: 1
 --- !u!1 &793712466
@@ -2714,6 +2720,8 @@ MonoBehaviour:
       m_Calls: []
   m_OnCompleteActions: []
   m_Duration: 1
+  m_PlayRollback: 0
+  m_RollbackDuration: 1
   m_MoveBy: {x: 0, y: 0, z: 0}
   m_Space: 1
 --- !u!4 &1117552329 stripped
@@ -3404,7 +3412,9 @@ MonoBehaviour:
   m_OnCompleteActions:
   - {fileID: 1797361648}
   m_Duration: 2.5
-  m_MoveBy: {x: 0, y: 5, z: 0}
+  m_PlayRollback: 0
+  m_RollbackDuration: 1
+  m_MoveBy: {x: 0, y: 1, z: 0}
   m_Space: 0
 --- !u!114 &1797361648
 MonoBehaviour:
@@ -3438,7 +3448,9 @@ MonoBehaviour:
         m_CallState: 2
   m_OnCompleteActions:
   - {fileID: 1797361647}
-  m_Duration: 1
+  m_Duration: 2
+  m_PlayRollback: 1
+  m_RollbackDuration: 0.75
   m_MoveTo: {x: 0, y: 0, z: 0}
   m_Space: 1
 --- !u!23 &1797361649

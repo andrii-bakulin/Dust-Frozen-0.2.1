@@ -1,8 +1,8 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace DustEngine
 {
-    public abstract class DuMoveAction : DuIntervalAction
+    public abstract class DuMoveAction : DuIntervalWithRollbackAction
     {
         protected Vector3 m_DeltaLocalMove;
 
@@ -14,7 +14,10 @@ namespace DustEngine
             if (Dust.IsNull(m_TargetTransform))
                 return;
 
-            m_TargetTransform.localPosition += m_DeltaLocalMove * (percentsCompletedNow - percentsCompletedLast);
+            if (playingPhase == PlayingPhase.Main)
+                m_TargetTransform.localPosition += m_DeltaLocalMove * (playbackStateInPhase - previousStateInPhase);
+            else
+                m_TargetTransform.localPosition -= m_DeltaLocalMove * (playbackStateInPhase - previousStateInPhase);
         }
     }
 }

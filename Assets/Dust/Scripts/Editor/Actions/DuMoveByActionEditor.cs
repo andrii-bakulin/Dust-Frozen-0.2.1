@@ -6,7 +6,7 @@ namespace DustEngine.DustEditor
     [CustomEditor(typeof(DuMoveByAction))]
     [CanEditMultipleObjects]
     [InitializeOnLoad]
-    public class DuMoveByActionEditor : DuIntervalActionEditor
+    public class DuMoveByActionEditor : DuIntervalWithRollbackActionEditor
     {
         private DuProperty m_MoveBy;
         private DuProperty m_Space;
@@ -46,6 +46,9 @@ namespace DustEngine.DustEditor
             {
                 PropertyField(m_MoveBy);
                 PropertyDurationSlider(m_Duration);
+                PropertyField(m_PlayRollback);
+                if (m_PlayRollback.IsTrue)
+                    PropertyDurationSlider(m_RollbackDuration);
                 PropertyField(m_Space);
             }
             DustGUI.FoldoutEnd();
