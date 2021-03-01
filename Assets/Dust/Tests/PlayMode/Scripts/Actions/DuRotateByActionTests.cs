@@ -1,10 +1,11 @@
-﻿using System.Collections;
+using System.Collections;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
 namespace DustEngine.Test.Actions.Rotate
 {
+    /*
     public class DuRotateByActionTests : DuRotateActionTests
     {
         [UnityTest, TestCaseSource(nameof(TestCases))]
@@ -20,6 +21,22 @@ namespace DustEngine.Test.Actions.Rotate
             tmp.transform.localScale = testObject.transform.localScale;
             tmp.transform.Rotate(rotateBy, Space.World);
 
+            // float timer = 0f;
+            // float percentsCompletedLast = 0f;
+            // float percentsCompletedNow = 0f;
+            // while (timer < duration)
+            // {
+            //     timer += 1 / 120f; // 120fps :)
+            //     percentsCompletedNow = timer / duration;
+            //     percentsCompletedNow = Mathf.Min(percentsCompletedNow, 1f);
+            //
+            //     Vector3 deltaRotate = rotateBy * (percentsCompletedNow - percentsCompletedLast);
+            //
+            //     tmp.transform.Rotate(deltaRotate, UnityEngine.Space.World);
+            //
+            //     percentsCompletedLast = percentsCompletedNow;
+            // }
+            
             Quaternion endInWorld = tmp.transform.rotation;
             Quaternion endInLocal = tmp.transform.localRotation;
             
@@ -81,4 +98,5 @@ namespace DustEngine.Test.Actions.Rotate
             yield return RotateTest(testObject, duration, endInWorld, endInLocal);
         }
     }
+    */
 }
