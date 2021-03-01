@@ -134,6 +134,17 @@ namespace DustEngine.DustEditor
         {
             if (target as DuIntervalAction is DuIntervalAction intervalAction)
                 return intervalAction.playbackState;
+
+            if (target as DuIntervalWithRollbackAction is DuIntervalWithRollbackAction intervalWithRollbackAction)
+            {
+                if (intervalWithRollbackAction.playingPhase == DuIntervalWithRollbackAction.PlayingPhase.Main)
+                    return intervalWithRollbackAction.playbackStateInPhase;
+                
+                if (intervalWithRollbackAction.playingPhase == DuIntervalWithRollbackAction.PlayingPhase.Rollback)
+                    return 1f - intervalWithRollbackAction.playbackStateInPhase;
+
+                return 0f;
+            }
             
             return 0f; // For DuInstantAction <or> others > return 0f
         }
