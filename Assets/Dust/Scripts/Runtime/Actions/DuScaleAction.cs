@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DustEngine
 {
-    public abstract class DuScaleAction : DuIntervalAction
+    public abstract class DuScaleAction : DuIntervalWithRollbackAction
     {
         public enum Space
         {
@@ -37,7 +37,10 @@ namespace DustEngine
             if (Dust.IsNull(m_TargetTransform))
                 return;
 
-            var scaleNext = Vector3.Lerp(m_ScaleStart, m_ScaleFinal, playbackState);
+            var scaleNext = playingPhase == PlayingPhase.Main
+                ? Vector3.Lerp(m_ScaleStart, m_ScaleFinal, playbackStateInPhase)
+                : Vector3.Lerp(m_ScaleFinal, m_ScaleStart, playbackStateInPhase);
+
             var scaleDiff = scaleNext - m_ScaleLast;
 
             if (space == Space.World)

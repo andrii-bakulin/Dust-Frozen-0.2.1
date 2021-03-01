@@ -8,7 +8,7 @@ namespace DustEngine.Test.Actions.Scale
     public class DuScaleByActionTests : DuScaleActionTests
     {
         [UnityTest, TestCaseSource(nameof(TestCases))]
-        public IEnumerator WorldSpaceTest(string objLevelId, float duration, float x, float y, float z)
+        public IEnumerator Scale_WorldSpace(string objLevelId, float duration, float x, float y, float z)
         {
             var scaleBy = new Vector3(x, y, z);
             var testObject = GetTestGameObject(objLevelId);
@@ -25,7 +25,7 @@ namespace DustEngine.Test.Actions.Scale
         }
         
         [UnityTest, TestCaseSource(nameof(TestCases))]
-        public IEnumerator LocalSpaceTest(string objLevelId, float duration, float x, float y, float z)
+        public IEnumerator Scale_LocalSpace(string objLevelId, float duration, float x, float y, float z)
         {
             var scaleBy = new Vector3(x, y, z);
             var testObject = GetTestGameObject(objLevelId);
@@ -34,6 +34,44 @@ namespace DustEngine.Test.Actions.Scale
             
             var sut = testObject.AddComponent<DuScaleByAction>();
             sut.duration = Sec(duration);
+            sut.space = DuScaleByAction.Space.Local;
+            sut.scaleBy = scaleBy;
+            sut.Play();
+
+            yield return ScaleInLocalSpaceTest(testObject, duration, endInLocal);
+        }
+
+        [UnityTest, TestCaseSource(nameof(TestCases))]
+        public IEnumerator ScaleAndRollback_WorldSpace(string objLevelId, float duration, float x, float y, float z)
+        {
+            var scaleBy = new Vector3(x, y, z);
+            var testObject = GetTestGameObject(objLevelId);
+
+            var endInWorld = testObject.transform.lossyScale;
+            
+            var sut = testObject.AddComponent<DuScaleByAction>();
+            sut.duration = Sec(duration * 0.5f);
+            sut.playRollback = true;
+            sut.rollbackDuration = Sec(duration * 0.5f);
+            sut.space = DuScaleByAction.Space.World;
+            sut.scaleBy = scaleBy;
+            sut.Play();
+
+            yield return ScaleInWorldSpaceTest(testObject, duration, endInWorld);
+        }
+        
+        [UnityTest, TestCaseSource(nameof(TestCases))]
+        public IEnumerator ScaleAndRollback_LocalSpace(string objLevelId, float duration, float x, float y, float z)
+        {
+            var scaleBy = new Vector3(x, y, z);
+            var testObject = GetTestGameObject(objLevelId);
+
+            var endInLocal = testObject.transform.localScale;
+            
+            var sut = testObject.AddComponent<DuScaleByAction>();
+            sut.duration = Sec(duration * 0.5f);
+            sut.playRollback = true;
+            sut.rollbackDuration = Sec(duration * 0.5f);
             sut.space = DuScaleByAction.Space.Local;
             sut.scaleBy = scaleBy;
             sut.Play();
