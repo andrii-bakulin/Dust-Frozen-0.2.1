@@ -38,7 +38,7 @@ namespace DustEngine
             if (Dust.IsNull(m_TargetTransform))
                 return;
 
-            Vector3 deltaRotate = rotateBy * (percentsCompletedNow - percentsCompletedLast);
+            Vector3 deltaRotate = rotateBy * (playbackState - previousState);
 
             if (space == Space.World)
             {

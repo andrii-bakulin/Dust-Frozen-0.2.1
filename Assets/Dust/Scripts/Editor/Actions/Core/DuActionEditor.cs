@@ -132,8 +132,8 @@ namespace DustEngine.DustEditor
 
         protected float GetActionPercentsDone(DuAction duAction)
         {
-            if (target as DuIntervalAction is DuIntervalAction duActionInterval)
-                return duActionInterval.percentsCompletedNow;
+            if (target as DuIntervalAction is DuIntervalAction intervalAction)
+                return intervalAction.playbackState;
             
             return 0f; // For DuInstantAction <or> others > return 0f
         }

@@ -37,7 +37,7 @@ namespace DustEngine
             if (Dust.IsNull(m_TargetTransform))
                 return;
 
-            var scaleNext = Vector3.Lerp(m_ScaleStart, m_ScaleFinal, percentsCompletedNow);
+            var scaleNext = Vector3.Lerp(m_ScaleStart, m_ScaleFinal, playbackState);
             var scaleDiff = scaleNext - m_ScaleLast;
 
             if (space == Space.World)

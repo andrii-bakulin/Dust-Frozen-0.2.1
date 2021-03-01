@@ -74,7 +74,7 @@ namespace DustEngine
             if (Dust.IsNull(m_TintMaterial))
                 return;
 
-            m_TintMaterial.SetColor(propertyName, Color.Lerp(m_ColorStartFrom, tintColor, percentsCompletedNow));
+            m_TintMaterial.SetColor(propertyName, Color.Lerp(m_ColorStartFrom, tintColor, playbackState));
         }
         
         //--------------------------------------------------------------------------------------------------------------

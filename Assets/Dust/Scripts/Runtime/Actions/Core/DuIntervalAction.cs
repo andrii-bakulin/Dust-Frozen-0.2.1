@@ -14,26 +14,26 @@ namespace DustEngine
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        protected float m_PercentsCompletedLast;
-        public float percentsCompletedLast => m_PercentsCompletedLast;
+        private float m_PlaybackState;
+        public float playbackState => m_PlaybackState;
 
-        protected float m_PercentsCompletedNow;
-        public float percentsCompletedNow => m_PercentsCompletedNow;
+        private float m_PreviousState;
+        protected float previousState => m_PreviousState;
 
         //--------------------------------------------------------------------------------------------------------------
 
         internal override void ActionInnerStart(DuAction previousAction)
         {
-            m_PercentsCompletedLast = 0f;
-            m_PercentsCompletedNow = 0f;
+            m_PreviousState = 0f;
+            m_PlaybackState = 0f;
 
             base.ActionInnerStart(previousAction);
         }
 
         internal override void ActionInnerStop(bool isTerminated)
         {
-            m_PercentsCompletedLast = 0f;
-            m_PercentsCompletedNow = 0f;
+            m_PreviousState = 0f;
+            m_PlaybackState = 0f;
 
             base.ActionInnerStop(isTerminated);
         }
@@ -42,18 +42,18 @@ namespace DustEngine
         {
             if (duration > 0f)
             {
-                m_PercentsCompletedLast = m_PercentsCompletedNow;
-                m_PercentsCompletedNow = Mathf.Min(m_PercentsCompletedNow + deltaTime / duration, 1f);
+                m_PreviousState = m_PlaybackState;
+                m_PlaybackState = Mathf.Min(m_PlaybackState + deltaTime / duration, 1f);
             }
             else
             {
-                m_PercentsCompletedLast = 0f;
-                m_PercentsCompletedNow = 1f;
+                m_PreviousState = 0f;
+                m_PlaybackState = 1f;
             }
 
             OnActionUpdate(deltaTime);
 
-            if (m_PercentsCompletedNow >= 1f)
+            if (m_PlaybackState >= 1f)
                 ActionInnerStop(false);
         }
 

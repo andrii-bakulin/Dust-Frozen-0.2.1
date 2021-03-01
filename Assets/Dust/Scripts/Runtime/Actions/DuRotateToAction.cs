@@ -48,8 +48,8 @@ namespace DustEngine
             if (Dust.IsNull(m_TargetTransform))
                 return;
 
-            var lerpOffset = duration > 0f && percentsCompletedNow < 1f
-                ? deltaTime / ((1f - percentsCompletedNow) * duration)
+            var lerpOffset = duration > 0f && playbackState < 1f
+                ? deltaTime / ((1f - playbackState) * duration)
                 : 1f;
 
             if (space == Space.World)
