@@ -6,7 +6,7 @@ namespace DustEngine.DustEditor
     [CustomEditor(typeof(DuTintAction))]
     [CanEditMultipleObjects]
     [InitializeOnLoad]
-    public class DuTintActionEditor : DuIntervalActionEditor
+    public class DuTintActionEditor : DuIntervalWithRollbackActionEditor
     {
         private DuProperty m_TintColor;
         private DuProperty m_MeshRenderer;
@@ -48,6 +48,9 @@ namespace DustEngine.DustEditor
             {
                 PropertyField(m_TintColor);
                 PropertyDurationSlider(m_Duration);
+                PropertyField(m_PlayRollback);
+                if (m_PlayRollback.IsTrue)
+                    PropertyDurationSlider(m_RollbackDuration);
                 
                 Space();
                 

@@ -3,7 +3,7 @@ using UnityEngine;
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Actions/Tint Action")]
-    public class DuTintAction : DuIntervalAction
+    public class DuTintAction : DuIntervalWithRollbackAction
     {
         [SerializeField]
         private MeshRenderer m_MeshRenderer;
@@ -51,6 +51,9 @@ namespace DustEngine
             m_TintMaterial = new Material(m_OriginalMaterial);
             m_TintMaterial.hideFlags = HideFlags.DontSave;
 
+            if (!m_TintMaterial.name.Contains("(Clone)"))
+                m_TintMaterial.name += " (Clone)";
+
             m_ColorStartFrom = m_TintMaterial.GetColor(propertyName);
 
             m_MeshRenderer.sharedMaterial = m_TintMaterial;
@@ -58,8 +61,8 @@ namespace DustEngine
 
         internal override void OnActionStop(bool isTerminated)
         {
-            // If need return material back!
-            // m_MeshRenderer.sharedMaterial = m_OriginalMaterial;
+            if (!isTerminated && playRollback)
+                m_MeshRenderer.sharedMaterial = m_OriginalMaterial;
             
             m_OriginalMaterial = null;
             m_TintMaterial = null;
@@ -74,7 +77,10 @@ namespace DustEngine
             if (Dust.IsNull(m_TintMaterial))
                 return;
 
-            m_TintMaterial.SetColor(propertyName, Color.Lerp(m_ColorStartFrom, tintColor, playbackState));
+            if (playingPhase == PlayingPhase.Main)
+                m_TintMaterial.SetColor(propertyName, Color.Lerp(m_ColorStartFrom, tintColor, playbackStateInPhase));
+            else
+                m_TintMaterial.SetColor(propertyName, Color.Lerp(tintColor, m_ColorStartFrom, playbackStateInPhase));
         }
         
         //--------------------------------------------------------------------------------------------------------------
