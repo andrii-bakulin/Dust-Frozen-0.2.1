@@ -7,7 +7,7 @@ namespace DustEngine.Test
     public static class Constants
     {
         // false | true
-        internal static readonly bool MINIMIZE_ACTIONS_TESTS = false;
+        internal static readonly bool MINIMIZE_ACTIONS_TESTS = true;
 
         // 0.2f | 1.0f
         internal static readonly float TIME_SCALE = 0.2f;
