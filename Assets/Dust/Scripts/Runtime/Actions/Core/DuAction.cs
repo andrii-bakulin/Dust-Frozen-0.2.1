@@ -108,6 +108,28 @@ namespace DustEngine
             ActionInnerStop(true);
         }
 
+        public void StopAllActionsAndPlay()
+        {
+            StopAllActions();
+            Play();
+        }
+
+        public void StopAllActions()
+        {
+            StopAllActions(this.gameObject);
+        }
+
+        public static void StopAllActions(GameObject target)
+        {
+            var duActions = target.GetComponents<DuAction>();
+
+            foreach (var duAction in duActions)
+            {
+                if (duAction.isPlaying)
+                    duAction.Stop();
+            }
+        }
+
         //--------------------------------------------------------------------------------------------------------------
         // DuAction lifecycle INNER
 
