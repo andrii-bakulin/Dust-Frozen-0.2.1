@@ -15,9 +15,9 @@ namespace DustEngine
                 return;
 
             if (playingPhase == PlayingPhase.Main)
-                m_TargetTransform.localPosition += m_DeltaLocalMove * (playbackStateInPhase - previousStateInPhase);
+                m_TargetTransform.localPosition += m_DeltaLocalMove * (playbackState - previousState);
             else
-                m_TargetTransform.localPosition -= m_DeltaLocalMove * (playbackStateInPhase - previousStateInPhase);
+                m_TargetTransform.localPosition -= m_DeltaLocalMove * (playbackState - previousState);
         }
     }
 }

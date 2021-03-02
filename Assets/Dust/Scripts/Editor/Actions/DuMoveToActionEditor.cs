@@ -45,16 +45,13 @@ namespace DustEngine.DustEditor
             if (DustGUI.FoldoutBegin("Parameters", "DuMoveToAction.Parameters"))
             {
                 PropertyField(m_MoveTo);
-                PropertyDurationSlider(m_Duration);
-                PropertyField(m_PlayRollback);
-                if (m_PlayRollback.IsTrue)
-                    PropertyDurationSlider(m_RollbackDuration);
-                CheckDurationsStates();
+                OnInspectorGUI_Durations();
                 PropertyField(m_Space);
             }
             DustGUI.FoldoutEnd();
 
-            OnInspectorGUI_AnyActionFields("DuMoveToAction");
+            OnInspectorGUI_Callbacks("DuMoveToAction");
+            OnInspectorGUI_Extended("DuMoveToAction");
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace DustEngine
 {
-    public abstract class DuIntervalWithRollbackAction : DuAction
+    public abstract class DuIntervalWithRollbackAction : DuIntervalAction
     {
         public enum PlayingPhase
         {
@@ -13,14 +13,6 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        [SerializeField]
-        private float m_Duration = 1f;
-        public float duration
-        {
-            get => m_Duration;
-            set => m_Duration = Normalizer.Duration(value);
-        }
-        
         [SerializeField]
         private bool m_PlayRollback = false;
         public bool playRollback
@@ -42,30 +34,13 @@ namespace DustEngine
         private PlayingPhase m_PlayingPhase = PlayingPhase.Idle;
         public PlayingPhase playingPhase => m_PlayingPhase;
 
-        private float m_PlaybackStateInPhase;
-        public float playbackStateInPhase => m_PlaybackStateInPhase;
-
-        private float m_PreviousStateInPhase;
-        protected float previousStateInPhase => m_PreviousStateInPhase;
-
         //--------------------------------------------------------------------------------------------------------------
 
-        internal override void ActionInnerStart(DuAction previousAction)
+        internal override void ActionPlaybackInitialize()
         {
-            m_PlaybackStateInPhase = 0f;
-            m_PreviousStateInPhase = 0f;
+            base.ActionPlaybackInitialize();
+
             m_PlayingPhase = PlayingPhase.Main;
-
-            base.ActionInnerStart(previousAction);
-        }
-
-        internal override void ActionInnerStop(bool isTerminated)
-        {
-            m_PlaybackStateInPhase = 0f;
-            m_PreviousStateInPhase = 0f;
-            m_PlayingPhase = PlayingPhase.Idle;
-
-            base.ActionInnerStop(isTerminated);
         }
 
         internal override void ActionInnerUpdate(float deltaTime)
@@ -80,41 +55,37 @@ namespace DustEngine
 
             if (curDuration > 0f)
             {
-                m_PreviousStateInPhase = m_PlaybackStateInPhase;
-                m_PlaybackStateInPhase = Mathf.Min(m_PlaybackStateInPhase + deltaTime / curDuration, 1f);
+                m_PreviousState = m_PlaybackState;
+                m_PlaybackState = Mathf.Min(m_PlaybackState + deltaTime / curDuration, 1f);
             }
             else
             {
-                m_PreviousStateInPhase = 0f;
-                m_PlaybackStateInPhase = 1f;
+                m_PreviousState = 0f;
+                m_PlaybackState = 1f;
             }
 
             OnActionUpdate(deltaTime);
 
-            if (m_PlaybackStateInPhase >= 1f)
+            if (m_PlaybackState >= 1f)
             {
                 if (playRollback && playingPhase == PlayingPhase.Main)
                 {
-                    m_PlaybackStateInPhase = 0f;
-                    m_PreviousStateInPhase = 0f;
+                    m_PlaybackState = 0f;
+                    m_PreviousState = 0f;
                     m_PlayingPhase = PlayingPhase.Rollback;
                 }
                 else
                 {
-                    ActionInnerStop(false);
+                    ActionPlaybackComplete();
                 }
             }
         }
 
-        //--------------------------------------------------------------------------------------------------------------
-        // Normalizer
-
-        public static class Normalizer
+        internal override void ActionInnerStop(bool isTerminated)
         {
-            public static float Duration(float value)
-            {
-                return Mathf.Max(value, 0f);
-            }
+            m_PlayingPhase = PlayingPhase.Idle;
+
+            base.ActionInnerStop(isTerminated);
         }
     }
 }

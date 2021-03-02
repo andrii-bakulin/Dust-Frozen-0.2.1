@@ -29,7 +29,8 @@ namespace DustEngine.DustEditor
 
             OnInspectorGUI_BaseControlUI();
 
-            OnInspectorGUI_AnyActionFields("DuCallbackAction", callbackExpanded:true);
+            OnInspectorGUI_Callbacks("DuCallbackAction", callbackExpanded:true);
+            OnInspectorGUI_Extended("DuCallbackAction");
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

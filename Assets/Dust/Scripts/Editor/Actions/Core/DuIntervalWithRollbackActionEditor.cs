@@ -3,9 +3,8 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    public abstract class DuIntervalWithRollbackActionEditor : DuActionEditor
+    public abstract class DuIntervalWithRollbackActionEditor : DuIntervalActionEditor
     {
-        protected DuProperty m_Duration;
         protected DuProperty m_PlayRollback;
         protected DuProperty m_RollbackDuration;
 
@@ -13,27 +12,24 @@ namespace DustEngine.DustEditor
         {
             base.InitializeEditor();
 
-            m_Duration = FindProperty("m_Duration", "Duration");
             m_PlayRollback = FindProperty("m_PlayRollback", "Play Rollback");
             m_RollbackDuration = FindProperty("m_RollbackDuration", "Rollback Duration");
         }
 
-        protected void CheckDurationsStates()
+        protected override void OnInspectorGUI_Durations()
         {
-            if (!m_PlayRollback.IsTrue)
-                return;
-
-            if (DuMath.IsNotZero(m_Duration.valFloat) || DuMath.IsNotZero(m_RollbackDuration.valFloat))
-                return;
+            PropertyDurationSlider(m_Duration);
             
-            DustGUI.HelpBoxWarning("This action has rollback flag and both durations have zero-lengths, so action has no sense.");
+            PropertyField(m_PlayRollback);
+            if (m_PlayRollback.IsTrue)
+                PropertyDurationSlider(m_RollbackDuration);
+
+            if (m_PlayRollback.IsTrue && DuMath.IsZero(m_Duration.valFloat) && DuMath.IsZero(m_RollbackDuration.valFloat))
+                DustGUI.HelpBoxWarning("This action has rollback flag and both durations have zero-lengths, so action has no sense.");
         }
 
         protected override void InspectorCommitUpdates()
         {
-            if (m_Duration.isChanged)
-                m_Duration.valFloat = DuIntervalWithRollbackAction.Normalizer.Duration(m_Duration.valFloat);
-
             if (m_RollbackDuration.isChanged)
                 m_RollbackDuration.valFloat = DuIntervalWithRollbackAction.Normalizer.Duration(m_RollbackDuration.valFloat);
 

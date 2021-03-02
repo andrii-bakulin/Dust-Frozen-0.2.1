@@ -63,7 +63,8 @@ namespace DustEngine.DustEditor
             }
             DustGUI.FoldoutEnd();
 
-            OnInspectorGUI_AnyActionFields("DuTransformCopyAction");
+            OnInspectorGUI_Callbacks("DuTransformCopyAction");
+            OnInspectorGUI_Extended("DuTransformCopyAction");
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

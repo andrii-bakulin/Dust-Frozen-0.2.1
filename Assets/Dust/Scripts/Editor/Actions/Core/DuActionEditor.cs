@@ -44,7 +44,7 @@ namespace DustEngine.DustEditor
 
         private Rect m_RectsAddButton;
 
-        protected void OnInspectorGUI_BaseControlUI()
+        protected virtual void OnInspectorGUI_BaseControlUI()
         {
             if (targets.Length != 1)
                 return;
@@ -55,6 +55,8 @@ namespace DustEngine.DustEditor
             if (Dust.IsNull(duAction))
                 return;
             
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
             string iconName;
             string iconTitle;
 
@@ -68,6 +70,23 @@ namespace DustEngine.DustEditor
                 iconName  = isAutoStart ? Icons.ACTION_PLAY : Icons.ACTION_IDLE;
                 iconTitle = isAutoStart ? "Auto Start" : "Idle";
             }
+            
+            if (duAction as DuIntervalAction is DuIntervalAction duIntervalAction)
+            {
+                if (duIntervalAction.repeatMode == DuIntervalAction.RepeatMode.Repeat)
+                {
+                    if (Application.isPlaying && duAction.isPlaying)
+                        iconTitle += $" ({duIntervalAction.playbackIndex+1}/{duIntervalAction.repeatTimes})";
+                    else
+                        iconTitle += $", Repeat {duIntervalAction.repeatTimes}x";
+                }
+                else if (duIntervalAction.repeatMode == DuIntervalAction.RepeatMode.RepeatForever)
+                {
+                    iconTitle += ", Repeat Forever";
+                }
+            }
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             DustGUI.BeginHorizontal();
             {
@@ -132,29 +151,29 @@ namespace DustEngine.DustEditor
 
         protected float GetActionPercentsDone(DuAction duAction)
         {
-            if (target as DuIntervalAction is DuIntervalAction intervalAction)
-                return intervalAction.playbackState;
-
             if (target as DuIntervalWithRollbackAction is DuIntervalWithRollbackAction intervalWithRollbackAction)
             {
                 if (intervalWithRollbackAction.playingPhase == DuIntervalWithRollbackAction.PlayingPhase.Main)
-                    return intervalWithRollbackAction.playbackStateInPhase;
+                    return intervalWithRollbackAction.playbackState;
                 
                 if (intervalWithRollbackAction.playingPhase == DuIntervalWithRollbackAction.PlayingPhase.Rollback)
-                    return 1f - intervalWithRollbackAction.playbackStateInPhase;
+                    return 1f - intervalWithRollbackAction.playbackState;
 
                 return 0f;
             }
             
+            if (target as DuIntervalAction is DuIntervalAction intervalAction)
+                return intervalAction.playbackState;
+
             return 0f; // For DuInstantAction <or> others > return 0f
         }
-        
+
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        protected void OnInspectorGUI_AnyActionFields(string actionId)
-            => OnInspectorGUI_AnyActionFields(actionId, false);
+        protected virtual void OnInspectorGUI_Callbacks(string actionId)
+            => OnInspectorGUI_Callbacks(actionId, false);
 
-        protected void OnInspectorGUI_AnyActionFields(string actionId, bool callbackExpanded)
+        protected virtual void OnInspectorGUI_Callbacks(string actionId, bool callbackExpanded)
         {
             if (DustGUI.FoldoutBegin("On Complete Callback", actionId + ".Callback", this, callbackExpanded))
             {
@@ -163,17 +182,34 @@ namespace DustEngine.DustEditor
             DustGUI.FoldoutEnd();
 
             PropertyField(m_OnCompleteActions, $"{m_OnCompleteActions.title} ({m_OnCompleteActions.property.arraySize})");
-
+        }
+        
+        protected virtual void OnInspectorGUI_Extended(string actionId)
+        {
             if (DustGUI.FoldoutBegin("Extended", actionId + ".Extended", this, false))
             {
-                PropertyField(m_AutoStart);
-
-                // Cannot hide this field even for actions without real target (callback, delay, ...)
-                // User should be able to change target any time (for ex. to "Inherit")
-                PropertyField(m_TargetMode);
-                PropertyFieldOrHide(m_TargetObject, targetMode != DuAction.TargetMode.GameObject);
+                OnInspectorGUI_Extended_BlockFirst();
+                OnInspectorGUI_Extended_BlockMiddle();
+                OnInspectorGUI_Extended_BlockLast();
             }
             DustGUI.FoldoutEnd();
+        }
+
+        protected virtual void OnInspectorGUI_Extended_BlockFirst()
+        {
+            PropertyField(m_AutoStart);
+        }
+
+        protected virtual void OnInspectorGUI_Extended_BlockMiddle()
+        {
+        }
+
+        protected virtual void OnInspectorGUI_Extended_BlockLast()
+        {
+            // Cannot hide this field even for actions without real target (callback, delay, ...)
+            // User should be able to change target any time (for ex. to "Inherit")
+            PropertyField(m_TargetMode);
+            PropertyFieldOrHide(m_TargetObject, targetMode != DuAction.TargetMode.GameObject);
         }
     }
 }

@@ -63,13 +63,13 @@ namespace DustEngine
 
             if (playingPhase == PlayingPhase.Main)
             {
-                if (duration > 0f && playbackStateInPhase < 1f)
-                    lerpOffset = deltaTime / ((1f - playbackStateInPhase) * duration);
+                if (duration > 0f && playbackState < 1f)
+                    lerpOffset = deltaTime / ((1f - playbackState) * duration);
             }
             else
             {
-                if (rollbackDuration > 0f && playbackStateInPhase < 1f)
-                    lerpOffset = deltaTime / ((1f - playbackStateInPhase) * rollbackDuration);
+                if (rollbackDuration > 0f && playbackState < 1f)
+                    lerpOffset = deltaTime / ((1f - playbackState) * rollbackDuration);
             }
 
             if (space == Space.World)

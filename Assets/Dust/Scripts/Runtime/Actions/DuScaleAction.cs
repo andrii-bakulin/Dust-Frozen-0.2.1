@@ -38,8 +38,8 @@ namespace DustEngine
                 return;
 
             var scaleNext = playingPhase == PlayingPhase.Main
-                ? Vector3.Lerp(m_ScaleStart, m_ScaleFinal, playbackStateInPhase)
-                : Vector3.Lerp(m_ScaleFinal, m_ScaleStart, playbackStateInPhase);
+                ? Vector3.Lerp(m_ScaleStart, m_ScaleFinal, playbackState)
+                : Vector3.Lerp(m_ScaleFinal, m_ScaleStart, playbackState);
 
             var scaleDiff = scaleNext - m_ScaleLast;
 

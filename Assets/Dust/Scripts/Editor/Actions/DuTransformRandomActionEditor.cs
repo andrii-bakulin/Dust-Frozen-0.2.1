@@ -108,7 +108,8 @@ namespace DustEngine.DustEditor
             }
             DustGUI.FoldoutEnd();
 
-            OnInspectorGUI_AnyActionFields("DuTransformRandomAction");
+            OnInspectorGUI_Callbacks("DuTransformRandomAction");
+            OnInspectorGUI_Extended("DuTransformRandomAction");
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

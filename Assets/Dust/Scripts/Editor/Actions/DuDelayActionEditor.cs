@@ -31,11 +31,12 @@ namespace DustEngine.DustEditor
 
             if (DustGUI.FoldoutBegin("Parameters", "DuDelayAction.Parameters"))
             {
-                PropertyDurationSlider(m_Duration);
+                OnInspectorGUI_Durations();
             }
             DustGUI.FoldoutEnd();
 
-            OnInspectorGUI_AnyActionFields("DuDelayAction");
+            OnInspectorGUI_Callbacks("DuDelayAction");
+            OnInspectorGUI_Extended("DuDelayAction");
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

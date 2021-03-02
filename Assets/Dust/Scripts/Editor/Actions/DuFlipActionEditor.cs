@@ -52,7 +52,8 @@ namespace DustEngine.DustEditor
             }
             DustGUI.FoldoutEnd();
 
-            OnInspectorGUI_AnyActionFields("DuFlipAction");
+            OnInspectorGUI_Callbacks("DuFlipAction");
+            OnInspectorGUI_Extended("DuFlipAction");
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

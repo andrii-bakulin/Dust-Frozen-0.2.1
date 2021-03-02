@@ -78,9 +78,9 @@ namespace DustEngine
                 return;
 
             if (playingPhase == PlayingPhase.Main)
-                m_TintMaterial.SetColor(propertyName, Color.Lerp(m_ColorStartFrom, tintColor, playbackStateInPhase));
+                m_TintMaterial.SetColor(propertyName, Color.Lerp(m_ColorStartFrom, tintColor, playbackState));
             else
-                m_TintMaterial.SetColor(propertyName, Color.Lerp(tintColor, m_ColorStartFrom, playbackStateInPhase));
+                m_TintMaterial.SetColor(propertyName, Color.Lerp(tintColor, m_ColorStartFrom, playbackState));
         }
         
         //--------------------------------------------------------------------------------------------------------------

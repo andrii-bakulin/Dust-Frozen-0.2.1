@@ -66,7 +66,7 @@ namespace DustEngine
 
             float signRotate = playingPhase == PlayingPhase.Main ? +1f : -1f;
 
-            Vector3 deltaRotate = rotateBy * (signRotate * (playbackStateInPhase - previousStateInPhase));
+            Vector3 deltaRotate = rotateBy * (signRotate * (playbackState - previousState));
 
             if (deltaRotate.Equals(Vector3.zero))
                 return;

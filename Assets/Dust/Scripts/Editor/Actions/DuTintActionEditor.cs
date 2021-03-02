@@ -47,11 +47,8 @@ namespace DustEngine.DustEditor
             if (DustGUI.FoldoutBegin("Parameters", "DuTintAction.Parameters"))
             {
                 PropertyField(m_TintColor);
-                PropertyDurationSlider(m_Duration);
-                PropertyField(m_PlayRollback);
-                if (m_PlayRollback.IsTrue)
-                    PropertyDurationSlider(m_RollbackDuration);
-                CheckDurationsStates();
+                
+                OnInspectorGUI_Durations();
                 
                 Space();
                 
@@ -60,7 +57,8 @@ namespace DustEngine.DustEditor
             }
             DustGUI.FoldoutEnd();
 
-            OnInspectorGUI_AnyActionFields("DuTintAction");
+            OnInspectorGUI_Callbacks("DuTintAction");
+            OnInspectorGUI_Extended("DuTintAction");
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

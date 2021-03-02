@@ -77,7 +77,8 @@ namespace DustEngine.DustEditor
             }
             DustGUI.FoldoutEnd();
 
-            OnInspectorGUI_AnyActionFields("DuTransformSetAction");
+            OnInspectorGUI_Callbacks("DuTransformSetAction");
+            OnInspectorGUI_Extended("DuTransformSetAction");
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
