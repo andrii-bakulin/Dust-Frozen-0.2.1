@@ -83,23 +83,5 @@ namespace DustEngine.Test.EditMode
 
             UnityEngine.Object.DestroyImmediate(gameObject);
         }
-
-        //--------------------------------------------------------------------------------------------------------------
-
-        [Test]
-        [TestCase(null)]
-        [TestCase("")]
-        public void IsNullOrEmpty_ShouldTrue_WhenStringIs(string sut)
-        {
-            Assert.That(Dust.IsNullOrEmpty(sut), Is.True);
-        }
-
-        [Test]
-        [TestCase(" ")]
-        [TestCase("Test")]
-        public void IsNullOrEmpty_ShouldFalse_WhenStringIs(string sut)
-        {
-            Assert.That(Dust.IsNullOrEmpty(sut), Is.False);
-        }
     }
 }

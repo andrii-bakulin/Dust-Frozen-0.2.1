@@ -25,11 +25,6 @@ namespace DustEngine
             return obj != null;
         }
 
-        public static bool IsNullOrEmpty(string str)
-        {
-            return str is null || str.Equals("");
-        }
-
         //--------------------------------------------------------------------------------------------------------------
 
 #if UNITY_EDITOR

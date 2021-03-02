@@ -337,13 +337,13 @@ namespace DustEngine
             if (Dust.IsNull(material))
                 return; // This may happen when you move factory to the prefab
 
-            if (!Dust.IsNullOrEmpty(matRef.valuePropertyName))
+            if (!string.IsNullOrEmpty(matRef.valuePropertyName))
                 material.SetFloat(matRef.valuePropertyName, stateDynamic.value * intensity);
 
-            if (!Dust.IsNullOrEmpty(matRef.colorPropertyName))
+            if (!string.IsNullOrEmpty(matRef.colorPropertyName))
                 material.SetColor(matRef.colorPropertyName, stateDynamic.color * intensity);
 
-            if (!Dust.IsNullOrEmpty(matRef.uvwPropertyName))
+            if (!string.IsNullOrEmpty(matRef.uvwPropertyName))
                 material.SetVector(matRef.uvwPropertyName, stateDynamic.uvw * intensity);
 
             m_DidApplyMaterialUpdatesBefore = true;
