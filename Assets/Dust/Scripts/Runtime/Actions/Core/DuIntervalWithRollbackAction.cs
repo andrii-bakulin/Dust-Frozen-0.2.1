@@ -36,14 +36,14 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        internal override void ActionPlaybackInitialize()
+        protected override void ActionPlaybackInitialize()
         {
             base.ActionPlaybackInitialize();
 
             m_PlayingPhase = PlayingPhase.Main;
         }
 
-        internal override void ActionInnerUpdate(float deltaTime)
+        protected override void ActionInnerUpdate(float deltaTime)
         {
             if (playRollback && DuMath.IsZero(duration) && DuMath.IsZero(rollbackDuration))
             {
@@ -81,7 +81,7 @@ namespace DustEngine
             }
         }
 
-        internal override void ActionInnerStop(bool isTerminated)
+        protected override void ActionInnerStop(bool isTerminated)
         {
             m_PlayingPhase = PlayingPhase.Idle;
 

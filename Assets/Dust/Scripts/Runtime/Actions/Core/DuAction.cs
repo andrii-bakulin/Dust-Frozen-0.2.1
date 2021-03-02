@@ -133,7 +133,7 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // DuAction lifecycle INNER
 
-        internal virtual void ActionInnerStart(DuAction previousAction)
+        protected virtual void ActionInnerStart(DuAction previousAction)
         {
             if (targetMode == TargetMode.Inherit)
             {
@@ -151,9 +151,9 @@ namespace DustEngine
             OnActionStart();
         }
 
-        internal abstract void ActionInnerUpdate(float deltaTime);
+        protected abstract void ActionInnerUpdate(float deltaTime);
 
-        internal virtual void ActionInnerStop(bool isTerminated)
+        protected virtual void ActionInnerStop(bool isTerminated)
         {
             m_IsPlaying = false;
 
@@ -176,7 +176,7 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // DuAction lifecycle
 
-        internal virtual void OnActionStart()
+        protected virtual void OnActionStart()
         {
             var target = GetTargetObject();
 
@@ -186,16 +186,16 @@ namespace DustEngine
             m_TargetTransform = target.transform;
         }
 
-        internal abstract void OnActionUpdate(float deltaTime);
+        protected abstract void OnActionUpdate(float deltaTime);
 
-        internal virtual void OnActionStop(bool isTerminated)
+        protected virtual void OnActionStop(bool isTerminated)
         {
             m_TargetTransform = null;
         }
 
         //--------------------------------------------------------------------------------------------------------------
 
-        internal GameObject GetTargetObject()
+        protected GameObject GetTargetObject()
         {
             switch (targetMode)
             {

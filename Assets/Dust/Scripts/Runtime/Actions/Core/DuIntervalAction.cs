@@ -52,7 +52,7 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        internal override void ActionInnerStart(DuAction previousAction)
+        protected override void ActionInnerStart(DuAction previousAction)
         {
             m_PlaybackIndex = 0;
 
@@ -61,13 +61,13 @@ namespace DustEngine
             base.ActionInnerStart(previousAction);
         }
 
-        internal virtual void ActionPlaybackInitialize()
+        protected virtual void ActionPlaybackInitialize()
         {
             m_PreviousState = 0f;
             m_PlaybackState = 0f;
         }
 
-        internal override void ActionInnerUpdate(float deltaTime)
+        protected override void ActionInnerUpdate(float deltaTime)
         {
             if (duration > 0f)
             {
@@ -86,7 +86,7 @@ namespace DustEngine
                 ActionPlaybackComplete();
         }
 
-        internal virtual void ActionPlaybackComplete()
+        protected virtual void ActionPlaybackComplete()
         {
             m_PlaybackIndex++;
 
@@ -108,7 +108,7 @@ namespace DustEngine
             ActionInnerStop(false);
         }
 
-        internal override void ActionInnerStop(bool isTerminated)
+        protected override void ActionInnerStop(bool isTerminated)
         {
             m_PlaybackIndex = 0;
             m_PreviousState = 0f;

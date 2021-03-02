@@ -31,7 +31,7 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        internal override void OnActionStart()
+        protected override void OnActionStart()
         {
             base.OnActionStart();
 

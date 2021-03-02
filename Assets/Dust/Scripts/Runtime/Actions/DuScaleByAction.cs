@@ -16,7 +16,7 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // DuAction lifecycle
 
-        internal override void OnActionStart()
+        protected override void OnActionStart()
         {
             base.OnActionStart();
 

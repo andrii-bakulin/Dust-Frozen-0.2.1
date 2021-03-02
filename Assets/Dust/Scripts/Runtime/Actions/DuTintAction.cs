@@ -39,7 +39,7 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // DuAction lifecycle
 
-        internal override void OnActionStart()
+        protected override void OnActionStart()
         {
             base.OnActionStart();
             
@@ -59,7 +59,7 @@ namespace DustEngine
             m_MeshRenderer.sharedMaterial = m_TintMaterial;
         }
 
-        internal override void OnActionStop(bool isTerminated)
+        protected override void OnActionStop(bool isTerminated)
         {
             if (!isTerminated && playRollback)
                 m_MeshRenderer.sharedMaterial = m_OriginalMaterial;
@@ -72,7 +72,7 @@ namespace DustEngine
         
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        internal override void OnActionUpdate(float deltaTime)
+        protected override void OnActionUpdate(float deltaTime)
         {
             if (Dust.IsNull(m_TintMaterial))
                 return;

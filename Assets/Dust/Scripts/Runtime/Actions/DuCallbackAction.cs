@@ -8,7 +8,7 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // DuAction lifecycle
 
-        internal override void OnActionUpdate(float deltaTime)
+        protected override void OnActionUpdate(float deltaTime)
         {
             // Nothing need to do :)
         }
