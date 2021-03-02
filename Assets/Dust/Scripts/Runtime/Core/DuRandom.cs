@@ -26,7 +26,7 @@ namespace DustEngine
         }
 
         /**
-         * return: (0..1)
+         * return: [0..1)
          */
         public float Next()
         {
@@ -39,7 +39,7 @@ namespace DustEngine
         }
 
         /**
-         * return: (min, max)
+         * return: [min, max)
          */
         public float Range(float min, float max)
         {

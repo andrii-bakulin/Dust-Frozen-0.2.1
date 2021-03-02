@@ -5,6 +5,7 @@
 - Added component Animation.DuScale
 - Added DuActions [core]
 - Added DuCallbackAction
+- Added DuCallRandomAction
 - Added DuDelayAction
 - Added DuFlipAction
 - Added DuMoveByAction & DuMoveToAction
