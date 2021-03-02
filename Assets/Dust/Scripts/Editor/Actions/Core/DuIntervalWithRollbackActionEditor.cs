@@ -18,6 +18,17 @@ namespace DustEngine.DustEditor
             m_RollbackDuration = FindProperty("m_RollbackDuration", "Rollback Duration");
         }
 
+        protected void CheckDurationsStates()
+        {
+            if (!m_PlayRollback.IsTrue)
+                return;
+
+            if (DuMath.IsNotZero(m_Duration.valFloat) || DuMath.IsNotZero(m_RollbackDuration.valFloat))
+                return;
+            
+            DustGUI.HelpBoxWarning("This action has rollback flag and both durations have zero-lengths, so action has no sense.");
+        }
+
         protected override void InspectorCommitUpdates()
         {
             if (m_Duration.isChanged)

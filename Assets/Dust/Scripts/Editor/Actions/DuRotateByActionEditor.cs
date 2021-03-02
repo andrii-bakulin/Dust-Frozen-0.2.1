@@ -57,6 +57,7 @@ namespace DustEngine.DustEditor
                 PropertyField(m_PlayRollback);
                 if (m_PlayRollback.IsTrue)
                     PropertyDurationSlider(m_RollbackDuration);
+                CheckDurationsStates();
                 PropertyField(m_Space);
             }
             DustGUI.FoldoutEnd();

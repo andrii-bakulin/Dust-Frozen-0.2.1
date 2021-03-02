@@ -70,6 +70,12 @@ namespace DustEngine
 
         internal override void ActionInnerUpdate(float deltaTime)
         {
+            if (playRollback && DuMath.IsZero(duration) && DuMath.IsZero(rollbackDuration))
+            {
+                ActionInnerStop(false);
+                return;
+            }
+            
             float curDuration = playingPhase == PlayingPhase.Main ? duration : rollbackDuration;
 
             if (curDuration > 0f)
