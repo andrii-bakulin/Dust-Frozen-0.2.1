@@ -13,9 +13,9 @@ namespace DustEngine.Test.Actions.Rotate
             {
                 var objLevelIds = new[] {ObjectTopLevel, ObjectSubLevel};
                 var durations = new[] {1.0f, 0.0f};
-                var xList = new[] {0f, 90f, -90f,  -5.00f, -1234.56f, 360f,   18.28f};
-                var yList = new[] {0f, 90f, -90f,   7.50f,  2456.78f, 360f, -127.55f};
-                var zList = new[] {0f, 90f, -90f, -12.25f, -3219.87f, 360f,   98.12f};
+                var xList = new[] {0f, 90f, -90f,  -5.00f, -999.99f};
+                var yList = new[] {0f, 90f, -90f,   7.50f,  888.88f};
+                var zList = new[] {0f, 90f, -90f, -12.25f,  360.00f};
 
                 if (Constants.MINIMIZE_ACTIONS_TESTS)
                 {
@@ -59,14 +59,15 @@ namespace DustEngine.Test.Actions.Rotate
 
         protected IEnumerator RotateTest(GameObject testObject, float duration, Quaternion endInWorld, Quaternion endInLocal)
         {
-            Debug.Log($"Start At [WORLD]: {testObject.transform.rotation.eulerAngles.ToString(Constants.FLOAT_ACCURACY_MASK)}");
-            Debug.Log($"Start At [LOCAL]: {testObject.transform.localRotation.eulerAngles.ToString(Constants.FLOAT_ACCURACY_MASK)}");
+            DebugLog($"Start At [WORLD]: {testObject.transform.rotation.eulerAngles.ToString(Constants.FLOAT_ACCURACY_MASK)}");
+            DebugLog($"Start At [LOCAL]: {testObject.transform.localRotation.eulerAngles.ToString(Constants.FLOAT_ACCURACY_MASK)}");
 
-            Debug.Log($"Expect At [WORLD]: {endInWorld.eulerAngles.ToString(Constants.FLOAT_ACCURACY_MASK)}");
-            Debug.Log($"Expect At [LOCAL]: {endInLocal.eulerAngles.ToString(Constants.FLOAT_ACCURACY_MASK)}");
+            DebugLog($"Expect At [WORLD]: {endInWorld.eulerAngles.ToString(Constants.FLOAT_ACCURACY_MASK)}");
+            DebugLog($"Expect At [LOCAL]: {endInLocal.eulerAngles.ToString(Constants.FLOAT_ACCURACY_MASK)}");
 
             yield return new WaitForSeconds(Sec(duration * 0.75f));
 
+            /*
             if (duration > 0f)
             {
                 var rotateByCmp = testObject.GetComponent<DuRotateByAction>();
@@ -76,11 +77,12 @@ namespace DustEngine.Test.Actions.Rotate
                     Assert_NotEqual(testObject.transform.localRotation, endInLocal, "Check middle point in Local space");
                 }
             }
+            */
 
             yield return new WaitForSeconds(Sec(duration * 0.75f));
  
-            Debug.Log($"Result At [WORLD]: {testObject.transform.rotation.eulerAngles.ToString(Constants.FLOAT_ACCURACY_MASK)}");
-            Debug.Log($"Result At [LOCAL]: {testObject.transform.localRotation.eulerAngles.ToString(Constants.FLOAT_ACCURACY_MASK)}");
+            DebugLog($"Result At [WORLD]: {testObject.transform.rotation.eulerAngles.ToString(Constants.FLOAT_ACCURACY_MASK)}");
+            DebugLog($"Result At [LOCAL]: {testObject.transform.localRotation.eulerAngles.ToString(Constants.FLOAT_ACCURACY_MASK)}");
 
             Assert_Equal(testObject.transform.rotation, endInWorld, "Check end point in World space");
             Assert_Equal(testObject.transform.localRotation, endInLocal, "Check end point in Local space");

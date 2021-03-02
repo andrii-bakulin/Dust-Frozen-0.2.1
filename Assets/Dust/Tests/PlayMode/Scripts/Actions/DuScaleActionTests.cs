@@ -59,11 +59,11 @@ namespace DustEngine.Test.Actions.Scale
 
         protected IEnumerator ScaleTest(GameObject testObject, float duration, Vector3 endInWorld, Vector3 endInLocal)
         {
-            Debug.Log($"Start At [WORLD]: {testObject.transform.lossyScale.ToString(Constants.FLOAT_ACCURACY_MASK)}");
-            Debug.Log($"Start At [LOCAL]: {testObject.transform.localScale.ToString(Constants.FLOAT_ACCURACY_MASK)}");
+            DebugLog($"Start At [WORLD]: {testObject.transform.lossyScale.ToString(Constants.FLOAT_ACCURACY_MASK)}");
+            DebugLog($"Start At [LOCAL]: {testObject.transform.localScale.ToString(Constants.FLOAT_ACCURACY_MASK)}");
 
-            Debug.Log($"Expect At [WORLD]: {endInWorld.ToString(Constants.FLOAT_ACCURACY_MASK)}");
-            Debug.Log($"Expect At [LOCAL]: {endInLocal.ToString(Constants.FLOAT_ACCURACY_MASK)}");
+            DebugLog($"Expect At [WORLD]: {endInWorld.ToString(Constants.FLOAT_ACCURACY_MASK)}");
+            DebugLog($"Expect At [LOCAL]: {endInLocal.ToString(Constants.FLOAT_ACCURACY_MASK)}");
 
             yield return new WaitForSeconds(Sec(duration * 0.75f));
 
@@ -79,8 +79,8 @@ namespace DustEngine.Test.Actions.Scale
 
             yield return new WaitForSeconds(Sec(duration * 0.75f));
 
-            Debug.Log($"Result At [WORLD]: {testObject.transform.lossyScale.ToString(Constants.FLOAT_ACCURACY_MASK)}");
-            Debug.Log($"Result At [LOCAL]: {testObject.transform.localScale.ToString(Constants.FLOAT_ACCURACY_MASK)}");
+            DebugLog($"Result At [WORLD]: {testObject.transform.lossyScale.ToString(Constants.FLOAT_ACCURACY_MASK)}");
+            DebugLog($"Result At [LOCAL]: {testObject.transform.localScale.ToString(Constants.FLOAT_ACCURACY_MASK)}");
 
             Assert_Equal(testObject.transform.lossyScale, endInWorld, "Check end in World space");
             Assert_Equal(testObject.transform.localScale, endInLocal, "Check end in Local space");
@@ -90,9 +90,9 @@ namespace DustEngine.Test.Actions.Scale
 
         protected IEnumerator ScaleInWorldSpaceTest(GameObject testObject, float duration, Vector3 endInWorld)
         {
-            Debug.Log($"Start At [WORLD]: {testObject.transform.lossyScale.ToString(Constants.FLOAT_ACCURACY_MASK)}");
+            DebugLog($"Start At [WORLD]: {testObject.transform.lossyScale.ToString(Constants.FLOAT_ACCURACY_MASK)}");
 
-            Debug.Log($"Expect At [WORLD]: {endInWorld.ToString(Constants.FLOAT_ACCURACY_MASK)}");
+            DebugLog($"Expect At [WORLD]: {endInWorld.ToString(Constants.FLOAT_ACCURACY_MASK)}");
 
             yield return new WaitForSeconds(Sec(duration * 0.75f));
 
@@ -107,16 +107,16 @@ namespace DustEngine.Test.Actions.Scale
 
             yield return new WaitForSeconds(Sec(duration * 0.75f));
 
-            Debug.Log($"Result At [WORLD]: {testObject.transform.lossyScale.ToString(Constants.FLOAT_ACCURACY_MASK)}");
+            DebugLog($"Result At [WORLD]: {testObject.transform.lossyScale.ToString(Constants.FLOAT_ACCURACY_MASK)}");
 
             Assert_Equal(testObject.transform.lossyScale, endInWorld, "Check end in World space");
         }
         
         protected IEnumerator ScaleInLocalSpaceTest(GameObject testObject, float duration, Vector3 endInLocal)
         {
-            Debug.Log($"Start At [LOCAL]: {testObject.transform.localScale.ToString(Constants.FLOAT_ACCURACY_MASK)}");
+            DebugLog($"Start At [LOCAL]: {testObject.transform.localScale.ToString(Constants.FLOAT_ACCURACY_MASK)}");
 
-            Debug.Log($"Expect At [LOCAL]: {endInLocal.ToString(Constants.FLOAT_ACCURACY_MASK)}");
+            DebugLog($"Expect At [LOCAL]: {endInLocal.ToString(Constants.FLOAT_ACCURACY_MASK)}");
 
             yield return new WaitForSeconds(Sec(duration * 0.75f));
 
@@ -131,7 +131,7 @@ namespace DustEngine.Test.Actions.Scale
 
             yield return new WaitForSeconds(Sec(duration * 0.75f));
 
-            Debug.Log($"Result At [LOCAL]: {testObject.transform.localScale.ToString(Constants.FLOAT_ACCURACY_MASK)}");
+            DebugLog($"Result At [LOCAL]: {testObject.transform.localScale.ToString(Constants.FLOAT_ACCURACY_MASK)}");
 
             Assert_Equal(testObject.transform.localScale, endInLocal, "Check end in Local space");
         }
