@@ -6,14 +6,6 @@ namespace DustEngine
     public class DuTintAction : DuIntervalWithRollbackAction
     {
         [SerializeField]
-        private MeshRenderer m_MeshRenderer;
-        public MeshRenderer meshRenderer
-        {
-            get => m_MeshRenderer;
-            set => m_MeshRenderer = value;
-        }
-
-        [SerializeField]
         private Color m_TintColor = Color.white;
         public Color tintColor
         {
@@ -31,6 +23,8 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
+        private MeshRenderer m_MeshRenderer;
+
         private Material m_OriginalMaterial;
         private Material m_TintMaterial;
 
@@ -43,6 +37,11 @@ namespace DustEngine
         {
             base.OnActionStart();
             
+            if (Dust.IsNull(m_TargetTransform))
+                return;
+
+            m_MeshRenderer = m_TargetTransform.GetComponent<MeshRenderer>();
+
             if (Dust.IsNull(m_MeshRenderer))
                 return;
 
@@ -61,6 +60,9 @@ namespace DustEngine
 
         protected override void OnActionStop(bool isTerminated)
         {
+            if (Dust.IsNull(m_MeshRenderer))
+                return;
+
             if (!isTerminated && playRollback)
                 m_MeshRenderer.sharedMaterial = m_OriginalMaterial;
             
@@ -81,15 +83,6 @@ namespace DustEngine
                 m_TintMaterial.SetColor(propertyName, Color.Lerp(m_ColorStartFrom, tintColor, playbackState));
             else
                 m_TintMaterial.SetColor(propertyName, Color.Lerp(tintColor, m_ColorStartFrom, playbackState));
-        }
-        
-        //--------------------------------------------------------------------------------------------------------------
-
-        protected override void ResetStates()
-        {
-            base.ResetStates();
-
-            meshRenderer = GetComponent<MeshRenderer>();
         }
     }
 }

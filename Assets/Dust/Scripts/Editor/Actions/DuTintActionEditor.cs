@@ -9,7 +9,6 @@ namespace DustEngine.DustEditor
     public class DuTintActionEditor : DuIntervalWithRollbackActionEditor
     {
         private DuProperty m_TintColor;
-        private DuProperty m_MeshRenderer;
         private DuProperty m_PropertyName;
 
         //--------------------------------------------------------------------------------------------------------------
@@ -32,7 +31,6 @@ namespace DustEngine.DustEditor
             base.InitializeEditor();
 
             m_TintColor = FindProperty("m_TintColor", "Tint Color");
-            m_MeshRenderer = FindProperty("m_MeshRenderer", "Mesh Renderer");
             m_PropertyName = FindProperty("m_PropertyName", "Property Name");
         }
 
@@ -52,7 +50,6 @@ namespace DustEngine.DustEditor
                 
                 Space();
                 
-                PropertyField(m_MeshRenderer);
                 PropertyField(m_PropertyName);
             }
             DustGUI.FoldoutEnd();
