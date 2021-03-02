@@ -57,5 +57,15 @@ namespace DustEngine.Test
 
             Assert.That(angle, Is.Not.LessThanOrEqualTo(Constants.QUATERNION_ANGLE_DELTA), message);
         }
+        
+        //--------------------------------------------------------------------------------------------------------------
+
+        public static void DebugLog(object message)
+        {
+            if (!Constants.DEBUG_LOG)
+                return;
+
+            Debug.Log(message);
+        }
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Actions/RotateBy Action")]
-    public class DuRotateByAction : DuIntervalAction
+    public class DuRotateByAction : DuIntervalWithRollbackAction
     {
         public enum Space
         {
@@ -29,6 +29,32 @@ namespace DustEngine
             get => m_Space;
             set => m_Space = value;
         }
+        
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        [SerializeField]
+        private bool m_ImproveAccuracy = false;
+        public bool improveAccuracy
+        {
+            get => m_ImproveAccuracy;
+            set => m_ImproveAccuracy = value;
+        }
+
+        [SerializeField]
+        private float m_ImproveAccuracyThreshold = 0.5f;
+        public float improveAccuracyThreshold
+        {
+            get => m_ImproveAccuracyThreshold;
+            set => m_ImproveAccuracyThreshold = Normalizer.ImproveAccuracyThreshold(value);
+        }
+
+        [SerializeField]
+        private int m_ImproveAccuracyMaxIterations = 16;
+        public int improveAccuracyMaxIterations
+        {
+            get => m_ImproveAccuracyMaxIterations;
+            set => m_ImproveAccuracyMaxIterations = Normalizer.ImproveAccuracyMaxIterations(value);
+        }
 
         //--------------------------------------------------------------------------------------------------------------
         // DuAction lifecycle
@@ -38,22 +64,57 @@ namespace DustEngine
             if (Dust.IsNull(m_TargetTransform))
                 return;
 
-            Vector3 deltaRotate = rotateBy * (playbackState - previousState);
+            float signRotate = playingPhase == PlayingPhase.Main ? +1f : -1f;
 
-            if (space == Space.World)
+            Vector3 deltaRotate = rotateBy * (signRotate * (playbackStateInPhase - previousStateInPhase));
+
+            if (deltaRotate.Equals(Vector3.zero))
+                return;
+            
+            if (space == Space.Local && Dust.IsNotNull(m_TargetTransform.parent))
+                deltaRotate = m_TargetTransform.parent.TransformDirection(deltaRotate);
+            
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+            int iterationsCount = 1;
+
+            if (improveAccuracy)
             {
-                m_TargetTransform.Rotate(deltaRotate, UnityEngine.Space.World);
+                iterationsCount = Mathf.CeilToInt(deltaRotate.magnitude / improveAccuracyThreshold);
+                iterationsCount = Mathf.Min(iterationsCount, improveAccuracyMaxIterations); 
+                deltaRotate /= iterationsCount;
             }
-            else if (space == Space.Local)
+
+            Quaternion quaternion = Quaternion.Euler(deltaRotate);
+
+            for (int i = 0; i < iterationsCount; i++)
             {
-                if (Dust.IsNotNull(m_TargetTransform.parent))
-                    m_TargetTransform.Rotate(m_TargetTransform.parent.TransformDirection(deltaRotate), UnityEngine.Space.World);
-                else
-                    m_TargetTransform.Rotate(deltaRotate, UnityEngine.Space.World);
+                if (space == Space.World || space == Space.Local)
+                {
+                    // m_TargetTransform.Rotate(deltaRotate, UnityEngine.Space.World);
+                    m_TargetTransform.rotation *= Quaternion.Inverse(m_TargetTransform.rotation) * quaternion * m_TargetTransform.rotation;
+                }
+                else if (space == Space.Self)
+                {
+                    // m_TargetTransform.Rotate(deltaRotate, UnityEngine.Space.Self);
+                    m_TargetTransform.localRotation *= quaternion;
+                }
             }
-            else if (space == Space.Self)
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+        // Normalizer
+
+        public new static class Normalizer
+        {
+            public static float ImproveAccuracyThreshold(float value)
             {
-                m_TargetTransform.Rotate(m_TargetTransform.TransformDirection(deltaRotate), UnityEngine.Space.World);
+                return Mathf.Max(value, 0.01f);
+            }
+
+            public static int ImproveAccuracyMaxIterations(int value)
+            {
+                return Mathf.Clamp(value, 1, 1000);
             }
         }
     }

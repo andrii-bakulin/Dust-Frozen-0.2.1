@@ -5,11 +5,12 @@ using UnityEngine.TestTools;
 
 namespace DustEngine.Test.Actions.Rotate
 {
-    /*
     public class DuRotateByActionTests : DuRotateActionTests
     {
+        protected float THRESHOLD = 0.02f;
+
         [UnityTest, TestCaseSource(nameof(TestCases))]
-        public IEnumerator WorldSpaceTest(string objLevelId, float duration, float x, float y, float z)
+        public IEnumerator Rotate_InWorldSpace(string objLevelId, float duration, float x, float y, float z)
         {
             var rotateBy = new Vector3(x, y, z);
             var testObject = GetTestGameObject(objLevelId);
@@ -19,38 +20,25 @@ namespace DustEngine.Test.Actions.Rotate
             tmp.transform.localPosition = testObject.transform.localPosition;
             tmp.transform.localRotation = testObject.transform.localRotation;
             tmp.transform.localScale = testObject.transform.localScale;
-            tmp.transform.Rotate(rotateBy, Space.World);
 
-            // float timer = 0f;
-            // float percentsCompletedLast = 0f;
-            // float percentsCompletedNow = 0f;
-            // while (timer < duration)
-            // {
-            //     timer += 1 / 120f; // 120fps :)
-            //     percentsCompletedNow = timer / duration;
-            //     percentsCompletedNow = Mathf.Min(percentsCompletedNow, 1f);
-            //
-            //     Vector3 deltaRotate = rotateBy * (percentsCompletedNow - percentsCompletedLast);
-            //
-            //     tmp.transform.Rotate(deltaRotate, UnityEngine.Space.World);
-            //
-            //     percentsCompletedLast = percentsCompletedNow;
-            // }
+            int iterations = Mathf.Max(1, Mathf.CeilToInt(rotateBy.magnitude / THRESHOLD));
+            var rotateByStep = rotateBy / iterations;
             
+            for (int i = 0; i < iterations; i++)
+            {
+                tmp.transform.Rotate(rotateByStep, Space.World);
+            }
+
             Quaternion endInWorld = tmp.transform.rotation;
             Quaternion endInLocal = tmp.transform.localRotation;
             
-            var sut = testObject.AddComponent<DuRotateByAction>();
-            sut.duration = Sec(duration);
-            sut.space = DuRotateByAction.Space.World;
-            sut.rotateBy = rotateBy;
-            sut.Play();
-
-            yield return RotateTest(testObject, duration, endInWorld, endInLocal);
+            Object.DestroyImmediate(tmp);
+            
+            yield return RotateTest(testObject, duration, DuRotateByAction.Space.World, rotateBy, endInWorld, endInLocal);
         }
         
         [UnityTest, TestCaseSource(nameof(TestCases))]
-        public IEnumerator LocalSpaceTest(string objLevelId, float duration, float x, float y, float z)
+        public IEnumerator Rotate_InLocalSpace(string objLevelId, float duration, float x, float y, float z)
         {
             var rotateBy = new Vector3(x, y, z);
             var testObject = GetTestGameObject(objLevelId);
@@ -60,43 +48,122 @@ namespace DustEngine.Test.Actions.Rotate
             tmp.transform.localPosition = testObject.transform.localPosition;
             tmp.transform.localRotation = testObject.transform.localRotation;
             tmp.transform.localScale = testObject.transform.localScale;
-            tmp.transform.Rotate(rotateBy, Space.Self);
+
+            var rotateByStep = rotateBy;
+            
+            if (tmp.transform.parent != null)
+                rotateByStep = tmp.transform.parent.TransformDirection(rotateByStep);
+
+            int iterations = Mathf.Max(1, Mathf.CeilToInt(rotateBy.magnitude / THRESHOLD));
+            rotateByStep = rotateByStep / iterations;
+            
+            for (int i = 0; i < iterations; i++)
+            {
+                tmp.transform.Rotate(rotateByStep, Space.World);
+            }
 
             Quaternion endInWorld = tmp.transform.rotation;
             Quaternion endInLocal = tmp.transform.localRotation;
             
-            var sut = testObject.AddComponent<DuRotateByAction>();
-            sut.duration = Sec(duration);
-            sut.space = DuRotateByAction.Space.Local;
-            sut.rotateBy = rotateBy;
-            sut.Play();
-
-            yield return RotateTest(testObject, duration, endInWorld, endInLocal);
+            Object.DestroyImmediate(tmp);
+            
+            yield return RotateTest(testObject, duration, DuRotateByAction.Space.Local, rotateBy, endInWorld, endInLocal);
         }
 
         [UnityTest, TestCaseSource(nameof(TestCases))]
-        public IEnumerator SelfSpaceTest(string objLevelId, float duration, float x, float y, float z)
+        public IEnumerator Rotate_InSelfSpace(string objLevelId, float duration, float x, float y, float z)
         {
             var rotateBy = new Vector3(x, y, z);
             var testObject = GetTestGameObject(objLevelId);
 
-            var subObject = new GameObject();
-            subObject.transform.parent = testObject.transform;
-            subObject.transform.localRotation = Quaternion.Euler(rotateBy);
+            var tmp = new GameObject();
+            tmp.transform.parent = testObject.transform.parent;
+            tmp.transform.localPosition = testObject.transform.localPosition;
+            tmp.transform.localRotation = testObject.transform.localRotation;
+            tmp.transform.localScale = testObject.transform.localScale;
 
-            var endInWorld = testObject.transform.rotation * Quaternion.Euler(rotateBy);
-            var endInLocal = ConvertWorldToLocal(testObject, endInWorld);
+            int iterations = Mathf.Max(1, Mathf.CeilToInt(rotateBy.magnitude / THRESHOLD));
+            var rotateByStep = rotateBy / iterations;
+            
+            for (int i = 0; i < iterations; i++)
+            {
+                tmp.transform.Rotate(rotateByStep, Space.Self);
+            }
 
-            Object.DestroyImmediate(subObject);
-
+            Quaternion endInWorld = tmp.transform.rotation;
+            Quaternion endInLocal = tmp.transform.localRotation;
+            
+            Object.DestroyImmediate(tmp);
+            
+            yield return RotateTest(testObject, duration, DuRotateByAction.Space.Self, rotateBy, endInWorld, endInLocal);
+        }
+        
+        protected IEnumerator RotateTest(GameObject testObject, float duration,
+            DuRotateByAction.Space space, Vector3 rotateBy, 
+            Quaternion endInWorld, Quaternion endInLocal)
+        {
             var sut = testObject.AddComponent<DuRotateByAction>();
             sut.duration = Sec(duration);
-            sut.space = DuRotateByAction.Space.Self;
+            sut.space = space;
             sut.rotateBy = rotateBy;
+            
+            sut.improveAccuracy = true;
+            sut.improveAccuracyThreshold = 0.1f;
+            sut.improveAccuracyMaxIterations = 1000;
+
             sut.Play();
 
-            yield return RotateTest(testObject, duration, endInWorld, endInLocal);
+            yield return RotateTest(testObject, duration, endInWorld, endInLocal);            
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+        
+        [UnityTest, TestCaseSource(nameof(TestCases))]
+        public IEnumerator RotateAndRollback_InWorldSpace(string objLevelId, float duration, float x, float y, float z)
+        {
+            var rotateBy = new Vector3(x, y, z);
+            var testObject = GetTestGameObject(objLevelId);
+
+            yield return RotateAndRollbackTest(testObject, duration, DuRotateByAction.Space.World, rotateBy);
+        }
+        
+        [UnityTest, TestCaseSource(nameof(TestCases))]
+        public IEnumerator RotateAndRollback_InLocalSpace(string objLevelId, float duration, float x, float y, float z)
+        {
+            var rotateBy = new Vector3(x, y, z);
+            var testObject = GetTestGameObject(objLevelId);
+
+            yield return RotateAndRollbackTest(testObject, duration, DuRotateByAction.Space.Local, rotateBy);
+        }
+
+        [UnityTest, TestCaseSource(nameof(TestCases))]
+        public IEnumerator RotateAndRollback_InSelfSpace(string objLevelId, float duration, float x, float y, float z)
+        {
+            var rotateBy = new Vector3(x, y, z);
+            var testObject = GetTestGameObject(objLevelId);
+
+            yield return RotateAndRollbackTest(testObject, duration, DuRotateByAction.Space.Self, rotateBy);
+        }
+
+        protected IEnumerator RotateAndRollbackTest(GameObject testObject, float duration,
+            DuRotateByAction.Space space, Vector3 rotateBy)
+        {
+            Quaternion endInWorld = testObject.transform.rotation;
+            Quaternion endInLocal = testObject.transform.localRotation;
+            
+            var sut = testObject.AddComponent<DuRotateByAction>();
+            sut.duration = Sec(duration * 0.5f);
+            sut.playRollback = true;
+            sut.rollbackDuration = Sec(duration * 0.5f);
+            sut.space = space;
+            sut.rotateBy = rotateBy;
+            
+            sut.improveAccuracy = true;
+            sut.improveAccuracyThreshold = 0.1f;
+            sut.improveAccuracyMaxIterations = 1000;
+            sut.Play();
+
+            yield return RotateTest(testObject, duration, endInWorld, endInLocal);            
         }
     }
-    */
 }

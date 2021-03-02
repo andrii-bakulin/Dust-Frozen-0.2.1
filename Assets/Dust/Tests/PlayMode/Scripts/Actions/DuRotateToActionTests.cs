@@ -8,7 +8,7 @@ namespace DustEngine.Test.Actions.Rotate
     public class DuRotateToActionTests : DuRotateActionTests
     {
         [UnityTest, TestCaseSource(nameof(TestCases))]
-        public IEnumerator WorldSpaceTest(string objLevelId, float duration, float x, float y, float z)
+        public IEnumerator Rotate_InWorldSpace(string objLevelId, float duration, float x, float y, float z)
         {
             var rotateTo = new Vector3(x, y, z);
             var testObject = GetTestGameObject(objLevelId);
@@ -16,17 +16,11 @@ namespace DustEngine.Test.Actions.Rotate
             Quaternion endInWorld = Quaternion.Euler(rotateTo);
             Quaternion endInLocal = ConvertWorldToLocal(testObject, endInWorld);
 
-            var sut = testObject.AddComponent<DuRotateToAction>();
-            sut.duration = Sec(duration);
-            sut.space = DuRotateToAction.Space.World;
-            sut.rotateTo = rotateTo;
-            sut.Play();
-
-            yield return RotateTest(testObject, duration, endInWorld, endInLocal);
+            yield return RotateTest(testObject, duration, DuRotateToAction.Space.World, rotateTo, endInWorld, endInLocal);
         }
         
         [UnityTest, TestCaseSource(nameof(TestCases))]
-        public IEnumerator LocalSpaceTest(string objLevelId, float duration, float x, float y, float z)
+        public IEnumerator Rotate_InLocalSpace(string objLevelId, float duration, float x, float y, float z)
         {
             var rotateTo = new Vector3(x, y, z);
             var testObject = GetTestGameObject(objLevelId);
@@ -34,9 +28,53 @@ namespace DustEngine.Test.Actions.Rotate
             Quaternion endInLocal = Quaternion.Euler(rotateTo);
             Quaternion endInWorld = ConvertLocalToWorld(testObject, endInLocal);
 
+            yield return RotateTest(testObject, duration, DuRotateToAction.Space.Local, rotateTo, endInWorld, endInLocal);
+        }
+
+        protected IEnumerator RotateTest(GameObject testObject, float duration, 
+            DuRotateToAction.Space space, Vector3 rotateTo,
+            Quaternion endInWorld, Quaternion endInLocal)
+        {
             var sut = testObject.AddComponent<DuRotateToAction>();
             sut.duration = Sec(duration);
-            sut.space = DuRotateToAction.Space.Local;
+            sut.space = space;
+            sut.rotateTo = rotateTo;
+            sut.Play();
+
+            yield return RotateTest(testObject, duration, endInWorld, endInLocal);
+        }
+        
+        //--------------------------------------------------------------------------------------------------------------
+
+        [UnityTest, TestCaseSource(nameof(TestCases))]
+        public IEnumerator RotateAndRollback_InWorldSpace(string objLevelId, float duration, float x, float y, float z)
+        {
+            var rotateTo = new Vector3(x, y, z);
+            var testObject = GetTestGameObject(objLevelId);
+
+            yield return RotateAndRollbackTest(testObject, duration, DuRotateToAction.Space.World, rotateTo);
+        }
+        
+        [UnityTest, TestCaseSource(nameof(TestCases))]
+        public IEnumerator RotateAndRollback_InLocalSpace(string objLevelId, float duration, float x, float y, float z)
+        {
+            var rotateTo = new Vector3(x, y, z);
+            var testObject = GetTestGameObject(objLevelId);
+
+            yield return RotateAndRollbackTest(testObject, duration, DuRotateToAction.Space.Local, rotateTo);
+        }
+
+        protected IEnumerator RotateAndRollbackTest(GameObject testObject, float duration,
+            DuRotateToAction.Space space, Vector3 rotateTo)
+        {
+            Quaternion endInWorld = testObject.transform.rotation;
+            Quaternion endInLocal = testObject.transform.localRotation;
+
+            var sut = testObject.AddComponent<DuRotateToAction>();
+            sut.duration = Sec(duration * 0.5f);
+            sut.playRollback = true;
+            sut.rollbackDuration = Sec(duration * 0.5f);
+            sut.space = space;
             sut.rotateTo = rotateTo;
             sut.Play();
 

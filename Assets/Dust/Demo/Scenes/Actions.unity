@@ -568,8 +568,13 @@ MonoBehaviour:
       m_Calls: []
   m_OnCompleteActions: []
   m_Duration: 2.5
+  m_PlayRollback: 0
+  m_RollbackDuration: 1
   m_RotateBy: {x: 45, y: 145, z: 245}
   m_Space: 1
+  m_ImproveAccuracy: 0
+  m_ImproveAccuracyThreshold: 0.5
+  m_ImproveAccuracyMaxIterations: 16
 --- !u!1 &249978937
 GameObject:
   m_ObjectHideFlags: 0
@@ -1089,9 +1094,14 @@ MonoBehaviour:
       m_Calls: []
   m_OnCompleteActions:
   - {fileID: 411398504}
-  m_Duration: 3
+  m_Duration: 1
+  m_PlayRollback: 0
+  m_RollbackDuration: 1
   m_RotateBy: {x: 0, y: 90, z: 0}
   m_Space: 1
+  m_ImproveAccuracy: 1
+  m_ImproveAccuracyThreshold: 0.1
+  m_ImproveAccuracyMaxIterations: 16
 --- !u!1 &440041503
 GameObject:
   m_ObjectHideFlags: 0
@@ -1385,8 +1395,13 @@ MonoBehaviour:
   m_OnCompleteActions:
   - {fileID: 534029530}
   m_Duration: 2
+  m_PlayRollback: 0
+  m_RollbackDuration: 1
   m_RotateBy: {x: 0, y: 90, z: 0}
   m_Space: 1
+  m_ImproveAccuracy: 0
+  m_ImproveAccuracyThreshold: 0.5
+  m_ImproveAccuracyMaxIterations: 16
 --- !u!1 &610270760
 GameObject:
   m_ObjectHideFlags: 0
@@ -2157,9 +2172,14 @@ MonoBehaviour:
       m_Calls: []
   m_OnCompleteActions:
   - {fileID: 942448813}
-  m_Duration: 3
+  m_Duration: 1
+  m_PlayRollback: 0
+  m_RollbackDuration: 1
   m_RotateBy: {x: 0, y: 90, z: 0}
   m_Space: 0
+  m_ImproveAccuracy: 0
+  m_ImproveAccuracyThreshold: 0.5
+  m_ImproveAccuracyMaxIterations: 16
 --- !u!1001 &971463478
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2270,8 +2290,13 @@ MonoBehaviour:
   m_OnCompleteActions:
   - {fileID: 997864720}
   m_Duration: 1
+  m_PlayRollback: 0
+  m_RollbackDuration: 1
   m_RotateBy: {x: 0, y: 90, z: 0}
   m_Space: 1
+  m_ImproveAccuracy: 0
+  m_ImproveAccuracyThreshold: 0.5
+  m_ImproveAccuracyMaxIterations: 16
 --- !u!1001 &1032265818
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2884,6 +2909,8 @@ MonoBehaviour:
       m_Calls: []
   m_OnCompleteActions: []
   m_Duration: 1
+  m_PlayRollback: 0
+  m_RollbackDuration: 1
   m_RotateTo: {x: 0, y: 0, z: 0}
   m_Space: 1
 --- !u!1001 &1337143704
@@ -3034,9 +3061,14 @@ MonoBehaviour:
       m_Calls: []
   m_OnCompleteActions:
   - {fileID: 1411742473}
-  m_Duration: 3
+  m_Duration: 1
+  m_PlayRollback: 0
+  m_RollbackDuration: 1
   m_RotateBy: {x: 0, y: 90, z: 0}
   m_Space: 2
+  m_ImproveAccuracy: 0
+  m_ImproveAccuracyThreshold: 0.5
+  m_ImproveAccuracyMaxIterations: 16
 --- !u!1 &1462614155 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4555384661247630378, guid: de011416d1efd411495a050805ad2357, type: 3}
@@ -3310,8 +3342,11 @@ MonoBehaviour:
   m_OnCompleteCallback:
     m_PersistentCalls:
       m_Calls: []
-  m_OnCompleteActions: []
+  m_OnCompleteActions:
+  - {fileID: 1745569376}
   m_Duration: 3
+  m_PlayRollback: 1
+  m_RollbackDuration: 1
   m_RotateTo: {x: 0, y: 0, z: 0}
   m_Space: 0
 --- !u!1 &1797361645
@@ -3522,8 +3557,13 @@ MonoBehaviour:
       m_Calls: []
   m_OnCompleteActions: []
   m_Duration: 1
+  m_PlayRollback: 0
+  m_RollbackDuration: 1
   m_RotateBy: {x: 0, y: 0, z: 0}
   m_Space: 1
+  m_ImproveAccuracy: 0
+  m_ImproveAccuracyThreshold: 0.5
+  m_ImproveAccuracyMaxIterations: 16
 --- !u!4 &1840469612 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4555384661247630383, guid: de011416d1efd411495a050805ad2357, type: 3}
@@ -3609,8 +3649,11 @@ MonoBehaviour:
   m_OnCompleteCallback:
     m_PersistentCalls:
       m_Calls: []
-  m_OnCompleteActions: []
+  m_OnCompleteActions:
+  - {fileID: 1867477414}
   m_Duration: 3
+  m_PlayRollback: 1
+  m_RollbackDuration: 1
   m_RotateTo: {x: 0, y: 0, z: 0}
   m_Space: 1
 --- !u!1 &1879260913

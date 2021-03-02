@@ -3,7 +3,7 @@ using UnityEngine;
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Actions/RotateTo Action")]
-    public class DuRotateToAction : DuIntervalAction
+    public class DuRotateToAction : DuIntervalWithRollbackAction
     {
         public enum Space
         {
@@ -30,7 +30,8 @@ namespace DustEngine
         }
         
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
+        
+        protected Quaternion m_RotationStart;
         protected Quaternion m_RotationFinal;
 
         //--------------------------------------------------------------------------------------------------------------
@@ -39,7 +40,16 @@ namespace DustEngine
         internal override void OnActionStart()
         {
             base.OnActionStart();
-            
+
+            if (space == Space.World)
+            {
+                m_RotationStart = m_TargetTransform.rotation;
+            }
+            else if (space == Space.Local)
+            {
+                m_RotationStart = m_TargetTransform.localRotation;
+            }
+             
             m_RotationFinal = Quaternion.Euler(rotateTo);
         }
 
@@ -48,17 +58,27 @@ namespace DustEngine
             if (Dust.IsNull(m_TargetTransform))
                 return;
 
-            var lerpOffset = duration > 0f && playbackState < 1f
-                ? deltaTime / ((1f - playbackState) * duration)
-                : 1f;
+            var lerpOffset = 1f;
+            var rotateEndPoint = playingPhase == PlayingPhase.Main ? m_RotationFinal : m_RotationStart;
+
+            if (playingPhase == PlayingPhase.Main)
+            {
+                if (duration > 0f && playbackStateInPhase < 1f)
+                    lerpOffset = deltaTime / ((1f - playbackStateInPhase) * duration);
+            }
+            else
+            {
+                if (rollbackDuration > 0f && playbackStateInPhase < 1f)
+                    lerpOffset = deltaTime / ((1f - playbackStateInPhase) * rollbackDuration);
+            }
 
             if (space == Space.World)
             {
-                m_TargetTransform.rotation = Quaternion.Slerp(m_TargetTransform.rotation, m_RotationFinal, lerpOffset);
+                m_TargetTransform.rotation = Quaternion.Slerp(m_TargetTransform.rotation, rotateEndPoint, lerpOffset);
             }
             else if (space == Space.Local)
             {
-                m_TargetTransform.localRotation = Quaternion.Slerp(m_TargetTransform.localRotation, m_RotationFinal, lerpOffset);
+                m_TargetTransform.localRotation = Quaternion.Slerp(m_TargetTransform.localRotation, rotateEndPoint, lerpOffset);
             }
         }
     }
