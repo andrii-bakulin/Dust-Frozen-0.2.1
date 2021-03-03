@@ -56,7 +56,7 @@ namespace DustEngine.DustEditor
 
             PropertyField(m_TranslateType);
 
-            switch ((DuMove.TranslateType) m_TranslateType.enumValueIndex)
+            switch ((DuMove.TranslateType) m_TranslateType.valInt)
             {
                 case DuMove.TranslateType.Linear:
                     PropertyField(m_LinearSpeed);

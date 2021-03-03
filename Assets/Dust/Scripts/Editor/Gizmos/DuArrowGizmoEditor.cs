@@ -92,7 +92,7 @@ namespace DustEngine.DustEditor
             Space();
 
             PropertyField(m_AxisColorMode);
-            PropertyFieldOrHide(m_Color, (DuArrowGizmo.AxisColorMode) m_AxisColorMode.enumValueIndex != DuArrowGizmo.AxisColorMode.Custom);
+            PropertyFieldOrHide(m_Color, (DuArrowGizmo.AxisColorMode) m_AxisColorMode.valInt != DuArrowGizmo.AxisColorMode.Custom);
             PropertyField(m_GizmoVisibility);
             PropertyField(m_ShowStartPoint);
 

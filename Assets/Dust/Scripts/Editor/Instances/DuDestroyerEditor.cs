@@ -22,7 +22,7 @@ namespace DustEngine.DustEditor
 
         private DuProperty m_OnDestroy;
 
-        private DuDestroyer.DestroyMode destroyMode => (DuDestroyer.DestroyMode) m_DestroyMode.enumValueIndex;
+        private DuDestroyer.DestroyMode destroyMode => (DuDestroyer.DestroyMode) m_DestroyMode.valInt;
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -80,7 +80,7 @@ namespace DustEngine.DustEditor
                 case DuDestroyer.DestroyMode.DeadZone:
                     PropertyField(m_VolumeCenterMode);
 
-                    switch ((DuDestroyer.VolumeCenterMode) m_VolumeCenterMode.enumValueIndex)
+                    switch ((DuDestroyer.VolumeCenterMode) m_VolumeCenterMode.valInt)
                     {
                         case DuDestroyer.VolumeCenterMode.StartPosition:
                             if (Application.isPlaying)

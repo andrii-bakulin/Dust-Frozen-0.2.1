@@ -75,7 +75,7 @@ namespace DustEngine.DustEditor
                 PropertySeedFixed(m_Seed);
                 Space();
 
-                switch ((DuNoiseField.NoiseMode) m_NoiseMode.enumValueIndex)
+                switch ((DuNoiseField.NoiseMode) m_NoiseMode.valInt)
                 {
                     case DuNoiseField.NoiseMode.Random:
                     default:

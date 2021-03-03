@@ -38,7 +38,7 @@ namespace DustEngine.DustEditor
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        private ClampMode clampMode => (ClampMode) m_ClampMode.enumValueIndex;
+        private ClampMode clampMode => (ClampMode) m_ClampMode.valInt;
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -110,7 +110,7 @@ namespace DustEngine.DustEditor
                     DuEditor.PropertyExtendedSlider(m_PostPower, 0f, 1f, 0.01f);
                     DuEditor.PropertyField(m_PostReshapeMode);
 
-                    switch ((DuRemapping.PostReshapeMode) m_PostReshapeMode.enumValueIndex)
+                    switch ((DuRemapping.PostReshapeMode) m_PostReshapeMode.valInt)
                     {
                         case DuRemapping.PostReshapeMode.None:
                             break;
@@ -140,7 +140,7 @@ namespace DustEngine.DustEditor
                 {
                     DuEditor.PropertyField(m_ColorMode);
 
-                    switch ((DuRemapping.ColorMode) m_ColorMode.enumValueIndex)
+                    switch ((DuRemapping.ColorMode) m_ColorMode.valInt)
                     {
                         case DuRemapping.ColorMode.Ignore:
                         case DuRemapping.ColorMode.RandomColor:

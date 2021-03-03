@@ -18,8 +18,8 @@ namespace DustEngine.DustEditor
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        private ClampMode powerClampMode => (ClampMode) m_PowerClampMode.enumValueIndex;
-        private ClampMode colorClampMode => (ClampMode) m_ColorClampMode.enumValueIndex;
+        private ClampMode powerClampMode => (ClampMode) m_PowerClampMode.valInt;
+        private ClampMode colorClampMode => (ClampMode) m_ColorClampMode.valInt;
 
         //--------------------------------------------------------------------------------------------------------------
 

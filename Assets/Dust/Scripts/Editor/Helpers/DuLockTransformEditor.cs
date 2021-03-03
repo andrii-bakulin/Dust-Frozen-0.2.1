@@ -68,7 +68,7 @@ namespace DustEngine.DustEditor
 
                     if (main.enabled && (m_LockPosition.IsTrue || m_LockRotation.IsTrue || m_LockScale.IsTrue))
                     {
-                        var space = (DuLockTransform.Space) m_Space.enumValueIndex;
+                        var space = (DuLockTransform.Space) m_Space.valInt;
 
                         if (m_LockPosition.IsTrue)
                         {

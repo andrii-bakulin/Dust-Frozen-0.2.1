@@ -25,8 +25,6 @@ namespace DustEngine.DustEditor
 
             public bool IsTrue => property.propertyType == SerializedPropertyType.Boolean ? property.boolValue : false;
 
-            public int enumValueIndex => property?.enumValueIndex ?? 0;
-
             public bool valBool
             {
                 get => property.boolValue;

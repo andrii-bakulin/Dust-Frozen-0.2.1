@@ -59,12 +59,12 @@ namespace DustEngine.DustEditor
             if (DustGUI.FoldoutBegin("LookAt", "DuFactoryMachine.LookAt"))
             {
                 PropertyField(m_TargetMode);
-                PropertyFieldOrHide(m_TargetObject, (DuLookAtFactoryMachine.TargetMode) m_TargetMode.enumValueIndex
+                PropertyFieldOrHide(m_TargetObject, (DuLookAtFactoryMachine.TargetMode) m_TargetMode.valInt
                                                     != DuLookAtFactoryMachine.TargetMode.ObjectTarget);
                 Space();
 
                 PropertyField(m_UpVectorMode);
-                PropertyFieldOrHide(m_UpVectorObject, (DuLookAtFactoryMachine.UpVectorMode) m_UpVectorMode.enumValueIndex
+                PropertyFieldOrHide(m_UpVectorObject, (DuLookAtFactoryMachine.UpVectorMode) m_UpVectorMode.valInt
                                                       != DuLookAtFactoryMachine.UpVectorMode.Object);
                 Space();
 

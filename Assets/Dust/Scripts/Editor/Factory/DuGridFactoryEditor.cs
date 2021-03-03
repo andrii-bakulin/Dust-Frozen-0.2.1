@@ -17,7 +17,7 @@ namespace DustEngine.DustEditor
         //--------------------------------------------------------------------------------------------------------------
 
         private DuGridFactory.OffsetDirection offsetDirection
-            => (DuGridFactory.OffsetDirection) m_OffsetDirection.enumValueIndex;
+            => (DuGridFactory.OffsetDirection) m_OffsetDirection.valInt;
 
         //--------------------------------------------------------------------------------------------------------------
 

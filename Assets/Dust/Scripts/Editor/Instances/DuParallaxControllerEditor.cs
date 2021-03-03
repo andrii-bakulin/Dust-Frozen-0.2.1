@@ -46,7 +46,7 @@ namespace DustEngine.DustEditor
             {
                 PropertyField(m_ParallaxControl);
 
-                switch ((DuParallaxController.ParallaxControl) m_ParallaxControl.enumValueIndex)
+                switch ((DuParallaxController.ParallaxControl) m_ParallaxControl.valInt)
                 {
                     case DuParallaxController.ParallaxControl.Manual:
                         PropertyExtendedSlider(m_Offset, 0f, 10f, 0.01f);

@@ -10,7 +10,7 @@ namespace DustEngine.DustEditor
         protected DuProperty m_RepeatMode;
         protected DuProperty m_RepeatTimes;
 
-        protected DuIntervalAction.RepeatMode repeatMode => (DuIntervalAction.RepeatMode) m_RepeatMode.enumValueIndex;
+        protected DuIntervalAction.RepeatMode repeatMode => (DuIntervalAction.RepeatMode) m_RepeatMode.valInt;
 
         protected override void InitializeEditor()
         {

@@ -21,7 +21,7 @@ namespace DustEngine.DustEditor
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        private DuFollow.SpeedMode speedMode => (DuFollow.SpeedMode) m_SpeedMode.enumValueIndex;
+        private DuFollow.SpeedMode speedMode => (DuFollow.SpeedMode) m_SpeedMode.valInt;
 
         //--------------------------------------------------------------------------------------------------------------
 

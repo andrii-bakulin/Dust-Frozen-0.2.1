@@ -106,13 +106,13 @@ namespace DustEngine.DustEditor
         //--------------------------------------------------------------------------------------------------------------
 
         protected DuFactory.SourceObjectsMode sourceObjectsMode
-            => (DuFactory.SourceObjectsMode) m_SourceObjectsMode.enumValueIndex;
+            => (DuFactory.SourceObjectsMode) m_SourceObjectsMode.valInt;
 
         protected DuFactory.IterateMode iterateMode
-            => (DuFactory.IterateMode) m_IterateMode.enumValueIndex;
+            => (DuFactory.IterateMode) m_IterateMode.valInt;
 
         protected DuFactory.TransformSpace transformSpace
-            => (DuFactory.TransformSpace) m_TransformSpace.enumValueIndex;
+            => (DuFactory.TransformSpace) m_TransformSpace.valInt;
 
         //--------------------------------------------------------------------------------------------------------------
 

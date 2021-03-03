@@ -88,7 +88,7 @@ namespace DustEngine.DustEditor
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // OnInspectorGUI_RemappingBlock();
 
-            if ((DuTextureSpaceField.ColorComponent) m_PowerSource.enumValueIndex != DuTextureSpaceField.ColorComponent.Ignore)
+            if ((DuTextureSpaceField.ColorComponent) m_PowerSource.valInt != DuTextureSpaceField.ColorComponent.Ignore)
             {
                 m_RemappingEditor.OnInspectorGUI(false);
             }

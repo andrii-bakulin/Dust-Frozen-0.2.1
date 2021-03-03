@@ -131,7 +131,7 @@ namespace DustEngine.DustEditor
                 PropertyField(m_TransformMode);
                 PropertyField(m_UpdateMode);
 
-                if ((DuShake.TransformMode) m_TransformMode.enumValueIndex == DuShake.TransformMode.AppendToAnimation)
+                if ((DuShake.TransformMode) m_TransformMode.valInt == DuShake.TransformMode.AppendToAnimation)
                 {
                     DustGUI.HelpBoxInfo("This mode need to use when object animated by keyframes or manually in Update method."
                                         + " Then you may apply shake in LastUpdate calls");

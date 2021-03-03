@@ -17,7 +17,7 @@ namespace DustEngine.DustEditor
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        private DuRotate.Space space => (DuRotate.Space) m_Space.enumValueIndex;
+        private DuRotate.Space space => (DuRotate.Space) m_Space.valInt;
 
         //--------------------------------------------------------------------------------------------------------------
 

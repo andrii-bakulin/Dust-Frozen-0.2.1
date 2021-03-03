@@ -67,7 +67,7 @@ namespace DustEngine.DustEditor
                 PropertyField(m_Texture);
                 PropertyField(m_SpaceUVW);
 
-                switch ((DuFactoryTextureField.SpaceUVW) m_SpaceUVW.enumValueIndex)
+                switch ((DuFactoryTextureField.SpaceUVW) m_SpaceUVW.valInt)
                 {
                     default:
                     case DuFactoryTextureField.SpaceUVW.UV:
@@ -100,7 +100,7 @@ namespace DustEngine.DustEditor
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // OnInspectorGUI_RemappingBlock();
 
-            if ((DuFactoryTextureField.ColorComponent) m_PowerSource.enumValueIndex != DuFactoryTextureField.ColorComponent.Ignore)
+            if ((DuFactoryTextureField.ColorComponent) m_PowerSource.valInt != DuFactoryTextureField.ColorComponent.Ignore)
             {
                 m_RemappingEditor.OnInspectorGUI(false);
             }

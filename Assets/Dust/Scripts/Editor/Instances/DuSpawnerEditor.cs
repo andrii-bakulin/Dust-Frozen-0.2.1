@@ -78,7 +78,7 @@ namespace DustEngine.DustEditor
 
             PropertyField(m_SpawnEvent);
 
-            switch ((DuSpawner.SpawnEvent) m_SpawnEvent.enumValueIndex)
+            switch ((DuSpawner.SpawnEvent) m_SpawnEvent.valInt)
             {
                 case DuSpawner.SpawnEvent.Manual:
                     DustGUI.HelpBoxInfo("Call method Spawn() or SpawnSingleObject() to spawn object(s)");
@@ -109,7 +109,7 @@ namespace DustEngine.DustEditor
             {
                 PropertyField(m_SpawnObjectsIterate);
 
-                if ((DuSpawner.IterateMode) m_SpawnObjectsIterate.enumValueIndex == DuSpawner.IterateMode.Random)
+                if ((DuSpawner.IterateMode) m_SpawnObjectsIterate.valInt == DuSpawner.IterateMode.Random)
                     PropertySeedRandomOrFixed(m_SpawnObjectsSeed);
             }
 
@@ -121,7 +121,7 @@ namespace DustEngine.DustEditor
 
             PropertyField(m_SpawnPointMode);
 
-            switch ((DuSpawner.SpawnPointMode) m_SpawnPointMode.enumValueIndex)
+            switch ((DuSpawner.SpawnPointMode) m_SpawnPointMode.valInt)
             {
                 case DuSpawner.SpawnPointMode.Self:
                     break;
@@ -133,7 +133,7 @@ namespace DustEngine.DustEditor
                     {
                         PropertyField(m_SpawnPointsIterate);
 
-                        if ((DuSpawner.IterateMode) m_SpawnPointsIterate.enumValueIndex == DuSpawner.IterateMode.Random)
+                        if ((DuSpawner.IterateMode) m_SpawnPointsIterate.valInt == DuSpawner.IterateMode.Random)
                             PropertySeedRandomOrFixed(m_SpawnPointsSeed);
                     }
                     break;

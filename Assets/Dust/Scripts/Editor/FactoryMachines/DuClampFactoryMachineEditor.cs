@@ -31,9 +31,9 @@ namespace DustEngine.DustEditor
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        private ClampMode positionMode => (ClampMode) m_PositionMode.enumValueIndex;
-        private ClampMode rotationMode => (ClampMode) m_RotationMode.enumValueIndex;
-        private ClampMode scaleMode => (ClampMode) m_ScaleMode.enumValueIndex;
+        private ClampMode positionMode => (ClampMode) m_PositionMode.valInt;
+        private ClampMode rotationMode => (ClampMode) m_RotationMode.valInt;
+        private ClampMode scaleMode => (ClampMode) m_ScaleMode.valInt;
 
         //--------------------------------------------------------------------------------------------------------------
 

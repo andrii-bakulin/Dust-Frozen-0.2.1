@@ -65,7 +65,7 @@ namespace DustEngine.DustEditor
             {
                 PropertyField(m_ParallaxControl);
 
-                switch ((DuParallax.ParallaxControl) m_ParallaxControl.enumValueIndex)
+                switch ((DuParallax.ParallaxControl) m_ParallaxControl.valInt)
                 {
                     case DuParallax.ParallaxControl.Manual:
                         PropertyExtendedSlider(m_Offset, -10f, +10f, 0.01f);
@@ -102,7 +102,7 @@ namespace DustEngine.DustEditor
 
             if (DustGUI.FoldoutBegin("Others", "DuParallax.Others"))
             {
-                if ((DuParallax.ParallaxControl) m_ParallaxControl.enumValueIndex == DuParallax.ParallaxControl.ParallaxController)
+                if ((DuParallax.ParallaxControl) m_ParallaxControl.valInt == DuParallax.ParallaxControl.ParallaxController)
                 {
                     DustGUI.StaticTextField(m_UpdateMode.title, "Inherited from Parallax Controller");
                 }

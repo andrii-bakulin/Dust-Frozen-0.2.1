@@ -72,7 +72,7 @@ namespace DustEngine.DustEditor
                 PropertyField(m_Synchronized);
                 Space();
 
-                switch ((DuNoiseFactoryMachine.NoiseMode) m_NoiseMode.enumValueIndex)
+                switch ((DuNoiseFactoryMachine.NoiseMode) m_NoiseMode.valInt)
                 {
                     case DuNoiseFactoryMachine.NoiseMode.Random:
                     default:
@@ -95,7 +95,7 @@ namespace DustEngine.DustEditor
 
 
             if (m_Synchronized.IsTrue
-                && (DuNoiseFactoryMachine.NoiseDimension) m_NoiseDimension.enumValueIndex == DuNoiseFactoryMachine.NoiseDimension.Noise3D)
+                && (DuNoiseFactoryMachine.NoiseDimension) m_NoiseDimension.valInt == DuNoiseFactoryMachine.NoiseDimension.Noise3D)
             {
                 if (DustGUI.FoldoutBegin("Remap Axises for Noise Forces", "DuFactoryMachine.RemapNoiseForces"))
                 {

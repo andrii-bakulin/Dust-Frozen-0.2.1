@@ -128,7 +128,7 @@ namespace DustEngine.DustEditor
                 PropertyField(m_TransformMode);
                 PropertyField(m_UpdateMode);
 
-                if ((DuPulsate.TransformMode) m_TransformMode.enumValueIndex == DuPulsate.TransformMode.AppendToAnimation)
+                if ((DuPulsate.TransformMode) m_TransformMode.valInt == DuPulsate.TransformMode.AppendToAnimation)
                 {
                     DustGUI.HelpBoxInfo("This mode need to use when object animated by keyframes or manually in Update method."
                                         + " Then you may apply pulsate in LastUpdate calls");

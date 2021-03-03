@@ -16,7 +16,7 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        protected DuAction.TargetMode targetMode => (DuAction.TargetMode) m_TargetMode.enumValueIndex;
+        protected DuAction.TargetMode targetMode => (DuAction.TargetMode) m_TargetMode.valInt;
 
         //--------------------------------------------------------------------------------------------------------------
 

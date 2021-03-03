@@ -58,7 +58,7 @@ namespace DustEngine.DustEditor
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - -
                 // Generate preview
 
-                var timeMode = (DuTimeField.TimeMode) m_TimeMode.enumValueIndex;
+                var timeMode = (DuTimeField.TimeMode) m_TimeMode.valInt;
                 var timeScale = m_TimeScale.valFloat;
                 var offset = m_Offset.valFloat;
 

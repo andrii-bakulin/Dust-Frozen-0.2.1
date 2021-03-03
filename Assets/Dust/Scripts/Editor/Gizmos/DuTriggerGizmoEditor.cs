@@ -83,7 +83,7 @@ namespace DustEngine.DustEditor
 
                 PropertyField(m_MessagePosition);
 
-                if ((DuTriggerGizmo.MessagePosition) m_MessagePosition.enumValueIndex != DuTriggerGizmo.MessagePosition.Center)
+                if ((DuTriggerGizmo.MessagePosition) m_MessagePosition.valInt != DuTriggerGizmo.MessagePosition.Center)
                 {
                     PropertyExtendedSlider(m_MessageOffset, 0f, +1f, 0.01f, 0f, +1f);
                 }

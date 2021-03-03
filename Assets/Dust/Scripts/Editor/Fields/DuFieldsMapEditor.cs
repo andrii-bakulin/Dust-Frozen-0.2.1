@@ -173,8 +173,8 @@ namespace DustEngine.DustEditor
             var record = new DuFieldsMap.FieldRecord();
             record.enabled = item.FindPropertyRelative("m_Enabled").boolValue;
             record.field = item.FindPropertyRelative("m_Field").objectReferenceValue as DuField;
-            record.blendPowerMode = (DuFieldsMap.FieldRecord.BlendPowerMode) item.FindPropertyRelative("m_BlendPowerMode").enumValueIndex;
-            record.blendColorMode = (DuFieldsMap.FieldRecord.BlendColorMode) item.FindPropertyRelative("m_BlendColorMode").enumValueIndex;
+            record.blendPowerMode = (DuFieldsMap.FieldRecord.BlendPowerMode) item.FindPropertyRelative("m_BlendPowerMode").intValue;
+            record.blendColorMode = (DuFieldsMap.FieldRecord.BlendColorMode) item.FindPropertyRelative("m_BlendColorMode").intValue;
             record.intensity = item.FindPropertyRelative("m_Intensity").floatValue;
             return record;
         }
@@ -331,12 +331,12 @@ namespace DustEngine.DustEditor
             }
 
             if (curRecord.blendPowerMode != newRecord.blendPowerMode) {
-                item.FindPropertyRelative("m_BlendPowerMode").enumValueIndex = (int) newRecord.blendPowerMode;
+                item.FindPropertyRelative("m_BlendPowerMode").intValue = (int) newRecord.blendPowerMode;
                 return true;
             }
 
             if (curRecord.blendColorMode != newRecord.blendColorMode) {
-                item.FindPropertyRelative("m_BlendColorMode").enumValueIndex = (int) newRecord.blendColorMode;
+                item.FindPropertyRelative("m_BlendColorMode").intValue = (int) newRecord.blendColorMode;
                 return true;
             }
 
@@ -430,8 +430,8 @@ namespace DustEngine.DustEditor
 
             newRecord.FindPropertyRelative("m_Enabled").boolValue = defaultRec.enabled;
             newRecord.FindPropertyRelative("m_Field").objectReferenceValue = field;
-            newRecord.FindPropertyRelative("m_BlendPowerMode").enumValueIndex = (int) m_FieldsMapInstance.GetDefaultBlendPower(field);
-            newRecord.FindPropertyRelative("m_BlendColorMode").enumValueIndex = (int) m_FieldsMapInstance.GetDefaultBlendColor(field);
+            newRecord.FindPropertyRelative("m_BlendPowerMode").intValue = (int) m_FieldsMapInstance.GetDefaultBlendPower(field);
+            newRecord.FindPropertyRelative("m_BlendColorMode").intValue = (int) m_FieldsMapInstance.GetDefaultBlendColor(field);
             newRecord.FindPropertyRelative("m_Intensity").floatValue = defaultRec.intensity;
 
             m_Editor.serializedObject.ApplyModifiedProperties();

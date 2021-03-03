@@ -33,7 +33,7 @@ namespace DustEngine.DustEditor
             DustGUI.Header("Tag");
             PropertyField(m_TagProcessingMode);
 
-            var tagProcessingMode = (DuColliderEvent.TagProcessingMode) m_TagProcessingMode.enumValueIndex;
+            var tagProcessingMode = (DuColliderEvent.TagProcessingMode) m_TagProcessingMode.valInt;
 
             if (tagProcessingMode != DuColliderEvent.TagProcessingMode.Ignore)
             {
