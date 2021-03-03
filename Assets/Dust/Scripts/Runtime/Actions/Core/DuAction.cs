@@ -250,7 +250,16 @@ namespace DustEngine
 
         protected virtual void ResetStates()
         {
-            autoStart = gameObject.GetComponents<DuAction>().Length == 1;
+            if (gameObject.GetComponents<DuAction>().Length == 1)
+            {
+                autoStart = true;
+                targetMode = TargetMode.Self;
+            }
+            else
+            {
+                autoStart = false;
+                targetMode = TargetMode.Inherit;
+            }
         }
     }
 }

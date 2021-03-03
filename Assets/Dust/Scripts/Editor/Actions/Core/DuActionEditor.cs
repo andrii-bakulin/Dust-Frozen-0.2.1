@@ -186,7 +186,7 @@ namespace DustEngine.DustEditor
         
         protected virtual void OnInspectorGUI_Extended(string actionId)
         {
-            if (DustGUI.FoldoutBegin("Extended", actionId + ".Extended", this, false))
+            if (DustGUI.FoldoutBegin("Extended", actionId + ".Extended", this))
             {
                 OnInspectorGUI_Extended_BlockFirst();
                 OnInspectorGUI_Extended_BlockMiddle();
@@ -210,6 +210,11 @@ namespace DustEngine.DustEditor
             // User should be able to change target any time (for ex. to "Inherit")
             PropertyField(m_TargetMode);
             PropertyFieldOrHide(m_TargetObject, targetMode != DuAction.TargetMode.GameObject);
+
+            if (m_AutoStart.IsTrue && targetMode == DuAction.TargetMode.Inherit)
+            {
+                DustGUI.HelpBoxWarning("Action cannot has Auto Start state and Inherit target mode together");
+            }
         }
     }
 }
