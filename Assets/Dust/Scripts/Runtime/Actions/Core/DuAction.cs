@@ -195,7 +195,7 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        protected GameObject GetTargetObject()
+        public GameObject GetTargetObject()
         {
             switch (targetMode)
             {

@@ -44,13 +44,27 @@ namespace DustEngine.DustEditor
 
             if (DustGUI.FoldoutBegin("Parameters", "DuTintAction.Parameters"))
             {
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                // Check MeshRenderer on target object
+
+                if (targetMode != DuAction.TargetMode.Inherit)
+                {
+                    if (target as DuAction is DuAction duAction)
+                    {
+                        var gameObject = duAction.GetTargetObject();
+
+                        if (Dust.IsNull(gameObject) || Dust.IsNull(gameObject.GetComponent<MeshRenderer>()))
+                        {
+                            DustGUI.HelpBoxWarning("Target Object has no MeshRenderer component");
+                        }
+                    }
+                }
+
+                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
                 PropertyField(m_TintColor);
-                
-                OnInspectorGUI_Durations();
-                
-                Space();
-                
                 PropertyField(m_PropertyName);
+                OnInspectorGUI_Durations();
             }
             DustGUI.FoldoutEnd();
 
