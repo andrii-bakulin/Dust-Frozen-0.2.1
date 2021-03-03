@@ -18,7 +18,11 @@ namespace DustEngine
         public bool position
         {
             get => m_Position;
-            set => m_Position = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_Position = value;
+            }
         }
 
         [SerializeField]
@@ -26,7 +30,11 @@ namespace DustEngine
         public bool rotation
         {
             get => m_Rotation;
-            set => m_Rotation = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_Rotation = value;
+            }
         }
 
         [SerializeField]
@@ -34,7 +42,11 @@ namespace DustEngine
         public bool scale
         {
             get => m_Scale;
-            set => m_Scale = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_Scale = value;
+            }
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -44,7 +56,11 @@ namespace DustEngine
         public GameObject sourceObject
         {
             get => m_SourceObject;
-            set => m_SourceObject = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_SourceObject = value;
+            }
         }
 
         [SerializeField]
@@ -52,7 +68,11 @@ namespace DustEngine
         public Space space
         {
             get => m_Space;
-            set => m_Space = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_Space = value;
+            }
         }
 
         //--------------------------------------------------------------------------------------------------------------

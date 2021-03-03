@@ -18,7 +18,11 @@ namespace DustEngine
         public bool playRollback
         {
             get => m_PlayRollback;
-            set => m_PlayRollback = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_PlayRollback = value;
+            }
         }
 
         [SerializeField]
@@ -26,7 +30,11 @@ namespace DustEngine
         public float rollbackDuration
         {
             get => m_RollbackDuration;
-            set => m_RollbackDuration = Normalizer.Duration(value);
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_RollbackDuration = Normalizer.Duration(value);
+            }
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

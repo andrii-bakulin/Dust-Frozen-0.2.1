@@ -10,7 +10,11 @@ namespace DustEngine
         public Vector3 scaleBy
         {
             get => m_ScaleBy;
-            set => m_ScaleBy = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_ScaleBy = value;
+            }
         }
 
         //--------------------------------------------------------------------------------------------------------------

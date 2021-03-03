@@ -24,7 +24,11 @@ namespace DustEngine
         public bool positionEnabled
         {
             get => m_PositionEnabled;
-            set => m_PositionEnabled = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_PositionEnabled = value;
+            }
         }
 
         [SerializeField]
@@ -32,7 +36,11 @@ namespace DustEngine
         public Vector3 positionRangeMin
         {
             get => m_PositionRangeMin;
-            set => m_PositionRangeMin = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_PositionRangeMin = value;
+            }
         }
 
         [SerializeField]
@@ -40,7 +48,11 @@ namespace DustEngine
         public Vector3 positionRangeMax
         {
             get => m_PositionRangeMax;
-            set => m_PositionRangeMax = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_PositionRangeMax = value;
+            }
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -50,7 +62,11 @@ namespace DustEngine
         public bool rotationEnabled
         {
             get => m_RotationEnabled;
-            set => m_RotationEnabled = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_RotationEnabled = value;
+            }
         }
 
         [SerializeField]
@@ -58,7 +74,11 @@ namespace DustEngine
         public Vector3 rotationRangeMin
         {
             get => m_RotationRangeMin;
-            set => m_RotationRangeMin = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_RotationRangeMin = value;
+            }
         }
 
         [SerializeField]
@@ -66,7 +86,11 @@ namespace DustEngine
         public Vector3 rotationRangeMax
         {
             get => m_RotationRangeMax;
-            set => m_RotationRangeMax = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_RotationRangeMax = value;
+            }
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -76,7 +100,11 @@ namespace DustEngine
         public bool scaleEnabled
         {
             get => m_ScaleEnabled;
-            set => m_ScaleEnabled = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_ScaleEnabled = value;
+            }
         }
 
         [SerializeField]
@@ -84,7 +112,11 @@ namespace DustEngine
         public Vector3 scaleRangeMin
         {
             get => m_ScaleRangeMin;
-            set => m_ScaleRangeMin = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_ScaleRangeMin = value;
+            }
         }
 
         [SerializeField]
@@ -92,7 +124,11 @@ namespace DustEngine
         public Vector3 scaleRangeMax
         {
             get => m_ScaleRangeMax;
-            set => m_ScaleRangeMax = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_ScaleRangeMax = value;
+            }
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -102,7 +138,11 @@ namespace DustEngine
         public TransformMode transformMode
         {
             get => m_TransformMode;
-            set => m_TransformMode = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_TransformMode = value;
+            }
         }
 
         [SerializeField]
@@ -110,7 +150,11 @@ namespace DustEngine
         public Space space
         {
             get => m_Space;
-            set => m_Space = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_Space = value;
+            }
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -122,6 +166,8 @@ namespace DustEngine
             get => m_Seed;
             set
             {
+                if (!IsAllowUpdateProperty()) return;
+
                 if (m_Seed == value)
                     return;
 

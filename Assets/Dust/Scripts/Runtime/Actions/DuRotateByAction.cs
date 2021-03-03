@@ -19,7 +19,11 @@ namespace DustEngine
         public Vector3 rotateBy
         {
             get => m_RotateBy;
-            set => m_RotateBy = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_RotateBy = value;
+            }
         }
 
         [SerializeField]
@@ -27,9 +31,13 @@ namespace DustEngine
         public Space space
         {
             get => m_Space;
-            set => m_Space = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_Space = value;
+            }
         }
-        
+
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
@@ -37,7 +45,11 @@ namespace DustEngine
         public bool improveAccuracy
         {
             get => m_ImproveAccuracy;
-            set => m_ImproveAccuracy = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_ImproveAccuracy = value;
+            }
         }
 
         [SerializeField]
@@ -45,7 +57,11 @@ namespace DustEngine
         public float improveAccuracyThreshold
         {
             get => m_ImproveAccuracyThreshold;
-            set => m_ImproveAccuracyThreshold = Normalizer.ImproveAccuracyThreshold(value);
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_ImproveAccuracyThreshold = Normalizer.ImproveAccuracyThreshold(value);
+            }
         }
 
         [SerializeField]
@@ -53,7 +69,11 @@ namespace DustEngine
         public int improveAccuracyMaxIterations
         {
             get => m_ImproveAccuracyMaxIterations;
-            set => m_ImproveAccuracyMaxIterations = Normalizer.ImproveAccuracyMaxIterations(value);
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_ImproveAccuracyMaxIterations = Normalizer.ImproveAccuracyMaxIterations(value);
+            }
         }
 
         //--------------------------------------------------------------------------------------------------------------

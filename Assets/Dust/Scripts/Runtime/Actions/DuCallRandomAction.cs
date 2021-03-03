@@ -43,6 +43,8 @@ namespace DustEngine
             get => m_Seed;
             set
             {
+                if (!IsAllowUpdateProperty()) return;
+
                 if (m_Seed == value)
                     return;
 

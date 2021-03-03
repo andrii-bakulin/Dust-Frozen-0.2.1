@@ -45,7 +45,11 @@ namespace DustEngine
         public Color tintColor
         {
             get => m_TintColor;
-            set => m_TintColor = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_TintColor = value;
+            }
         }
 
         [SerializeField]
@@ -53,9 +57,13 @@ namespace DustEngine
         public TintMode tintMode
         {
             get => m_TintMode;
-            set => m_TintMode = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_TintMode = value;
+            }
         }
-        
+
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         // Used by: { MeshRenderer } 
 
@@ -64,7 +72,11 @@ namespace DustEngine
         public string propertyName
         {
             get => m_PropertyName;
-            set => m_PropertyName = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_PropertyName = value;
+            }
         }
 
         //--------------------------------------------------------------------------------------------------------------

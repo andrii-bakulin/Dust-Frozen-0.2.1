@@ -18,7 +18,11 @@ namespace DustEngine
         public bool positionEnabled
         {
             get => m_PositionEnabled;
-            set => m_PositionEnabled = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_PositionEnabled = value;
+            }
         }
 
         [SerializeField]
@@ -26,7 +30,11 @@ namespace DustEngine
         public Vector3 position
         {
             get => m_Position;
-            set => m_Position = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_Position = value;
+            }
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -36,7 +44,11 @@ namespace DustEngine
         public bool rotationEnabled
         {
             get => m_RotationEnabled;
-            set => m_RotationEnabled = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_RotationEnabled = value;
+            }
         }
 
         [SerializeField]
@@ -44,7 +56,11 @@ namespace DustEngine
         public Vector3 rotation
         {
             get => m_Rotation;
-            set => m_Rotation = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_Rotation = value;
+            }
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -54,7 +70,11 @@ namespace DustEngine
         public bool scaleEnabled
         {
             get => m_ScaleEnabled;
-            set => m_ScaleEnabled = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_ScaleEnabled = value;
+            }
         }
 
         [SerializeField]
@@ -62,7 +82,11 @@ namespace DustEngine
         public Vector3 scale
         {
             get => m_Scale;
-            set => m_Scale = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_Scale = value;
+            }
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -72,7 +96,11 @@ namespace DustEngine
         public Space space
         {
             get => m_Space;
-            set => m_Space = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_Space = value;
+            }
         }
 
         //--------------------------------------------------------------------------------------------------------------

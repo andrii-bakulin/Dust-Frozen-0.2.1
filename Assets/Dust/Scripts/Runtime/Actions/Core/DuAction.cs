@@ -27,7 +27,11 @@ namespace DustEngine
         public bool autoStart
         {
             get => m_AutoStart;
-            set => m_AutoStart = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_AutoStart = value;
+            }
         }
 
         [SerializeField]
@@ -35,7 +39,11 @@ namespace DustEngine
         public TargetMode targetMode
         {
             get => m_TargetMode;
-            set => m_TargetMode = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_TargetMode = value;
+            }
         }
 
         [SerializeField]
@@ -43,7 +51,11 @@ namespace DustEngine
         public GameObject targetObject
         {
             get => m_TargetObject;
-            set => m_TargetObject = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_TargetObject = value;
+            }
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -71,6 +83,21 @@ namespace DustEngine
 
         protected bool m_IsPlaying;
         public bool isPlaying => m_IsPlaying;
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        protected bool IsAllowUpdateProperty()
+        {
+            if (isPlaying)
+            {
+#if UNITY_EDITOR
+                Dust.Debug.Warning("Cannot update property for action while it playing");
+#endif
+                return false;
+            }
+
+            return true;
+        }
 
         //--------------------------------------------------------------------------------------------------------------
 

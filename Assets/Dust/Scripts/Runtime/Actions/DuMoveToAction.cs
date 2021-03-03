@@ -18,7 +18,11 @@ namespace DustEngine
         public Vector3 moveTo
         {
             get => m_MoveTo;
-            set => m_MoveTo = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_MoveTo = value;
+            }
         }
 
         [SerializeField]
@@ -26,7 +30,11 @@ namespace DustEngine
         public Space space
         {
             get => m_Space;
-            set => m_Space = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_Space = value;
+            }
         }
 
         //--------------------------------------------------------------------------------------------------------------

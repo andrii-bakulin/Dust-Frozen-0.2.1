@@ -18,7 +18,11 @@ namespace DustEngine
         public float duration
         {
             get => m_Duration;
-            set => m_Duration = Normalizer.Duration(value);
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_Duration = Normalizer.Duration(value);
+            }
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -28,17 +32,25 @@ namespace DustEngine
         public RepeatMode repeatMode
         {
             get => m_RepeatMode;
-            set => m_RepeatMode = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_RepeatMode = value;
+            }
         }
- 
+
         [SerializeField]
         private int m_RepeatTimes = 1;
         public int repeatTimes
         {
             get => m_RepeatTimes;
-            set => m_RepeatTimes = Normalizer.RepeatTimes(value);
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_RepeatTimes = Normalizer.RepeatTimes(value);
+            }
         }
- 
+
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         protected int m_PlaybackIndex;

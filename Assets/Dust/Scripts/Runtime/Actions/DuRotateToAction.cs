@@ -18,7 +18,11 @@ namespace DustEngine
         public Vector3 rotateTo
         {
             get => m_RotateTo;
-            set => m_RotateTo = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_RotateTo = value;
+            }
         }
 
         [SerializeField]
@@ -26,9 +30,13 @@ namespace DustEngine
         public Space space
         {
             get => m_Space;
-            set => m_Space = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_Space = value;
+            }
         }
-        
+
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         
         protected Quaternion m_RotationStart;

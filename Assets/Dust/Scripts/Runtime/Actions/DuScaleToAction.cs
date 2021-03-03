@@ -10,7 +10,11 @@ namespace DustEngine
         public Vector3 scaleTo
         {
             get => m_ScaleTo;
-            set => m_ScaleTo = value;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_ScaleTo = value;
+            }
         }
 
         //--------------------------------------------------------------------------------------------------------------
