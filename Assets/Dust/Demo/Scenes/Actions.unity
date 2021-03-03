@@ -757,6 +757,7 @@ MonoBehaviour:
   m_PlayRollback: 0
   m_RollbackDuration: 1
   m_TintColor: {r: 1, g: 0, b: 0, a: 1}
+  m_TintMode: 0
   m_PropertyName: _Color
 --- !u!114 &249978942
 MonoBehaviour:
@@ -783,6 +784,7 @@ MonoBehaviour:
   m_PlayRollback: 0
   m_RollbackDuration: 1
   m_TintColor: {r: 0, g: 0, b: 1, a: 1}
+  m_TintMode: 0
   m_PropertyName: _Color
 --- !u!114 &249978943
 MonoBehaviour:
@@ -810,6 +812,7 @@ MonoBehaviour:
   m_PlayRollback: 0
   m_RollbackDuration: 1
   m_TintColor: {r: 0, g: 1, b: 0, a: 1}
+  m_TintMode: 0
   m_PropertyName: _Color
 --- !u!1 &301460044
 GameObject:
@@ -952,6 +955,7 @@ MonoBehaviour:
   m_PlayRollback: 1
   m_RollbackDuration: 1
   m_TintColor: {r: 0, g: 0, b: 1, a: 1}
+  m_TintMode: 1
   m_PropertyName: _Color
 --- !u!114 &301460050
 MonoBehaviour:
@@ -979,6 +983,7 @@ MonoBehaviour:
   m_PlayRollback: 1
   m_RollbackDuration: 1
   m_TintColor: {r: 0, g: 1, b: 0, a: 1}
+  m_TintMode: 1
   m_PropertyName: _Color
 --- !u!114 &301460051
 MonoBehaviour:
@@ -1006,6 +1011,7 @@ MonoBehaviour:
   m_PlayRollback: 1
   m_RollbackDuration: 1
   m_TintColor: {r: 1, g: 0, b: 0, a: 1}
+  m_TintMode: 1
   m_PropertyName: _Color
 --- !u!114 &301460052
 MonoBehaviour:
@@ -1625,6 +1631,7 @@ MonoBehaviour:
   m_PlayRollback: 0
   m_RollbackDuration: 1
   m_TintColor: {r: 1, g: 1, b: 1, a: 1}
+  m_TintMode: 0
   m_PropertyName: _Color
 --- !u!1 &534029528
 GameObject:
@@ -1775,6 +1782,7 @@ MonoBehaviour:
   m_PlayRollback: 0
   m_RollbackDuration: 1
   m_TintColor: {r: 1, g: 1, b: 0, a: 1}
+  m_TintMode: 0
   m_PropertyName: _Color
 --- !u!114 &610270763
 MonoBehaviour:
@@ -1802,6 +1810,7 @@ MonoBehaviour:
   m_PlayRollback: 0
   m_RollbackDuration: 1
   m_TintColor: {r: 1, g: 0, b: 1, a: 1}
+  m_TintMode: 0
   m_PropertyName: _Color
 --- !u!114 &610270764
 MonoBehaviour:
@@ -1829,6 +1838,7 @@ MonoBehaviour:
   m_PlayRollback: 0
   m_RollbackDuration: 1
   m_TintColor: {r: 0, g: 1, b: 1, a: 1}
+  m_TintMode: 0
   m_PropertyName: _Color
 --- !u!23 &610270765
 MeshRenderer:
@@ -3441,6 +3451,7 @@ GameObject:
   - component: {fileID: 1469112477}
   - component: {fileID: 1469112480}
   - component: {fileID: 1469112479}
+  - component: {fileID: 1469112481}
   - component: {fileID: 1469112478}
   m_Layer: 0
   m_Name: Cube Pointer (2)
@@ -3475,7 +3486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b410b92af5a24c71a1391f25c1d67b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AutoStart: 1
+  m_AutoStart: 0
   m_TargetMode: 0
   m_TargetObject: {fileID: 0}
   m_OnCompleteCallback:
@@ -3488,6 +3499,7 @@ MonoBehaviour:
   m_PlayRollback: 1
   m_RollbackDuration: 0.5
   m_TintColor: {r: 0.78431374, g: 0, b: 0, a: 1}
+  m_TintMode: 0
   m_PropertyName: _Color
 --- !u!23 &1469112479
 MeshRenderer:
@@ -3538,6 +3550,34 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1469112476}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1469112481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1469112476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b410b92af5a24c71a1391f25c1d67b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AutoStart: 1
+  m_TargetMode: 0
+  m_TargetObject: {fileID: 0}
+  m_OnCompleteCallback:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnCompleteActions:
+  - {fileID: 1469112478}
+  m_Duration: 0
+  m_RepeatMode: 0
+  m_RepeatTimes: 1
+  m_PlayRollback: 0
+  m_RollbackDuration: 1
+  m_TintColor: {r: 0, g: 0, b: 0, a: 1}
+  m_TintMode: 0
+  m_PropertyName: _Color
 --- !u!1001 &1550188888
 PrefabInstance:
   m_ObjectHideFlags: 0

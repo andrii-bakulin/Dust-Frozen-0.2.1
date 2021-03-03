@@ -1,3 +1,5 @@
+using System;
+using System.Reflection;
 using UnityEngine;
 using UnityEditor;
 
@@ -9,7 +11,10 @@ namespace DustEngine.DustEditor
     public class DuTintActionEditor : DuIntervalWithRollbackActionEditor
     {
         private DuProperty m_TintColor;
+        private DuProperty m_TintMode;
         private DuProperty m_PropertyName;
+
+        protected DuTintAction.TintMode tintMode => (DuTintAction.TintMode) m_TintMode.valInt;
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -31,6 +36,7 @@ namespace DustEngine.DustEditor
             base.InitializeEditor();
 
             m_TintColor = FindProperty("m_TintColor", "Tint Color");
+            m_TintMode = FindProperty("m_TintMode", "Tint Mode");
             m_PropertyName = FindProperty("m_PropertyName", "Property Name");
         }
 
@@ -44,26 +50,18 @@ namespace DustEngine.DustEditor
 
             if (DustGUI.FoldoutBegin("Parameters", "DuTintAction.Parameters"))
             {
-                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-                // Check MeshRenderer on target object
-
-                if (targetMode != DuAction.TargetMode.Inherit)
-                {
-                    if (target as DuAction is DuAction duAction)
-                    {
-                        var gameObject = duAction.GetTargetObject();
-
-                        if (Dust.IsNull(gameObject) || Dust.IsNull(gameObject.GetComponent<MeshRenderer>()))
-                        {
-                            DustGUI.HelpBoxWarning("Target Object has no MeshRenderer component");
-                        }
-                    }
-                }
-
-                // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
+                OnInspectorGUI_CheckIsObjectReady();
+                
                 PropertyField(m_TintColor);
-                PropertyField(m_PropertyName);
+                PropertyField(m_TintMode);
+                
+                if (tintMode == DuTintAction.TintMode.MeshRenderer)
+                {
+                    PropertyField(m_PropertyName);
+                }
+                
+                Space();
+                
                 OnInspectorGUI_Durations();
             }
             DustGUI.FoldoutEnd();
@@ -74,6 +72,29 @@ namespace DustEngine.DustEditor
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             InspectorCommitUpdates();
+        }
+
+        protected void OnInspectorGUI_CheckIsObjectReady()
+        {
+            if (targets.Length != 1 || targetMode == DuAction.TargetMode.Inherit)
+                return;
+
+            var gameObject = (target as DuAction).GetTargetObject();
+
+            Type component = DuTintAction.GetUpdaterTypeByTintMode(tintMode);
+
+            if (Dust.IsNull(gameObject) || Dust.IsNull(component))
+                return;
+
+            MethodInfo mInfo = component.GetMethod("GetTypeToUpdate");
+
+            if (Dust.IsNull(mInfo))
+                return;
+
+            component = (Type) mInfo.Invoke(null, null);
+            
+            if (Dust.IsNull(gameObject.GetComponent(component)))
+                DustGUI.HelpBoxWarning($"Target GameObject has no {component} component");
         }
     }
 }

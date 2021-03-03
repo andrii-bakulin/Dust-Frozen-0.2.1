@@ -3,8 +3,43 @@ using UnityEngine;
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Actions/Tint Action")]
-    public class DuTintAction : DuIntervalWithRollbackAction
+    public partial class DuTintAction : DuIntervalWithRollbackAction
     {
+        protected abstract class TintUpdater
+        {
+            private DuTintAction m_TintAction;
+            protected DuTintAction tintAction => m_TintAction;
+            
+            protected Color m_StartColor;
+            public Color startColor => m_StartColor;
+
+            public virtual void Init(DuTintAction parentTintAction)
+            {
+                m_TintAction = parentTintAction;
+            }
+
+            public abstract void Update(float deltaTime, Color color);
+
+            public virtual void Release(bool isActionTerminated)
+            {
+                m_TintAction = null;
+            }
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        public enum TintMode
+        {
+            Auto = 0,
+            
+            MeshRenderer = 1,
+
+            UIImage = 101,
+            UIText = 102,
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
         [SerializeField]
         private Color m_TintColor = Color.white;
         public Color tintColor
@@ -12,6 +47,17 @@ namespace DustEngine
             get => m_TintColor;
             set => m_TintColor = value;
         }
+
+        [SerializeField]
+        private TintMode m_TintMode = TintMode.Auto;
+        public TintMode tintMode
+        {
+            get => m_TintMode;
+            set => m_TintMode = value;
+        }
+        
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        // Used by: { MeshRenderer } 
 
         [SerializeField]
         private string m_PropertyName = "_Color";
@@ -23,12 +69,7 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        private MeshRenderer m_MeshRenderer;
-
-        private Material m_OriginalMaterial;
-        private Material m_TintMaterial;
-
-        private Color m_ColorStartFrom;
+        protected TintUpdater m_ActiveTintUpdater;
 
         //--------------------------------------------------------------------------------------------------------------
         // DuAction lifecycle
@@ -40,49 +81,33 @@ namespace DustEngine
             if (Dust.IsNull(m_TargetTransform))
                 return;
 
-            m_MeshRenderer = m_TargetTransform.GetComponent<MeshRenderer>();
+            m_ActiveTintUpdater = FactoryUpdater(this, tintMode);
+        }
 
-            if (Dust.IsNull(m_MeshRenderer))
+        protected override void OnActionUpdate(float deltaTime)
+        {
+            if (Dust.IsNull(m_ActiveTintUpdater))
                 return;
 
-            m_OriginalMaterial = m_MeshRenderer.sharedMaterial;
+            Color color;
+
+            if (playingPhase == PlayingPhase.Main)
+                color = Color.Lerp(m_ActiveTintUpdater.startColor, tintColor, playbackState);
+            else
+                color = Color.Lerp(tintColor, m_ActiveTintUpdater.startColor, playbackState);
             
-            m_TintMaterial = new Material(m_OriginalMaterial);
-            m_TintMaterial.hideFlags = HideFlags.DontSave;
-
-            if (!m_TintMaterial.name.Contains("(Clone)"))
-                m_TintMaterial.name += " (Clone)";
-
-            m_ColorStartFrom = m_TintMaterial.GetColor(propertyName);
-
-            m_MeshRenderer.sharedMaterial = m_TintMaterial;
+            m_ActiveTintUpdater.Update(deltaTime, color);
         }
 
         protected override void OnActionStop(bool isTerminated)
         {
-            if (Dust.IsNull(m_MeshRenderer))
-                return;
-
-            if (!isTerminated && playRollback)
-                m_MeshRenderer.sharedMaterial = m_OriginalMaterial;
-            
-            m_OriginalMaterial = null;
-            m_TintMaterial = null;
+            if (Dust.IsNotNull(m_ActiveTintUpdater))
+            {
+                m_ActiveTintUpdater.Release(isTerminated);
+                m_ActiveTintUpdater = null;
+            }
 
             base.OnActionStop(isTerminated);
-        }
-        
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-        protected override void OnActionUpdate(float deltaTime)
-        {
-            if (Dust.IsNull(m_TintMaterial))
-                return;
-
-            if (playingPhase == PlayingPhase.Main)
-                m_TintMaterial.SetColor(propertyName, Color.Lerp(m_ColorStartFrom, tintColor, playbackState));
-            else
-                m_TintMaterial.SetColor(propertyName, Color.Lerp(tintColor, m_ColorStartFrom, playbackState));
         }
     }
 }
