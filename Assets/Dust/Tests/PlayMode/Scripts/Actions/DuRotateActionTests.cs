@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace DustEngine.Test.Actions.Rotate
 {
-    public class DuRotateActionTests : DuActionTests
+    public class DuRotateActionTests : DuTransformActionTests
     {
         protected static IEnumerable<TestCaseData> TestCases
         {

@@ -2,11 +2,10 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.TestTools;
-using Object = UnityEngine.Object;
 
 namespace DustEngine.Test.Actions
 {
-    public abstract class DuActionTests : CorePlayModeTests
+    public class DuTransformActionTests : DuActionTests
     {
         protected const string ObjectTopLevel = "Top-Level";
         protected const string ObjectSubLevel = "Sub-Level";
@@ -18,7 +17,7 @@ namespace DustEngine.Test.Actions
         //--------------------------------------------------------------------------------------------------------------
 
         [UnitySetUp]
-        protected IEnumerator SetupPreset1()
+        protected IEnumerator SetupScene()
         {
             topLevelObj = new GameObject("TopLevelObj");
             topLevelObj.transform.localPosition = new Vector3(1f, 2f, 3f);
@@ -41,11 +40,11 @@ namespace DustEngine.Test.Actions
         }
 
         [UnityTearDown]
-        protected IEnumerator ReleasePreset1()
+        protected IEnumerator ReleaseScene()
         {
-            Object.DestroyImmediate(lastLevelObj);   
-            Object.DestroyImmediate(middleLevelObj);   
-            Object.DestroyImmediate(topLevelObj);
+            UnityEngine.Object.DestroyImmediate(lastLevelObj);   
+            UnityEngine.Object.DestroyImmediate(middleLevelObj);   
+            UnityEngine.Object.DestroyImmediate(topLevelObj);
 
             yield break;
         }

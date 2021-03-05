@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace DustEngine.Test.Actions.Scale
 {
-    public abstract class DuScaleActionTests : DuActionTests
+    public abstract class DuScaleActionTests : DuTransformActionTests
     {
         protected static IEnumerable<TestCaseData> TestCases
         {

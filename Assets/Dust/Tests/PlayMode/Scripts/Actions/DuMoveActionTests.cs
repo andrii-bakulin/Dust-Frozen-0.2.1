@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace DustEngine.Test.Actions.Move
 {
-    public abstract class DuMoveActionTests : DuActionTests
+    public abstract class DuMoveActionTests : DuTransformActionTests
     {
         protected static IEnumerable<TestCaseData> TestCases
         {
