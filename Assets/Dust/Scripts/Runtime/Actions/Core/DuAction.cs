@@ -9,10 +9,10 @@ namespace DustEngine
     {
         public enum TargetMode
         {
-            Self = 0,
-            ParentObject = 1,
-            GameObject = 2,
-            Inherit = 3,
+            Inherit = 0,
+            Self = 1,
+            ParentObject = 2,
+            GameObject = 3,
         }
 
         [Serializable]
@@ -35,7 +35,7 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private TargetMode m_TargetMode = TargetMode.Self;
+        private TargetMode m_TargetMode = TargetMode.Inherit;
         public TargetMode targetMode
         {
             get => m_TargetMode;
@@ -164,13 +164,7 @@ namespace DustEngine
         {
             if (targetMode == TargetMode.Inherit)
             {
-                if (Dust.IsNull(previousAction))
-                {
-                    Dust.Debug.Error("Cannot start action [" + gameObject.name + "]->["+GetType()+"] because previousAction is null, but it required to inherit target object");
-                    return;
-                }
-
-                m_TargetObject = previousAction.GetTargetObject();
+                m_TargetObject = Dust.IsNotNull(previousAction) ? previousAction.GetTargetObject() : this.gameObject;
             }
             
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -221,7 +215,6 @@ namespace DustEngine
         protected virtual void OnActionStop(bool isTerminated)
         {
             // Nothing need to do
-            m_TargetTransform = null;
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -230,6 +223,9 @@ namespace DustEngine
         {
             switch (targetMode)
             {
+                case TargetMode.Inherit:
+                    return Dust.IsNotNull(this.targetObject) ? this.targetObject : this.gameObject;
+
                 case TargetMode.Self:
                     return this.gameObject;
 
@@ -237,32 +233,10 @@ namespace DustEngine
                     return Dust.IsNotNull(transform.parent) ? transform.parent.gameObject : null;
 
                 case TargetMode.GameObject:
-                case TargetMode.Inherit:
                     return this.targetObject;
 
                 default:
-                    return null;
-            }
-        }
-
-        //--------------------------------------------------------------------------------------------------------------
-
-        private void Reset()
-        {
-            ResetStates();
-        }
-
-        protected virtual void ResetStates()
-        {
-            if (gameObject.GetComponents<DuAction>().Length == 1)
-            {
-                autoStart = true;
-                targetMode = TargetMode.Self;
-            }
-            else
-            {
-                autoStart = false;
-                targetMode = TargetMode.Inherit;
+                    return null; 
             }
         }
     }

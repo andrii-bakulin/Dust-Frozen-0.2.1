@@ -213,7 +213,7 @@ namespace DustEngine.DustEditor
 
             if (m_AutoStart.IsTrue && targetMode == DuAction.TargetMode.Inherit)
             {
-                DustGUI.HelpBoxWarning("Action cannot has Auto Start state and Inherit target mode together");
+                DustGUI.HelpBoxWarning("Action has AutoStart state and target mode is Inherit! In this case the first target object will be Self object.");
             }
         }
     }
