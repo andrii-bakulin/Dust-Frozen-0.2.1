@@ -7,6 +7,7 @@
 - Added DuCallbackAction
 - Added DuCallRandomAction
 - Added DuDelayAction
+- Added DuDestroyerAction
 - Added DuFlipAction
 - Added DuMoveByAction & DuMoveToAction
 - Added DuRotateByAction & DuRotateToAction
