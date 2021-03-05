@@ -170,8 +170,16 @@ namespace DustEngine
                     return;
                 }
 
-                targetObject = previousAction.GetTargetObject();
+                m_TargetObject = previousAction.GetTargetObject();
             }
+            
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+            
+            var activeTargetObject = GetTargetObject();
+
+            m_TargetTransform = Dust.IsNotNull(activeTargetObject) ? activeTargetObject.transform : null;
+
+            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             m_IsPlaying = true;
 
@@ -205,18 +213,14 @@ namespace DustEngine
 
         protected virtual void OnActionStart()
         {
-            var target = GetTargetObject();
-
-            if (Dust.IsNull(target))
-                return;
-
-            m_TargetTransform = target.transform;
+            // Nothing need to do
         }
 
         protected abstract void OnActionUpdate(float deltaTime);
 
         protected virtual void OnActionStop(bool isTerminated)
         {
+            // Nothing need to do
             m_TargetTransform = null;
         }
 
