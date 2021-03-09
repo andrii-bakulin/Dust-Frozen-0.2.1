@@ -29,10 +29,10 @@ namespace DustEngine.DustEditor
 
         static DuTransformRandomActionEditor()
         {
-            DuActionsPopupButtons.AddActionOthers(typeof(DuTransformRandomAction), "Transform Random");
+            DuActionsPopupButtons.AddActionTransform(typeof(DuTransformRandomAction), "Transform Random");
         }
 
-        [MenuItem("Dust/Actions/Instant Actions/Transform Random")]
+        [MenuItem("Dust/Actions/Transform Random")]
         public static void AddComponentToSelectedObjects()
         {
             AddComponentToSelectedOrNewObject("Transform Random Action", typeof(DuTransformRandomAction));

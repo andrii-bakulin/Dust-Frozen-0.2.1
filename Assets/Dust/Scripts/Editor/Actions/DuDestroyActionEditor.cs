@@ -17,7 +17,7 @@ namespace DustEngine.DustEditor
             DuActionsPopupButtons.AddActionOthers(typeof(DuDestroyAction), "Destroy");
         }
 
-        [MenuItem("Dust/Actions/Instant Actions/Destroy")]
+        [MenuItem("Dust/Actions/Destroy")]
         public static void AddComponentToSelectedObjects()
         {
             AddComponentToSelectedOrNewObject("Destroy Action", typeof(DuDestroyAction));

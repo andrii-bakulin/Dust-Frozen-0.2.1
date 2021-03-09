@@ -16,10 +16,10 @@ namespace DustEngine.DustEditor
 
         static DuCallRandomActionEditor()
         {
-            DuActionsPopupButtons.AddActionOthers(typeof(DuCallRandomAction), "Call Random");
+            DuActionsPopupButtons.AddActionFlow(typeof(DuCallRandomAction), "Call Random");
         }
 
-        [MenuItem("Dust/Actions/Instant Actions/Call Random")]
+        [MenuItem("Dust/Actions/Call Random")]
         public static void AddComponentToSelectedObjects()
         {
             AddComponentToSelectedOrNewObject("Call Random Action", typeof(DuCallRandomAction));

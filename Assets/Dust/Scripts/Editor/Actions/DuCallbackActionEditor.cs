@@ -13,7 +13,7 @@ namespace DustEngine.DustEditor
             DuActionsPopupButtons.AddActionOthers(typeof(DuCallbackAction), "Callback");
         }
 
-        [MenuItem("Dust/Actions/Instant Actions/Callback")]
+        [MenuItem("Dust/Actions/Callback")]
         public static void AddComponentToSelectedObjects()
         {
             AddComponentToSelectedOrNewObject("Callback Action", typeof(DuCallbackAction));

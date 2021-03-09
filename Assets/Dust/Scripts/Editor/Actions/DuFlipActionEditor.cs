@@ -16,10 +16,10 @@ namespace DustEngine.DustEditor
 
         static DuFlipActionEditor()
         {
-            DuActionsPopupButtons.AddActionOthers(typeof(DuFlipAction), "Flip");
+            DuActionsPopupButtons.AddActionTransform(typeof(DuFlipAction), "Flip");
         }
 
-        [MenuItem("Dust/Actions/Instant Actions/Flip")]
+        [MenuItem("Dust/Actions/Flip")]
         public static void AddComponentToSelectedObjects()
         {
             AddComponentToSelectedOrNewObject("Flip Action", typeof(DuFlipAction));

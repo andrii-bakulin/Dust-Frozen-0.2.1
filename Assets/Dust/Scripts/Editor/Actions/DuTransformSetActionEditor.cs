@@ -22,10 +22,10 @@ namespace DustEngine.DustEditor
 
         static DuTransformSetActionEditor()
         {
-            DuActionsPopupButtons.AddActionOthers(typeof(DuTransformSetAction), "Transform Set");
+            DuActionsPopupButtons.AddActionTransform(typeof(DuTransformSetAction), "Transform Set");
         }
 
-        [MenuItem("Dust/Actions/Instant Actions/Transform Set")]
+        [MenuItem("Dust/Actions/Transform Set")]
         public static void AddComponentToSelectedObjects()
         {
             AddComponentToSelectedOrNewObject("Transform Set Action", typeof(DuTransformSetAction));
