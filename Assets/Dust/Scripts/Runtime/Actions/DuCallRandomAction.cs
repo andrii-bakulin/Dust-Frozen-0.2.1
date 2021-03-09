@@ -63,9 +63,6 @@ namespace DustEngine
 
         protected override void OnActionUpdate(float deltaTime)
         {
-            if (Dust.IsNull(m_TargetTransform))
-                return;
-
             if (actions.Count == 0)
                 return;
 

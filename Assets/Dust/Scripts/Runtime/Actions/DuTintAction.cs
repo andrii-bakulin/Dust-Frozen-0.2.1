@@ -90,9 +90,6 @@ namespace DustEngine
         {
             base.OnActionStart();
             
-            if (Dust.IsNull(m_TargetTransform))
-                return;
-
             m_ActiveTintUpdater = FactoryUpdater(this, tintMode);
         }
 
