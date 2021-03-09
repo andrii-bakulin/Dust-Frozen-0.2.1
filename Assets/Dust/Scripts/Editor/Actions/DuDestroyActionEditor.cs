@@ -3,24 +3,24 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuDestroyerAction))]
+    [CustomEditor(typeof(DuDestroyAction))]
     [CanEditMultipleObjects]
     [InitializeOnLoad]
-    public class DuDestroyerActionEditor : DuInstantActionEditor
+    public class DuDestroyActionEditor : DuInstantActionEditor
     {
         private DuProperty m_DisableColliders;
 
         //--------------------------------------------------------------------------------------------------------------
 
-        static DuDestroyerActionEditor()
+        static DuDestroyActionEditor()
         {
-            DuActionsPopupButtons.AddActionOthers(typeof(DuDestroyerAction), "Destroyer");
+            DuActionsPopupButtons.AddActionOthers(typeof(DuDestroyAction), "Destroy");
         }
 
-        [MenuItem("Dust/Actions/Instant Actions/Destroyer")]
+        [MenuItem("Dust/Actions/Instant Actions/Destroy")]
         public static void AddComponentToSelectedObjects()
         {
-            AddComponentToSelectedOrNewObject("Destroyer Action", typeof(DuDestroyerAction));
+            AddComponentToSelectedOrNewObject("Destroy Action", typeof(DuDestroyAction));
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -40,14 +40,14 @@ namespace DustEngine.DustEditor
 
             OnInspectorGUI_BaseControlUI();
 
-            if (DustGUI.FoldoutBegin("Parameters", "DuDestroyerAction.Parameters"))
+            if (DustGUI.FoldoutBegin("Parameters", "DuDestroyAction.Parameters"))
             {
                 PropertyField(m_DisableColliders);
             }
             DustGUI.FoldoutEnd();
 
-            OnInspectorGUI_Callbacks("DuDestroyerAction");
-            OnInspectorGUI_Extended("DuDestroyerAction");
+            OnInspectorGUI_Callbacks("DuDestroyAction");
+            OnInspectorGUI_Extended("DuDestroyAction");
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

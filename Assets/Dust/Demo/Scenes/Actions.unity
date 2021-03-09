@@ -3434,7 +3434,7 @@ GameObject:
   - component: {fileID: 1417913446}
   - component: {fileID: 1417913447}
   m_Layer: 0
-  m_Name: DuDestroyerAction
+  m_Name: DuDestroyAction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

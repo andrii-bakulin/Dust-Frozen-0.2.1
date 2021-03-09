@@ -2,8 +2,8 @@
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Actions/Destroyer Action")]
-    public class DuDestroyerAction : DuInstantAction
+    [AddComponentMenu("Dust/Actions/Destroy Action")]
+    public class DuDestroyAction : DuInstantAction
     {
         [SerializeField]
         private bool m_DisableColliders = true;

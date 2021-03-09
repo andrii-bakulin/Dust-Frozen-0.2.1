@@ -5,9 +5,9 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using Object = UnityEngine.Object;
 
-namespace DustEngine.Test.Actions.Destroyer
+namespace DustEngine.Test.Actions.Destroy
 {
-    public class DuDestroyerActionTests : DuActionTests
+    public class DuDestroyActionTests : DuActionTests
     {
         protected const int MAX_TEST_OBJECTS_COUNT = 2;
         protected string TestId = "";
@@ -62,7 +62,7 @@ namespace DustEngine.Test.Actions.Destroyer
 
             var testObject1 = CreateTestObject(1);
 
-            var actDestroy = testObject1.AddComponent<DuDestroyerAction>();
+            var actDestroy = testObject1.AddComponent<DuDestroyAction>();
             // actDestroy.Play();
 
             Assert.That(IsTestObjectExists(1), Is.True);
@@ -79,7 +79,7 @@ namespace DustEngine.Test.Actions.Destroyer
 
             var testObject1 = CreateTestObject(1);
 
-            var actDestroy = testObject1.AddComponent<DuDestroyerAction>();
+            var actDestroy = testObject1.AddComponent<DuDestroyAction>();
 
             Assert.That(IsTestObjectExists(1), Is.True);
 
@@ -103,7 +103,7 @@ namespace DustEngine.Test.Actions.Destroyer
             var actDelay = testObject1.AddComponent<DuDelayAction>();
             actDelay.duration = Sec(0.5f);
 
-            var actDestroy = testObject1.AddComponent<DuDestroyerAction>();
+            var actDestroy = testObject1.AddComponent<DuDestroyAction>();
             actDelay.onCompleteActions.Add(actDestroy);
             
             Assert.That(IsTestObjectExists(1), Is.True);
@@ -136,7 +136,7 @@ namespace DustEngine.Test.Actions.Destroyer
             var actDelay = testObject2.AddComponent<DuDelayAction>();
             actDelay.duration = Sec(0.25f);
 
-            var actDestroy = testObject2.AddComponent<DuDestroyerAction>();
+            var actDestroy = testObject2.AddComponent<DuDestroyAction>();
             actDestroy.onCompleteActions.Add(actMoving);
 
             actDelay.onCompleteActions.Add(actDestroy);
