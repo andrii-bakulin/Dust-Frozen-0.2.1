@@ -14,7 +14,7 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
 
         [SerializeField]
-        private float m_Duration = 1f;
+        protected float m_Duration = 1f;
         public float duration
         {
             get => m_Duration;
@@ -28,7 +28,7 @@ namespace DustEngine
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
-        private RepeatMode m_RepeatMode = RepeatMode.PlayOnce;
+        protected RepeatMode m_RepeatMode = RepeatMode.PlayOnce;
         public RepeatMode repeatMode
         {
             get => m_RepeatMode;
@@ -40,7 +40,7 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private int m_RepeatTimes = 1;
+        protected int m_RepeatTimes = 1;
         public int repeatTimes
         {
             get => m_RepeatTimes;

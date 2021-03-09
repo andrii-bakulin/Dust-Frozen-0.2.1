@@ -23,7 +23,7 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
 
         [SerializeField]
-        private bool m_AutoStart = false;
+        protected bool m_AutoStart = false;
         public bool autoStart
         {
             get => m_AutoStart;
@@ -35,7 +35,7 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private TargetMode m_TargetMode = TargetMode.Inherit;
+        protected TargetMode m_TargetMode = TargetMode.Inherit;
         public TargetMode targetMode
         {
             get => m_TargetMode;
@@ -47,7 +47,7 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private GameObject m_TargetObject = null;
+        protected GameObject m_TargetObject = null;
         public GameObject targetObject
         {
             get => m_TargetObject;
@@ -61,11 +61,11 @@ namespace DustEngine
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
-        private ActionCallback m_OnCompleteCallback = null;
+        protected ActionCallback m_OnCompleteCallback = null;
         public ActionCallback onCompleteCallback => m_OnCompleteCallback;
 
         [SerializeField]
-        private List<DuAction> m_OnCompleteActions = null;
+        protected List<DuAction> m_OnCompleteActions = null;
         public List<DuAction> onCompleteActions
         {
             get

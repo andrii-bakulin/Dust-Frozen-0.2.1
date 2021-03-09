@@ -14,7 +14,7 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
 
         [SerializeField]
-        private bool m_PlayRollback = false;
+        protected bool m_PlayRollback = false;
         public bool playRollback
         {
             get => m_PlayRollback;
@@ -26,7 +26,7 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private float m_RollbackDuration = 1f;
+        protected float m_RollbackDuration = 1f;
         public float rollbackDuration
         {
             get => m_RollbackDuration;
@@ -39,7 +39,7 @@ namespace DustEngine
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        private PlayingPhase m_PlayingPhase = PlayingPhase.Idle;
+        protected PlayingPhase m_PlayingPhase = PlayingPhase.Idle;
         public PlayingPhase playingPhase => m_PlayingPhase;
 
         //--------------------------------------------------------------------------------------------------------------
