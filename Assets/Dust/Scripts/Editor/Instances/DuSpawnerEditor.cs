@@ -61,7 +61,7 @@ namespace DustEngine.DustEditor
             m_MultipleSpawnEnabled = FindProperty("m_MultipleSpawnEnabled", "Enabled");
             m_MultipleSpawnCountMin = FindProperty(serializedObject.FindProperty("m_MultipleSpawnCount"), "m_Min", "Min Count");
             m_MultipleSpawnCountMax = FindProperty(serializedObject.FindProperty("m_MultipleSpawnCount"), "m_Max", "Max Count");
-            m_MultipleSpawnSeed = FindProperty("m_SpawnPointsSeed", "Seed");
+            m_MultipleSpawnSeed = FindProperty("m_MultipleSpawnSeed", "Seed");
 
             m_ParentMode = FindProperty("m_ParentMode", "Assign Parent As");
             m_Limit = FindProperty("m_Limit", "Total Limit");
