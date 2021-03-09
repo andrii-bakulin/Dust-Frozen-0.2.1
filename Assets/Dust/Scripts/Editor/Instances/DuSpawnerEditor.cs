@@ -63,7 +63,7 @@ namespace DustEngine.DustEditor
             m_MultipleSpawnCountMax = FindProperty(serializedObject.FindProperty("m_MultipleSpawnCount"), "m_Max", "Max Count");
             m_MultipleSpawnSeed = FindProperty("m_SpawnPointsSeed", "Seed");
 
-            m_ParentMode = FindProperty("m_ParentMode", "Set Parent As");
+            m_ParentMode = FindProperty("m_ParentMode", "Assign Parent As");
             m_Limit = FindProperty("m_Limit", "Total Limit");
             m_SpawnOnAwake = FindProperty("m_SpawnOnAwake", "Spawn On Awake");
 
@@ -101,7 +101,7 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            DustGUI.Header("Spawn Objects");
+            DustGUI.Header("Objects To Spawn");
 
             PropertyField(m_SpawnObjects);
 
@@ -117,7 +117,7 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            DustGUI.Header("Spawn Points");
+            DustGUI.Header("Spawn At Points");
 
             PropertyField(m_SpawnPointMode);
 
@@ -147,7 +147,7 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            DustGUI.Header("Multiple Objects Spawn");
+            DustGUI.Header("Spawn Multiple Objects");
 
             PropertyField(m_MultipleSpawnEnabled);
 
