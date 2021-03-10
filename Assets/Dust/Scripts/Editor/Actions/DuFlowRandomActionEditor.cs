@@ -3,10 +3,10 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuCallRandomAction))]
+    [CustomEditor(typeof(DuFlowRandomAction))]
     [CanEditMultipleObjects]
     [InitializeOnLoad]
-    public class DuCallRandomActionEditor : DuInstantActionEditor
+    public class DuFlowRandomActionEditor : DuInstantActionEditor
     {
         private DuProperty m_Actions;
 
@@ -14,15 +14,15 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        static DuCallRandomActionEditor()
+        static DuFlowRandomActionEditor()
         {
-            DuActionsPopupButtons.AddActionFlow(typeof(DuCallRandomAction), "Call Random");
+            DuActionsPopupButtons.AddActionFlow(typeof(DuFlowRandomAction), "Flow Random");
         }
 
-        [MenuItem("Dust/Actions/Call Random")]
+        [MenuItem("Dust/Actions/Flow Random")]
         public static void AddComponentToSelectedObjects()
         {
-            AddComponentToSelectedOrNewObject("Call Random Action", typeof(DuCallRandomAction));
+            AddComponentToSelectedOrNewObject("Flow Random Action", typeof(DuFlowRandomAction));
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -44,7 +44,7 @@ namespace DustEngine.DustEditor
 
             OnInspectorGUI_BaseControlUI();
 
-            if (DustGUI.FoldoutBegin("Parameters", "DuCallRandomAction.Parameters"))
+            if (DustGUI.FoldoutBegin("Parameters", "DuFlowRandomAction.Parameters"))
             {
                 PropertyField(m_Actions);
 
@@ -54,8 +54,8 @@ namespace DustEngine.DustEditor
             }
             DustGUI.FoldoutEnd();
 
-            OnInspectorGUI_Callbacks("DuCallRandomAction");
-            OnInspectorGUI_Extended("DuCallRandomAction");
+            OnInspectorGUI_Callbacks("DuFlowRandomAction");
+            OnInspectorGUI_Extended("DuFlowRandomAction");
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

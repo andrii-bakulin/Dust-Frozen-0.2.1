@@ -5,8 +5,8 @@ using Random = System.Random;
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Actions/Call Random Action")]
-    public class DuCallRandomAction : DuInstantAction
+    [AddComponentMenu("Dust/Actions/Flow Random Action")]
+    public class DuFlowRandomAction : DuInstantAction
     {
         [Serializable]
         public class Record
