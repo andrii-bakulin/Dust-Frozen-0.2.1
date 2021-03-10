@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace DustEngine
 {
@@ -13,11 +10,6 @@ namespace DustEngine
             Self = 1,
             ParentObject = 2,
             GameObject = 3,
-        }
-
-        [Serializable]
-        public class ActionCallback : UnityEvent<DuAction>
-        {
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -55,25 +47,6 @@ namespace DustEngine
             {
                 if (!IsAllowUpdateProperty()) return;
                 m_TargetObject = value;
-            }
-        }
-
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-        [SerializeField]
-        protected ActionCallback m_OnCompleteCallback = null;
-        public ActionCallback onCompleteCallback => m_OnCompleteCallback;
-
-        [SerializeField]
-        protected List<DuAction> m_OnCompleteActions = null;
-        public List<DuAction> onCompleteActions
-        {
-            get
-            {
-                if (Dust.IsNull(m_OnCompleteActions))
-                    m_OnCompleteActions = new List<DuAction>();
-
-                return m_OnCompleteActions;
             }
         }
 
@@ -187,19 +160,6 @@ namespace DustEngine
             m_IsPlaying = false;
 
             OnActionStop(isTerminated);
-
-            if (!isTerminated)
-            {
-                onCompleteCallback?.Invoke(this);
-
-                if (Dust.IsNotNull(onCompleteActions))
-                {
-                    for (int i = 0; i < onCompleteActions.Count; i++)
-                    {
-                        onCompleteActions[i]?.Play(this);
-                    }
-                }
-            }
         }
 
         //--------------------------------------------------------------------------------------------------------------

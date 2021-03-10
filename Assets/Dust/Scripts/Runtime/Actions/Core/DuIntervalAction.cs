@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace DustEngine
 {
-    public abstract class DuIntervalAction : DuAction
+    public abstract class DuIntervalAction : DuActionWithCallbacks
     {
         public enum RepeatMode
         {

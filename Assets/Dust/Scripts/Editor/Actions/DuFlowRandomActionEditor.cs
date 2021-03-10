@@ -6,7 +6,7 @@ namespace DustEngine.DustEditor
     [CustomEditor(typeof(DuFlowRandomAction))]
     [CanEditMultipleObjects]
     [InitializeOnLoad]
-    public class DuFlowRandomActionEditor : DuInstantActionEditor
+    public class DuFlowRandomActionEditor : DuFlowActionEditor
     {
         private DuProperty m_Actions;
 
@@ -54,7 +54,6 @@ namespace DustEngine.DustEditor
             }
             DustGUI.FoldoutEnd();
 
-            OnInspectorGUI_Callbacks("DuFlowRandomAction");
             OnInspectorGUI_Extended("DuFlowRandomAction");
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -3,7 +3,7 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    public abstract class DuInstantActionEditor : DuActionEditor
+    public abstract class DuInstantActionEditor : DuActionWithCallbacksEditor
     {
     }
 }

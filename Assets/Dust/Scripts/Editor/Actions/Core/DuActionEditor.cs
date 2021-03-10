@@ -11,9 +11,6 @@ namespace DustEngine.DustEditor
         protected DuProperty m_TargetMode;
         protected DuProperty m_TargetObject;
 
-        protected DuProperty m_OnCompleteCallback;
-        protected DuProperty m_OnCompleteActions;
-
         //--------------------------------------------------------------------------------------------------------------
 
         protected DuAction.TargetMode targetMode => (DuAction.TargetMode) m_TargetMode.valInt;
@@ -28,9 +25,6 @@ namespace DustEngine.DustEditor
 
             m_TargetMode = FindProperty("m_TargetMode", "Target Mode");
             m_TargetObject = FindProperty("m_TargetObject", "Target Object");
-
-            m_OnCompleteCallback = FindProperty("m_OnCompleteCallback", "Callback");
-            m_OnCompleteActions = FindProperty("m_OnCompleteActions", "On Complete Start Actions");
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -118,13 +112,16 @@ namespace DustEngine.DustEditor
 
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-                foreach (DuAction nextAction in duAction.onCompleteActions)
+                if (duAction as DuActionWithCallbacks is DuActionWithCallbacks duActionWithCallbacks)
                 {
-                    if (Dust.IsNull(nextAction))
-                        continue;
+                    foreach (var nextAction in duActionWithCallbacks.onCompleteActions)
+                    {
+                        if (Dust.IsNull(nextAction))
+                            continue;
 
-                    Texture icon = Icons.GetTextureByComponent(nextAction);
-                    DustGUI.IconButton(icon);
+                        Texture icon = Icons.GetTextureByComponent(nextAction);
+                        DustGUI.IconButton(icon);
+                    }
                 }
 
                 if (DustGUI.IconButton(Icons.ACTION_ADD_ACTION))
@@ -163,20 +160,6 @@ namespace DustEngine.DustEditor
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        protected virtual void OnInspectorGUI_Callbacks(string actionId)
-            => OnInspectorGUI_Callbacks(actionId, false);
-
-        protected virtual void OnInspectorGUI_Callbacks(string actionId, bool callbackExpanded)
-        {
-            if (DustGUI.FoldoutBegin("On Complete Callback", actionId + ".Callback", this, callbackExpanded))
-            {
-                PropertyField(m_OnCompleteCallback);
-            }
-            DustGUI.FoldoutEnd();
-
-            PropertyField(m_OnCompleteActions, $"{m_OnCompleteActions.title} ({m_OnCompleteActions.property.arraySize})");
-        }
-        
         protected virtual void OnInspectorGUI_Extended(string actionId)
         {
             if (DustGUI.FoldoutBegin("Extended", actionId + ".Extended", this))

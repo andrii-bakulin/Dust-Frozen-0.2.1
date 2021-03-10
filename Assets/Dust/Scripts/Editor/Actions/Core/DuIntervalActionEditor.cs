@@ -3,7 +3,7 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    public abstract class DuIntervalActionEditor : DuActionEditor
+    public abstract class DuIntervalActionEditor : DuActionWithCallbacksEditor
     {
         protected DuProperty m_Duration;
 
