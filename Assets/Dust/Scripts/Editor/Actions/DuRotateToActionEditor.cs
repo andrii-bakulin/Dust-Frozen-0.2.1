@@ -45,7 +45,7 @@ namespace DustEngine.DustEditor
             if (DustGUI.FoldoutBegin("Parameters", "DuRotateToAction.Parameters"))
             {
                 PropertyField(m_RotateTo);
-                OnInspectorGUI_Durations();
+                OnInspectorGUI_Duration();
                 PropertyField(m_Space);
             }
             DustGUI.FoldoutEnd();

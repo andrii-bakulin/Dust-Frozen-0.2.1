@@ -16,13 +16,13 @@ namespace DustEngine.DustEditor
             m_RollbackDuration = FindProperty("m_RollbackDuration", "Rollback Duration");
         }
 
-        protected override void OnInspectorGUI_Durations()
+        protected override void OnInspectorGUI_Duration()
         {
-            PropertyDurationSlider(m_Duration);
+            PropertyDurationField(m_Duration);
             
             PropertyField(m_PlayRollback);
             if (m_PlayRollback.IsTrue)
-                PropertyDurationSlider(m_RollbackDuration);
+                PropertyDurationField(m_RollbackDuration);
 
             if (m_PlayRollback.IsTrue && DuMath.IsZero(m_Duration.valFloat) && DuMath.IsZero(m_RollbackDuration.valFloat))
                 DustGUI.HelpBoxWarning("This action has rollback flag and both durations have zero-lengths, so action has no sense.");

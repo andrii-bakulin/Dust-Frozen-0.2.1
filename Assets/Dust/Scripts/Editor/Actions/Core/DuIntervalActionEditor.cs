@@ -22,9 +22,9 @@ namespace DustEngine.DustEditor
             m_RepeatTimes = FindProperty("m_RepeatTimes", "Repeat Times");
         }
 
-        protected virtual void OnInspectorGUI_Durations()
+        protected virtual void OnInspectorGUI_Duration()
         {
-            PropertyDurationSlider(m_Duration);
+            PropertyDurationField(m_Duration);
         }
 
         protected override void OnInspectorGUI_Extended_BlockMiddle()

@@ -62,7 +62,7 @@ namespace DustEngine.DustEditor
                 
                 Space();
                 
-                OnInspectorGUI_Durations();
+                OnInspectorGUI_Duration();
             }
             DustGUI.FoldoutEnd();
 

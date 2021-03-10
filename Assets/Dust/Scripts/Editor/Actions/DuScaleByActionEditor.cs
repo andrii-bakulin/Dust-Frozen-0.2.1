@@ -45,7 +45,7 @@ namespace DustEngine.DustEditor
             if (DustGUI.FoldoutBegin("Parameters", "DuScaleByAction.Parameters"))
             {
                 PropertyField(m_ScaleBy);
-                OnInspectorGUI_Durations();
+                OnInspectorGUI_Duration();
                 PropertyField(m_Space);
             }
             DustGUI.FoldoutEnd();

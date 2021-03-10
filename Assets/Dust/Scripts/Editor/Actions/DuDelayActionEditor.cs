@@ -9,8 +9,7 @@ namespace DustEngine.DustEditor
     public class DuDelayActionEditor : DuIntervalActionEditor
     {
         private DuProperty m_DelayMode;
-        private DuProperty m_DurationRangeMin;
-        private DuProperty m_DurationRangeMax;
+        private DuProperty m_DurationRange;
         private DuProperty m_Seed;
 
         private DuDelayAction.DelayMode delayMode => (DuDelayAction.DelayMode) m_DelayMode.valInt;
@@ -35,8 +34,7 @@ namespace DustEngine.DustEditor
             base.InitializeEditor();
 
             m_DelayMode = FindProperty("m_DelayMode", "Mode");
-            m_DurationRangeMin = FindProperty(serializedObject.FindProperty("m_DurationRange"), "m_Min", "Delay Min Range");
-            m_DurationRangeMax = FindProperty(serializedObject.FindProperty("m_DurationRange"), "m_Max", "Delay Max Range");
+            m_DurationRange = FindProperty("m_DurationRange");
             m_Seed = FindProperty("m_Seed", "Seed");
         }
 
@@ -54,12 +52,11 @@ namespace DustEngine.DustEditor
 
                 if (delayMode == DuDelayAction.DelayMode.Fixed)
                 {
-                    OnInspectorGUI_Durations();
+                    OnInspectorGUI_Duration();
                 }
                 else if (delayMode == DuDelayAction.DelayMode.Range)
                 {
-                    PropertyDurationSlider(m_DurationRangeMin);
-                    PropertyDurationSlider(m_DurationRangeMax);
+                    PropertyFieldDurationRange(m_DurationRange); 
                     PropertySeedRandomOrFixed(m_Seed);
                 }
             }
