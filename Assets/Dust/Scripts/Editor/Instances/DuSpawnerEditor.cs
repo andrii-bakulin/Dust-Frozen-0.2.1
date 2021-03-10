@@ -85,11 +85,11 @@ namespace DustEngine.DustEditor
                     break;
 
                 case DuSpawner.SpawnEvent.FixedInterval:
-                    PropertyField(m_Interval);
+                    PropertyDurationField(m_Interval);
                     break;
 
                 case DuSpawner.SpawnEvent.IntervalInRange:
-                    PropertyFieldRange(m_IntervalRange);
+                    PropertyFieldDurationRange(m_IntervalRange);
                     break;
 
                 default:
@@ -215,15 +215,6 @@ namespace DustEngine.DustEditor
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // Validate & Normalize Data
 
-            if (m_Interval.isChanged)
-                NormalizeIntervalValue(m_Interval.property);
-
-            if (m_IntervalRange.isChanged)
-            {
-                NormalizeIntervalValue(m_IntervalRange.FindInnerProperty("m_Min"));
-                NormalizeIntervalValue(m_IntervalRange.FindInnerProperty("m_Max"));
-            }
-
             if (m_MultipleSpawnCountMin.isChanged || m_MultipleSpawnCountMax.isChanged)
             {
                 DuIntRange range = new DuIntRange(m_MultipleSpawnCountMin.valInt, m_MultipleSpawnCountMax.valInt);
@@ -238,11 +229,6 @@ namespace DustEngine.DustEditor
                 m_Limit.valInt = DuSpawner.Normalizer.Limit(m_Limit.valInt);
 
             InspectorCommitUpdates();
-        }
-
-        private void NormalizeIntervalValue(SerializedProperty property)
-        {
-            property.floatValue = DuSpawner.Normalizer.IntervalValue(property.floatValue);
         }
     }
 }

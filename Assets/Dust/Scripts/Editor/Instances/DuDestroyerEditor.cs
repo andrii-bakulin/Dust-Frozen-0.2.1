@@ -69,11 +69,11 @@ namespace DustEngine.DustEditor
                     break;
 
                 case DuDestroyer.DestroyMode.Time:
-                    PropertyField(m_Timeout);
+                    PropertyDurationField(m_Timeout);
                     break;
 
                 case DuDestroyer.DestroyMode.TimeRange:
-                    PropertyFieldRange(m_TimeoutRange, "Timeout Range Min", "Timeout Range Max");
+                    PropertyFieldDurationRange(m_TimeoutRange);
                     break;
 
                 case DuDestroyer.DestroyMode.AliveZone:

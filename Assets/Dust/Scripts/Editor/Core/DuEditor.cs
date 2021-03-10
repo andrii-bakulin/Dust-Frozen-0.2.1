@@ -334,10 +334,25 @@ namespace DustEngine.DustEditor
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+        public static bool PropertyDurationField(DuProperty duProperty)
+            => PropertyDurationField(duProperty, 10f);
+
+        public static bool PropertyDurationField(DuProperty duProperty, float rightValue)
+        {
+            PropertyExtendedSlider(duProperty, 0.0f, rightValue, 0.01f, 0.0f, float.MaxValue);
+            
+            if (duProperty.isChanged)
+                duProperty.valFloat = Mathf.Clamp(duProperty.valFloat, 0f, float.MaxValue);
+
+            return duProperty.isChanged;
+        }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
         public static bool PropertyFieldRange(DuProperty duProperty)
             => PropertyFieldRange(duProperty, "Range Min", "Range Max");
 
-        public static bool PropertyFieldRange(DuProperty duProperty, string titleRangeMin, string titleRangeMax)
+        public static bool PropertyFieldRange(DuProperty duProperty, string minTitle, string maxTitle)
         {
             if (Dust.IsNull(duProperty.property))
             {
@@ -345,10 +360,70 @@ namespace DustEngine.DustEditor
                 return false;
             }
 
-            duProperty.isChanged |= PropertyField(duProperty.FindInnerProperty("m_Min"), titleRangeMin);
-            duProperty.isChanged |= PropertyField(duProperty.FindInnerProperty("m_Max"), titleRangeMax);
+            duProperty.isChanged |= PropertyField(duProperty.FindInnerProperty("m_Min"), minTitle);
+            duProperty.isChanged |= PropertyField(duProperty.FindInnerProperty("m_Max"), maxTitle);
             return duProperty.isChanged;
         }
+
+        public bool PropertyFieldRange(DuProperty duProperty,
+            string minTitle, float minLeftValue, float minRightValue, float minStepValue, float minLeftLimit, float minRightLimit,  
+            string maxTitle, float maxLeftValue, float maxRightValue, float maxStepValue, float maxLeftLimit, float maxRightLimit)
+        {
+            if (Dust.IsNull(duProperty.property))
+            {
+                Dust.Debug.Warning("DuProperty[" + duProperty.propertyPath + "] is null");
+                return false;
+            }
+
+            var duMinProperty = FindProperty(this, duProperty.property, "m_Min", minTitle);
+            var duMaxProperty = FindProperty(this, duProperty.property, "m_Max", maxTitle);
+
+            duProperty.isChanged |= PropertyExtendedSlider(duMinProperty, 
+                minLeftValue, minRightValue, minStepValue,
+                minLeftLimit, minRightLimit);
+
+            duProperty.isChanged |= PropertyExtendedSlider(duMaxProperty, 
+                maxLeftValue, maxRightValue, maxStepValue,
+                maxLeftLimit, maxRightLimit);
+
+            if (duMinProperty.isChanged)
+            {
+                duMinProperty.valFloat = Mathf.Clamp(duMinProperty.valFloat, minLeftLimit, minRightLimit);
+
+                if (duMinProperty.valFloat > duMaxProperty.valFloat)
+                    duMaxProperty.valFloat = duMinProperty.valFloat;
+            }
+            
+            if (duMaxProperty.isChanged)
+            {
+                duMaxProperty.valFloat = Mathf.Clamp(duMaxProperty.valFloat, maxLeftLimit, maxRightLimit);
+
+                if (duMinProperty.valFloat > duMaxProperty.valFloat)
+                    duMinProperty.valFloat = duMaxProperty.valFloat;
+            }
+            
+            return duProperty.isChanged;
+        }
+        
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        
+        public bool PropertyFieldDurationRange(DuProperty duProperty)
+            => PropertyFieldDurationRange(duProperty, duProperty.title + " Min", duProperty.title + " Max");
+
+        public bool PropertyFieldDurationRange(DuProperty duProperty, 
+            string minTitle, string maxTitle)
+            => PropertyFieldDurationRange(duProperty,
+                minTitle, maxTitle,
+                0.0f, 10.0f, 0.01f, 0.0f, float.MaxValue);
+
+        public bool PropertyFieldDurationRange(DuProperty duProperty, 
+            string minTitle, string maxTitle,
+            float leftValue, float rightValue, float stepValue, float leftLimit, float rightLimit)
+            => PropertyFieldRange(duProperty,
+                minTitle, leftValue, rightValue, stepValue, leftLimit, rightLimit,
+                maxTitle, leftValue, rightValue, stepValue, leftLimit, rightLimit);
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         public static bool PropertySeedRandomOrFixed(DuProperty duProperty)
             => PropertySeedRandomOrFixed(duProperty, DuConstants.RANDOM_SEED_DEFAULT);

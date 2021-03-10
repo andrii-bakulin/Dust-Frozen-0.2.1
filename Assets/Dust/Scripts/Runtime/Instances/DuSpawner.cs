@@ -7,8 +7,6 @@ namespace DustEngine
     [AddComponentMenu("Dust/Instances/Spawner")]
     public class DuSpawner : DuMonoBehaviour
     {
-        internal const float k_MinIntervalValue = 0.01f;
-
         public enum SpawnEvent
         {
             Manual = 0,
@@ -229,12 +227,12 @@ namespace DustEngine
 
         private void Update()
         {
-            if (spawnEvent == SpawnEvent.Manual)
+            if (spawnEvent == SpawnEvent.Manual || m_SpawnDelay < 0f)
                 return;
 
             m_SpawnTimer += Time.deltaTime;
 
-            if (m_SpawnDelay <= 0f || m_SpawnTimer < m_SpawnDelay)
+            if (m_SpawnTimer < m_SpawnDelay)
                 return;
 
             Spawn();
@@ -372,12 +370,9 @@ namespace DustEngine
                     break;
 
                 default:
-                    delay = k_MinIntervalValue;
+                    delay = -1f;
                     break;
             }
-
-            if (delay < k_MinIntervalValue)
-                delay = k_MinIntervalValue;
 
             return delay;
         }
@@ -406,7 +401,7 @@ namespace DustEngine
 
             public static float IntervalValue(float value)
             {
-                return Mathf.Max(k_MinIntervalValue, value);
+                return Mathf.Max(0f, value);
             }
         }
     }
