@@ -5,13 +5,16 @@
 - Added component Animation.DuScale
 - Added DuActions [core]
 - Added DuCallbackAction
-- Added DuCallRandomAction
 - Added DuDelayAction
-- Added DuDestroyerAction
+- Added DuDestroyAction
 - Added DuFlipAction
-- Added DuMoveByAction & DuMoveToAction
-- Added DuRotateByAction & DuRotateToAction
-- Added DuScaleByAction & DuScaleToAction
+- Added DuFlowRandomAction
+- Added DuMoveByAction
+- Added DuMoveToAction
+- Added DuRotateByAction
+- Added DuRotateToAction
+- Added DuScaleByAction
+- Added DuScaleToAction
 - Added DuSpawnAction
 - Added DuTintAction
 - Added DuTransformCopyAction
