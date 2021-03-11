@@ -330,7 +330,7 @@ namespace DustEngine
                 }
             }
 
-            if (Dust.IsNull(useSpawnObject))
+            if (Dust.IsNull(useSpawnObject) || Dust.IsNull(useSpawnPoint))
                 return null;
 
             // Spawn
