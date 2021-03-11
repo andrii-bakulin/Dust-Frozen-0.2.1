@@ -18,6 +18,7 @@ namespace DustEngine.DustEditor
         private DuProperty m_ScaleEnabled;
         private DuProperty m_ScaleRangeMin;
         private DuProperty m_ScaleRangeMax;
+        private DuProperty m_ScaleUniform;
 
         private DuProperty m_ActivateMode;
         private DuProperty m_TransformMode;
@@ -50,6 +51,7 @@ namespace DustEngine.DustEditor
             m_ScaleEnabled = FindProperty("m_ScaleEnabled", "Random Scale");
             m_ScaleRangeMin = FindProperty("m_ScaleRangeMin", "Scale Range Min");
             m_ScaleRangeMax = FindProperty("m_ScaleRangeMax", "Scale Range Max");
+            m_ScaleUniform = FindProperty("m_ScaleUniform", "Uniform");
 
             m_ActivateMode = FindProperty("m_ActivateMode", "Activate On");
             m_TransformMode = FindProperty("m_TransformMode", "Transform Mode",
@@ -90,6 +92,7 @@ namespace DustEngine.DustEditor
             {
                 PropertyField(m_ScaleRangeMin);
                 PropertyField(m_ScaleRangeMax);
+                PropertyField(m_ScaleUniform);
                 Space();
             }
 

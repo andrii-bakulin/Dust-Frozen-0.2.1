@@ -1259,6 +1259,7 @@ MonoBehaviour:
   m_ScaleEnabled: 0
   m_ScaleRangeMin: {x: -0.5, y: -0.5, z: -0.5}
   m_ScaleRangeMax: {x: 1, y: 1, z: 1}
+  m_ScaleUniform: 1
   m_TransformMode: 1
   m_Space: 1
   m_Seed: 0
@@ -2165,13 +2166,13 @@ MonoBehaviour:
   - {fileID: 2872860718845723962, guid: 110904e152dd248de866270c6b3a8cc5, type: 3}
   m_SpawnObjectsIterate: 1
   m_SpawnObjectsIteration: 0
-  m_SpawnObjectsSeed: 12345
+  m_SpawnObjectsSeed: 12350
   m_MultipleSpawnEnabled: 1
   m_MultipleSpawnCount:
     m_Min: 0
     m_Max: 3
   m_MultipleSpawnSeed: -31250
-  m_ParentMode: 2
+  m_ParentMode: 0
   m_ResetTransform: 0
 --- !u!114 &674186449
 MonoBehaviour:
@@ -2542,6 +2543,7 @@ MonoBehaviour:
   m_ScaleEnabled: 0
   m_ScaleRangeMin: {x: -0.5, y: -0.5, z: -0.5}
   m_ScaleRangeMax: {x: 1, y: 1, z: 1}
+  m_ScaleUniform: 1
   m_TransformMode: 1
   m_Space: 1
   m_Seed: 0
@@ -4851,7 +4853,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 10, y: 1, z: 10}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -0.5, z: 0}
 --- !u!1 &1977766932
 GameObject:
   m_ObjectHideFlags: 0

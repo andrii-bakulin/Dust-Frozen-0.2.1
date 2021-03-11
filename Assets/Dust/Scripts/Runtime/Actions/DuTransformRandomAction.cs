@@ -131,6 +131,18 @@ namespace DustEngine
             }
         }
 
+        [SerializeField] 
+        private bool m_ScaleUniform = true;
+        public bool scaleUniform
+        {
+            get => m_ScaleUniform;
+            set
+            {
+                if (!IsAllowUpdateProperty()) return;
+                m_ScaleUniform = value;
+            }
+        }
+
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
@@ -233,7 +245,13 @@ namespace DustEngine
 
             if (scaleEnabled)
             {
-                Vector3 value = duRandom.Range(scaleRangeMin, scaleRangeMax);
+                Vector3 value;
+                
+                if (scaleUniform)
+                    value = Vector3.Lerp(scaleRangeMin, scaleRangeMax, duRandom.Next());
+                else
+                    value = duRandom.Range(scaleRangeMin, scaleRangeMax);
+
                 Vector3 scale = Vector3.one;
 
                 if (space == Space.World)
