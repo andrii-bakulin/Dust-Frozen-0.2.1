@@ -188,6 +188,14 @@ namespace DustEngine
             set => m_SpawnOnAwake = value;
         }
 
+        [SerializeField]
+        private bool m_ResetTransform = true;
+        public bool resetTransform
+        {
+            get => m_ResetTransform;
+            set => m_ResetTransform = value;
+        }
+
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
@@ -273,7 +281,6 @@ namespace DustEngine
 
             switch (spawnPointMode)
             {
-                default:
                 case SpawnPointMode.Self:
                     useSpawnPoint = this.gameObject;
                     break;
@@ -284,7 +291,6 @@ namespace DustEngine
 
                     switch (spawnPointsIterate)
                     {
-                        default:
                         case IterateMode.Iterate:
                             useSpawnPoint = spawnPoints[(spawnPointsIteration++) % spawnPoints.Count];
                             break;
@@ -292,9 +298,14 @@ namespace DustEngine
                         case IterateMode.Random:
                             useSpawnPoint = spawnPoints[spawnPointsRandom.Range(0, spawnPoints.Count)];
                             break;
+                        
+                        default:
+                            return null;
                     }
-
                     break;
+
+                default:
+                    return null;
             }
 
             if (Dust.IsNull(useSpawnPoint))
@@ -306,7 +317,6 @@ namespace DustEngine
             {
                 switch (spawnObjectsIterate)
                 {
-                    default:
                     case IterateMode.Iterate:
                         useSpawnObject = spawnObjects[(spawnObjectsIteration++) % spawnObjects.Count];
                         break;
@@ -314,6 +324,9 @@ namespace DustEngine
                     case IterateMode.Random:
                         useSpawnObject = spawnObjects[spawnObjectsRandom.Range(0, spawnObjects.Count)];
                         break;
+
+                    default:
+                        return null;
                 }
             }
 
@@ -323,12 +336,12 @@ namespace DustEngine
             // Spawn
 
             GameObject obj = Instantiate(useSpawnObject, useSpawnPoint.transform);
-            obj.transform.localPosition = Vector3.zero;
-            obj.transform.localRotation = Quaternion.identity;
+
+            if (resetTransform)
+                DuTransform.Reset(obj.transform);
 
             switch (parentMode)
             {
-                default:
                 case SpawnParentMode.Spawner:
                     obj.transform.parent = transform;
                     break;
@@ -345,9 +358,7 @@ namespace DustEngine
             m_Count++;
 
             if (Dust.IsNotNull(onSpawn) && onSpawn.GetPersistentEventCount() > 0)
-            {
                 onSpawn.Invoke(obj);
-            }
 
             return obj;
         }

@@ -25,6 +25,7 @@ namespace DustEngine.DustEditor
         private DuProperty m_MultipleSpawnCountMax;
         private DuProperty m_MultipleSpawnSeed;
 
+        private DuProperty m_ResetTransform;
         private DuProperty m_ParentMode;
         private DuProperty m_Limit;
         private DuProperty m_SpawnOnAwake;
@@ -63,6 +64,7 @@ namespace DustEngine.DustEditor
             m_MultipleSpawnCountMax = FindProperty(serializedObject.FindProperty("m_MultipleSpawnCount"), "m_Max", "Max Count");
             m_MultipleSpawnSeed = FindProperty("m_MultipleSpawnSeed", "Seed");
 
+            m_ResetTransform = FindProperty("m_ResetTransform", "Reset Transform");
             m_ParentMode = FindProperty("m_ParentMode", "Assign Parent As");
             m_Limit = FindProperty("m_Limit", "Total Limit");
             m_SpawnOnAwake = FindProperty("m_SpawnOnAwake", "Spawn On Awake");
@@ -164,6 +166,7 @@ namespace DustEngine.DustEditor
 
             PropertyField(m_Limit);
             PropertyField(m_SpawnOnAwake);
+            PropertyField(m_ResetTransform);
             PropertyField(m_ParentMode);
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
