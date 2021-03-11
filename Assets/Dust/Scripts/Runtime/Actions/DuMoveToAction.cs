@@ -43,14 +43,14 @@ namespace DustEngine
         {
             base.OnActionStart();
 
-            if (Dust.IsNull(m_TargetTransform))
+            if (Dust.IsNull(activeTargetTransform))
                 return;
 
             Vector3 localMoveTo;
 
             if (space == Space.World)
             {
-                var trParent = m_TargetTransform.parent;
+                var trParent = activeTargetTransform.parent;
                 localMoveTo = Dust.IsNotNull(trParent) ? trParent.InverseTransformPoint(m_MoveTo) : m_MoveTo;
             }
             else if (space == Space.Local)
@@ -59,7 +59,7 @@ namespace DustEngine
             }
             else return;
 
-            m_DeltaLocalMove = localMoveTo - m_TargetTransform.localPosition; 
+            m_DeltaLocalMove = localMoveTo - activeTargetTransform.localPosition; 
         }
     }
 }

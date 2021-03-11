@@ -51,11 +51,11 @@ namespace DustEngine
 
             if (space == Space.World)
             {
-                m_RotationStart = m_TargetTransform.rotation;
+                m_RotationStart = activeTargetTransform.rotation;
             }
             else if (space == Space.Local)
             {
-                m_RotationStart = m_TargetTransform.localRotation;
+                m_RotationStart = activeTargetTransform.localRotation;
             }
              
             m_RotationFinal = Quaternion.Euler(rotateTo);
@@ -63,7 +63,7 @@ namespace DustEngine
 
         protected override void OnActionUpdate(float deltaTime)
         {
-            if (Dust.IsNull(m_TargetTransform))
+            if (Dust.IsNull(activeTargetTransform))
                 return;
 
             var lerpOffset = 1f;
@@ -82,11 +82,11 @@ namespace DustEngine
 
             if (space == Space.World)
             {
-                m_TargetTransform.rotation = Quaternion.Slerp(m_TargetTransform.rotation, rotateEndPoint, lerpOffset);
+                activeTargetTransform.rotation = Quaternion.Slerp(activeTargetTransform.rotation, rotateEndPoint, lerpOffset);
             }
             else if (space == Space.Local)
             {
-                m_TargetTransform.localRotation = Quaternion.Slerp(m_TargetTransform.localRotation, rotateEndPoint, lerpOffset);
+                activeTargetTransform.localRotation = Quaternion.Slerp(activeTargetTransform.localRotation, rotateEndPoint, lerpOffset);
             }
         }
     }

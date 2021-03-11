@@ -24,13 +24,13 @@ namespace DustEngine
         {
             base.OnActionStart();
 
-            if (Dust.IsNull(m_TargetTransform))
+            if (Dust.IsNull(activeTargetTransform))
                 return;
 
             if (space == Space.World)
-                m_ScaleStart = m_TargetTransform.lossyScale;
+                m_ScaleStart = activeTargetTransform.lossyScale;
             else if (space == Space.Local)
-                m_ScaleStart = m_TargetTransform.localScale;
+                m_ScaleStart = activeTargetTransform.localScale;
 
             m_ScaleFinal = Vector3.Scale(m_ScaleStart, scaleBy);
             

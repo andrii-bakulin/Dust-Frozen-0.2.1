@@ -935,7 +935,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AutoStart: 1
-  m_TargetMode: 1
+  m_TargetMode: 0
   m_TargetObject: {fileID: 0}
   m_Actions:
   - m_Action: {fileID: 301460051}
@@ -4283,7 +4283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AutoStart: 0
-  m_TargetMode: 3
+  m_TargetMode: 0
   m_TargetObject: {fileID: 0}
   m_OnCompleteCallback:
     m_PersistentCalls:

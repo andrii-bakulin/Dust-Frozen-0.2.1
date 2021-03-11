@@ -50,8 +50,6 @@ namespace DustEngine.DustEditor
 
             if (DustGUI.FoldoutBegin("Parameters", "DuTintAction.Parameters"))
             {
-                OnInspectorGUI_CheckIsObjectReady();
-                
                 PropertyField(m_TintColor);
                 PropertyField(m_TintMode);
                 
@@ -72,29 +70,6 @@ namespace DustEngine.DustEditor
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             InspectorCommitUpdates();
-        }
-
-        protected void OnInspectorGUI_CheckIsObjectReady()
-        {
-            if (targets.Length != 1 || targetMode == DuAction.TargetMode.Inherit)
-                return;
-
-            var gameObject = (target as DuAction).GetTargetObject();
-
-            Type component = DuTintAction.GetUpdaterTypeByTintMode(tintMode);
-
-            if (Dust.IsNull(gameObject) || Dust.IsNull(component))
-                return;
-
-            MethodInfo mInfo = component.GetMethod("GetTypeToUpdate");
-
-            if (Dust.IsNull(mInfo))
-                return;
-
-            component = (Type) mInfo.Invoke(null, null);
-            
-            if (Dust.IsNull(gameObject.GetComponent(component)))
-                DustGUI.HelpBoxWarning($"Target GameObject has no {component} component");
         }
     }
 }

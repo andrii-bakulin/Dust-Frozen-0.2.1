@@ -38,7 +38,7 @@ namespace DustEngine
         
         protected override void OnActionUpdate(float deltaTime)
         {
-            if (Dust.IsNull(m_TargetTransform))
+            if (Dust.IsNull(activeTargetTransform))
                 return;
 
             var scaleNext = playingPhase == PlayingPhase.Main
@@ -49,11 +49,11 @@ namespace DustEngine
 
             if (space == Space.World)
             {
-                DuTransform.SetGlobalScale(m_TargetTransform, m_TargetTransform.lossyScale + scaleDiff);
+                DuTransform.SetGlobalScale(activeTargetTransform, activeTargetTransform.lossyScale + scaleDiff);
             }
             else if (space == Space.Local)
             {
-                m_TargetTransform.localScale += scaleDiff;
+                activeTargetTransform.localScale += scaleDiff;
             }
 
             m_ScaleLast = scaleNext;

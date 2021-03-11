@@ -15,7 +15,7 @@ namespace DustEngine
 
             public static TintUpdater Create(DuTintAction parentTintAction)
             {
-                var target = parentTintAction.GetTargetObject().GetComponent<MeshRenderer>();
+                var target = parentTintAction.activeTargetObject.GetComponent<MeshRenderer>();
 
                 if (Dust.IsNull(target))
                     return null;

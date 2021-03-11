@@ -198,7 +198,7 @@ namespace DustEngine
 
         protected override void OnActionUpdate(float deltaTime)
         {
-            if (Dust.IsNull(m_TargetTransform))
+            if (Dust.IsNull(activeTargetTransform))
                 return;
 
             if (positionEnabled)
@@ -207,9 +207,9 @@ namespace DustEngine
                 Vector3 position = Vector3.zero;
 
                 if (space == Space.World)
-                    position = m_TargetTransform.position;
+                    position = activeTargetTransform.position;
                 else if (space == Space.Local)
-                    position = m_TargetTransform.localPosition;
+                    position = activeTargetTransform.localPosition;
 
                 if (transformMode == TransformMode.Add)
                     position += value;
@@ -217,9 +217,9 @@ namespace DustEngine
                     position = value;
 
                 if (space == Space.World)
-                    m_TargetTransform.position = position;
+                    activeTargetTransform.position = position;
                 else if (space == Space.Local)
-                    m_TargetTransform.localPosition = position;
+                    activeTargetTransform.localPosition = position;
             }
 
             if (rotationEnabled)
@@ -228,9 +228,9 @@ namespace DustEngine
                 Vector3 rotation = Vector3.zero;
 
                 if (space == Space.World)
-                    rotation = m_TargetTransform.eulerAngles;
+                    rotation = activeTargetTransform.eulerAngles;
                 else if (space == Space.Local)
-                    rotation = m_TargetTransform.localEulerAngles;
+                    rotation = activeTargetTransform.localEulerAngles;
 
                 if (transformMode == TransformMode.Add)
                     rotation += value;
@@ -238,9 +238,9 @@ namespace DustEngine
                     rotation = value;
 
                 if (space == Space.World)
-                    m_TargetTransform.eulerAngles = rotation;
+                    activeTargetTransform.eulerAngles = rotation;
                 else if (space == Space.Local)
-                    m_TargetTransform.localEulerAngles = rotation;
+                    activeTargetTransform.localEulerAngles = rotation;
             }
 
             if (scaleEnabled)
@@ -255,9 +255,9 @@ namespace DustEngine
                 Vector3 scale = Vector3.one;
 
                 if (space == Space.World)
-                    scale = m_TargetTransform.lossyScale;
+                    scale = activeTargetTransform.lossyScale;
                 else if (space == Space.Local)
-                    scale = m_TargetTransform.localScale;
+                    scale = activeTargetTransform.localScale;
 
                 if (transformMode == TransformMode.Add)
                     scale += value;
@@ -265,9 +265,9 @@ namespace DustEngine
                     scale = value;
 
                 if (space == Space.World)
-                    DuTransform.SetGlobalScale(m_TargetTransform, scale);
+                    DuTransform.SetGlobalScale(activeTargetTransform, scale);
                 else if (space == Space.Local)
-                    m_TargetTransform.localScale = scale;
+                    activeTargetTransform.localScale = scale;
             }
         }
     }

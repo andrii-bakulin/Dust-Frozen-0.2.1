@@ -6,10 +6,9 @@ namespace DustEngine
     {
         public enum TargetMode
         {
-            Inherit = 0,
-            Self = 1,
-            ParentObject = 2,
-            GameObject = 3,
+            Self = 0,
+            ParentObject = 1,
+            GameObject = 2,
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -27,7 +26,7 @@ namespace DustEngine
         }
 
         [SerializeField]
-        protected TargetMode m_TargetMode = TargetMode.Inherit;
+        protected TargetMode m_TargetMode = TargetMode.Self;
         public TargetMode targetMode
         {
             get => m_TargetMode;
@@ -52,7 +51,11 @@ namespace DustEngine
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        protected Transform m_TargetTransform;
+        private GameObject m_ActiveTargetObject;
+        public GameObject activeTargetObject => m_ActiveTargetObject;
+
+        private Transform m_ActiveTargetTransform;
+        public Transform activeTargetTransform => m_ActiveTargetTransform;
 
         protected bool m_IsPlaying;
         public bool isPlaying => m_IsPlaying;
@@ -135,16 +138,41 @@ namespace DustEngine
 
         protected virtual void ActionInnerStart(DuAction previousAction)
         {
-            if (targetMode == TargetMode.Inherit)
+            if (Dust.IsNotNull(previousAction))
             {
-                m_TargetObject = Dust.IsNotNull(previousAction) ? previousAction.GetTargetObject() : this.gameObject;
+                // Continue execution
+                m_ActiveTargetObject = previousAction.activeTargetObject;
+            }
+            else
+            {
+                // Start Action
+                // Target object is SELF by default
+                m_ActiveTargetObject = gameObject;
+                
+                // Only for auto-start action user able to assign target object
+                if (autoStart) switch (targetMode)
+                {
+                    case TargetMode.Self:
+                        // nothing need to change
+                        break;
+
+                    case TargetMode.ParentObject:
+                        m_ActiveTargetObject = Dust.IsNotNull(transform.parent) ? transform.parent.gameObject : null;
+                        break;
+
+                    case TargetMode.GameObject:
+                        m_ActiveTargetObject = targetObject;
+                        break;
+                }
+            }
+
+            if (Dust.IsNull(activeTargetObject))
+            {
+                Debug.LogError("Cannot start action, because failed to detect target object");
+                return;
             }
             
-            // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-            
-            var activeTargetObject = GetTargetObject();
-
-            m_TargetTransform = Dust.IsNotNull(activeTargetObject) ? activeTargetObject.transform : null;
+            m_ActiveTargetTransform = activeTargetObject.transform;
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -175,29 +203,6 @@ namespace DustEngine
         protected virtual void OnActionStop(bool isTerminated)
         {
             // Nothing need to do
-        }
-
-        //--------------------------------------------------------------------------------------------------------------
-
-        public GameObject GetTargetObject()
-        {
-            switch (targetMode)
-            {
-                case TargetMode.Inherit:
-                    return Dust.IsNotNull(this.targetObject) ? this.targetObject : this.gameObject;
-
-                case TargetMode.Self:
-                    return this.gameObject;
-
-                case TargetMode.ParentObject:
-                    return Dust.IsNotNull(transform.parent) ? transform.parent.gameObject : null;
-
-                case TargetMode.GameObject:
-                    return this.targetObject;
-
-                default:
-                    return null; 
-            }
         }
     }
 }

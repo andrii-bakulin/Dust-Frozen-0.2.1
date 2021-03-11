@@ -13,7 +13,7 @@ namespace DustEngine
 
             public static TintUpdater Create(DuTintAction parentTintAction)
             {
-                var target = parentTintAction.GetTargetObject().GetComponent<Image>();
+                var target = parentTintAction.activeTargetObject.GetComponent<Image>();
 
                 if (Dust.IsNull(target))
                     return null;

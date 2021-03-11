@@ -46,16 +46,16 @@ namespace DustEngine
 
         protected override void OnActionUpdate(float deltaTime)
         {
-            if (Dust.IsNull(m_TargetTransform))
+            if (Dust.IsNull(activeTargetTransform))
                 return;
 
-            Vector3 scale = m_TargetTransform.localScale;
+            Vector3 scale = activeTargetTransform.localScale;
 
             if (flipX) scale.x *= -1f;
             if (flipY) scale.y *= -1f;
             if (flipZ) scale.z *= -1f;
 
-            m_TargetTransform.localScale = scale;
+            activeTargetTransform.localScale = scale;
         }
     }
 }

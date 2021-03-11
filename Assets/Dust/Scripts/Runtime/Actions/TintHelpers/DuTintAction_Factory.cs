@@ -13,25 +13,6 @@ namespace DustEngine
             TintMode.UIText,
         };
 
-        public static Type GetUpdaterTypeByTintMode(TintMode tintMode)
-        {
-            switch (tintMode)
-            {
-                case TintMode.Auto:
-                    return null;
-
-                case TintMode.MeshRenderer:
-                    return typeof(MeshRendererUpdater);
-
-                case TintMode.UIImage:
-                    return typeof(UIImageUpdater);
-                case TintMode.UIText:
-                    return typeof(UITextUpdater);
-            }
-            
-            return null;
-        } 
-        
         protected static TintUpdater FactoryUpdater(DuTintAction tintAction, TintMode tintMode)
         {
             switch (tintMode)

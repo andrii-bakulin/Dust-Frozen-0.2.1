@@ -35,14 +35,12 @@ namespace DustEngine
 
         public void DestroyNow()
         {
-            GameObject target = GetTargetObject();
-
-            if (Dust.IsNull(target))
+            if (Dust.IsNull(activeTargetObject))
                 return;
 
             if (disableColliders)
             {
-                Collider[] objColliders = target.GetComponents<Collider>();
+                Collider[] objColliders = activeTargetObject.GetComponents<Collider>();
 
                 foreach (var objCollider in objColliders)
                 {
@@ -50,7 +48,7 @@ namespace DustEngine
                 }
             }
 
-            Destroy(target.gameObject);
+            Destroy(activeTargetObject);
         }
     }
 }

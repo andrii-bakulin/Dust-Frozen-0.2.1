@@ -108,30 +108,30 @@ namespace DustEngine
 
         protected override void OnActionUpdate(float deltaTime)
         {
-            if (Dust.IsNull(m_TargetTransform))
+            if (Dust.IsNull(activeTargetTransform))
                 return;
 
             if (space == Space.World)
             {
                 if (positionEnabled)
-                    m_TargetTransform.position = position;
+                    activeTargetTransform.position = position;
 
                 if (rotationEnabled)
-                    m_TargetTransform.rotation = Quaternion.Euler(rotation);
+                    activeTargetTransform.rotation = Quaternion.Euler(rotation);
 
                 if (scaleEnabled)
-                    DuTransform.SetGlobalScale(m_TargetTransform, scale);
+                    DuTransform.SetGlobalScale(activeTargetTransform, scale);
             }
             else if (space == Space.Local)
             {
                 if (positionEnabled)
-                    m_TargetTransform.localPosition = position;
+                    activeTargetTransform.localPosition = position;
 
                 if (rotationEnabled)
-                    m_TargetTransform.localRotation = Quaternion.Euler(rotation);
+                    activeTargetTransform.localRotation = Quaternion.Euler(rotation);
 
                 if (scaleEnabled)
-                    m_TargetTransform.localScale = scale;
+                    activeTargetTransform.localScale = scale;
             }
         }
     }

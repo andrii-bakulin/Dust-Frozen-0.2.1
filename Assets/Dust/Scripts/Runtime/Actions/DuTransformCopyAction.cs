@@ -80,33 +80,33 @@ namespace DustEngine
 
         protected override void OnActionUpdate(float deltaTime)
         {
-            if (Dust.IsNull(sourceObject) || sourceObject.Equals(this.gameObject))
+            if (Dust.IsNull(sourceObject) || sourceObject.Equals(gameObject))
                 return;
 
-            if (Dust.IsNull(m_TargetTransform))
+            if (Dust.IsNull(activeTargetTransform))
                 return;
 
             if (space == Space.World)
             {
                 if (position)
-                    m_TargetTransform.position = sourceObject.transform.position;
+                    activeTargetTransform.position = sourceObject.transform.position;
 
                 if (rotation)
-                    m_TargetTransform.rotation = sourceObject.transform.rotation;
+                    activeTargetTransform.rotation = sourceObject.transform.rotation;
 
                 if (scale)
-                    DuTransform.SetGlobalScale(m_TargetTransform, sourceObject.transform.lossyScale);
+                    DuTransform.SetGlobalScale(activeTargetTransform, sourceObject.transform.lossyScale);
             }
             else if (space == Space.Local)
             {
                 if (position)
-                    m_TargetTransform.localPosition = sourceObject.transform.localPosition;
+                    activeTargetTransform.localPosition = sourceObject.transform.localPosition;
 
                 if (rotation)
-                    m_TargetTransform.localRotation = sourceObject.transform.localRotation;
+                    activeTargetTransform.localRotation = sourceObject.transform.localRotation;
 
                 if (scale)
-                    m_TargetTransform.localScale = sourceObject.transform.localScale;
+                    activeTargetTransform.localScale = sourceObject.transform.localScale;
             }
         }
     }

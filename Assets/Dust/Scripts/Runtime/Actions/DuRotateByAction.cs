@@ -81,7 +81,7 @@ namespace DustEngine
 
         protected override void OnActionUpdate(float deltaTime)
         {
-            if (Dust.IsNull(m_TargetTransform))
+            if (Dust.IsNull(activeTargetTransform))
                 return;
 
             float signRotate = playingPhase == PlayingPhase.Main ? +1f : -1f;
@@ -91,8 +91,8 @@ namespace DustEngine
             if (deltaRotate.Equals(Vector3.zero))
                 return;
             
-            if (space == Space.Local && Dust.IsNotNull(m_TargetTransform.parent))
-                deltaRotate = m_TargetTransform.parent.TransformDirection(deltaRotate);
+            if (space == Space.Local && Dust.IsNotNull(activeTargetTransform.parent))
+                deltaRotate = activeTargetTransform.parent.TransformDirection(deltaRotate);
             
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -112,12 +112,13 @@ namespace DustEngine
                 if (space == Space.World || space == Space.Local)
                 {
                     // m_TargetTransform.Rotate(deltaRotate, UnityEngine.Space.World);
-                    m_TargetTransform.rotation *= Quaternion.Inverse(m_TargetTransform.rotation) * quaternion * m_TargetTransform.rotation;
+                    activeTargetTransform.rotation *= 
+                        Quaternion.Inverse(activeTargetTransform.rotation) * quaternion * activeTargetTransform.rotation;
                 }
                 else if (space == Space.Self)
                 {
                     // m_TargetTransform.Rotate(deltaRotate, UnityEngine.Space.Self);
-                    m_TargetTransform.localRotation *= quaternion;
+                    activeTargetTransform.localRotation *= quaternion;
                 }
             }
         }

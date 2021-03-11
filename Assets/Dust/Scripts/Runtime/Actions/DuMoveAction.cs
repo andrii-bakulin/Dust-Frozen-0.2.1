@@ -11,13 +11,13 @@ namespace DustEngine
         
         protected override void OnActionUpdate(float deltaTime)
         {
-            if (Dust.IsNull(m_TargetTransform))
+            if (Dust.IsNull(activeTargetTransform))
                 return;
 
             if (playingPhase == PlayingPhase.Main)
-                m_TargetTransform.localPosition += m_DeltaLocalMove * (playbackState - previousState);
+                activeTargetTransform.localPosition += m_DeltaLocalMove * (playbackState - previousState);
             else
-                m_TargetTransform.localPosition -= m_DeltaLocalMove * (playbackState - previousState);
+                activeTargetTransform.localPosition -= m_DeltaLocalMove * (playbackState - previousState);
         }
     }
 }

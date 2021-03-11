@@ -23,7 +23,11 @@ namespace DustEngine.DustEditor
 
             m_AutoStart = FindProperty("m_AutoStart", "Auto Start");
 
-            m_TargetMode = FindProperty("m_TargetMode", "Target Mode");
+            m_TargetMode = FindProperty("m_TargetMode", "Target Mode (?)",
+                "IMPORTANT!\n" 
+                + "The Target Object will only be used for the actions that are launching. "
+                + "In the chain of actions, the Target Object be inherited from the previous action.");
+            
             m_TargetObject = FindProperty("m_TargetObject", "Target Object");
         }
 
@@ -182,15 +186,8 @@ namespace DustEngine.DustEditor
 
         protected virtual void OnInspectorGUI_Extended_BlockLast()
         {
-            // Cannot hide this field even for actions without real target (callback, delay, ...)
-            // User should be able to change target any time (for ex. to "Inherit")
             PropertyField(m_TargetMode);
             PropertyFieldOrHide(m_TargetObject, targetMode != DuAction.TargetMode.GameObject);
-
-            if (m_AutoStart.IsTrue && targetMode == DuAction.TargetMode.Inherit)
-            {
-                DustGUI.HelpBoxWarning("Action has AutoStart state and target mode is Inherit! In this case the first target object will be Self object.");
-            }
         }
     }
 }
