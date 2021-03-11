@@ -12,6 +12,7 @@
 - Added DuMoveByAction & DuMoveToAction
 - Added DuRotateByAction & DuRotateToAction
 - Added DuScaleByAction & DuScaleToAction
+- Added DuSpawnAction
 - Added DuTintAction
 - Added DuTransformCopyAction
 - Added DuTransformRandomAction
