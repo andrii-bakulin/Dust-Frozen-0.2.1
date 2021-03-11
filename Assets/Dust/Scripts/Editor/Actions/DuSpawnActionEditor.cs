@@ -18,8 +18,7 @@ namespace DustEngine.DustEditor
         private DuProperty m_SpawnPointsSeed;
 
         private DuProperty m_MultipleSpawnEnabled;
-        private DuProperty m_MultipleSpawnCountMin;
-        private DuProperty m_MultipleSpawnCountMax;
+        private DuProperty m_MultipleSpawnCount;
         private DuProperty m_MultipleSpawnSeed;
 
         private DuProperty m_ResetTransform;
@@ -54,8 +53,7 @@ namespace DustEngine.DustEditor
             m_SpawnPointsSeed = FindProperty("m_SpawnPointsSeed", "Seed");
 
             m_MultipleSpawnEnabled = FindProperty("m_MultipleSpawnEnabled", "Enabled");
-            m_MultipleSpawnCountMin = FindProperty(serializedObject.FindProperty("m_MultipleSpawnCount"), "m_Min", "Min Count");
-            m_MultipleSpawnCountMax = FindProperty(serializedObject.FindProperty("m_MultipleSpawnCount"), "m_Max", "Max Count");
+            m_MultipleSpawnCount = FindProperty("m_MultipleSpawnCount", "Spawn Count");
             m_MultipleSpawnSeed = FindProperty("m_MultipleSpawnSeed", "Seed");
 
             m_ResetTransform = FindProperty("m_ResetTransform", "Reset Transform");
@@ -124,8 +122,7 @@ namespace DustEngine.DustEditor
 
                 if (m_MultipleSpawnEnabled.IsTrue)
                 {
-                    PropertyExtendedIntSlider(m_MultipleSpawnCountMin, 0, 10, 1, 0);
-                    PropertyExtendedIntSlider(m_MultipleSpawnCountMax, 0, 10, 1, 0);
+                    PropertyFieldRange(m_MultipleSpawnCount, 0, 16, 1, 0, int.MaxValue);
                     PropertySeedRandomOrFixed(m_MultipleSpawnSeed);
                 }
 
@@ -143,16 +140,6 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // Validate & Normalize Data
-
-            if (m_MultipleSpawnCountMin.isChanged || m_MultipleSpawnCountMax.isChanged)
-            {
-                DuIntRange range = new DuIntRange(m_MultipleSpawnCountMin.valInt, m_MultipleSpawnCountMax.valInt);
-
-                range = DuSpawnAction.Normalizer.MultipleSpawnCount(range);
-
-                m_MultipleSpawnCountMin.valInt = range.min;
-                m_MultipleSpawnCountMax.valInt = range.max;
-            }
 
             InspectorCommitUpdates();
         }

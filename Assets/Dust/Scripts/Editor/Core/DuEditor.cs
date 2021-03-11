@@ -366,6 +366,61 @@ namespace DustEngine.DustEditor
         }
 
         public bool PropertyFieldRange(DuProperty duProperty,
+            string minTitle, int minLeftValue, int minRightValue, int minStepValue, int minLeftLimit, int minRightLimit,  
+            string maxTitle, int maxLeftValue, int maxRightValue, int maxStepValue, int maxLeftLimit, int maxRightLimit)
+        {
+            if (Dust.IsNull(duProperty.property))
+            {
+                Dust.Debug.Warning("DuProperty[" + duProperty.propertyPath + "] is null");
+                return false;
+            }
+
+            var duMinProperty = FindProperty(this, duProperty.property, "m_Min", minTitle);
+            var duMaxProperty = FindProperty(this, duProperty.property, "m_Max", maxTitle);
+
+            duProperty.isChanged |= PropertyExtendedIntSlider(duMinProperty, 
+                minLeftValue, minRightValue, minStepValue,
+                minLeftLimit, minRightLimit);
+
+            duProperty.isChanged |= PropertyExtendedIntSlider(duMaxProperty, 
+                maxLeftValue, maxRightValue, maxStepValue,
+                maxLeftLimit, maxRightLimit);
+
+            if (duMinProperty.isChanged)
+            {
+                duMinProperty.valInt = Mathf.Clamp(duMinProperty.valInt, minLeftLimit, minRightLimit);
+
+                if (duMinProperty.valInt > duMaxProperty.valInt)
+                    duMaxProperty.valInt = duMinProperty.valInt;
+            }
+            
+            if (duMaxProperty.isChanged)
+            {
+                duMaxProperty.valInt = Mathf.Clamp(duMaxProperty.valInt, maxLeftLimit, maxRightLimit);
+
+                if (duMinProperty.valInt > duMaxProperty.valInt)
+                    duMinProperty.valInt = duMaxProperty.valInt;
+            }
+            
+            return duProperty.isChanged;
+        }
+        
+        public bool PropertyFieldRange(DuProperty duProperty,
+            int leftValue, int rightValue, int stepValue, int leftLimit, int rightLimit)
+            => PropertyFieldRange(duProperty,
+                duProperty.title + " Min", leftValue, rightValue, stepValue, leftLimit, rightLimit,
+                duProperty.title + " Max", leftValue, rightValue, stepValue, leftLimit, rightLimit);
+
+        public bool PropertyFieldRange(DuProperty duProperty,
+            string minTitle, string maxTitle,
+            int leftValue, int rightValue, int stepValue, int leftLimit, int rightLimit)
+            => PropertyFieldRange(duProperty,
+                minTitle, leftValue, rightValue, stepValue, leftLimit, rightLimit,
+                maxTitle, leftValue, rightValue, stepValue, leftLimit, rightLimit);
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        public bool PropertyFieldRange(DuProperty duProperty,
             string minTitle, float minLeftValue, float minRightValue, float minStepValue, float minLeftLimit, float minRightLimit,  
             string maxTitle, float maxLeftValue, float maxRightValue, float maxStepValue, float maxLeftLimit, float maxRightLimit)
         {
@@ -404,7 +459,20 @@ namespace DustEngine.DustEditor
             
             return duProperty.isChanged;
         }
-        
+
+        public bool PropertyFieldRange(DuProperty duProperty,
+            float leftValue, float rightValue, float stepValue, float leftLimit, float rightLimit)
+            => PropertyFieldRange(duProperty,
+                duProperty.title + " Min", leftValue, rightValue, stepValue, leftLimit, rightLimit,
+                duProperty.title + " Max", leftValue, rightValue, stepValue, leftLimit, rightLimit);
+
+        public bool PropertyFieldRange(DuProperty duProperty,
+            string minTitle, string maxTitle,
+            float leftValue, float rightValue, float stepValue, float leftLimit, float rightLimit)
+            => PropertyFieldRange(duProperty,
+                minTitle, leftValue, rightValue, stepValue, leftLimit, rightLimit,
+                maxTitle, leftValue, rightValue, stepValue, leftLimit, rightLimit);
+
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         
         public bool PropertyFieldDurationRange(DuProperty duProperty)
