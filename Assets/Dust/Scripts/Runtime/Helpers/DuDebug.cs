@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace DustEngine
 {
+    [AddComponentMenu("Dust/Helpers/Debug")]
     public class DuDebug : DuMonoBehaviour
     {
         [SerializeField]
