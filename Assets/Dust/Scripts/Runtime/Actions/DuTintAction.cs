@@ -3,9 +3,9 @@ using UnityEngine;
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Actions/Tint Action")]
-    public partial class DuTintAction : DuIntervalWithRollbackAction
+    public class DuTintAction : DuIntervalWithRollbackAction
     {
-        protected abstract class TintUpdater
+        public abstract class TintUpdater
         {
             private DuTintAction m_TintAction;
             protected DuTintAction tintAction => m_TintAction;
@@ -90,7 +90,7 @@ namespace DustEngine
         {
             base.OnActionStart();
             
-            m_ActiveTintUpdater = FactoryUpdater(this, tintMode);
+            m_ActiveTintUpdater = FactoryUpdater(tintMode);
         }
 
         protected override void OnActionUpdate(float deltaTime)
@@ -117,6 +117,41 @@ namespace DustEngine
             }
 
             base.OnActionStop(isTerminated);
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+        
+        private static TintMode[] autoDetectTintsSequence = new[]
+        {
+            TintMode.MeshRenderer,
+
+            TintMode.UIImage,
+            TintMode.UIText,
+        };
+
+        protected TintUpdater FactoryUpdater(TintMode tintMode)
+        {
+            switch (tintMode)
+            {
+                case TintMode.Auto:
+                    foreach (var tryTintMode in autoDetectTintsSequence)
+                    {
+                        TintUpdater updater = FactoryUpdater(tryTintMode);
+
+                        if (Dust.IsNotNull(updater))
+                            return updater;
+                    }
+                    return null;
+                    
+                case TintMode.MeshRenderer:
+                    return DuMeshRendererTintUpdater.Create(this);
+
+                case TintMode.UIImage:
+                    return DuUIImageTintUpdater.Create(this);
+                case TintMode.UIText:
+                    return DuUITextTintUpdater.Create(this);
+            }
+            return null;
         }
     }
 }
