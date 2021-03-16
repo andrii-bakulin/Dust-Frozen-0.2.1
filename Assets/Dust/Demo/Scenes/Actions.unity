@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 32285037}
   - component: {fileID: 32285038}
   m_Layer: 0
-  m_Name: DuFlipAction
+  m_Name: FlipAction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2125,7 +2125,7 @@ GameObject:
   - component: {fileID: 440041504}
   - component: {fileID: 440041505}
   m_Layer: 0
-  m_Name: DuScaleByAction
+  m_Name: ScaleByAction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2182,7 +2182,7 @@ GameObject:
   - component: {fileID: 442934352}
   - component: {fileID: 442934353}
   m_Layer: 0
-  m_Name: DuCallbackAction
+  m_Name: CallbackAction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2232,7 +2232,7 @@ GameObject:
   - component: {fileID: 499160658}
   - component: {fileID: 499160659}
   m_Layer: 0
-  m_Name: DuScaleToAction
+  m_Name: ScaleToAction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2289,7 +2289,7 @@ GameObject:
   - component: {fileID: 512524714}
   - component: {fileID: 512524715}
   m_Layer: 0
-  m_Name: DuTintAction
+  m_Name: TintAction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2347,7 +2347,7 @@ GameObject:
   - component: {fileID: 513941051}
   - component: {fileID: 513941052}
   m_Layer: 0
-  m_Name: DuUpdateHierarchyAction
+  m_Name: UpdateHierarchyAction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2977,7 +2977,7 @@ GameObject:
   - component: {fileID: 692039029}
   - component: {fileID: 692039030}
   m_Layer: 0
-  m_Name: DuTransformCopyAction
+  m_Name: TransformCopyAction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3032,7 +3032,7 @@ GameObject:
   - component: {fileID: 780717880}
   - component: {fileID: 780717881}
   m_Layer: 0
-  m_Name: DuMoveToAction
+  m_Name: MoveToAction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3259,7 +3259,7 @@ GameObject:
   - component: {fileID: 823883150}
   - component: {fileID: 823883151}
   m_Layer: 0
-  m_Name: DuTransformRandomAction
+  m_Name: TransformRandomAction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3847,7 +3847,7 @@ GameObject:
   - component: {fileID: 1040221511}
   - component: {fileID: 1040221512}
   m_Layer: 0
-  m_Name: DuDelayAction
+  m_Name: DelayAction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4068,7 +4068,7 @@ GameObject:
   - component: {fileID: 1109463565}
   - component: {fileID: 1109463566}
   m_Layer: 0
-  m_Name: DuMoveByAction
+  m_Name: MoveByAction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4330,7 +4330,7 @@ GameObject:
   - component: {fileID: 1290687474}
   - component: {fileID: 1290687475}
   m_Layer: 0
-  m_Name: DuRotateToAction
+  m_Name: RotateToAction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5079,7 +5079,7 @@ GameObject:
   - component: {fileID: 1417913446}
   - component: {fileID: 1417913447}
   m_Layer: 0
-  m_Name: DuDestroyAction
+  m_Name: DestroyAction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5749,7 +5749,7 @@ GameObject:
   - component: {fileID: 1618672150}
   - component: {fileID: 1618672151}
   m_Layer: 0
-  m_Name: DuFlowRandomAction
+  m_Name: FlowRandomAction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5797,7 +5797,7 @@ GameObject:
   - component: {fileID: 1695401163}
   - component: {fileID: 1695401164}
   m_Layer: 0
-  m_Name: DuActivateAction
+  m_Name: ActivateAction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6344,7 +6344,7 @@ GameObject:
   - component: {fileID: 1821770461}
   - component: {fileID: 1821770462}
   m_Layer: 0
-  m_Name: DuRotateByAction
+  m_Name: RotateByAction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6498,7 +6498,7 @@ GameObject:
   - component: {fileID: 1879260914}
   - component: {fileID: 1879260915}
   m_Layer: 0
-  m_Name: DuTransformSetAction
+  m_Name: TransformSetAction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6798,7 +6798,7 @@ GameObject:
   - component: {fileID: 1928476232}
   - component: {fileID: 1928476233}
   m_Layer: 0
-  m_Name: DuSpawnAction
+  m_Name: SpawnAction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

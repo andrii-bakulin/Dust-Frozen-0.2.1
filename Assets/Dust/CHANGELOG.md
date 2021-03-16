@@ -1,8 +1,12 @@
-## [0.1.4] - ?
+## [InDev]
 
 ### Added
 
-- Added Actions/DuActivateAction
+- Added Actions/ActivateAction
+
+### Fixed
+
+- Removed prefix "Du" from all Actions; Applied other related fixes
 
 
 ________________________________________________________________________________________________________________________
