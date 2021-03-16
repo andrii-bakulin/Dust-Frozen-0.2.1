@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace DustEngine
 {
-    public abstract class DuEvent : DuMonoBehaviour
+    public abstract class OnEvent : DuMonoBehaviour
     {
     }
 }

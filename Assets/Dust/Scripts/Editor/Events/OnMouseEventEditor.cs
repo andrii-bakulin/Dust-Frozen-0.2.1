@@ -3,9 +3,9 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuMouseEvent))]
+    [CustomEditor(typeof(OnMouseEvent))]
     [CanEditMultipleObjects]
-    public class DuMouseEventEditor : DuEventEditor
+    public class OnMouseEventEditor : OnEventEditor
     {
         private DuProperty m_MouseButtonIndex;
 
@@ -18,7 +18,7 @@ namespace DustEngine.DustEditor
         [MenuItem("Dust/Events/On Mouse")]
         public static void AddComponent()
         {
-            AddComponentToSelectedOrNewObject("DuMouse", typeof(DuMouseEvent));
+            AddComponentToSelectedOrNewObject("DuMouse", typeof(OnMouseEvent));
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -48,7 +48,7 @@ namespace DustEngine.DustEditor
             var titleOnKeyHold = "Button Hold" + (m_OnMouseButtonHold.valUnityEvent.arraySize > 0 ? " (" + m_OnMouseButtonHold.valUnityEvent.arraySize + ")" : "");
             var titleOnKeyUp   = "Button Up"   + (m_OnMouseButtonUp.valUnityEvent.arraySize   > 0 ? " (" + m_OnMouseButtonUp.valUnityEvent.arraySize   + ")" : "");
 
-            var tabIndex = DustGUI.Toolbar("DuKeyEvent.Events", new[] {titleOnKeyDown, titleOnKeyHold, titleOnKeyUp});
+            var tabIndex = DustGUI.Toolbar("OnKeyEvent.Events", new[] {titleOnKeyDown, titleOnKeyHold, titleOnKeyUp});
 
             switch (tabIndex)
             {

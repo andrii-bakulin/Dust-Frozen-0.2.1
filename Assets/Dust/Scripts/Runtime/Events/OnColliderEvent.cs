@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 namespace DustEngine
 {
-    public abstract class DuColliderEvent : DuEvent
+    public abstract class OnColliderEvent : OnEvent
     {
         public enum TagProcessingMode
         {

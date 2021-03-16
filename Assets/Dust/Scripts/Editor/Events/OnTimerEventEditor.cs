@@ -3,9 +3,9 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuTimerEvent))]
+    [CustomEditor(typeof(OnTimerEvent))]
     [CanEditMultipleObjects]
-    public class DuTimerEventEditor : DuEventEditor
+    public class OnTimerEventEditor : OnEventEditor
     {
         protected DuProperty m_Delay;
         protected DuProperty m_Repeat;
@@ -18,7 +18,7 @@ namespace DustEngine.DustEditor
         [MenuItem("Dust/Events/On Timer")]
         public static void AddComponent()
         {
-            AddComponentToSelectedOrNewObject("OnTimer", typeof(DuTimerEvent));
+            AddComponentToSelectedOrNewObject("OnTimer", typeof(OnTimerEvent));
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -53,10 +53,10 @@ namespace DustEngine.DustEditor
             // Validate & Normalize Data
 
             if (m_Delay.isChanged)
-                m_Delay.valFloat = DuTimerEvent.Normalizer.Delay(m_Delay.valFloat);
+                m_Delay.valFloat = OnTimerEvent.Normalizer.Delay(m_Delay.valFloat);
 
             if (m_Repeat.isChanged)
-                m_Repeat.valInt = DuTimerEvent.Normalizer.Repeat(m_Repeat.valInt);
+                m_Repeat.valInt = OnTimerEvent.Normalizer.Repeat(m_Repeat.valInt);
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

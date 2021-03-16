@@ -2,24 +2,24 @@
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Events/On Collision Event 2D")]
-    public class DuCollision2DEvent : DuColliderEvent
+    [AddComponentMenu("Dust/Events/On Collision Event")]
+    public class OnCollisionEvent : OnColliderEvent
     {
         [SerializeField]
-        private Collision2DEvent m_OnEnter = null;
-        public Collision2DEvent onEnter => m_OnEnter;
+        private CollisionEvent m_OnEnter = null;
+        public CollisionEvent onEnter => m_OnEnter;
 
         [SerializeField]
-        private Collision2DEvent m_OnStay = null;
-        public Collision2DEvent onStay => m_OnStay;
+        private CollisionEvent m_OnStay = null;
+        public CollisionEvent onStay => m_OnStay;
 
         [SerializeField]
-        private Collision2DEvent m_OnExit = null;
-        public Collision2DEvent onExit => m_OnExit;
+        private CollisionEvent m_OnExit = null;
+        public CollisionEvent onExit => m_OnExit;
 
         //--------------------------------------------------------------------------------------------------------------
 
-        private void OnCollisionEnter2D(Collision2D other)
+        private void OnCollisionEnter(Collision other)
         {
             if (Dust.IsNull(onEnter) || onEnter.GetPersistentEventCount() == 0 || !IsRequireSendEvent(other.gameObject))
                 return;
@@ -27,7 +27,7 @@ namespace DustEngine
             onEnter.Invoke(other);
         }
 
-        private void OnCollisionStay2D(Collision2D other)
+        private void OnCollisionStay(Collision other)
         {
             if (Dust.IsNull(onStay) || onStay.GetPersistentEventCount() == 0 || !IsRequireSendEvent(other.gameObject))
                 return;
@@ -35,7 +35,7 @@ namespace DustEngine
             onStay.Invoke(other);
         }
 
-        private void OnCollisionExit2D(Collision2D other)
+        private void OnCollisionExit(Collision other)
         {
             if (Dust.IsNull(onExit) || onExit.GetPersistentEventCount() == 0 || !IsRequireSendEvent(other.gameObject))
                 return;

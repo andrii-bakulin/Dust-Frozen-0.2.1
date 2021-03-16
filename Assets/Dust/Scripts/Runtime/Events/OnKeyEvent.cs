@@ -5,7 +5,7 @@ using UnityEngine.Events;
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Events/On Key Event")]
-    public class DuKeyEvent : DuEvent
+    public class OnKeyEvent : OnEvent
     {
         [SerializeField]
         private KeyCode m_KeyCode = KeyCode.None;

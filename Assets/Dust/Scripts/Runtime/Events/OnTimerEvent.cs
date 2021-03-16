@@ -5,7 +5,7 @@ using UnityEngine.Events;
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Events/On Timer Event")]
-    public class DuTimerEvent : DuEvent
+    public class OnTimerEvent : OnEvent
     {
         [Serializable]
         public class TimerEvent : UnityEvent<GameObject>

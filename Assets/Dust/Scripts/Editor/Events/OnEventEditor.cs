@@ -3,7 +3,7 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    public abstract class DuEventEditor : DuEditor
+    public abstract class OnEventEditor : DuEditor
     {
     }
 }

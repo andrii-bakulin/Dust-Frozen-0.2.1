@@ -6,8 +6,9 @@
 
 ### Fixed
 
-- Removed prefix "Du" from all Actions
-- Removed prefix "Du" from all Animations
+- Removed prefix "Du" for all Actions
+- Removed prefix "Du" for all Animations
+- Rename prefix "Du" to "On" for all Events
 
 
 ________________________________________________________________________________________________________________________

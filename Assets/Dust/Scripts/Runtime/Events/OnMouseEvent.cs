@@ -5,7 +5,7 @@ using UnityEngine.Events;
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Events/On Mouse Event")]
-    public class DuMouseEvent : DuEvent
+    public class OnMouseEvent : OnEvent
     {
         public enum MouseButtonIndex
         {

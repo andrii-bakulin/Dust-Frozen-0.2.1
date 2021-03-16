@@ -3,7 +3,7 @@
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Events/On Trigger Event 2D")]
-    public class DuTrigger2DEvent : DuColliderEvent
+    public class OnTrigger2DEvent : OnColliderEvent
     {
         [SerializeField]
         private Trigger2DEvent m_OnEnter = null;

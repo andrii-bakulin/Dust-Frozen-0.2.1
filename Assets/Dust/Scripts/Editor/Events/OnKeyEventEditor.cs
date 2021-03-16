@@ -3,9 +3,9 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuKeyEvent))]
+    [CustomEditor(typeof(OnKeyEvent))]
     [CanEditMultipleObjects]
-    public class DuKeyEventEditor : DuEventEditor
+    public class OnKeyEventEditor : OnEventEditor
     {
         private DuProperty m_KeyCode;
 
@@ -18,7 +18,7 @@ namespace DustEngine.DustEditor
         [MenuItem("Dust/Events/On Key")]
         public static void AddComponent()
         {
-            AddComponentToSelectedOrNewObject("OnKey", typeof(DuKeyEvent));
+            AddComponentToSelectedOrNewObject("OnKey", typeof(OnKeyEvent));
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -48,7 +48,7 @@ namespace DustEngine.DustEditor
             var titleOnKeyHold = "Hold" + (m_OnKeyHold.valUnityEvent.arraySize > 0 ? " (" + m_OnKeyHold.valUnityEvent.arraySize + ")" : "");
             var titleOnKeyUp   = "Up"   + (m_OnKeyUp.valUnityEvent.arraySize   > 0 ? " (" + m_OnKeyUp.valUnityEvent.arraySize   + ")" : "");
 
-            var tabIndex = DustGUI.Toolbar("DuKeyEvent.Events", new[] {titleOnKeyDown, titleOnKeyHold, titleOnKeyUp});
+            var tabIndex = DustGUI.Toolbar("OnKeyEvent.Events", new[] {titleOnKeyDown, titleOnKeyHold, titleOnKeyUp});
 
             switch (tabIndex)
             {

@@ -3,7 +3,7 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    public abstract class DuColliderEventEditor : DuEventEditor
+    public abstract class OnColliderEventEditor : OnEventEditor
     {
         protected DuProperty m_ObjectTags;
         protected DuProperty m_TagProcessingMode;
@@ -33,9 +33,9 @@ namespace DustEngine.DustEditor
             DustGUI.Header("Tag");
             PropertyField(m_TagProcessingMode);
 
-            var tagProcessingMode = (DuColliderEvent.TagProcessingMode) m_TagProcessingMode.valInt;
+            var tagProcessingMode = (OnColliderEvent.TagProcessingMode) m_TagProcessingMode.valInt;
 
-            if (tagProcessingMode != DuColliderEvent.TagProcessingMode.Ignore)
+            if (tagProcessingMode != OnColliderEvent.TagProcessingMode.Ignore)
             {
                 PropertyField(m_ObjectTags);
             }
@@ -46,7 +46,7 @@ namespace DustEngine.DustEditor
             var titleOnStay  = "Stay"  + (m_OnStay.valUnityEvent.arraySize  > 0 ? " (" + m_OnStay.valUnityEvent.arraySize  + ")" : "");
             var titleOnExit  = "Exit"  + (m_OnExit.valUnityEvent.arraySize  > 0 ? " (" + m_OnExit.valUnityEvent.arraySize  + ")" : "");
 
-            var tabIndex = DustGUI.Toolbar("DuColliderEvent.Events", new[] {titleOnEnter, titleOnStay, titleOnExit});
+            var tabIndex = DustGUI.Toolbar("OnColliderEvent.Events", new[] {titleOnEnter, titleOnStay, titleOnExit});
 
             switch (tabIndex)
             {
