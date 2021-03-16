@@ -278,7 +278,7 @@ namespace DustEngine
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        public bool Calculate(DuFactoryMachine.FactoryInstanceState factoryInstanceState, out float power, out Color color)
+        public bool Calculate(FactoryMachine.FactoryInstanceState factoryInstanceState, out float power, out Color color)
         {
             if (!HasFields())
             {

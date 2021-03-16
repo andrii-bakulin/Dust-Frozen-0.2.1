@@ -16,7 +16,7 @@ namespace DustEngine
             internal Vector3 inPosition; // point in world position
             internal float inOffset; // offset for point in sequence of points [0..1]
 
-            internal DuFactoryMachine.FactoryInstanceState inFactoryInstanceState;
+            internal FactoryMachine.FactoryInstanceState inFactoryInstanceState;
 
             // Out/End/Resulted values
             internal float endPower; // power calculated by fieldsMap

@@ -9,6 +9,7 @@
 - Removed prefix "Du" for all Actions
 - Removed prefix "Du" for all Animations
 - Rename prefix "Du" to "On" for all Events
+- Removed prefix "Du" for all Factory & FactoryMachines
 
 
 ________________________________________________________________________________________________________________________
