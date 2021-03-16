@@ -5,7 +5,7 @@ namespace DustEngine
 {
     [AddComponentMenu("Dust/Animations/Follow")]
     [ExecuteInEditMode]
-    public class DuFollow : DuMonoBehaviour
+    public class Follow : DuMonoBehaviour
     {
         public enum SpeedMode
         {

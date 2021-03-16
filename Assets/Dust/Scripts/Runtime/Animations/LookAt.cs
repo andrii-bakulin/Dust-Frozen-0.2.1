@@ -4,7 +4,7 @@ namespace DustEngine
 {
     [AddComponentMenu("Dust/Animations/LookAt")]
     [ExecuteInEditMode]
-    public class DuLookAt : DuMonoBehaviour
+    public class LookAt : DuMonoBehaviour
     {
         [SerializeField]
         private GameObject m_TargetObject = null;

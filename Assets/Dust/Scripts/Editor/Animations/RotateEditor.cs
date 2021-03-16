@@ -3,9 +3,9 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuRotate))]
+    [CustomEditor(typeof(Rotate))]
     [CanEditMultipleObjects]
-    public class DuRotateEditor : DuEditor
+    public class RotateEditor : DuEditor
     {
         private DuProperty m_Axis;
         private DuProperty m_Speed;
@@ -17,14 +17,14 @@ namespace DustEngine.DustEditor
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        private DuRotate.Space space => (DuRotate.Space) m_Space.valInt;
+        private Rotate.Space space => (Rotate.Space) m_Space.valInt;
 
         //--------------------------------------------------------------------------------------------------------------
 
         [MenuItem("Dust/Animations/Rotate")]
         public static void AddComponentToSelectedObjects()
         {
-            AddComponentToSelectedOrNewObject("Rotate", typeof(DuRotate));
+            AddComponentToSelectedOrNewObject("Rotate", typeof(Rotate));
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -52,7 +52,7 @@ namespace DustEngine.DustEditor
             PropertyExtendedSlider(m_Speed, -180f, +180f, 1f);
             PropertyField(m_Space);
 
-            if (space == DuRotate.Space.AroundObject)
+            if (space == Rotate.Space.AroundObject)
             {
                 PropertyField(m_RotateAroundObject);
             }

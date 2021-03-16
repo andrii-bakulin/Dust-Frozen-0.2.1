@@ -3,9 +3,9 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuShake))]
+    [CustomEditor(typeof(Shake))]
     [CanEditMultipleObjects]
-    public class DuShakeEditor : DuEditor
+    public class ShakeEditor : DuEditor
     {
         private DuProperty m_Power;
         private DuProperty m_WarmUpTime;
@@ -33,7 +33,7 @@ namespace DustEngine.DustEditor
         [MenuItem("Dust/Animations/Shake")]
         public static void AddComponentToSelectedObjects()
         {
-            AddComponentToSelectedOrNewObject("Shake", typeof(DuShake));
+            AddComponentToSelectedOrNewObject("Shake", typeof(Shake));
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -70,7 +70,7 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            if (DustGUI.FoldoutBegin("Position", "DuShake.Position"))
+            if (DustGUI.FoldoutBegin("Position", "Shake.Position"))
             {
                 PropertyField(m_PositionEnabled);
 
@@ -86,7 +86,7 @@ namespace DustEngine.DustEditor
             DustGUI.FoldoutEnd();
 
 
-            if (DustGUI.FoldoutBegin("Rotation", "DuShake.Rotation"))
+            if (DustGUI.FoldoutBegin("Rotation", "Shake.Rotation"))
             {
                 PropertyField(m_RotationEnabled);
 
@@ -102,7 +102,7 @@ namespace DustEngine.DustEditor
             DustGUI.FoldoutEnd();
 
 
-            if (DustGUI.FoldoutBegin("Scale", "DuShake.Scale"))
+            if (DustGUI.FoldoutBegin("Scale", "Shake.Scale"))
             {
                 PropertyField(m_ScaleEnabled);
 
@@ -119,7 +119,7 @@ namespace DustEngine.DustEditor
             DustGUI.FoldoutEnd();
 
 
-            if (DustGUI.FoldoutBegin("Shake Parameters", "DuShake.Parameters"))
+            if (DustGUI.FoldoutBegin("Shake Parameters", "Shake.Parameters"))
             {
                 PropertyExtendedSlider(m_Power, 0f, 1f, 0.01f, 0f, 1f);
                 PropertyExtendedSlider(m_WarmUpTime, 0f, 5f, 0.01f, 0f);
@@ -131,7 +131,7 @@ namespace DustEngine.DustEditor
                 PropertyField(m_TransformMode);
                 PropertyField(m_UpdateMode);
 
-                if ((DuShake.TransformMode) m_TransformMode.valInt == DuShake.TransformMode.AppendToAnimation)
+                if ((Shake.TransformMode) m_TransformMode.valInt == Shake.TransformMode.AppendToAnimation)
                 {
                     DustGUI.HelpBoxInfo("This mode need to use when object animated by keyframes or manually in Update method."
                                         + " Then you may apply shake in LastUpdate calls");
@@ -145,13 +145,13 @@ namespace DustEngine.DustEditor
             // Validate & Normalize Data
 
             if (m_Power.isChanged)
-                m_Power.valFloat = DuShake.Normalizer.Power(m_Power.valFloat);
+                m_Power.valFloat = Shake.Normalizer.Power(m_Power.valFloat);
 
             if (m_WarmUpTime.isChanged)
-                m_WarmUpTime.valFloat = DuShake.Normalizer.WarmUpTime(m_WarmUpTime.valFloat);
+                m_WarmUpTime.valFloat = Shake.Normalizer.WarmUpTime(m_WarmUpTime.valFloat);
 
             if (m_ScaleAmplitude.isChanged)
-                m_ScaleAmplitude.valVector3 = DuShake.Normalizer.ScaleAmplitude(m_ScaleAmplitude.valVector3);
+                m_ScaleAmplitude.valVector3 = Shake.Normalizer.ScaleAmplitude(m_ScaleAmplitude.valVector3);
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -161,7 +161,7 @@ namespace DustEngine.DustEditor
 
             foreach (var subTarget in targets)
             {
-                var origin = subTarget as DuShake;
+                var origin = subTarget as Shake;
 
                 if (m_Seed.isChanged || DustGUI.IsUndoRedoPerformed())
                     origin.ResetStates();

@@ -6,7 +6,8 @@
 
 ### Fixed
 
-- Removed prefix "Du" from all Actions; Applied other related fixes
+- Removed prefix "Du" from all Actions
+- Removed prefix "Du" from all Animations
 
 
 ________________________________________________________________________________________________________________________

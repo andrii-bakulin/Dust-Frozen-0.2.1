@@ -3,9 +3,9 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuScale))]
+    [CustomEditor(typeof(Scale))]
     [CanEditMultipleObjects]
-    public class DuScaleEditor : DuEditor
+    public class ScaleEditor : DuEditor
     {
         private DuProperty m_DeltaScale;
         private DuProperty m_Speed;
@@ -19,7 +19,7 @@ namespace DustEngine.DustEditor
         [MenuItem("Dust/Animations/Scale")]
         public static void AddComponentToSelectedObjects()
         {
-            AddComponentToSelectedOrNewObject("Scale", typeof(DuScale));
+            AddComponentToSelectedOrNewObject("Scale", typeof(Scale));
         }
 
         //--------------------------------------------------------------------------------------------------------------

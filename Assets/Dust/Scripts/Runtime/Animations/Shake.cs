@@ -2,16 +2,10 @@
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Animations/Pulsate")]
-    public class DuPulsate : DuMonoBehaviour
+    [AddComponentMenu("Dust/Animations/Shake")]
+    public class Shake : DuMonoBehaviour
     {
         internal const float k_MinScaleValue = 0.0001f;
-
-        public enum EaseMode
-        {
-            Linear = 0,
-            EaseInOut = 1,
-        };
 
         public enum TransformMode
         {
@@ -23,6 +17,21 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
 
         [SerializeField]
+        private int m_Seed = 0;
+        public int seed
+        {
+            get => m_Seed;
+            set
+            {
+                if (m_Seed == value)
+                    return;
+
+                m_Seed = value;
+                ResetStates();
+            }
+        }
+
+        [SerializeField]
         private float m_Power = 1f;
         public float power
         {
@@ -31,11 +40,11 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private float m_SleepTime = 0f;
-        public float sleepTime
+        private float m_WarmUpTime = 0f;
+        public float warmUpTime
         {
-            get => m_SleepTime;
-            set => m_SleepTime = Normalizer.SleepTime(value);
+            get => m_WarmUpTime;
+            set => m_WarmUpTime = Normalizer.WarmUpTime(value);
         }
 
         [SerializeField]
@@ -57,7 +66,7 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private Vector3 m_PositionAmplitude = Vector3.up;
+        private Vector3 m_PositionAmplitude = Vector3.one;
         public Vector3 positionAmplitude
         {
             get => m_PositionAmplitude;
@@ -124,15 +133,15 @@ namespace DustEngine
             set => m_ScaleSpeed = value;
         }
 
-        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
         [SerializeField]
-        private EaseMode m_EaseMode = EaseMode.EaseInOut;
-        public EaseMode easeMode
+        private bool m_ScaleUniform = false;
+        public bool scaleUniform
         {
-            get => m_EaseMode;
-            set => m_EaseMode = value;
+            get => m_ScaleUniform;
+            set => m_ScaleUniform = value;
         }
+
+        // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
         private TransformMode m_TransformMode = TransformMode.Relative;
@@ -161,6 +170,11 @@ namespace DustEngine
         public Vector3 lastMultScale => m_LastMultScale;
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+        private DuNoise n_DuNoise;
+        private DuNoise duNoise => n_DuNoise ?? (n_DuNoise = new DuNoise(seed));
+
+        private float m_TimeOffset = 0f;
 
         private float m_PositionTimeOffset;
         private float m_RotationTimeOffset;
@@ -194,11 +208,9 @@ namespace DustEngine
 
         void UpdateState(float deltaTime)
         {
-            if (sleepTime > 0f)
-            {
-                sleepTime = Mathf.Max(sleepTime - deltaTime, 0f);
-                return;
-            }
+            m_TimeOffset += deltaTime;
+
+            float warmUpOffset = warmUpTime > 0f ? m_TimeOffset / warmUpTime : 1f;
 
             if (positionEnabled)
             {
@@ -210,8 +222,11 @@ namespace DustEngine
                 if (power > 0f)
                 {
                     deltaPosition = positionAmplitude * power;
-                    deltaPosition *= CalcOffsetByEaseMode(m_PositionTimeOffset);
+                    deltaPosition.Scale(duNoise.Perlin1D_asWideVector3(0f, m_PositionTimeOffset));
                 }
+
+                if (warmUpOffset < 1f)
+                    deltaPosition = Vector3.Lerp(Vector3.zero, deltaPosition, warmUpOffset);
 
                 switch (transformMode)
                 {
@@ -242,8 +257,11 @@ namespace DustEngine
                 if (power > 0f)
                 {
                     deltaRotation = rotationAmplitude * power;
-                    deltaRotation *= CalcOffsetByEaseMode(m_RotationTimeOffset);
+                    deltaRotation.Scale(duNoise.Perlin1D_asWideVector3(0f, m_RotationTimeOffset));
                 }
+
+                if (warmUpOffset < 1f)
+                    deltaRotation = Vector3.Lerp(Vector3.zero, deltaRotation, warmUpOffset);
 
                 switch (transformMode)
                 {
@@ -273,9 +291,16 @@ namespace DustEngine
 
                 if (power > 0f)
                 {
-                    float noiseValue1 = CalcOffsetByEaseMode(m_ScaleTimeOffset);
+                    Vector3 noiseValue;
 
-                    Vector3 noiseValue = DuVector3.New(noiseValue1);
+                    if (scaleUniform)
+                    {
+                        noiseValue.x = noiseValue.y = noiseValue.z = duNoise.Perlin1D_asWide(0f, m_ScaleTimeOffset);
+                    }
+                    else
+                    {
+                        noiseValue = duNoise.Perlin1D_asWideVector3(0f, m_ScaleTimeOffset);
+                    }
 
                     multScale.x = CalcScaleValue(scaleAmplitude.x, noiseValue.x);
                     multScale.y = CalcScaleValue(scaleAmplitude.y, noiseValue.y);
@@ -283,6 +308,9 @@ namespace DustEngine
 
                     multScale = Vector3.Lerp(Vector3.one, multScale, power);
                 }
+
+                if (warmUpOffset < 1f)
+                    multScale = Vector3.Lerp(Vector3.one, multScale, warmUpOffset);
 
                 switch (transformMode)
                 {
@@ -313,18 +341,7 @@ namespace DustEngine
             }
         }
 
-        private float CalcOffsetByEaseMode(float timeOffset)
-        {
-            if (easeMode == EaseMode.EaseInOut)
-            {
-                return Mathf.Sin(DuConstants.PI2 * timeOffset);
-            }
-
-            // (easeMode == EaseMode.Linear)
-            return Mathf.PingPong(timeOffset * 4f, 2f) - 1f;
-        }
-
-        private float CalcScaleValue(float amplitude, float offset)
+        float CalcScaleValue(float amplitude, float offset)
         {
             if (amplitude < k_MinScaleValue)
                 amplitude = k_MinScaleValue;
@@ -333,6 +350,18 @@ namespace DustEngine
                 return Mathf.Lerp(1f, amplitude, offset);
 
             return Mathf.Lerp(1f, 1f / amplitude, -offset);
+        }
+
+        //--------------------------------------------------------------------------------------------------------------
+
+        void Reset()
+        {
+            ResetStates();
+        }
+
+        public void ResetStates()
+        {
+            n_DuNoise = null;
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -345,15 +374,14 @@ namespace DustEngine
                 return Mathf.Clamp01(value);
             }
 
-            public static float SleepTime(float value)
+            public static float WarmUpTime(float value)
             {
                 return Mathf.Max(value, 0f);
             }
 
             public static Vector3 ScaleAmplitude(Vector3 value)
             {
-                value = Vector3.Max(value, DuVector3.New(k_MinScaleValue));
-                return value;
+                return Vector3.Max(value, DuVector3.New(k_MinScaleValue));
             }
         }
     }

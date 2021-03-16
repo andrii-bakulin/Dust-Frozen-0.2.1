@@ -3,9 +3,9 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuLookAt))]
+    [CustomEditor(typeof(LookAt))]
     [CanEditMultipleObjects]
-    public class DuLookAtEditor : DuEditor
+    public class LookAtEditor : DuEditor
     {
         private DuProperty m_TargetObject;
         private DuProperty m_UpVectorObject;
@@ -18,7 +18,7 @@ namespace DustEngine.DustEditor
         [MenuItem("Dust/Animations/LookAt")]
         public static void AddComponentToSelectedObjects()
         {
-            AddComponentToSelectedOrNewObject("LookAt", typeof(DuLookAt));
+            AddComponentToSelectedOrNewObject("LookAt", typeof(LookAt));
         }
 
         //--------------------------------------------------------------------------------------------------------------

@@ -3,7 +3,7 @@
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Animations/Scale")]
-    public class DuScale : DuMonoBehaviour
+    public class Scale : DuMonoBehaviour
     {
         [SerializeField]
         private Vector3 m_DeltaScale = Vector3.one;

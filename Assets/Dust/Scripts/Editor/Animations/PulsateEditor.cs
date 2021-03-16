@@ -3,9 +3,9 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuPulsate))]
+    [CustomEditor(typeof(Pulsate))]
     [CanEditMultipleObjects]
-    public class DuPulsateEditor : DuEditor
+    public class PulsateEditor : DuEditor
     {
         private DuProperty m_Power;
         private DuProperty m_SleepTime;
@@ -32,7 +32,7 @@ namespace DustEngine.DustEditor
         [MenuItem("Dust/Animations/Pulsate")]
         public static void AddComponentToSelectedObjects()
         {
-            AddComponentToSelectedOrNewObject("Pulsate", typeof(DuPulsate));
+            AddComponentToSelectedOrNewObject("Pulsate", typeof(Pulsate));
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -68,7 +68,7 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            if (DustGUI.FoldoutBegin("Position", "DuPulsate.Position"))
+            if (DustGUI.FoldoutBegin("Position", "Pulsate.Position"))
             {
                 PropertyField(m_PositionEnabled);
 
@@ -84,7 +84,7 @@ namespace DustEngine.DustEditor
             DustGUI.FoldoutEnd();
 
 
-            if (DustGUI.FoldoutBegin("Rotation", "DuPulsate.Rotation"))
+            if (DustGUI.FoldoutBegin("Rotation", "Pulsate.Rotation"))
             {
                 PropertyField(m_RotationEnabled);
 
@@ -100,7 +100,7 @@ namespace DustEngine.DustEditor
             DustGUI.FoldoutEnd();
 
 
-            if (DustGUI.FoldoutBegin("Scale", "DuPulsate.Scale"))
+            if (DustGUI.FoldoutBegin("Scale", "Pulsate.Scale"))
             {
                 PropertyField(m_ScaleEnabled);
 
@@ -116,7 +116,7 @@ namespace DustEngine.DustEditor
             DustGUI.FoldoutEnd();
 
 
-            if (DustGUI.FoldoutBegin("Pulsate Parameters", "DuPulsate.Parameters"))
+            if (DustGUI.FoldoutBegin("Pulsate Parameters", "Pulsate.Parameters"))
             {
                 PropertyField(m_EaseMode);
                 PropertyExtendedSlider(m_Power, 0f, 1f, 0.01f, 0f, 1f);
@@ -128,7 +128,7 @@ namespace DustEngine.DustEditor
                 PropertyField(m_TransformMode);
                 PropertyField(m_UpdateMode);
 
-                if ((DuPulsate.TransformMode) m_TransformMode.valInt == DuPulsate.TransformMode.AppendToAnimation)
+                if ((Pulsate.TransformMode) m_TransformMode.valInt == Pulsate.TransformMode.AppendToAnimation)
                 {
                     DustGUI.HelpBoxInfo("This mode need to use when object animated by keyframes or manually in Update method."
                                         + " Then you may apply pulsate in LastUpdate calls");
@@ -142,13 +142,13 @@ namespace DustEngine.DustEditor
             // Validate & Normalize Data
 
             if (m_Power.isChanged)
-                m_Power.valFloat = DuPulsate.Normalizer.Power(m_Power.valFloat);
+                m_Power.valFloat = Pulsate.Normalizer.Power(m_Power.valFloat);
 
             if (m_SleepTime.isChanged)
-                m_SleepTime.valFloat = DuPulsate.Normalizer.SleepTime(m_SleepTime.valFloat);
+                m_SleepTime.valFloat = Pulsate.Normalizer.SleepTime(m_SleepTime.valFloat);
 
             if (m_ScaleAmplitude.isChanged)
-                m_ScaleAmplitude.valVector3 = DuPulsate.Normalizer.ScaleAmplitude(m_ScaleAmplitude.valVector3);
+                m_ScaleAmplitude.valVector3 = Pulsate.Normalizer.ScaleAmplitude(m_ScaleAmplitude.valVector3);
 
             InspectorCommitUpdates();
         }

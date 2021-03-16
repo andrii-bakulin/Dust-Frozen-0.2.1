@@ -3,9 +3,9 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuFollow))]
+    [CustomEditor(typeof(Follow))]
     [CanEditMultipleObjects]
-    public class DuFollowEditor : DuEditor
+    public class FollowEditor : DuEditor
     {
         private DuProperty m_FollowObject;
         private DuProperty m_FollowOffset;
@@ -21,14 +21,14 @@ namespace DustEngine.DustEditor
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-        private DuFollow.SpeedMode speedMode => (DuFollow.SpeedMode) m_SpeedMode.valInt;
+        private Follow.SpeedMode speedMode => (Follow.SpeedMode) m_SpeedMode.valInt;
 
         //--------------------------------------------------------------------------------------------------------------
 
         [MenuItem("Dust/Animations/Follow")]
         public static void AddComponentToSelectedObjects()
         {
-            AddComponentToSelectedOrNewObject("Follow", typeof(DuFollow));
+            AddComponentToSelectedOrNewObject("Follow", typeof(Follow));
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -65,11 +65,11 @@ namespace DustEngine.DustEditor
 
             switch (speedMode)
             {
-                case DuFollow.SpeedMode.Unlimited:
+                case Follow.SpeedMode.Unlimited:
                     // Nothing to show
                     break;
 
-                case DuFollow.SpeedMode.Limited:
+                case Follow.SpeedMode.Limited:
                     PropertyField(m_SpeedLimit);
                     break;
             }
@@ -95,7 +95,7 @@ namespace DustEngine.DustEditor
                 {
                     foreach (var entity in GetSerializedEntitiesByTargets())
                     {
-                        Vector3 followOffset = (entity.target as DuFollow).transform.position - followObject.transform.position;
+                        Vector3 followOffset = (entity.target as Follow).transform.position - followObject.transform.position;
 
                         entity.serializedObject.FindProperty("m_FollowOffset").vector3Value = DuVector3.Round(followOffset);
                         entity.serializedObject.ApplyModifiedProperties();
@@ -104,10 +104,10 @@ namespace DustEngine.DustEditor
             }
 
             if (m_SpeedLimit.isChanged)
-                m_SpeedLimit.valFloat = DuFollow.Normalizer.SpeedLimit(m_SpeedLimit.valFloat);
+                m_SpeedLimit.valFloat = Follow.Normalizer.SpeedLimit(m_SpeedLimit.valFloat);
 
             if (m_SmoothTime.isChanged)
-                m_SmoothTime.valVector3 = DuFollow.Normalizer.SmoothTime(m_SmoothTime.valVector3);
+                m_SmoothTime.valVector3 = Follow.Normalizer.SmoothTime(m_SmoothTime.valVector3);
 
             InspectorCommitUpdates();
         }

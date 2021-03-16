@@ -3,7 +3,7 @@
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Animations/Rotate")]
-    public class DuRotate : DuMonoBehaviour
+    public class Rotate : DuMonoBehaviour
     {
         public enum Space
         {
