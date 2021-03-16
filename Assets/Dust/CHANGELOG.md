@@ -11,25 +11,25 @@ ________________________________________________________________________________
 
 ### Added
 
-- Added component Animation.DuScale
-- Added DuActions [core]
-- Added DuCallbackAction
-- Added DuDelayAction
-- Added DuDestroyAction
-- Added DuFlipAction
-- Added DuFlowRandomAction
-- Added DuMoveByAction
-- Added DuMoveToAction
-- Added DuRotateByAction
-- Added DuRotateToAction
-- Added DuScaleByAction
-- Added DuScaleToAction
-- Added DuSpawnAction
-- Added DuTintAction
-- Added DuTransformCopyAction
-- Added DuTransformRandomAction
-- Added DuTransformSetAction
-- Added DuUpdateHierarchyAction
+- Added Animations/DuScale
+- Added Actions/DuAction [core]
+- Added Actions/DuCallbackAction
+- Added Actions/DuDelayAction
+- Added Actions/DuDestroyAction
+- Added Actions/DuFlipAction
+- Added Actions/DuFlowRandomAction
+- Added Actions/DuMoveByAction
+- Added Actions/DuMoveToAction
+- Added Actions/DuRotateByAction
+- Added Actions/DuRotateToAction
+- Added Actions/DuScaleByAction
+- Added Actions/DuScaleToAction
+- Added Actions/DuSpawnAction
+- Added Actions/DuTintAction
+- Added Actions/DuTransformCopyAction
+- Added Actions/DuTransformRandomAction
+- Added Actions/DuTransformSetAction
+- Added Actions/DuUpdateHierarchyAction
 
 ### Fixed
 
