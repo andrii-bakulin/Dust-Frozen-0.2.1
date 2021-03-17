@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace DustEngine
 {
-    public static class DuGizmos
+    public static class DustGizmos
     {
         //--------------------------------------------------------------------------------------------------------------
         // All Gizmos by default draw elements in [X+]-axis-direction

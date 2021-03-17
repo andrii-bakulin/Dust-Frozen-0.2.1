@@ -3,19 +3,21 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuCubeGizmo))]
+    [CustomEditor(typeof(MeshGizmo))]
     [CanEditMultipleObjects]
-    public class DuCubeGizmoEditor : DuGizmoObjectEditor
+    public class MeshGizmoEditor : GizmoObjectEditor
     {
-        private DuProperty m_Size;
-        private DuProperty m_Center;
+        private DuProperty m_Mesh;
+        private DuProperty m_Position;
+        private DuProperty m_Rotation;
+        private DuProperty m_Scale;
 
         //--------------------------------------------------------------------------------------------------------------
 
-        [MenuItem("Dust/Gizmos/Cube")]
+        [MenuItem("Dust/Gizmos/Mesh")]
         public static void AddComponentToSelectedObjects()
         {
-            AddGizmoToSelectedOrNewObject(typeof(DuCubeGizmo));
+            AddGizmoToSelectedOrNewObject(typeof(MeshGizmo));
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -24,8 +26,10 @@ namespace DustEngine.DustEditor
         {
             base.InitializeEditor();
 
-            m_Size = FindProperty("m_Size", "Size");
-            m_Center = FindProperty("m_Center", "Center");
+            m_Mesh = FindProperty("m_Mesh", "Mesh");
+            m_Position = FindProperty("m_Position", "Position");
+            m_Rotation = FindProperty("m_Rotation", "Rotation");
+            m_Scale = FindProperty("m_Scale", "Scale");
         }
 
         public override void OnInspectorGUI()
@@ -34,8 +38,10 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            PropertyField(m_Size);
-            PropertyField(m_Center);
+            PropertyField(m_Mesh);
+            PropertyField(m_Position);
+            PropertyField(m_Rotation);
+            PropertyField(m_Scale);
             Space();
             PropertyField(m_Color);
             PropertyField(m_GizmoVisibility);

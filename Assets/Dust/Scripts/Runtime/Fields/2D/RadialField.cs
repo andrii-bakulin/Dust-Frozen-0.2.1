@@ -198,15 +198,15 @@ namespace DustEngine
                 float angle0 = angleStart + i * angleDelta;
                 float angle1 = angleStart + (i + 1) * angleDelta;
 
-                Vector3 p0 = DuGizmos.GetCirclePointByAngle(180f - angle0, direction) * gizmoRadius * scale;
-                Vector3 p1 = DuGizmos.GetCirclePointByAngle(180f - angle1, direction) * gizmoRadius * scale;
+                Vector3 p0 = DustGizmos.GetCirclePointByAngle(180f - angle0, direction) * gizmoRadius * scale;
+                Vector3 p1 = DustGizmos.GetCirclePointByAngle(180f - angle1, direction) * gizmoRadius * scale;
 
                 Gizmos.DrawLine(p0, p1);
             }
 
             Vector3 pMid = Vector3.zero;
-            Vector3 pBeg = DuGizmos.GetCirclePointByAngle(180f - angleStart, direction) * gizmoRadius * scale;
-            Vector3 pEnd = DuGizmos.GetCirclePointByAngle(180f - angleEnd, direction) * gizmoRadius * scale;
+            Vector3 pBeg = DustGizmos.GetCirclePointByAngle(180f - angleStart, direction) * gizmoRadius * scale;
+            Vector3 pEnd = DustGizmos.GetCirclePointByAngle(180f - angleEnd, direction) * gizmoRadius * scale;
 
             Gizmos.DrawLine(pMid, pBeg);
             Gizmos.DrawLine(pMid, pEnd);

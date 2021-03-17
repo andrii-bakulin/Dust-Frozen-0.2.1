@@ -3,9 +3,9 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuArrowGizmo))]
+    [CustomEditor(typeof(ArrowGizmo))]
     [CanEditMultipleObjects]
-    public class DuArrowGizmoEditor : DuGizmoObjectEditor
+    public class ArrowGizmoEditor : GizmoObjectEditor
     {
         private static string[] s_DirectionOptions = new[]
         {
@@ -30,7 +30,7 @@ namespace DustEngine.DustEditor
         [MenuItem("Dust/Gizmos/Arrow")]
         public static void AddComponentToSelectedObjects()
         {
-            AddGizmoToSelectedOrNewObject(typeof(DuArrowGizmo));
+            AddGizmoToSelectedOrNewObject(typeof(ArrowGizmo));
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -92,7 +92,7 @@ namespace DustEngine.DustEditor
             Space();
 
             PropertyField(m_AxisColorMode);
-            PropertyFieldOrHide(m_Color, (DuArrowGizmo.AxisColorMode) m_AxisColorMode.valInt != DuArrowGizmo.AxisColorMode.Custom);
+            PropertyFieldOrHide(m_Color, (ArrowGizmo.AxisColorMode) m_AxisColorMode.valInt != ArrowGizmo.AxisColorMode.Custom);
             PropertyField(m_GizmoVisibility);
             PropertyField(m_ShowStartPoint);
 

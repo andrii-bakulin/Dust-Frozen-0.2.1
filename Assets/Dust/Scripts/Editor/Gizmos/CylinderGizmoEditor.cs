@@ -3,9 +3,9 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuConeGizmo))]
+    [CustomEditor(typeof(CylinderGizmo))]
     [CanEditMultipleObjects]
-    public class DuConeGizmoEditor : DuGizmoObjectEditor
+    public class CylinderGizmoEditor : GizmoObjectEditor
     {
         private DuProperty m_Radius;
         private DuProperty m_Height;
@@ -14,10 +14,10 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        [MenuItem("Dust/Gizmos/Cone")]
+        [MenuItem("Dust/Gizmos/Cylinder")]
         public static void AddComponentToSelectedObjects()
         {
-            AddGizmoToSelectedOrNewObject(typeof(DuConeGizmo));
+            AddGizmoToSelectedOrNewObject(typeof(CylinderGizmo));
         }
 
         //--------------------------------------------------------------------------------------------------------------

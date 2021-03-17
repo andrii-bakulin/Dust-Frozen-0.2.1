@@ -3,7 +3,7 @@
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Gizmos/Mesh Gizmo")]
-    public class DuMeshGizmo : DuGizmoObject
+    public class MeshGizmo : GizmoObject
     {
         [SerializeField]
         private Mesh m_Mesh;

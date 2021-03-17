@@ -5,7 +5,7 @@ namespace DustEngine
 {
     [AddComponentMenu("Dust/Gizmos/Fields Space Gizmo")]
     [ExecuteInEditMode]
-    public class DuFieldsSpaceGizmo : DuGizmoObject
+    public class FieldsSpaceGizmo : GizmoObject
     {
         [SerializeField]
         private FieldsSpace m_FieldsSpace;

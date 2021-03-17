@@ -3,7 +3,7 @@ using UnityEditor;
 
 namespace DustEngine
 {
-    public abstract class DuGizmoObject : DuMonoBehaviour
+    public abstract class GizmoObject : DuMonoBehaviour
     {
         protected static readonly Color k_GizmosDefaultColor = new Color(1.00f, 0.66f, 0.33f);
 

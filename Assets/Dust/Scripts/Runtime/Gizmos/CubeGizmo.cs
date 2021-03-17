@@ -3,7 +3,7 @@
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Gizmos/Cube Gizmo")]
-    public class DuCubeGizmo : DuGizmoObject
+    public class CubeGizmo : GizmoObject
     {
         [SerializeField]
         private Vector3 m_Size = Vector3.one;

@@ -100,15 +100,15 @@ namespace DustEngine
             if (remapping.remapForceEnabled)
             {
                 Gizmos.color = !remapping.invert ? colorRange1 : colorRange0;
-                DuGizmos.DrawWireTorus(radius, thickness * remapping.offset, Vector3.zero, direction, 64, 32);
+                DustGizmos.DrawWireTorus(radius, thickness * remapping.offset, Vector3.zero, direction, 64, 32);
 
                 Gizmos.color = !remapping.invert ? colorRange0 : colorRange1;
-                DuGizmos.DrawWireTorus(radius, thickness, Vector3.zero, direction, 64, 32);
+                DustGizmos.DrawWireTorus(radius, thickness, Vector3.zero, direction, 64, 32);
             }
             else
             {
                 Gizmos.color = colorRange0;
-                DuGizmos.DrawWireTorus(radius, thickness, Vector3.zero, direction, 64, 32);
+                DustGizmos.DrawWireTorus(radius, thickness, Vector3.zero, direction, 64, 32);
             }
         }
 #endif

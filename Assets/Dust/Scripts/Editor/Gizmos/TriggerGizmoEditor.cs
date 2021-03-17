@@ -3,9 +3,9 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuTriggerGizmo))]
+    [CustomEditor(typeof(TriggerGizmo))]
     [CanEditMultipleObjects]
-    public class DuTriggerGizmoEditor : DuGizmoObjectEditor
+    public class TriggerGizmoEditor : GizmoObjectEditor
     {
         private DuProperty m_Size;
 
@@ -30,7 +30,7 @@ namespace DustEngine.DustEditor
         [MenuItem("Dust/Gizmos/Trigger")]
         public static void AddComponentToSelectedObjects()
         {
-            AddGizmoToSelectedOrNewObject(typeof(DuTriggerGizmo));
+            AddGizmoToSelectedOrNewObject(typeof(TriggerGizmo));
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -83,7 +83,7 @@ namespace DustEngine.DustEditor
 
                 PropertyField(m_MessagePosition);
 
-                if ((DuTriggerGizmo.MessagePosition) m_MessagePosition.valInt != DuTriggerGizmo.MessagePosition.Center)
+                if ((TriggerGizmo.MessagePosition) m_MessagePosition.valInt != TriggerGizmo.MessagePosition.Center)
                 {
                     PropertyExtendedSlider(m_MessageOffset, 0f, +1f, 0.01f, 0f, +1f);
                 }
@@ -107,7 +107,7 @@ namespace DustEngine.DustEditor
             {
                 foreach (var subTarget in targets)
                 {
-                    (subTarget as DuTriggerGizmo).Trigger();
+                    (subTarget as TriggerGizmo).Trigger();
                 }
             }
 
@@ -115,19 +115,19 @@ namespace DustEngine.DustEditor
             // Validate & Normalize Data
 
             if (m_Size.isChanged)
-                m_Size.valFloat = DuTriggerGizmo.Normalizer.Size(m_Size.valFloat);
+                m_Size.valFloat = TriggerGizmo.Normalizer.Size(m_Size.valFloat);
 
             if (m_TriggeredSize.isChanged)
-                m_TriggeredSize.valFloat = DuTriggerGizmo.Normalizer.Size(m_TriggeredSize.valFloat);
+                m_TriggeredSize.valFloat = TriggerGizmo.Normalizer.Size(m_TriggeredSize.valFloat);
 
             if (m_FalloffDuration.isChanged)
-                m_FalloffDuration.valFloat = DuTriggerGizmo.Normalizer.FalloffDuration(m_FalloffDuration.valFloat);
+                m_FalloffDuration.valFloat = TriggerGizmo.Normalizer.FalloffDuration(m_FalloffDuration.valFloat);
 
             if (m_MessageOffset.isChanged)
-                m_MessageOffset.valFloat = DuTriggerGizmo.Normalizer.MessageOffset(m_MessageOffset.valFloat);
+                m_MessageOffset.valFloat = TriggerGizmo.Normalizer.MessageOffset(m_MessageOffset.valFloat);
 
             if (m_MessageSize.isChanged)
-                m_MessageSize.valFloat = DuTriggerGizmo.Normalizer.MessageSize(m_MessageSize.valFloat);
+                m_MessageSize.valFloat = TriggerGizmo.Normalizer.MessageSize(m_MessageSize.valFloat);
 
             InspectorCommitUpdates();
         }

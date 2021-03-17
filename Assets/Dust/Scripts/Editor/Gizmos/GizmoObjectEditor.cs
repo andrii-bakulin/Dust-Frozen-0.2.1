@@ -3,7 +3,7 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    public abstract class DuGizmoObjectEditor : DuEditor
+    public abstract class GizmoObjectEditor : DuEditor
     {
         protected DuProperty m_Color;
         protected DuProperty m_GizmoVisibility;
@@ -35,7 +35,7 @@ namespace DustEngine.DustEditor
             if (Dust.IsNotNull(Selection.activeGameObject))
                 gameObject.transform.parent = Selection.activeGameObject.transform;
 
-            var component = gameObject.AddComponent(duComponentType) as DuGizmoObject;
+            var component = gameObject.AddComponent(duComponentType) as GizmoObject;
 
             gameObject.name = component.GizmoName() + " Gizmo";
             DuTransform.Reset(gameObject.transform);

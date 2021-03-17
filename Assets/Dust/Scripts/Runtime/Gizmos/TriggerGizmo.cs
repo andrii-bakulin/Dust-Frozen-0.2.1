@@ -5,7 +5,7 @@ namespace DustEngine
 {
     [AddComponentMenu("Dust/Gizmos/Trigger Gizmo")]
     [ExecuteInEditMode]
-    public class DuTriggerGizmo : DuGizmoObject
+    public class TriggerGizmo : GizmoObject
     {
         public enum MessagePosition
         {

@@ -3,9 +3,9 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuFieldsSpaceGizmo))]
+    [CustomEditor(typeof(FieldsSpaceGizmo))]
     [CanEditMultipleObjects]
-    public class DuFieldsSpaceGizmoEditor : DuGizmoObjectEditor
+    public class FieldsSpaceGizmoEditor : GizmoObjectEditor
     {
         private DuProperty m_FieldsSpace;
 
@@ -29,7 +29,7 @@ namespace DustEngine.DustEditor
         [MenuItem("Dust/Gizmos/Fields Space")]
         public static void AddComponentToSelectedObjects()
         {
-            AddGizmoToSelectedOrNewObject(typeof(DuFieldsSpaceGizmo));
+            AddGizmoToSelectedOrNewObject(typeof(FieldsSpaceGizmo));
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -66,7 +66,7 @@ namespace DustEngine.DustEditor
 
             Space();
 
-            if (DustGUI.FoldoutBegin("Grid", "DuFieldsSpaceGizmo.Grid"))
+            if (DustGUI.FoldoutBegin("Grid", "FieldsSpaceGizmo.Grid"))
             {
                 PropertyField(m_GridCount);
                 PropertyField(m_GridStep);
@@ -75,7 +75,7 @@ namespace DustEngine.DustEditor
             DustGUI.FoldoutEnd();
 
 
-            if (DustGUI.FoldoutBegin("Power", "DuFieldsSpaceGizmo.Power"))
+            if (DustGUI.FoldoutBegin("Power", "FieldsSpaceGizmo.Power"))
             {
                 PropertyField(m_PowerVisible);
                 PropertyExtendedSlider(m_PowerSize, 0.1f, 2.0f, +0.1f, 0.1f);
@@ -89,7 +89,7 @@ namespace DustEngine.DustEditor
             DustGUI.FoldoutEnd();
 
 
-            if (DustGUI.FoldoutBegin("Color", "DuFieldsSpaceGizmo.Color"))
+            if (DustGUI.FoldoutBegin("Color", "FieldsSpaceGizmo.Color"))
             {
                 PropertyField(m_ColorVisible);
                 PropertyExtendedSlider(m_ColorSize, 0.1f, 5.0f, +0.1f, 0.1f);
@@ -105,16 +105,16 @@ namespace DustEngine.DustEditor
             // Validate & Normalize Data
 
             if (m_GridCount.isChanged)
-                m_GridCount.valVector3Int = DuFieldsSpaceGizmo.Normalizer.GridCount(m_GridCount.valVector3Int);
+                m_GridCount.valVector3Int = FieldsSpaceGizmo.Normalizer.GridCount(m_GridCount.valVector3Int);
 
             if (m_PowerSize.isChanged)
-                m_PowerSize.valFloat = DuFieldsSpaceGizmo.Normalizer.Size(m_PowerSize.valFloat);
+                m_PowerSize.valFloat = FieldsSpaceGizmo.Normalizer.Size(m_PowerSize.valFloat);
 
             if (m_PowerDotsSize.isChanged)
-                m_PowerDotsSize.valFloat = DuFieldsSpaceGizmo.Normalizer.Size(m_PowerDotsSize.valFloat);
+                m_PowerDotsSize.valFloat = FieldsSpaceGizmo.Normalizer.Size(m_PowerDotsSize.valFloat);
 
             if (m_ColorSize.isChanged)
-                m_ColorSize.valFloat = DuFieldsSpaceGizmo.Normalizer.Size(m_ColorSize.valFloat);
+                m_ColorSize.valFloat = FieldsSpaceGizmo.Normalizer.Size(m_ColorSize.valFloat);
 
             InspectorCommitUpdates();
         }

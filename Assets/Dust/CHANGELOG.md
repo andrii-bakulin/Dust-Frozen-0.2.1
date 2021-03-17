@@ -10,6 +10,7 @@
 - Removed prefix "Du" for all Animations
 - Removed prefix "Du" for all Factory & FactoryMachines
 - Removed prefix "Du" for all Fields
+- Removed prefix "Du" for all Gizmos
 - Rename prefix "Du" to "On" for all Events
 
 

@@ -2,23 +2,15 @@
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Gizmos/Torus Gizmo")]
-    public class DuTorusGizmo : DuGizmoObject
+    [AddComponentMenu("Dust/Gizmos/Sphere Gizmo")]
+    public class SphereGizmo : GizmoObject
     {
         [SerializeField]
-        private float m_Radius = 2f;
+        private float m_Radius = 1f;
         public float radius
         {
             get => m_Radius;
             set => m_Radius = value;
-        }
-
-        [SerializeField]
-        private float m_Thickness = 0.5f;
-        public float thickness
-        {
-            get => m_Thickness;
-            set => m_Thickness = value;
         }
 
         [SerializeField]
@@ -29,19 +21,11 @@ namespace DustEngine
             set => m_Center = value;
         }
 
-        [SerializeField]
-        private Axis3xDirection m_Direction = Axis3xDirection.Y;
-        public Axis3xDirection direction
-        {
-            get => m_Direction;
-            set => m_Direction = value;
-        }
-
         //--------------------------------------------------------------------------------------------------------------
 
         public override string GizmoName()
         {
-            return "Torus";
+            return "Sphere";
         }
 
 #if UNITY_EDITOR
@@ -49,8 +33,7 @@ namespace DustEngine
         {
             Gizmos.matrix = transform.localToWorldMatrix;
             Gizmos.color = color;
-
-            DuGizmos.DrawWireTorus(radius, thickness, center, direction, 64, 32);
+            Gizmos.DrawWireSphere(center, radius);
         }
 #endif
     }

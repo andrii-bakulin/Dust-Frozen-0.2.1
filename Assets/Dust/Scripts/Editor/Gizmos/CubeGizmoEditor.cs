@@ -3,19 +3,19 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuSphereGizmo))]
+    [CustomEditor(typeof(CubeGizmo))]
     [CanEditMultipleObjects]
-    public class DuSphereGizmoEditor : DuGizmoObjectEditor
+    public class CubeGizmoEditor : GizmoObjectEditor
     {
-        private DuProperty m_Radius;
+        private DuProperty m_Size;
         private DuProperty m_Center;
 
         //--------------------------------------------------------------------------------------------------------------
 
-        [MenuItem("Dust/Gizmos/Sphere")]
+        [MenuItem("Dust/Gizmos/Cube")]
         public static void AddComponentToSelectedObjects()
         {
-            AddGizmoToSelectedOrNewObject(typeof(DuSphereGizmo));
+            AddGizmoToSelectedOrNewObject(typeof(CubeGizmo));
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -24,7 +24,7 @@ namespace DustEngine.DustEditor
         {
             base.InitializeEditor();
 
-            m_Radius = FindProperty("m_Radius", "Radius");
+            m_Size = FindProperty("m_Size", "Size");
             m_Center = FindProperty("m_Center", "Center");
         }
 
@@ -34,7 +34,7 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            PropertyExtendedSlider(m_Radius, 0f, 10f, 0.01f);
+            PropertyField(m_Size);
             PropertyField(m_Center);
             Space();
             PropertyField(m_Color);

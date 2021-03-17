@@ -2,8 +2,8 @@
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Gizmos/Pyramid Gizmo")]
-    public class DuPyramidGizmo : DuGizmoObject
+    [AddComponentMenu("Dust/Gizmos/Cone Gizmo")]
+    public class ConeGizmo : GizmoObject
     {
         [SerializeField]
         private float m_Radius = 1f;
@@ -19,14 +19,6 @@ namespace DustEngine
         {
             get => m_Height;
             set => m_Height = value;
-        }
-
-        [SerializeField]
-        private int m_Faces = 4;
-        public int faces
-        {
-            get => m_Faces;
-            set => m_Faces = Normalizer.Faces(value);
         }
 
         [SerializeField]
@@ -49,7 +41,7 @@ namespace DustEngine
 
         public override string GizmoName()
         {
-            return "Pyramid";
+            return "Cone";
         }
 
 #if UNITY_EDITOR
@@ -58,19 +50,8 @@ namespace DustEngine
             Gizmos.matrix = transform.localToWorldMatrix;
             Gizmos.color = color;
 
-            DuGizmos.DrawWirePyramid(radius, height, center, direction, faces);
+            DustGizmos.DrawWireCone(radius, height, center, direction, 64, 4);
         }
 #endif
-
-        //--------------------------------------------------------------------------------------------------------------
-        // Normalizer
-
-        public static class Normalizer
-        {
-            public static int Faces(int value)
-            {
-                return Mathf.Max(3, value);
-            }
-        }
     }
 }
