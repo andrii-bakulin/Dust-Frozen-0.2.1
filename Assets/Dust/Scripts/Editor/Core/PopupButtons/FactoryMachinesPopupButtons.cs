@@ -3,7 +3,7 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    public class FactoryMachinesPopupButtons : DuPopupButtons
+    public class FactoryMachinesPopupButtons : PopupButtons
     {
         private FactoryEditor m_Factory;
 
@@ -16,7 +16,7 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public static DuPopupButtons Popup(FactoryEditor factory)
+        public static PopupButtons Popup(FactoryEditor factory)
         {
             var popup = new FactoryMachinesPopupButtons();
             popup.m_Factory = factory;

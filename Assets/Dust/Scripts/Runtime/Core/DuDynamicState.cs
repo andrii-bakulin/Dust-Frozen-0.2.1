@@ -89,7 +89,7 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public static void Append(ref int dynamicState, int sequenceIndex, DuRemapping remapping)
+        public static void Append(ref int dynamicState, int sequenceIndex, Remapping remapping)
         {
             dynamicState ^= sequenceIndex * 291422 + (Dust.IsNotNull(remapping) ? remapping.GetDynamicStateHashCode() : 123456);
         }
@@ -106,7 +106,7 @@ namespace DustEngine
             dynamicState ^= sequenceIndex * 955735 + (Dust.IsNotNull(fieldsMap) ? fieldsMap.GetDynamicStateHashCode() : 123456);
         }
 
-        public static void Append(ref int dynamicState, int sequenceIndex, DuField field)
+        public static void Append(ref int dynamicState, int sequenceIndex, Field field)
         {
             dynamicState ^= sequenceIndex * 512661 + (Dust.IsNotNull(field) ? field.GetDynamicStateHashCode() : 123456);
         }

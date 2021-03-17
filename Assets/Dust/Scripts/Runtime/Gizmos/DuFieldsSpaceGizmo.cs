@@ -8,8 +8,8 @@ namespace DustEngine
     public class DuFieldsSpaceGizmo : DuGizmoObject
     {
         [SerializeField]
-        private DuFieldsSpace m_FieldsSpace;
-        public DuFieldsSpace fieldsSpace
+        private FieldsSpace m_FieldsSpace;
+        public FieldsSpace fieldsSpace
         {
             get => m_FieldsSpace;
             set => m_FieldsSpace = value;

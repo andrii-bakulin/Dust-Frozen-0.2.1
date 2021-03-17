@@ -3,7 +3,7 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    public class ActionsPopupButtons : DuPopupButtons
+    public class ActionsPopupButtons : PopupButtons
     {
         private Action m_Action;
 
@@ -31,7 +31,7 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public static DuPopupButtons Popup(Action action)
+        public static PopupButtons Popup(Action action)
         {
             var popup = new ActionsPopupButtons();
             popup.m_Action = action;

@@ -19,7 +19,7 @@ namespace DustEngine.DustEditor
         protected DuProperty m_ColorImpactIntensity;
         protected DuProperty m_ColorBlendMode;
 
-        protected DuFieldsMapEditor m_FieldsMapEditor;
+        protected FieldsMapEditor m_FieldsMapEditor;
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -51,7 +51,7 @@ namespace DustEngine.DustEditor
             m_ColorImpactIntensity = FindProperty("m_ColorImpactIntensity", "Intensity");
             m_ColorBlendMode = FindProperty("m_ColorBlendMode", "Blend Mode");
 
-            m_FieldsMapEditor = new DuFieldsMapEditor(this, serializedObject.FindProperty("m_FieldsMap"), (target as BasicFactoryMachine).fieldsMap);
+            m_FieldsMapEditor = new FieldsMapEditor(this, serializedObject.FindProperty("m_FieldsMap"), (target as BasicFactoryMachine).fieldsMap);
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -130,11 +130,11 @@ namespace DustEngine.DustEditor
         // with same method name/links
         protected void OnInspectorGUI_FieldsMap()
         {
-            var showColumnPower = DuFieldsMapEditor.ColumnVisibility.Auto;
-            var showColumnColor = DuFieldsMapEditor.ColumnVisibility.Auto;
+            var showColumnPower = FieldsMapEditor.ColumnVisibility.Auto;
+            var showColumnColor = FieldsMapEditor.ColumnVisibility.Auto;
 
             if (!m_ColorImpactEnabled.IsTrue)
-                showColumnColor = DuFieldsMapEditor.ColumnVisibility.ForcedHide;
+                showColumnColor = FieldsMapEditor.ColumnVisibility.ForcedHide;
 
             m_FieldsMapEditor.OnInspectorGUI(showColumnPower, showColumnColor);
         }
