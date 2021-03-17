@@ -4,7 +4,7 @@ namespace DustEngine
 {
     [AddComponentMenu("Dust/Helpers/Lock Transform")]
     [ExecuteAlways]
-    public class DuLockTransform : MonoBehaviour
+    public class LockTransform : MonoBehaviour
     {
         public enum Space
         {

@@ -3,9 +3,9 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuRandomTransform))]
+    [CustomEditor(typeof(RandomTransform))]
     [CanEditMultipleObjects]
-    public class DuRandomTransformEditor : DuEditor
+    public class RandomTransformEditor : DuEditor
     {
         private DuProperty m_PositionEnabled;
         private DuProperty m_PositionRangeMin;
@@ -31,7 +31,7 @@ namespace DustEngine.DustEditor
         [MenuItem("Dust/Helpers/Random Transform")]
         public static void AddComponentToSelectedObjects()
         {
-            AddComponentToSelectedOrNewObject("Random Transform", typeof(DuRandomTransform));
+            AddComponentToSelectedOrNewObject("Random Transform", typeof(RandomTransform));
         }
 
         //--------------------------------------------------------------------------------------------------------------

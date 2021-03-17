@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace DustEngine
 {
-    [AddComponentMenu("Dust/Helpers/Debug")]
-    public class DuDebug : DuMonoBehaviour
+    [AddComponentMenu("Dust/Helpers/Debugger")]
+    public class Debugger : DuMonoBehaviour
     {
         [SerializeField]
         private bool m_LogInConsole = true;
@@ -55,7 +55,7 @@ namespace DustEngine
         public void LogNotice(string message)
         {
             if (logInConsole)
-                Debug.Log($"DuDebug [{gameObject.name}]: {message}");
+                Debug.Log($"Debugger [{gameObject.name}]: {message}");
 
             if (logInMessageBox)
                 AppendLogMessages($"[NOTE] {message}");
@@ -64,7 +64,7 @@ namespace DustEngine
         public void LogWarning(string message)
         {
             if (logInConsole)
-                Debug.LogWarning($"DuDebug [{gameObject.name}]: {message}");
+                Debug.LogWarning($"Debugger [{gameObject.name}]: {message}");
 
             if (logInMessageBox)
                 AppendLogMessages($"[WAR] {message}");
@@ -73,7 +73,7 @@ namespace DustEngine
         public void LogError(string message)
         {
             if (logInConsole)
-                Debug.LogError($"DuDebug [{gameObject.name}]: {message}");
+                Debug.LogError($"Debugger [{gameObject.name}]: {message}");
 
             if (logInMessageBox)
                 AppendLogMessages($"[ERR] {message}");

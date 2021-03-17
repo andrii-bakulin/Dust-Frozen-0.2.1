@@ -4,9 +4,9 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuDebug))]
+    [CustomEditor(typeof(Debugger))]
     // [CanEditMultipleObjects]
-    public class DuDebugEditor : DuEditor
+    public class DebuggerEditor : DuEditor
     {
         private DuProperty m_LogInConsole;
         private DuProperty m_LogInMessageBox;
@@ -15,10 +15,10 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        [MenuItem("Dust/Helpers/Debug")]
+        [MenuItem("Dust/Helpers/Debugger")]
         public static void AddComponentToSelectedObjects()
         {
-            AddComponentToSelectedObjects(typeof(DuDebug));
+            AddComponentToSelectedObjects(typeof(Debugger));
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -48,7 +48,7 @@ namespace DustEngine.DustEditor
             {
                 Space();
 
-                var main = target as DuDebug;
+                var main = target as Debugger;
                 var message = main.GetPlainLogMessages();
                 var linesCount = message.Count(f => f == '\n') + 1;
 

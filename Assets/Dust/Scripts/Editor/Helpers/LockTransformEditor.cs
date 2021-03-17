@@ -3,9 +3,9 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuLockTransform))]
+    [CustomEditor(typeof(LockTransform))]
     [CanEditMultipleObjects]
-    public class DuLockTransformEditor : DuEditor
+    public class LockTransformEditor : DuEditor
     {
         private DuProperty m_LockPosition;
         private DuProperty m_LockRotation;
@@ -22,7 +22,7 @@ namespace DustEngine.DustEditor
         [MenuItem("Dust/Helpers/Lock Transform")]
         public static void AddComponentToSelectedObjects()
         {
-            AddComponentToSelectedObjects(typeof(DuLockTransform));
+            AddComponentToSelectedObjects(typeof(LockTransform));
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -44,7 +44,7 @@ namespace DustEngine.DustEditor
 
         public override void OnInspectorGUI()
         {
-            var main = target as DuLockTransform;
+            var main = target as LockTransform;
 
             InspectorInitStates();
 
@@ -62,17 +62,17 @@ namespace DustEngine.DustEditor
             {
                 Space();
 
-                if (DustGUI.FoldoutBegin("Lock States At", "DuLockTransform.LockStatesAt"))
+                if (DustGUI.FoldoutBegin("Lock States At", "LockTransform.LockStatesAt"))
                 {
                     DustGUI.Lock();
 
                     if (main.enabled && (m_LockPosition.IsTrue || m_LockRotation.IsTrue || m_LockScale.IsTrue))
                     {
-                        var space = (DuLockTransform.Space) m_Space.valInt;
+                        var space = (LockTransform.Space) m_Space.valInt;
 
                         if (m_LockPosition.IsTrue)
                         {
-                            string title = space == DuLockTransform.Space.Local
+                            string title = space == LockTransform.Space.Local
                                 ? "Local Position"
                                 : "World Position";
                             DustGUI.Field(title, m_Position.valVector3);
@@ -80,7 +80,7 @@ namespace DustEngine.DustEditor
 
                         if (m_LockRotation.IsTrue)
                         {
-                            string title = space == DuLockTransform.Space.Local
+                            string title = space == LockTransform.Space.Local
                                 ? "Local Rotation"
                                 : "World Rotation";
                             DustGUI.Field(title, m_Rotation.valQuaternion.eulerAngles);
@@ -88,7 +88,7 @@ namespace DustEngine.DustEditor
 
                         if (m_LockScale.IsTrue)
                         {
-                            string title = space == DuLockTransform.Space.Local
+                            string title = space == LockTransform.Space.Local
                                 ? "Local Scale"
                                 : "Local* Scale";
                             DustGUI.Field(title, m_Scale.valVector3);
@@ -120,7 +120,7 @@ namespace DustEngine.DustEditor
             {
                 foreach (var subTarget in targets)
                 {
-                    var origin = subTarget as DuLockTransform;
+                    var origin = subTarget as LockTransform;
 
                     origin.FixLockStates();
                 }

@@ -3,7 +3,7 @@
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Helpers/Random Transform")]
-    public class DuRandomTransform : DuMonoBehaviour
+    public class RandomTransform : DuMonoBehaviour
     {
         public enum ActivateMode
         {
