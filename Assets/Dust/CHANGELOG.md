@@ -12,6 +12,7 @@
 - Removed prefix "Du" for all Fields
 - Removed prefix "Du" for all Gizmos
 - Removed prefix "Du" for all Helpers
+- Removed prefix "Du" for all Instances
 - Renamed prefix "Du" to "On" for all Events
 - Renamed class "DuDebug" to "Debugger"
 

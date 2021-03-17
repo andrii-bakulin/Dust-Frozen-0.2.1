@@ -3,9 +3,9 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuParallax))]
+    [CustomEditor(typeof(Parallax))]
     [CanEditMultipleObjects]
-    public class DuParallaxEditor : DuEditor
+    public class ParallaxEditor : DuEditor
     {
         private DuProperty m_ParallaxControl;
         private DuProperty m_Offset;
@@ -27,7 +27,7 @@ namespace DustEngine.DustEditor
         [MenuItem("Dust/Instances/Parallax")]
         public static void AddComponentToSelected()
         {
-            AddComponentToSelectedOrNewObject("Parallax", typeof(DuParallax));
+            AddComponentToSelectedOrNewObject("Parallax", typeof(Parallax));
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -61,22 +61,22 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            if (DustGUI.FoldoutBegin("Control", "DuParallax.Control"))
+            if (DustGUI.FoldoutBegin("Control", "Parallax.Control"))
             {
                 PropertyField(m_ParallaxControl);
 
-                switch ((DuParallax.ParallaxControl) m_ParallaxControl.valInt)
+                switch ((Parallax.ParallaxControl) m_ParallaxControl.valInt)
                 {
-                    case DuParallax.ParallaxControl.Manual:
+                    case Parallax.ParallaxControl.Manual:
                         PropertyExtendedSlider(m_Offset, -10f, +10f, 0.01f);
                         break;
 
-                    case DuParallax.ParallaxControl.Time:
+                    case Parallax.ParallaxControl.Time:
                         PropertyExtendedSlider(m_Offset, -10f, +10f, 0.01f);
                         PropertyExtendedSlider(m_TimeScale, -10f, 10f, 0.01f);
                         break;
 
-                    case DuParallax.ParallaxControl.ParallaxController:
+                    case Parallax.ParallaxControl.ParallaxController:
                         PropertyField(m_ParallaxController);
                         break;
 
@@ -91,7 +91,7 @@ namespace DustEngine.DustEditor
             }
             DustGUI.FoldoutEnd();
 
-            if (DustGUI.FoldoutBegin("Parameters", "DuParallax.Parameters"))
+            if (DustGUI.FoldoutBegin("Parameters", "Parallax.Parameters"))
             {
                 PropertyField(m_TileObject);
                 PropertyExtendedSlider(m_TileLength, 0f, 25f, 0.01f);
@@ -100,9 +100,9 @@ namespace DustEngine.DustEditor
             }
             DustGUI.FoldoutEnd();
 
-            if (DustGUI.FoldoutBegin("Others", "DuParallax.Others"))
+            if (DustGUI.FoldoutBegin("Others", "Parallax.Others"))
             {
-                if ((DuParallax.ParallaxControl) m_ParallaxControl.valInt == DuParallax.ParallaxControl.ParallaxController)
+                if ((Parallax.ParallaxControl) m_ParallaxControl.valInt == Parallax.ParallaxControl.ParallaxController)
                 {
                     DustGUI.StaticTextField(m_UpdateMode.title, "Inherited from Parallax Controller");
                 }
@@ -118,10 +118,10 @@ namespace DustEngine.DustEditor
             // Validate & Normalize Data
 
             if (m_TileOffset.isChanged)
-                m_TileOffset.valFloat = DuParallax.Normalizer.TileOffset(m_TileOffset.valFloat);
+                m_TileOffset.valFloat = Parallax.Normalizer.TileOffset(m_TileOffset.valFloat);
 
             if (m_TilesCount.isChanged)
-                m_TilesCount.valInt = DuParallax.Normalizer.TilesCount(m_TilesCount.valInt);
+                m_TilesCount.valInt = Parallax.Normalizer.TilesCount(m_TilesCount.valInt);
 
             InspectorCommitUpdates();
 
@@ -138,7 +138,7 @@ namespace DustEngine.DustEditor
 
             foreach (var subTarget in targets)
             {
-                var origin = subTarget as DuParallax;
+                var origin = subTarget as Parallax;
 
                 if (isRequireRebuildTiles)
                 {

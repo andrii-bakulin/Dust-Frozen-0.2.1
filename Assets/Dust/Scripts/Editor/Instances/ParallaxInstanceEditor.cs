@@ -3,9 +3,9 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuParallaxInstance))]
+    [CustomEditor(typeof(ParallaxInstance))]
     [CanEditMultipleObjects]
-    public class DuParallaxInstanceEditor : DuEditor
+    public class ParallaxInstanceEditor : DuEditor
     {
         private DuProperty m_ParentParallax;
 

@@ -3,9 +3,9 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuDestroyer))]
+    [CustomEditor(typeof(Destroyer))]
     [CanEditMultipleObjects]
-    public class DuDestroyerEditor : DuEditor
+    public class DestroyerEditor : DuEditor
     {
         private DuProperty m_DestroyMode;
 
@@ -22,14 +22,14 @@ namespace DustEngine.DustEditor
 
         private DuProperty m_OnDestroy;
 
-        private DuDestroyer.DestroyMode destroyMode => (DuDestroyer.DestroyMode) m_DestroyMode.valInt;
+        private Destroyer.DestroyMode destroyMode => (Destroyer.DestroyMode) m_DestroyMode.valInt;
 
         //--------------------------------------------------------------------------------------------------------------
 
         [MenuItem("Dust/Instances/Destroyer")]
         public static void AddComponentToSelectedObjects()
         {
-            AddComponentToSelectedOrNewObject("Destroyer", typeof(DuDestroyer));
+            AddComponentToSelectedOrNewObject("Destroyer", typeof(Destroyer));
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -64,25 +64,25 @@ namespace DustEngine.DustEditor
 
             switch (destroyMode)
             {
-                case DuDestroyer.DestroyMode.Manual:
+                case Destroyer.DestroyMode.Manual:
                     // Nothing need to show here
                     break;
 
-                case DuDestroyer.DestroyMode.Time:
+                case Destroyer.DestroyMode.Time:
                     PropertyDurationField(m_Timeout);
                     break;
 
-                case DuDestroyer.DestroyMode.TimeRange:
+                case Destroyer.DestroyMode.TimeRange:
                     PropertyFieldDurationRange(m_TimeoutRange);
                     break;
 
-                case DuDestroyer.DestroyMode.AliveZone:
-                case DuDestroyer.DestroyMode.DeadZone:
+                case Destroyer.DestroyMode.AliveZone:
+                case Destroyer.DestroyMode.DeadZone:
                     PropertyField(m_VolumeCenterMode);
 
-                    switch ((DuDestroyer.VolumeCenterMode) m_VolumeCenterMode.valInt)
+                    switch ((Destroyer.VolumeCenterMode) m_VolumeCenterMode.valInt)
                     {
-                        case DuDestroyer.VolumeCenterMode.StartPosition:
+                        case Destroyer.VolumeCenterMode.StartPosition:
                             if (Application.isPlaying)
                                 PropertyFieldOrLock(m_VolumeCenter, true);
                             else
@@ -91,13 +91,13 @@ namespace DustEngine.DustEditor
                             PropertyField(m_VolumeSize, "Size");
                             break;
 
-                        case DuDestroyer.VolumeCenterMode.FixedWorldPosition:
+                        case Destroyer.VolumeCenterMode.FixedWorldPosition:
                             PropertyField(m_VolumeCenter);
                             PropertyField(m_VolumeOffset);
                             PropertyField(m_VolumeSize);
                             break;
 
-                        case DuDestroyer.VolumeCenterMode.SourceObject:
+                        case Destroyer.VolumeCenterMode.SourceObject:
                             PropertyField(m_VolumeSourceCenter);
                             PropertyField(m_VolumeOffset);
                             PropertyField(m_VolumeSize);
@@ -117,7 +117,7 @@ namespace DustEngine.DustEditor
 
             Space();
 
-            if (DustGUI.FoldoutBegin("Events", "DuDestroyer.Events", false))
+            if (DustGUI.FoldoutBegin("Events", "Destroyer.Events", false))
             {
                 PropertyField(m_OnDestroy);
             }
@@ -127,20 +127,20 @@ namespace DustEngine.DustEditor
 
             switch (destroyMode)
             {
-                case DuDestroyer.DestroyMode.Manual:
+                case Destroyer.DestroyMode.Manual:
                     DustGUI.HelpBoxInfo("To destroy this GameObject call Destroy() method");
                     break;
 
-                case DuDestroyer.DestroyMode.Time:
-                case DuDestroyer.DestroyMode.TimeRange:
+                case Destroyer.DestroyMode.Time:
+                case Destroyer.DestroyMode.TimeRange:
                     // Nothing need to show here
                     break;
 
-                case DuDestroyer.DestroyMode.AliveZone:
+                case Destroyer.DestroyMode.AliveZone:
                     DustGUI.HelpBoxInfo("GameObject will be destroyed\nwhen it will leave Alive Zone");
                     break;
 
-                case DuDestroyer.DestroyMode.DeadZone:
+                case Destroyer.DestroyMode.DeadZone:
                     DustGUI.HelpBoxInfo("GameObject will be destroyed\nwhen it will get inside Dead Zone");
                     break;
 
@@ -152,9 +152,9 @@ namespace DustEngine.DustEditor
 
             if (Application.isPlaying && targets.Length == 1)
             {
-                if (destroyMode == DuDestroyer.DestroyMode.Time || destroyMode == DuDestroyer.DestroyMode.TimeRange)
+                if (destroyMode == Destroyer.DestroyMode.Time || destroyMode == Destroyer.DestroyMode.TimeRange)
                 {
-                    var main = target as DuDestroyer;
+                    var main = target as Destroyer;
 
                     if (main.timeLimit > 0)
                     {
@@ -173,7 +173,7 @@ namespace DustEngine.DustEditor
             // Post Update
 
             if (m_VolumeSize.isChanged)
-                m_VolumeSize.valVector3 = DuDestroyer.Normalizer.VolumeSize(m_VolumeSize.valVector3);
+                m_VolumeSize.valVector3 = Destroyer.Normalizer.VolumeSize(m_VolumeSize.valVector3);
 
             InspectorCommitUpdates();
         }

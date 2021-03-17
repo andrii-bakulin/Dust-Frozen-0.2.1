@@ -5,7 +5,7 @@ using UnityEditor;
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Instances/Parallax")]
-    public class DuParallax : DuMonoBehaviour
+    public class Parallax : DuMonoBehaviour
     {
         public enum ParallaxControl
         {
@@ -33,8 +33,8 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private DuParallaxController m_ParallaxController = null;
-        public DuParallaxController parallaxController
+        private ParallaxController m_ParallaxController = null;
+        public ParallaxController parallaxController
         {
             get => m_ParallaxController;
             set => m_ParallaxController = value;
@@ -115,7 +115,7 @@ namespace DustEngine
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
-        private List<DuParallaxInstance> m_Instances = new List<DuParallaxInstance>();
+        private List<ParallaxInstance> m_Instances = new List<ParallaxInstance>();
 
         private float m_OffsetDynamic;
 
@@ -248,7 +248,7 @@ namespace DustEngine
                     newGameObject = Instantiate(tileObject, this.transform);
                 }
 
-                var newInstance = newGameObject.AddComponent<DuParallaxInstance>();
+                var newInstance = newGameObject.AddComponent<ParallaxInstance>();
                 newInstance.Initialize(this);
 
                 m_Instances.Add(newInstance);
@@ -263,7 +263,7 @@ namespace DustEngine
 
             while (index >= 0)
             {
-                DuParallaxInstance instance = transform.GetChild(index).gameObject.GetComponent<DuParallaxInstance>();
+                ParallaxInstance instance = transform.GetChild(index).gameObject.GetComponent<ParallaxInstance>();
 
                 if (Dust.IsNotNull(instance) && instance.parentParallax == this)
                     Dust.DestroyObjectWhenReady(instance.gameObject);

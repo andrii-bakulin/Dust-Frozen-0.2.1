@@ -3,9 +3,9 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuParallaxController))]
+    [CustomEditor(typeof(ParallaxController))]
     [CanEditMultipleObjects]
-    public class DuParallaxControllerEditor : DuEditor
+    public class ParallaxControllerEditor : DuEditor
     {
         private DuProperty m_ParallaxControl;
         private DuProperty m_Offset;
@@ -19,7 +19,7 @@ namespace DustEngine.DustEditor
         [MenuItem("Dust/Instances/Parallax Controller")]
         public static void AddComponentToSelectedObjects()
         {
-            AddComponentToSelectedOrNewObject("Parallax Controller", typeof(DuParallaxController));
+            AddComponentToSelectedOrNewObject("Parallax Controller", typeof(ParallaxController));
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -46,13 +46,13 @@ namespace DustEngine.DustEditor
             {
                 PropertyField(m_ParallaxControl);
 
-                switch ((DuParallaxController.ParallaxControl) m_ParallaxControl.valInt)
+                switch ((ParallaxController.ParallaxControl) m_ParallaxControl.valInt)
                 {
-                    case DuParallaxController.ParallaxControl.Manual:
+                    case ParallaxController.ParallaxControl.Manual:
                         PropertyExtendedSlider(m_Offset, 0f, 10f, 0.01f);
                         break;
 
-                    case DuParallaxController.ParallaxControl.Time:
+                    case ParallaxController.ParallaxControl.Time:
                         PropertyExtendedSlider(m_Offset, 0f, 10f, 0.01f);
                         PropertyExtendedSlider(m_TimeScale, -10f, 10f, 0.01f);
                         PropertyField(m_Freeze);
@@ -81,11 +81,11 @@ namespace DustEngine.DustEditor
 
             if (m_Offset.isChanged)
             {
-                var parallaxChildren = FindObjectsOfType<DuParallax>();
+                var parallaxChildren = FindObjectsOfType<Parallax>();
 
                 foreach (var subTarget in targets)
                 {
-                    var origin = subTarget as DuParallaxController;
+                    var origin = subTarget as ParallaxController;
                     origin.UpdateState(0f);
 
                     foreach (var parallaxChild in parallaxChildren)

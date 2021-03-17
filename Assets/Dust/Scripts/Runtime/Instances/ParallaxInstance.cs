@@ -3,17 +3,17 @@
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Support/Parallax Instance")]
-    public class DuParallaxInstance : DuMonoBehaviour
+    public class ParallaxInstance : DuMonoBehaviour
     {
         [SerializeField]
-        internal DuParallax m_ParentParallax = null;
-        public DuParallax parentParallax => m_ParentParallax;
+        internal Parallax m_ParentParallax = null;
+        public Parallax parentParallax => m_ParentParallax;
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public void Initialize(DuParallax duParallax)
+        public void Initialize(Parallax parallax)
         {
-            m_ParentParallax = duParallax;
+            m_ParentParallax = parallax;
         }
     }
 }

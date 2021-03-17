@@ -3,9 +3,9 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    [CustomEditor(typeof(DuSpawner))]
+    [CustomEditor(typeof(Spawner))]
     [CanEditMultipleObjects]
-    public class DuSpawnerEditor : DuEditor
+    public class SpawnerEditor : DuEditor
     {
         private DuProperty m_SpawnEvent;
         private DuProperty m_Interval;
@@ -36,7 +36,7 @@ namespace DustEngine.DustEditor
         [MenuItem("Dust/Instances/Spawner")]
         public static void AddComponentToSelectedObjects()
         {
-            AddComponentToSelectedOrNewObject("Spawner", typeof(DuSpawner));
+            AddComponentToSelectedOrNewObject("Spawner", typeof(Spawner));
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -78,17 +78,17 @@ namespace DustEngine.DustEditor
 
             PropertyField(m_SpawnEvent);
 
-            switch ((DuSpawner.SpawnEvent) m_SpawnEvent.valInt)
+            switch ((Spawner.SpawnEvent) m_SpawnEvent.valInt)
             {
-                case DuSpawner.SpawnEvent.Manual:
+                case Spawner.SpawnEvent.Manual:
                     DustGUI.HelpBoxInfo("Call method Spawn() or SpawnSingleObject() to spawn object(s)");
                     break;
 
-                case DuSpawner.SpawnEvent.FixedInterval:
+                case Spawner.SpawnEvent.FixedInterval:
                     PropertyDurationField(m_Interval);
                     break;
 
-                case DuSpawner.SpawnEvent.IntervalInRange:
+                case Spawner.SpawnEvent.IntervalInRange:
                     PropertyFieldDurationRange(m_IntervalRange);
                     break;
 
@@ -109,7 +109,7 @@ namespace DustEngine.DustEditor
             {
                 PropertyField(m_SpawnObjectsIterate);
 
-                if ((DuSpawner.IterateMode) m_SpawnObjectsIterate.valInt == DuSpawner.IterateMode.Random)
+                if ((Spawner.IterateMode) m_SpawnObjectsIterate.valInt == Spawner.IterateMode.Random)
                     PropertySeedRandomOrFixed(m_SpawnObjectsSeed);
             }
 
@@ -121,19 +121,19 @@ namespace DustEngine.DustEditor
 
             PropertyField(m_SpawnPointMode);
 
-            switch ((DuSpawner.SpawnPointMode) m_SpawnPointMode.valInt)
+            switch ((Spawner.SpawnPointMode) m_SpawnPointMode.valInt)
             {
-                case DuSpawner.SpawnPointMode.Self:
+                case Spawner.SpawnPointMode.Self:
                     break;
 
-                case DuSpawner.SpawnPointMode.Points:
+                case Spawner.SpawnPointMode.Points:
                     PropertyField(m_SpawnPoints);
 
                     if (m_SpawnPoints.property.arraySize > 1)
                     {
                         PropertyField(m_SpawnPointsIterate);
 
-                        if ((DuSpawner.IterateMode) m_SpawnPointsIterate.valInt == DuSpawner.IterateMode.Random)
+                        if ((Spawner.IterateMode) m_SpawnPointsIterate.valInt == Spawner.IterateMode.Random)
                             PropertySeedRandomOrFixed(m_SpawnPointsSeed);
                     }
                     break;
@@ -170,7 +170,7 @@ namespace DustEngine.DustEditor
 
             Space();
 
-            if (DustGUI.FoldoutBegin("Events", "DuSpawner.Events", false))
+            if (DustGUI.FoldoutBegin("Events", "Spawner.Events", false))
             {
                 PropertyField(m_OnSpawn);
             }
@@ -180,27 +180,27 @@ namespace DustEngine.DustEditor
 
             if (Application.isPlaying)
             {
-                if (DustGUI.FoldoutBegin("Debug", "DuSpawner.Debug"))
+                if (DustGUI.FoldoutBegin("Debug", "Spawner.Debug"))
                 {
                     DustGUI.BeginHorizontal();
                     {
                         if (DustGUI.Button("Spawn"))
                         {
                             foreach (var subTarget in targets)
-                                (subTarget as DuSpawner).Spawn();
+                                (subTarget as Spawner).Spawn();
                         }
 
                         if (DustGUI.Button("Spawn Single Object"))
                         {
                             foreach (var subTarget in targets)
-                                (subTarget as DuSpawner).SpawnSingleObject();
+                                (subTarget as Spawner).SpawnSingleObject();
                         }
                     }
                     DustGUI.EndHorizontal();
 
                     if (targets.Length == 1)
                     {
-                        var main = target as DuSpawner;
+                        var main = target as Spawner;
 
                         Space();
 
@@ -216,7 +216,7 @@ namespace DustEngine.DustEditor
             // Validate & Normalize Data
 
             if (m_Limit.isChanged)
-                m_Limit.valInt = DuSpawner.Normalizer.Limit(m_Limit.valInt);
+                m_Limit.valInt = Spawner.Normalizer.Limit(m_Limit.valInt);
 
             InspectorCommitUpdates();
         }

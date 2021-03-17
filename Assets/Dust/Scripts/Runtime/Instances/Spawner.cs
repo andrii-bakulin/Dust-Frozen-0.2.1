@@ -5,7 +5,7 @@ using UnityEngine.Events;
 namespace DustEngine
 {
     [AddComponentMenu("Dust/Instances/Spawner")]
-    public class DuSpawner : DuMonoBehaviour
+    public class Spawner : DuMonoBehaviour
     {
         public enum SpawnEvent
         {
