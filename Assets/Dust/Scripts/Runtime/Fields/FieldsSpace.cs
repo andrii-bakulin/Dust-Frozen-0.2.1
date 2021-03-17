@@ -6,8 +6,8 @@ namespace DustEngine
     public class FieldsSpace : DuMonoBehaviour
     {
         [SerializeField]
-        private DuFieldsMap m_FieldsMap = DuFieldsMap.FieldsSpace();
-        public DuFieldsMap fieldsMap => m_FieldsMap;
+        private FieldsMap m_FieldsMap = FieldsMap.FieldsSpace();
+        public FieldsMap fieldsMap => m_FieldsMap;
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

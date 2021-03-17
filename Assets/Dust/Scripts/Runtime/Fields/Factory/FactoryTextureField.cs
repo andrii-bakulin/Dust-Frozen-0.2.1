@@ -92,26 +92,26 @@ namespace DustEngine
         public Remapping remapping => m_Remapping;
 
         //--------------------------------------------------------------------------------------------------------------
-        // DuDynamicStateInterface
+        // IDynamicState
 
         public override int GetDynamicStateHashCode()
         {
             var seq = 0;
             var dynamicState = base.GetDynamicStateHashCode();
 
-            DuDynamicState.Append(ref dynamicState, ++seq, texture);
-            DuDynamicState.Append(ref dynamicState, ++seq, spaceUVW);
-            DuDynamicState.Append(ref dynamicState, ++seq, flipU);
-            DuDynamicState.Append(ref dynamicState, ++seq, flipV);
-            DuDynamicState.Append(ref dynamicState, ++seq, flipW);
+            DynamicState.Append(ref dynamicState, ++seq, texture);
+            DynamicState.Append(ref dynamicState, ++seq, spaceUVW);
+            DynamicState.Append(ref dynamicState, ++seq, flipU);
+            DynamicState.Append(ref dynamicState, ++seq, flipV);
+            DynamicState.Append(ref dynamicState, ++seq, flipW);
 
-            DuDynamicState.Append(ref dynamicState, ++seq, powerSource);
-            DuDynamicState.Append(ref dynamicState, ++seq, applyPowerToAlpha);
+            DynamicState.Append(ref dynamicState, ++seq, powerSource);
+            DynamicState.Append(ref dynamicState, ++seq, applyPowerToAlpha);
 
             if (powerSource != ColorComponent.Ignore)
-                DuDynamicState.Append(ref dynamicState, ++seq, remapping);
+                DynamicState.Append(ref dynamicState, ++seq, remapping);
 
-            return DuDynamicState.Normalize(dynamicState);
+            return DynamicState.Normalize(dynamicState);
         }
 
         //--------------------------------------------------------------------------------------------------------------

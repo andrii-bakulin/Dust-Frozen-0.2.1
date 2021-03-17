@@ -23,8 +23,8 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        private DuFieldsMap m_FieldsMapInstance;
-        public DuFieldsMap fieldsMapInstance => m_FieldsMapInstance;
+        private FieldsMap m_FieldsMapInstance;
+        public FieldsMap fieldsMapInstance => m_FieldsMapInstance;
 
         private DuEditor m_Editor;
 
@@ -36,7 +36,7 @@ namespace DustEngine.DustEditor
 
         private readonly Dictionary<string, Rect> m_RectsUI = new Dictionary<string, Rect>();
 
-        public FieldsMapEditor(DuEditor parentEditor, SerializedProperty fieldsMapProperty, DuFieldsMap fieldsMapInstance)
+        public FieldsMapEditor(DuEditor parentEditor, SerializedProperty fieldsMapProperty, FieldsMap fieldsMapInstance)
         {
             m_FieldsMapInstance = fieldsMapInstance;
             m_Editor = parentEditor;
@@ -82,7 +82,7 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            if (DustGUI.FoldoutBegin("Fields Map", "DuFieldsMap.Main"))
+            if (DustGUI.FoldoutBegin("Fields Map", "FieldsMap.Main"))
             {
                 if (showPowerEditor)
                     DuEditor.PropertyExtendedSlider(m_DefaultPower, 0f, 1f, 0.01f);
@@ -96,7 +96,7 @@ namespace DustEngine.DustEditor
 
                 OptimizeFieldsArray();
 
-                Vector2 scrollPosition = DuSessionState.GetVector3("DuFieldsMap.Fields.ScrollPosition", m_Editor.target, Vector2.zero);
+                Vector2 scrollPosition = SessionState.GetVector3("FieldsMap.Fields.ScrollPosition", m_Editor.target, Vector2.zero);
                 float totalHeight = 24 + 36 * Mathf.Clamp(m_Fields.property.arraySize + 1, 4, 8) + 16;
 
                 int indentLevel = DustGUI.IndentLevelReset(); // Because it'll try to add left-spacing when draw fields
@@ -163,18 +163,18 @@ namespace DustEngine.DustEditor
 
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-                DuSessionState.SetVector3("DuFieldsMap.Fields.ScrollPosition", m_Editor.target, scrollPosition);
+                SessionState.SetVector3("FieldsMap.Fields.ScrollPosition", m_Editor.target, scrollPosition);
             }
             DustGUI.FoldoutEnd();
         }
 
-        private DuFieldsMap.FieldRecord UnpackFieldRecord(SerializedProperty item)
+        private FieldsMap.FieldRecord UnpackFieldRecord(SerializedProperty item)
         {
-            var record = new DuFieldsMap.FieldRecord();
+            var record = new FieldsMap.FieldRecord();
             record.enabled = item.FindPropertyRelative("m_Enabled").boolValue;
             record.field = item.FindPropertyRelative("m_Field").objectReferenceValue as Field;
-            record.blendPowerMode = (DuFieldsMap.FieldRecord.BlendPowerMode) item.FindPropertyRelative("m_BlendPowerMode").intValue;
-            record.blendColorMode = (DuFieldsMap.FieldRecord.BlendColorMode) item.FindPropertyRelative("m_BlendColorMode").intValue;
+            record.blendPowerMode = (FieldsMap.FieldRecord.BlendPowerMode) item.FindPropertyRelative("m_BlendPowerMode").intValue;
+            record.blendColorMode = (FieldsMap.FieldRecord.BlendColorMode) item.FindPropertyRelative("m_BlendColorMode").intValue;
             record.intensity = item.FindPropertyRelative("m_Intensity").floatValue;
             return record;
         }
@@ -247,7 +247,7 @@ namespace DustEngine.DustEditor
                     Rect buttonRect = m_RectsUI["item" + itemIndex.ToString()];
                     buttonRect.y += 5f;
 
-                    PopupWindow.Show(buttonRect, DuPopupExtraSlider.Create(m_Editor.serializedObject, "Intensity", item.FindPropertyRelative("m_Intensity")));
+                    PopupWindow.Show(buttonRect, PopupExtraSlider.Create(m_Editor.serializedObject, "Intensity", item.FindPropertyRelative("m_Intensity")));
                 }
 
                 if (Event.current.type == EventType.Repaint)
@@ -258,7 +258,7 @@ namespace DustEngine.DustEditor
                 if (showPowerEditor)
                 {
                     var enumValue = DustGUI.DropDownList(newRecord.blendPowerMode, CELL_WIDTH_BLENDING, 0, UI.ExtraList.styleDropDownList);
-                    newRecord.blendPowerMode = (DuFieldsMap.FieldRecord.BlendPowerMode) enumValue;
+                    newRecord.blendPowerMode = (FieldsMap.FieldRecord.BlendPowerMode) enumValue;
                 }
 
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -268,7 +268,7 @@ namespace DustEngine.DustEditor
                     if (newRecord.field.IsAllowCalculateFieldColor())
                     {
                         var enumValue = DustGUI.DropDownList(newRecord.blendColorMode, CELL_WIDTH_BLENDING, 0, UI.ExtraList.styleDropDownList);
-                        newRecord.blendColorMode = (DuFieldsMap.FieldRecord.BlendColorMode) enumValue;
+                        newRecord.blendColorMode = (FieldsMap.FieldRecord.BlendColorMode) enumValue;
 
                         if (newRecord.field.IsHasFieldColorPreview())
                         {
@@ -287,7 +287,7 @@ namespace DustEngine.DustEditor
                                     // like for 0.0 intensity I still should draw small color-box (width = 8f)
                                     lastElement.width = DuMath.Fit(0f, 1f, 8f, lastElement.width, colorPower, false);
 
-                                    var opacity = newRecord.blendColorMode != DuFieldsMap.FieldRecord.BlendColorMode.Ignore ? 1f : 0.25f;
+                                    var opacity = newRecord.blendColorMode != FieldsMap.FieldRecord.BlendColorMode.Ignore ? 1f : 0.25f;
                                     DustGUI.Gradient(lastElement, previewGradient, opacity);
                                 }
                             }
@@ -296,7 +296,7 @@ namespace DustEngine.DustEditor
                     else
                     {
                         DustGUI.Lock();
-                        DustGUI.DropDownList(DuFieldsMap.FieldRecord.BlendColorMode.Ignore, CELL_WIDTH_BLENDING, 0, UI.ExtraList.styleDropDownList);
+                        DustGUI.DropDownList(FieldsMap.FieldRecord.BlendColorMode.Ignore, CELL_WIDTH_BLENDING, 0, UI.ExtraList.styleDropDownList);
                         DustGUI.Unlock();
                     }
                 }
@@ -424,7 +424,7 @@ namespace DustEngine.DustEditor
 
             m_Fields.property.InsertArrayElementAtIndex(count);
 
-            var defaultRec = new DuFieldsMap.FieldRecord();
+            var defaultRec = new FieldsMap.FieldRecord();
 
             SerializedProperty newRecord = m_Fields.property.GetArrayElementAtIndex(count);
 
@@ -439,7 +439,7 @@ namespace DustEngine.DustEditor
 
         private void OptimizeFieldsArray()
         {
-            DuEditorHelper.OptimizeObjectReferencesArray(ref m_Fields, "m_Field");
+            EditorHelper.OptimizeObjectReferencesArray(ref m_Fields, "m_Field");
         }
     }
 }

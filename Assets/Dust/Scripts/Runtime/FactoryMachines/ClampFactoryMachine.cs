@@ -256,44 +256,44 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
-        // DuDynamicStateInterface
+        // IDynamicState
 
         public override int GetDynamicStateHashCode()
         {
             var seq = 0;
             var dynamicState = base.GetDynamicStateHashCode();
 
-            DuDynamicState.Append(ref dynamicState, ++seq, positionMode);
+            DynamicState.Append(ref dynamicState, ++seq, positionMode);
             if (positionMode != ClampMode.NoClamp)
             {
-                DuDynamicState.Append(ref dynamicState, ++seq, positionMin);
-                DuDynamicState.Append(ref dynamicState, ++seq, positionMax);
-                DuDynamicState.Append(ref dynamicState, ++seq, positionClampX);
-                DuDynamicState.Append(ref dynamicState, ++seq, positionClampY);
-                DuDynamicState.Append(ref dynamicState, ++seq, positionClampZ);
+                DynamicState.Append(ref dynamicState, ++seq, positionMin);
+                DynamicState.Append(ref dynamicState, ++seq, positionMax);
+                DynamicState.Append(ref dynamicState, ++seq, positionClampX);
+                DynamicState.Append(ref dynamicState, ++seq, positionClampY);
+                DynamicState.Append(ref dynamicState, ++seq, positionClampZ);
             }
 
-            DuDynamicState.Append(ref dynamicState, ++seq, rotationMode);
+            DynamicState.Append(ref dynamicState, ++seq, rotationMode);
             if (rotationMode != ClampMode.NoClamp)
             {
-                DuDynamicState.Append(ref dynamicState, ++seq, rotationMin);
-                DuDynamicState.Append(ref dynamicState, ++seq, rotationMax);
-                DuDynamicState.Append(ref dynamicState, ++seq, rotationClampX);
-                DuDynamicState.Append(ref dynamicState, ++seq, rotationClampY);
-                DuDynamicState.Append(ref dynamicState, ++seq, rotationClampZ);
+                DynamicState.Append(ref dynamicState, ++seq, rotationMin);
+                DynamicState.Append(ref dynamicState, ++seq, rotationMax);
+                DynamicState.Append(ref dynamicState, ++seq, rotationClampX);
+                DynamicState.Append(ref dynamicState, ++seq, rotationClampY);
+                DynamicState.Append(ref dynamicState, ++seq, rotationClampZ);
             }
 
-            DuDynamicState.Append(ref dynamicState, ++seq, scaleMode);
+            DynamicState.Append(ref dynamicState, ++seq, scaleMode);
             if (scaleMode != ClampMode.NoClamp)
             {
-                DuDynamicState.Append(ref dynamicState, ++seq, scaleMin);
-                DuDynamicState.Append(ref dynamicState, ++seq, scaleMax);
-                DuDynamicState.Append(ref dynamicState, ++seq, scaleClampX);
-                DuDynamicState.Append(ref dynamicState, ++seq, scaleClampY);
-                DuDynamicState.Append(ref dynamicState, ++seq, scaleClampZ);
+                DynamicState.Append(ref dynamicState, ++seq, scaleMin);
+                DynamicState.Append(ref dynamicState, ++seq, scaleMax);
+                DynamicState.Append(ref dynamicState, ++seq, scaleClampX);
+                DynamicState.Append(ref dynamicState, ++seq, scaleClampY);
+                DynamicState.Append(ref dynamicState, ++seq, scaleClampZ);
             }
 
-            return DuDynamicState.Normalize(dynamicState);
+            return DynamicState.Normalize(dynamicState);
         }
 
         //--------------------------------------------------------------------------------------------------------------

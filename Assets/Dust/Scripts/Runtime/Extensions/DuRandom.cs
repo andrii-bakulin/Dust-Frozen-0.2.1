@@ -9,7 +9,7 @@ namespace DustEngine
         public DuRandom(int seed)
         {
             if (seed <= 0)
-                seed = Random.Range(DuConstants.RANDOM_SEED_MIN, DuConstants.RANDOM_SEED_MAX);
+                seed = Random.Range(Constants.RANDOM_SEED_MIN, Constants.RANDOM_SEED_MAX);
 
             random = new System.Random(seed);
         }

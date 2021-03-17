@@ -55,7 +55,7 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
 
         public static Vector3 Round(Vector3 value)
-            => Round(value, DuConstants.ROUND_DIGITS_COUNT);
+            => Round(value, Constants.ROUND_DIGITS_COUNT);
 
         public static Vector3 Round(Vector3 value, int roundToDigits)
         {

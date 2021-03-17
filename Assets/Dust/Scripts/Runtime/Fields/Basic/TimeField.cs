@@ -55,21 +55,21 @@ namespace DustEngine
         private float m_OffsetDynamic;
 
         //--------------------------------------------------------------------------------------------------------------
-        // DuDynamicStateInterface
+        // IDynamicState
 
         public override int GetDynamicStateHashCode()
         {
             var seq = 0;
             var dynamicState = base.GetDynamicStateHashCode();
 
-            DuDynamicState.Append(ref dynamicState, ++seq, timeMode);
-            DuDynamicState.Append(ref dynamicState, ++seq, timeScale);
-            DuDynamicState.Append(ref dynamicState, ++seq, offset);
+            DynamicState.Append(ref dynamicState, ++seq, timeMode);
+            DynamicState.Append(ref dynamicState, ++seq, timeScale);
+            DynamicState.Append(ref dynamicState, ++seq, offset);
 
-            DuDynamicState.Append(ref dynamicState, ++seq, remapping);
-            DuDynamicState.Append(ref dynamicState, ++seq, m_OffsetDynamic);
+            DynamicState.Append(ref dynamicState, ++seq, remapping);
+            DynamicState.Append(ref dynamicState, ++seq, m_OffsetDynamic);
 
-            return DuDynamicState.Normalize(dynamicState);
+            return DynamicState.Normalize(dynamicState);
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -111,16 +111,16 @@ namespace DustEngine
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
                 case TimeMode.Sin:
-                    return DuMath.Fit(-1f, +1f, 0f, 1f, Mathf.Sin(DuConstants.PI2 * timeOffset));
+                    return DuMath.Fit(-1f, +1f, 0f, 1f, Mathf.Sin(Constants.PI2 * timeOffset));
 
                 case TimeMode.Cos:
-                    return DuMath.Fit(-1f, +1f, 0f, 1f, Mathf.Cos(DuConstants.PI2 * timeOffset));
+                    return DuMath.Fit(-1f, +1f, 0f, 1f, Mathf.Cos(Constants.PI2 * timeOffset));
 
                 case TimeMode.WaveUp:
-                    return Mathf.Abs(Mathf.Sin(DuConstants.PI * timeOffset));
+                    return Mathf.Abs(Mathf.Sin(Constants.PI * timeOffset));
 
                 case TimeMode.WaveDown:
-                    return 1f - Mathf.Abs(Mathf.Sin(DuConstants.PI * timeOffset));
+                    return 1f - Mathf.Abs(Mathf.Sin(Constants.PI * timeOffset));
 
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

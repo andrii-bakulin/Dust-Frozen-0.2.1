@@ -43,7 +43,7 @@ namespace DustEngine.DustEditor
 
             GenerateColumn(popup, "Fields.Basic", "Basic Fields");
 
-            if (fieldsMap.fieldsMapInstance.fieldsMapMode == DuFieldsMap.FieldsMapMode.FactoryMachine)
+            if (fieldsMap.fieldsMapInstance.fieldsMapMode == FieldsMap.FieldsMapMode.FactoryMachine)
                 GenerateColumn(popup, "Fields.Factory", "Factory Fields");
 
             GenerateColumn(popup, "Fields.2D", "2D Fields");

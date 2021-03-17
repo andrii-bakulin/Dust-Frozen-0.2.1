@@ -2,7 +2,7 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    public static class DuEditorHelper
+    public static class EditorHelper
     {
         internal static void OptimizeObjectReferencesArray(ref DuEditor.DuProperty itemsListProperty, string refObjectKey)
         {

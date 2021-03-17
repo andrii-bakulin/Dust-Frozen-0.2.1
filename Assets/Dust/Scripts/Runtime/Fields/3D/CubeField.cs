@@ -32,16 +32,16 @@ namespace DustEngine
         private Calc m_Calc = null;
 
         //--------------------------------------------------------------------------------------------------------------
-        // DuDynamicStateInterface
+        // IDynamicState
 
         public override int GetDynamicStateHashCode()
         {
             var seq = 0;
             var dynamicState = base.GetDynamicStateHashCode();
 
-            DuDynamicState.Append(ref dynamicState, ++seq, size);
+            DynamicState.Append(ref dynamicState, ++seq, size);
 
-            return DuDynamicState.Normalize(dynamicState);
+            return DynamicState.Normalize(dynamicState);
         }
 
         //--------------------------------------------------------------------------------------------------------------

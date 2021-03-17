@@ -143,24 +143,24 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
-        // DuDynamicStateInterface
+        // IDynamicState
 
         public override int GetDynamicStateHashCode()
         {
             var seq = 0;
             var dynamicState = base.GetDynamicStateHashCode();
 
-            DuDynamicState.Append(ref dynamicState, ++seq, amplitude);
-            DuDynamicState.Append(ref dynamicState, ++seq, size);
-            DuDynamicState.Append(ref dynamicState, ++seq, linearFalloff);
-            DuDynamicState.Append(ref dynamicState, ++seq, direction);
+            DynamicState.Append(ref dynamicState, ++seq, amplitude);
+            DynamicState.Append(ref dynamicState, ++seq, size);
+            DynamicState.Append(ref dynamicState, ++seq, linearFalloff);
+            DynamicState.Append(ref dynamicState, ++seq, direction);
 
-            DuDynamicState.Append(ref dynamicState, ++seq, offset);
-            DuDynamicState.Append(ref dynamicState, ++seq, animationSpeed);
+            DynamicState.Append(ref dynamicState, ++seq, offset);
+            DynamicState.Append(ref dynamicState, ++seq, animationSpeed);
 
-            DuDynamicState.Append(ref dynamicState, ++seq, m_OffsetDynamic);
+            DynamicState.Append(ref dynamicState, ++seq, m_OffsetDynamic);
 
-            return DuDynamicState.Normalize(dynamicState);
+            return DynamicState.Normalize(dynamicState);
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -183,7 +183,7 @@ namespace DustEngine
             Vector3 localPosition = transform.worldToLocalMatrix.MultiplyPoint(fieldPoint.inPosition);
 
             // Convert to Axis X+ (xp) space
-            var xpLocalPosition = DuAxisDirection.ConvertFromDirectionToAxisXPlus(direction, localPosition);
+            var xpLocalPosition = AxisDirection.ConvertFromDirectionToAxisXPlus(direction, localPosition);
 
             result.fieldPower = GetPowerForLocalPositionInAxisXPlus(xpLocalPosition);
             result.fieldColor = GetFieldColorFromRemapping(remapping, result.fieldPower, calculateColor);
@@ -200,7 +200,7 @@ namespace DustEngine
                 return remapping.MapValue(0.5f);
 
             float sinOffset = distance / size - (offset + 0.75f) - m_OffsetDynamic;
-            float waveOffset = Mathf.Sin(DuConstants.PI2 * sinOffset) * amplitude;
+            float waveOffset = Mathf.Sin(Constants.PI2 * sinOffset) * amplitude;
 
             if (DuMath.IsNotZero(linearFalloff))
                 waveOffset *= Mathf.Clamp01((linearFalloff - distance) / linearFalloff);
@@ -253,10 +253,10 @@ namespace DustEngine
                 pointZ0.x = GetPowerForLocalPositionInAxisXPlus(pointZ0);
                 pointZ1.x = GetPowerForLocalPositionInAxisXPlus(pointZ1);
 
-                pointY0 = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, pointY0);
-                pointY1 = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, pointY1);
-                pointZ0 = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, pointZ0);
-                pointZ1 = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, pointZ1);
+                pointY0 = AxisDirection.ConvertFromAxisXPlusToDirection(direction, pointY0);
+                pointY1 = AxisDirection.ConvertFromAxisXPlusToDirection(direction, pointY1);
+                pointZ0 = AxisDirection.ConvertFromAxisXPlusToDirection(direction, pointZ0);
+                pointZ1 = AxisDirection.ConvertFromAxisXPlusToDirection(direction, pointZ1);
 
                 Gizmos.DrawLine(pointY0, pointY1);
                 Gizmos.DrawLine(pointZ0, pointZ1);
@@ -266,7 +266,7 @@ namespace DustEngine
             {
                 Vector3 zeroPoint = Vector3.zero;
                 zeroPoint.x = GetPowerForLocalPositionInAxisXPlus(new Vector3(0f, linearFalloff, linearFalloff)); // this point will be always outside falloff range
-                zeroPoint = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, zeroPoint);
+                zeroPoint = AxisDirection.ConvertFromAxisXPlusToDirection(direction, zeroPoint);
 
                 DustGizmos.DrawCircle(linearFalloff, zeroPoint, direction, 32);
             }

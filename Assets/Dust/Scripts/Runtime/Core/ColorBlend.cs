@@ -4,7 +4,7 @@ namespace DustEngine
 {
     // https://en.wikipedia.org/wiki/Alpha_compositing#Alpha_blending
     // PS: "SRC over DST" [or] "colorOVER over colorBASE"
-    public static class DuColorBlend
+    public static class ColorBlend
     {
         public static Color AlphaBlend(Color colorBase, Color colorOver)
         {

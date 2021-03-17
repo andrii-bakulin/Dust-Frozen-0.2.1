@@ -122,37 +122,37 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
-        // DuDynamicStateInterface
+        // IDynamicState
 
         public override int GetDynamicStateHashCode()
         {
             var seq = 0;
             var dynamicState = base.GetDynamicStateHashCode();
 
-            DuDynamicState.Append(ref dynamicState, ++seq, transform);
+            DynamicState.Append(ref dynamicState, ++seq, transform);
 
-            DuDynamicState.Append(ref dynamicState, ++seq, powerEnabled);
-            DuDynamicState.Append(ref dynamicState, ++seq, colorEnabled);
+            DynamicState.Append(ref dynamicState, ++seq, powerEnabled);
+            DynamicState.Append(ref dynamicState, ++seq, colorEnabled);
 
             if (powerEnabled)
             {
-                DuDynamicState.Append(ref dynamicState, ++seq, powerUseAxisX);
-                DuDynamicState.Append(ref dynamicState, ++seq, powerUseAxisY);
-                DuDynamicState.Append(ref dynamicState, ++seq, powerUseAxisZ);
-                DuDynamicState.Append(ref dynamicState, ++seq, powerScale);
-                DuDynamicState.Append(ref dynamicState, ++seq, powerAggregate);
-                DuDynamicState.Append(ref dynamicState, ++seq, powerMin);
-                DuDynamicState.Append(ref dynamicState, ++seq, powerMax);
-                DuDynamicState.Append(ref dynamicState, ++seq, powerShape);
+                DynamicState.Append(ref dynamicState, ++seq, powerUseAxisX);
+                DynamicState.Append(ref dynamicState, ++seq, powerUseAxisY);
+                DynamicState.Append(ref dynamicState, ++seq, powerUseAxisZ);
+                DynamicState.Append(ref dynamicState, ++seq, powerScale);
+                DynamicState.Append(ref dynamicState, ++seq, powerAggregate);
+                DynamicState.Append(ref dynamicState, ++seq, powerMin);
+                DynamicState.Append(ref dynamicState, ++seq, powerMax);
+                DynamicState.Append(ref dynamicState, ++seq, powerShape);
             }
 
             if (colorEnabled)
             {
-                DuDynamicState.Append(ref dynamicState, ++seq, colorScale);
-                DuDynamicState.Append(ref dynamicState, ++seq, colorShape);
+                DynamicState.Append(ref dynamicState, ++seq, colorScale);
+                DynamicState.Append(ref dynamicState, ++seq, colorShape);
             }
 
-            return DuDynamicState.Normalize(dynamicState);
+            return DynamicState.Normalize(dynamicState);
         }
 
         //--------------------------------------------------------------------------------------------------------------

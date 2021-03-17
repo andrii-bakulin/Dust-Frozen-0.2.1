@@ -111,8 +111,8 @@ namespace DustEngine
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
-        protected DuFieldsMap m_FieldsMap = DuFieldsMap.FactoryMachine();
-        public DuFieldsMap fieldsMap => m_FieldsMap;
+        protected FieldsMap m_FieldsMap = FieldsMap.FactoryMachine();
+        public FieldsMap fieldsMap => m_FieldsMap;
 
         //--------------------------------------------------------------------------------------------------------------
 
@@ -256,7 +256,7 @@ namespace DustEngine
             {
                 case ColorBlendMode.Blend:
                 default:
-                    newColor = DuColorBlend.AlphaBlend(instanceState.color, newColor);
+                    newColor = ColorBlend.AlphaBlend(instanceState.color, newColor);
                     break;
 
                 case ColorBlendMode.Set:
@@ -265,23 +265,23 @@ namespace DustEngine
                     break;
 
                 case ColorBlendMode.Add:
-                    newColor = DuColorBlend.Add(instanceState.color, newColor);
+                    newColor = ColorBlend.Add(instanceState.color, newColor);
                     break;
 
                 case ColorBlendMode.Subtract:
-                    newColor = DuColorBlend.Subtract(instanceState.color, newColor);
+                    newColor = ColorBlend.Subtract(instanceState.color, newColor);
                     break;
 
                 case ColorBlendMode.Multiply:
-                    newColor = DuColorBlend.Multiply(instanceState.color, newColor);
+                    newColor = ColorBlend.Multiply(instanceState.color, newColor);
                     break;
 
                 case ColorBlendMode.Min:
-                    newColor = DuColorBlend.MinAfterBlend(instanceState.color, newColor);
+                    newColor = ColorBlend.MinAfterBlend(instanceState.color, newColor);
                     break;
 
                 case ColorBlendMode.Max:
-                    newColor = DuColorBlend.MaxAfterBlend(instanceState.color,newColor);
+                    newColor = ColorBlend.MaxAfterBlend(instanceState.color,newColor);
                     break;
             }
 
@@ -294,33 +294,33 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
-        // DuDynamicStateInterface
+        // IDynamicState
 
         public override int GetDynamicStateHashCode()
         {
             var seq = 0;
             var dynamicState = base.GetDynamicStateHashCode();
 
-            DuDynamicState.Append(ref dynamicState, ++seq, valueImpactEnabled);
+            DynamicState.Append(ref dynamicState, ++seq, valueImpactEnabled);
             if (valueImpactEnabled)
             {
-                DuDynamicState.Append(ref dynamicState, ++seq, valueImpactIntensity);
-                DuDynamicState.Append(ref dynamicState, ++seq, valueBlendMode);
-                DuDynamicState.Append(ref dynamicState, ++seq, valueClampEnabled);
-                DuDynamicState.Append(ref dynamicState, ++seq, valueClampMin);
-                DuDynamicState.Append(ref dynamicState, ++seq, valueClampMax);
+                DynamicState.Append(ref dynamicState, ++seq, valueImpactIntensity);
+                DynamicState.Append(ref dynamicState, ++seq, valueBlendMode);
+                DynamicState.Append(ref dynamicState, ++seq, valueClampEnabled);
+                DynamicState.Append(ref dynamicState, ++seq, valueClampMin);
+                DynamicState.Append(ref dynamicState, ++seq, valueClampMax);
             }
 
-            DuDynamicState.Append(ref dynamicState, ++seq, colorImpactEnabled);
+            DynamicState.Append(ref dynamicState, ++seq, colorImpactEnabled);
             if (colorImpactEnabled)
             {
-                DuDynamicState.Append(ref dynamicState, ++seq, colorImpactIntensity);
-                DuDynamicState.Append(ref dynamicState, ++seq, colorBlendMode);
+                DynamicState.Append(ref dynamicState, ++seq, colorImpactIntensity);
+                DynamicState.Append(ref dynamicState, ++seq, colorBlendMode);
             }
 
-            DuDynamicState.Append(ref dynamicState, ++seq, fieldsMap);
+            DynamicState.Append(ref dynamicState, ++seq, fieldsMap);
 
-            return DuDynamicState.Normalize(dynamicState);
+            return DynamicState.Normalize(dynamicState);
         }
 
         //--------------------------------------------------------------------------------------------------------------

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace DustEngine
 {
-    public abstract class Field : DuMonoBehaviour, DuDynamicStateInterface
+    public abstract class Field : DuMonoBehaviour, IDynamicState
     {
         public static readonly Color k_GizmosColorRangeZero = new Color(0.0f, 0.3f, 0.6f);
         public static readonly Color k_GizmosColorRangeOne = new Color(0.0f, 0.5f, 1.0f);
@@ -84,27 +84,27 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public virtual DuFieldsMap.FieldRecord.BlendPowerMode GetBlendPowerMode()
+        public virtual FieldsMap.FieldRecord.BlendPowerMode GetBlendPowerMode()
         {
-            return DuFieldsMap.FieldRecord.BlendPowerMode.Ignore;
+            return FieldsMap.FieldRecord.BlendPowerMode.Ignore;
         }
 
-        public virtual DuFieldsMap.FieldRecord.BlendColorMode GetBlendColorMode()
+        public virtual FieldsMap.FieldRecord.BlendColorMode GetBlendColorMode()
         {
-            return DuFieldsMap.FieldRecord.BlendColorMode.Ignore;
+            return FieldsMap.FieldRecord.BlendColorMode.Ignore;
         }
 
         //--------------------------------------------------------------------------------------------------------------
-        // DuDynamicStateInterface
+        // IDynamicState
 
         public virtual int GetDynamicStateHashCode()
         {
             int seq = 0, dynamicState = 0;
 
             // Paste here local vars
-            DuDynamicState.Append(ref dynamicState, ++seq, true);
+            DynamicState.Append(ref dynamicState, ++seq, true);
 
-            return DuDynamicState.Normalize(dynamicState);
+            return DynamicState.Normalize(dynamicState);
         }
 
         //--------------------------------------------------------------------------------------------------------------

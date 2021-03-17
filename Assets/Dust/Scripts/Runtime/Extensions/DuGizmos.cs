@@ -9,13 +9,13 @@ namespace DustEngine
 
         public static void DrawWireCylinder(float radius, float height, Vector3 center, Axis3xDirection direction, int circlePoints, int edgesCount)
         {
-            DrawWireCylinder(radius, height, center, DuAxisDirection.ConvertToAxis6(direction), circlePoints, edgesCount);
+            DrawWireCylinder(radius, height, center, AxisDirection.ConvertToAxis6(direction), circlePoints, edgesCount);
         }
 
         public static void DrawWireCylinder(float radius, float height, Vector3 center, Axis6xDirection direction, int circlePoints, int edgesCount)
         {
             Vector3 pHeight = new Vector3(height / 2f, 0f, 0f);
-            pHeight = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, pHeight);
+            pHeight = AxisDirection.ConvertFromAxisXPlusToDirection(direction, pHeight);
 
             for (int i = 0; i < circlePoints; i++)
             {
@@ -44,7 +44,7 @@ namespace DustEngine
         public static void DrawWireCone(float radius, float height, Vector3 center, Axis6xDirection direction, int circlePoints, int edgesCount)
         {
             Vector3 pHeight = new Vector3(height / 2f, 0f, 0f);
-            pHeight = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, pHeight);
+            pHeight = AxisDirection.ConvertFromAxisXPlusToDirection(direction, pHeight);
 
             for (int i = 0; i < circlePoints; i++)
             {
@@ -76,7 +76,7 @@ namespace DustEngine
             sidesCount = Mathf.Max(3, sidesCount);
 
             Vector3 pHeight = new Vector3(height / 2f, 0f, 0f);
-            pHeight = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, pHeight);
+            pHeight = AxisDirection.ConvertFromAxisXPlusToDirection(direction, pHeight);
 
             for (int i = 0; i < sidesCount; i++)
             {
@@ -103,7 +103,7 @@ namespace DustEngine
 
         public static void DrawWireTorus(float radius, float thickness, Vector3 center, Axis6xDirection direction, int circlePoints, int smallCirclePoints)
         {
-            DrawWireTorus(radius, thickness, center, DuAxisDirection.ConvertToAxis3(direction), circlePoints, smallCirclePoints);
+            DrawWireTorus(radius, thickness, center, AxisDirection.ConvertToAxis3(direction), circlePoints, smallCirclePoints);
         }
 
         public static void DrawWireTorus(float radius, float thickness, Vector3 center, Axis3xDirection direction, int circlePoints, int smallCirclePoints)
@@ -160,13 +160,13 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
 
         public static void DrawRect(float width, float height, Vector3 center, Axis3xDirection direction)
-            => DrawRect(width, height, center, DuAxisDirection.ConvertToAxis6(direction));
+            => DrawRect(width, height, center, AxisDirection.ConvertToAxis6(direction));
 
         public static void DrawRect(float width, float height, Vector3 center, Axis6xDirection direction)
             => DrawRect(new Vector2(width, height), center, direction);
 
         public static void DrawRect(Vector2 size, Vector3 center, Axis3xDirection direction)
-            => DrawRect(size, center, DuAxisDirection.ConvertToAxis6(direction));
+            => DrawRect(size, center, AxisDirection.ConvertToAxis6(direction));
 
         public static void DrawRect(Vector2 size, Vector3 center, Axis6xDirection direction)
         {
@@ -175,10 +175,10 @@ namespace DustEngine
             Vector3 p2 = new Vector3(0f, -size.y / 2f, +size.x / 2f);
             Vector3 p3 = new Vector3(0f, +size.y / 2f, +size.x / 2f);
 
-            p0 = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, p0);
-            p1 = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, p1);
-            p2 = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, p2);
-            p3 = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, p3);
+            p0 = AxisDirection.ConvertFromAxisXPlusToDirection(direction, p0);
+            p1 = AxisDirection.ConvertFromAxisXPlusToDirection(direction, p1);
+            p2 = AxisDirection.ConvertFromAxisXPlusToDirection(direction, p2);
+            p3 = AxisDirection.ConvertFromAxisXPlusToDirection(direction, p3);
 
             Gizmos.DrawLine(center + p0, center + p1);
             Gizmos.DrawLine(center + p1, center + p3);
@@ -190,7 +190,7 @@ namespace DustEngine
 
         public static void DrawCircle(float radius, Vector3 center, Axis3xDirection direction, int circlePoints)
         {
-            DrawCircle(radius, center, DuAxisDirection.ConvertToAxis6(direction), circlePoints);
+            DrawCircle(radius, center, AxisDirection.ConvertToAxis6(direction), circlePoints);
         }
 
         public static void DrawCircle(float radius, Vector3 center, Axis6xDirection direction, int circlePoints)
@@ -212,12 +212,12 @@ namespace DustEngine
 
         public static Vector3 GetCirclePointByAngle(float angle, Axis3xDirection direction)
         {
-            return GetCirclePointByOffset(angle / 360f, DuAxisDirection.ConvertToAxis6(direction));
+            return GetCirclePointByOffset(angle / 360f, AxisDirection.ConvertToAxis6(direction));
         }
 
         public static Vector3 GetCirclePointByOffset(float offset, Axis3xDirection direction)
         {
-            return GetCirclePointByOffset(offset, DuAxisDirection.ConvertToAxis6(direction));
+            return GetCirclePointByOffset(offset, AxisDirection.ConvertToAxis6(direction));
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -229,9 +229,9 @@ namespace DustEngine
 
         public static Vector3 GetCirclePointByOffset(float offset, Axis6xDirection direction)
         {
-            Vector3 point = new Vector3(0f, Mathf.Sin(DuConstants.PI2 * offset), Mathf.Cos(DuConstants.PI2 * offset));
+            Vector3 point = new Vector3(0f, Mathf.Sin(Constants.PI2 * offset), Mathf.Cos(Constants.PI2 * offset));
 
-            return DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, point);
+            return AxisDirection.ConvertFromAxisXPlusToDirection(direction, point);
         }
     }
 }

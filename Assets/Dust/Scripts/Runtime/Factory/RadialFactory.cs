@@ -168,7 +168,7 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private int m_OffsetSeed = DuConstants.RANDOM_SEED_DEFAULT;
+        private int m_OffsetSeed = Constants.RANDOM_SEED_DEFAULT;
         public int offsetSeed
         {
             get => m_OffsetSeed;

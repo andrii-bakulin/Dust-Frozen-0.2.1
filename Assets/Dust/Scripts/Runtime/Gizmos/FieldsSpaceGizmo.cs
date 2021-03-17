@@ -163,7 +163,7 @@ namespace DustEngine
                 if (showColor)
                 {
                     if (!colorAllowTransparent)
-                        fieldColor = DuColorBlend.AlphaBlend(Color.black, fieldColor);
+                        fieldColor = ColorBlend.AlphaBlend(Color.black, fieldColor);
 
                     float dotSize = 0.1f * colorSize;
                     if (powerImpactOnColorSize)

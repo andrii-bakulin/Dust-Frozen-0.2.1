@@ -104,26 +104,26 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
-        // DuDynamicStateInterface
+        // IDynamicState
 
         public override int GetDynamicStateHashCode()
         {
             var seq = 0;
             var dynamicState = base.GetDynamicStateHashCode();
 
-            DuDynamicState.Append(ref dynamicState, ++seq, texture);
-            DuDynamicState.Append(ref dynamicState, ++seq, wrapMode);
-            DuDynamicState.Append(ref dynamicState, ++seq, flipX);
-            DuDynamicState.Append(ref dynamicState, ++seq, flipY);
+            DynamicState.Append(ref dynamicState, ++seq, texture);
+            DynamicState.Append(ref dynamicState, ++seq, wrapMode);
+            DynamicState.Append(ref dynamicState, ++seq, flipX);
+            DynamicState.Append(ref dynamicState, ++seq, flipY);
 
-            DuDynamicState.Append(ref dynamicState, ++seq, direction);
-            DuDynamicState.Append(ref dynamicState, ++seq, width);
-            DuDynamicState.Append(ref dynamicState, ++seq, height);
+            DynamicState.Append(ref dynamicState, ++seq, direction);
+            DynamicState.Append(ref dynamicState, ++seq, width);
+            DynamicState.Append(ref dynamicState, ++seq, height);
 
-            DuDynamicState.Append(ref dynamicState, ++seq, powerSource);
-            DuDynamicState.Append(ref dynamicState, ++seq, applyPowerToAlpha);
+            DynamicState.Append(ref dynamicState, ++seq, powerSource);
+            DynamicState.Append(ref dynamicState, ++seq, applyPowerToAlpha);
 
-            return DuDynamicState.Normalize(dynamicState);
+            return DynamicState.Normalize(dynamicState);
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -153,7 +153,7 @@ namespace DustEngine
                 Vector3 localPosition = transform.worldToLocalMatrix.MultiplyPoint(fieldPoint.inPosition);
 
                 // Convert to [X+]-axis-space by direction
-                localPosition = DuAxisDirection.ConvertFromDirectionToAxisXPlus(direction, localPosition);
+                localPosition = AxisDirection.ConvertFromDirectionToAxisXPlus(direction, localPosition);
 
                 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

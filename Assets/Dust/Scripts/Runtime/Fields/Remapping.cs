@@ -3,7 +3,7 @@
 namespace DustEngine
 {
     [System.Serializable]
-    public class Remapping : DuDynamicStateInterface
+    public class Remapping : IDynamicState
     {
         public enum PostReshapeMode
         {
@@ -211,39 +211,39 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
-        // DuDynamicStateInterface
+        // IDynamicState
 
         public int GetDynamicStateHashCode()
         {
             int seq = 0, dynamicState = 0;
 
-            DuDynamicState.Append(ref dynamicState, ++seq, remapForceEnabled);
+            DynamicState.Append(ref dynamicState, ++seq, remapForceEnabled);
 
             if (remapForceEnabled)
             {
-                DuDynamicState.Append(ref dynamicState, ++seq, strength);
-                DuDynamicState.Append(ref dynamicState, ++seq, offset);
-                DuDynamicState.Append(ref dynamicState, ++seq, limitByStrength);
-                DuDynamicState.Append(ref dynamicState, ++seq, invert);
-                DuDynamicState.Append(ref dynamicState, ++seq, min);
-                DuDynamicState.Append(ref dynamicState, ++seq, max);
-                DuDynamicState.Append(ref dynamicState, ++seq, clampMode);
+                DynamicState.Append(ref dynamicState, ++seq, strength);
+                DynamicState.Append(ref dynamicState, ++seq, offset);
+                DynamicState.Append(ref dynamicState, ++seq, limitByStrength);
+                DynamicState.Append(ref dynamicState, ++seq, invert);
+                DynamicState.Append(ref dynamicState, ++seq, min);
+                DynamicState.Append(ref dynamicState, ++seq, max);
+                DynamicState.Append(ref dynamicState, ++seq, clampMode);
 
                 if (clampMode == ClampMode.MinOnly || clampMode == ClampMode.MinAndMax)
-                    DuDynamicState.Append(ref dynamicState, ++seq, clampMin);
+                    DynamicState.Append(ref dynamicState, ++seq, clampMin);
 
                 if (clampMode == ClampMode.MaxOnly || clampMode == ClampMode.MinAndMax)
-                    DuDynamicState.Append(ref dynamicState, ++seq, clampMax);
+                    DynamicState.Append(ref dynamicState, ++seq, clampMax);
 
-                DuDynamicState.Append(ref dynamicState, ++seq, postPower);
-                DuDynamicState.Append(ref dynamicState, ++seq, postReshapeMode);
-                DuDynamicState.Append(ref dynamicState, ++seq, postStepsCount);
-                DuDynamicState.Append(ref dynamicState, ++seq, postCurve);
+                DynamicState.Append(ref dynamicState, ++seq, postPower);
+                DynamicState.Append(ref dynamicState, ++seq, postReshapeMode);
+                DynamicState.Append(ref dynamicState, ++seq, postStepsCount);
+                DynamicState.Append(ref dynamicState, ++seq, postCurve);
             }
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            DuDynamicState.Append(ref dynamicState, ++seq, colorMode);
+            DynamicState.Append(ref dynamicState, ++seq, colorMode);
 
             switch (colorMode)
             {
@@ -253,29 +253,29 @@ namespace DustEngine
                     break;
 
                 case ColorMode.Color:
-                    DuDynamicState.Append(ref dynamicState, ++seq, color);
+                    DynamicState.Append(ref dynamicState, ++seq, color);
                     break;
 
                 case ColorMode.Gradient:
-                    DuDynamicState.Append(ref dynamicState, ++seq, gradient);
+                    DynamicState.Append(ref dynamicState, ++seq, gradient);
                     break;
 
                 case ColorMode.Rainbow:
-                    DuDynamicState.Append(ref dynamicState, ++seq, rainbowMinOffset);
-                    DuDynamicState.Append(ref dynamicState, ++seq, rainbowMaxOffset);
-                    DuDynamicState.Append(ref dynamicState, ++seq, rainbowRepeat);
+                    DynamicState.Append(ref dynamicState, ++seq, rainbowMinOffset);
+                    DynamicState.Append(ref dynamicState, ++seq, rainbowMaxOffset);
+                    DynamicState.Append(ref dynamicState, ++seq, rainbowRepeat);
                     break;
 
                 case ColorMode.RandomColorInRange:
-                    DuDynamicState.Append(ref dynamicState, ++seq, randomMinColor);
-                    DuDynamicState.Append(ref dynamicState, ++seq, randomMaxColor);
+                    DynamicState.Append(ref dynamicState, ++seq, randomMinColor);
+                    DynamicState.Append(ref dynamicState, ++seq, randomMaxColor);
                     break;
 
                 default:
                     break;
             }
 
-            return DuDynamicState.Normalize(dynamicState);
+            return DynamicState.Normalize(dynamicState);
         }
 
         //--------------------------------------------------------------------------------------------------------------

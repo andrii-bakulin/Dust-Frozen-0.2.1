@@ -23,7 +23,7 @@ namespace DustEngine
 
                     angle += radialFactory.offset * (1f + radialFactory.offsetVariation * duRandom.Next());
 
-                    Vector2 pos = new Vector2(Mathf.Sin(DuConstants.PI2 * angle / 360f), Mathf.Cos(DuConstants.PI2 * angle / 360f));
+                    Vector2 pos = new Vector2(Mathf.Sin(Constants.PI2 * angle / 360f), Mathf.Cos(Constants.PI2 * angle / 360f));
 
                     var instanceState = new FactoryInstance.State();
 

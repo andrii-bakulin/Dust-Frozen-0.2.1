@@ -19,7 +19,7 @@ namespace DustEngine
         public DuNoise(int seed)
         {
             if (seed <= 0)
-                seed = Random.Range(DuConstants.RANDOM_SEED_MIN, DuConstants.RANDOM_SEED_MAX);
+                seed = Random.Range(Constants.RANDOM_SEED_MIN, Constants.RANDOM_SEED_MAX);
 
             DuRandom duRandom = new DuRandom(seed);
 

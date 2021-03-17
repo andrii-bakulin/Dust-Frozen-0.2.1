@@ -45,14 +45,14 @@ namespace DustEngine.DustEditor
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // Extend UI
 
-            bool isRequireShowMeshInfo = DuSessionState.GetBool("DuiTransform.ShowMeshInfo", false);
+            bool isRequireShowMeshInfo = SessionState.GetBool("DuiTransform.ShowMeshInfo", false);
 
             DustGUI.BeginHorizontal();
             {
                 if (DustGUI.IconButton(UI.Icons.GAME_OBJECT_STATS, isRequireShowMeshInfo ? DustGUI.ButtonState.Pressed : DustGUI.ButtonState.Normal))
                 {
                     isRequireShowMeshInfo = !isRequireShowMeshInfo;
-                    DuSessionState.SetBool("DuiTransform.ShowMeshInfo", isRequireShowMeshInfo);
+                    SessionState.SetBool("DuiTransform.ShowMeshInfo", isRequireShowMeshInfo);
                 }
 
                 if (DustGUI.IconButton(UI.Icons.TRANSFORM_RESET))

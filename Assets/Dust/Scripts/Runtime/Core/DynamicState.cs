@@ -2,8 +2,12 @@ using UnityEngine;
 
 namespace DustEngine
 {
-    // @DUST.todo: do something with consts
-    public static class DuDynamicState
+    public interface IDynamicState
+    {
+        int GetDynamicStateHashCode();
+    }
+
+    public static class DynamicState
     {
         public static int Normalize(int state)
         {
@@ -101,7 +105,7 @@ namespace DustEngine
         }
 #endif
 
-        public static void Append(ref int dynamicState, int sequenceIndex, DuFieldsMap fieldsMap)
+        public static void Append(ref int dynamicState, int sequenceIndex, FieldsMap fieldsMap)
         {
             dynamicState ^= sequenceIndex * 955735 + (Dust.IsNotNull(fieldsMap) ? fieldsMap.GetDynamicStateHashCode() : 123456);
         }

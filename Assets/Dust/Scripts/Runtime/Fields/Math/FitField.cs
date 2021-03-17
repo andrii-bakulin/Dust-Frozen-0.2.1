@@ -38,19 +38,19 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
-        // DuDynamicStateInterface
+        // IDynamicState
 
         public override int GetDynamicStateHashCode()
         {
             var seq = 0;
             var dynamicState = base.GetDynamicStateHashCode();
 
-            DuDynamicState.Append(ref dynamicState, ++seq, minInput);
-            DuDynamicState.Append(ref dynamicState, ++seq, maxInput);
-            DuDynamicState.Append(ref dynamicState, ++seq, minOutput);
-            DuDynamicState.Append(ref dynamicState, ++seq, maxOutput);
+            DynamicState.Append(ref dynamicState, ++seq, minInput);
+            DynamicState.Append(ref dynamicState, ++seq, maxInput);
+            DynamicState.Append(ref dynamicState, ++seq, minOutput);
+            DynamicState.Append(ref dynamicState, ++seq, maxOutput);
 
-            return DuDynamicState.Normalize(dynamicState);
+            return DynamicState.Normalize(dynamicState);
         }
 
         //--------------------------------------------------------------------------------------------------------------

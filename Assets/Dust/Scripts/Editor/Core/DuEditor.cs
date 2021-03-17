@@ -494,7 +494,7 @@ namespace DustEngine.DustEditor
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         public static bool PropertySeedRandomOrFixed(DuProperty duProperty)
-            => PropertySeedRandomOrFixed(duProperty, DuConstants.RANDOM_SEED_DEFAULT);
+            => PropertySeedRandomOrFixed(duProperty, Constants.RANDOM_SEED_DEFAULT);
 
         public static bool PropertySeedRandomOrFixed(DuProperty duProperty, int defValue)
         {
@@ -523,10 +523,10 @@ namespace DustEngine.DustEditor
 
         public static bool PropertySeedFixed(DuProperty duProperty)
         {
-            int seedMin = DuConstants.RANDOM_SEED_MIN;
-            int seedMax = DuConstants.RANDOM_SEED_MAX;
-            int seedEditorMin = DuConstants.RANDOM_SEED_MIN_IN_EDITOR;
-            int seedEditorMax = DuConstants.RANDOM_SEED_MAX_IN_EDITOR;
+            int seedMin = Constants.RANDOM_SEED_MIN;
+            int seedMax = Constants.RANDOM_SEED_MAX;
+            int seedEditorMin = Constants.RANDOM_SEED_MIN_IN_EDITOR;
+            int seedEditorMax = Constants.RANDOM_SEED_MAX_IN_EDITOR;
 
             EditorGUI.BeginChangeCheck();
             DustGUI.ExtraIntSlider.Create(seedEditorMin, seedEditorMax, 1, seedMin, seedMax).Draw("Seed", duProperty.property);

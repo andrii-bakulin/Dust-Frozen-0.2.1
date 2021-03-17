@@ -130,7 +130,7 @@ namespace DustEngine
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
         [SerializeField]
-        private int m_Seed = DuConstants.RANDOM_SEED_DEFAULT;
+        private int m_Seed = Constants.RANDOM_SEED_DEFAULT;
         public int seed
         {
             get => m_Seed;
@@ -339,24 +339,24 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
-        // DuDynamicStateInterface
+        // IDynamicState
 
         public override int GetDynamicStateHashCode()
         {
             var seq = 0;
             var dynamicState = base.GetDynamicStateHashCode();
 
-            DuDynamicState.Append(ref dynamicState, ++seq, noiseMode);
+            DynamicState.Append(ref dynamicState, ++seq, noiseMode);
 
-            DuDynamicState.Append(ref dynamicState, ++seq, noiseDimension);
-            DuDynamicState.Append(ref dynamicState, ++seq, seed);
-            DuDynamicState.Append(ref dynamicState, ++seq, synchronized);
+            DynamicState.Append(ref dynamicState, ++seq, noiseDimension);
+            DynamicState.Append(ref dynamicState, ++seq, seed);
+            DynamicState.Append(ref dynamicState, ++seq, synchronized);
 
             if (synchronized)
             {
-                DuDynamicState.Append(ref dynamicState, ++seq, positionAxisRemapping);
-                DuDynamicState.Append(ref dynamicState, ++seq, rotationAxisRemapping);
-                DuDynamicState.Append(ref dynamicState, ++seq, scaleAxisRemapping);
+                DynamicState.Append(ref dynamicState, ++seq, positionAxisRemapping);
+                DynamicState.Append(ref dynamicState, ++seq, rotationAxisRemapping);
+                DynamicState.Append(ref dynamicState, ++seq, scaleAxisRemapping);
             }
 
             switch (noiseMode)
@@ -366,21 +366,21 @@ namespace DustEngine
                     break;
 
                 case NoiseMode.Perlin:
-                    DuDynamicState.Append(ref dynamicState, ++seq, noiseSpace);
-                    DuDynamicState.Append(ref dynamicState, ++seq, noiseForce);
-                    DuDynamicState.Append(ref dynamicState, ++seq, noiseScale);
+                    DynamicState.Append(ref dynamicState, ++seq, noiseSpace);
+                    DynamicState.Append(ref dynamicState, ++seq, noiseForce);
+                    DynamicState.Append(ref dynamicState, ++seq, noiseScale);
 
-                    DuDynamicState.Append(ref dynamicState, ++seq, animationSpeed);
-                    DuDynamicState.Append(ref dynamicState, ++seq, animationOffset);
+                    DynamicState.Append(ref dynamicState, ++seq, animationSpeed);
+                    DynamicState.Append(ref dynamicState, ++seq, animationOffset);
 
-                    DuDynamicState.Append(ref dynamicState, ++seq, m_OffsetDynamic);
+                    DynamicState.Append(ref dynamicState, ++seq, m_OffsetDynamic);
                     break;
 
                 default:
                     break;
             }
 
-            return DuDynamicState.Normalize(dynamicState);
+            return DynamicState.Normalize(dynamicState);
         }
 
         //--------------------------------------------------------------------------------------------------------------

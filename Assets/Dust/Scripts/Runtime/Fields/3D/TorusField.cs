@@ -30,18 +30,18 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
-        // DuDynamicStateInterface
+        // IDynamicState
 
         public override int GetDynamicStateHashCode()
         {
             var seq = 0;
             var dynamicState = base.GetDynamicStateHashCode();
 
-            DuDynamicState.Append(ref dynamicState, ++seq, radius);
-            DuDynamicState.Append(ref dynamicState, ++seq, thickness);
-            DuDynamicState.Append(ref dynamicState, ++seq, direction);
+            DynamicState.Append(ref dynamicState, ++seq, radius);
+            DynamicState.Append(ref dynamicState, ++seq, thickness);
+            DynamicState.Append(ref dynamicState, ++seq, direction);
 
-            return DuDynamicState.Normalize(dynamicState);
+            return DynamicState.Normalize(dynamicState);
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -68,7 +68,7 @@ namespace DustEngine
                 Vector3 localPosition = transform.worldToLocalMatrix.MultiplyPoint(fieldPoint.inPosition);
 
                 // Convert to [X+]-axis-space by direction
-                localPosition = DuAxisDirection.ConvertFromDirectionToAxisXPlus(direction, localPosition);
+                localPosition = AxisDirection.ConvertFromDirectionToAxisXPlus(direction, localPosition);
 
                 // Convert 3D point to 2D (x; y-&-z) -> (x; y)
                 Vector2 localPoint2D = new Vector2(localPosition.x, DuMath.Length(localPosition.y, localPosition.z));

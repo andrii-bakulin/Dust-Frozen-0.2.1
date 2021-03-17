@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace DustEngine
 {
-    public static class DuAxisDirection
+    public static class AxisDirection
     {
         public static string ToString(Axis3xDirection direction)
         {
@@ -100,7 +100,6 @@ namespace DustEngine
 
             switch (direction)
             {
-                default:
                 case Axis6xDirection.XPlus:  break;
                 case Axis6xDirection.XMinus: convertedPoint.x = -originPoint.x; break;
                 case Axis6xDirection.YPlus:  convertedPoint.x = +originPoint.y; convertedPoint.y = +originPoint.x; break;
@@ -118,7 +117,6 @@ namespace DustEngine
 
             switch (direction)
             {
-                default:
                 case Axis6xDirection.XPlus:  break;
                 case Axis6xDirection.XMinus: originPoint.x = -convertedPoint.x; break;
                 case Axis6xDirection.YPlus:  originPoint.y = +convertedPoint.x; originPoint.x = +convertedPoint.y; break;

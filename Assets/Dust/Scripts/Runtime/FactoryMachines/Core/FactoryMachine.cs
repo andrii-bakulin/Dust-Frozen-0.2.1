@@ -2,7 +2,7 @@
 
 namespace DustEngine
 {
-    public abstract class FactoryMachine : DuMonoBehaviour, DuDynamicStateInterface
+    public abstract class FactoryMachine : DuMonoBehaviour, IDynamicState
     {
         public class FactoryInstanceState
         {
@@ -77,15 +77,15 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
-        // DuDynamicStateInterface
+        // IDynamicState
 
         public virtual int GetDynamicStateHashCode()
         {
             int seq = 0, dynamicState = 0;
 
-            DuDynamicState.Append(ref dynamicState, ++seq, intensity);
+            DynamicState.Append(ref dynamicState, ++seq, intensity);
 
-            return DuDynamicState.Normalize(dynamicState);
+            return DynamicState.Normalize(dynamicState);
         }
 
         //--------------------------------------------------------------------------------------------------------------

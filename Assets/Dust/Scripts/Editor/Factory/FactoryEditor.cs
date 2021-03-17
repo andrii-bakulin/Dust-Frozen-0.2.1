@@ -315,7 +315,7 @@ namespace DustEngine.DustEditor
 
             OptimizeFactoryMachinesArray();
 
-            Vector2 scrollPosition = DuSessionState.GetVector3("Factory.FactoryMachine.ScrollPosition", target, Vector2.zero);
+            Vector2 scrollPosition = SessionState.GetVector3("Factory.FactoryMachine.ScrollPosition", target, Vector2.zero);
             float totalHeight = 36 * Mathf.Clamp(m_FactoryMachines.property.arraySize + 1, 4, 8) + 16;
 
             int indentLevel = DustGUI.IndentLevelReset(); // Because it'll try to add left-spacing when draw fields
@@ -361,7 +361,7 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-            DuSessionState.SetVector3("Factory.FactoryMachine.ScrollPosition", target, scrollPosition);
+            SessionState.SetVector3("Factory.FactoryMachine.ScrollPosition", target, scrollPosition);
         }
 
         private FactoryMachine.Record UnpackFactoryMachineRecord(SerializedProperty item)
@@ -441,7 +441,7 @@ namespace DustEngine.DustEditor
                     Rect buttonRect = m_RectsUI["item" + itemIndex.ToString()];
                     buttonRect.y += 5f;
 
-                    PopupWindow.Show(buttonRect, DuPopupExtraSlider.Create(serializedObject, "Intensity", item.FindPropertyRelative("m_Intensity")));
+                    PopupWindow.Show(buttonRect, PopupExtraSlider.Create(serializedObject, "Intensity", item.FindPropertyRelative("m_Intensity")));
                 }
 
                 if (Event.current.type == EventType.Repaint)
@@ -572,7 +572,7 @@ namespace DustEngine.DustEditor
 
         private void OptimizeFactoryMachinesArray()
         {
-            DuEditorHelper.OptimizeObjectReferencesArray(ref m_FactoryMachines, "m_FactoryMachine");
+            EditorHelper.OptimizeObjectReferencesArray(ref m_FactoryMachines, "m_FactoryMachine");
         }
     }
 }

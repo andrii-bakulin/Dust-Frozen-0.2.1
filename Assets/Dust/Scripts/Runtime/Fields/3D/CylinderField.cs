@@ -30,18 +30,18 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
-        // DuDynamicStateInterface
+        // IDynamicState
 
         public override int GetDynamicStateHashCode()
         {
             var seq = 0;
             var dynamicState = base.GetDynamicStateHashCode();
 
-            DuDynamicState.Append(ref dynamicState, ++seq, radius);
-            DuDynamicState.Append(ref dynamicState, ++seq, height);
-            DuDynamicState.Append(ref dynamicState, ++seq, direction);
+            DynamicState.Append(ref dynamicState, ++seq, radius);
+            DynamicState.Append(ref dynamicState, ++seq, height);
+            DynamicState.Append(ref dynamicState, ++seq, direction);
 
-            return DuDynamicState.Normalize(dynamicState);
+            return DynamicState.Normalize(dynamicState);
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -64,7 +64,7 @@ namespace DustEngine
             Vector3 localPosition = transform.worldToLocalMatrix.MultiplyPoint(fieldPoint.inPosition);
 
             // Convert to [X+]-axis-space by direction
-            localPosition = DuAxisDirection.ConvertFromDirectionToAxisXPlus(direction, localPosition);
+            localPosition = AxisDirection.ConvertFromDirectionToAxisXPlus(direction, localPosition);
 
             float distanceToPoint = localPosition.magnitude;
             float distanceToEdge = DuMath.Cylinder.DistanceToEdge(radius, height, localPosition);

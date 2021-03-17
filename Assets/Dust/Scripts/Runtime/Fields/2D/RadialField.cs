@@ -72,22 +72,22 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
-        // DuDynamicStateInterface
+        // IDynamicState
 
         public override int GetDynamicStateHashCode()
         {
             var seq = 0;
             var dynamicState = base.GetDynamicStateHashCode();
 
-            DuDynamicState.Append(ref dynamicState, ++seq, startAngle);
-            DuDynamicState.Append(ref dynamicState, ++seq, endAngle);
-            DuDynamicState.Append(ref dynamicState, ++seq, fadeInOffset);
-            DuDynamicState.Append(ref dynamicState, ++seq, fadeOutOffset);
-            DuDynamicState.Append(ref dynamicState, ++seq, iterations);
-            DuDynamicState.Append(ref dynamicState, ++seq, offset);
-            DuDynamicState.Append(ref dynamicState, ++seq, direction);
+            DynamicState.Append(ref dynamicState, ++seq, startAngle);
+            DynamicState.Append(ref dynamicState, ++seq, endAngle);
+            DynamicState.Append(ref dynamicState, ++seq, fadeInOffset);
+            DynamicState.Append(ref dynamicState, ++seq, fadeOutOffset);
+            DynamicState.Append(ref dynamicState, ++seq, iterations);
+            DynamicState.Append(ref dynamicState, ++seq, offset);
+            DynamicState.Append(ref dynamicState, ++seq, direction);
 
-            return DuDynamicState.Normalize(dynamicState);
+            return DynamicState.Normalize(dynamicState);
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -117,7 +117,7 @@ namespace DustEngine
             Vector3 localPosition = transform.worldToLocalMatrix.MultiplyPoint(fieldPoint.inPosition);
 
             // Convert to [X+]-axis-space by direction
-            localPosition = DuAxisDirection.ConvertFromDirectionToAxisXPlus(direction, localPosition);
+            localPosition = AxisDirection.ConvertFromDirectionToAxisXPlus(direction, localPosition);
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

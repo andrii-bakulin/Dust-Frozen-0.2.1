@@ -40,17 +40,17 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
-        // DuDynamicStateInterface
+        // IDynamicState
 
         public override int GetDynamicStateHashCode()
         {
             var seq = 0;
             var dynamicState = base.GetDynamicStateHashCode();
 
-            DuDynamicState.Append(ref dynamicState, ++seq, length);
-            DuDynamicState.Append(ref dynamicState, ++seq, direction);
+            DynamicState.Append(ref dynamicState, ++seq, length);
+            DynamicState.Append(ref dynamicState, ++seq, direction);
 
-            return DuDynamicState.Normalize(dynamicState);
+            return DynamicState.Normalize(dynamicState);
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -108,9 +108,9 @@ namespace DustEngine
         {
             float halfLength = length / 2f;
 
-            Vector3 plainSize = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, new Vector3(0.001f, gizmoHeight, gizmoWidth));
-            Vector3 offsetPlane0 = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, new Vector3(-halfLength, 0f, 0f));
-            Vector3 offsetPlane1 = DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, new Vector3(+halfLength, 0f, 0f));
+            Vector3 plainSize = AxisDirection.ConvertFromAxisXPlusToDirection(direction, new Vector3(0.001f, gizmoHeight, gizmoWidth));
+            Vector3 offsetPlane0 = AxisDirection.ConvertFromAxisXPlusToDirection(direction, new Vector3(-halfLength, 0f, 0f));
+            Vector3 offsetPlane1 = AxisDirection.ConvertFromAxisXPlusToDirection(direction, new Vector3(+halfLength, 0f, 0f));
 
             Gizmos.matrix = transform.localToWorldMatrix;
 
@@ -145,10 +145,10 @@ namespace DustEngine
             float arrowSign = remapping.remapForceEnabled && remapping.invert ? -1f : +1f;
             Gizmos.color = colorRange1;
             Gizmos.DrawRay(offsetPlane0 * arrowSign, (offsetPlane1 - offsetPlane0) * arrowSign);
-            Gizmos.DrawRay(offsetPlane1 * arrowSign, DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, new Vector3(-0.2f, 0f, +0.06f) * halfLength) * arrowSign);
-            Gizmos.DrawRay(offsetPlane1 * arrowSign, DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, new Vector3(-0.2f, 0f, -0.06f) * halfLength) * arrowSign);
-            Gizmos.DrawRay(offsetPlane1 * arrowSign, DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, new Vector3(-0.2f, +0.06f, 0f) * halfLength) * arrowSign);
-            Gizmos.DrawRay(offsetPlane1 * arrowSign, DuAxisDirection.ConvertFromAxisXPlusToDirection(direction, new Vector3(-0.2f, -0.06f, 0f) * halfLength) * arrowSign);
+            Gizmos.DrawRay(offsetPlane1 * arrowSign, AxisDirection.ConvertFromAxisXPlusToDirection(direction, new Vector3(-0.2f, 0f, +0.06f) * halfLength) * arrowSign);
+            Gizmos.DrawRay(offsetPlane1 * arrowSign, AxisDirection.ConvertFromAxisXPlusToDirection(direction, new Vector3(-0.2f, 0f, -0.06f) * halfLength) * arrowSign);
+            Gizmos.DrawRay(offsetPlane1 * arrowSign, AxisDirection.ConvertFromAxisXPlusToDirection(direction, new Vector3(-0.2f, +0.06f, 0f) * halfLength) * arrowSign);
+            Gizmos.DrawRay(offsetPlane1 * arrowSign, AxisDirection.ConvertFromAxisXPlusToDirection(direction, new Vector3(-0.2f, -0.06f, 0f) * halfLength) * arrowSign);
         }
 
         private void Reset()

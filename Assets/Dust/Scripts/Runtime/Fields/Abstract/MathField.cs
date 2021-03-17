@@ -5,14 +5,14 @@ namespace DustEngine
 {
     public abstract class MathField : Field
     {
-        public override DuFieldsMap.FieldRecord.BlendPowerMode GetBlendPowerMode()
+        public override FieldsMap.FieldRecord.BlendPowerMode GetBlendPowerMode()
         {
-            return DuFieldsMap.FieldRecord.BlendPowerMode.Set;
+            return FieldsMap.FieldRecord.BlendPowerMode.Set;
         }
 
-        public override DuFieldsMap.FieldRecord.BlendColorMode GetBlendColorMode()
+        public override FieldsMap.FieldRecord.BlendColorMode GetBlendColorMode()
         {
-            return DuFieldsMap.FieldRecord.BlendColorMode.Set;
+            return FieldsMap.FieldRecord.BlendColorMode.Set;
         }
 
         //--------------------------------------------------------------------------------------------------------------

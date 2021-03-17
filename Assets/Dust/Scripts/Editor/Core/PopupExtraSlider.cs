@@ -3,7 +3,7 @@ using UnityEditor;
 
 namespace DustEngine.DustEditor
 {
-    public class DuPopupExtraSlider : PopupWindowContent
+    public class PopupExtraSlider : PopupWindowContent
     {
         internal const float WIDTH = 200f;
         internal const float HEIGHT = 23f;
@@ -15,9 +15,9 @@ namespace DustEngine.DustEditor
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public static DuPopupExtraSlider Create(SerializedObject serializedObject, SerializedProperty property)
+        public static PopupExtraSlider Create(SerializedObject serializedObject, SerializedProperty property)
         {
-            var popup = new DuPopupExtraSlider();
+            var popup = new PopupExtraSlider();
             popup.m_ActiveGameObject = Selection.activeGameObject;
             popup.m_SerializedObject = serializedObject;
             popup.m_Property = property;
@@ -25,9 +25,9 @@ namespace DustEngine.DustEditor
             return popup;
         }
 
-        public static DuPopupExtraSlider Create(SerializedObject serializedObject, string title, SerializedProperty property)
+        public static PopupExtraSlider Create(SerializedObject serializedObject, string title, SerializedProperty property)
         {
-            var popup = new DuPopupExtraSlider();
+            var popup = new PopupExtraSlider();
             popup.m_ActiveGameObject = Selection.activeGameObject;
             popup.m_SerializedObject = serializedObject;
             popup.m_Property = property;

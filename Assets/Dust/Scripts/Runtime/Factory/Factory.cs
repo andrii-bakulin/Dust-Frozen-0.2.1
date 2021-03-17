@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace DustEngine
 {
-    public abstract partial class Factory : DuMonoBehaviour, DuDynamicStateInterface
+    public abstract partial class Factory : DuMonoBehaviour, IDynamicState
     {
         internal readonly string kGameObjectName_SourceObjects = "Source Objects";
         internal readonly string kGameObjectName_Instances = "Instances";
@@ -117,7 +117,7 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private int m_InstancesFillSeed = DuConstants.RANDOM_SEED_DEFAULT;
+        private int m_InstancesFillSeed = Constants.RANDOM_SEED_DEFAULT;
         public int instancesFillSeed
         {
             get => m_InstancesFillSeed;
@@ -169,7 +169,7 @@ namespace DustEngine
         }
 
         [SerializeField]
-        private int m_Seed = DuConstants.RANDOM_SEED_DEFAULT;
+        private int m_Seed = Constants.RANDOM_SEED_DEFAULT;
         public int seed
         {
             get => m_Seed;

@@ -158,7 +158,7 @@ namespace DustEngine
             editorUpdate_deltaTime += (float) (EditorApplication.timeSinceStartup - editorUpdate_lastTimeStamp);
             editorUpdate_lastTimeStamp = EditorApplication.timeSinceStartup;
 
-            if (editorUpdate_deltaTime < DuConstants.EDITOR_UPDATE_TIMEOUT)
+            if (editorUpdate_deltaTime < Constants.EDITOR_UPDATE_TIMEOUT)
                 return false;
 
             deltaTime = editorUpdate_deltaTime;

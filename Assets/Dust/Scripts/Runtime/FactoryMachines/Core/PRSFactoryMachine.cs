@@ -124,39 +124,39 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
-        // DuDynamicStateInterface
+        // IDynamicState
 
         public override int GetDynamicStateHashCode()
         {
             var seq = 0;
             var dynamicState = base.GetDynamicStateHashCode();
 
-            DuDynamicState.Append(ref dynamicState, ++seq, min);
-            DuDynamicState.Append(ref dynamicState, ++seq, max);
+            DynamicState.Append(ref dynamicState, ++seq, min);
+            DynamicState.Append(ref dynamicState, ++seq, max);
 
-            DuDynamicState.Append(ref dynamicState, ++seq, positionEnabled);
+            DynamicState.Append(ref dynamicState, ++seq, positionEnabled);
             if (positionEnabled)
             {
-                DuDynamicState.Append(ref dynamicState, ++seq, position);
-                DuDynamicState.Append(ref dynamicState, ++seq, positionTransformSpace);
-                DuDynamicState.Append(ref dynamicState, ++seq, positionTransformMode);
+                DynamicState.Append(ref dynamicState, ++seq, position);
+                DynamicState.Append(ref dynamicState, ++seq, positionTransformSpace);
+                DynamicState.Append(ref dynamicState, ++seq, positionTransformMode);
             }
 
-            DuDynamicState.Append(ref dynamicState, ++seq, rotationEnabled);
+            DynamicState.Append(ref dynamicState, ++seq, rotationEnabled);
             if (rotationEnabled)
             {
-                DuDynamicState.Append(ref dynamicState, ++seq, rotation);
-                DuDynamicState.Append(ref dynamicState, ++seq, rotationTransformMode);
+                DynamicState.Append(ref dynamicState, ++seq, rotation);
+                DynamicState.Append(ref dynamicState, ++seq, rotationTransformMode);
             }
 
-            DuDynamicState.Append(ref dynamicState, ++seq, scaleEnabled);
+            DynamicState.Append(ref dynamicState, ++seq, scaleEnabled);
             if (scaleEnabled)
             {
-                DuDynamicState.Append(ref dynamicState, ++seq, scale);
-                DuDynamicState.Append(ref dynamicState, ++seq, scaleTransformMode);
+                DynamicState.Append(ref dynamicState, ++seq, scale);
+                DynamicState.Append(ref dynamicState, ++seq, scaleTransformMode);
             }
 
-            return DuDynamicState.Normalize(dynamicState);
+            return DynamicState.Normalize(dynamicState);
         }
 
         //--------------------------------------------------------------------------------------------------------------

@@ -22,7 +22,7 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
 
         public static float Round(float value)
-            => Round(value, DuConstants.ROUND_DIGITS_COUNT);
+            => Round(value, Constants.ROUND_DIGITS_COUNT);
 
         public static float Round(float value, int roundToDigits)
         {

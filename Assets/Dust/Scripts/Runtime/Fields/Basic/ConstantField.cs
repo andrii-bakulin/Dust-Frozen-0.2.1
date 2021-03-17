@@ -22,17 +22,17 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
-        // DuDynamicStateInterface
+        // IDynamicState
 
         public override int GetDynamicStateHashCode()
         {
             var seq = 0;
             var dynamicState = base.GetDynamicStateHashCode();
 
-            DuDynamicState.Append(ref dynamicState, ++seq, power);
-            DuDynamicState.Append(ref dynamicState, ++seq, color);
+            DynamicState.Append(ref dynamicState, ++seq, power);
+            DynamicState.Append(ref dynamicState, ++seq, color);
 
-            return DuDynamicState.Normalize(dynamicState);
+            return DynamicState.Normalize(dynamicState);
         }
 
         //--------------------------------------------------------------------------------------------------------------

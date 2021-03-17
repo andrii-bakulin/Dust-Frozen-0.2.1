@@ -59,22 +59,22 @@ namespace DustEngine
         private float m_OffsetDynamic;
 
         //--------------------------------------------------------------------------------------------------------------
-        // DuDynamicStateInterface
+        // IDynamicState
 
         public override int GetDynamicStateHashCode()
         {
             var seq = 0;
             var dynamicState = base.GetDynamicStateHashCode();
 
-            DuDynamicState.Append(ref dynamicState, ++seq, shape);
-            DuDynamicState.Append(ref dynamicState, ++seq, offset);
-            DuDynamicState.Append(ref dynamicState, ++seq, animationSpeed);
-            DuDynamicState.Append(ref dynamicState, ++seq, beforeCurve);
-            DuDynamicState.Append(ref dynamicState, ++seq, afterCurve);
+            DynamicState.Append(ref dynamicState, ++seq, shape);
+            DynamicState.Append(ref dynamicState, ++seq, offset);
+            DynamicState.Append(ref dynamicState, ++seq, animationSpeed);
+            DynamicState.Append(ref dynamicState, ++seq, beforeCurve);
+            DynamicState.Append(ref dynamicState, ++seq, afterCurve);
 
-            DuDynamicState.Append(ref dynamicState, ++seq, m_OffsetDynamic);
+            DynamicState.Append(ref dynamicState, ++seq, m_OffsetDynamic);
 
-            return DuDynamicState.Normalize(dynamicState);
+            return DynamicState.Normalize(dynamicState);
         }
 
         //--------------------------------------------------------------------------------------------------------------

@@ -19,14 +19,14 @@ namespace DustEngine
         public int lastDynamicStateHashCode => m_LastDynamicStateHashCode;
 
         //--------------------------------------------------------------------------------------------------------------
-        // DuDynamicStateInterface
+        // IDynamicState
 
         public virtual int GetDynamicStateHashCode()
         {
             int seq = 0, dynamicState = 0;
 
-            DuDynamicState.Append(ref dynamicState, ++seq, GetInstancesHolderTransform());
-            DuDynamicState.Append(ref dynamicState, ++seq, factoryMachines.Count);
+            DynamicState.Append(ref dynamicState, ++seq, GetInstancesHolderTransform());
+            DynamicState.Append(ref dynamicState, ++seq, factoryMachines.Count);
 
             foreach (FactoryMachine.Record record in factoryMachines)
             {
@@ -40,12 +40,12 @@ namespace DustEngine
 
                 // @END
 
-                DuDynamicState.Append(ref dynamicState, ++seq, record.enabled);
-                DuDynamicState.Append(ref dynamicState, ++seq, record.intensity);
-                DuDynamicState.Append(ref dynamicState, ++seq, record.factoryMachine);
+                DynamicState.Append(ref dynamicState, ++seq, record.enabled);
+                DynamicState.Append(ref dynamicState, ++seq, record.intensity);
+                DynamicState.Append(ref dynamicState, ++seq, record.factoryMachine);
             }
 
-            int stampId = DuDynamicState.Normalize(dynamicState);
+            int stampId = DynamicState.Normalize(dynamicState);
 
 #if DUST_DEBUG_FACTORY_UPDATER
             Dust.Debug.Checkpoint("Factory.Updater", "GetDynamicStateHashCode", stampId);

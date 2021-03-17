@@ -317,7 +317,7 @@ namespace DustEngine
         {
             if (easeMode == EaseMode.EaseInOut)
             {
-                return Mathf.Sin(DuConstants.PI2 * timeOffset);
+                return Mathf.Sin(Constants.PI2 * timeOffset);
             }
 
             // (easeMode == EaseMode.Linear)

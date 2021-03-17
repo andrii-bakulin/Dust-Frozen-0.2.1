@@ -14,7 +14,7 @@ namespace DustEngine
     ///
     /// </summary>
     [Serializable]
-    public class DuFieldsMap : DuDynamicStateInterface
+    public class FieldsMap : IDynamicState
     {
         [Serializable]
         public class FieldRecord
@@ -154,9 +154,9 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
 
 #if DUST_ALPHA_DEFORMERS
-        public static DuFieldsMap Deformer()
+        public static FieldsMap Deformer()
         {
-            return new DuFieldsMap
+            return new FieldsMap
             {
                 m_FieldsMapMode = FieldsMapMode.Deformer,
 
@@ -168,9 +168,9 @@ namespace DustEngine
         }
 #endif
 
-        public static DuFieldsMap FactoryMachine()
+        public static FieldsMap FactoryMachine()
         {
-            return new DuFieldsMap
+            return new FieldsMap
             {
                 m_FieldsMapMode = FieldsMapMode.FactoryMachine,
 
@@ -182,9 +182,9 @@ namespace DustEngine
             };
         }
 
-        public static DuFieldsMap FieldsSpace()
+        public static FieldsMap FieldsSpace()
         {
-            return new DuFieldsMap
+            return new FieldsMap
             {
                 m_FieldsMapMode = FieldsMapMode.FieldsSpace,
 
@@ -197,18 +197,18 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
-        // DuDynamicStateInterface
+        // IDynamicState
 
         public int GetDynamicStateHashCode()
         {
             int seq = 0, dynamicState = 0;
 
-            DuDynamicState.Append(ref dynamicState, ++seq, calculatePower);
-            DuDynamicState.Append(ref dynamicState, ++seq, defaultPower);
-            DuDynamicState.Append(ref dynamicState, ++seq, calculateColor);
-            DuDynamicState.Append(ref dynamicState, ++seq, defaultColor);
+            DynamicState.Append(ref dynamicState, ++seq, calculatePower);
+            DynamicState.Append(ref dynamicState, ++seq, defaultPower);
+            DynamicState.Append(ref dynamicState, ++seq, calculateColor);
+            DynamicState.Append(ref dynamicState, ++seq, defaultColor);
 
-            DuDynamicState.Append(ref dynamicState, ++seq, fields.Count);
+            DynamicState.Append(ref dynamicState, ++seq, fields.Count);
 
             foreach (FieldRecord fieldRecord in fields)
             {
@@ -222,14 +222,14 @@ namespace DustEngine
 
                 // @END
 
-                DuDynamicState.Append(ref dynamicState, ++seq, fieldRecord.enabled);
-                DuDynamicState.Append(ref dynamicState, ++seq, fieldRecord.field);
-                DuDynamicState.Append(ref dynamicState, ++seq, fieldRecord.blendPowerMode);
-                DuDynamicState.Append(ref dynamicState, ++seq, fieldRecord.blendColorMode);
-                DuDynamicState.Append(ref dynamicState, ++seq, fieldRecord.intensity);
+                DynamicState.Append(ref dynamicState, ++seq, fieldRecord.enabled);
+                DynamicState.Append(ref dynamicState, ++seq, fieldRecord.field);
+                DynamicState.Append(ref dynamicState, ++seq, fieldRecord.blendPowerMode);
+                DynamicState.Append(ref dynamicState, ++seq, fieldRecord.blendColorMode);
+                DynamicState.Append(ref dynamicState, ++seq, fieldRecord.intensity);
             }
 
-            return DuDynamicState.Normalize(dynamicState);
+            return DynamicState.Normalize(dynamicState);
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -396,27 +396,27 @@ namespace DustEngine
                             break;
 
                         case FieldRecord.BlendColorMode.Blend:
-                            blendedColor = DuColorBlend.AlphaBlend(fieldPoint.endColor, fieldResultData.fieldColor);
+                            blendedColor = ColorBlend.AlphaBlend(fieldPoint.endColor, fieldResultData.fieldColor);
                             break;
 
                         case FieldRecord.BlendColorMode.Add:
-                            blendedColor = DuColorBlend.Add(fieldPoint.endColor, fieldResultData.fieldColor);
+                            blendedColor = ColorBlend.Add(fieldPoint.endColor, fieldResultData.fieldColor);
                             break;
 
                         case FieldRecord.BlendColorMode.Subtract:
-                            blendedColor = DuColorBlend.Subtract(fieldPoint.endColor, fieldResultData.fieldColor);
+                            blendedColor = ColorBlend.Subtract(fieldPoint.endColor, fieldResultData.fieldColor);
                             break;
 
                         case FieldRecord.BlendColorMode.Multiply:
-                            blendedColor = DuColorBlend.Multiply(fieldPoint.endColor, fieldResultData.fieldColor);
+                            blendedColor = ColorBlend.Multiply(fieldPoint.endColor, fieldResultData.fieldColor);
                             break;
 
                         case FieldRecord.BlendColorMode.Min:
-                            blendedColor = DuColorBlend.MinAfterBlend(fieldPoint.endColor, fieldResultData.fieldColor);
+                            blendedColor = ColorBlend.MinAfterBlend(fieldPoint.endColor, fieldResultData.fieldColor);
                             break;
 
                         case FieldRecord.BlendColorMode.Max:
-                            blendedColor = DuColorBlend.MaxAfterBlend(fieldPoint.endColor,fieldResultData.fieldColor);
+                            blendedColor = ColorBlend.MaxAfterBlend(fieldPoint.endColor,fieldResultData.fieldColor);
                             break;
                     }
 

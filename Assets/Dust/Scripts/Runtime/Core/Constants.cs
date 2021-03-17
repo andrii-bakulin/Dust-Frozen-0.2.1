@@ -2,7 +2,7 @@
 
 namespace DustEngine
 {
-    public static class DuConstants
+    public static class Constants
     {
         public static readonly float PI = Mathf.PI;
         public static readonly float PI2 = Mathf.PI * 2f;

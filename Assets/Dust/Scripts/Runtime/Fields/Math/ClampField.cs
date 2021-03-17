@@ -57,31 +57,31 @@ namespace DustEngine
         }
 
         //--------------------------------------------------------------------------------------------------------------
-        // DuDynamicStateInterface
+        // IDynamicState
 
         public override int GetDynamicStateHashCode()
         {
             var seq = 0;
             var dynamicState = base.GetDynamicStateHashCode();
 
-            DuDynamicState.Append(ref dynamicState, ++seq, powerClampMode);
+            DynamicState.Append(ref dynamicState, ++seq, powerClampMode);
 
             if (powerClampMode != ClampMode.NoClamp)
             {
-                DuDynamicState.Append(ref dynamicState, ++seq, powerClampMin);
-                DuDynamicState.Append(ref dynamicState, ++seq, powerClampMax);
+                DynamicState.Append(ref dynamicState, ++seq, powerClampMin);
+                DynamicState.Append(ref dynamicState, ++seq, powerClampMax);
             }
 
 
-            DuDynamicState.Append(ref dynamicState, ++seq, colorClampMode);
+            DynamicState.Append(ref dynamicState, ++seq, colorClampMode);
 
             if (colorClampMode != ClampMode.NoClamp)
             {
-                DuDynamicState.Append(ref dynamicState, ++seq, colorClampMin);
-                DuDynamicState.Append(ref dynamicState, ++seq, colorClampMax);
+                DynamicState.Append(ref dynamicState, ++seq, colorClampMin);
+                DynamicState.Append(ref dynamicState, ++seq, colorClampMax);
             }
 
-            return DuDynamicState.Normalize(dynamicState);
+            return DynamicState.Normalize(dynamicState);
         }
 
         //--------------------------------------------------------------------------------------------------------------

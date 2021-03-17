@@ -63,7 +63,7 @@ namespace DustEngine.DustEditor
                 var offset = m_Offset.valFloat;
 
                 var previewDynamic = true;
-                var previewLength = DuSessionState.GetFloat("TimeField.Preview.Length", 3f);
+                var previewLength = SessionState.GetFloat("TimeField.Preview.Length", 3f);
                 var previewTitle = "Preview (" + previewLength.ToString("F1") + " sec)";
 
                 // Small trick for "None" timeMode: it's always show be "Linear"
@@ -97,7 +97,7 @@ namespace DustEngine.DustEditor
                 if (previewDynamic)
                 {
                     previewLength = DustGUI.ExtraSlider.Create(1f, 5f, 0.1f, 1f, 100f).Draw("Preview Length", previewLength);
-                    DuSessionState.SetFloat("TimeField.Preview.Length", previewLength);
+                    SessionState.SetFloat("TimeField.Preview.Length", previewLength);
                 }
 
                 Space();

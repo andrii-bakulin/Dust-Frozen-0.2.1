@@ -179,7 +179,7 @@ namespace DustEngine
             if (DuMath.IsZero(amplitude))
                 return 0f;
 
-            return Mathf.Sin(DuConstants.PI2 * (speed / 360f) * m_TimeSinceStart + DuConstants.PI2 * offset) * amplitude;
+            return Mathf.Sin(Constants.PI2 * (speed / 360f) * m_TimeSinceStart + Constants.PI2 * offset) * amplitude;
         }
     }
 }
