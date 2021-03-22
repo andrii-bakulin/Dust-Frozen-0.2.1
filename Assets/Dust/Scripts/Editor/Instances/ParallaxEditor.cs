@@ -118,10 +118,10 @@ namespace DustEngine.DustEditor
             // Validate & Normalize Data
 
             if (m_TileOffset.isChanged)
-                m_TileOffset.valFloat = Parallax.Normalizer.TileOffset(m_TileOffset.valFloat);
+                m_TileOffset.valFloat = Parallax.NormalizeTileOffset(m_TileOffset.valFloat);
 
             if (m_TilesCount.isChanged)
-                m_TilesCount.valInt = Parallax.Normalizer.TilesCount(m_TilesCount.valInt);
+                m_TilesCount.valInt = Parallax.NormalizeTilesCount(m_TilesCount.valInt);
 
             InspectorCommitUpdates();
 

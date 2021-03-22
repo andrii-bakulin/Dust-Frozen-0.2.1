@@ -84,7 +84,7 @@ namespace DustEngine.DustEditor
             // Validate & Normalize Data
 
             if (m_Count.isChanged)
-                m_Count.valVector3Int = GridFactory.Normalizer.Count(m_Count.valVector3Int);
+                m_Count.valVector3Int = GridFactory.NormalizeCount(m_Count.valVector3Int);
 
             InspectorCommitUpdates();
         }

@@ -185,13 +185,13 @@ namespace DustEngine.DustEditor
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             if (m_Offset.isChanged)
-                m_Offset.valFloat = Remapping.ObjectNormalizer.Offset(m_Offset.valFloat);
+                m_Offset.valFloat = Remapping.NormalizeOffset(m_Offset.valFloat);
 
             if (m_PostStepsCount.isChanged)
-                m_PostStepsCount.valInt = Remapping.ObjectNormalizer.PostStepsCount(m_PostStepsCount.valInt);
+                m_PostStepsCount.valInt = Remapping.NormalizePostStepsCount(m_PostStepsCount.valInt);
 
             if (m_PostCurve.isChanged)
-                m_PostCurve.valAnimationCurve = Remapping.ObjectNormalizer.PostCurve(m_PostCurve.valAnimationCurve);
+                m_PostCurve.valAnimationCurve = Remapping.NormalizePostCurve(m_PostCurve.valAnimationCurve);
         }
 
         //--------------------------------------------------------------------------------------------------------------

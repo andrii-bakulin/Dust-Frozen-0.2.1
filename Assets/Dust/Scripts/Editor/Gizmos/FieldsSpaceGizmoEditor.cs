@@ -105,16 +105,16 @@ namespace DustEngine.DustEditor
             // Validate & Normalize Data
 
             if (m_GridCount.isChanged)
-                m_GridCount.valVector3Int = FieldsSpaceGizmo.Normalizer.GridCount(m_GridCount.valVector3Int);
+                m_GridCount.valVector3Int = FieldsSpaceGizmo.NormalizeGridCount(m_GridCount.valVector3Int);
 
             if (m_PowerSize.isChanged)
-                m_PowerSize.valFloat = FieldsSpaceGizmo.Normalizer.Size(m_PowerSize.valFloat);
+                m_PowerSize.valFloat = FieldsSpaceGizmo.NormalizeSize(m_PowerSize.valFloat);
 
             if (m_PowerDotsSize.isChanged)
-                m_PowerDotsSize.valFloat = FieldsSpaceGizmo.Normalizer.Size(m_PowerDotsSize.valFloat);
+                m_PowerDotsSize.valFloat = FieldsSpaceGizmo.NormalizeSize(m_PowerDotsSize.valFloat);
 
             if (m_ColorSize.isChanged)
-                m_ColorSize.valFloat = FieldsSpaceGizmo.Normalizer.Size(m_ColorSize.valFloat);
+                m_ColorSize.valFloat = FieldsSpaceGizmo.NormalizeSize(m_ColorSize.valFloat);
 
             InspectorCommitUpdates();
         }

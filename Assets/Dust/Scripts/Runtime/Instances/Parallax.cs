@@ -77,7 +77,7 @@ namespace DustEngine
         public float tileOffset
         {
             get => m_TileOffset;
-            set => m_TileOffset = Normalizer.TileOffset(value);
+            set => m_TileOffset = NormalizeTileOffset(value);
         }
 
         [SerializeField]
@@ -93,7 +93,7 @@ namespace DustEngine
         public int tilesCount
         {
             get => m_TilesCount;
-            set => m_TilesCount = Normalizer.TilesCount(value);
+            set => m_TilesCount = NormalizeTilesCount(value);
         }
 
         [SerializeField]
@@ -317,17 +317,14 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        public static class Normalizer
+        internal static float NormalizeTileOffset(float value)
         {
-            public static float TileOffset(float value)
-            {
-                return Mathf.Clamp01(value);
-            }
+            return Mathf.Clamp01(value);
+        }
 
-            public static int TilesCount(int value)
-            {
-                return Mathf.Max(2, value);
-            }
+        internal static int NormalizeTilesCount(int value)
+        {
+            return Mathf.Max(2, value);
         }
     }
 }

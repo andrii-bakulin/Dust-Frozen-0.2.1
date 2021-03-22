@@ -67,7 +67,7 @@ namespace DustEngine.DustEditor
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             if (m_Shape.isChanged)
-                m_Shape.valAnimationCurve = CurveField.Normalizer.Shape(m_Shape.valAnimationCurve);
+                m_Shape.valAnimationCurve = CurveField.NormalizeShape(m_Shape.valAnimationCurve);
 
             InspectorCommitUpdates();
         }

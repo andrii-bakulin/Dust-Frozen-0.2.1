@@ -75,13 +75,13 @@ namespace DustEngine.DustEditor
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             if (m_Length.isChanged)
-                m_Length.valFloat = DirectionalField.ShapeNormalizer.Length(m_Length.valFloat);
+                m_Length.valFloat = DirectionalField.NormalizeLength(m_Length.valFloat);
 
             if (m_GizmoWidth.isChanged)
-                m_GizmoWidth.valFloat = DirectionalField.ShapeNormalizer.GizmoWidth(m_GizmoWidth.valFloat);
+                m_GizmoWidth.valFloat = DirectionalField.NormalizeGizmoWidth(m_GizmoWidth.valFloat);
 
             if (m_GizmoHeight.isChanged)
-                m_GizmoHeight.valFloat = DirectionalField.ShapeNormalizer.GizmoHeight(m_GizmoHeight.valFloat);
+                m_GizmoHeight.valFloat = DirectionalField.NormalizeGizmoHeight(m_GizmoHeight.valFloat);
 
             InspectorCommitUpdates();
         }

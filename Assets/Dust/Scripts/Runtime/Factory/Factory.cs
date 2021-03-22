@@ -107,7 +107,7 @@ namespace DustEngine
             get => m_InstancesFillRate;
             set
             {
-                value = NormalizerCore.InstancesFillRate(value);
+                value = NormalizeInstancesFillRate(value);
 
                 if (!UpdatePropertyValue(ref m_InstancesFillRate, value))
                     return;
@@ -123,7 +123,7 @@ namespace DustEngine
             get => m_InstancesFillSeed;
             set
             {
-                value = NormalizerCore.InstancesFillSeed(value);
+                value = NormalizeInstancesFillSeed(value);
 
                 if (!UpdatePropertyValue(ref m_InstancesFillSeed, value))
                     return;
@@ -175,7 +175,7 @@ namespace DustEngine
             get => m_Seed;
             set
             {
-                value = NormalizerCore.Seed(value);
+                value = NormalizeSeed(value);
 
                 if (!UpdatePropertyValue(ref m_Seed, value))
                     return;
@@ -492,22 +492,19 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        public static class NormalizerCore
+        internal static int NormalizeSeed(int value)
         {
-            public static int Seed(int value)
-            {
-                return DuRandom.NormalizeSeedToNonRandom(value);
-            }
+            return DuRandom.NormalizeSeedToNonRandom(value);
+        }
 
-            public static float InstancesFillRate(float value)
-            {
-                return Mathf.Clamp01(value);
-            }
+        internal static float NormalizeInstancesFillRate(float value)
+        {
+            return Mathf.Clamp01(value);
+        }
 
-            public static int InstancesFillSeed(int value)
-            {
-                return DuRandom.NormalizeSeedToNonRandom(value);
-            }
+        internal static int NormalizeInstancesFillSeed(int value)
+        {
+            return DuRandom.NormalizeSeedToNonRandom(value);
         }
     }
 }

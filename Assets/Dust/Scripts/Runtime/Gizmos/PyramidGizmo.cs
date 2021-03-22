@@ -26,7 +26,7 @@ namespace DustEngine
         public int faces
         {
             get => m_Faces;
-            set => m_Faces = Normalizer.Faces(value);
+            set => m_Faces = NormalizeFaces(value);
         }
 
         [SerializeField]
@@ -65,12 +65,9 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        public static class Normalizer
+        internal static int NormalizeFaces(int value)
         {
-            public static int Faces(int value)
-            {
-                return Mathf.Max(3, value);
-            }
+            return Mathf.Max(3, value);
         }
     }
 }

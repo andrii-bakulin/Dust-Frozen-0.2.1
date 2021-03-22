@@ -26,7 +26,7 @@ namespace DustEngine
         public float fadeInOffset
         {
             get => m_FadeInOffset;
-            set => m_FadeInOffset = ShapeNormalizer.FadeOffset(value);
+            set => m_FadeInOffset = NormalizeFadeOffset(value);
         }
 
         [SerializeField]
@@ -34,7 +34,7 @@ namespace DustEngine
         public float fadeOutOffset
         {
             get => m_FadeOutOffset;
-            set => m_FadeOutOffset = ShapeNormalizer.FadeOffset(value);
+            set => m_FadeOutOffset = NormalizeFadeOffset(value);
         }
 
         [SerializeField]
@@ -42,7 +42,7 @@ namespace DustEngine
         public float iterations
         {
             get => m_Iterations;
-            set => m_Iterations = ShapeNormalizer.Iterations(value);
+            set => m_Iterations = NormalizeIterations(value);
         }
 
         [SerializeField]
@@ -68,7 +68,7 @@ namespace DustEngine
         public float gizmoRadius
         {
             get => m_GizmoRadius;
-            set => m_GizmoRadius = ShapeNormalizer.GizmoRadius(value);
+            set => m_GizmoRadius = NormalizeGizmoRadius(value);
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -216,22 +216,19 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        public static class ShapeNormalizer
+        internal static float NormalizeFadeOffset(float value)
         {
-            public static float FadeOffset(float value)
-            {
-                return Mathf.Clamp(value, 0f, 360f);
-            }
+            return Mathf.Clamp(value, 0f, 360f);
+        }
 
-            public static float Iterations(float value)
-            {
-                return Mathf.Max(1f, value);
-            }
+        internal static float NormalizeIterations(float value)
+        {
+            return Mathf.Max(1f, value);
+        }
 
-            public static float GizmoRadius(float value)
-            {
-                return Mathf.Abs(value);
-            }
+        internal static float NormalizeGizmoRadius(float value)
+        {
+            return Mathf.Abs(value);
         }
     }
 }

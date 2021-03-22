@@ -178,7 +178,7 @@ namespace DustEngine.DustEditor
             m_IsRequireRebuildInstances |= m_Seed.isChanged;
 
             if (m_Seed.isChanged)
-                m_Seed.valInt = Factory.NormalizerCore.Seed(m_Seed.valInt);
+                m_Seed.valInt = Factory.NormalizeSeed(m_Seed.valInt);
         }
 
         protected void OnInspectorGUI_Instances()
@@ -211,10 +211,10 @@ namespace DustEngine.DustEditor
             m_IsRequireRebuildInstances |= m_InstancesHolder.isChanged;
 
             if (m_InstancesFillRate.isChanged)
-                m_InstancesFillRate.valFloat = Factory.NormalizerCore.InstancesFillRate(m_InstancesFillRate.valFloat);
+                m_InstancesFillRate.valFloat = Factory.NormalizeInstancesFillRate(m_InstancesFillRate.valFloat);
 
             if (m_InstancesFillSeed.isChanged)
-                m_InstancesFillSeed.valInt = Factory.NormalizerCore.InstancesFillSeed(m_InstancesFillSeed.valInt);
+                m_InstancesFillSeed.valInt = Factory.NormalizeInstancesFillSeed(m_InstancesFillSeed.valInt);
         }
 
         protected void OnInspectorGUI_FactoryMachines()

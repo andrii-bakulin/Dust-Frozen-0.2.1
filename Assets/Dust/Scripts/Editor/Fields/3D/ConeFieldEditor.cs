@@ -60,10 +60,10 @@ namespace DustEngine.DustEditor
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             if (m_Height.isChanged)
-                m_Height.valFloat = ConeField.ShapeNormalizer.Height(m_Height.valFloat);
+                m_Height.valFloat = ConeField.NormalizeHeight(m_Height.valFloat);
 
             if (m_Radius.isChanged)
-                m_Radius.valFloat = ConeField.ShapeNormalizer.Radius(m_Radius.valFloat);
+                m_Radius.valFloat = ConeField.NormalizeRadius(m_Radius.valFloat);
 
             InspectorCommitUpdates();
         }

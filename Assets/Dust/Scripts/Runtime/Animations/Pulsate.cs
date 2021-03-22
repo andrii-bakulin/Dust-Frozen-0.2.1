@@ -27,7 +27,7 @@ namespace DustEngine
         public float power
         {
             get => m_Power;
-            set => m_Power = Normalizer.Power(value);
+            set => m_Power = NormalizePower(value);
         }
 
         [SerializeField]
@@ -35,7 +35,7 @@ namespace DustEngine
         public float sleepTime
         {
             get => m_SleepTime;
-            set => m_SleepTime = Normalizer.SleepTime(value);
+            set => m_SleepTime = NormalizeSleepTime(value);
         }
 
         [SerializeField]
@@ -113,7 +113,7 @@ namespace DustEngine
         public Vector3 scaleAmplitude
         {
             get => m_ScaleAmplitude;
-            set => m_ScaleAmplitude = Normalizer.ScaleAmplitude(value);
+            set => m_ScaleAmplitude = NormalizeScaleAmplitude(value);
         }
 
         [SerializeField]
@@ -338,23 +338,20 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        public static class Normalizer
+        internal static float NormalizePower(float value)
         {
-            public static float Power(float value)
-            {
-                return Mathf.Clamp01(value);
-            }
+            return Mathf.Clamp01(value);
+        }
 
-            public static float SleepTime(float value)
-            {
-                return Mathf.Max(value, 0f);
-            }
+        internal static float NormalizeSleepTime(float value)
+        {
+            return Mathf.Max(value, 0f);
+        }
 
-            public static Vector3 ScaleAmplitude(Vector3 value)
-            {
-                value = Vector3.Max(value, DuVector3.New(k_MinScaleValue));
-                return value;
-            }
+        internal static Vector3 NormalizeScaleAmplitude(Vector3 value)
+        {
+            value = Vector3.Max(value, DuVector3.New(k_MinScaleValue));
+            return value;
         }
     }
 }

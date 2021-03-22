@@ -60,10 +60,10 @@ namespace DustEngine.DustEditor
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             if (m_Radius.isChanged)
-                m_Radius.valFloat = TorusField.Normalizer.Radius(m_Radius.valFloat);
+                m_Radius.valFloat = TorusField.NormalizeRadius(m_Radius.valFloat);
 
             if (m_Thickness.isChanged)
-                m_Thickness.valFloat = TorusField.Normalizer.Thickness(m_Thickness.valFloat);
+                m_Thickness.valFloat = TorusField.NormalizeThickness(m_Thickness.valFloat);
 
             InspectorCommitUpdates();
         }

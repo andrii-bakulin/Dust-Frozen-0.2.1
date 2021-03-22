@@ -215,8 +215,17 @@ namespace DustEngine.DustEditor
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // Validate & Normalize Data
 
+            if (m_Interval.isChanged)
+                m_Interval.valFloat = Spawner.NormalizeIntervalValue(m_Interval.valFloat);
+
             if (m_Limit.isChanged)
-                m_Limit.valInt = Spawner.Normalizer.Limit(m_Limit.valInt);
+                m_Limit.valInt = Spawner.NormalizeLimit(m_Limit.valInt);
+
+            // @notice: no need to NormalizeIntervalValue for m_IntervalRange.
+            // It auto-normalized in PropertyFieldDurationRange() method
+
+            // @notice: no need to NormalizeMultipleSpawnCount for m_MultipleSpawnCount.
+            // It auto-normalized in PropertyFieldRange() method
 
             InspectorCommitUpdates();
         }

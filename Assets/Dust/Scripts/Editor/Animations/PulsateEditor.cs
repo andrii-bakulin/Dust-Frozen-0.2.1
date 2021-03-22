@@ -142,13 +142,13 @@ namespace DustEngine.DustEditor
             // Validate & Normalize Data
 
             if (m_Power.isChanged)
-                m_Power.valFloat = Pulsate.Normalizer.Power(m_Power.valFloat);
+                m_Power.valFloat = Pulsate.NormalizePower(m_Power.valFloat);
 
             if (m_SleepTime.isChanged)
-                m_SleepTime.valFloat = Pulsate.Normalizer.SleepTime(m_SleepTime.valFloat);
+                m_SleepTime.valFloat = Pulsate.NormalizeSleepTime(m_SleepTime.valFloat);
 
             if (m_ScaleAmplitude.isChanged)
-                m_ScaleAmplitude.valVector3 = Pulsate.Normalizer.ScaleAmplitude(m_ScaleAmplitude.valVector3);
+                m_ScaleAmplitude.valVector3 = Pulsate.NormalizeScaleAmplitude(m_ScaleAmplitude.valVector3);
 
             InspectorCommitUpdates();
         }

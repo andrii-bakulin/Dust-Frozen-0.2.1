@@ -145,13 +145,13 @@ namespace DustEngine.DustEditor
             // Validate & Normalize Data
 
             if (m_Power.isChanged)
-                m_Power.valFloat = Shake.Normalizer.Power(m_Power.valFloat);
+                m_Power.valFloat = Shake.NormalizePower(m_Power.valFloat);
 
             if (m_WarmUpTime.isChanged)
-                m_WarmUpTime.valFloat = Shake.Normalizer.WarmUpTime(m_WarmUpTime.valFloat);
+                m_WarmUpTime.valFloat = Shake.NormalizeWarmUpTime(m_WarmUpTime.valFloat);
 
             if (m_ScaleAmplitude.isChanged)
-                m_ScaleAmplitude.valVector3 = Shake.Normalizer.ScaleAmplitude(m_ScaleAmplitude.valVector3);
+                m_ScaleAmplitude.valVector3 = Shake.NormalizeScaleAmplitude(m_ScaleAmplitude.valVector3);
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

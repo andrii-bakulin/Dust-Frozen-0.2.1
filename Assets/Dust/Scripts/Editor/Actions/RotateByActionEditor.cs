@@ -81,11 +81,11 @@ namespace DustEngine.DustEditor
 
             if (m_ImproveAccuracyThreshold.isChanged)
                 m_ImproveAccuracyThreshold.valFloat =
-                    RotateByAction.Normalizer.ImproveAccuracyThreshold(m_ImproveAccuracyThreshold.valFloat);
+                    RotateByAction.NormalizeAccuracyThreshold(m_ImproveAccuracyThreshold.valFloat);
 
             if (m_ImproveAccuracyMaxIterations.isChanged)
                 m_ImproveAccuracyMaxIterations.valInt =
-                    RotateByAction.Normalizer.ImproveAccuracyMaxIterations(m_ImproveAccuracyMaxIterations.valInt);
+                    RotateByAction.NormalizeAccuracyMaxIterations(m_ImproveAccuracyMaxIterations.valInt);
 
             InspectorCommitUpdates();
         }

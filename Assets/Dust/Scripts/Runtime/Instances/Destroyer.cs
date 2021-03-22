@@ -84,7 +84,7 @@ namespace DustEngine
         public Vector3 volumeSize
         {
             get => m_VolumeSize;
-            set => m_VolumeSize = Normalizer.VolumeSize(value);
+            set => m_VolumeSize = NormalizeVolumeSize(value);
         }
 
         [SerializeField]
@@ -281,12 +281,9 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        public static class Normalizer
+        internal static Vector3 NormalizeVolumeSize(Vector3 value)
         {
-            public static Vector3 VolumeSize(Vector3 value)
-            {
-                return DuVector3.Abs(value);
-            }
+            return DuVector3.Abs(value);
         }
     }
 }

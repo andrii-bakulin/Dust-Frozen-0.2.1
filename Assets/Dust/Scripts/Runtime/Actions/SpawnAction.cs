@@ -111,7 +111,7 @@ namespace DustEngine
         public DuIntRange multipleSpawnCount
         {
             get => m_MultipleSpawnCount;
-            set => m_MultipleSpawnCount = Normalizer.MultipleSpawnCount(value);
+            set => m_MultipleSpawnCount = NormalizeMultipleSpawnCount(value);
         }
 
         [SerializeField]
@@ -259,14 +259,11 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        public static class Normalizer
+        internal static DuIntRange NormalizeMultipleSpawnCount(DuIntRange range)
         {
-            public static DuIntRange MultipleSpawnCount(DuIntRange range)
-            {
-                range.min = Mathf.Max(range.min, 0);
-                range.max = Mathf.Max(range.max, range.min);
-                return range;
-            }
+            range.min = Mathf.Max(range.min, 0);
+            range.max = Mathf.Max(range.max, range.min);
+            return range;
         }
     }
 }

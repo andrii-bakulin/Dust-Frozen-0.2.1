@@ -104,10 +104,10 @@ namespace DustEngine.DustEditor
             }
 
             if (m_SpeedLimit.isChanged)
-                m_SpeedLimit.valFloat = Follow.Normalizer.SpeedLimit(m_SpeedLimit.valFloat);
+                m_SpeedLimit.valFloat = Follow.NormalizeSpeedLimit(m_SpeedLimit.valFloat);
 
             if (m_SmoothTime.isChanged)
-                m_SmoothTime.valVector3 = Follow.Normalizer.SmoothTime(m_SmoothTime.valVector3);
+                m_SmoothTime.valVector3 = Follow.NormalizeSmoothTime(m_SmoothTime.valVector3);
 
             InspectorCommitUpdates();
         }

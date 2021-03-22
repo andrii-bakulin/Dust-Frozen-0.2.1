@@ -81,10 +81,10 @@ namespace DustEngine.DustEditor
             // Validate & Normalize Data
 
             if (m_Count.isChanged)
-                m_Count.valInt = LinearFactory.Normalizer.Count(m_Count.valInt);
+                m_Count.valInt = LinearFactory.NormalizeCount(m_Count.valInt);
 
             if (m_Offset.isChanged)
-                m_Offset.valInt = LinearFactory.Normalizer.Offset(m_Offset.valInt);
+                m_Offset.valInt = LinearFactory.NormalizeOffset(m_Offset.valInt);
 
             InspectorCommitUpdates();
         }

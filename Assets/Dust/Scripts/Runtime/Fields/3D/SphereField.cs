@@ -10,7 +10,7 @@ namespace DustEngine
         public float radius
         {
             get => m_Radius;
-            set => m_Radius = ShapeNormalizer.Radius(value);
+            set => m_Radius = NormalizeRadius(value);
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -88,12 +88,9 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        public static class ShapeNormalizer
+        internal static float NormalizeRadius(float value)
         {
-            public static float Radius(float value)
-            {
-                return Mathf.Abs(value);
-            }
+            return Mathf.Abs(value);
         }
     }
 }

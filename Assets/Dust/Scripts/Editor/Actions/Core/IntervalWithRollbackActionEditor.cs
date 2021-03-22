@@ -31,7 +31,7 @@ namespace DustEngine.DustEditor
         protected override void InspectorCommitUpdates()
         {
             if (m_RollbackDuration.isChanged)
-                m_RollbackDuration.valFloat = IntervalWithRollbackAction.Normalizer.Duration(m_RollbackDuration.valFloat);
+                m_RollbackDuration.valFloat = IntervalWithRollbackAction.NormalizeDuration(m_RollbackDuration.valFloat);
 
             base.InspectorCommitUpdates();
         }

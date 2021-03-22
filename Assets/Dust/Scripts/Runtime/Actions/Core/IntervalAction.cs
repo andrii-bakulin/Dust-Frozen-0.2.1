@@ -21,7 +21,7 @@ namespace DustEngine
             set
             {
                 if (!IsAllowUpdateProperty()) return;
-                m_Duration = Normalizer.Duration(value);
+                m_Duration = NormalizeDuration(value);
             }
         }
 
@@ -47,7 +47,7 @@ namespace DustEngine
             set
             {
                 if (!IsAllowUpdateProperty()) return;
-                m_RepeatTimes = Normalizer.RepeatTimes(value);
+                m_RepeatTimes = NormalizeRepeatTimes(value);
             }
         }
 
@@ -132,17 +132,14 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        public static class Normalizer
+        internal static float NormalizeDuration(float value)
         {
-            public static float Duration(float value)
-            {
-                return Mathf.Max(value, 0f);
-            }
+            return Mathf.Max(value, 0f);
+        }
 
-            public static int RepeatTimes(int value)
-            {
-                return Mathf.Max(value, 1);
-            }
+        internal static int NormalizeRepeatTimes(int value)
+        {
+            return Mathf.Max(value, 1);
         }
     }
 }

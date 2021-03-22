@@ -33,7 +33,7 @@ namespace DustEngine
             set
             {
                 if (!IsAllowUpdateProperty()) return;
-                m_RollbackDuration = Normalizer.Duration(value);
+                m_RollbackDuration = NormalizeDuration(value);
             }
         }
 

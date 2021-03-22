@@ -33,8 +33,8 @@ namespace DustEngine
             set
             {
                 if (!IsAllowUpdateProperty()) return;
-                m_DurationRange.min = Normalizer.Duration(value.min);
-                m_DurationRange.max = Normalizer.Duration(value.max);
+                m_DurationRange.min = NormalizeDuration(value.min);
+                m_DurationRange.max = NormalizeDuration(value.max);
             }
         }
 

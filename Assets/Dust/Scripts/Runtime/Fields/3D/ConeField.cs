@@ -10,7 +10,7 @@ namespace DustEngine
         public float radius
         {
             get => m_Radius;
-            set => m_Radius = ShapeNormalizer.Radius(value);
+            set => m_Radius = NormalizeRadius(value);
         }
 
         [SerializeField]
@@ -18,7 +18,7 @@ namespace DustEngine
         public float height
         {
             get => m_Height;
-            set => m_Height = ShapeNormalizer.Height(value);
+            set => m_Height = NormalizeHeight(value);
         }
 
         [SerializeField]
@@ -106,17 +106,14 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        public static class ShapeNormalizer
+        internal static float NormalizeHeight(float value)
         {
-            public static float Height(float value)
-            {
-                return Mathf.Abs(value);
-            }
+            return Mathf.Abs(value);
+        }
 
-            public static float Radius(float value)
-            {
-                return Mathf.Abs(value);
-            }
+        internal static float NormalizeRadius(float value)
+        {
+            return Mathf.Abs(value);
         }
     }
 }

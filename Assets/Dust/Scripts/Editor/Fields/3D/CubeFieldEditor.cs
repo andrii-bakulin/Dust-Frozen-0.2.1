@@ -54,7 +54,7 @@ namespace DustEngine.DustEditor
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             if (m_Size.isChanged)
-                m_Size.valVector3 = CubeField.ShapeNormalizer.Size(m_Size.valVector3);
+                m_Size.valVector3 = CubeField.NormalizeSize(m_Size.valVector3);
 
             InspectorCommitUpdates();
 

@@ -10,7 +10,7 @@ namespace DustEngine
         public float length
         {
             get => m_Length;
-            set => m_Length = ShapeNormalizer.Length(value);
+            set => m_Length = NormalizeLength(value);
         }
 
         [SerializeField]
@@ -28,7 +28,7 @@ namespace DustEngine
         public float gizmoWidth
         {
             get => m_GizmoWidth;
-            set => m_GizmoWidth = ShapeNormalizer.GizmoWidth(value);
+            set => m_GizmoWidth = NormalizeGizmoWidth(value);
         }
 
         [SerializeField]
@@ -36,7 +36,7 @@ namespace DustEngine
         public float gizmoHeight
         {
             get => m_GizmoHeight;
-            set => m_GizmoHeight = ShapeNormalizer.GizmoHeight(value);
+            set => m_GizmoHeight = NormalizeGizmoHeight(value);
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -160,22 +160,19 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        public static class ShapeNormalizer
+        internal static float NormalizeLength(float value)
         {
-            public static float Length(float value)
-            {
-                return Mathf.Max(0f, value);
-            }
+            return Mathf.Max(0f, value);
+        }
 
-            public static float GizmoWidth(float value)
-            {
-                return Mathf.Abs(value);
-            }
+        internal static float NormalizeGizmoWidth(float value)
+        {
+            return Mathf.Abs(value);
+        }
 
-            public static float GizmoHeight(float value)
-            {
-                return Mathf.Abs(value);
-            }
+        internal static float NormalizeGizmoHeight(float value)
+        {
+            return Mathf.Abs(value);
         }
     }
 }

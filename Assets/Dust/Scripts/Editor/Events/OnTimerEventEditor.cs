@@ -53,10 +53,10 @@ namespace DustEngine.DustEditor
             // Validate & Normalize Data
 
             if (m_Delay.isChanged)
-                m_Delay.valFloat = OnTimerEvent.Normalizer.Delay(m_Delay.valFloat);
+                m_Delay.valFloat = OnTimerEvent.NormalizeDelay(m_Delay.valFloat);
 
             if (m_Repeat.isChanged)
-                m_Repeat.valInt = OnTimerEvent.Normalizer.Repeat(m_Repeat.valInt);
+                m_Repeat.valInt = OnTimerEvent.NormalizeRepeat(m_Repeat.valInt);
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 

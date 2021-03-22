@@ -66,7 +66,7 @@ namespace DustEngine
         public float width
         {
             get => m_Width;
-            set => m_Width = ShapeNormalizer.Width(value);
+            set => m_Width = NormalizeWidth(value);
         }
 
         [SerializeField]
@@ -74,7 +74,7 @@ namespace DustEngine
         public float height
         {
             get => m_Height;
-            set => m_Height = ShapeNormalizer.Height(value);
+            set => m_Height = NormalizeHeight(value);
         }
 
         [SerializeField]
@@ -282,17 +282,14 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        public static class ShapeNormalizer
+        internal static float NormalizeWidth(float value)
         {
-            public static float Width(float value)
-            {
-                return Mathf.Abs(value);
-            }
+            return Mathf.Abs(value);
+        }
 
-            public static float Height(float value)
-            {
-                return Mathf.Abs(value);
-            }
+        internal static float NormalizeHeight(float value)
+        {
+            return Mathf.Abs(value);
         }
     }
 }

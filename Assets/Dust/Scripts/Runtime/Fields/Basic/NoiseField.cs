@@ -60,7 +60,7 @@ namespace DustEngine
         public float noiseScale
         {
             get => m_NoiseScale;
-            set => m_NoiseScale = Normalizer.NoiseScale(value);
+            set => m_NoiseScale = NormalizeNoiseScale(value);
         }
 
         [SerializeField]
@@ -68,7 +68,7 @@ namespace DustEngine
         public float noisePower
         {
             get => m_NoisePower;
-            set => m_NoisePower = Normalizer.NoisePower(value);
+            set => m_NoisePower = NormalizeNoisePower(value);
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -106,7 +106,7 @@ namespace DustEngine
             get => m_Seed;
             set
             {
-                value = Normalizer.Seed(value);
+                value = NormalizeSeed(value);
 
                 if (m_Seed == value)
                     return;
@@ -261,22 +261,19 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        public static class Normalizer
+        internal static float NormalizeNoiseScale(float value)
         {
-            public static float NoiseScale(float value)
-            {
-                return Mathf.Clamp(value, 0.0001f, float.MaxValue);
-            }
+            return Mathf.Clamp(value, 0.0001f, float.MaxValue);
+        }
 
-            public static float NoisePower(float value)
-            {
-                return Mathf.Clamp(value, 0.0001f, float.MaxValue);
-            }
+        internal static float NormalizeNoisePower(float value)
+        {
+            return Mathf.Clamp(value, 0.0001f, float.MaxValue);
+        }
 
-            public static int Seed(int value)
-            {
-                return DuRandom.NormalizeSeedToNonRandom(value);
-            }
+        internal static int NormalizeSeed(int value)
+        {
+            return DuRandom.NormalizeSeedToNonRandom(value);
         }
     }
 }

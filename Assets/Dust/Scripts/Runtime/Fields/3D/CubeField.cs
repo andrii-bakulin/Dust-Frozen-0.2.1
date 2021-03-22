@@ -22,7 +22,7 @@ namespace DustEngine
             get => m_Size;
             set
             {
-                m_Size = ShapeNormalizer.Size(value);
+                m_Size = NormalizeSize(value);
                 ResetCalcData();
             }
         }
@@ -140,12 +140,9 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        public static class ShapeNormalizer
+        internal static Vector3 NormalizeSize(Vector3 value)
         {
-            public static Vector3 Size(Vector3 value)
-            {
-                return DuVector3.Abs(value);
-            }
+            return DuVector3.Abs(value);
         }
     }
 }

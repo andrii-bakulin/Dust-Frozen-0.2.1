@@ -95,6 +95,12 @@ namespace DustEngine.DustEditor
 
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+            if (m_Width.isChanged)
+                m_Width.valFloat = TextureSpaceField.NormalizeWidth(m_Width.valFloat);
+
+            if (m_Height.isChanged)
+                m_Height.valFloat = TextureSpaceField.NormalizeHeight(m_Height.valFloat);
+
             InspectorCommitUpdates();
         }
     }

@@ -115,19 +115,19 @@ namespace DustEngine.DustEditor
             // Validate & Normalize Data
 
             if (m_Size.isChanged)
-                m_Size.valFloat = TriggerGizmo.Normalizer.Size(m_Size.valFloat);
+                m_Size.valFloat = TriggerGizmo.NormalizeSize(m_Size.valFloat);
 
             if (m_TriggeredSize.isChanged)
-                m_TriggeredSize.valFloat = TriggerGizmo.Normalizer.Size(m_TriggeredSize.valFloat);
+                m_TriggeredSize.valFloat = TriggerGizmo.NormalizeSize(m_TriggeredSize.valFloat);
 
             if (m_FalloffDuration.isChanged)
-                m_FalloffDuration.valFloat = TriggerGizmo.Normalizer.FalloffDuration(m_FalloffDuration.valFloat);
+                m_FalloffDuration.valFloat = TriggerGizmo.NormalizeFalloffDuration(m_FalloffDuration.valFloat);
 
             if (m_MessageOffset.isChanged)
-                m_MessageOffset.valFloat = TriggerGizmo.Normalizer.MessageOffset(m_MessageOffset.valFloat);
+                m_MessageOffset.valFloat = TriggerGizmo.NormalizeMessageOffset(m_MessageOffset.valFloat);
 
             if (m_MessageSize.isChanged)
-                m_MessageSize.valFloat = TriggerGizmo.Normalizer.MessageSize(m_MessageSize.valFloat);
+                m_MessageSize.valFloat = TriggerGizmo.NormalizeMessageSize(m_MessageSize.valFloat);
 
             InspectorCommitUpdates();
         }

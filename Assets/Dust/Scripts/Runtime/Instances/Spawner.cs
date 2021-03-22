@@ -125,7 +125,7 @@ namespace DustEngine
         public float interval
         {
             get => m_Interval;
-            set => m_Interval = value;
+            set => m_Interval = NormalizeIntervalValue(value);
         }
 
         [SerializeField]
@@ -133,7 +133,12 @@ namespace DustEngine
         public DuRange intervalRange
         {
             get => m_IntervalRange;
-            set => m_IntervalRange = value;
+            set
+            {
+                value.min = NormalizeIntervalValue(value.min);
+                value.max = NormalizeIntervalValue(value.max);
+                m_IntervalRange = value;
+            } 
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -151,7 +156,7 @@ namespace DustEngine
         public DuIntRange multipleSpawnCount
         {
             get => m_MultipleSpawnCount;
-            set => m_MultipleSpawnCount = Normalizer.MultipleSpawnCount(value);
+            set => m_MultipleSpawnCount = NormalizeMultipleSpawnCount(value);
         }
 
         [SerializeField]
@@ -177,7 +182,7 @@ namespace DustEngine
         public int limit
         {
             get => m_Limit;
-            set => m_Limit = Normalizer.Limit(value);
+            set => m_Limit = NormalizeLimit(value);
         }
 
         [SerializeField]
@@ -396,24 +401,21 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        public static class Normalizer
+        internal static int NormalizeLimit(int value)
         {
-            public static int Limit(int value)
-            {
-                return Mathf.Max(0, value);
-            }
+            return Mathf.Max(0, value);
+        }
 
-            public static DuIntRange MultipleSpawnCount(DuIntRange range)
-            {
-                range.min = Mathf.Max(range.min, 0);
-                range.max = Mathf.Max(range.max, range.min);
-                return range;
-            }
+        internal static DuIntRange NormalizeMultipleSpawnCount(DuIntRange range)
+        {
+            range.min = Mathf.Max(range.min, 0);
+            range.max = Mathf.Max(range.max, range.min);
+            return range;
+        }
 
-            public static float IntervalValue(float value)
-            {
-                return Mathf.Max(0f, value);
-            }
+        internal static float NormalizeIntervalValue(float value)
+        {
+            return Mathf.Max(0f, value);
         }
     }
 }

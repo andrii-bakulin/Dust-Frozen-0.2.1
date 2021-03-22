@@ -141,6 +141,9 @@ namespace DustEngine.DustEditor
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             // Validate & Normalize Data
 
+            // @notice: no need to NormalizeMultipleSpawnCount for m_MultipleSpawnCount.
+            // It auto-normalized in PropertyFieldRange() method
+
             InspectorCommitUpdates();
         }
     }

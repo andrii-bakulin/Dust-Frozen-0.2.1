@@ -116,7 +116,7 @@ namespace DustEngine
         public float noiseForce
         {
             get => m_NoiseForce;
-            set => m_NoiseForce = Normalizer.NoiseForce(value);
+            set => m_NoiseForce = NormalizeNoiseForce(value);
         }
 
         [SerializeField]
@@ -124,7 +124,7 @@ namespace DustEngine
         public float noiseScale
         {
             get => m_NoiseScale;
-            set => m_NoiseScale = Normalizer.NoiseScale(value);
+            set => m_NoiseScale = NormalizeNoiseScale(value);
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -136,7 +136,7 @@ namespace DustEngine
             get => m_Seed;
             set
             {
-                value = Normalizer.Seed(value);
+                value = NormalizeSeed(value);
 
                 if (m_Seed == value)
                     return;
@@ -403,22 +403,19 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        public static class Normalizer
+        internal static float NormalizeNoiseForce(float value)
         {
-            public static float NoiseForce(float value)
-            {
-                return Mathf.Clamp(value, 0f, 10f);
-            }
+            return Mathf.Clamp(value, 0f, 10f);
+        }
 
-            public static float NoiseScale(float value)
-            {
-                return Mathf.Clamp(value, 0.0001f, float.MaxValue);
-            }
+        internal static float NormalizeNoiseScale(float value)
+        {
+            return Mathf.Clamp(value, 0.0001f, float.MaxValue);
+        }
 
-            public static int Seed(int value)
-            {
-                return DuRandom.NormalizeSeedToNonRandom(value);
-            }
+        internal static int NormalizeSeed(int value)
+        {
+            return DuRandom.NormalizeSeedToNonRandom(value);
         }
     }
 }

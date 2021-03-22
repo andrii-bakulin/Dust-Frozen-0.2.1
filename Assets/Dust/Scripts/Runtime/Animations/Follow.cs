@@ -46,7 +46,7 @@ namespace DustEngine
         public float speedLimit
         {
             get => m_SpeedLimit;
-            set => m_SpeedLimit = Normalizer.SpeedLimit(value);
+            set => m_SpeedLimit = NormalizeSpeedLimit(value);
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -64,7 +64,7 @@ namespace DustEngine
         public Vector3 smoothTime
         {
             get => m_SmoothTime;
-            set => m_SmoothTime = Normalizer.SmoothTime(value);
+            set => m_SmoothTime = NormalizeSmoothTime(value);
         }
 
         [SerializeField]
@@ -192,17 +192,14 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        public static class Normalizer
+        internal static float NormalizeSpeedLimit(float value)
         {
-            public static float SpeedLimit(float value)
-            {
-                return Mathf.Max(value, 0f);
-            }
+            return Mathf.Max(value, 0f);
+        }
 
-            public static Vector3 SmoothTime(Vector3 value)
-            {
-                return Vector3.Max(DuVector3.New(0.01f), value);
-            }
+        internal static Vector3 NormalizeSmoothTime(Vector3 value)
+        {
+            return Vector3.Max(DuVector3.New(0.01f), value);
         }
     }
 }

@@ -60,7 +60,7 @@ namespace DustEngine
             set
             {
                 if (!IsAllowUpdateProperty()) return;
-                m_ImproveAccuracyThreshold = Normalizer.ImproveAccuracyThreshold(value);
+                m_ImproveAccuracyThreshold = NormalizeAccuracyThreshold(value);
             }
         }
 
@@ -72,7 +72,7 @@ namespace DustEngine
             set
             {
                 if (!IsAllowUpdateProperty()) return;
-                m_ImproveAccuracyMaxIterations = Normalizer.ImproveAccuracyMaxIterations(value);
+                m_ImproveAccuracyMaxIterations = NormalizeAccuracyMaxIterations(value);
             }
         }
 
@@ -126,17 +126,14 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        public new static class Normalizer
+        internal static float NormalizeAccuracyThreshold(float value)
         {
-            public static float ImproveAccuracyThreshold(float value)
-            {
-                return Mathf.Max(value, 0.01f);
-            }
+            return Mathf.Max(value, 0.01f);
+        }
 
-            public static int ImproveAccuracyMaxIterations(int value)
-            {
-                return Mathf.Clamp(value, 1, 1000);
-            }
+        internal static int NormalizeAccuracyMaxIterations(int value)
+        {
+            return Mathf.Clamp(value, 1, 1000);
         }
     }
 }

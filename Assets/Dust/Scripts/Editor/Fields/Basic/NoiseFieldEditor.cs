@@ -110,13 +110,13 @@ namespace DustEngine.DustEditor
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             if (m_NoiseScale.isChanged)
-                m_NoiseScale.valFloat = NoiseField.Normalizer.NoiseScale(m_NoiseScale.valFloat);
+                m_NoiseScale.valFloat = NoiseField.NormalizeNoiseScale(m_NoiseScale.valFloat);
 
             if (m_NoisePower.isChanged)
-                m_NoisePower.valFloat = NoiseField.Normalizer.NoisePower(m_NoisePower.valFloat);
+                m_NoisePower.valFloat = NoiseField.NormalizeNoisePower(m_NoisePower.valFloat);
 
             if (m_Seed.isChanged)
-                m_Seed.valInt = NoiseField.Normalizer.Seed(m_Seed.valInt);
+                m_Seed.valInt = NoiseField.NormalizeSeed(m_Seed.valInt);
 
             InspectorCommitUpdates();
 

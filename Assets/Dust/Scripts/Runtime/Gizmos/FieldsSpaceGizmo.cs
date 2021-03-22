@@ -22,7 +22,7 @@ namespace DustEngine
         public Vector3Int gridCount
         {
             get => m_GridCount;
-            set => m_GridCount = Normalizer.GridCount(value);
+            set => m_GridCount = NormalizeGridCount(value);
         }
 
         [SerializeField]
@@ -48,7 +48,7 @@ namespace DustEngine
         public float powerSize
         {
             get => m_PowerSize;
-            set => m_PowerSize = Normalizer.Size(value);
+            set => m_PowerSize = NormalizeSize(value);
         }
 
         [SerializeField]
@@ -64,7 +64,7 @@ namespace DustEngine
         public float powerDotsSize
         {
             get => m_PowerDotsSize;
-            set => m_PowerDotsSize = Normalizer.Size(value);
+            set => m_PowerDotsSize = NormalizeSize(value);
         }
 
         [SerializeField]
@@ -98,7 +98,7 @@ namespace DustEngine
         public float colorSize
         {
             get => m_ColorSize;
-            set => m_ColorSize = Normalizer.Size(value);
+            set => m_ColorSize = NormalizeSize(value);
         }
 
         [SerializeField]
@@ -200,17 +200,14 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        public static class Normalizer
+        internal static float NormalizeSize(float value)
         {
-            public static float Size(float value)
-            {
-                return Mathf.Clamp(value, 0.1f, float.MaxValue);
-            }
+            return Mathf.Clamp(value, 0.1f, float.MaxValue);
+        }
 
-            public static Vector3Int GridCount(Vector3Int value)
-            {
-                return DuVector3Int.Clamp(value, Vector3Int.one, Vector3Int.one * 1000);
-            }
+        internal static Vector3Int NormalizeGridCount(Vector3Int value)
+        {
+            return DuVector3Int.Clamp(value, Vector3Int.one, Vector3Int.one * 1000);
         }
     }
 }

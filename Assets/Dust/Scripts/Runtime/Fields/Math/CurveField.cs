@@ -19,7 +19,7 @@ namespace DustEngine
         public AnimationCurve shape
         {
             get => m_Shape;
-            set => m_Shape = Normalizer.Shape(value);
+            set => m_Shape = NormalizeShape(value);
         }
 
         [SerializeField]
@@ -166,13 +166,10 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        public static class Normalizer
+        internal static AnimationCurve NormalizeShape(AnimationCurve curve)
         {
-            public static AnimationCurve Shape(AnimationCurve curve)
-            {
-                curve.duClamp01TimeAndValues(true);
-                return curve;
-            }
+            curve.duClamp01TimeAndValues(true);
+            return curve;
         }
     }
 }

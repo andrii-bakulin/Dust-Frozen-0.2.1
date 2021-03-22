@@ -45,7 +45,7 @@ namespace DustEngine
         public float offset
         {
             get => m_Offset;
-            set => m_Offset = ObjectNormalizer.Offset(value);
+            set => m_Offset = NormalizeOffset(value);
         }
 
         [SerializeField]
@@ -129,7 +129,7 @@ namespace DustEngine
         public int postStepsCount
         {
             get => m_PostStepsCount;
-            set => m_PostStepsCount = ObjectNormalizer.PostStepsCount(value);
+            set => m_PostStepsCount = NormalizePostStepsCount(value);
         }
 
         [SerializeField]
@@ -137,7 +137,7 @@ namespace DustEngine
         public AnimationCurve postCurve
         {
             get => m_PostCurve;
-            set => m_PostCurve = ObjectNormalizer.PostCurve(value);
+            set => m_PostCurve = NormalizePostCurve(value);
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -357,23 +357,20 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        public static class ObjectNormalizer
+        internal static float NormalizeOffset(float value)
         {
-            public static float Offset(float value)
-            {
-                return Mathf.Clamp01(value);
-            }
+            return Mathf.Clamp01(value);
+        }
 
-            public static int PostStepsCount(int value)
-            {
-                return Mathf.Max(1, value);
-            }
+        internal static int NormalizePostStepsCount(int value)
+        {
+            return Mathf.Max(1, value);
+        }
 
-            public static AnimationCurve PostCurve(AnimationCurve curve)
-            {
-                curve.duClamp01TimeAndValues(true);
-                return curve;
-            }
+        internal static AnimationCurve NormalizePostCurve(AnimationCurve curve)
+        {
+            curve.duClamp01TimeAndValues(true);
+            return curve;
         }
     }
 }

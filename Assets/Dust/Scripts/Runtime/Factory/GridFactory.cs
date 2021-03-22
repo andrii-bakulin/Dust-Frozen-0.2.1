@@ -23,7 +23,7 @@ namespace DustEngine
             get => m_Count;
             set
             {
-                if (!UpdatePropertyValue(ref m_Count, Normalizer.Count(value)))
+                if (!UpdatePropertyValue(ref m_Count, NormalizeCount(value)))
                     return;
 
                 RebuildInstances();
@@ -102,12 +102,9 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        public static class Normalizer
+        internal static Vector3Int NormalizeCount(Vector3Int value)
         {
-            public static Vector3Int Count(Vector3Int value)
-            {
-                return DuVector3Int.Clamp(value, Vector3Int.one, Vector3Int.one * 1000);
-            }
+            return DuVector3Int.Clamp(value, Vector3Int.one, Vector3Int.one * 1000);
         }
     }
 }

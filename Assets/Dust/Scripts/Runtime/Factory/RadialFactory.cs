@@ -13,7 +13,7 @@ namespace DustEngine
             get => m_Count;
             set
             {
-                if (!UpdatePropertyValue(ref m_Count, Normalizer.Count(value)))
+                if (!UpdatePropertyValue(ref m_Count, NormalizeCount(value)))
                     return;
 
                 RebuildInstances();
@@ -72,7 +72,7 @@ namespace DustEngine
             get => m_LevelsCount;
             set
             {
-                if (!UpdatePropertyValue(ref m_LevelsCount, Normalizer.LevelsCount(value)))
+                if (!UpdatePropertyValue(ref m_LevelsCount, NormalizeLevelsCount(value)))
                     return;
 
                 RebuildInstances();
@@ -176,7 +176,7 @@ namespace DustEngine
             {
                 value = DuRandom.NormalizeSeedToNonRandom(value);
 
-                if (!UpdatePropertyValue(ref m_OffsetSeed, Normalizer.OffsetSeed(value)))
+                if (!UpdatePropertyValue(ref m_OffsetSeed, NormalizeOffsetSeed(value)))
                     return;
 
                 UpdateInstancesZeroStates();
@@ -198,22 +198,19 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        public static class Normalizer
+        internal static int NormalizeCount(int value)
         {
-            public static int Count(int value)
-            {
-                return Mathf.Max(0, value);
-            }
+            return Mathf.Max(0, value);
+        }
 
-            public static int OffsetSeed(int value)
-            {
-                return DuRandom.NormalizeSeedToNonRandom(value);
-            }
+        internal static int NormalizeOffsetSeed(int value)
+        {
+            return DuRandom.NormalizeSeedToNonRandom(value);
+        }
 
-            public static int LevelsCount(int value)
-            {
-                return Mathf.Max(1, value);
-            }
+        internal static int NormalizeLevelsCount(int value)
+        {
+            return Mathf.Max(1, value);
         }
     }
 }

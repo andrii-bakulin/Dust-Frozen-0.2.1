@@ -53,7 +53,7 @@ namespace DustEngine.DustEditor
             // Validate & Normalize Data
 
             if (m_Faces.isChanged)
-                m_Faces.valInt = PyramidGizmo.Normalizer.Faces(m_Faces.valInt);
+                m_Faces.valInt = PyramidGizmo.NormalizeFaces(m_Faces.valInt);
 
             InspectorCommitUpdates();
         }

@@ -54,7 +54,7 @@ namespace DustEngine.DustEditor
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             if (m_Radius.isChanged)
-                m_Radius.valFloat = SphereField.ShapeNormalizer.Radius(m_Radius.valFloat);
+                m_Radius.valFloat = SphereField.NormalizeRadius(m_Radius.valFloat);
 
             InspectorCommitUpdates();
         }

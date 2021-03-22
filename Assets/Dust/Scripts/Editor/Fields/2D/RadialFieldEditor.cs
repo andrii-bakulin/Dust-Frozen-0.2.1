@@ -99,16 +99,16 @@ namespace DustEngine.DustEditor
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             if (m_FadeInOffset.isChanged)
-                m_FadeInOffset.valFloat = RadialField.ShapeNormalizer.FadeOffset(m_FadeInOffset.valFloat);
+                m_FadeInOffset.valFloat = RadialField.NormalizeFadeOffset(m_FadeInOffset.valFloat);
 
             if (m_FadeOutOffset.isChanged)
-                m_FadeOutOffset.valFloat = RadialField.ShapeNormalizer.FadeOffset(m_FadeOutOffset.valFloat);
+                m_FadeOutOffset.valFloat = RadialField.NormalizeFadeOffset(m_FadeOutOffset.valFloat);
 
             if (m_Iterations.isChanged)
-                m_Iterations.valFloat = RadialField.ShapeNormalizer.Iterations(m_Iterations.valFloat);
+                m_Iterations.valFloat = RadialField.NormalizeIterations(m_Iterations.valFloat);
 
             if (m_GizmoRadius.isChanged)
-                m_GizmoRadius.valFloat = RadialField.ShapeNormalizer.GizmoRadius(m_GizmoRadius.valFloat);
+                m_GizmoRadius.valFloat = RadialField.NormalizeGizmoRadius(m_GizmoRadius.valFloat);
 
             InspectorCommitUpdates();
         }

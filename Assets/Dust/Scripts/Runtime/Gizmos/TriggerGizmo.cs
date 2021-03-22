@@ -31,7 +31,7 @@ namespace DustEngine
         public float size
         {
             get => m_Size;
-            set => m_Size = Normalizer.Size(value);
+            set => m_Size = NormalizeSize(value);
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -49,7 +49,7 @@ namespace DustEngine
         public float triggeredSize
         {
             get => m_TriggeredSize;
-            set => m_TriggeredSize = Normalizer.Size(value);
+            set => m_TriggeredSize = NormalizeSize(value);
         }
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -91,7 +91,7 @@ namespace DustEngine
         public float messageOffset
         {
             get => m_MessageOffset;
-            set => m_MessageOffset = Normalizer.MessageOffset(value);
+            set => m_MessageOffset = NormalizeMessageOffset(value);
         }
 
         [SerializeField]
@@ -99,7 +99,7 @@ namespace DustEngine
         public float messageSize
         {
             get => m_MessageSize;
-            set => m_MessageSize = Normalizer.MessageSize(value);
+            set => m_MessageSize = NormalizeMessageSize(value);
         }
 
         [SerializeField]
@@ -117,7 +117,7 @@ namespace DustEngine
         public float falloffDuration
         {
             get => m_FalloffDuration;
-            set => m_FalloffDuration = Normalizer.FalloffDuration(value);
+            set => m_FalloffDuration = NormalizeFalloffDuration(value);
         }
 
         [SerializeField]
@@ -301,27 +301,24 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        public static class Normalizer
+        internal static float NormalizeSize(float value)
         {
-            public static float Size(float value)
-            {
-                return Mathf.Abs(value);
-            }
+            return Mathf.Abs(value);
+        }
 
-            public static float FalloffDuration(float value)
-            {
-                return Mathf.Clamp(value, 0.01f, float.MaxValue);
-            }
+        internal static float NormalizeFalloffDuration(float value)
+        {
+            return Mathf.Clamp(value, 0.01f, float.MaxValue);
+        }
 
-            public static float MessageOffset(float value)
-            {
-                return Mathf.Clamp(value, 0f, +1f);
-            }
+        internal static float NormalizeMessageOffset(float value)
+        {
+            return Mathf.Clamp(value, 0f, +1f);
+        }
 
-            public static float MessageSize(float value)
-            {
-                return Mathf.Clamp(value, 0.01f, +1000f);
-            }
+        internal static float NormalizeMessageSize(float value)
+        {
+            return Mathf.Clamp(value, 0.01f, +1000f);
         }
     }
 }

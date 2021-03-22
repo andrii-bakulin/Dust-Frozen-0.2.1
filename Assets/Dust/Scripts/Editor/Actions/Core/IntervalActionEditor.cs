@@ -38,10 +38,10 @@ namespace DustEngine.DustEditor
         protected override void InspectorCommitUpdates()
         {
             if (m_Duration.isChanged)
-                m_Duration.valFloat = IntervalAction.Normalizer.Duration(m_Duration.valFloat);
+                m_Duration.valFloat = IntervalAction.NormalizeDuration(m_Duration.valFloat);
 
             if (m_RepeatTimes.isChanged)
-                m_RepeatTimes.valInt = IntervalAction.Normalizer.RepeatTimes(m_RepeatTimes.valInt);
+                m_RepeatTimes.valInt = IntervalAction.NormalizeRepeatTimes(m_RepeatTimes.valInt);
 
             base.InspectorCommitUpdates();
         }

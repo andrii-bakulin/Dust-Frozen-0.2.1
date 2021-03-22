@@ -122,13 +122,13 @@ namespace DustEngine.DustEditor
             // Validate & Normalize Data
 
             if (m_Count.isChanged)
-                m_Count.valInt = RadialFactory.Normalizer.Count(m_Count.valInt);
+                m_Count.valInt = RadialFactory.NormalizeCount(m_Count.valInt);
 
             if (m_OffsetSeed.isChanged)
-                m_OffsetSeed.valInt = RadialFactory.Normalizer.OffsetSeed(m_OffsetSeed.valInt);
+                m_OffsetSeed.valInt = RadialFactory.NormalizeOffsetSeed(m_OffsetSeed.valInt);
 
             if (m_LevelsCount.isChanged)
-                m_LevelsCount.valInt = RadialFactory.Normalizer.LevelsCount(m_LevelsCount.valInt);
+                m_LevelsCount.valInt = RadialFactory.NormalizeLevelsCount(m_LevelsCount.valInt);
 
             InspectorCommitUpdates();
         }

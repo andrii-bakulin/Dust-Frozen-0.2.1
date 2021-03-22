@@ -13,7 +13,7 @@ namespace DustEngine
             get => m_Count;
             set
             {
-                if (!UpdatePropertyValue(ref m_Count, Normalizer.Count(value)))
+                if (!UpdatePropertyValue(ref m_Count, NormalizeCount(value)))
                     return;
 
                 RebuildInstances();
@@ -27,7 +27,7 @@ namespace DustEngine
             get => m_Offset;
             set
             {
-                if (!UpdatePropertyValue(ref m_Offset, Normalizer.Offset(value)))
+                if (!UpdatePropertyValue(ref m_Offset, NormalizeOffset(value)))
                     return;
 
                 UpdateInstancesZeroStates();
@@ -119,17 +119,14 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        public static class Normalizer
+        internal static int NormalizeCount(int value)
         {
-            public static int Count(int value)
-            {
-                return Mathf.Max(0, value);
-            }
+            return Mathf.Max(0, value);
+        }
 
-            public static int Offset(int value)
-            {
-                return Mathf.Max(0, value);
-            }
+        internal static int NormalizeOffset(int value)
+        {
+            return Mathf.Max(0, value);
         }
     }
 }

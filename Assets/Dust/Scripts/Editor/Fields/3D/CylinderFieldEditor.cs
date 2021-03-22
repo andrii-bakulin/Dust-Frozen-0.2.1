@@ -60,10 +60,10 @@ namespace DustEngine.DustEditor
             // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
             if (m_Height.isChanged)
-                m_Height.valFloat = CylinderField.ShapeNormalizer.Height(m_Height.valFloat);
+                m_Height.valFloat = CylinderField.NormalizeHeight(m_Height.valFloat);
 
             if (m_Radius.isChanged)
-                m_Radius.valFloat = CylinderField.ShapeNormalizer.Radius(m_Radius.valFloat);
+                m_Radius.valFloat = CylinderField.NormalizeRadius(m_Radius.valFloat);
 
             InspectorCommitUpdates();
         }

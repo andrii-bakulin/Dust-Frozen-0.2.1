@@ -19,7 +19,7 @@ namespace DustEngine
         public float delay
         {
             get => m_Delay;
-            set => m_Delay = Normalizer.Delay(value);
+            set => m_Delay = NormalizeDelay(value);
         }
 
         [SerializeField]
@@ -27,7 +27,7 @@ namespace DustEngine
         public int repeat
         {
             get => m_Repeat;
-            set => m_Repeat = Normalizer.Repeat(value);
+            set => m_Repeat = NormalizeRepeat(value);
         }
 
         [SerializeField]
@@ -93,17 +93,14 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        public static class Normalizer
+        internal static float NormalizeDelay(float value)
         {
-            public static float Delay(float value)
-            {
-                return Mathf.Clamp(value, 0.0f, float.MaxValue);
-            }
+            return Mathf.Clamp(value, 0.0f, float.MaxValue);
+        }
 
-            public static int Repeat(int value)
-            {
-                return Mathf.Clamp(value, 0, int.MaxValue);
-            }
+        internal static int NormalizeRepeat(int value)
+        {
+            return Mathf.Clamp(value, 0, int.MaxValue);
         }
     }
 }

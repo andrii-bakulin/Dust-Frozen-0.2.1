@@ -173,7 +173,7 @@ namespace DustEngine.DustEditor
             // Post Update
 
             if (m_VolumeSize.isChanged)
-                m_VolumeSize.valVector3 = Destroyer.Normalizer.VolumeSize(m_VolumeSize.valVector3);
+                m_VolumeSize.valVector3 = Destroyer.NormalizeVolumeSize(m_VolumeSize.valVector3);
 
             InspectorCommitUpdates();
         }
