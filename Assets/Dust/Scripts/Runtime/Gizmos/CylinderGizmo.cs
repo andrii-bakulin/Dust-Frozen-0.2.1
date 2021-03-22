@@ -50,7 +50,7 @@ namespace DustEngine
             Gizmos.matrix = transform.localToWorldMatrix;
             Gizmos.color = color;
 
-            DustGizmos.DrawWireCylinder(radius, height, center, direction, 64, 4);
+            DuGizmos.DrawWireCylinder(radius, height, center, direction, 64, 4);
         }
 #endif
     }

@@ -275,7 +275,7 @@ namespace DustEngine
             Gizmos.matrix = transform.localToWorldMatrix;
 
             Gizmos.color = GetGizmoColorRange1();
-            DustGizmos.DrawRect(width, height, Vector3.zero, direction);
+            DuGizmos.DrawRect(width, height, Vector3.zero, direction);
         }
 #endif
 

@@ -5,7 +5,7 @@ namespace DustEngine.DustEditor
 {
     [CustomEditor(typeof(GridFactory))]
     [CanEditMultipleObjects]
-    public class DuGridFactoryEditor : FactoryEditor
+    public class GridFactoryEditor : FactoryEditor
     {
         private DuProperty m_Count;
         private DuProperty m_Step;

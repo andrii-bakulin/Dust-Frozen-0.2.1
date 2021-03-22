@@ -58,7 +58,7 @@ namespace DustEngine
             Gizmos.matrix = transform.localToWorldMatrix;
             Gizmos.color = color;
 
-            DustGizmos.DrawWirePyramid(radius, height, center, direction, faces);
+            DuGizmos.DrawWirePyramid(radius, height, center, direction, faces);
         }
 #endif
 

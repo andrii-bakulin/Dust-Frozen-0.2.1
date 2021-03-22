@@ -5,7 +5,7 @@ namespace DustEngine.DustEditor
 {
     [CustomEditor(typeof(RadialFactory))]
     [CanEditMultipleObjects]
-    public class DuRadialFactoryEditor : FactoryEditor
+    public class RadialFactoryEditor : FactoryEditor
     {
         private DuProperty m_Count;
         private DuProperty m_Radius;

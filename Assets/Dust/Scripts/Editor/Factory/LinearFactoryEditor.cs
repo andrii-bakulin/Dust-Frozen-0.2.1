@@ -5,7 +5,7 @@ namespace DustEngine.DustEditor
 {
     [CustomEditor(typeof(LinearFactory))]
     [CanEditMultipleObjects]
-    public class DuLinearFactoryEditor : FactoryEditor
+    public class LinearFactoryEditor : FactoryEditor
     {
         private DuProperty m_Count;
         private DuProperty m_Offset;

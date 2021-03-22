@@ -268,7 +268,7 @@ namespace DustEngine
                 zeroPoint.x = GetPowerForLocalPositionInAxisXPlus(new Vector3(0f, linearFalloff, linearFalloff)); // this point will be always outside falloff range
                 zeroPoint = AxisDirection.ConvertFromAxisXPlusToDirection(direction, zeroPoint);
 
-                DustGizmos.DrawCircle(linearFalloff, zeroPoint, direction, 32);
+                DuGizmos.DrawCircle(linearFalloff, zeroPoint, direction, 32);
             }
         }
 #endif
