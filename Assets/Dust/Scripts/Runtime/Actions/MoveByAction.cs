@@ -9,7 +9,8 @@ namespace DustEngine
         {
             World = 0,
             Local = 1,
-            Self = 2,
+            SelfFixed = 2,
+            SelfDynamic = 3,
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -59,9 +60,14 @@ namespace DustEngine
             {
                 m_DeltaLocalMove = moveBy;
             }
-            else if (space == Space.Self)
+            else if (space == Space.SelfFixed)
             {
                 m_DeltaLocalMove = DuMath.RotatePoint(moveBy, activeTargetTransform.localEulerAngles);
+            }
+            else if (space == Space.SelfDynamic)
+            {
+                m_DeltaLocalMove = moveBy;
+                m_AutoRotateBySelfDirection = true;
             }
         }
     }

@@ -1,5 +1,11 @@
 ## [InDev]
 
+### Added
+
+- MoveBy Action extend `Space.Self` to `Space.SelfFixed` and `Space.SelfDynamic`. For `Space.SelfDynamic` duration will recount on each iteration depend of object rotation
+
+### Fixed
+
 ________________________________________________________________________________________________________________________
 
 ## [0.2.0] - 2021-03-22

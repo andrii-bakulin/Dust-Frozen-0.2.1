@@ -54,7 +54,7 @@ namespace DustEngine.Test.Actions.Move
 
             var sut = testObject.AddComponent<MoveByAction>();
             sut.duration = Sec(duration);
-            sut.space = MoveByAction.Space.Self;
+            sut.space = MoveByAction.Space.SelfFixed;
             sut.moveBy = moveBy;
             sut.Play();
 
@@ -116,7 +116,7 @@ namespace DustEngine.Test.Actions.Move
             sut.duration = Sec(duration * 0.5f);
             sut.playRollback = true;
             sut.rollbackDuration = Sec(duration * 0.5f);
-            sut.space = MoveByAction.Space.Self;
+            sut.space = MoveByAction.Space.SelfFixed;
             sut.moveBy = moveBy;
             sut.Play();
 
