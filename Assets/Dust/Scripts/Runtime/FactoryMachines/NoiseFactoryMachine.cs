@@ -403,17 +403,17 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        internal static float NormalizeNoiseForce(float value)
+        public static float NormalizeNoiseForce(float value)
         {
             return Mathf.Clamp(value, 0f, 10f);
         }
 
-        internal static float NormalizeNoiseScale(float value)
+        public static float NormalizeNoiseScale(float value)
         {
             return Mathf.Clamp(value, 0.0001f, float.MaxValue);
         }
 
-        internal static int NormalizeSeed(int value)
+        public static int NormalizeSeed(int value)
         {
             return DuRandom.NormalizeSeedToNonRandom(value);
         }

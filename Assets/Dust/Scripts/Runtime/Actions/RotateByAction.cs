@@ -126,12 +126,12 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        internal static float NormalizeAccuracyThreshold(float value)
+        public static float NormalizeAccuracyThreshold(float value)
         {
             return Mathf.Max(value, 0.01f);
         }
 
-        internal static int NormalizeAccuracyMaxIterations(int value)
+        public static int NormalizeAccuracyMaxIterations(int value)
         {
             return Mathf.Clamp(value, 1, 1000);
         }

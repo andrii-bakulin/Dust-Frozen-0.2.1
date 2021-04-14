@@ -192,12 +192,12 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        internal static float NormalizeSpeedLimit(float value)
+        public static float NormalizeSpeedLimit(float value)
         {
             return Mathf.Max(value, 0f);
         }
 
-        internal static Vector3 NormalizeSmoothTime(Vector3 value)
+        public static Vector3 NormalizeSmoothTime(Vector3 value)
         {
             return Vector3.Max(DuVector3.New(0.01f), value);
         }

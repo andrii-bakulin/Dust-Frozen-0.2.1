@@ -216,17 +216,17 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        internal static float NormalizeFadeOffset(float value)
+        public static float NormalizeFadeOffset(float value)
         {
             return Mathf.Clamp(value, 0f, 360f);
         }
 
-        internal static float NormalizeIterations(float value)
+        public static float NormalizeIterations(float value)
         {
             return Mathf.Max(1f, value);
         }
 
-        internal static float NormalizeGizmoRadius(float value)
+        public static float NormalizeGizmoRadius(float value)
         {
             return Mathf.Abs(value);
         }

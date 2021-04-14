@@ -357,17 +357,17 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        internal static float NormalizeOffset(float value)
+        public static float NormalizeOffset(float value)
         {
             return Mathf.Clamp01(value);
         }
 
-        internal static int NormalizePostStepsCount(int value)
+        public static int NormalizePostStepsCount(int value)
         {
             return Mathf.Max(1, value);
         }
 
-        internal static AnimationCurve NormalizePostCurve(AnimationCurve curve)
+        public static AnimationCurve NormalizePostCurve(AnimationCurve curve)
         {
             curve.duClamp01TimeAndValues(true);
             return curve;

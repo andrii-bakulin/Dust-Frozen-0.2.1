@@ -281,7 +281,7 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        internal static Vector3 NormalizeVolumeSize(Vector3 value)
+        public static Vector3 NormalizeVolumeSize(Vector3 value)
         {
             return DuVector3.Abs(value);
         }

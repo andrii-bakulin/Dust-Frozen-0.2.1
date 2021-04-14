@@ -102,7 +102,7 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        internal static Vector3Int NormalizeCount(Vector3Int value)
+        public static Vector3Int NormalizeCount(Vector3Int value)
         {
             return DuVector3Int.Clamp(value, Vector3Int.one, Vector3Int.one * 1000);
         }

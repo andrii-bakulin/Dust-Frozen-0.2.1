@@ -282,12 +282,12 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        internal static float NormalizeWidth(float value)
+        public static float NormalizeWidth(float value)
         {
             return Mathf.Abs(value);
         }
 
-        internal static float NormalizeHeight(float value)
+        public static float NormalizeHeight(float value)
         {
             return Mathf.Abs(value);
         }

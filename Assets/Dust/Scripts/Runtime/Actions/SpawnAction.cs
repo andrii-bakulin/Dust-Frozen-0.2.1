@@ -259,7 +259,7 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        internal static DuIntRange NormalizeMultipleSpawnCount(DuIntRange range)
+        public static DuIntRange NormalizeMultipleSpawnCount(DuIntRange range)
         {
             range.min = Mathf.Max(range.min, 0);
             range.max = Mathf.Max(range.max, range.min);

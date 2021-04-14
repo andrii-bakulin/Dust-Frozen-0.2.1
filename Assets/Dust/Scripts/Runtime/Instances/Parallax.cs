@@ -317,12 +317,12 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        internal static float NormalizeTileOffset(float value)
+        public static float NormalizeTileOffset(float value)
         {
             return Mathf.Clamp01(value);
         }
 
-        internal static int NormalizeTilesCount(int value)
+        public static int NormalizeTilesCount(int value)
         {
             return Mathf.Max(2, value);
         }

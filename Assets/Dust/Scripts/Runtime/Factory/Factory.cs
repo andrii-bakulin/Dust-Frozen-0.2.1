@@ -492,17 +492,17 @@ namespace DustEngine
 
         //--------------------------------------------------------------------------------------------------------------
 
-        internal static int NormalizeSeed(int value)
+        public static int NormalizeSeed(int value)
         {
             return DuRandom.NormalizeSeedToNonRandom(value);
         }
 
-        internal static float NormalizeInstancesFillRate(float value)
+        public static float NormalizeInstancesFillRate(float value)
         {
             return Mathf.Clamp01(value);
         }
 
-        internal static int NormalizeInstancesFillSeed(int value)
+        public static int NormalizeInstancesFillSeed(int value)
         {
             return DuRandom.NormalizeSeedToNonRandom(value);
         }

@@ -166,7 +166,7 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        internal static AnimationCurve NormalizeShape(AnimationCurve curve)
+        public static AnimationCurve NormalizeShape(AnimationCurve curve)
         {
             curve.duClamp01TimeAndValues(true);
             return curve;

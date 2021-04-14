@@ -65,7 +65,7 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        internal static int NormalizeFaces(int value)
+        public static int NormalizeFaces(int value)
         {
             return Mathf.Max(3, value);
         }

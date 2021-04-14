@@ -401,19 +401,19 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        internal static int NormalizeLimit(int value)
+        public static int NormalizeLimit(int value)
         {
             return Mathf.Max(0, value);
         }
 
-        internal static DuIntRange NormalizeMultipleSpawnCount(DuIntRange range)
+        public static DuIntRange NormalizeMultipleSpawnCount(DuIntRange range)
         {
             range.min = Mathf.Max(range.min, 0);
             range.max = Mathf.Max(range.max, range.min);
             return range;
         }
 
-        internal static float NormalizeIntervalValue(float value)
+        public static float NormalizeIntervalValue(float value)
         {
             return Mathf.Max(0f, value);
         }

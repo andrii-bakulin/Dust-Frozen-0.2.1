@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEditor;
 
 namespace DustEngine
@@ -301,22 +301,22 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        internal static float NormalizeSize(float value)
+        public static float NormalizeSize(float value)
         {
             return Mathf.Abs(value);
         }
 
-        internal static float NormalizeFalloffDuration(float value)
+        public static float NormalizeFalloffDuration(float value)
         {
             return Mathf.Clamp(value, 0.01f, float.MaxValue);
         }
 
-        internal static float NormalizeMessageOffset(float value)
+        public static float NormalizeMessageOffset(float value)
         {
             return Mathf.Clamp(value, 0f, +1f);
         }
 
-        internal static float NormalizeMessageSize(float value)
+        public static float NormalizeMessageSize(float value)
         {
             return Mathf.Clamp(value, 0.01f, +1000f);
         }

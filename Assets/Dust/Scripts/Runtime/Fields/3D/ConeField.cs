@@ -106,12 +106,12 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        internal static float NormalizeHeight(float value)
+        public static float NormalizeHeight(float value)
         {
             return Mathf.Abs(value);
         }
 
-        internal static float NormalizeRadius(float value)
+        public static float NormalizeRadius(float value)
         {
             return Mathf.Abs(value);
         }

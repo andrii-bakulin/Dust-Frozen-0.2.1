@@ -198,17 +198,17 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        internal static int NormalizeCount(int value)
+        public static int NormalizeCount(int value)
         {
             return Mathf.Max(0, value);
         }
 
-        internal static int NormalizeOffsetSeed(int value)
+        public static int NormalizeOffsetSeed(int value)
         {
             return DuRandom.NormalizeSeedToNonRandom(value);
         }
 
-        internal static int NormalizeLevelsCount(int value)
+        public static int NormalizeLevelsCount(int value)
         {
             return Mathf.Max(1, value);
         }

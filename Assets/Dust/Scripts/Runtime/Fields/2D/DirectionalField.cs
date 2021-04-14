@@ -160,17 +160,17 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        internal static float NormalizeLength(float value)
+        public static float NormalizeLength(float value)
         {
             return Mathf.Max(0f, value);
         }
 
-        internal static float NormalizeGizmoWidth(float value)
+        public static float NormalizeGizmoWidth(float value)
         {
             return Mathf.Abs(value);
         }
 
-        internal static float NormalizeGizmoHeight(float value)
+        public static float NormalizeGizmoHeight(float value)
         {
             return Mathf.Abs(value);
         }

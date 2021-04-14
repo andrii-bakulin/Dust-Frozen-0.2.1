@@ -367,17 +367,17 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        internal static float NormalizePower(float value)
+        public static float NormalizePower(float value)
         {
             return Mathf.Clamp01(value);
         }
 
-        internal static float NormalizeWarmUpTime(float value)
+        public static float NormalizeWarmUpTime(float value)
         {
             return Mathf.Max(value, 0f);
         }
 
-        internal static Vector3 NormalizeScaleAmplitude(Vector3 value)
+        public static Vector3 NormalizeScaleAmplitude(Vector3 value)
         {
             return Vector3.Max(value, DuVector3.New(k_MinScaleValue));
         }

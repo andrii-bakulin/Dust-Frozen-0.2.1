@@ -200,12 +200,12 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        internal static float NormalizeSize(float value)
+        public static float NormalizeSize(float value)
         {
             return Mathf.Clamp(value, 0.1f, float.MaxValue);
         }
 
-        internal static Vector3Int NormalizeGridCount(Vector3Int value)
+        public static Vector3Int NormalizeGridCount(Vector3Int value)
         {
             return DuVector3Int.Clamp(value, Vector3Int.one, Vector3Int.one * 1000);
         }

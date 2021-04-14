@@ -119,12 +119,12 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        internal static int NormalizeCount(int value)
+        public static int NormalizeCount(int value)
         {
             return Mathf.Max(0, value);
         }
 
-        internal static int NormalizeOffset(int value)
+        public static int NormalizeOffset(int value)
         {
             return Mathf.Max(0, value);
         }

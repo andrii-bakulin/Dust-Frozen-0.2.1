@@ -132,12 +132,12 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        internal static float NormalizeDuration(float value)
+        public static float NormalizeDuration(float value)
         {
             return Mathf.Max(value, 0f);
         }
 
-        internal static int NormalizeRepeatTimes(int value)
+        public static int NormalizeRepeatTimes(int value)
         {
             return Mathf.Max(value, 1);
         }

@@ -93,12 +93,12 @@ namespace DustEngine
         //--------------------------------------------------------------------------------------------------------------
         // Normalizer
 
-        internal static float NormalizeDelay(float value)
+        public static float NormalizeDelay(float value)
         {
             return Mathf.Clamp(value, 0.0f, float.MaxValue);
         }
 
-        internal static int NormalizeRepeat(int value)
+        public static int NormalizeRepeat(int value)
         {
             return Mathf.Clamp(value, 0, int.MaxValue);
         }
