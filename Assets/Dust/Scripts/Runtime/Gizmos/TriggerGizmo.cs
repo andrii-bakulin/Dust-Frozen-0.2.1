@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
 
 namespace DustEngine
@@ -289,7 +289,8 @@ namespace DustEngine
                 Handles.Label(worldPosition + offset * (1f + messageOffset), message, style);
             }
 
-            DustGUIRuntime.ForcedRedrawSceneView();
+            // ForcedRedrawSceneView
+            SceneView.lastActiveSceneView.Repaint();
         }
 #endif
 

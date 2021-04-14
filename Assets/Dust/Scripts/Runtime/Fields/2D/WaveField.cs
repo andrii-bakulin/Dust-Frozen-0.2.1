@@ -128,7 +128,8 @@ namespace DustEngine
             {
                 m_OffsetDynamic += deltaTime * animationSpeed;
 
-                DustGUIRuntime.ForcedRedrawSceneView();
+                // ForcedRedrawSceneView
+                SceneView.lastActiveSceneView.Repaint();
             }
         }
 #endif
